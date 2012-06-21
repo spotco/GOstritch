@@ -8,6 +8,7 @@
 #import "GameObject.h"
 #import "BGLayer.h"
 #import "Resource.h"
+#import "MapLoader.h"
 
 @interface GameEngineLayer : CCLayer {
 	NSMutableArray *islands;

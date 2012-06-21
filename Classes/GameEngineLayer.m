@@ -50,11 +50,19 @@ static float cur_pos_y = 0;
 }
 
 -(void) loadMap{
-	islands = [GameEngineLayer loadIslands];
-	for (Island* i in islands) {
+	//islands = [GameEngineLayer loadIslands];
+	Map *map = [MapLoader load_map:@"island1" oftype:@"map"];
+    
+    
+    islands = map.n_islands;
+    
+    for (Island* i in islands) {
 		[self addChild:i];
+        
 	}
-    game_objects = [GameEngineLayer loadGameObjects];
+    
+    game_objects = map.game_objects;
+    
     for (GameObject* o in game_objects) {
         [self addChild:o];
     }

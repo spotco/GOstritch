@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Map : NSObject
+@interface Map : NSObject{
+    NSMutableArray *n_islands, *game_objects;
+}
 
-@property NSMutableArray *n_islands, *coins;
+@property(readwrite, assign) NSMutableArray *n_islands, *game_objects;
 
 @end

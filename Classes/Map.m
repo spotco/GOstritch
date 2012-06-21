@@ -10,6 +10,16 @@
 
 @implementation Map
 
+@synthesize n_islands, game_objects;
+
+-(id) init{
+    n_islands = [[NSMutableArray alloc] init];
+    game_objects = [[NSMutableArray alloc] init];
+    
+    return self;
+    
+}
+
 
 
 @end
