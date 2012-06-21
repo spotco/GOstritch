@@ -20,7 +20,12 @@
 }
 
 -(void)update:(Player*)player  {
-    
+    if (CGRectIntersectsRect([self get_hit_rect],[player get_hit_rect])) {
+        /*player.vx *= 1.6;
+        player.vy *= 1.2;*/
+        player.vx *= .7;
+        player.vy *= .95;
+    }
 }
 
 @end

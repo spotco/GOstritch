@@ -75,7 +75,7 @@ static float cur_pos_y = 0;
 
 -(void)draw {
     [super draw];
-	glColor4ub(0,255,0,100);
+	glColor4ub(255,0,0,100);
     glLineWidth(2.0f);
     CGRect pathBox = [player get_hit_rect];
     CGPoint verts[4] = {
@@ -212,7 +212,7 @@ static float cur_pos_y = 0;
 
 +(NSMutableArray*) loadGameObjects {
     NSMutableArray *gameObjArray = [[NSMutableArray alloc] init];
-    [gameObjArray addObject:[Coin init_x:368 y:70]];
+    [gameObjArray addObject:[Coin init_x:368 y:150]];
     return gameObjArray;
 }
 
