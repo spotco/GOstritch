@@ -10,6 +10,4 @@
 
 @interface Coin : GameObject
 
-+(Coin*)
-
 @end
