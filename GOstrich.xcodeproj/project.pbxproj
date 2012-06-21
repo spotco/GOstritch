@@ -71,6 +71,8 @@
 		7E8F9012156855A900C2E30F /* dog1runss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E8F9011156855A900C2E30F /* dog1runss.png */; };
 		7E93D6761592B97C00A83E9C /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E93D6751592B97C00A83E9C /* GameObject.m */; };
 		7E93D67A1592BABF00A83E9C /* Coin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E93D6791592BABF00A83E9C /* Coin.m */; };
+		8B4028D01592CDCF00A2E791 /* MapLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028CF1592CDCF00A2E791 /* MapLoader.m */; };
+		8B4028D31592D43900A2E791 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028D21592D43900A2E791 /* Map.m */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		DC6640050F83B3EA000B3E49 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
 		DCCBF1B70F6022AE0040855A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */; };
@@ -349,6 +351,10 @@
 		7E93D6751592B97C00A83E9C /* GameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameObject.m; sourceTree = "<group>"; };
 		7E93D6781592BABF00A83E9C /* Coin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coin.h; sourceTree = "<group>"; };
 		7E93D6791592BABF00A83E9C /* Coin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coin.m; sourceTree = "<group>"; };
+		8B4028CE1592CDCF00A2E791 /* MapLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLoader.h; sourceTree = "<group>"; };
+		8B4028CF1592CDCF00A2E791 /* MapLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLoader.m; sourceTree = "<group>"; };
+		8B4028D11592D43900A2E791 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		8B4028D21592D43900A2E791 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
 		DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DC6640040F83B3EA000B3E49 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		DCCBF1B60F6022AE0040855A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -630,7 +636,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				7E93D6771592BA4100A83E9C /* island */,
+				8B4028CC1592CC6000A2E791 /* map_util */,
 				7E93D6731592B69C00A83E9C /* game_obj */,
 				7E8F8FFE1568555100C2E30F /* bgobj */,
 				494E2594152C22DB004EBE74 /* layers */,
@@ -824,15 +830,19 @@
 			name = game_obj;
 			sourceTree = "<group>";
 		};
-		7E93D6771592BA4100A83E9C /* island */ = {
+		8B4028CC1592CC6000A2E791 /* map_util */ = {
 			isa = PBXGroup;
 			children = (
 				4926F83B152B867C00A1EFDE /* Island.h */,
 				4926F83C152B867C00A1EFDE /* Island.m */,
 				494E25A0152C236C004EBE74 /* Line_Island.h */,
 				494E25A1152C236C004EBE74 /* Line_Island.m */,
+				8B4028CE1592CDCF00A2E791 /* MapLoader.h */,
+				8B4028CF1592CDCF00A2E791 /* MapLoader.m */,
+				8B4028D11592D43900A2E791 /* Map.h */,
+				8B4028D21592D43900A2E791 /* Map.m */,
 			);
-			name = island;
+			name = map_util;
 			sourceTree = "<group>";
 		};
 		E02BB764126CC223006E46A2 /* cocos2d */ = {
@@ -1304,6 +1314,8 @@
 				49CE639A1541F26D00538B33 /* Resource.m in Sources */,
 				7E93D6761592B97C00A83E9C /* GameObject.m in Sources */,
 				7E93D67A1592BABF00A83E9C /* Coin.m in Sources */,
+				8B4028D01592CDCF00A2E791 /* MapLoader.m in Sources */,
+				8B4028D31592D43900A2E791 /* Map.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
