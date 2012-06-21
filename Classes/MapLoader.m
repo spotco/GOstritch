@@ -12,12 +12,12 @@
 
 +(Map *) load_map:(NSString *)map_file_name oftype:(NSString *) map_file_type{
     
-    NSString *islandFilePath = [[NSBundle mainBundle] pathForResource:@"island1" ofType:@"map"];
+    NSString *islandFilePath = [[NSBundle mainBundle] pathForResource:map_file_name ofType:map_file_type];
 	NSString *islandInputStr = [[NSString alloc] initWithContentsOfFile : islandFilePath encoding:NSUTF8StringEncoding error:nil];
 	
 	NSData *islandData  =  [islandInputStr dataUsingEncoding : NSUTF8StringEncoding];
     
-    NSDictionary *j_map_data = [[CJSONDeserializer deserializer] deserializeAsDictionary:(islandData) error:(nil)];
+    NSDictionary *j_map_data = [[CJSONDeserializer deserializer] deserializeAsDictionary:islandData error:(nil)];
     
     NSArray *islandArray = [j_map_data objectForKey:(@"islands")];
     
@@ -25,7 +25,9 @@
 	
 	int islandsCount = [islandArray count];
 	
-	NSMutableArray *n_islands = [[NSMutableArray alloc] init];
+	//NSMutableArray *n_islands = [[NSMutableArray alloc] init];
+    Map *map = [[Map alloc] init];
+   
 	
 	for(int i = 0; i < islandsCount; i++){
 		NSDictionary *currentIslandDict = (NSDictionary *)[islandArray objectAtIndex:i];
@@ -39,25 +41,27 @@
 			currentIsland = [Line_Island init_pt1:start pt2:end];
 		}
 		
-		[n_islands addObject:currentIsland];
+		[map.n_islands addObject:currentIsland];
 		
 	}
     
     
     NSArray *coins_array = [j_map_data objectForKey:@"objects"];
-    NSMutableArray *n_coins = [[NSMutableArray alloc] init];
+    //NSMutableArray *n_coins = [[NSMutableArray alloc] init];
+
     
     for(int i = 0; i < [coins_array count]; i++){
         NSDictionary *j_object = (NSDictionary *)[coins_array objectAtIndex:i];
         NSString *type = (NSString *)[j_object objectForKey:@"type"];
-        if(type == @"coins"){
+        if([type compare:@"coins"]){
             Coin *c = [Coin init_x:((NSString *)[j_object  objectForKey:@"x"]).floatValue y:((NSString *)[j_object objectForKey:@"y"]).floatValue];
-            [n_coins addObject:c];
+            [map.game_objects addObject:c];
         }
         
     }
+     
     
-    Map *map = [[Map alloc] init];
+    //map.n_islands = n_islands;
     
     
     return map;
