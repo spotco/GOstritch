@@ -9,6 +9,8 @@
     float airjump_count;
 }
 
+-(CGRect) get_hit_rect; 
+
 @property(readwrite,assign) float vx,vy,touch_count,airjump_count;
 @property(readwrite,assign) CCSprite* player_img;
 

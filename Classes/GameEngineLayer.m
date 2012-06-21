@@ -73,9 +73,36 @@ static float cur_pos_y = 0;
     
 }
 
+-(void)draw {
+    [super draw];
+	glColor4ub(0,255,0,100);
+    glLineWidth(2.0f);
+    CGRect pathBox = [player get_hit_rect];
+    CGPoint verts[4] = {
+        ccp(pathBox.origin.x, pathBox.origin.y),
+        ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
+        ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
+        ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
+    };
+    ccDrawPoly(verts, 4, YES);
+    
+    for (GameObject* o in game_objects) {
+        CGRect pathBox = [o get_hit_rect];
+        CGPoint verts[4] = {
+            ccp(pathBox.origin.x, pathBox.origin.y),
+            ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
+            ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
+            ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
+        };
+        ccDrawPoly(verts, 4, YES);
+    }
+    
+
+}
+
 -(void)update_game_obj {
     for (GameObject* o in game_objects) {
-        [o update_given:player];
+        [o update:player];
     }
 }
 

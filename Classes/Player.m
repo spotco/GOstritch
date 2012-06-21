@@ -36,7 +36,7 @@
 }
 
 -(CGRect) get_hit_rect {
-    return CGRectMake([self position].x,  [self position].y, 60, 55);
+    return CGRectMake([self position].x-55/2,  [self position].y, 60, 55);
 }
 
 -(void) draw {
