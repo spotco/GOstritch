@@ -183,7 +183,12 @@ static float cur_pos_y = 0;
 	NSString *islandInputStr = [[NSString alloc] initWithContentsOfFile : islandFilePath];
 	
 	NSData *islandData  =  [islandInputStr dataUsingEncoding : NSUTF8StringEncoding];
-	NSArray *islandArray = [[CJSONDeserializer deserializer] deserializeAsArray : islandData error : nil ];
+    
+    NSDictionary *j_islands_data = [[CJSONDeserializer deserializer] deserializeAsDictionary:(islandData) error:(nil)];
+    
+    NSArray *islandArray = [j_islands_data objectForKey:(@"islands")];
+    
+	//NSArray *islandArray = [[CJSONDeserializer deserializer] deserializeAsArray : islandData error : nil ];
 	
 	int islandsCount = [islandArray count];
 	
@@ -195,7 +200,7 @@ static float cur_pos_y = 0;
 							,((NSString *)[currentIslandDict objectForKey:@"y1"]).floatValue );
 		CGPoint end = ccp( ((NSString *)[currentIslandDict objectForKey:@"x2"]).floatValue
 						  ,((NSString *)[currentIslandDict objectForKey:@"y2"]).floatValue );
-		
+		NSLog(@"%f", start.x);
 		Island *currentIsland;
 		if (true) { //TODO: if statement here based on type of island read in json
 			currentIsland = [Line_Island init_pt1:start pt2:end];
