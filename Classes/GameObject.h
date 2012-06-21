@@ -4,6 +4,7 @@
 
 @interface GameObject : CCNode
 
--(void)update_given:(Player*)player ;
+-(void)update:(Player*)player;
+-(CGRect) get_hit_rect; 
 
 @end
