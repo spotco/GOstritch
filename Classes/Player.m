@@ -35,6 +35,10 @@
 	return new_player;
 }
 
+-(CGRect) get_hit_rect {
+    return CGRectMake([self position].x,  [self position].y, 60, 55);
+}
+
 -(void) draw {
     [super draw];
     
@@ -42,6 +46,18 @@
     glLineWidth(7.0f);
     ccDrawLine(ccp(-30,60),ccp(MIN(-30+(touch_count/15)*(50),20),60));
     
+    /*CGRect pathBox = [self get_hit_rect];
+    CGPoint verts[4] = {
+        ccp(pathBox.origin.x, pathBox.origin.y),
+        ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
+        ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
+        ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
+    };
+    
+    ccDrawPoly(verts, 4, YES);
+    */
+     
+     
 	/*glColor4f(0.0,1.0f,0,1.0f);
 	ccDrawCircle(ccp(0,10), 10, 0, 10, NO);
 	

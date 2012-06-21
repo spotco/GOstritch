@@ -4,6 +4,8 @@
 #import "Island.h"
 #import "Player.h"
 #import "Common.h"
+#import "Coin.h"
+#import "GameObject.h"
 #import "BGLayer.h"
 #import "Resource.h"
 
@@ -11,6 +13,7 @@
 	NSMutableArray *islands;
     NSMutableArray *game_objects;
 	Player *player;
+    
     
 	BOOL is_touch;
 }

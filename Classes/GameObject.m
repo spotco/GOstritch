@@ -3,7 +3,7 @@
 
 @implementation GameObject
 
--(void)update {
+-(void)update_given:(Player*)player {
     return;
 }
 

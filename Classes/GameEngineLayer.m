@@ -54,6 +54,10 @@ static float cur_pos_y = 0;
 	for (Island* i in islands) {
 		[self addChild:i];
 	}
+    game_objects = [GameEngineLayer loadGameObjects];
+    for (GameObject* o in game_objects) {
+        [self addChild:o];
+    }
 }
 
 -(void)update:(ccTime)dt {
@@ -65,7 +69,14 @@ static float cur_pos_y = 0;
 	player.position=pos_f;
     [self check_game_state];	
     [self update_static_x:pos_x y:pos_y];
+    [self update_game_obj];
     
+}
+
+-(void)update_game_obj {
+    for (GameObject* o in game_objects) {
+        [o update_given:player];
+    }
 }
 
 -(void) ccTouchesBegan:(NSSet*)pTouches withEvent:(UIEvent*)pEvent {
@@ -78,10 +89,6 @@ static float cur_pos_y = 0;
 
 -(void) ccTouchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
 	is_touch = NO;
-}
-
--(void)update_game_obj {
-    
 }
 
 -(void)check_game_state {
@@ -174,6 +181,12 @@ static float cur_pos_y = 0;
     }
     [self player_control_update:is_contact];
     return ccp(pos_x,pos_y);
+}
+
++(NSMutableArray*) loadGameObjects {
+    NSMutableArray *gameObjArray = [[NSMutableArray alloc] init];
+    [gameObjArray addObject:[Coin init_x:368 y:70]];
+    return gameObjArray;
 }
 
 //static method that loads map into array from file, process array afterwards

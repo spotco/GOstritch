@@ -1,15 +1,8 @@
-//
-//  Coin.h
-//  GOstrich
-//
-//  Created by Shiny Yang on 6/20/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 #import "GameObject.h"
+#import "cocos2d.h"
 
 @interface Coin : GameObject
 
-+(Coin*)
++(Coin*)init_x:(float)x y:(float)y;
 
 @end
