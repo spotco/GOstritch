@@ -3,7 +3,9 @@
 
 @implementation GameObject
 
--(void)update:(Player*)player {
+@synthesize active;
+
+-(void)update:(Player*)player  {
     return;
 }
 

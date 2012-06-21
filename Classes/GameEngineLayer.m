@@ -73,7 +73,7 @@ static float cur_pos_y = 0;
     
 }
 
--(void)draw {
+/*-(void)draw {
     [super draw];
 	glColor4ub(255,0,0,100);
     glLineWidth(2.0f);
@@ -98,7 +98,7 @@ static float cur_pos_y = 0;
     }
     
 
-}
+}*/
 
 -(void)update_game_obj {
     for (GameObject* o in game_objects) {
@@ -124,6 +124,9 @@ static float cur_pos_y = 0;
         player.touch_count = 0;
         player.vx = 0;
         player.vy = 0;
+        for (GameObject* o in game_objects) {
+            o.active = YES;
+        }
 	}
 }
 
@@ -213,6 +216,7 @@ static float cur_pos_y = 0;
 +(NSMutableArray*) loadGameObjects {
     NSMutableArray *gameObjArray = [[NSMutableArray alloc] init];
     [gameObjArray addObject:[Coin init_x:368 y:150]];
+    [gameObjArray addObject:[Coin init_x:800 y:200]];
     return gameObjArray;
 }
 

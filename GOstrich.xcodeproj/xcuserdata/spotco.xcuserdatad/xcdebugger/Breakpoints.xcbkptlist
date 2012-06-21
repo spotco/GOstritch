@@ -8,13 +8,26 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/GameObject.m"
-         timestampString = "361940343.059185"
+         timestampString = "361945818.696135"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "6"
-         endingLineNumber = "6"
+         startingLineNumber = "8"
+         endingLineNumber = "8"
          landmarkName = "-update:"
          landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Classes/GameObject.h"
+         timestampString = "361945818.696135"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "11"
+         endingLineNumber = "11"
+         landmarkName = "-update:"
+         landmarkType = "4">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

@@ -4,13 +4,17 @@
 
 +(Coin*)init_x:(float)posx y:(float)posy {
     Coin *new_coin = [Coin node];
+    new_coin.active = YES;
     new_coin.position = ccp(posx,posy);
     return new_coin;
 }
 
 -(void) draw {
+    if (!active) {
+        return;
+    }
     [super draw];
-	glColor4ub(255,255,0,100);
+	glColor4ub(255,0,0,100);
     glLineWidth(1.0f);
     ccDrawCircle(ccp(0,0), 10, 0, 10, NO);
 }
@@ -19,12 +23,14 @@
     return CGRectMake([self position].x-10,[self position].y-10,20,20);
 }
 
--(void)update:(Player*)player  {
+-(void)update:(Player*)player {
+    if (!active) {
+        return;
+    }
     if (CGRectIntersectsRect([self get_hit_rect],[player get_hit_rect])) {
-        /*player.vx *= 1.6;
-        player.vy *= 1.2;*/
-        player.vx *= .7;
-        player.vy *= .95;
+        player.vx *= 3.0;
+        player.vy *= 1.5;
+        active = NO;
     }
 }
 
