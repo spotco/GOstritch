@@ -10,16 +10,16 @@
 
 @implementation MapLoader
 
-+(bool) load_map:(NSString *)map_file_name oftype:(NSString *) map_file_type{
++(Map *) load_map:(NSString *)map_file_name oftype:(NSString *) map_file_type{
     
     NSString *islandFilePath = [[NSBundle mainBundle] pathForResource:@"island1" ofType:@"map"];
 	NSString *islandInputStr = [[NSString alloc] initWithContentsOfFile : islandFilePath encoding:NSUTF8StringEncoding error:nil];
 	
 	NSData *islandData  =  [islandInputStr dataUsingEncoding : NSUTF8StringEncoding];
     
-    NSDictionary *j_islands_data = [[CJSONDeserializer deserializer] deserializeAsDictionary:(islandData) error:(nil)];
+    NSDictionary *j_map_data = [[CJSONDeserializer deserializer] deserializeAsDictionary:(islandData) error:(nil)];
     
-    NSArray *islandArray = [j_islands_data objectForKey:(@"islands")];
+    NSArray *islandArray = [j_map_data objectForKey:(@"islands")];
     
 	//NSArray *islandArray = [[CJSONDeserializer deserializer] deserializeAsArray : islandData error : nil ];
 	
@@ -43,7 +43,24 @@
 		
 	}
     
-    return true;
+    
+    NSArray *coins_array = [j_map_data objectForKey:@"objects"];
+    NSMutableArray *n_coins = [[NSMutableArray alloc] init];
+    
+    for(int i = 0; i < [coins_array count]; i++){
+        NSDictionary *j_object = (NSDictionary *)[coins_array objectAtIndex:i];
+        NSString *type = (NSString *)[j_object objectForKey:@"type"];
+        if(type == @"coins"){
+            Coin *c = [Coin init_x:((NSString *)[j_object  objectForKey:@"x"]).floatValue y:((NSString *)[j_object objectForKey:@"y"]).floatValue];
+            [n_coins addObject:c];
+        }
+        
+    }
+    
+    Map *map = [[Map alloc] init];
+    
+    
+    return map;
 }
 
 @end

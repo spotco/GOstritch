@@ -10,9 +10,11 @@
 #import "CJSONDeserializer.h"
 #import "Line_Island.h"
 #import "Island.h"
+#import "Map.h"
+#import "Coin.h"
 
 @interface MapLoader : NSObject
 
-+(bool) load_map: (NSString *)map_file_name oftype:(NSString *) map_file_type;
++(Map *) load_map: (NSString *)map_file_name oftype:(NSString *) map_file_type;
 
 @end
