@@ -40,12 +40,7 @@
 		if (true) { //TODO: if statement here based on type of island read in json
 			currentIsland = [Line_Island init_pt1:start pt2:end];
 		}
-<<<<<<< HEAD
-		[n_islands addObject:currentIsland];
-=======
-		
 		[map.n_islands addObject:currentIsland];
->>>>>>> 75f8ced8a340f34314b782819f0451d0e36283b4
 		
 	}
     
