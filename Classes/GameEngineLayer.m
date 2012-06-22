@@ -13,7 +13,7 @@ static float cur_pos_y = 0;
 	[[CCDirector sharedDirector] setDisplayFPS:NO];
 	CCScene *scene = [CCScene node];
 	BGLayer *bglayer = [BGLayer node];
-	[scene addChild:bglayer];
+	//[scene addChild:bglayer];
 	GameEngineLayer *layer = [GameEngineLayer node];
 	[scene addChild: layer];
 	return scene;
@@ -22,7 +22,8 @@ static float cur_pos_y = 0;
 
 -(id) init{
 	if( (self=[super init])) {
-		[self loadMap];
+		//[self loadMap];
+        [self load_test_map];
         player = [Player init];
 		[self addChild:player];
 		player.position = ccp(PLAYER_START_X,PLAYER_START_Y);
@@ -47,6 +48,15 @@ static float cur_pos_y = 0;
         max_y = MAX(max_y, i.endY);
     }
     return CGRectMake(-100, -100, max_x+600, max_y+600);
+}
+
+-(void) load_test_map {
+    islands = [[NSMutableArray alloc] init];
+    game_objects = [[NSMutableArray alloc] init];
+    [islands addObject:[CurveIsland init_pt_i:ccp(100,100) pt_f:ccp(500,200) theta_i:M_PI*(3.0/2.0) theta_f:M_PI*(4.0)]];
+    for (Island* i in islands) {
+		[self addChild:i];
+	}
 }
 
 -(void) loadMap{

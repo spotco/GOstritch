@@ -9,6 +9,7 @@
 #import "BGLayer.h"
 #import "Resource.h"
 #import "MapLoader.h"
+#import "CurveIsland.h"
 
 @interface GameEngineLayer : CCLayer {
 	NSMutableArray *islands;

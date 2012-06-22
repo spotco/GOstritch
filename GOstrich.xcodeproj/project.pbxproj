@@ -71,6 +71,7 @@
 		7E8F9012156855A900C2E30F /* dog1runss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E8F9011156855A900C2E30F /* dog1runss.png */; };
 		7E93D6761592B97C00A83E9C /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E93D6751592B97C00A83E9C /* GameObject.m */; };
 		7E93D67A1592BABF00A83E9C /* Coin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E93D6791592BABF00A83E9C /* Coin.m */; };
+		7EE784BB1593FA42001704B1 /* CurveIsland.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE784BA1593FA42001704B1 /* CurveIsland.m */; };
 		8B4028D01592CDCF00A2E791 /* MapLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028CF1592CDCF00A2E791 /* MapLoader.m */; };
 		8B4028D31592D43900A2E791 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028D21592D43900A2E791 /* Map.m */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
@@ -351,6 +352,8 @@
 		7E93D6751592B97C00A83E9C /* GameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameObject.m; sourceTree = "<group>"; };
 		7E93D6781592BABF00A83E9C /* Coin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coin.h; sourceTree = "<group>"; };
 		7E93D6791592BABF00A83E9C /* Coin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coin.m; sourceTree = "<group>"; };
+		7EE784B91593FA42001704B1 /* CurveIsland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveIsland.h; sourceTree = "<group>"; };
+		7EE784BA1593FA42001704B1 /* CurveIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurveIsland.m; sourceTree = "<group>"; };
 		8B4028CE1592CDCF00A2E791 /* MapLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLoader.h; sourceTree = "<group>"; };
 		8B4028CF1592CDCF00A2E791 /* MapLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLoader.m; sourceTree = "<group>"; };
 		8B4028D11592D43900A2E791 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
@@ -636,11 +639,12 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				7EE784B71593F9EB001704B1 /* islands */,
 				8B4028CC1592CC6000A2E791 /* map_util */,
 				7E93D6731592B69C00A83E9C /* game_obj */,
-				7E8F8FFE1568555100C2E30F /* bgobj */,
+				7E8F8FFE1568555100C2E30F /* bg_obj */,
 				494E2594152C22DB004EBE74 /* layers */,
-				494E2593152C22BF004EBE74 /* game_core */,
+				494E2593152C22BF004EBE74 /* player */,
 				E0F80F5D120A0182005866B8 /* GameConfig.h */,
 				E0F80F5E120A0182005866B8 /* RootViewController.h */,
 				E0F80F5F120A0182005866B8 /* RootViewController.m */,
@@ -662,13 +666,13 @@
 			path = map;
 			sourceTree = "<group>";
 		};
-		494E2593152C22BF004EBE74 /* game_core */ = {
+		494E2593152C22BF004EBE74 /* player */ = {
 			isa = PBXGroup;
 			children = (
 				49931E32152D6D5500E2B320 /* Player.h */,
 				49931E33152D6D5500E2B320 /* Player.m */,
 			);
-			name = game_core;
+			name = player;
 			sourceTree = "<group>";
 		};
 		494E2594152C22DB004EBE74 /* layers */ = {
@@ -802,13 +806,13 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		7E8F8FFE1568555100C2E30F /* bgobj */ = {
+		7E8F8FFE1568555100C2E30F /* bg_obj */ = {
 			isa = PBXGroup;
 			children = (
 				7E8F90001568556900C2E30F /* BackgroundObject.h */,
 				7E8F90011568556900C2E30F /* BackgroundObject.m */,
 			);
-			name = bgobj;
+			name = bg_obj;
 			sourceTree = "<group>";
 		};
 		7E8F9010156855A900C2E30F /* char1 */ = {
@@ -830,13 +834,22 @@
 			name = game_obj;
 			sourceTree = "<group>";
 		};
-		8B4028CC1592CC6000A2E791 /* map_util */ = {
+		7EE784B71593F9EB001704B1 /* islands */ = {
 			isa = PBXGroup;
 			children = (
 				4926F83B152B867C00A1EFDE /* Island.h */,
 				4926F83C152B867C00A1EFDE /* Island.m */,
 				494E25A0152C236C004EBE74 /* Line_Island.h */,
 				494E25A1152C236C004EBE74 /* Line_Island.m */,
+				7EE784B91593FA42001704B1 /* CurveIsland.h */,
+				7EE784BA1593FA42001704B1 /* CurveIsland.m */,
+			);
+			name = islands;
+			sourceTree = "<group>";
+		};
+		8B4028CC1592CC6000A2E791 /* map_util */ = {
+			isa = PBXGroup;
+			children = (
 				8B4028CE1592CDCF00A2E791 /* MapLoader.h */,
 				8B4028CF1592CDCF00A2E791 /* MapLoader.m */,
 				8B4028D11592D43900A2E791 /* Map.h */,
@@ -1316,6 +1329,7 @@
 				7E93D67A1592BABF00A83E9C /* Coin.m in Sources */,
 				8B4028D01592CDCF00A2E791 /* MapLoader.m in Sources */,
 				8B4028D31592D43900A2E791 /* Map.m in Sources */,
+				7EE784BB1593FA42001704B1 /* CurveIsland.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
