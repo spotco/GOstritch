@@ -1,27 +1,27 @@
 
-#import "Line_Island.h"
+#import "LineIsland.h"
 #import "PRFilledPolygon.h"
 #import "GameEngineLayer.h"
 
-@implementation Line_Island
+@implementation LineIsland
 
 @synthesize min_range,max_range,slope;
 @synthesize main_fill;
 
-+(Line_Island*)init_pt1:(CGPoint)start pt2:(CGPoint)end {
-	Line_Island *new_island = [Line_Island node];
++(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end {
+	LineIsland *new_island = [LineIsland node];
 	[new_island set_pt1:start pt2:end];
 	[new_island calc_init];
 	new_island.anchorPoint = ccp(0,0);
 	new_island.position = ccp(new_island.startX,new_island.startY);
 	
 	/*CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:@"fg_tex.png"];
-	NSMutableArray *pts = [NSMutableArray array];
-	[pts addObject:[NSValue valueWithCGPoint:ccp(0,0)]];
-	[pts addObject:[NSValue valueWithCGPoint:ccp(end.x-start.x,end.y-start.y)]];
-	[pts addObject:[NSValue valueWithCGPoint:ccp(end.x-start.x,end.y-start.y-50)]];
-	[pts addObject:[NSValue valueWithCGPoint:ccp(0,0-50)]];
-	[new_island addChild:[PRFilledPolygon filledPolygonWithPoints:pts andTexture:texture]];*/
+     NSMutableArray *pts = [NSMutableArray array];
+     [pts addObject:[NSValue valueWithCGPoint:ccp(0,0)]];
+     [pts addObject:[NSValue valueWithCGPoint:ccp(end.x-start.x,end.y-start.y)]];
+     [pts addObject:[NSValue valueWithCGPoint:ccp(end.x-start.x,end.y-start.y-50)]];
+     [pts addObject:[NSValue valueWithCGPoint:ccp(0,0-50)]];
+     [new_island addChild:[PRFilledPolygon filledPolygonWithPoints:pts andTexture:texture]];*/
 	
 	[new_island init_tex];
 	[new_island init_top];
@@ -98,8 +98,8 @@
 	
 	
 	/*glColor4ub(0,0,255,100);
-	glLineWidth(7.0f);
-	ccDrawLine(ccp(0,0), ccp(endX-[self position].x,endY-[self position].y));*/
+     glLineWidth(7.0f);
+     ccDrawLine(ccp(0,0), ccp(endX-[self position].x,endY-[self position].y));*/
 	
 	glPushMatrix();
 	glBindTexture(GL_TEXTURE_2D, main_fill.texture.name);
@@ -160,6 +160,10 @@
 	} else {
 		return startY+(pos-startX)*slope;
 	}
+}
+
+-(float)get_angle:(float)pos {
+    return atan((endY-startY)/(endX-startX))*(180/M_PI);
 }
 
 @end

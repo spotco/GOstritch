@@ -38,7 +38,7 @@
 		NSLog(@"%f", start.x);
 		Island *currentIsland;
 		if (true) { //TODO: if statement here based on type of island read in json
-			currentIsland = [Line_Island init_pt1:start pt2:end];
+			currentIsland = [LineIsland init_pt1:start pt2:end];
 		}
 		[map.n_islands addObject:currentIsland];
 		

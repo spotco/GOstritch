@@ -1,11 +1,3 @@
-//
-//  Island.m
-//  GOstrich
-//
-//  Created by Student User on 4/3/12.
-//  Copyright 2012 University of Washington. All rights reserved.
-//
-
 #import "Island.h"
 
 
@@ -15,6 +7,10 @@
 
 -(float)get_height:(float)pos {
 	return -1;
+}
+
+-(float)get_ang:(float)pos {
+    return 0;
 }
 
 @end

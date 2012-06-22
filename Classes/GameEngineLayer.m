@@ -6,7 +6,17 @@
 @implementation GameEngineLayer
 
 static float cur_pos_x = 0;
-static float cur_pos_y = 0; 
+static float cur_pos_y = 0;
+
+/**
+ TODO:
+    -Fix curve fallthrough bug
+    -Fix island join bug
+    -Fix curve island offset bug (when not starting at 0 or PI*n
+    -Refactor player move code
+    -Fix line island top part-alignment rendering problem
+    -Running vertically/upsidedown
+ **/
 
 +(CCScene *) scene{
     [Resource init_textures];
@@ -53,26 +63,24 @@ static float cur_pos_y = 0;
 -(void) load_test_map {
     islands = [[NSMutableArray alloc] init];
     game_objects = [[NSMutableArray alloc] init];
-    [islands addObject:[CurveIsland init_pt_i:ccp(100,100) pt_f:ccp(500,200) theta_i:M_PI*(3.0/2.0) theta_f:M_PI*(4.0)]];
+    [islands addObject:[CurveIsland init_pt_i:ccp(50,0) pt_f:ccp(500,200) theta_i:0 theta_f:M_PI*(0.5)]];
+    [islands addObject:[CurveIsland init_pt_i:ccp(500,200) pt_f:ccp(1000,400) theta_i:0 theta_f:M_PI*(0.5)]];
+    [islands addObject:[CurveIsland init_pt_i:ccp(1000,400) pt_f:ccp(1500,690) theta_i:0 theta_f:M_PI*(0.5)]];
+    [islands addObject:[LineIsland init_pt1:ccp(0,0) pt2:ccp(1700,200)]];
     for (Island* i in islands) {
 		[self addChild:i];
 	}
 }
 
 -(void) loadMap{
-	//islands = [GameEngineLayer loadIslands];
 	Map *map = [MapLoader load_map:@"island1" oftype:@"map"];
     
-    
     islands = map.n_islands;
-    
     for (Island* i in islands) {
 		[self addChild:i];
-        
 	}
     
     game_objects = map.game_objects;
-    
     for (GameObject* o in game_objects) {
         [self addChild:o];
     }
@@ -91,33 +99,6 @@ static float cur_pos_y = 0;
     
 }
 
-/*-(void)draw {
-    [super draw];
-	glColor4ub(255,0,0,100);
-    glLineWidth(2.0f);
-    CGRect pathBox = [player get_hit_rect];
-    CGPoint verts[4] = {
-        ccp(pathBox.origin.x, pathBox.origin.y),
-        ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
-        ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
-        ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
-    };
-    ccDrawPoly(verts, 4, YES);
-    
-    for (GameObject* o in game_objects) {
-        CGRect pathBox = [o get_hit_rect];
-        CGPoint verts[4] = {
-            ccp(pathBox.origin.x, pathBox.origin.y),
-            ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
-            ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
-            ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
-        };
-        ccDrawPoly(verts, 4, YES);
-    }
-    
-
-}*/
-
 -(void)update_game_obj {
     for (GameObject* o in game_objects) {
         [o update:player];
@@ -129,15 +110,15 @@ static float cur_pos_y = 0;
     player.touch_count = 5;
 }
 
-/*-(void) ccTouchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
-}*/
+-(void) ccTouchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {
+}
 
 -(void) ccTouchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
 	is_touch = NO;
 }
 
 -(void)check_game_state {
-	if (player.position.y < 0) { //TODO--ACTUAL GAME OVER STATES
+    if (!CGRectIntersectsRect([self get_world_bounds],[player get_hit_rect])) { 
 		player.position = ccp(PLAYER_START_X,PLAYER_START_Y);
         player.touch_count = 0;
         player.vx = 0;
@@ -201,8 +182,9 @@ static float cur_pos_y = 0;
 			pos_x = pos_x + player.vx;
 			pos_y=post_y;
 		}
-		float ang = atan((contact_island.endY-contact_island.startY)/(contact_island.endX-contact_island.startX))*(180/M_PI);
-		player.rotation = -ang; //rotate 
+		//float ang = atan((contact_island.endY-contact_island.startY)/(contact_island.endX-contact_island.startX))*(180/M_PI);
+		float ang = [contact_island get_angle:pos_x];
+        player.rotation = -ang; //rotate 
 		player.vy = 0;
 	} else {
 		pos_y+=player.vy; //move before incrementing velocity OR ELSE
@@ -238,41 +220,30 @@ static float cur_pos_y = 0;
     return gameObjArray;
 }
 
-//static method that loads map into array from file, process array afterwards
-+(NSMutableArray*) loadIslands{
-	//find the path of given file
-	NSString *islandFilePath = [[NSBundle mainBundle] pathForResource:@"island1" ofType:@"map"];
-	NSString *islandInputStr = [[NSString alloc] initWithContentsOfFile : islandFilePath];
-	
-	NSData *islandData  =  [islandInputStr dataUsingEncoding : NSUTF8StringEncoding];
-    
-    NSDictionary *j_islands_data = [[CJSONDeserializer deserializer] deserializeAsDictionary:(islandData) error:(nil)];
-    
-    NSArray *islandArray = [j_islands_data objectForKey:(@"islands")];
-    
-	//NSArray *islandArray = [[CJSONDeserializer deserializer] deserializeAsArray : islandData error : nil ];
-	
-	int islandsCount = [islandArray count];
-	
-	NSMutableArray *n_islands = [[NSMutableArray alloc] init];
-	
-	for(int i = 0; i < islandsCount; i++){
-		NSDictionary *currentIslandDict = (NSDictionary *)[islandArray objectAtIndex:i];
-		CGPoint start = ccp( ((NSString *)[currentIslandDict objectForKey:@"x1"]).floatValue
-							,((NSString *)[currentIslandDict objectForKey:@"y1"]).floatValue );
-		CGPoint end = ccp( ((NSString *)[currentIslandDict objectForKey:@"x2"]).floatValue
-						  ,((NSString *)[currentIslandDict objectForKey:@"y2"]).floatValue );
-		NSLog(@"%f", start.x);
-		Island *currentIsland;
-		if (true) { //TODO: if statement here based on type of island read in json
-			currentIsland = [Line_Island init_pt1:start pt2:end];
-		}
-		
-		[n_islands addObject:currentIsland];
-		
-	}
-	return n_islands;
-}
+/*-(void)draw {
+     [super draw];
+     glColor4ub(255,0,0,100);
+     glLineWidth(2.0f);
+     CGRect pathBox = [player get_hit_rect];
+     CGPoint verts[4] = {
+         ccp(pathBox.origin.x, pathBox.origin.y),
+         ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
+         ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
+         ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
+     };
+     ccDrawPoly(verts, 4, YES);
+     
+     for (GameObject* o in game_objects) {
+         CGRect pathBox = [o get_hit_rect];
+         CGPoint verts[4] = {
+             ccp(pathBox.origin.x, pathBox.origin.y),
+             ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
+             ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
+             ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
+         };
+         ccDrawPoly(verts, 4, YES);
+     }
+ }*/
 
 -(void)check_sort_islands_given:(float)pos_x and:(float)pos_y {
 	float tmp = FLT_MAX;//if islands out of order, sort
@@ -305,7 +276,6 @@ static float cur_pos_y = 0;
 	cur_pos_y = pos_y;
 }
 
-//static player status getters
 +(float) get_cur_pos_x {
 	return cur_pos_x;
 }

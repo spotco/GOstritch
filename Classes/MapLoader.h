@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CJSONDeserializer.h"
-#import "Line_Island.h"
+#import "LineIsland.h"
 #import "Island.h"
 #import "Map.h"
 #import "Coin.h"
