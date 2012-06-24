@@ -72,6 +72,8 @@ static float cur_pos_y = 0;
 	}
 }
 
+/*load the map and items in the map
+ */
 -(void) loadMap{
 	Map *map = [MapLoader load_map:@"island1" oftype:@"map"];
     
