@@ -196,7 +196,8 @@ static float cur_pos_y = 0;
 		float post_x = pos_x+player.vx;
 		BOOL has_hit_x = NO;
 		for (Island* i in islands) { //use 2-line segment intersection to see if any x-dir conflicts
-			CGPoint intersection = [Common line_seg_intersection_a1:ccp(pre_x,pos_y) a2:ccp(post_x,pos_y) b1:ccp(i.startX,i.startY) b2:ccp(i.endX,i.endY)];
+			//CGPoint intersection = [Common line_seg_intersection_a1:ccp(pre_x,pos_y) a2:ccp(post_x,pos_y) b1:ccp(i.startX,i.startY) b2:ccp(i.endX,i.endY)];
+            CGPoint intersection = [Common line_seg_intersection_a1:ccp(pre_x,pos_y) a2:ccp(post_x,pos_y) b1:ccp(pre_x, [i get_height:pre_x]) b2:ccp(post_x,[i get_height:post_x])];
 			if (intersection.x != -1 && intersection.y != -1) {//if conflict, set position at conflict_x,contact_island_height(x)
 				pos_x = intersection.x; 
 				pos_y = [i get_height:intersection.x];
