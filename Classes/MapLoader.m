@@ -35,11 +35,23 @@
 							,((NSString *)[currentIslandDict objectForKey:@"y1"]).floatValue );
 		CGPoint end = ccp( ((NSString *)[currentIslandDict objectForKey:@"x2"]).floatValue
 						  ,((NSString *)[currentIslandDict objectForKey:@"y2"]).floatValue );
-		NSLog(@"%f", start.x);
-		Island *currentIsland;
-		if (true) { //TODO: if statement here based on type of island read in json
+		
+        
+        NSString *type = (NSString*)[currentIslandDict objectForKey:@"type"];
+        
+        Island *currentIsland;
+		if ([type isEqualToString:@"line"]) {
 			currentIsland = [LineIsland init_pt1:start pt2:end];
-		}
+            NSLog(@"add line island");
+        } else if ([type isEqualToString:@"curve"]) {
+            float theta_i = ((NSString *)[currentIslandDict objectForKey:@"theta_i"]).floatValue;
+            float theta_f = ((NSString *)[currentIslandDict objectForKey:@"theta_f"]).floatValue;
+            currentIsland = [CurveIsland init_pt_i:start pt_f:end theta_i:theta_i*M_PI theta_f:theta_f*M_PI];
+            NSLog(@"add curve island");
+		} else {
+            NSLog(@"line read error");
+            continue;
+        }
 		[map.n_islands addObject:currentIsland];
 		
 	}
@@ -52,16 +64,19 @@
     for(int i = 0; i < [coins_array count]; i++){
         NSDictionary *j_object = (NSDictionary *)[coins_array objectAtIndex:i];
         NSString *type = (NSString *)[j_object objectForKey:@"type"];
-        if([type compare:@"coins"]){
+        if([type isEqualToString:@"coin"]){
             Coin *c = [Coin init_x:((NSString *)[j_object  objectForKey:@"x"]).floatValue y:((NSString *)[j_object objectForKey:@"y"]).floatValue];
             [map.game_objects addObject:c];
+            NSLog(@"add coin");
+        } else {
+            NSLog(@"item read error");
+            continue;
         }
-        
     }
      
     
     //map.n_islands = n_islands;
-    
+    NSLog(@"finish parse");
     
     return map;
 }

@@ -10,7 +10,6 @@ static float cur_pos_y = 0;
 
 /**
  TODO:
-    -Fix curve fallthrough bug
     -Fix island join bug
     -Fix curve island offset bug (when not starting at 0 or PI*n
     -Refactor player move code
@@ -32,8 +31,7 @@ static float cur_pos_y = 0;
 
 -(id) init{
 	if( (self=[super init])) {
-		//[self loadMap];
-        [self load_test_map];
+		[self loadMap];
         player = [Player init];
 		[self addChild:player];
 		player.position = ccp(PLAYER_START_X,PLAYER_START_Y);
@@ -60,20 +58,6 @@ static float cur_pos_y = 0;
     return CGRectMake(-100, -100, max_x+600, max_y+600);
 }
 
--(void) load_test_map {
-    islands = [[NSMutableArray alloc] init];
-    game_objects = [[NSMutableArray alloc] init];
-    [islands addObject:[CurveIsland init_pt_i:ccp(50,0) pt_f:ccp(500,200) theta_i:0 theta_f:M_PI*(0.5)]];
-    [islands addObject:[CurveIsland init_pt_i:ccp(500,200) pt_f:ccp(1000,400) theta_i:0 theta_f:M_PI*(0.5)]];
-    [islands addObject:[CurveIsland init_pt_i:ccp(1000,400) pt_f:ccp(1500,690) theta_i:0 theta_f:M_PI*(0.5)]];
-    [islands addObject:[LineIsland init_pt1:ccp(0,0) pt2:ccp(1700,200)]];
-    for (Island* i in islands) {
-		[self addChild:i];
-	}
-}
-
-/*load the map and items in the map
- */
 -(void) loadMap{
 	Map *map = [MapLoader load_map:@"island1" oftype:@"map"];
     
@@ -126,7 +110,7 @@ static float cur_pos_y = 0;
         player.vx = 0;
         player.vy = 0;
         for (GameObject* o in game_objects) {
-            o.active = YES;
+            [o set_active:YES];
         }
 	}
 }
@@ -198,9 +182,11 @@ static float cur_pos_y = 0;
 		float post_x = pos_x+player.vx;
 		BOOL has_hit_x = NO;
 		for (Island* i in islands) { //use 2-line segment intersection to see if any x-dir conflicts
-			//CGPoint intersection = [Common line_seg_intersection_a1:ccp(pre_x,pos_y) a2:ccp(post_x,pos_y) b1:ccp(i.startX,i.startY) b2:ccp(i.endX,i.endY)];
-            CGPoint intersection = [Common line_seg_intersection_a1:ccp(pre_x,pos_y) a2:ccp(post_x,pos_y) b1:ccp(pre_x, [i get_height:pre_x]) b2:ccp(post_x,[i get_height:post_x])];
-			if (intersection.x != -1 && intersection.y != -1) {//if conflict, set position at conflict_x,contact_island_height(x)
+            float line_pre_y = [i get_height:pre_x];
+            float line_post_y = [i get_height:post_x];
+            
+            CGPoint intersection = [Common line_seg_intersection_a1:ccp(pre_x,pos_y) a2:ccp(post_x,pos_y) b1:ccp(pre_x,line_pre_y) b2:ccp(post_x,line_post_y)];
+			if (intersection.x != -1 && intersection.y != -1 && line_pre_y != -1 && line_post_y != -1) {//if conflict, set position at conflict_x,contact_island_height(x)
 				pos_x = intersection.x; 
 				pos_y = [i get_height:intersection.x];
 				has_hit_x = YES;

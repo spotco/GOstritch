@@ -13,4 +13,8 @@
     return CGRectMake(0,0,0,0);
 }
 
+-(void)set_active:(BOOL)t_active {
+    return;
+}
+
 @end

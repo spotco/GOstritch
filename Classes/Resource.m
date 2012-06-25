@@ -15,6 +15,7 @@ static NSMutableDictionary* textures = nil;
                      @"bgsky.png",@"bg_sky",
                      @"bg_layer_1.png",@"bg_layer_1",
                      @"bg_layer_2.png",@"bg_layer_2",
+                     @"goldenbone.png",@"golden_bone",
                      nil];
     
     ccTexParams texParams = { GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT };
