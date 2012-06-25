@@ -65,6 +65,9 @@
 		62064D871597E9B900C5DCE5 /* MapSelectionPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 62064D861597E9B900C5DCE5 /* MapSelectionPage.m */; };
 		62064D8A1597ED3B00C5DCE5 /* CoverFlowViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62064D891597ED3B00C5DCE5 /* CoverFlowViewControllerViewController.m */; };
 		62064D94159802CF00C5DCE5 /* CCCircularSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 62064D93159802CF00C5DCE5 /* CCCircularSelector.m */; };
+		62064DA3159819B600C5DCE5 /* map1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62064DA0159819B600C5DCE5 /* map1.jpg */; };
+		62064DA4159819B600C5DCE5 /* map2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62064DA1159819B600C5DCE5 /* map2.jpg */; };
+		62064DA5159819B600C5DCE5 /* map3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62064DA2159819B600C5DCE5 /* map3.jpg */; };
 		7E8DF3FF159451ED00B00340 /* goldenbone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E8DF3FE159451ED00B00340 /* goldenbone.png */; };
 		7E8DF40315945E8C00B00340 /* LineIsland.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E8DF40215945E8C00B00340 /* LineIsland.m */; };
 		7E8F90021568556900C2E30F /* BackgroundObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8F90001568556900C2E30F /* BackgroundObject.h */; };
@@ -357,6 +360,9 @@
 		62064D891597ED3B00C5DCE5 /* CoverFlowViewControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverFlowViewControllerViewController.m; sourceTree = "<group>"; };
 		62064D92159802CF00C5DCE5 /* CCCircularSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCircularSelector.h; sourceTree = "<group>"; };
 		62064D93159802CF00C5DCE5 /* CCCircularSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCCircularSelector.m; sourceTree = "<group>"; };
+		62064DA0159819B600C5DCE5 /* map1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = map1.jpg; sourceTree = "<group>"; };
+		62064DA1159819B600C5DCE5 /* map2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = map2.jpg; sourceTree = "<group>"; };
+		62064DA2159819B600C5DCE5 /* map3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = map3.jpg; sourceTree = "<group>"; };
 		7E8DF3FE159451ED00B00340 /* goldenbone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goldenbone.png; sourceTree = "<group>"; };
 		7E8DF40115945E8C00B00340 /* LineIsland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineIsland.h; sourceTree = "<group>"; };
 		7E8DF40215945E8C00B00340 /* LineIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineIsland.m; sourceTree = "<group>"; };
@@ -805,6 +811,7 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				62064D95159812B400C5DCE5 /* mapPics */,
 				7E8DF40415945FC200B00340 /* icons */,
 				7E8DF3FD159451ED00B00340 /* object */,
 				494E279E152C403D004EBE74 /* char */,
@@ -839,6 +846,16 @@
 				62064D891597ED3B00C5DCE5 /* CoverFlowViewControllerViewController.m */,
 			);
 			name = open_flow;
+			sourceTree = "<group>";
+		};
+		62064D95159812B400C5DCE5 /* mapPics */ = {
+			isa = PBXGroup;
+			children = (
+				62064DA0159819B600C5DCE5 /* map1.jpg */,
+				62064DA1159819B600C5DCE5 /* map2.jpg */,
+				62064DA2159819B600C5DCE5 /* map3.jpg */,
+			);
+			path = mapPics;
 			sourceTree = "<group>";
 		};
 		7E8DF3FD159451ED00B00340 /* object */ = {
@@ -1386,6 +1403,9 @@
 				7E8F900F1568559B00C2E30F /* ground_1.png in Resources */,
 				7E8F9012156855A900C2E30F /* dog1runss.png in Resources */,
 				7E8DF3FF159451ED00B00340 /* goldenbone.png in Resources */,
+				62064DA3159819B600C5DCE5 /* map1.jpg in Resources */,
+				62064DA4159819B600C5DCE5 /* map2.jpg in Resources */,
+				62064DA5159819B600C5DCE5 /* map3.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

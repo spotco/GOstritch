@@ -5,6 +5,16 @@
 
 static NSMutableDictionary* textures = nil;
 
++(void)init_menu_textures {
+    textures = [NSMutableDictionary dictionary];
+    NSArray *temp = [[NSArray alloc] initWithObjects:
+                     @"map1.jpg", @"map1",
+                     @"map2.jpg", @"map2",
+                     @"map3.jpg", @"map3",
+                     nil];
+    [Resource load_tex_from_array:temp];
+}
+
 +(void)init_textures {
     textures = [NSMutableDictionary dictionary];
     NSArray *temp = [[NSArray alloc] initWithObjects:
@@ -17,7 +27,11 @@ static NSMutableDictionary* textures = nil;
                      @"bg_layer_2.png",@"bg_layer_2",
                      @"goldenbone.png",@"golden_bone",
                      nil];
-    
+    [Resource load_tex_from_array:temp];
+
+}
+
++(void)load_tex_from_array:(NSArray*)temp {
     ccTexParams texParams = { GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT };
     for(int i = 0; i < [temp count]-1; i+=2) {
         NSLog(@"LOADING: %@->%@\n",[temp objectAtIndex:i], [temp objectAtIndex:(i+1)]);

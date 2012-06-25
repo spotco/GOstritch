@@ -41,18 +41,28 @@ float radianToDegree(float radian){
 }
 
 +(CCScene *) scene{
-    [Resource init_textures];
+    [Resource init_menu_textures];
     [[CCDirector sharedDirector] setDisplayFPS:NO];
     CCScene *scene = [CCScene node];
     //BGLayer *bglayer = [BGLayer node];
     //[scene addChild:bglayer];
-    
-    //CCCircularSelector *layer = [CCCircularSelector initWithChoices: ];
-    //[scene addChild: layer];
+    CCCircularSelector *selector = [[CCCircularSelector alloc] initWithChoices:[CCCircularSelector loadMapPictures]];
+    [scene addChild: selector];
     return scene;
 }
 
-
++(NSArray *) loadMapPictures{
+    CCTexture2D *texture1 = [Resource get_tex:@"map1"];
+    CCSprite *img1 = [CCSprite spriteWithTexture:texture1];
+    
+    CCTexture2D *texture2 = [Resource get_tex:@"map2"];
+    CCSprite *img2 = [CCSprite spriteWithTexture:texture2];
+    	
+    CCTexture2D *texture3 = [Resource get_tex:@"map3"];
+    CCSprite *img3 = [CCSprite spriteWithTexture:texture3];
+    NSArray *result = [[NSArray alloc] initWithObjects:img1, img2, img3, nil];
+    return result;
+}
 
 -(CCCircularSelector*)initWithChoices:(NSArray*)someChoices{
     CGSize winSize = [[CCDirector sharedDirector] winSize];
@@ -89,7 +99,14 @@ float radianToDegree(float radian){
         rotationMode_ = kCCCircularSelectorRotationModeDrag | kCCCircularSelectorRotationModeTapItem | kCCCircularSelectorRotationModeTapLeftRight;
         touchArea_ = CGRectMake(0.0f, 0.0f, winSize.width, winSize.height);
         
-        center_ = CGPointZero;
+        
+        //get the center of the screen
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        CGFloat screenWidth = screenRect.size.width;
+        CGFloat screenHeight = screenRect.size.height;
+        center_.x = screenWidth / 2;
+        center_.y = screenHeight / 2;
+        
         radiusX_ = self.contentSize.width * 0.35f;
         radiusY_ = self.contentSize.height * 0.25f;
         frontScale_ = 1.0f;

@@ -65,7 +65,7 @@ typedef enum{
 }
 
 +(CCScene *) scene;
-
++(NSArray *) loadMapPictures;
 
 -(CCCircularSelector*)initWithChoices:(NSArray*)someChoices;
 -(void)positionChoices;
@@ -85,6 +85,7 @@ typedef enum{
 -(void)tapped:(UITouch *)touch;
 
 -(void)rotateToIndex:(int)index;
+
 
 @property (retain) NSObject<CCCircularSelectorDelagateProtocol> *delegate;
 @property (readonly) int selectionIndex;
