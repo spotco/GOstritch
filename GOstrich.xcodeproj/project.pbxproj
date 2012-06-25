@@ -72,6 +72,7 @@
 		7E8F9012156855A900C2E30F /* dog1runss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E8F9011156855A900C2E30F /* dog1runss.png */; };
 		7E93D6761592B97C00A83E9C /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E93D6751592B97C00A83E9C /* GameObject.m */; };
 		7E93D67A1592BABF00A83E9C /* Coin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E93D6791592BABF00A83E9C /* Coin.m */; };
+		7ECBC8671597FA5700B2BCFE /* Vec3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBC8661597FA5700B2BCFE /* Vec3D.m */; };
 		7EE784BB1593FA42001704B1 /* CurveIsland.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE784BA1593FA42001704B1 /* CurveIsland.m */; };
 		8B4028D01592CDCF00A2E791 /* MapLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028CF1592CDCF00A2E791 /* MapLoader.m */; };
 		8B4028D31592D43900A2E791 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028D21592D43900A2E791 /* Map.m */; };
@@ -354,6 +355,8 @@
 		7E93D6751592B97C00A83E9C /* GameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameObject.m; sourceTree = "<group>"; };
 		7E93D6781592BABF00A83E9C /* Coin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coin.h; sourceTree = "<group>"; };
 		7E93D6791592BABF00A83E9C /* Coin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coin.m; sourceTree = "<group>"; };
+		7ECBC8651597FA5700B2BCFE /* Vec3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec3D.h; sourceTree = "<group>"; };
+		7ECBC8661597FA5700B2BCFE /* Vec3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vec3D.m; sourceTree = "<group>"; };
 		7EE784B91593FA42001704B1 /* CurveIsland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveIsland.h; sourceTree = "<group>"; };
 		7EE784BA1593FA42001704B1 /* CurveIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurveIsland.m; sourceTree = "<group>"; };
 		8B4028CE1592CDCF00A2E791 /* MapLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLoader.h; sourceTree = "<group>"; };
@@ -837,6 +840,8 @@
 				4997E84B153A20BE000E8E34 /* Common.m */,
 				49CE63981541F26D00538B33 /* Resource.h */,
 				49CE63991541F26D00538B33 /* Resource.m */,
+				7ECBC8651597FA5700B2BCFE /* Vec3D.h */,
+				7ECBC8661597FA5700B2BCFE /* Vec3D.m */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -1366,6 +1371,7 @@
 				8B4028D31592D43900A2E791 /* Map.m in Sources */,
 				7EE784BB1593FA42001704B1 /* CurveIsland.m in Sources */,
 				7E8DF40315945E8C00B00340 /* LineIsland.m in Sources */,
+				7ECBC8671597FA5700B2BCFE /* Vec3D.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

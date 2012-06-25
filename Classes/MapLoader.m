@@ -27,7 +27,6 @@
 	
 	//NSMutableArray *n_islands = [[NSMutableArray alloc] init];
     Map *map = [[Map alloc] init];
-   
 	
 	for(int i = 0; i < islandsCount; i++){
 		NSDictionary *currentIslandDict = (NSDictionary *)[islandArray objectAtIndex:i];

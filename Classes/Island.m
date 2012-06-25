@@ -9,7 +9,7 @@
 	return -1;
 }
 
--(float)get_ang:(float)pos {
+-(float)get_angle:(float)pos {
     return 0;
 }
 
