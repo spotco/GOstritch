@@ -10,7 +10,8 @@
 
 #import "GOstrichAppDelegate.h"
 #import "GameConfig.h"
-#import "GameEngineLayer.h"
+//#import "GameEngineLayer.h"
+#import "CCCircularSelector.h"
 #import "RootViewController.h"
 
 @implementation GOstrichAppDelegate
@@ -109,7 +110,8 @@
 	[self removeStartupFlicker];
 	
 	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene: [GameEngineLayer scene]];
+	//[[CCDirector sharedDirector] runWithScene: [GameEngineLayer scene]];
+    [[CCDirector sharedDirector] runWithScene:[CCCircularSelector scene]];
 }
 
 

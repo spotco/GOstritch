@@ -59,6 +59,12 @@
 		50F414F01069373D002A0D5E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F414EC1069373D002A0D5E /* Default.png */; };
 		50F414F11069373D002A0D5E /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F414ED1069373D002A0D5E /* fps_images.png */; };
 		50F414F21069373D002A0D5E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 50F414EE1069373D002A0D5E /* Icon.png */; };
+		62064D821597DE6300C5DCE5 /* AFItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62064D7C1597DE6300C5DCE5 /* AFItemView.m */; };
+		62064D831597DE6300C5DCE5 /* AFOpenFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62064D7F1597DE6300C5DCE5 /* AFOpenFlowView.m */; };
+		62064D841597DE6300C5DCE5 /* AFUIImageReflection.m in Sources */ = {isa = PBXBuildFile; fileRef = 62064D811597DE6300C5DCE5 /* AFUIImageReflection.m */; };
+		62064D871597E9B900C5DCE5 /* MapSelectionPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 62064D861597E9B900C5DCE5 /* MapSelectionPage.m */; };
+		62064D8A1597ED3B00C5DCE5 /* CoverFlowViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62064D891597ED3B00C5DCE5 /* CoverFlowViewControllerViewController.m */; };
+		62064D94159802CF00C5DCE5 /* CCCircularSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = 62064D93159802CF00C5DCE5 /* CCCircularSelector.m */; };
 		7E8DF3FF159451ED00B00340 /* goldenbone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E8DF3FE159451ED00B00340 /* goldenbone.png */; };
 		7E8DF40315945E8C00B00340 /* LineIsland.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E8DF40215945E8C00B00340 /* LineIsland.m */; };
 		7E8F90021568556900C2E30F /* BackgroundObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8F90001568556900C2E30F /* BackgroundObject.h */; };
@@ -338,6 +344,19 @@
 		50F414ED1069373D002A0D5E /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
 		50F414EE1069373D002A0D5E /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		50F414EF1069373D002A0D5E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		62064D7B1597DE6300C5DCE5 /* AFItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFItemView.h; path = OpenFlow/AFItemView.h; sourceTree = "<group>"; };
+		62064D7C1597DE6300C5DCE5 /* AFItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFItemView.m; path = OpenFlow/AFItemView.m; sourceTree = "<group>"; };
+		62064D7D1597DE6300C5DCE5 /* AFOpenFlowConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFOpenFlowConstants.h; path = OpenFlow/AFOpenFlowConstants.h; sourceTree = "<group>"; };
+		62064D7E1597DE6300C5DCE5 /* AFOpenFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFOpenFlowView.h; path = OpenFlow/AFOpenFlowView.h; sourceTree = "<group>"; };
+		62064D7F1597DE6300C5DCE5 /* AFOpenFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFOpenFlowView.m; path = OpenFlow/AFOpenFlowView.m; sourceTree = "<group>"; };
+		62064D801597DE6300C5DCE5 /* AFUIImageReflection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFUIImageReflection.h; path = OpenFlow/AFUIImageReflection.h; sourceTree = "<group>"; };
+		62064D811597DE6300C5DCE5 /* AFUIImageReflection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFUIImageReflection.m; path = OpenFlow/AFUIImageReflection.m; sourceTree = "<group>"; };
+		62064D851597E9B900C5DCE5 /* MapSelectionPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapSelectionPage.h; sourceTree = "<group>"; };
+		62064D861597E9B900C5DCE5 /* MapSelectionPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapSelectionPage.m; sourceTree = "<group>"; };
+		62064D881597ED3B00C5DCE5 /* CoverFlowViewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverFlowViewControllerViewController.h; sourceTree = "<group>"; };
+		62064D891597ED3B00C5DCE5 /* CoverFlowViewControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverFlowViewControllerViewController.m; sourceTree = "<group>"; };
+		62064D92159802CF00C5DCE5 /* CCCircularSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCircularSelector.h; sourceTree = "<group>"; };
+		62064D93159802CF00C5DCE5 /* CCCircularSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCCircularSelector.m; sourceTree = "<group>"; };
 		7E8DF3FE159451ED00B00340 /* goldenbone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goldenbone.png; sourceTree = "<group>"; };
 		7E8DF40115945E8C00B00340 /* LineIsland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineIsland.h; sourceTree = "<group>"; };
 		7E8DF40215945E8C00B00340 /* LineIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineIsland.m; sourceTree = "<group>"; };
@@ -641,6 +660,8 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				62064D7A1597DD9100C5DCE5 /* open_flow */,
+				62064D711597DB0F00C5DCE5 /* page */,
 				7E8DF4061594601E00B00340 /* util */,
 				7E8DF4051594600600B00340 /* cc */,
 				7EE784B71593F9EB001704B1 /* islands */,
@@ -791,6 +812,33 @@
 				4926F8D6152BCBFF00A1EFDE /* map */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		62064D711597DB0F00C5DCE5 /* page */ = {
+			isa = PBXGroup;
+			children = (
+				62064D92159802CF00C5DCE5 /* CCCircularSelector.h */,
+				62064D93159802CF00C5DCE5 /* CCCircularSelector.m */,
+				62064D851597E9B900C5DCE5 /* MapSelectionPage.h */,
+				62064D861597E9B900C5DCE5 /* MapSelectionPage.m */,
+			);
+			name = page;
+			sourceTree = "<group>";
+		};
+		62064D7A1597DD9100C5DCE5 /* open_flow */ = {
+			isa = PBXGroup;
+			children = (
+				62064D7B1597DE6300C5DCE5 /* AFItemView.h */,
+				62064D7C1597DE6300C5DCE5 /* AFItemView.m */,
+				62064D7D1597DE6300C5DCE5 /* AFOpenFlowConstants.h */,
+				62064D7E1597DE6300C5DCE5 /* AFOpenFlowView.h */,
+				62064D7F1597DE6300C5DCE5 /* AFOpenFlowView.m */,
+				62064D801597DE6300C5DCE5 /* AFUIImageReflection.h */,
+				62064D811597DE6300C5DCE5 /* AFUIImageReflection.m */,
+				62064D881597ED3B00C5DCE5 /* CoverFlowViewControllerViewController.h */,
+				62064D891597ED3B00C5DCE5 /* CoverFlowViewControllerViewController.m */,
+			);
+			name = open_flow;
 			sourceTree = "<group>";
 		};
 		7E8DF3FD159451ED00B00340 /* object */ = {
@@ -1366,6 +1414,12 @@
 				8B4028D31592D43900A2E791 /* Map.m in Sources */,
 				7EE784BB1593FA42001704B1 /* CurveIsland.m in Sources */,
 				7E8DF40315945E8C00B00340 /* LineIsland.m in Sources */,
+				62064D821597DE6300C5DCE5 /* AFItemView.m in Sources */,
+				62064D831597DE6300C5DCE5 /* AFOpenFlowView.m in Sources */,
+				62064D841597DE6300C5DCE5 /* AFUIImageReflection.m in Sources */,
+				62064D871597E9B900C5DCE5 /* MapSelectionPage.m in Sources */,
+				62064D8A1597ED3B00C5DCE5 /* CoverFlowViewControllerViewController.m in Sources */,
+				62064D94159802CF00C5DCE5 /* CCCircularSelector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
