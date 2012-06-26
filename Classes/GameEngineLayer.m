@@ -10,11 +10,13 @@ static float cur_pos_y = 0;
 
 /**
  TODO:
-    -Fix island join bug
-    -Fix curve island offset bug (when not starting at 0 or PI*n
     -Refactor player move code
+    -Fix curve island offset bug (when not starting at 0 or PI*n)
+    -Additonal curve island based on circle
+    -Jump normal to current island direction
     -Running vertically/upsidedown
     -Curve island rendering
+    -Ghost (stack loading, curl)
  **/
 
 +(CCScene *) scene{
@@ -30,12 +32,6 @@ static float cur_pos_y = 0;
 
 
 -(id) init{
-    
-    /*line_seg a = [Common cons_line_seg_a:ccp(100,100) b:ccp(0,0)];
-    line_seg b = [Common double_extend_line_seg:a];
-    [Common print_line_seg:a];
-    [Common print_line_seg:b];*/
-    
 	if( (self=[super init])) {
 		[self loadMap];
         player = [Player init];
@@ -173,23 +169,26 @@ static float cur_pos_y = 0;
 		} else { //else if at edge
             float pre_x = pos_x;
             float post_x = pre_x + player.vx;
-            line_seg player_lseg = [Common cons_line_seg_a:ccp(pre_x,pos_y) b:ccp(post_x,pos_y)];
+            float est_post_y = pos_y + (post_x-pre_x)*[contact_island get_slope:pre_x];
+            line_seg player_lseg = [Common cons_line_seg_a:ccp(pos_x,pos_y) b:ccp(post_x,est_post_y)];
             player_lseg = [Common double_extend_line_seg:player_lseg];
             [Common print_line_seg:player_lseg msg:@"Player: "];
             
             BOOL has_hit_x = NO;
             
             for (Island* i in islands) {
+                if (i == contact_island) {
+                    continue;
+                }
                 line_seg island_lseg = [Common cons_line_seg_a:ccp(i.startX,[i get_height:i.startX]) b:ccp(post_x,[i get_height:post_x])];
-                line_seg island_lseg_extend = [Common left_extend_line_seg:island_lseg];
-                [Common print_line_seg:island_lseg msg:@"\tIsland: "];
-                [Common print_line_seg:island_lseg_extend msg:@"\tIsland extend: "];
+                line_seg island_lseg_extend = [Common double_extend_line_seg:island_lseg];
+                
                 
                 CGPoint intersection = [Common line_seg_intersection_a:player_lseg b:island_lseg_extend];
-                if ([Common line_seg_valid:island_lseg] && [Common line_seg_valid:island_lseg_extend] && intersection.x != -1 && intersection.y != -1) {
-
-                    NSLog(@"Inter(%f,%f)",intersection.x,intersection.y);
-                    
+                if (!([Common line_seg_valid:island_lseg] && [Common line_seg_valid:island_lseg_extend])) {
+                    continue;
+                }
+                if ((intersection.x != -1 && intersection.y != -1) || ([Common point_fuzzy_on_line_seg:island_lseg pt:player_lseg.b])) {
                     pos_x = post_x; 
                     pos_y = [i get_height:post_x];
                     has_hit_x = YES;
@@ -201,10 +200,7 @@ static float cur_pos_y = 0;
             if (!has_hit_x) {
                 pos_x = pos_x + player.vx;
                 pos_y= post_y;
-                NSLog(@"fall");
             }
-                      
-            NSLog(@"\n\n");
             
 		}
         

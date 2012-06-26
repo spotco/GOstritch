@@ -8,9 +8,9 @@ static NSMutableDictionary* textures = nil;
 +(void)init_menu_textures {
     textures = [NSMutableDictionary dictionary];
     NSArray *temp = [[NSArray alloc] initWithObjects:
-                     @"map1.jpg", @"map1",
-                     @"map2.jpg", @"map2",
-                     @"map3.jpg", @"map3",
+                     @"theme1_pic.jpg", @"map1",
+                     @"theme2_pic.jpg", @"map2",
+                     @"theme3_pic.jpg", @"map3",
                      nil];
     [Resource load_tex_from_array:temp];
 }

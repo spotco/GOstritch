@@ -9,6 +9,7 @@
 
 -(float)get_height:(float)pos;
 -(float)get_angle:(float)pos;
+-(float)get_slope:(float)pos;
 
 
 @end

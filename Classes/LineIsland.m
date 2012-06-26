@@ -143,7 +143,11 @@
 }
 
 -(float)get_angle:(float)pos {
-    return atan((endY-startY)/(endX-startX))*(180/M_PI);
+    return atan(slope)*(180/M_PI);
+}
+
+-(float)get_slope:(float)pos {
+    return slope;
 }
 
 @end
