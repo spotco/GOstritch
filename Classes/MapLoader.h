@@ -18,4 +18,5 @@
 
 +(Map *) load_map: (NSString *)map_file_name oftype:(NSString *) map_file_type;
 
+
 @end
