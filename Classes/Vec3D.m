@@ -21,8 +21,8 @@
     return [Vec3D init_x:(x - v.x) y:(y-v.y) z:(z-v.z)];
 }
 
--(Vec3D*) mult:(Vec3D*)v {
-    return [Vec3D init_x:(x * v.x) y:(y*v.y) z:(z*v.z)];
+-(Vec3D*) scale:(float)sf {
+    return [Vec3D init_x:(x * sf) y:(y*sf) z:(z*sf)];
 }
 
 -(BOOL) eq:(Vec3D*)v {

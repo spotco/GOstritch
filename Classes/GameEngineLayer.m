@@ -21,7 +21,7 @@ static float cur_pos_y = 0;
     [Resource init_textures];
 	[[CCDirector sharedDirector] setDisplayFPS:NO];
 	CCScene *scene = [CCScene node];
-	BGLayer *bglayer = [BGLayer node];
+	//BGLayer *bglayer = [BGLayer node];
 	//[scene addChild:bglayer];
 	GameEngineLayer *layer = [GameEngineLayer node];
 	[scene addChild: layer];
@@ -30,6 +30,11 @@ static float cur_pos_y = 0;
 
 
 -(id) init{
+    
+    /*line_seg a = [Common cons_line_seg_a:ccp(100,100) b:ccp(0,0)];
+    line_seg b = [Common double_extend_line_seg:a];
+    [Common print_line_seg:a];
+    [Common print_line_seg:b];*/
     
 	if( (self=[super init])) {
 		[self loadMap];
@@ -166,10 +171,43 @@ static float cur_pos_y = 0;
 			pos_x = pos_x + dx;
 			pos_y = mov_h;
 		} else { //else if at edge
-			pos_x = pos_x + player.vx;
-			pos_y=post_y;
+            float pre_x = pos_x;
+            float post_x = pre_x + player.vx;
+            line_seg player_lseg = [Common cons_line_seg_a:ccp(pre_x,pos_y) b:ccp(post_x,pos_y)];
+            player_lseg = [Common double_extend_line_seg:player_lseg];
+            [Common print_line_seg:player_lseg msg:@"Player: "];
+            
+            BOOL has_hit_x = NO;
+            
+            for (Island* i in islands) {
+                line_seg island_lseg = [Common cons_line_seg_a:ccp(i.startX,[i get_height:i.startX]) b:ccp(post_x,[i get_height:post_x])];
+                line_seg island_lseg_extend = [Common left_extend_line_seg:island_lseg];
+                [Common print_line_seg:island_lseg msg:@"\tIsland: "];
+                [Common print_line_seg:island_lseg_extend msg:@"\tIsland extend: "];
+                
+                CGPoint intersection = [Common line_seg_intersection_a:player_lseg b:island_lseg_extend];
+                if ([Common line_seg_valid:island_lseg] && [Common line_seg_valid:island_lseg_extend] && intersection.x != -1 && intersection.y != -1) {
+
+                    NSLog(@"Inter(%f,%f)",intersection.x,intersection.y);
+                    
+                    pos_x = post_x; 
+                    pos_y = [i get_height:post_x];
+                    has_hit_x = YES;
+                    NSLog(@"join");
+                    break;
+                }
+            }
+            
+            if (!has_hit_x) {
+                pos_x = pos_x + player.vx;
+                pos_y= post_y;
+                NSLog(@"fall");
+            }
+                      
+            NSLog(@"\n\n");
+            
 		}
-		//float ang = atan((contact_island.endY-contact_island.startY)/(contact_island.endX-contact_island.startX))*(180/M_PI);
+        
 		float ang = [contact_island get_angle:pos_x];
         player.rotation = -ang; //rotate 
 		player.vy = 0;
@@ -188,8 +226,11 @@ static float cur_pos_y = 0;
             
             CGPoint intersection = [Common line_seg_intersection_a1:ccp(pre_x,pos_y) a2:ccp(post_x,pos_y) b1:ccp(pre_x,line_pre_y) b2:ccp(post_x,line_post_y)];
 			if (intersection.x != -1 && intersection.y != -1 && line_pre_y != -1 && line_post_y != -1) {//if conflict, set position at conflict_x,contact_island_height(x)
-				pos_x = intersection.x; 
-				pos_y = [i get_height:intersection.x];
+                pos_x = post_x; 
+                pos_y = [i get_height:pos_x];
+                
+//              pos_x = intersection.x; 
+//				pos_y = [i get_height:intersection.x];
 				has_hit_x = YES;
 				break;
 			}

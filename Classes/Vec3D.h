@@ -10,7 +10,7 @@
 +(Vec3D*) init_x:(float)x y:(float)y z:(float)z;
 -(Vec3D*) add:(Vec3D*)v;
 -(Vec3D*) sub:(Vec3D*)v;
--(Vec3D*) mult:(Vec3D*)v;
+-(Vec3D*) scale:(float)sf;
 -(BOOL) eq:(Vec3D*)v;
 -(void) negate;
 -(double) length;
