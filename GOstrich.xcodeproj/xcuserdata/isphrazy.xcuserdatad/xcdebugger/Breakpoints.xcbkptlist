@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/CCCircularSelector.m"
-         timestampString = "362289552.422324"
+         timestampString = "362373223.216421"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "102"
-         endingLineNumber = "102"
+         startingLineNumber = "103"
+         endingLineNumber = "103"
          landmarkName = "-initWithChoices:"
          landmarkType = "5">
       </FileBreakpoint>

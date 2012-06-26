@@ -7,6 +7,7 @@
 //
 
 #import "CCCircularSelector.h"
+#import "GameEngineLayer.h"
 
 
 
@@ -410,15 +411,19 @@ float radianToDegree(float radian){
     // if the touch point is in the area of the node
     // no need to scale the area even if the node is scaled, because the touch point relative to the node is already scaled
     if (CGRectContainsPoint(CGRectMake(0, 0, currentChoice.contentSize.width,currentChoice.contentSize.height), [currentChoice convertTouchToNodeSpace:touch])) {
+        NSLog(@"first if");	
         // the selected choice is tapped
         if (delegate_ && [delegate_ respondsToSelector:@selector(selectionDidDecide:circularSelector:)]) {
             [delegate_ selectionDidDecide:selectionIndex_ circularSelector:self];
         }
+        [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene]];	
     } else {
         // other place is tapped
         tempTopChoice = nil;
         for (tempChoice in choices_) {
+            
             if (tempChoice == currentChoice) {
+                
                 continue;
             }
             if (tempTopChoice && tempChoice.zOrder < tempTopChoice.zOrder) {

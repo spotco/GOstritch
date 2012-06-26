@@ -686,6 +686,7 @@
 		4926F8D6152BCBFF00A1EFDE /* map */ = {
 			isa = PBXGroup;
 			children = (
+				62064D95159812B400C5DCE5 /* mapPics */,
 				4926F8D7152BCBFF00A1EFDE /* island1.map */,
 			);
 			path = map;
@@ -814,7 +815,6 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				62064D95159812B400C5DCE5 /* mapPics */,
 				7E8DF40415945FC200B00340 /* icons */,
 				7E8DF3FD159451ED00B00340 /* object */,
 				494E279E152C403D004EBE74 /* char */,
@@ -858,8 +858,9 @@
 				62064DA1159819B600C5DCE5 /* map2.jpg */,
 				62064DA2159819B600C5DCE5 /* map3.jpg */,
 			);
-			path = mapPics;
-			sourceTree = "<group>";
+			name = mapPics;
+			path = Resources/mapPics;
+			sourceTree = SOURCE_ROOT;
 		};
 		7E8DF3FD159451ED00B00340 /* object */ = {
 			isa = PBXGroup;
