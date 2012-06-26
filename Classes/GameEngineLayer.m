@@ -13,8 +13,8 @@ static float cur_pos_y = 0;
     -Fix island join bug
     -Fix curve island offset bug (when not starting at 0 or PI*n
     -Refactor player move code
-    -Fix line island top part-alignment rendering problem
     -Running vertically/upsidedown
+    -Curve island rendering
  **/
 
 +(CCScene *) scene{
@@ -30,6 +30,7 @@ static float cur_pos_y = 0;
 
 
 -(id) init{
+    
 	if( (self=[super init])) {
 		[self loadMap];
         player = [Player init];

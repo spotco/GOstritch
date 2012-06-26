@@ -53,9 +53,9 @@
 __object__=__array__->arr[0]; for(NSUInteger i=0, num=__array__->num; i<num; i++, __object__=__array__->arr[i])	\
 
 #if defined(__has_feature) && __has_feature(objc_arc)
-	typedef __strong id CCARRAY_ID;
+typedef __strong id CCARRAY_ID;
 #else
-	typedef id CCARRAY_ID;
+typedef id CCARRAY_ID;
 #endif
 
 typedef struct ccArray {
@@ -499,19 +499,19 @@ static inline int mergesortL(ccCArray* array, size_t width, int (*compar)(const 
             NSInteger hi = m+s; 
             
             j = lo;
-
+            
             if (m-j > 0)
             {
                 //triggers a warning when compiled with ARC, B needs to be strong typed, for compiling for obj-c++
                 //memcpy aritmetics aren't allowed on void* types
                 //explicitely casting didn't work
-                #pragma clang diagnostic push
+#pragma clang diagnostic push
 #if defined(__has_feature) && __has_feature(objc_arc)				
-                #pragma clang diagnostic ignored "-Warc-non-pod-memaccess"
+#pragma clang diagnostic ignored "-Warc-non-pod-memaccess"
 #endif				
                 
                 memcpy(B, &arr[j], (m-j) * width);
-                #pragma clang diagnostic pop
+#pragma clang diagnostic pop
             }
             
             i = 0;
@@ -524,10 +524,10 @@ static inline int mergesortL(ccCArray* array, size_t width, int (*compar)(const 
                 {    
                     pointerswap(&arr[k++],&B[i++], width);
                 }
-             
+                
                 else 
                 {    
-                   pointerswap(&arr[k++],&arr[j++], width);
+                    pointerswap(&arr[k++],&arr[j++], width);
                 }
             }
             

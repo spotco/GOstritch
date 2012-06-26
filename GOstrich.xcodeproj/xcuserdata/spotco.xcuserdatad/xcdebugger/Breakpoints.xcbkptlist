@@ -34,12 +34,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/GameEngineLayer.m"
-         timestampString = "362278935.272803"
+         timestampString = "362293258.527138"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
+         landmarkName = "-init"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Classes/LineIsland.m"
+         timestampString = "362293395.598388"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "46"
          endingLineNumber = "46"
-         landmarkName = "-init"
+         landmarkName = "-init_tex"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
