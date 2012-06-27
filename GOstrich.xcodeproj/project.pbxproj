@@ -68,20 +68,8 @@
 		62064DA3159819B600C5DCE5 /* theme1_pic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62064DA0159819B600C5DCE5 /* theme1_pic.jpg */; };
 		62064DA4159819B600C5DCE5 /* theme2_pic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62064DA1159819B600C5DCE5 /* theme2_pic.jpg */; };
 		62064DA5159819B600C5DCE5 /* theme3_pic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62064DA2159819B600C5DCE5 /* theme3_pic.jpg */; };
-		62064DAD159966D400C5DCE5 /* ThemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 62064DAC159966D400C5DCE5 /* ThemInfo.m */; };
-		7E09DF71159AA7D600FEF7D6 /* 1_1Background_Arrow-Up.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E09DF5B159AA7D600FEF7D6 /* 1_1Background_Arrow-Up.png */; };
-		7E09DF73159AA7D600FEF7D6 /* 1_1Background_Cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E09DF5D159AA7D600FEF7D6 /* 1_1Background_Cloud.png */; };
-		7E09DF78159AA7D600FEF7D6 /* 1_1Background_Finish_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E09DF62159AA7D600FEF7D6 /* 1_1Background_Finish_2.png */; };
-		7E09DF79159AA7D600FEF7D6 /* 1_1Background_Hills.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E09DF63159AA7D600FEF7D6 /* 1_1Background_Hills.png */; };
-		7E09DF7B159AA7D600FEF7D6 /* 1_1Background_Short-Fence.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E09DF65159AA7D600FEF7D6 /* 1_1Background_Short-Fence.png */; };
-		7E09DF7C159AA7D600FEF7D6 /* GrassTexture1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E09DF66159AA7D600FEF7D6 /* GrassTexture1.png */; };
-		7E09DF7F159AA7D600FEF7D6 /* GroundTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E09DF69159AA7D600FEF7D6 /* GroundTexture.png */; };
-		7E09DF80159AA7D600FEF7D6 /* Island1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E09DF6A159AA7D600FEF7D6 /* Island1.png */; };
-		7E09DF81159AA7D600FEF7D6 /* Island2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E09DF6B159AA7D600FEF7D6 /* Island2.png */; };
-		7E09DF82159AA7D600FEF7D6 /* Island3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E09DF6C159AA7D600FEF7D6 /* Island3.png */; };
-		7E09DF83159AA7D600FEF7D6 /* Island4.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E09DF6D159AA7D600FEF7D6 /* Island4.png */; };
-		7E09DF84159AA7D600FEF7D6 /* Island5.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E09DF6E159AA7D600FEF7D6 /* Island5.png */; };
-		7E09DF88159AB92D00FEF7D6 /* 1_1Background_Hills-and-Sky.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E09DF87159AB92D00FEF7D6 /* 1_1Background_Hills-and-Sky.png */; };
+		62064DAD159966D400C5DCE5 /* ThemeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 62064DAC159966D400C5DCE5 /* ThemeInfo.m */; };
+		62064DAF1599713400C5DCE5 /* themes_info.theme in Resources */ = {isa = PBXBuildFile; fileRef = 62064DAE1599713400C5DCE5 /* themes_info.theme */; };
 		7E8DF3FF159451ED00B00340 /* goldenbone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E8DF3FE159451ED00B00340 /* goldenbone.png */; };
 		7E8DF40315945E8C00B00340 /* LineIsland.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E8DF40215945E8C00B00340 /* LineIsland.m */; };
 		7E8F90021568556900C2E30F /* BackgroundObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8F90001568556900C2E30F /* BackgroundObject.h */; };
@@ -378,21 +366,9 @@
 		62064DA0159819B600C5DCE5 /* theme1_pic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theme1_pic.jpg; sourceTree = "<group>"; };
 		62064DA1159819B600C5DCE5 /* theme2_pic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theme2_pic.jpg; sourceTree = "<group>"; };
 		62064DA2159819B600C5DCE5 /* theme3_pic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theme3_pic.jpg; sourceTree = "<group>"; };
-		62064DAB159966D400C5DCE5 /* ThemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemInfo.h; sourceTree = "<group>"; };
-		62064DAC159966D400C5DCE5 /* ThemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemInfo.m; sourceTree = "<group>"; };
-		7E09DF5B159AA7D600FEF7D6 /* 1_1Background_Arrow-Up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1_1Background_Arrow-Up.png"; sourceTree = "<group>"; };
-		7E09DF5D159AA7D600FEF7D6 /* 1_1Background_Cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_1Background_Cloud.png; sourceTree = "<group>"; };
-		7E09DF62159AA7D600FEF7D6 /* 1_1Background_Finish_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_1Background_Finish_2.png; sourceTree = "<group>"; };
-		7E09DF63159AA7D600FEF7D6 /* 1_1Background_Hills.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1_1Background_Hills.png; sourceTree = "<group>"; };
-		7E09DF65159AA7D600FEF7D6 /* 1_1Background_Short-Fence.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1_1Background_Short-Fence.png"; sourceTree = "<group>"; };
-		7E09DF66159AA7D600FEF7D6 /* GrassTexture1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GrassTexture1.png; sourceTree = "<group>"; };
-		7E09DF69159AA7D600FEF7D6 /* GroundTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GroundTexture.png; sourceTree = "<group>"; };
-		7E09DF6A159AA7D600FEF7D6 /* Island1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Island1.png; sourceTree = "<group>"; };
-		7E09DF6B159AA7D600FEF7D6 /* Island2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Island2.png; sourceTree = "<group>"; };
-		7E09DF6C159AA7D600FEF7D6 /* Island3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Island3.png; sourceTree = "<group>"; };
-		7E09DF6D159AA7D600FEF7D6 /* Island4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Island4.png; sourceTree = "<group>"; };
-		7E09DF6E159AA7D600FEF7D6 /* Island5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Island5.png; sourceTree = "<group>"; };
-		7E09DF87159AB92D00FEF7D6 /* 1_1Background_Hills-and-Sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1_1Background_Hills-and-Sky.png"; sourceTree = "<group>"; };
+		62064DAB159966D400C5DCE5 /* ThemeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeInfo.h; sourceTree = "<group>"; };
+		62064DAC159966D400C5DCE5 /* ThemeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeInfo.m; sourceTree = "<group>"; };
+		62064DAE1599713400C5DCE5 /* themes_info.theme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = themes_info.theme; sourceTree = "<group>"; };
 		7E8DF3FE159451ED00B00340 /* goldenbone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goldenbone.png; sourceTree = "<group>"; };
 		7E8DF40115945E8C00B00340 /* LineIsland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineIsland.h; sourceTree = "<group>"; };
 		7E8DF40215945E8C00B00340 /* LineIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineIsland.m; sourceTree = "<group>"; };
@@ -715,6 +691,7 @@
 		4926F8D6152BCBFF00A1EFDE /* map */ = {
 			isa = PBXGroup;
 			children = (
+				62064DAE1599713400C5DCE5 /* themes_info.theme */,
 				62064D95159812B400C5DCE5 /* mapPics */,
 				4926F8D7152BCBFF00A1EFDE /* island1.map */,
 			);
@@ -844,7 +821,6 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7E09DF59159AA7D600FEF7D6 /* bg_2 */,
 				7E8DF40415945FC200B00340 /* icons */,
 				7E8DF3FD159451ED00B00340 /* object */,
 				494E279E152C403D004EBE74 /* char */,
@@ -891,27 +867,6 @@
 			name = mapPics;
 			path = Resources/mapPics;
 			sourceTree = SOURCE_ROOT;
-		};
-		7E09DF59159AA7D600FEF7D6 /* bg_2 */ = {
-			isa = PBXGroup;
-			children = (
-				7E09DF87159AB92D00FEF7D6 /* 1_1Background_Hills-and-Sky.png */,
-				7E09DF5B159AA7D600FEF7D6 /* 1_1Background_Arrow-Up.png */,
-				7E09DF5D159AA7D600FEF7D6 /* 1_1Background_Cloud.png */,
-				7E09DF62159AA7D600FEF7D6 /* 1_1Background_Finish_2.png */,
-				7E09DF63159AA7D600FEF7D6 /* 1_1Background_Hills.png */,
-				7E09DF65159AA7D600FEF7D6 /* 1_1Background_Short-Fence.png */,
-				7E09DF66159AA7D600FEF7D6 /* GrassTexture1.png */,
-				7E09DF69159AA7D600FEF7D6 /* GroundTexture.png */,
-				7E09DF6A159AA7D600FEF7D6 /* Island1.png */,
-				7E09DF6B159AA7D600FEF7D6 /* Island2.png */,
-				7E09DF6C159AA7D600FEF7D6 /* Island3.png */,
-				7E09DF6D159AA7D600FEF7D6 /* Island4.png */,
-				7E09DF6E159AA7D600FEF7D6 /* Island5.png */,
-			);
-			name = bg_2;
-			path = bg/bg_2;
-			sourceTree = "<group>";
 		};
 		7E8DF3FD159451ED00B00340 /* object */ = {
 			isa = PBXGroup;
@@ -1011,8 +966,8 @@
 				8B4028CF1592CDCF00A2E791 /* MapLoader.m */,
 				8B4028D11592D43900A2E791 /* Map.h */,
 				8B4028D21592D43900A2E791 /* Map.m */,
-				62064DAB159966D400C5DCE5 /* ThemInfo.h */,
-				62064DAC159966D400C5DCE5 /* ThemInfo.m */,
+				62064DAB159966D400C5DCE5 /* ThemeInfo.h */,
+				62064DAC159966D400C5DCE5 /* ThemeInfo.m */,
 			);
 			name = map_util;
 			sourceTree = "<group>";
@@ -1468,19 +1423,7 @@
 				62064DA3159819B600C5DCE5 /* theme1_pic.jpg in Resources */,
 				62064DA4159819B600C5DCE5 /* theme2_pic.jpg in Resources */,
 				62064DA5159819B600C5DCE5 /* theme3_pic.jpg in Resources */,
-				7E09DF71159AA7D600FEF7D6 /* 1_1Background_Arrow-Up.png in Resources */,
-				7E09DF73159AA7D600FEF7D6 /* 1_1Background_Cloud.png in Resources */,
-				7E09DF78159AA7D600FEF7D6 /* 1_1Background_Finish_2.png in Resources */,
-				7E09DF79159AA7D600FEF7D6 /* 1_1Background_Hills.png in Resources */,
-				7E09DF7B159AA7D600FEF7D6 /* 1_1Background_Short-Fence.png in Resources */,
-				7E09DF7C159AA7D600FEF7D6 /* GrassTexture1.png in Resources */,
-				7E09DF7F159AA7D600FEF7D6 /* GroundTexture.png in Resources */,
-				7E09DF80159AA7D600FEF7D6 /* Island1.png in Resources */,
-				7E09DF81159AA7D600FEF7D6 /* Island2.png in Resources */,
-				7E09DF82159AA7D600FEF7D6 /* Island3.png in Resources */,
-				7E09DF83159AA7D600FEF7D6 /* Island4.png in Resources */,
-				7E09DF84159AA7D600FEF7D6 /* Island5.png in Resources */,
-				7E09DF88159AB92D00FEF7D6 /* 1_1Background_Hills-and-Sky.png in Resources */,
+				62064DAF1599713400C5DCE5 /* themes_info.theme in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1516,7 +1459,7 @@
 				62064D8A1597ED3B00C5DCE5 /* CoverFlowViewControllerViewController.m in Sources */,
 				62064D94159802CF00C5DCE5 /* CCCircularSelector.m in Sources */,
 				7ECBC8671597FA5700B2BCFE /* Vec3D.m in Sources */,
-				62064DAD159966D400C5DCE5 /* ThemInfo.m in Sources */,
+				62064DAD159966D400C5DCE5 /* ThemeInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1639,18 +1582,17 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GOstrich_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Resources/Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = GOstrich;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -1662,17 +1604,16 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GOstrich_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Resources/Info.plist;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = GOstrich;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -1696,7 +1637,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
-				PREBINDING = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1708,17 +1648,16 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GOstrich_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = Resources/Info.plist;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = GOstrich;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -1730,9 +1669,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				PREBINDING = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = "cocos2d libraries";
 				ZERO_LINK = NO;
 			};
@@ -1746,7 +1684,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				PREBINDING = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = "cocos2d libraries";
 			};
 			name = Debug;
@@ -1757,9 +1695,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
-				PREBINDING = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = "cocos2d libraries";
 				ZERO_LINK = NO;
 			};
@@ -1784,7 +1721,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PREBINDING = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1808,7 +1744,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
-				PREBINDING = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

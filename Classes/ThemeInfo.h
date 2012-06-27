@@ -1,5 +1,5 @@
 //
-//  ThemInfo.h
+//  ThemeInfo.h
 //  GOstrich
 //
 //  Created by Pingyang He on 6/25/12.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ThemInfo : NSObject{
+@interface ThemeInfo : NSObject{
     NSString *pic_name, *map_name, *map_type;
 }
 
