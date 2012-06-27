@@ -25,15 +25,27 @@
 }
 
 -(float)get_angle:(float)pos {
-    if (pos > endX-0.5 || pos < startX) {
+    if (pos > endX-0.01 || pos < startX) {
         return -1;
     } else {
         //return atan((endY-startY)/(endX-startX))*(180/M_PI);
         float x1 = pos;
         float y1 = [self get_height:x1];
-        float x2 = x1+0.5;
+        float x2 = x1+0.01;
         float y2 = [self get_height:x2];
         return atan((y2-y1)/(x2-x1))*(180/M_PI);
+    }
+}
+
+-(float)get_slope:(float)pos {
+    if (pos > endX-0.01 || pos < startX) {
+        return -1;
+    } else {
+        float x1 = pos;
+        float y1 = [self get_height:x1];
+        float x2 = x1+0.01;
+        float y2 = [self get_height:x2];
+        return ((y2-y1)/(x2-x1));
     }
 }
 

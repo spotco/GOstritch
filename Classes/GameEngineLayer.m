@@ -10,18 +10,19 @@ static float cur_pos_y = 0;
 
 /**
  TODO:
-    -Fix island join bug
-    -Fix curve island offset bug (when not starting at 0 or PI*n
-    -Refactor player move code
+    -Fix curve island offset bug (when not starting at 0 or PI*n)
+    -Additonal curve island based on circle
+    -Jump normal to current island direction
     -Running vertically/upsidedown
     -Curve island rendering
+    -Ghost (stack loading, curl)
  **/
 
 +(CCScene *) scene{
     [Resource init_textures];
 	[[CCDirector sharedDirector] setDisplayFPS:NO];
 	CCScene *scene = [CCScene node];
-	BGLayer *bglayer = [BGLayer node];
+	//BGLayer *bglayer = [BGLayer node];
 	//[scene addChild:bglayer];
 	GameEngineLayer *layer = [GameEngineLayer node];
 	[scene addChild: layer];
@@ -30,7 +31,6 @@ static float cur_pos_y = 0;
 
 
 -(id) init{
-    
 	if( (self=[super init])) {
 		[self loadMap];
         player = [Player init];
@@ -78,8 +78,8 @@ static float cur_pos_y = 0;
 	float pos_y = player.position.y;
 	
     [self check_sort_islands_given:pos_x and:pos_y];
-	CGPoint pos_f = [self player_move_x:pos_x y:pos_y];
-	player.position=pos_f;
+    [self player_control_update:[Player  player_move:player with_islands:islands]];
+    
     [self check_game_state];	
     [self update_static_x:pos_x y:pos_y];
     [self update_game_obj];
@@ -142,66 +142,6 @@ static float cur_pos_y = 0;
     }
 }
 
-//calculates and returns position of player in next update "step"
--(CGPoint)player_move_x:(float)pos_x y:(float) pos_y {
-    float pre_y = pos_y;//ydir movement check, get y(pre +vy) and y(post +vy)
-	float post_y = pos_y+player.vy;
-	BOOL is_contact = NO;
-	Island *contact_island;
-	
-	for (Island* i in islands) {//if island height at pos_x overlaps ypre->ypost, CONTACT and select island
-		float h = [i get_height:pos_x];
-		if (h != -1 && h <= pre_y && h >= post_y) {
-			is_contact = YES;
-			post_y = h;
-			contact_island = i;
-			break;
-		}
-	}
-	if (is_contact) { //if found contact through ydir-search
-		float rise_one = [contact_island get_height:(pos_x+1)] - [contact_island get_height:pos_x];
-		float dx = player.vx*cos(atan(rise_one));
-		float mov_h = [contact_island get_height:(pos_x+dx)]; //calculate slide movement on slope
-		if (mov_h != -1 && [contact_island get_height:(pos_x+player.vx)] != -1) { //if on slope and enough forward room, apply movement up slope
-			pos_x = pos_x + dx;
-			pos_y = mov_h;
-		} else { //else if at edge
-			pos_x = pos_x + player.vx;
-			pos_y=post_y;
-		}
-		//float ang = atan((contact_island.endY-contact_island.startY)/(contact_island.endX-contact_island.startX))*(180/M_PI);
-		float ang = [contact_island get_angle:pos_x];
-        player.rotation = -ang; //rotate 
-		player.vy = 0;
-	} else {
-		pos_y+=player.vy; //move before incrementing velocity OR ELSE
-		player.vy-=0.5;
-		
-		player.rotation = player.rotation*0.9;//not touching anything, center rotation animation
-		
-		float pre_x = pos_x;//move xdir by vx, check pre and post
-		float post_x = pos_x+player.vx;
-		BOOL has_hit_x = NO;
-		for (Island* i in islands) { //use 2-line segment intersection to see if any x-dir conflicts
-            float line_pre_y = [i get_height:pre_x];
-            float line_post_y = [i get_height:post_x];
-            
-            CGPoint intersection = [Common line_seg_intersection_a1:ccp(pre_x,pos_y) a2:ccp(post_x,pos_y) b1:ccp(pre_x,line_pre_y) b2:ccp(post_x,line_post_y)];
-			if (intersection.x != -1 && intersection.y != -1 && line_pre_y != -1 && line_post_y != -1) {//if conflict, set position at conflict_x,contact_island_height(x)
-				pos_x = intersection.x; 
-				pos_y = [i get_height:intersection.x];
-				has_hit_x = YES;
-				break;
-			}
-		}
-		
-		if (!has_hit_x) {//else if no conflict, full vx move
-			pos_x = post_x;
-		}
-    }
-    [self player_control_update:is_contact];
-    return ccp(pos_x,pos_y);
-}
 
 +(NSMutableArray*) loadGameObjects {
     NSMutableArray *gameObjArray = [[NSMutableArray alloc] init];
@@ -209,31 +149,6 @@ static float cur_pos_y = 0;
     [gameObjArray addObject:[Coin init_x:800 y:200]];
     return gameObjArray;
 }
-
-/*-(void)draw {
-     [super draw];
-     glColor4ub(255,0,0,100);
-     glLineWidth(2.0f);
-     CGRect pathBox = [player get_hit_rect];
-     CGPoint verts[4] = {
-         ccp(pathBox.origin.x, pathBox.origin.y),
-         ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
-         ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
-         ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
-     };
-     ccDrawPoly(verts, 4, YES);
-     
-     for (GameObject* o in game_objects) {
-         CGRect pathBox = [o get_hit_rect];
-         CGPoint verts[4] = {
-             ccp(pathBox.origin.x, pathBox.origin.y),
-             ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
-             ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
-             ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
-         };
-         ccDrawPoly(verts, 4, YES);
-     }
- }*/
 
 -(void)check_sort_islands_given:(float)pos_x and:(float)pos_y {
 	float tmp = FLT_MAX;//if islands out of order, sort
@@ -284,6 +199,31 @@ static float cur_pos_y = 0;
     [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFrames];
 	[super dealloc];
 }
+
+/*-(void)draw {
+ [super draw];
+ glColor4ub(255,0,0,100);
+ glLineWidth(2.0f);
+ CGRect pathBox = [player get_hit_rect];
+ CGPoint verts[4] = {
+ ccp(pathBox.origin.x, pathBox.origin.y),
+ ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
+ ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
+ ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
+ };
+ ccDrawPoly(verts, 4, YES);
+ 
+ for (GameObject* o in game_objects) {
+ CGRect pathBox = [o get_hit_rect];
+ CGPoint verts[4] = {
+ ccp(pathBox.origin.x, pathBox.origin.y),
+ ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
+ ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
+ ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
+ };
+ ccDrawPoly(verts, 4, YES);
+ }
+ }*/
 
 
 @end

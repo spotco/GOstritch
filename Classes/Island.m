@@ -13,4 +13,8 @@
     return 0;
 }
 
+-(float)get_slope:(float)pos {
+    return 0;
+}
+
 @end

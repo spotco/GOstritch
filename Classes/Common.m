@@ -4,6 +4,8 @@
 
 @implementation Common
 
+
+
 +(CGPoint)line_seg_intersection_a1:(CGPoint)a1 a2:(CGPoint)a2 b1:(CGPoint)b1 b2:(CGPoint)b2 {//2 line segment intersection (seg a1,a2) (seg b1,b2)
 	double Ax = a1.x; double Ay = a1.y;
 	double Bx = a2.x; double By = a2.y;
@@ -39,5 +41,70 @@
 	
 	return ccp(X,Y);//  Success.
 }
+
++(CGPoint)line_seg_intersection_a:(line_seg)a b:(line_seg)b {
+    return [Common line_seg_intersection_a1:a.a a2:a.b b1:b.a b2:b.b];
+}
+
++(line_seg)cons_line_seg_a:(CGPoint)a b:(CGPoint)b {
+    struct line_seg new;
+    new.a = a;
+    new.b = b;
+    return new;
+}
+
++(line_seg)double_extend_line_seg:(line_seg)seg {
+    Vec3D *dir_vec = [Vec3D init_x:seg.b.x-seg.a.x y:seg.b.y-seg.a.y z:0];
+    line_seg new = [Common cons_line_seg_a:seg.a b:seg.b];
+    new.b.x += dir_vec.x;
+    new.b.y += dir_vec.y;
+    
+    [dir_vec negate];
+    
+    new.a.x += dir_vec.x;
+    new.a.y += dir_vec.y;
+    [dir_vec dealloc];
+    
+    return new;
+}
+
++(line_seg)left_extend_line_seg:(line_seg)seg {
+    Vec3D *dir_vec = [Vec3D init_x:seg.b.x-seg.a.x y:seg.b.y-seg.a.y z:0];
+    line_seg new = [Common cons_line_seg_a:seg.a b:seg.b];
+    
+    [dir_vec negate];
+    
+    new.a.x += dir_vec.x;
+    new.a.y += dir_vec.y;
+    [dir_vec dealloc];
+    
+    return new;
+}
+
+/*+(BOOL)point_fuzzy_on_line_seg:(line_seg)seg pt:(CGPoint)pt {
+    Vec3D *b_m_a = [Vec3D init_x:seg.b.x-seg.a.x y:seg.b.y-seg.a.y z:0];
+    Vec3D *c_m_a = [Vec3D init_x:pt.x-seg.a.x y:pt.y-seg.a.y z:0];
+    Vec3D *ab_c_ac = [b_m_a crossWith:c_m_a];
+    
+    float val = [ab_c_ac length] / [b_m_a length];
+    //NSLog(@"dist:%f",val);
+    if (val <= 0.1) {
+        return YES;
+    } else {
+        return NO;
+    }
+}*/
+
++(void)print_line_seg:(line_seg)l msg:(NSString*)msg {
+    NSLog(@"%@ line segment (%f,%f) to (%f,%f)",msg,l.a.x,l.a.y,l.b.x,l.b.y);
+}
+
++(BOOL)line_seg_valid:(line_seg)l {
+    return l.a.x != -1.0 && l.a.y != -1.0 && l.b.x != -1.0 && l.b.y != -1.0;
+}
+
+
+
+
 
 @end
