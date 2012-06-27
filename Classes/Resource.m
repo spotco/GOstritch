@@ -3,6 +3,8 @@
 
 @implementation Resource
 
+
+
 static NSMutableDictionary* textures = nil;
 
 +(void)init_menu_textures {
@@ -15,7 +17,26 @@ static NSMutableDictionary* textures = nil;
     [Resource load_tex_from_array:temp];
 }
 
-+(void)init_textures {
++(void)init_bg1_textures {
+    textures = [NSMutableDictionary dictionary];
+    NSArray *temp = [[NSArray alloc] initWithObjects:
+                     @"GroundTexture.png", TEX_GROUND_TEX_1,
+                     @"GrassTexture1.png", TEX_GROUND_TOP_1,
+                     @"dog1runss.png", TEX_DOG_RUN_1,
+                     
+                     @"1_1Background_Hills-and-Sky.png", TEX_BG_SKY,
+                     @"1_1Background_Hills.png", TEX_BG_LAYER_1,
+                     @"1_1Background_Cloud.png", TEX_BG_LAYER_2,
+                     @"goldenbone.png", TEX_GOLDEN_BONE,
+                     
+                     @"1_1Background_Short-Fence.png", TEX_GROUND_DETAIL_1,
+                     @"1_1Background_Arrow-Up.png", TEX_GROUND_DETAIL_2,
+                     @"1_1Background_Finish_2.png", TEX_GROUND_DETAIL_3,
+                     nil];
+    [Resource load_tex_from_array:temp];
+}
+
+/*+(void)init_bgtest_textures {
     textures = [NSMutableDictionary dictionary];
     NSArray *temp = [[NSArray alloc] initWithObjects:
                      @"fg_tex.png", @"level1_island1_tex",
@@ -28,8 +49,7 @@ static NSMutableDictionary* textures = nil;
                      @"goldenbone.png",@"golden_bone",
                      nil];
     [Resource load_tex_from_array:temp];
-
-}
+}*/
 
 +(void)load_tex_from_array:(NSArray*)temp {
     ccTexParams texParams = { GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT };

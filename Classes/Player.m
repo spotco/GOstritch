@@ -16,7 +16,7 @@
 	[new_player addChild:player_img];
 
 	
-	CCTexture2D *texture = [Resource get_tex:@"char1_run1_ss"];
+	CCTexture2D *texture = [Resource get_tex:TEX_DOG_RUN_1];
 	NSMutableArray *animFrames = [NSMutableArray array];
 	
 	for (int i = 1; i<=3; i++) {

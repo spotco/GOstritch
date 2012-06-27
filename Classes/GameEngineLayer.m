@@ -19,11 +19,12 @@ static float cur_pos_y = 0;
  **/
 
 +(CCScene *) scene{
-    [Resource init_textures];
-	[[CCDirector sharedDirector] setDisplayFPS:NO];
+    //[Resource init_bg1_textures];
+	[Resource init_bg1_textures];
+    [[CCDirector sharedDirector] setDisplayFPS:NO];
 	CCScene *scene = [CCScene node];
-	//BGLayer *bglayer = [BGLayer node];
-	//[scene addChild:bglayer];
+	BGLayer *bglayer = [BGLayer node];
+	[scene addChild:bglayer];
 	GameEngineLayer *layer = [GameEngineLayer node];
 	[scene addChild: layer];
 	return scene;
@@ -106,7 +107,8 @@ static float cur_pos_y = 0;
 
 -(void)check_game_state {
     if (!CGRectIntersectsRect([self get_world_bounds],[player get_hit_rect])) { 
-		player.position = ccp(PLAYER_START_X,PLAYER_START_Y);
+	//if (player.position.y < 0) {
+        player.position = ccp(PLAYER_START_X,PLAYER_START_Y);
         player.touch_count = 0;
         player.vx = 0;
         player.vy = 0;

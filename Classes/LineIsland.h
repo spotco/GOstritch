@@ -1,6 +1,7 @@
 #import "Island.h"
 #import "Common.h"
 #import "Vec3D.h"
+#import "Resource.h"
 
 
 

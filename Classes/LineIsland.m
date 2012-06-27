@@ -34,7 +34,7 @@
  (2)--(1)      (4)--(3)
  then glDrawArrays(offset++)*/
 -(void)init_tex {	
-    main_fill.texture = [Resource get_tex:@"level1_island1_tex"];
+    main_fill.texture = [Resource get_tex:TEX_GROUND_TEX_1];
     
 	main_fill.tri_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
 	main_fill.tex_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
@@ -48,10 +48,12 @@
     Vec3D *v3t1 = [v3t2 crossWith:vZ];
     [v3t1 normalize];
     
+    float taille = 50;
+    
     tri_pts[3] = ccp(0,0);
     tri_pts[2] = ccp(endX-startX,endY-startY);
-    tri_pts[1] = ccp(0+v3t1.x * 10,0+v3t1.y * 10);
-    tri_pts[0] = ccp(endX-startX +v3t1.x * 10 ,endY-startY +v3t1.y * 10);
+    tri_pts[1] = ccp(0+v3t1.x * 10,0+v3t1.y * taille);
+    tri_pts[0] = ccp(endX-startX +v3t1.x * taille ,endY-startY +v3t1.y * taille);
 	
 	tex_pts[2] = ccp(tri_pts[2].x/texture.pixelsWide, tri_pts[2].y/texture.pixelsHigh);
 	tex_pts[3] = ccp(tri_pts[3].x/texture.pixelsWide, tri_pts[3].y/texture.pixelsWide);
@@ -64,7 +66,7 @@
 }
 
 -(void)init_top {
-    top_fill.texture = [Resource get_tex:@"level1_island1_top"];
+    top_fill.texture = [Resource get_tex:TEX_GROUND_TOP_1];
     //top_fill.texture = [Resource get_tex:@"bg_sky"];
     
 	top_fill.tri_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
@@ -82,12 +84,22 @@
     [v3t1 normalize];
     [v3t1 negate];
     
-    float hei = 300;
     
-    tri_pts[2] = ccp(endX-startX,endY-startY);
+    
+    /*tri_pts[2] = ccp(endX-startX,endY-startY);
     tri_pts[3] = ccp(0,0);
     tri_pts[0] = ccp(endX-startX+v3t1.x*hei,endY-startY+v3t1.y*hei);
-    tri_pts[1] = ccp(v3t1.x*hei,v3t1.y*hei);
+    tri_pts[1] = ccp(v3t1.x*hei,v3t1.y*hei);*/
+    
+    float hei = 56;
+    float offset = -40;
+    float d_o_x = offset * v3t1.x;
+    float d_o_y = offset * v3t1.y;
+    
+    tri_pts[2] = ccp(endX-startX + d_o_x              ,endY-startY + d_o_y);
+    tri_pts[3] = ccp(0 + d_o_x                        ,0  + d_o_y);
+    tri_pts[0] = ccp(endX-startX+v3t1.x*hei  + d_o_x  ,endY-startY+v3t1.y*hei + d_o_y);
+    tri_pts[1] = ccp(v3t1.x*hei + d_o_x               ,v3t1.y*hei + d_o_y);
     
     tex_pts[0] = ccp(dist/texture.pixelsWide,0);
     tex_pts[1] = ccp(0,0);
