@@ -63,7 +63,7 @@ static float cur_pos_y = 0;
 }
 
 -(CGPoint) loadMap{
-	Map *map = [MapLoader load_map:@"island1" oftype:@"map"];
+	Map *map = [MapLoader load_map:@"island2" oftype:@"map"];
     
     islands = map.n_islands;
     for (Island* i in islands) {
