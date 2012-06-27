@@ -13,7 +13,7 @@
 +(void)init_textures;
 +(CCTexture2D*)get_tex:(NSString*)key;
 +(void)dealloc_textures;
-+(void)init_menu_textures;
++(void)init_menu_textures:(NSArray *)pic_names;
 +(void)load_tex_from_array:(NSArray*)temp;
 
 @end

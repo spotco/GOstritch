@@ -8,6 +8,8 @@
 
 #import "CCCircularSelector.h"
 #import "GameEngineLayer.h"
+#import "MapLoader.h"
+#import "ThemeInfo.h"
 
 
 
@@ -42,7 +44,7 @@ float radianToDegree(float radian){
 }
 
 +(CCScene *) scene{
-    [Resource init_menu_textures];
+    
     [[CCDirector sharedDirector] setDisplayFPS:NO];
     CCScene *scene = [CCScene node];
     //BGLayer *bglayer = [BGLayer node];
@@ -53,15 +55,23 @@ float radianToDegree(float radian){
 }
 
 +(NSArray *) loadMapPictures{
-    CCTexture2D *texture1 = [Resource get_tex:@"map1"];
-    CCSprite *img1 = [CCSprite spriteWithTexture:texture1];
+    NSArray *themes = [MapLoader load_themes_info];
+    NSMutableArray *themes_pic_name = [[NSMutableArray alloc ] init ];
+    for(ThemeInfo *theme in themes){
+        [themes_pic_name addObject:theme.pic_name];
+        [themes_pic_name addObject:theme.pic_name];
+    }
     
-    CCTexture2D *texture2 = [Resource get_tex:@"map2"];
-    CCSprite *img2 = [CCSprite spriteWithTexture:texture2];
-    	
-    CCTexture2D *texture3 = [Resource get_tex:@"map3"];
-    CCSprite *img3 = [CCSprite spriteWithTexture:texture3];
-    NSArray *result = [[NSArray alloc] initWithObjects:img1, img2, img3, nil];
+    [Resource init_menu_textures: [[NSArray alloc] initWithArray:themes_pic_name ]];
+    NSMutableArray *theme_pic_sprite = [[NSMutableArray alloc] init ];
+    for(ThemeInfo *theme in themes){
+        CCTexture2D *texture= [Resource get_tex:theme.pic_name];
+        CCSprite *img = [CCSprite spriteWithTexture:texture];
+        [theme_pic_sprite addObject:img];
+        
+    }
+
+    NSArray *result = [[NSArray alloc] initWithArray:theme_pic_sprite];
     return result;
 }
 

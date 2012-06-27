@@ -68,7 +68,8 @@
 		62064DA3159819B600C5DCE5 /* theme1_pic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62064DA0159819B600C5DCE5 /* theme1_pic.jpg */; };
 		62064DA4159819B600C5DCE5 /* theme2_pic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62064DA1159819B600C5DCE5 /* theme2_pic.jpg */; };
 		62064DA5159819B600C5DCE5 /* theme3_pic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 62064DA2159819B600C5DCE5 /* theme3_pic.jpg */; };
-		62064DAD159966D400C5DCE5 /* ThemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 62064DAC159966D400C5DCE5 /* ThemInfo.m */; };
+		62064DAD159966D400C5DCE5 /* ThemeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 62064DAC159966D400C5DCE5 /* ThemeInfo.m */; };
+		62064DAF1599713400C5DCE5 /* themes_info.theme in Resources */ = {isa = PBXBuildFile; fileRef = 62064DAE1599713400C5DCE5 /* themes_info.theme */; };
 		7E8DF3FF159451ED00B00340 /* goldenbone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E8DF3FE159451ED00B00340 /* goldenbone.png */; };
 		7E8DF40315945E8C00B00340 /* LineIsland.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E8DF40215945E8C00B00340 /* LineIsland.m */; };
 		7E8F90021568556900C2E30F /* BackgroundObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8F90001568556900C2E30F /* BackgroundObject.h */; };
@@ -365,8 +366,9 @@
 		62064DA0159819B600C5DCE5 /* theme1_pic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theme1_pic.jpg; sourceTree = "<group>"; };
 		62064DA1159819B600C5DCE5 /* theme2_pic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theme2_pic.jpg; sourceTree = "<group>"; };
 		62064DA2159819B600C5DCE5 /* theme3_pic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theme3_pic.jpg; sourceTree = "<group>"; };
-		62064DAB159966D400C5DCE5 /* ThemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemInfo.h; sourceTree = "<group>"; };
-		62064DAC159966D400C5DCE5 /* ThemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemInfo.m; sourceTree = "<group>"; };
+		62064DAB159966D400C5DCE5 /* ThemeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ThemeInfo.h; sourceTree = "<group>"; };
+		62064DAC159966D400C5DCE5 /* ThemeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeInfo.m; sourceTree = "<group>"; };
+		62064DAE1599713400C5DCE5 /* themes_info.theme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = themes_info.theme; sourceTree = "<group>"; };
 		7E8DF3FE159451ED00B00340 /* goldenbone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goldenbone.png; sourceTree = "<group>"; };
 		7E8DF40115945E8C00B00340 /* LineIsland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineIsland.h; sourceTree = "<group>"; };
 		7E8DF40215945E8C00B00340 /* LineIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineIsland.m; sourceTree = "<group>"; };
@@ -689,6 +691,7 @@
 		4926F8D6152BCBFF00A1EFDE /* map */ = {
 			isa = PBXGroup;
 			children = (
+				62064DAE1599713400C5DCE5 /* themes_info.theme */,
 				62064D95159812B400C5DCE5 /* mapPics */,
 				4926F8D7152BCBFF00A1EFDE /* island1.map */,
 			);
@@ -963,8 +966,8 @@
 				8B4028CF1592CDCF00A2E791 /* MapLoader.m */,
 				8B4028D11592D43900A2E791 /* Map.h */,
 				8B4028D21592D43900A2E791 /* Map.m */,
-				62064DAB159966D400C5DCE5 /* ThemInfo.h */,
-				62064DAC159966D400C5DCE5 /* ThemInfo.m */,
+				62064DAB159966D400C5DCE5 /* ThemeInfo.h */,
+				62064DAC159966D400C5DCE5 /* ThemeInfo.m */,
 			);
 			name = map_util;
 			sourceTree = "<group>";
@@ -1417,6 +1420,7 @@
 				62064DA3159819B600C5DCE5 /* theme1_pic.jpg in Resources */,
 				62064DA4159819B600C5DCE5 /* theme2_pic.jpg in Resources */,
 				62064DA5159819B600C5DCE5 /* theme3_pic.jpg in Resources */,
+				62064DAF1599713400C5DCE5 /* themes_info.theme in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1452,7 +1456,7 @@
 				62064D8A1597ED3B00C5DCE5 /* CoverFlowViewControllerViewController.m in Sources */,
 				62064D94159802CF00C5DCE5 /* CCCircularSelector.m in Sources */,
 				7ECBC8671597FA5700B2BCFE /* Vec3D.m in Sources */,
-				62064DAD159966D400C5DCE5 /* ThemInfo.m in Sources */,
+				62064DAD159966D400C5DCE5 /* ThemeInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
