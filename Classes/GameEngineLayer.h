@@ -10,13 +10,15 @@
 #import "Resource.h"
 #import "MapLoader.h"
 #import "CurveIsland.h"
+#import "GroundDetail.h"
 #import "Vec3D.h"
 
 @interface GameEngineLayer : CCLayer {
 	NSMutableArray *islands;
     NSMutableArray *game_objects;
-	Player *player;
     
+	Player *player;
+    CGPoint player_start_pt;
     
 	BOOL is_touch;
 }
@@ -26,7 +28,7 @@
 
 +(CCScene *) scene;
 -(CGRect) get_world_bounds;
--(void) loadMap;
+-(CGPoint) loadMap;
 -(void) check_sort_islands_given:(float)pos_x and:(float)pos_y;
 -(void) check_game_state;
 -(void) update_static_x:(float)pos_x y:(float)pos_y;

@@ -221,7 +221,7 @@
             
             //if intersection is found the player is moved onto that island
             //*TODO -- seems to break on same-slope (relatively steep) line island joins when jumping repeatedly
-            if ((intersection.x != -1 && intersection.y != -1) /*|| ([Common point_fuzzy_on_line_seg:island_lseg pt:player_lseg.b])*/) {
+            if ((intersection.x != -1 && intersection.y != -1) || ([Common point_fuzzy_on_line_seg:island_lseg pt:player_lseg.b])) {
                 pos_x = post_x; 
                 pos_y = [i get_height:post_x];
                 has_hit_x = YES;

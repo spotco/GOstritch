@@ -21,14 +21,15 @@
     NSDictionary *j_map_data = [[CJSONDeserializer deserializer] deserializeAsDictionary:islandData error:(nil)];
     
     NSArray *islandArray = [j_map_data objectForKey:(@"islands")];
-    
-	//NSArray *islandArray = [[CJSONDeserializer deserializer] deserializeAsArray : islandData error : nil ];
-	
 	int islandsCount = [islandArray count];
 	
-	//NSMutableArray *n_islands = [[NSMutableArray alloc] init];
     Map *map = [[Map alloc] init];
-	
+    
+    float start_x = ((NSString*)[j_map_data objectForKey:(@"start_x")]).floatValue;
+	float start_y = ((NSString*)[j_map_data objectForKey:(@"start_y")]).floatValue;
+    map.player_start_pt = ccp(start_x,start_y);
+    NSLog(@"Player starting at (%f,%f)",start_x,start_y);
+    
 	for(int i = 0; i < islandsCount; i++){
 		NSDictionary *currentIslandDict = (NSDictionary *)[islandArray objectAtIndex:i];
 		CGPoint start = ccp( ((NSString *)[currentIslandDict objectForKey:@"x1"]).floatValue
@@ -68,6 +69,12 @@
             Coin *c = [Coin init_x:((NSString *)[j_object  objectForKey:@"x"]).floatValue y:((NSString *)[j_object objectForKey:@"y"]).floatValue];
             [map.game_objects addObject:c];
             NSLog(@"add coin");
+        } else if ([type isEqualToString:@"ground_detail"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            int type = ((NSString*)[j_object  objectForKey:@"img"]).intValue;
+            [map.game_objects addObject:[GroundDetail init_x:x y:y type:type]];
+            NSLog(@"add ground detail x:%f y:%f",x,y);
         } else {
             NSLog(@"item read error");
             continue;

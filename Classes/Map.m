@@ -11,13 +11,13 @@
 @implementation Map
 
 @synthesize n_islands, game_objects;
+@synthesize player_start_pt;
 
 -(id) init{
     n_islands = [[NSMutableArray alloc] init];
     game_objects = [[NSMutableArray alloc] init];
     
     return self;
-    
 }
 
 

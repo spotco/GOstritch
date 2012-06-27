@@ -10,8 +10,10 @@
 
 @interface Map : NSObject{
     NSMutableArray *n_islands, *game_objects;
+    CGPoint player_start_pt;
 }
 
 @property(readwrite, assign) NSMutableArray *n_islands, *game_objects;
+@property(readwrite,assign) CGPoint player_start_pt;
 
 @end
