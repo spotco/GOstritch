@@ -6,12 +6,14 @@
 //  Copyright __MyCompanyName__ 2011. All rights reserved.
 //
 
-#import "CCCircularSelector.h"
+#import "ThemeSelectionPage.h"
 #import "GameEngineLayer.h"
 #import "MapLoader.h"
 #import "ThemeInfo.h"
 
+#define THEME_PAGE_BACKGROUND_FILE @"theme_selection_bg.jpg"          
 
+static NSArray *maps_file;
 
 float degreeToRadian(float degree){
     return degree/180.0f*M_PI;
@@ -21,7 +23,7 @@ float radianToDegree(float radian){
     return radian/M_PI*180.0f;
 }
 
-@implementation CCCircularSelector
+@implementation ThemeSelectionPage
 
 @synthesize delegate=delegate_;
 @synthesize selectionIndex=selectionIndex_;
@@ -39,34 +41,31 @@ float radianToDegree(float radian){
 @synthesize deceleration=deceleration_;
 @synthesize decelerationMode=decelerationMode_;
 
-+(CCCircularSelector*)layerWithChoices:(NSArray*)someChoices{
-    return [[[CCCircularSelector alloc] initWithChoices:someChoices] autorelease];
++(ThemeSelectionPage*)layerWithChoices:(NSArray*)someChoices{
+    return [[[ThemeSelectionPage alloc] initWithChoices:someChoices] autorelease];
 }
 
-+(CCScene *) scene{
-    
-    [[CCDirector sharedDirector] setDisplayFPS:NO];
-    CCScene *scene = [CCScene node];
-    //BGLayer *bglayer = [BGLayer node];
-    //[scene addChild:bglayer];
-    CCCircularSelector *selector = [[CCCircularSelector alloc] initWithChoices:[CCCircularSelector loadMapPictures]];
-    [scene addChild: selector];
-    return scene;
-}
 
-+(NSArray *) loadMapPictures{
++(NSArray *) loadThemePic{
     NSArray *themes = [MapLoader load_themes_info];
     NSMutableArray *themes_pic_name = [[NSMutableArray alloc ] init ];
+    NSMutableArray *m_map_file = [[NSMutableArray alloc] init ];
+    [themes_pic_name addObject:THEME_PAGE_BACKGROUND_FILE];
+    [themes_pic_name addObject:THEME_PAGE_BACKGROUND_FILE];
     for(ThemeInfo *theme in themes){
         [themes_pic_name addObject:theme.pic_name];
         [themes_pic_name addObject:theme.pic_name];
+        [m_map_file addObject:theme.map_name];
+        [m_map_file addObject:theme.map_type];
     }
+    maps_file = [[NSArray alloc] initWithArray:m_map_file];
     
     [Resource init_menu_textures: [[NSArray alloc] initWithArray:themes_pic_name ]];
     NSMutableArray *theme_pic_sprite = [[NSMutableArray alloc] init ];
     for(ThemeInfo *theme in themes){
         CCTexture2D *texture= [Resource get_tex:theme.pic_name];
         CCSprite *img = [CCSprite spriteWithTexture:texture];
+        img.anchorPoint = ccp(0, 0);
         [theme_pic_sprite addObject:img];
         
     }
@@ -75,7 +74,30 @@ float radianToDegree(float radian){
     return result;
 }
 
--(CCCircularSelector*)initWithChoices:(NSArray*)someChoices{
+-(CCLayer *) createBackground{
+    CCLayer *background = [[CCLayer alloc] init];
+    CCSprite *bg_sp = [CCSprite spriteWithTexture:[Resource get_tex:@"theme_selection_bg.jpg"]];
+    
+    bg_sp.anchorPoint = ccp(0, 0);
+    [background addChild:bg_sp];
+    return background;
+}
+
++(CCScene *) scene{
+    
+    [[CCDirector sharedDirector] setDisplayFPS:NO];
+    CCScene *scene = [CCScene node];
+    //BGLayer *bglayer = [BGLayer node];
+    
+    
+    ThemeSelectionPage *selector = [[ThemeSelectionPage alloc] initWithChoices:[ThemeSelectionPage loadThemePic]];
+    [scene addChild:[selector createBackground]];
+    [scene addChild: selector];
+    return scene;
+}
+
+
+-(ThemeSelectionPage*)initWithChoices:(NSArray*)someChoices{
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     CCNode *tempNode;
     NSMutableArray *tempChoices = [NSMutableArray arrayWithCapacity:0];
@@ -110,13 +132,13 @@ float radianToDegree(float radian){
         rotationMode_ = kCCCircularSelectorRotationModeDrag | kCCCircularSelectorRotationModeTapItem | kCCCircularSelectorRotationModeTapLeftRight;
         touchArea_ = CGRectMake(0.0f, 0.0f, winSize.width, winSize.height);
         
-        
+        //center_ = CGPointZero;
         //get the center of the screen
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         CGFloat screenWidth = screenRect.size.width;
         CGFloat screenHeight = screenRect.size.height;
-        center_.x = screenWidth / 2;
-        center_.y = screenHeight / 2;
+        center_.x = screenWidth / 2 + 60;
+        center_.y = screenHeight / 2 - 30;
         
         radiusX_ = self.contentSize.width * 0.35f;
         radiusY_ = self.contentSize.height * 0.25f;
@@ -421,12 +443,16 @@ float radianToDegree(float radian){
     // if the touch point is in the area of the node
     // no need to scale the area even if the node is scaled, because the touch point relative to the node is already scaled
     if (CGRectContainsPoint(CGRectMake(0, 0, currentChoice.contentSize.width,currentChoice.contentSize.height), [currentChoice convertTouchToNodeSpace:touch])) {
-        NSLog(@"first if");	
+        
         // the selected choice is tapped
         if (delegate_ && [delegate_ respondsToSelector:@selector(selectionDidDecide:circularSelector:)]) {
             [delegate_ selectionDidDecide:selectionIndex_ circularSelector:self];
         }
-        [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene]];	
+        NSLog(@"index: %d", selectionIndex_);
+        NSLog(@"%@", [maps_file objectAtIndex:selectionIndex_ * 2]);
+        NSLog(@"%@", [maps_file objectAtIndex:selectionIndex_ * 2 + 1]);
+        [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene_with: [maps_file objectAtIndex:selectionIndex_ * 2]  
+                                                                      of_type:[maps_file objectAtIndex:selectionIndex_ * 2 + 1]]];
     } else {
         // other place is tapped
         tempTopChoice = nil;

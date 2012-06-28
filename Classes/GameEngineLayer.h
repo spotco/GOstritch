@@ -17,14 +17,14 @@
     NSMutableArray *game_objects;
 	Player *player;
     
-    
 	BOOL is_touch;
 }
+
 
 +(float) get_cur_pos_x;
 +(float) get_cur_pos_y;
 
-+(CCScene *) scene;
++(CCScene *) scene_with:(NSString *) map_file_name of_type:(NSString *) map_file_type;
 -(CGRect) get_world_bounds;
 -(void) loadMap;
 -(void) check_sort_islands_given:(float)pos_x and:(float)pos_y;

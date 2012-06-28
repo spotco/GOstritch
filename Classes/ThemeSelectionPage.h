@@ -24,19 +24,19 @@ typedef enum{
     kCCCircularSelectorRotationModeTapLeftRight     = 1 << 2    // rotate left/right by one item by tapping left/right space
 } CCCircularSelectorRotationMode;
 
-@class CCCircularSelector;
+@class ThemeSelectionPage;
 
 @protocol CCCircularSelectorDelagateProtocol
 
--(void)rotationBegan:(CCCircularSelector*)circularSelector;
--(void)rotationEnded:(CCCircularSelector*)circularSelector;
--(void)selectionDidChange:(int)index circularSelector:(CCCircularSelector*)circularSelector;
--(void)selectionDidDecide:(int)index circularSelector:(CCCircularSelector*)circularSelector;
+-(void)rotationBegan:(ThemeSelectionPage*)circularSelector;
+-(void)rotationEnded:(ThemeSelectionPage*)circularSelector;
+-(void)selectionDidChange:(int)index circularSelector:(ThemeSelectionPage*)circularSelector;
+-(void)selectionDidDecide:(int)index circularSelector:(ThemeSelectionPage*)circularSelector;
 
 @end
 
 
-@interface CCCircularSelector : CCLayer {
+@interface ThemeSelectionPage : CCLayer {
     NSObject<CCCircularSelectorDelagateProtocol> *delegate_;
     CGPoint center_;
     BOOL isDragging_;
@@ -65,9 +65,9 @@ typedef enum{
 }
 
 +(CCScene *) scene;
-+(NSArray *) loadMapPictures;
++(NSArray *) loadThemePic;
 
--(CCCircularSelector*)initWithChoices:(NSArray*)someChoices;
+-(ThemeSelectionPage*)initWithChoices:(NSArray*)someChoices;
 -(void)positionChoices;
 -(float)getAngleForChoice:(int)index;
 -(CGPoint)getNormalizedXZCoordinatesForAngle:(float)theta;
