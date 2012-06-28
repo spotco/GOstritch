@@ -25,6 +25,12 @@ typedef struct line_seg {
 +(void)print_line_seg:(line_seg)l msg:(NSString*)msg;
 +(BOOL)line_seg_valid:(line_seg)l;
 +(BOOL)point_fuzzy_on_line_seg:(line_seg)seg pt:(CGPoint)pt;
++(BOOL)pt_fuzzy_eq:(CGPoint)a b:(CGPoint)b;
++(float)shortest_rot_dir_from_cur:(float)cur to_tar:(float)tar;
+
++(float)deg_to_rad:(float)degrees;
++(float)rad_to_deg:(float)rad;
+
 
 
 

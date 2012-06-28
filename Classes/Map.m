@@ -12,6 +12,7 @@
 
 @synthesize n_islands, game_objects;
 @synthesize player_start_pt;
+@synthesize assert_links;
 
 -(id) init{
     n_islands = [[NSMutableArray alloc] init];

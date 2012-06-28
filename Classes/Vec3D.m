@@ -4,6 +4,14 @@
 
 @synthesize x,y,z;
 
+static Vec3D* z_vec = NULL;
++(Vec3D*)Z_VEC {
+    if (z_vec == NULL) {
+        z_vec = [Vec3D init_x:0 y:0 z:1];
+    }
+    return z_vec;
+}
+
 +(Vec3D*) init_x:(float)x y:(float)y z:(float)z {
     Vec3D *v = [Vec3D alloc];
     v.x = x;
@@ -57,6 +65,21 @@
 
 -(float) dotWith:(Vec3D*)a {
 	return ( x * a.x ) + ( y * a.y ) + ( z * a.z );
+}
+
+-(CGPoint) transform_pt:(CGPoint)p {
+    return ccp(p.x+x,p.y+y);
+}
+
+-(Vec3D*)rotate_vec_by_rad:(float)rad {
+    float mag = [self length];
+    float ang = atan2f(y, x);
+    ang += rad;
+    return [Vec3D init_x:mag*cos(ang) y:mag*sin(ang) z:0];
+}
+
+-(float)get_angle_in_rad {
+    return atan2f(y,x);
 }
 
 -(void) print {

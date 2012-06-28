@@ -5,7 +5,9 @@
 
 @implementation LineIsland
 
-@synthesize min_range,max_range,slope;
+static float INF = INFINITY;
+
+@synthesize min_range,max_range,slope,t_min,t_max;
 @synthesize main_fill;
 
 +(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end {
@@ -17,6 +19,8 @@
 	
 	[new_island init_tex];
 	[new_island init_top];
+    
+    //NSLog(@"Line START(%f,%f) END(%f,%f)",new_island.startX,new_island.startY,new_island.endX,new_island.endY);
 	
 	return new_island;
 	
@@ -44,7 +48,7 @@
 	CCTexture2D* texture = main_fill.texture;
     
     Vec3D *v3t2 = [Vec3D init_x:(endX - startX) y:(endY - startY) z:0];
-    Vec3D *vZ = [Vec3D init_x:0 y:0 z:1];
+    Vec3D *vZ = [Vec3D Z_VEC];
     Vec3D *v3t1 = [v3t2 crossWith:vZ];
     [v3t1 normalize];
     
@@ -52,7 +56,7 @@
     
     tri_pts[3] = ccp(0,0);
     tri_pts[2] = ccp(endX-startX,endY-startY);
-    tri_pts[1] = ccp(0+v3t1.x * 10,0+v3t1.y * taille);
+    tri_pts[1] = ccp(0+v3t1.x * taille,0+v3t1.y * taille);
     tri_pts[0] = ccp(endX-startX +v3t1.x * taille ,endY-startY +v3t1.y * taille);
 	
 	tex_pts[2] = ccp(tri_pts[2].x/texture.pixelsWide, tri_pts[2].y/texture.pixelsHigh);
@@ -61,7 +65,6 @@
 	tex_pts[1] = ccp(tri_pts[1].x/texture.pixelsWide, tri_pts[1].y/texture.pixelsWide);
     
     [v3t2 dealloc];
-    [vZ dealloc];
     [v3t1 dealloc];
 }
 
@@ -78,18 +81,12 @@
 	
 	float dist = sqrt(pow(endX-startX, 2)+pow(endY-startY, 2));
     
+
     Vec3D *v3t2 = [Vec3D init_x:(endX - startX) y:(endY - startY) z:0];
     Vec3D *vZ = [Vec3D init_x:0 y:0 z:1];
     Vec3D *v3t1 = [v3t2 crossWith:vZ];
     [v3t1 normalize];
     [v3t1 negate];
-    
-    
-    
-    /*tri_pts[2] = ccp(endX-startX,endY-startY);
-    tri_pts[3] = ccp(0,0);
-    tri_pts[0] = ccp(endX-startX+v3t1.x*hei,endY-startY+v3t1.y*hei);
-    tri_pts[1] = ccp(v3t1.x*hei,v3t1.y*hei);*/
     
     float hei = 56;
     float offset = -40;
@@ -142,13 +139,21 @@
 -(void)calc_init {
 	min_range = startX;
 	max_range = endX;
-	slope = (endY - startY)/(endX - startX);
+    
+    if (endX == startX) {
+        slope = INFINITY;
+    } else {
+        slope = (endY - startY)/(endX - startX);
+    }
 	rot = atan((endY-startY)/(endX-startX))*(180/M_PI);
+    
+    t_min = 0;
+    t_max = sqrtf(powf(endX - startX, 2) + powf(endY - startY, 2));
 }
 
 -(float)get_height:(float)pos {
 	if (pos < min_range || pos > max_range) {
-		return -1;
+		return [Island NO_VALUE];
 	} else {
 		return startY+(pos-startX)*slope;
 	}
@@ -160,6 +165,31 @@
 
 -(float)get_slope:(float)pos {
     return slope;
+}
+
+-(line_seg)get_line_seg_a:(float)pre_x b:(float)post_x {
+    return [super get_line_seg_a:pre_x b:post_x];
+}
+
+-(float)get_t_given_position:(CGPoint)position {
+    float dx = powf(position.x - startX, 2);
+    float dy = powf(position.y - startY, 2);
+    float f = sqrtf( dx+dy );
+    return f;
+}
+
+-(CGPoint)get_position_given_t:(float)t {
+    if (t > t_max || t < t_min) {
+         return ccp([Island NO_VALUE],[Island NO_VALUE]);
+    } else {
+        float frac = t/t_max;
+        Vec3D *dir_vec = [Vec3D init_x:endX-startX y:endY-startY z:0];
+        Vec3D *scaled_vec = [dir_vec scale:frac];
+        [dir_vec dealloc];
+        CGPoint pos = ccp(startX+scaled_vec.x,startY+scaled_vec.y);
+        [scaled_vec dealloc];
+        return pos;
+    }
 }
 
 @end

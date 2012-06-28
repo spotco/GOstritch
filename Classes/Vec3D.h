@@ -17,6 +17,10 @@
 -(void) normalize;
 -(Vec3D*) crossWith:(Vec3D*)a;
 -(float) dotWith:(Vec3D*)a;
+-(CGPoint) transform_pt:(CGPoint)p;
+-(Vec3D*)rotate_vec_by_rad:(float)rad;
+-(float)get_angle_in_rad;
 -(void) print;
++(Vec3D*)Z_VEC;
 
 @end

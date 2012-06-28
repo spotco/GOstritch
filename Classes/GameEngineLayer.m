@@ -11,13 +11,14 @@ static float cur_pos_y = 0;
 
 /**
  TODO:
-    -Fix curve island offset bug (when not starting at 0 or PI*n)
+    -Fix falloff island jitter (better vx prediction)
     -Additonal curve island based on circle
-    -Jump normal to current island direction
-    -Running vertically/upsidedown
     -Curve island rendering
     -Ghost (stack loading, curl)
-    -Vertical line join fallthrough bug
+    -Running upsidedown + reverse rotation
+    -Optimize background rendering
+    -LineIsland height parameterization
+    -Refactor Vec3D, Common code
  **/
 
 +(CCScene *) scene{
@@ -66,6 +67,15 @@ static float cur_pos_y = 0;
 	Map *map = [MapLoader load_map:@"island2" oftype:@"map"];
     
     islands = map.n_islands;
+    int ct = [Island link_islands:islands];
+    if (ct == map.assert_links) {
+        NSLog(@"Successfully linked islands, %i links.",ct);
+    } else {
+        NSLog(@"ERROR: expected %i links, got %i.",map.assert_links,ct);
+    }
+    
+    
+    
     for (Island* i in islands) {
 		[self addChild:i z:1];
 	}
@@ -110,8 +120,7 @@ static float cur_pos_y = 0;
 }
 
 -(void)check_game_state {
-    //if (!CGRectIntersectsRect([self get_world_bounds],[player get_hit_rect])) { 
-	if (player.position.y < 0) {
+    if (!CGRectIntersectsRect([self get_world_bounds],[player get_hit_rect])) { 
         player.position = player_start_pt;
         player.touch_count = 0;
         player.vx = 0;
@@ -122,7 +131,7 @@ static float cur_pos_y = 0;
 	}
 }
 
--(void)player_control_update:(BOOL)is_contact {
+-(void)player_control_update:(BOOL)is_contact {  //TODO -- This code sucks, fix
     if (player.vx < 3) {
         player.vx += 0.1;
     }
@@ -133,9 +142,29 @@ static float cur_pos_y = 0;
     if (is_touch) {
         player.touch_count+=0.5;
         player.vx = MAX(player.vx*0.99,4);
-    } else if (player.touch_count != 0) {
-        if (is_contact) {
+    } else if (player.touch_count != 0) { 
+        if (is_contact && player.current_island != NULL) {
+            
+            float jump_power = 15;
+            
             player.vy = MIN(player.touch_count,15);
+            
+            //add player up vector and player current island's tangent vector, normalize then apply as jump
+            Vec3D *up = player.up_vec;
+            Vec3D *tangent = [Island get_tangent_vec_given_slope:[player.current_island get_slope:player.position.x]];
+            Vec3D *combined = [up add:tangent];
+            [combined normalize];
+            
+            [tangent dealloc];
+            
+            
+            player.position = [player.up_vec transform_pt:player.position];
+            player.vx = combined.x*jump_power;
+            player.vy = combined.y*jump_power;
+            
+            [combined dealloc];
+            
+            player.current_island = NULL;
         } else if (player.airjump_count > 0) {
             player.airjump_count--;
             player.vy = MIN(player.touch_count,15);
@@ -149,7 +178,7 @@ static float cur_pos_y = 0;
 }
 
 -(void)check_sort_islands_given:(float)pos_x and:(float)pos_y {
-	float tmp = FLT_MAX;//if islands out of order, sort
+	float tmp = FLT_MAX;
 	for (Island* i in islands) {
 		float h = [i get_height:pos_x];
 		if (h > tmp) {

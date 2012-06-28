@@ -1,21 +1,21 @@
 
 #import "Common.h"
+#import "Island.h"
 
 
 @implementation Common
 
-
-
 +(CGPoint)line_seg_intersection_a1:(CGPoint)a1 a2:(CGPoint)a2 b1:(CGPoint)b1 b2:(CGPoint)b2 {//2 line segment intersection (seg a1,a2) (seg b1,b2)
-	double Ax = a1.x; double Ay = a1.y;
+    CGPoint null_point = CGPointMake([Island NO_VALUE], [Island NO_VALUE]);
+    double Ax = a1.x; double Ay = a1.y;
 	double Bx = a2.x; double By = a2.y;
 	double Cx = b1.x; double Cy = b1.y;
 	double Dx = b2.x; double Dy = b2.y;
 	double X; double Y;
 	double  distAB, theCos, theSin, newX, ABpos ;
 	
-	if ((Ax==Bx && Ay==By) || (Cx==Dx && Cy==Dy)) return ccp(-1,-1); //  Fail if either line segment is zero-length.
-	if ((Ax==Cx && Ay==Cy) || (Bx==Cx && By==Cy) ||  (Ax==Dx && Ay==Dy) || (Bx==Dx && By==Dy)) return ccp(-1,-1); //  Fail if the segments share an end-point.
+	if ((Ax==Bx && Ay==By) || (Cx==Dx && Cy==Dy)) return null_point; //  Fail if either line segment is zero-length.
+	if ((Ax==Cx && Ay==Cy) || (Bx==Cx && By==Cy) ||  (Ax==Dx && Ay==Dy) || (Bx==Dx && By==Dy)) return null_point; //  Fail if the segments share an end-point.
 	
 	Bx-=Ax; By-=Ay;//Translate the system so that point A is on the origin.
 	Cx-=Ax; Cy-=Ay;
@@ -30,11 +30,11 @@
 	newX=Dx*theCos+Dy*theSin;
 	Dy  =Dy*theCos-Dx*theSin; Dx=newX;
 	
-	if ((Cy<0. && Dy<0.) || (Cy>=0. && Dy>=0.)) return ccp(-1,-1);//  Fail if segment C-D doesn't cross line A-B.
+	if ((Cy<0. && Dy<0.) || (Cy>=0. && Dy>=0.)) return null_point;//  Fail if segment C-D doesn't cross line A-B.
 	
 	ABpos=Dx+(Cx-Dx)*Dy/(Dy-Cy);//Discover the position of the intersection point along line A-B.
 	
-	if (ABpos<0. || ABpos>distAB) return ccp(-1,-1);//  Fail if segment C-D crosses line A-B outside of segment A-B.
+	if (ABpos<0. || ABpos>distAB) return null_point;//  Fail if segment C-D crosses line A-B outside of segment A-B.
 	
 	X=Ax+ABpos*theCos;//Apply the discovered position to line A-B in the original coordinate system.
 	Y=Ay+ABpos*theSin;
@@ -103,6 +103,26 @@
     return l.a.x != -1.0 && l.a.y != -1.0 && l.b.x != -1.0 && l.b.y != -1.0;
 }
 
++(BOOL)pt_fuzzy_eq:(CGPoint)a b:(CGPoint)b {
+    return ABS(a.x-b.x) <= 0.1 && ABS(a.y-b.y) <= 0.1;
+}
+
++(float)deg_to_rad:(float)degrees {
+    return degrees * M_PI / 180.0;
+}
+
++(float)rad_to_deg:(float)rad {
+    return rad * 180.0 / M_PI;
+}
+
++(float)shortest_rot_dir_from_cur:(float)cur to_tar:(float)tar {
+    float dir = cur - tar;
+    if (dir > 0 && ABS(dir) <= M_PI) { return 1; }
+    else if (dir > 0 && ABS(dir) > M_PI) { return -1; }
+    else if (dir < 0 && ABS(dir) <= M_PI) { return -1; }
+    else if (dir < 0 && ABS(dir) > M_PI) { return 1; }
+    else { return 0; }
+}
 
 
 

@@ -1,6 +1,7 @@
 {
 "start_x":"100",
 "start_y":"300",
+"assert_links":"2",
 
 "islands":
 [
@@ -16,6 +17,7 @@
 {"type":"coin","x":"368","y":"150"},
 {"type":"coin","x":"800","y":"150"},
 {"type":"ground_detail","x":"300","y":"25","img":"2"},
+{"type":"ground_detail","x":"450","y":"25","img":"3"},
 {"type":"ground_detail","x":"700","y":"25","img":"1"},
 {"type":"ground_detail","x":"2400","y":"25","img":"3"}
 ]

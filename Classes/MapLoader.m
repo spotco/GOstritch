@@ -1,11 +1,3 @@
-//
-//  MapLoader.m
-//  GOstrich
-//
-//  Created by Chengcheng Hao on 6/20/12.
-//  Copyright (c) 2012 University of Washington. All rights reserved.
-//
-
 #import "MapLoader.h"
 #import "ThemeInfo.h"
 
@@ -29,6 +21,9 @@
 	float start_y = ((NSString*)[j_map_data objectForKey:(@"start_y")]).floatValue;
     map.player_start_pt = ccp(start_x,start_y);
     NSLog(@"Player starting at (%f,%f)",start_x,start_y);
+    
+    int assert_links = ((NSString*)[j_map_data objectForKey:(@"assert_links")]).intValue;
+    map.assert_links = assert_links;
     
 	for(int i = 0; i < islandsCount; i++){
 		NSDictionary *currentIslandDict = (NSDictionary *)[islandArray objectAtIndex:i];
@@ -54,13 +49,10 @@
             continue;
         }
 		[map.n_islands addObject:currentIsland];
-		
 	}
     
     
     NSArray *coins_array = [j_map_data objectForKey:@"objects"];
-    //NSMutableArray *n_coins = [[NSMutableArray alloc] init];
-
     
     for(int i = 0; i < [coins_array count]; i++){
         NSDictionary *j_object = (NSDictionary *)[coins_array objectAtIndex:i];
