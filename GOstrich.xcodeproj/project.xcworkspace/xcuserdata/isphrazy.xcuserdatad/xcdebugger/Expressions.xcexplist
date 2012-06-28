@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[ThemeSelectionPage tapped:]:ThemeSelectionPage.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "NSLog(&quot;%@&quot;, [maps_file objectAtIndex:selectionIndex_ * 2]]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

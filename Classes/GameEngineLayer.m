@@ -8,6 +8,8 @@
 
 static float cur_pos_x = 0;
 static float cur_pos_y = 0;
+static NSString *my_map_file_name;
+static NSString *my_map_file_type;
 
 /**
  TODO:
@@ -21,14 +23,20 @@ static float cur_pos_y = 0;
     -Refactor Vec3D, Common code
  **/
 
-+(CCScene *) scene{
-	[Resource init_bg1_textures];
-    [[CCDirector sharedDirector] setDisplayFPS:NO];
+
++(CCScene *) scene_with:(NSString *) map_file_name of_type:(NSString *) map_file_type{
+    my_map_file_name = map_file_name;
+    my_map_file_type = map_file_type;
+    
+    [Resource init_bg1_textures];
+	[[CCDirector sharedDirector] setDisplayFPS:NO];
 	CCScene *scene = [CCScene node];
 	BGLayer *bglayer = [BGLayer node];
 	[scene addChild:bglayer];
 	GameEngineLayer *layer = [GameEngineLayer node];
-	[scene addChild: layer];
+
+	
+    [scene addChild: layer];
 	return scene;
 }
 
@@ -63,8 +71,10 @@ static float cur_pos_y = 0;
     return CGRectMake(-100, -100, max_x+600, max_y+600);
 }
 
--(CGPoint) loadMap{
-	Map *map = [MapLoader load_map:@"island2" oftype:@"map"];
+
+-(void) loadMap{
+	Map *map = [MapLoader load_map:my_map_file_name oftype: my_map_file_type];
+
     
     islands = map.n_islands;
     int ct = [Island link_islands:islands];

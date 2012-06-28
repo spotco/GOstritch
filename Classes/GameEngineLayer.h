@@ -16,17 +16,18 @@
 @interface GameEngineLayer : CCLayer {
 	NSMutableArray *islands;
     NSMutableArray *game_objects;
-    
+
 	Player *player;
     CGPoint player_start_pt;
     
 	BOOL is_touch;
 }
 
+
 +(float) get_cur_pos_x;
 +(float) get_cur_pos_y;
 
-+(CCScene *) scene;
++(CCScene *) scene_with:(NSString *) map_file_name of_type:(NSString *) map_file_type;
 -(CGRect) get_world_bounds;
 -(CGPoint) loadMap;
 -(void) check_sort_islands_given:(float)pos_x and:(float)pos_y;

@@ -6,7 +6,7 @@
 @implementation BGLayer
 
 -(id) init{
-	if( (self=[super init])) {
+	if( (self = [super init])) {
 		bg_elements = [BGLayer loadBg];
 		for (CCSprite* i in bg_elements) {
 			[self addChild:i];
