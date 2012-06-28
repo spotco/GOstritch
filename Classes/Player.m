@@ -64,6 +64,21 @@
     }
 }
 
+/**
+ Calculates player position and moves the player one 'tick' based on current state and islands.
+ @requires
+     islands is sorted
+ @params
+     (Player*)player - the target player to move
+     (NSMutableArray*)islands - the islands of the player's world
+ @modifies
+     player.position
+     player.rotation
+     player.vx/player.vy
+ @returns
+     YES if player is in contact with the ground
+     else NO
+ **/
 +(BOOL)player_move:(Player*)player with_islands:(NSMutableArray*)islands {
     if (player.current_island == NULL) {
         player.position = [Player player_free_fall:player islands:islands];
@@ -73,7 +88,19 @@
     
     return player.current_island != NULL;
 }
-                           
+
+/**
+ Player movement calculation when in contact with an island (any ground).
+ If moving past an island edge, calculates if the player should fall/climb onto any intersecting islands
+ @params
+     (Player*)player - the target player
+     (NSMutableArray*)islands - the islands of the player's world
+ @modifies
+     player.rotation - rotates player in the direction of contact_island
+     player.vy - reduced to zero
+ @returns
+    A CGPoint of the player's calculated position after this update 'tick'
+ **/
 +(CGPoint)player_move_along_island:(Player*)player islands:(NSMutableArray*)islands {
     float mov_speed = player.vx;
     player.vy = 0;
@@ -116,6 +143,19 @@
     return position_final;
 }
 
+
+/**
+ Player movement calculation when in freefall (not in contact with any islands)
+ Also applies a gravitation acceleration effect.
+ @params
+     (Player*)player - the target player
+     (NSMutableArray*)islands - the islands of the player's world
+ @modifies
+     player.rotation
+     player.vy (gravitational acceleration effect)
+ @returns
+    A CGPoint of the player's calculated position after this update 'tick'
+ **/
 +(CGPoint)player_free_fall:(Player*)player islands:(NSMutableArray*)islands {
     player.rotation = player.rotation*0.9;
     

@@ -16,7 +16,7 @@
 	return self;
 }
 
-+(NSMutableArray*) loadBg {
++(NSMutableArray*) loadBg { //TODO - split, crop and optimize
 	NSMutableArray *a = [[NSMutableArray alloc] init];
     
     [a addObject:[BackgroundObject backgroundFromTex:[Resource get_tex:TEX_BG_SKY] scrollspd_x:0 scrollspd_y:0]];
