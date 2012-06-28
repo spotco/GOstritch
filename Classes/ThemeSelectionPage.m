@@ -65,6 +65,7 @@ float radianToDegree(float radian){
     for(ThemeInfo *theme in themes){
         CCTexture2D *texture= [Resource get_tex:theme.pic_name];
         CCSprite *img = [CCSprite spriteWithTexture:texture];
+        
         img.anchorPoint = ccp(0, 0);
         [theme_pic_sprite addObject:img];
         

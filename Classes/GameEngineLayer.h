@@ -16,13 +16,10 @@
 @interface GameEngineLayer : CCLayer {
 	NSMutableArray *islands;
     NSMutableArray *game_objects;
-    
-<<<<<<< HEAD
-=======
+
 	Player *player;
     CGPoint player_start_pt;
     
->>>>>>> 1ddcec1d4e7a3960a02b18a468027bbcbfc4a8a6
 	BOOL is_touch;
 }
 

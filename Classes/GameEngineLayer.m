@@ -22,17 +22,13 @@ static NSString *my_map_file_type;
     -Vertical line join fallthrough bug
  **/
 
-<<<<<<< HEAD
+
 +(CCScene *) scene_with:(NSString *) map_file_name of_type:(NSString *) map_file_type{
     my_map_file_name = map_file_name;
     my_map_file_type = map_file_type;
-    [Resource init_textures];
+    
+    [Resource init_bg1_textures];
 	[[CCDirector sharedDirector] setDisplayFPS:NO];
-=======
-+(CCScene *) scene{
-	[Resource init_bg1_textures];
-    [[CCDirector sharedDirector] setDisplayFPS:NO];
->>>>>>> 1ddcec1d4e7a3960a02b18a468027bbcbfc4a8a6
 	CCScene *scene = [CCScene node];
 	BGLayer *bglayer = [BGLayer node];
 	[scene addChild:bglayer];
@@ -74,13 +70,10 @@ static NSString *my_map_file_type;
     return CGRectMake(-100, -100, max_x+600, max_y+600);
 }
 
-<<<<<<< HEAD
+
 -(void) loadMap{
 	Map *map = [MapLoader load_map:my_map_file_name oftype: my_map_file_type];
-=======
--(CGPoint) loadMap{
-	Map *map = [MapLoader load_map:@"island2" oftype:@"map"];
->>>>>>> 1ddcec1d4e7a3960a02b18a468027bbcbfc4a8a6
+
     
     islands = map.n_islands;
     for (Island* i in islands) {
