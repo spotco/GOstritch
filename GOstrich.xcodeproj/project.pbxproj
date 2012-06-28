@@ -90,6 +90,11 @@
 		7E93D6761592B97C00A83E9C /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E93D6751592B97C00A83E9C /* GameObject.m */; };
 		7E93D67A1592BABF00A83E9C /* Coin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E93D6791592BABF00A83E9C /* Coin.m */; };
 		7ECBC8671597FA5700B2BCFE /* Vec3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBC8661597FA5700B2BCFE /* Vec3D.m */; };
+		7EDF0444159C53A000E9ABDA /* 1_1Icon 250px.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF043F159C53A000E9ABDA /* 1_1Icon 250px.png */; };
+		7EDF0445159C53A000E9ABDA /* theme_selection_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0440159C53A000E9ABDA /* theme_selection_bg.jpg */; };
+		7EDF0446159C53A000E9ABDA /* theme1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0441159C53A000E9ABDA /* theme1.png */; };
+		7EDF0447159C53A000E9ABDA /* theme2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0442159C53A000E9ABDA /* theme2.png */; };
+		7EDF0448159C53A000E9ABDA /* theme3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0443159C53A000E9ABDA /* theme3.png */; };
 		7EE784BB1593FA42001704B1 /* CurveIsland.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE784BA1593FA42001704B1 /* CurveIsland.m */; };
 		8B4028D01592CDCF00A2E791 /* MapLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028CF1592CDCF00A2E791 /* MapLoader.m */; };
 		8B4028D31592D43900A2E791 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028D21592D43900A2E791 /* Map.m */; };
@@ -408,6 +413,11 @@
 		7E93D6791592BABF00A83E9C /* Coin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coin.m; sourceTree = "<group>"; };
 		7ECBC8651597FA5700B2BCFE /* Vec3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec3D.h; sourceTree = "<group>"; };
 		7ECBC8661597FA5700B2BCFE /* Vec3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vec3D.m; sourceTree = "<group>"; };
+		7EDF043F159C53A000E9ABDA /* 1_1Icon 250px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1_1Icon 250px.png"; sourceTree = "<group>"; };
+		7EDF0440159C53A000E9ABDA /* theme_selection_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theme_selection_bg.jpg; sourceTree = "<group>"; };
+		7EDF0441159C53A000E9ABDA /* theme1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme1.png; sourceTree = "<group>"; };
+		7EDF0442159C53A000E9ABDA /* theme2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme2.png; sourceTree = "<group>"; };
+		7EDF0443159C53A000E9ABDA /* theme3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme3.png; sourceTree = "<group>"; };
 		7EE784B91593FA42001704B1 /* CurveIsland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveIsland.h; sourceTree = "<group>"; };
 		7EE784BA1593FA42001704B1 /* CurveIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurveIsland.m; sourceTree = "<group>"; };
 		8B4028CE1592CDCF00A2E791 /* MapLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLoader.h; sourceTree = "<group>"; };
@@ -893,6 +903,11 @@
 		7E89F278159ADF2C00A32F2B /* mapPics */ = {
 			isa = PBXGroup;
 			children = (
+				7EDF043F159C53A000E9ABDA /* 1_1Icon 250px.png */,
+				7EDF0440159C53A000E9ABDA /* theme_selection_bg.jpg */,
+				7EDF0441159C53A000E9ABDA /* theme1.png */,
+				7EDF0442159C53A000E9ABDA /* theme2.png */,
+				7EDF0443159C53A000E9ABDA /* theme3.png */,
 			);
 			path = mapPics;
 			sourceTree = "<group>";
@@ -1460,6 +1475,11 @@
 				6299503C159C18BE00B6CA5B /* theme1.png in Resources */,
 				6299503D159C18BE00B6CA5B /* theme2.png in Resources */,
 				6299503E159C18BE00B6CA5B /* theme3.png in Resources */,
+				7EDF0444159C53A000E9ABDA /* 1_1Icon 250px.png in Resources */,
+				7EDF0445159C53A000E9ABDA /* theme_selection_bg.jpg in Resources */,
+				7EDF0446159C53A000E9ABDA /* theme1.png in Resources */,
+				7EDF0447159C53A000E9ABDA /* theme2.png in Resources */,
+				7EDF0448159C53A000E9ABDA /* theme3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

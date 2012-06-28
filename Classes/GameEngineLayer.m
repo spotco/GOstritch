@@ -72,7 +72,7 @@ static NSString *my_map_file_type;
 }
 
 
--(void) loadMap{
+-(CGPoint) loadMap{
 	Map *map = [MapLoader load_map:my_map_file_name oftype: my_map_file_type];
 
     
