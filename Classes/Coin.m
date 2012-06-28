@@ -7,7 +7,7 @@
     new_coin.active = YES;
     new_coin.position = ccp(posx,posy);
     
-    CCTexture2D *texture = [Resource get_tex:@"golden_bone"];
+    CCTexture2D *texture = [Resource get_tex:TEX_GOLDEN_BONE];
     CCSprite *img = [CCSprite spriteWithTexture:texture];
     [new_coin addChild:img];
     

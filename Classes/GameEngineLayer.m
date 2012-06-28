@@ -1,7 +1,8 @@
 #import "GameEngineLayer.h"
 
-#define PLAYER_START_X 50
-#define PLAYER_START_Y 50
+#define RENDER_PLAYER_ORD 2
+#define RENDER_ISLAND_ORD 1
+#define RENDER_GAMEOBJ_ORD 0
 
 @implementation GameEngineLayer
 
@@ -18,16 +19,23 @@ static NSString *my_map_file_type;
     -Running vertically/upsidedown
     -Curve island rendering
     -Ghost (stack loading, curl)
+    -Vertical line join fallthrough bug
  **/
 
+<<<<<<< HEAD
 +(CCScene *) scene_with:(NSString *) map_file_name of_type:(NSString *) map_file_type{
     my_map_file_name = map_file_name;
     my_map_file_type = map_file_type;
     [Resource init_textures];
 	[[CCDirector sharedDirector] setDisplayFPS:NO];
+=======
++(CCScene *) scene{
+	[Resource init_bg1_textures];
+    [[CCDirector sharedDirector] setDisplayFPS:NO];
+>>>>>>> 1ddcec1d4e7a3960a02b18a468027bbcbfc4a8a6
 	CCScene *scene = [CCScene node];
-	//BGLayer *bglayer = [BGLayer node];
-	//[scene addChild:bglayer];
+	BGLayer *bglayer = [BGLayer node];
+	[scene addChild:bglayer];
 	GameEngineLayer *layer = [GameEngineLayer node];
 
 	
@@ -38,12 +46,13 @@ static NSString *my_map_file_type;
 
 -(id) init{
 	if( (self=[super init])) {
-		[self loadMap];
+		player_start_pt = [self loadMap];
         player = [Player init];
-		[self addChild:player];
-		player.position = ccp(PLAYER_START_X,PLAYER_START_Y);
+        player.position = player_start_pt;
+        
+		[self addChild:player z:RENDER_PLAYER_ORD];
 		player.vy = 0;
-		player.vx = 1;
+		player.vx = 0;
 		[self schedule:@selector(update:)];
 		self.isTouchEnabled = YES;
         
@@ -65,18 +74,25 @@ static NSString *my_map_file_type;
     return CGRectMake(-100, -100, max_x+600, max_y+600);
 }
 
+<<<<<<< HEAD
 -(void) loadMap{
 	Map *map = [MapLoader load_map:my_map_file_name oftype: my_map_file_type];
+=======
+-(CGPoint) loadMap{
+	Map *map = [MapLoader load_map:@"island2" oftype:@"map"];
+>>>>>>> 1ddcec1d4e7a3960a02b18a468027bbcbfc4a8a6
     
     islands = map.n_islands;
     for (Island* i in islands) {
-		[self addChild:i];
+		[self addChild:i z:1];
 	}
     
     game_objects = map.game_objects;
     for (GameObject* o in game_objects) {
-        [self addChild:o];
+        [self addChild:o z:0];
     }
+    
+    return map.player_start_pt;
 }
 
 -(void)update:(ccTime)dt {
@@ -111,8 +127,9 @@ static NSString *my_map_file_type;
 }
 
 -(void)check_game_state {
-    if (!CGRectIntersectsRect([self get_world_bounds],[player get_hit_rect])) { 
-		player.position = ccp(PLAYER_START_X,PLAYER_START_Y);
+    //if (!CGRectIntersectsRect([self get_world_bounds],[player get_hit_rect])) { 
+	if (player.position.y < 0) {
+        player.position = player_start_pt;
         player.touch_count = 0;
         player.vx = 0;
         player.vy = 0;
@@ -146,14 +163,6 @@ static NSString *my_map_file_type;
     if (!is_touch) {
         player.vx = MIN(player.vx*1.01,8);
     }
-}
-
-
-+(NSMutableArray*) loadGameObjects {
-    NSMutableArray *gameObjArray = [[NSMutableArray alloc] init];
-    [gameObjArray addObject:[Coin init_x:368 y:150]];
-    [gameObjArray addObject:[Coin init_x:800 y:200]];
-    return gameObjArray;
 }
 
 -(void)check_sort_islands_given:(float)pos_x and:(float)pos_y {
