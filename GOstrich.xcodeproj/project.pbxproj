@@ -93,6 +93,7 @@
 		7EDF0447159C53A000E9ABDA /* theme2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0442159C53A000E9ABDA /* theme2.png */; };
 		7EDF0448159C53A000E9ABDA /* theme3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0443159C53A000E9ABDA /* theme3.png */; };
 		7EDF177F15A41A55006AA7E4 /* bigjump.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF177E15A41A55006AA7E4 /* bigjump.map */; };
+		7EDF178215A43C3A006AA7E4 /* test.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF178115A43C3A006AA7E4 /* test.map */; };
 		8B4028D01592CDCF00A2E791 /* MapLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028CF1592CDCF00A2E791 /* MapLoader.m */; };
 		8B4028D31592D43900A2E791 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028D21592D43900A2E791 /* Map.m */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
@@ -412,6 +413,7 @@
 		7EDF0442159C53A000E9ABDA /* theme2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme2.png; sourceTree = "<group>"; };
 		7EDF0443159C53A000E9ABDA /* theme3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme3.png; sourceTree = "<group>"; };
 		7EDF177E15A41A55006AA7E4 /* bigjump.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bigjump.map; sourceTree = "<group>"; };
+		7EDF178115A43C3A006AA7E4 /* test.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.map; sourceTree = "<group>"; };
 		8B4028CE1592CDCF00A2E791 /* MapLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLoader.h; sourceTree = "<group>"; };
 		8B4028CF1592CDCF00A2E791 /* MapLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLoader.m; sourceTree = "<group>"; };
 		8B4028D11592D43900A2E791 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
@@ -937,6 +939,7 @@
 				7E89F2DD159AEDEE00A32F2B /* themes_info.theme */,
 				7E455F2C159B018F00006895 /* curvetest.map */,
 				7EDF177E15A41A55006AA7E4 /* bigjump.map */,
+				7EDF178115A43C3A006AA7E4 /* test.map */,
 			);
 			path = map;
 			sourceTree = "<group>";
@@ -1467,6 +1470,7 @@
 				7EDF0448159C53A000E9ABDA /* theme3.png in Resources */,
 				7E733EF315A3BD1F00067EC5 /* goldenbone.png in Resources */,
 				7EDF177F15A41A55006AA7E4 /* bigjump.map in Resources */,
+				7EDF178215A43C3A006AA7E4 /* test.map in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,6 +4,8 @@
 
 @implementation LineIsland
 
+#define HEI 56
+#define OFFSET -40
 static float INF = INFINITY;
 
 @synthesize min_range,max_range,t_min,t_max,slope;
@@ -92,7 +94,9 @@ static float INF = INFINITY;
 		return;
 	} 
 	[super draw];
-	
+
+    
+    
 	glBindTexture(GL_TEXTURE_2D, main_fill.texture.name);
 	glVertexPointer(2, GL_FLOAT, 0, main_fill.tri_pts); //coord per vertex, type, stride, pointer to array
 	glTexCoordPointer(2, GL_FLOAT, 0, main_fill.tex_pts);
@@ -110,6 +114,9 @@ static float INF = INFINITY;
         glVertexPointer(2,GL_FLOAT,0,corner_fill.tri_pts);
         glTexCoordPointer(2,GL_FLOAT,0,corner_fill.tex_pts);
         glDrawArrays(GL_TRIANGLES, 0, 3);
+        
+        glColor4f(0.29, 0.69, 0.03, 1.0);
+        ccDrawSolidPoly(toppts, 3, YES);
     }
 }
 
@@ -163,8 +170,8 @@ static float INF = INFINITY;
     [v3t1 normalize];
     [v3t1 negate];
     
-    float hei = 56;
-    float offset = -40;
+    float hei = HEI;
+    float offset = OFFSET;
     float d_o_x = offset * v3t1.x;
     float d_o_y = offset * v3t1.y;
     
@@ -177,6 +184,9 @@ static float INF = INFINITY;
     tex_pts[1] = ccp(0,0);
     tex_pts[2] = ccp(dist/texture.pixelsWide,1);
     tex_pts[3] = ccp(0,1);
+    
+    toppts[0] = ccp(endX-startX,endY-startY);
+    toppts[1] = ccp(tri_pts[2].x,tri_pts[2].y);
 }
 
 -(void)link_finish {
@@ -187,6 +197,35 @@ static float INF = INFINITY;
 }
 
 -(void)init_corner_top {
+    Vec3D *v3t2 = [Vec3D init_x:(next.endX - next.startX) y:(next.endY - next.startY) z:0];
+    Vec3D *vZ = [Vec3D init_x:0 y:0 z:1];
+    Vec3D *v3t1 = [v3t2 crossWith:vZ];
+    [v3t1 normalize];
+    [v3t1 negate];
+    
+    float offset = OFFSET;
+    float d_o_x = offset * v3t1.x;
+    float d_o_y = offset * v3t1.y;
+    toppts[2] = ccp( d_o_x+next.startX-startX ,d_o_y+next.startY-startY );
+    [v3t2 dealloc];
+    [v3t1 dealloc];
+    
+    float corner_top_scale = 0.65;
+    
+    Vec3D *reduce_left = [Vec3D init_x:toppts[1].x-toppts[0].x y:toppts[1].y-toppts[0].y z:0];
+    float leftlen = [reduce_left length];
+    [reduce_left normalize];
+    leftlen = leftlen * corner_top_scale;
+    toppts[1] = ccp( toppts[0].x + reduce_left.x * leftlen, toppts[0].y + reduce_left.y * leftlen);
+    [reduce_left dealloc];
+    
+    Vec3D *reduce_right = [Vec3D init_x:toppts[2].x-toppts[0].x y:toppts[2].y-toppts[0].y z:0];
+    float rightlen = [reduce_right length];
+    [reduce_right normalize];
+    rightlen = rightlen * corner_top_scale;
+    toppts[2] = ccp( toppts[0].x + reduce_right.x * rightlen, toppts[0].y + reduce_right.y * rightlen);
+    [reduce_right dealloc];
+    
     
 }
 
