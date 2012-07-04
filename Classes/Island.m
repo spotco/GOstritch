@@ -16,14 +16,6 @@ static float NO_VAL = -99999.0;
 	return [Island NO_VALUE];
 }
 
--(float)get_angle:(float)pos {
-    return 0;
-}
-
--(float)get_slope:(float)pos {
-    return 0;
-}
-
 -(line_seg)get_line_seg_a:(float)pre_x b:(float)post_x {
     float island_start_x = pre_x;
     float island_start_y = [self get_height:island_start_x];
@@ -41,14 +33,8 @@ static float NO_VAL = -99999.0;
     return [Common cons_line_seg_a:ccp(island_start_x,island_start_y) b:ccp(island_end_x,island_end_y)];
 }
 
-+(Vec3D*)get_tangent_vec_given_slope:(float)slope {
-    if (slope == INFINITY) {
-        return [Vec3D init_x:0 y:1 z:0];
-    } else {
-        Vec3D *v = [Vec3D init_x:1 y:slope z:0];
-        [v normalize];
-        return v;
-    }
+-(Vec3D*)get_tangent_vec {
+    return [Vec3D init_x:0 y:0 z:0];
 }
 
 +(int) link_islands:(NSMutableArray*)islands {

@@ -167,7 +167,12 @@ static float INF = INFINITY;
     } else {
         return 180 + [Common rad_to_deg:atan(slope)];
     }
-   
+}
+
+-(Vec3D*)get_tangent_vec {
+    Vec3D *v = [Vec3D init_x:endX-startX y:endY-startY z:0];
+    [v normalize];
+    return v;
 }
 
 -(float)get_slope:(float)pos {

@@ -26,12 +26,10 @@ typedef struct line_seg {
 +(BOOL)line_seg_valid:(line_seg)l;
 +(BOOL)point_fuzzy_on_line_seg:(line_seg)seg pt:(CGPoint)pt;
 +(BOOL)pt_fuzzy_eq:(CGPoint)a b:(CGPoint)b;
-+(float)shortest_rot_dir_from_cur:(float)cur to_tar:(float)tar;
+
++(float)shortest_dist_from_cur:(float)a1 to:(float)a2;
 
 +(float)deg_to_rad:(float)degrees;
 +(float)rad_to_deg:(float)rad;
-
-
-+(float)test:(float)a1 to:(float)a2;
 
 @end

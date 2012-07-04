@@ -161,7 +161,7 @@ static NSString *my_map_file_type;
             
             //add player up vector and player current island's tangent vector, normalize then apply as jump
             Vec3D *up = player.up_vec;
-            Vec3D *tangent = [Island get_tangent_vec_given_slope:[player.current_island get_slope:player.position.x]];
+            Vec3D *tangent = [player.current_island get_tangent_vec];
             Vec3D *combined = [up add:tangent];
             [combined normalize];
             

@@ -4,7 +4,7 @@
 
 
 @implementation Player
-@synthesize vx,vy,touch_count,airjump_count;
+@synthesize vx,vy,touch_count,airjump_count,rotate_to;
 @synthesize player_img;
 @synthesize current_island;
 @synthesize up_vec;
@@ -80,12 +80,16 @@
      else NO
  **/
 +(BOOL)player_move:(Player*)player with_islands:(NSMutableArray*)islands {
+    //NSLog(@"rotation:%f",player.rotation);
     if (player.current_island == NULL) {
         player.position = [Player player_free_fall:player islands:islands];
     } else {
         player.position = [Player player_move_along_island:player islands:islands];
     }
     
+    //NSLog(@"{x:%f,y:%f,rotation:%f}",player.position.x,player.position.y,player.rotation);
+    //NSLog(@"VX:%f VY:%f",player.vx,player.vy);
+    //NSLog(@"UPX:%f UPY:%f",player.up_vec.x,player.up_vec.y);
     return player.current_island != NULL;
 }
 
@@ -111,36 +115,28 @@
     CGPoint position_final = [i get_position_given_t:t_final];
     
     Vec3D *tmp = player.up_vec;
-    Vec3D *tangent_vec = [Island get_tangent_vec_given_slope:[i get_slope:player.position.x]];
+    Vec3D *tangent_vec = [i get_tangent_vec];
     player.up_vec = [[Vec3D Z_VEC] crossWith:tangent_vec];
     [player.up_vec normalize];
+    [tmp release];
     
-    [tmp dealloc];
-    [tangent_vec dealloc];
+    float tar_rad = -[tangent_vec get_angle_in_rad];
+    float tar_deg = [Common rad_to_deg:tar_rad];
+    float dir = [Common shortest_dist_from_cur:player.rotation to:tar_deg];
+    player.rotation += dir*0.3;
     
-    
-    float tar_ang = -[i get_angle:player.position.x];
-    float ang_dist = [Common test:player.rotation to:tar_ang];
-    float d_ang = 0;
-    if (ang_dist != 0) {
-        d_ang = ang_dist / ABS(ang_dist);
-    }
-    //FIX ME! logarithmic
-    player.rotation += ang_dist;
     
     if (position_final.x == [Island NO_VALUE] || position_final.y == [Island NO_VALUE]) {
         if (i.next != NULL) {
             player.current_island = i.next;
             position_final = ccp(i.next.startX,i.next.startY);
         } else {
-            float slope = [i get_slope:player.position.x];
-            if (slope == INFINITY) {
-                slope = 0;
-            }
-            position_final = ccp(i.endX + slope*mov_speed,i.endY);
+            Vec3D *tangent = [i get_tangent_vec];
+            position_final = ccp(i.endX + tangent.x*mov_speed, i.endY + tangent.y*mov_speed);
             player.current_island = NULL;
         }
     }
+    [tangent_vec release];
     return position_final;
 }
 
@@ -158,12 +154,18 @@
     A CGPoint of the player's calculated position after this update 'tick'
  **/
 +(CGPoint)player_free_fall:(Player*)player islands:(NSMutableArray*)islands {
-    player.rotation = player.rotation*0.9;
+    float cur_deg = ((int)player.rotation)%360;
+    float tar_deg = 0;
+    float dir = [Common shortest_dist_from_cur:cur_deg to:tar_deg];
+    player.rotation += dir*0.3;
     
-    float cur_ang = [player.up_vec get_angle_in_rad];
-    float tar_ang = -M_PI_2;
-    float rot_by = [Common shortest_rot_dir_from_cur:cur_ang to_tar:tar_ang]*0.05;
+    
+    float cur_ang = [Common rad_to_deg:[player.up_vec get_angle_in_rad]];
+    float tar_ang = 90;
+    float rot_by = [Common shortest_dist_from_cur:cur_ang to:tar_ang]*0.1;
+    rot_by = [Common deg_to_rad:rot_by];
     Vec3D *tmp = player.up_vec;
+    
     Vec3D *rot_vec = [tmp rotate_vec_by_rad:rot_by];
     player.up_vec = rot_vec;
     [tmp dealloc];

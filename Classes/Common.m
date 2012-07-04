@@ -87,7 +87,6 @@
     Vec3D *ab_c_ac = [b_m_a crossWith:c_m_a];
     
     float val = [ab_c_ac length] / [b_m_a length];
-    //NSLog(@"dist:%f",val);
     if (val <= 0.1) {
         return YES;
     } else {
@@ -115,19 +114,9 @@
     return rad * 180.0 / M_PI;
 }
 
-+(float)shortest_rot_dir_from_cur:(float)cur to_tar:(float)tar {
-    float dir = cur - tar;
-    if (dir > 0 && ABS(dir) <= M_PI) { return 1; }
-    else if (dir > 0 && ABS(dir) > M_PI) { return -1; }
-    else if (dir < 0 && ABS(dir) <= M_PI) { return -1; }
-    else if (dir < 0 && ABS(dir) > M_PI) { return 1; }
-    else { return 0; }
-}
-
-+(float)test:(float)a1 to:(float)a2 {
++(float)shortest_dist_from_cur:(float)a1 to:(float)a2 {
     a1 = [Common deg_to_rad:a1];
     a2 = [Common deg_to_rad:a2];
-    //Math.atan2((Math.cos(angle0)*Math.sin(angle1)-Math.sin(angle0)*Math.cos(angle1)),(Math.sin(angle0)*Math.sin(angle1)+Math.cos(angle0)*Math.cos(angle1)))
     float res = atan2f(cosf(a1)*sinf(a2)-sinf(a1)*cosf(a2),
                        sinf(a1)*sinf(a2)+cosf(a1)*cosf(a2));
     
