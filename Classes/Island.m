@@ -9,8 +9,11 @@ static float NO_VAL = -99999.0;
     return NO_VAL;
 }
 
-@synthesize startX, startY, endX, endY;
+@synthesize startX, startY, endX, endY, fill_hei;
 @synthesize next;
+
+-(void)link_finish {
+}
 
 -(float)get_height:(float)pos {
 	return [Island NO_VALUE];
@@ -46,6 +49,9 @@ static float NO_VAL = -99999.0;
                 ct++;
             }
         }
+    }
+    for (Island *i in islands) {
+        [i link_finish];
     }
     return ct;
 }

@@ -13,15 +13,10 @@ static NSString *my_map_file_type;
 
 /**
  TODO:
-    -Faster going down, liftoff criteria
-    -Fix falloff island jitter (better vx prediction)
     -Running upsidedown + reverse rotation
- 
     -Line island rendering, fill triangles
     -Ghost (stack loading, curl)
-    
     -Optimize background rendering
-    -Refactor Vec3D, Common code
  **/
 
 
@@ -33,7 +28,7 @@ static NSString *my_map_file_type;
 	[[CCDirector sharedDirector] setDisplayFPS:NO];
 	CCScene *scene = [CCScene node];
 	BGLayer *bglayer = [BGLayer node];
-	//[scene addChild:bglayer];
+	[scene addChild:bglayer];
 	GameEngineLayer *layer = [GameEngineLayer node];
 
 	

@@ -6,17 +6,16 @@
 
 
 @interface LineIsland : Island {
-	float min_range, max_range,slope;
-	gl_render_obj main_fill;
-	gl_render_obj top_fill;
-	float rot;
+	float min_range, max_range,t_min,t_max,slope;
+	gl_render_obj main_fill,top_fill,corner_fill,corner_top_fill;
     
-    float t_min,t_max;
+    
 }
 
-@property(readwrite,assign)  float min_range, max_range, slope, t_min, t_max;
-@property(readwrite,assign) gl_render_obj main_fill;
+@property(readwrite,assign)  float min_range, max_range, t_min, t_max,slope;
+@property(readwrite,assign) gl_render_obj main_fill,top_fill,corner_fill;
 +(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height;
+
 -(void)init_tex;
 -(void)init_top;
 -(void)set_pt1:(CGPoint)start pt2:(CGPoint)end;

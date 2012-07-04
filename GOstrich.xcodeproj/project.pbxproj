@@ -74,13 +74,12 @@
 		7E455F25159AFC8A00006895 /* Island3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E455F18159AFC8A00006895 /* Island3.png */; };
 		7E455F26159AFC8A00006895 /* Island4.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E455F19159AFC8A00006895 /* Island4.png */; };
 		7E455F27159AFC8A00006895 /* Island5.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E455F1A159AFC8A00006895 /* Island5.png */; };
-		7E455F2D159B018F00006895 /* island2.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E455F2C159B018F00006895 /* island2.map */; };
-		7E455F30159B01E000006895 /* island3.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E455F2F159B01E000006895 /* island3.map */; };
+		7E455F2D159B018F00006895 /* curvetest.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E455F2C159B018F00006895 /* curvetest.map */; };
 		7E733EF315A3BD1F00067EC5 /* goldenbone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E733EF215A3BD1F00067EC5 /* goldenbone.png */; };
 		7E89F24D159ADA3A00A32F2B /* GroundDetail.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E89F24B159ADA3A00A32F2B /* GroundDetail.h */; };
 		7E89F24E159ADA3A00A32F2B /* GroundDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E89F24C159ADA3A00A32F2B /* GroundDetail.m */; };
 		7E89F2CF159AEC4A00A32F2B /* dog1runss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E89F2CE159AEC4A00A32F2B /* dog1runss.png */; };
-		7E89F2DE159AEDEE00A32F2B /* island1.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E89F2DC159AEDEE00A32F2B /* island1.map */; };
+		7E89F2DE159AEDEE00A32F2B /* looptest.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E89F2DC159AEDEE00A32F2B /* looptest.map */; };
 		7E89F2DF159AEDEE00A32F2B /* themes_info.theme in Resources */ = {isa = PBXBuildFile; fileRef = 7E89F2DD159AEDEE00A32F2B /* themes_info.theme */; };
 		7E8DF40315945E8C00B00340 /* LineIsland.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E8DF40215945E8C00B00340 /* LineIsland.m */; };
 		7E8F90021568556900C2E30F /* BackgroundObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8F90001568556900C2E30F /* BackgroundObject.h */; };
@@ -93,6 +92,7 @@
 		7EDF0446159C53A000E9ABDA /* theme1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0441159C53A000E9ABDA /* theme1.png */; };
 		7EDF0447159C53A000E9ABDA /* theme2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0442159C53A000E9ABDA /* theme2.png */; };
 		7EDF0448159C53A000E9ABDA /* theme3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0443159C53A000E9ABDA /* theme3.png */; };
+		7EDF177F15A41A55006AA7E4 /* bigjump.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF177E15A41A55006AA7E4 /* bigjump.map */; };
 		8B4028D01592CDCF00A2E791 /* MapLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028CF1592CDCF00A2E791 /* MapLoader.m */; };
 		8B4028D31592D43900A2E791 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028D21592D43900A2E791 /* Map.m */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
@@ -373,8 +373,7 @@
 		7E455F18159AFC8A00006895 /* Island3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Island3.png; sourceTree = "<group>"; };
 		7E455F19159AFC8A00006895 /* Island4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Island4.png; sourceTree = "<group>"; };
 		7E455F1A159AFC8A00006895 /* Island5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Island5.png; sourceTree = "<group>"; };
-		7E455F2C159B018F00006895 /* island2.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = island2.map; sourceTree = "<group>"; };
-		7E455F2F159B01E000006895 /* island3.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = island3.map; sourceTree = "<group>"; };
+		7E455F2C159B018F00006895 /* curvetest.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = curvetest.map; sourceTree = "<group>"; };
 		7E733EF215A3BD1F00067EC5 /* goldenbone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goldenbone.png; sourceTree = "<group>"; };
 		7E89F24B159ADA3A00A32F2B /* GroundDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroundDetail.h; sourceTree = "<group>"; };
 		7E89F24C159ADA3A00A32F2B /* GroundDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroundDetail.m; sourceTree = "<group>"; };
@@ -395,7 +394,7 @@
 		7E89F273159ADF2C00A32F2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E89F274159ADF2C00A32F2B /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		7E89F2CE159AEC4A00A32F2B /* dog1runss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dog1runss.png; sourceTree = "<group>"; };
-		7E89F2DC159AEDEE00A32F2B /* island1.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = island1.map; sourceTree = "<group>"; };
+		7E89F2DC159AEDEE00A32F2B /* looptest.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = looptest.map; sourceTree = "<group>"; };
 		7E89F2DD159AEDEE00A32F2B /* themes_info.theme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = themes_info.theme; sourceTree = "<group>"; };
 		7E8DF40115945E8C00B00340 /* LineIsland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineIsland.h; sourceTree = "<group>"; };
 		7E8DF40215945E8C00B00340 /* LineIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineIsland.m; sourceTree = "<group>"; };
@@ -412,6 +411,7 @@
 		7EDF0441159C53A000E9ABDA /* theme1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme1.png; sourceTree = "<group>"; };
 		7EDF0442159C53A000E9ABDA /* theme2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme2.png; sourceTree = "<group>"; };
 		7EDF0443159C53A000E9ABDA /* theme3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme3.png; sourceTree = "<group>"; };
+		7EDF177E15A41A55006AA7E4 /* bigjump.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bigjump.map; sourceTree = "<group>"; };
 		8B4028CE1592CDCF00A2E791 /* MapLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLoader.h; sourceTree = "<group>"; };
 		8B4028CF1592CDCF00A2E791 /* MapLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLoader.m; sourceTree = "<group>"; };
 		8B4028D11592D43900A2E791 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
@@ -933,10 +933,10 @@
 		7E89F2DB159AEDEE00A32F2B /* map */ = {
 			isa = PBXGroup;
 			children = (
-				7E89F2DC159AEDEE00A32F2B /* island1.map */,
+				7E89F2DC159AEDEE00A32F2B /* looptest.map */,
 				7E89F2DD159AEDEE00A32F2B /* themes_info.theme */,
-				7E455F2C159B018F00006895 /* island2.map */,
-				7E455F2F159B01E000006895 /* island3.map */,
+				7E455F2C159B018F00006895 /* curvetest.map */,
+				7EDF177E15A41A55006AA7E4 /* bigjump.map */,
 			);
 			path = map;
 			sourceTree = "<group>";
@@ -1444,7 +1444,7 @@
 			files = (
 				494A60D7152EC5CF00DF418A /* misc_notes in Resources */,
 				7E89F2CF159AEC4A00A32F2B /* dog1runss.png in Resources */,
-				7E89F2DE159AEDEE00A32F2B /* island1.map in Resources */,
+				7E89F2DE159AEDEE00A32F2B /* looptest.map in Resources */,
 				7E89F2DF159AEDEE00A32F2B /* themes_info.theme in Resources */,
 				7E455F1B159AFC8A00006895 /* 1_1Background_Arrow-Up.png in Resources */,
 				7E455F1C159AFC8A00006895 /* 1_1Background_Cloud.png in Resources */,
@@ -1459,14 +1459,14 @@
 				7E455F25159AFC8A00006895 /* Island3.png in Resources */,
 				7E455F26159AFC8A00006895 /* Island4.png in Resources */,
 				7E455F27159AFC8A00006895 /* Island5.png in Resources */,
-				7E455F2D159B018F00006895 /* island2.map in Resources */,
-				7E455F30159B01E000006895 /* island3.map in Resources */,
+				7E455F2D159B018F00006895 /* curvetest.map in Resources */,
 				7EDF0444159C53A000E9ABDA /* 1_1Icon 250px.png in Resources */,
 				7EDF0445159C53A000E9ABDA /* theme_selection_bg.jpg in Resources */,
 				7EDF0446159C53A000E9ABDA /* theme1.png in Resources */,
 				7EDF0447159C53A000E9ABDA /* theme2.png in Resources */,
 				7EDF0448159C53A000E9ABDA /* theme3.png in Resources */,
 				7E733EF315A3BD1F00067EC5 /* goldenbone.png in Resources */,
+				7EDF177F15A41A55006AA7E4 /* bigjump.map in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

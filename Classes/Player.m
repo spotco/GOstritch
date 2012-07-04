@@ -105,13 +105,15 @@
     A CGPoint of the player's calculated position after this update 'tick'
  **/
 +(CGPoint)player_move_along_island:(Player*)player islands:(NSMutableArray*)islands {
+    float ABS_MAX_SPEED = 25;
+    float LIMIT_SPEED = 5;
+    float SLOPE_ACCEL = 0.3;
+    float FRICTION = 0.99;
+    float TO_GROUND_ROTATION_SPEED = 0.3;
+    
     Island *i = player.current_island;
     Vec3D *tangent_vec = [i get_tangent_vec];
-    
-    float ABS_MAX_SPEED = 20;
-    float LIMIT_SPEED = 5;
-    float SLOPE_ACCEL = 0.2;
-    
+        
     if (tangent_vec.y < 0) {
         float ang = [tangent_vec get_angle_in_rad];
         if (ang < -M_PI_2) {
@@ -122,17 +124,15 @@
         float pct = ABS(ang/M_PI_2);
         LIMIT_SPEED += (ABS_MAX_SPEED - LIMIT_SPEED)*(pct);
     }
-    //NSLog(@"LIM:%f",LIMIT_SPEED);
     
     float mov_speed = sqrtf(powf(player.vx, 2) + powf(player.vy, 2)); //TODO -- fall angle speed calc
     if (mov_speed > ABS_MAX_SPEED) {
         mov_speed = ABS_MAX_SPEED;
     }
     if (mov_speed > LIMIT_SPEED) {
-        player.vx *= 0.98;
-        player.vy *= 0.98;
+        player.vx *= FRICTION;
+        player.vy *= FRICTION;
     }
-    //NSLog(@"speed:%f",mov_speed);
     
     
     float t = [i get_t_given_position:player.position];
@@ -147,7 +147,7 @@
     float tar_rad = -[tangent_vec get_angle_in_rad];
     float tar_deg = [Common rad_to_deg:tar_rad];
     float dir = [Common shortest_dist_from_cur:player.rotation to:tar_deg];
-    player.rotation += dir*0.3;
+    player.rotation += dir*TO_GROUND_ROTATION_SPEED;
     
     
     if (position_final.x == [Island NO_VALUE] || position_final.y == [Island NO_VALUE]) {
@@ -164,7 +164,8 @@
         } else {
             position_final = ccp(i.endX + tangent_vec.x*mov_speed, i.endY + tangent_vec.y*mov_speed);
             player.current_island = NULL;
-            player.vy = 0;
+            player.vx = tangent_vec.x * mov_speed;
+            player.vy = tangent_vec.y * mov_speed;
         }
     }
     
@@ -186,10 +187,14 @@
     A CGPoint of the player's calculated position after this update 'tick'
  **/
 +(CGPoint)player_free_fall:(Player*)player islands:(NSMutableArray*)islands {
+    float CENTERING_ROTATION_SPD = 0.3;
+    float MAX_LOSS = 0.3;
+    float GRAVITY = -0.5;
+    
     float cur_deg = ((int)player.rotation)%360;
     float tar_deg = 0;
     float dir = [Common shortest_dist_from_cur:cur_deg to:tar_deg];
-    player.rotation += dir*0.3;
+    player.rotation += dir*CENTERING_ROTATION_SPD;
     
     
     float cur_ang = [Common rad_to_deg:[player.up_vec get_angle_in_rad]];
@@ -224,7 +229,6 @@
         player.current_island = contact_island;
         player.position = contact_intersection;
         
-        float MAX_LOSS = 0.3;
         
         Vec3D *a = [Vec3D init_x:player_mov.b.x - player_mov.a.x y:player_mov.b.y - player_mov.a.y z:0];
         Vec3D *b = [Vec3D init_x:contact_segment.b.x - contact_segment.a.x y:contact_segment.b.y - contact_segment.a.y z:0];
@@ -232,7 +236,6 @@
         if (theta < M_PI) {
             player.vx *= MAX((M_PI - theta)/(M_PI),MAX_LOSS);
             player.vy *= MAX((M_PI - theta)/(M_PI),MAX_LOSS);
-            NSLog(@"Landing:%f",(M_PI - theta)/(M_PI));
         } else {
             player.vx *= MAX_LOSS;
             player.vy *= MAX_LOSS;
@@ -241,7 +244,7 @@
         [b release];
         
     } else {
-        float grav_const = -0.5;
+        float grav_const = GRAVITY;
         player.vx += grav_const * player.up_vec.x;
         player.vy += grav_const * player.up_vec.y;
     }
