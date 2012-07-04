@@ -13,13 +13,14 @@ static NSString *my_map_file_type;
 
 /**
  TODO:
+    -Faster going down, liftoff criteria
     -Fix falloff island jitter (better vx prediction)
     -Running upsidedown + reverse rotation
-
+ 
+    -Line island rendering, fill triangles
     -Ghost (stack loading, curl)
     
     -Optimize background rendering
-    -LineIsland height parameterization
     -Refactor Vec3D, Common code
  **/
 

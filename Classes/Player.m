@@ -80,7 +80,6 @@
      else NO
  **/
 +(BOOL)player_move:(Player*)player with_islands:(NSMutableArray*)islands {
-    //NSLog(@"rotation:%f",player.rotation);
     if (player.current_island == NULL) {
         player.position = [Player player_free_fall:player islands:islands];
     } else {
@@ -106,16 +105,41 @@
     A CGPoint of the player's calculated position after this update 'tick'
  **/
 +(CGPoint)player_move_along_island:(Player*)player islands:(NSMutableArray*)islands {
-    float mov_speed = player.vx;
-    player.vy = 0;
-    
     Island *i = player.current_island;
+    Vec3D *tangent_vec = [i get_tangent_vec];
+    
+    float ABS_MAX_SPEED = 20;
+    float LIMIT_SPEED = 5;
+    float SLOPE_ACCEL = 0.2;
+    
+    if (tangent_vec.y < 0) {
+        float ang = [tangent_vec get_angle_in_rad];
+        if (ang < -M_PI_2) {
+            ang = ang + M_PI;
+        }
+        player.vx += SLOPE_ACCEL;
+        player.vy += SLOPE_ACCEL;
+        float pct = ABS(ang/M_PI_2);
+        LIMIT_SPEED += (ABS_MAX_SPEED - LIMIT_SPEED)*(pct);
+    }
+    //NSLog(@"LIM:%f",LIMIT_SPEED);
+    
+    float mov_speed = sqrtf(powf(player.vx, 2) + powf(player.vy, 2)); //TODO -- fall angle speed calc
+    if (mov_speed > ABS_MAX_SPEED) {
+        mov_speed = ABS_MAX_SPEED;
+    }
+    if (mov_speed > LIMIT_SPEED) {
+        player.vx *= 0.98;
+        player.vy *= 0.98;
+    }
+    //NSLog(@"speed:%f",mov_speed);
+    
+    
     float t = [i get_t_given_position:player.position];
     float t_final = t+mov_speed;
     CGPoint position_final = [i get_position_given_t:t_final];
     
     Vec3D *tmp = player.up_vec;
-    Vec3D *tangent_vec = [i get_tangent_vec];
     player.up_vec = [[Vec3D Z_VEC] crossWith:tangent_vec];
     [player.up_vec normalize];
     [tmp release];
@@ -128,14 +152,22 @@
     
     if (position_final.x == [Island NO_VALUE] || position_final.y == [Island NO_VALUE]) {
         if (i.next != NULL) {
+            float t_sum = mov_speed;
+            t_sum -= [i get_t_given_position:ccp(i.endX,i.endY)] - t;
             player.current_island = i.next;
-            position_final = ccp(i.next.startX,i.next.startY);
+            if ([player.current_island get_position_given_t:t_sum].x != [Island NO_VALUE] && [player.current_island get_position_given_t:t_sum].y != [Island NO_VALUE]) {
+                position_final = [player.current_island get_position_given_t:t_sum];
+            } else {
+                position_final = ccp(player.current_island.endX,player.current_island.endY);
+                NSLog(@"GOTTA GO FAST");
+            }
         } else {
-            Vec3D *tangent = [i get_tangent_vec];
-            position_final = ccp(i.endX + tangent.x*mov_speed, i.endY + tangent.y*mov_speed);
+            position_final = ccp(i.endX + tangent_vec.x*mov_speed, i.endY + tangent_vec.y*mov_speed);
             player.current_island = NULL;
+            player.vy = 0;
         }
     }
+    
     [tangent_vec release];
     return position_final;
 }
@@ -176,6 +208,7 @@
     
     Island* contact_island = NULL;
     CGPoint contact_intersection;
+    line_seg contact_segment;
     
     for (Island *i in islands) {     
         line_seg island_seg = [i get_line_seg_a:player_pre.x b:player_post.x];
@@ -183,12 +216,30 @@
         if (intersection.x != [Island NO_VALUE] && intersection.y != [Island NO_VALUE]) {
             contact_island = i;
             contact_intersection = intersection;
+            contact_segment = island_seg;
         }
     }
     
     if (contact_island != NULL) {
         player.current_island = contact_island;
         player.position = contact_intersection;
+        
+        float MAX_LOSS = 0.3;
+        
+        Vec3D *a = [Vec3D init_x:player_mov.b.x - player_mov.a.x y:player_mov.b.y - player_mov.a.y z:0];
+        Vec3D *b = [Vec3D init_x:contact_segment.b.x - contact_segment.a.x y:contact_segment.b.y - contact_segment.a.y z:0];
+        float theta = acosf( [a dotWith:b] / ([a length]*[b length]) );
+        if (theta < M_PI) {
+            player.vx *= MAX((M_PI - theta)/(M_PI),MAX_LOSS);
+            player.vy *= MAX((M_PI - theta)/(M_PI),MAX_LOSS);
+            NSLog(@"Landing:%f",(M_PI - theta)/(M_PI));
+        } else {
+            player.vx *= MAX_LOSS;
+            player.vy *= MAX_LOSS;
+        }
+        [a release];
+        [b release];
+        
     } else {
         float grav_const = -0.5;
         player.vx += grav_const * player.up_vec.x;
