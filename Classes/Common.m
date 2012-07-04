@@ -124,6 +124,18 @@
     else { return 0; }
 }
 
++(float)test:(float)a1 to:(float)a2 {
+    a1 = [Common deg_to_rad:a1];
+    a2 = [Common deg_to_rad:a2];
+    //Math.atan2((Math.cos(angle0)*Math.sin(angle1)-Math.sin(angle0)*Math.cos(angle1)),(Math.sin(angle0)*Math.sin(angle1)+Math.cos(angle0)*Math.cos(angle1)))
+    float res = atan2f(cosf(a1)*sinf(a2)-sinf(a1)*cosf(a2),
+                       sinf(a1)*sinf(a2)+cosf(a1)*cosf(a2));
+    
+    res = [Common rad_to_deg:res];
+    return res;
+    
+}
+
 
 
 

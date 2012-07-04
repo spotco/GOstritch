@@ -111,7 +111,8 @@
 	
 	// Run the intro Scene
 	//[[CCDirector sharedDirector] runWithScene: [GameEngineLayer scene]];
-    [[CCDirector sharedDirector] runWithScene:[ThemeSelectionPage scene]];
+    //[[CCDirector sharedDirector] runWithScene:[ThemeSelectionPage scene]];
+    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"island1" of_type:@"map"]];
 }
 
 

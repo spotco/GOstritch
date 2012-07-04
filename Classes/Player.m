@@ -120,12 +120,13 @@
     
     
     float tar_ang = -[i get_angle:player.position.x];
-    float d_ang = ABS(tar_ang - player.rotation);
-    if (tar_ang > player.rotation) {
-        player.rotation += d_ang*0.4;
-    } else if (tar_ang < player.rotation) {
-        player.rotation -= d_ang*0.4;
+    float ang_dist = [Common test:player.rotation to:tar_ang];
+    float d_ang = 0;
+    if (ang_dist != 0) {
+        d_ang = ang_dist / ABS(ang_dist);
     }
+    //FIX ME! logarithmic
+    player.rotation += ang_dist;
     
     if (position_final.x == [Island NO_VALUE] || position_final.y == [Island NO_VALUE]) {
         if (i.next != NULL) {

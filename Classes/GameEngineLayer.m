@@ -14,10 +14,10 @@ static NSString *my_map_file_type;
 /**
  TODO:
     -Fix falloff island jitter (better vx prediction)
-    -Additonal curve island based on circle
-    -Curve island rendering
-    -Ghost (stack loading, curl)
     -Running upsidedown + reverse rotation
+
+    -Ghost (stack loading, curl)
+    
     -Optimize background rendering
     -LineIsland height parameterization
     -Refactor Vec3D, Common code
@@ -32,7 +32,7 @@ static NSString *my_map_file_type;
 	[[CCDirector sharedDirector] setDisplayFPS:NO];
 	CCScene *scene = [CCScene node];
 	BGLayer *bglayer = [BGLayer node];
-	[scene addChild:bglayer];
+	//[scene addChild:bglayer];
 	GameEngineLayer *layer = [GameEngineLayer node];
 
 	

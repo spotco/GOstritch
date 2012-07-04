@@ -16,7 +16,7 @@
 
 @property(readwrite,assign)  float min_range, max_range, slope, t_min, t_max;
 @property(readwrite,assign) gl_render_obj main_fill;
-+(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end;
++(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height;
 -(void)init_tex;
 -(void)init_top;
 -(void)set_pt1:(CGPoint)start pt2:(CGPoint)end;

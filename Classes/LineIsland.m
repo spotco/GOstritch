@@ -10,14 +10,14 @@ static float INF = INFINITY;
 @synthesize min_range,max_range,slope,t_min,t_max;
 @synthesize main_fill;
 
-+(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end {
++(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height {
 	LineIsland *new_island = [LineIsland node];
 	[new_island set_pt1:start pt2:end];
 	[new_island calc_init];
 	new_island.anchorPoint = ccp(0,0);
 	new_island.position = ccp(new_island.startX,new_island.startY);
 	
-	[new_island init_tex];
+	[new_island init_tex:height];
 	[new_island init_top];
     
     //NSLog(@"Line START(%f,%f) END(%f,%f)",new_island.startX,new_island.startY,new_island.endX,new_island.endY);
@@ -37,7 +37,7 @@ static float INF = INFINITY;
  |    |   -->  |    |
  (2)--(1)      (4)--(3)
  then glDrawArrays(offset++)*/
--(void)init_tex {	
+-(void)init_tex:(float)height {	
     main_fill.texture = [Resource get_tex:TEX_GROUND_TEX_1];
     
 	main_fill.tri_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
@@ -52,7 +52,7 @@ static float INF = INFINITY;
     Vec3D *v3t1 = [v3t2 crossWith:vZ];
     [v3t1 normalize];
     
-    float taille = 50;
+    float taille = height;
     
     tri_pts[3] = ccp(0,0);
     tri_pts[2] = ccp(endX-startX,endY-startY);
@@ -140,8 +140,10 @@ static float INF = INFINITY;
 	min_range = startX;
 	max_range = endX;
     
-    if (endX == startX) {
+    if (endX == startX && startY < endY) {
         slope = INFINITY;
+    } else if (endX == startX && startY > endY) {
+        slope = -INFINITY;
     } else {
         slope = (endY - startY)/(endX - startX);
     }
@@ -160,7 +162,12 @@ static float INF = INFINITY;
 }
 
 -(float)get_angle:(float)pos {
-    return atan(slope)*(180/M_PI);
+    if (startX < endX) {
+        return [Common rad_to_deg:atan(slope)];
+    } else {
+        return 180 + [Common rad_to_deg:atan(slope)];
+    }
+   
 }
 
 -(float)get_slope:(float)pos {

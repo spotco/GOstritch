@@ -76,6 +76,7 @@
 		7E455F27159AFC8A00006895 /* Island5.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E455F1A159AFC8A00006895 /* Island5.png */; };
 		7E455F2D159B018F00006895 /* island2.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E455F2C159B018F00006895 /* island2.map */; };
 		7E455F30159B01E000006895 /* island3.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E455F2F159B01E000006895 /* island3.map */; };
+		7E733EF315A3BD1F00067EC5 /* goldenbone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E733EF215A3BD1F00067EC5 /* goldenbone.png */; };
 		7E89F24D159ADA3A00A32F2B /* GroundDetail.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E89F24B159ADA3A00A32F2B /* GroundDetail.h */; };
 		7E89F24E159ADA3A00A32F2B /* GroundDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E89F24C159ADA3A00A32F2B /* GroundDetail.m */; };
 		7E89F2CF159AEC4A00A32F2B /* dog1runss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E89F2CE159AEC4A00A32F2B /* dog1runss.png */; };
@@ -92,7 +93,6 @@
 		7EDF0446159C53A000E9ABDA /* theme1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0441159C53A000E9ABDA /* theme1.png */; };
 		7EDF0447159C53A000E9ABDA /* theme2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0442159C53A000E9ABDA /* theme2.png */; };
 		7EDF0448159C53A000E9ABDA /* theme3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0443159C53A000E9ABDA /* theme3.png */; };
-		7EE784BB1593FA42001704B1 /* CurveIsland.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE784BA1593FA42001704B1 /* CurveIsland.m */; };
 		8B4028D01592CDCF00A2E791 /* MapLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028CF1592CDCF00A2E791 /* MapLoader.m */; };
 		8B4028D31592D43900A2E791 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028D21592D43900A2E791 /* Map.m */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
@@ -375,6 +375,7 @@
 		7E455F1A159AFC8A00006895 /* Island5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Island5.png; sourceTree = "<group>"; };
 		7E455F2C159B018F00006895 /* island2.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = island2.map; sourceTree = "<group>"; };
 		7E455F2F159B01E000006895 /* island3.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = island3.map; sourceTree = "<group>"; };
+		7E733EF215A3BD1F00067EC5 /* goldenbone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goldenbone.png; sourceTree = "<group>"; };
 		7E89F24B159ADA3A00A32F2B /* GroundDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroundDetail.h; sourceTree = "<group>"; };
 		7E89F24C159ADA3A00A32F2B /* GroundDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroundDetail.m; sourceTree = "<group>"; };
 		7E89F254159ADF2C00A32F2B /* bg_layer_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_layer_1.png; sourceTree = "<group>"; };
@@ -393,7 +394,6 @@
 		7E89F272159ADF2C00A32F2B /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		7E89F273159ADF2C00A32F2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E89F274159ADF2C00A32F2B /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
-		7E89F284159ADF2C00A32F2B /* goldenbone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goldenbone.png; sourceTree = "<group>"; };
 		7E89F2CE159AEC4A00A32F2B /* dog1runss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dog1runss.png; sourceTree = "<group>"; };
 		7E89F2DC159AEDEE00A32F2B /* island1.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = island1.map; sourceTree = "<group>"; };
 		7E89F2DD159AEDEE00A32F2B /* themes_info.theme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = themes_info.theme; sourceTree = "<group>"; };
@@ -412,8 +412,6 @@
 		7EDF0441159C53A000E9ABDA /* theme1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme1.png; sourceTree = "<group>"; };
 		7EDF0442159C53A000E9ABDA /* theme2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme2.png; sourceTree = "<group>"; };
 		7EDF0443159C53A000E9ABDA /* theme3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme3.png; sourceTree = "<group>"; };
-		7EE784B91593FA42001704B1 /* CurveIsland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveIsland.h; sourceTree = "<group>"; };
-		7EE784BA1593FA42001704B1 /* CurveIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurveIsland.m; sourceTree = "<group>"; };
 		8B4028CE1592CDCF00A2E791 /* MapLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLoader.h; sourceTree = "<group>"; };
 		8B4028CF1592CDCF00A2E791 /* MapLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLoader.m; sourceTree = "<group>"; };
 		8B4028D11592D43900A2E791 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
@@ -911,7 +909,7 @@
 		7E89F283159ADF2C00A32F2B /* object */ = {
 			isa = PBXGroup;
 			children = (
-				7E89F284159ADF2C00A32F2B /* goldenbone.png */,
+				7E733EF215A3BD1F00067EC5 /* goldenbone.png */,
 			);
 			path = object;
 			sourceTree = "<group>";
@@ -995,8 +993,6 @@
 			children = (
 				4926F83B152B867C00A1EFDE /* Island.h */,
 				4926F83C152B867C00A1EFDE /* Island.m */,
-				7EE784B91593FA42001704B1 /* CurveIsland.h */,
-				7EE784BA1593FA42001704B1 /* CurveIsland.m */,
 				7E8DF40115945E8C00B00340 /* LineIsland.h */,
 				7E8DF40215945E8C00B00340 /* LineIsland.m */,
 			);
@@ -1470,6 +1466,7 @@
 				7EDF0446159C53A000E9ABDA /* theme1.png in Resources */,
 				7EDF0447159C53A000E9ABDA /* theme2.png in Resources */,
 				7EDF0448159C53A000E9ABDA /* theme3.png in Resources */,
+				7E733EF315A3BD1F00067EC5 /* goldenbone.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1496,7 +1493,6 @@
 				7E93D67A1592BABF00A83E9C /* Coin.m in Sources */,
 				8B4028D01592CDCF00A2E791 /* MapLoader.m in Sources */,
 				8B4028D31592D43900A2E791 /* Map.m in Sources */,
-				7EE784BB1593FA42001704B1 /* CurveIsland.m in Sources */,
 				7E8DF40315945E8C00B00340 /* LineIsland.m in Sources */,
 				62064D821597DE6300C5DCE5 /* AFItemView.m in Sources */,
 				62064D831597DE6300C5DCE5 /* AFOpenFlowView.m in Sources */,

@@ -32,6 +32,6 @@ typedef struct line_seg {
 +(float)rad_to_deg:(float)rad;
 
 
-
++(float)test:(float)a1 to:(float)a2;
 
 @end
