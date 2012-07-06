@@ -8,10 +8,10 @@
 #define OFFSET -40
 static float INF = INFINITY;
 
-@synthesize min_range,max_range,t_min,t_max,slope,ndir;
+@synthesize min_range,max_range,t_min,t_max,slope;
 @synthesize main_fill,top_fill,corner_fill;
 
-+(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir {
++(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land {
 	LineIsland *new_island = [LineIsland node];
     new_island.fill_hei = height;
     new_island.ndir = ndir;
@@ -19,13 +19,20 @@ static float INF = INFINITY;
 	[new_island calc_init];
 	new_island.anchorPoint = ccp(0,0);
 	new_island.position = ccp(new_island.startX,new_island.startY);
+    new_island.can_land = can_land;
 	[new_island init_tex];
 	[new_island init_top];
-    
-    NSLog(@"NDIR:%f",ndir);
-    
+    [new_island calculate_normal];
 	return new_island;
 	
+}
+
+-(void)calculate_normal {
+    Vec3D *line_vec = [Vec3D init_x:endX-startX y:endY-startY z:0];
+    normal_vec = [[Vec3D Z_VEC] crossWith:line_vec];
+    [normal_vec normalize];
+    [line_vec dealloc];
+    [normal_vec scale:ndir];
 }
 
 -(void)set_pt1:(CGPoint)start pt2:(CGPoint)end {
@@ -82,10 +89,9 @@ static float INF = INFINITY;
     } else {
         float frac = t/t_max;
         Vec3D *dir_vec = [Vec3D init_x:endX-startX y:endY-startY z:0];
-        Vec3D *scaled_vec = [dir_vec scale:frac];
+        [dir_vec scale:frac];
+        CGPoint pos = ccp(startX+dir_vec.x,startY+dir_vec.y);
         [dir_vec dealloc];
-        CGPoint pos = ccp(startX+scaled_vec.x,startY+scaled_vec.y);
-        [scaled_vec dealloc];
         return pos;
     }
 }
@@ -124,9 +130,7 @@ static float INF = INFINITY;
 }
 
 -(void)scale_ndir:(Vec3D*)v {
-    v.x *= ndir;
-    v.y *= ndir;
-    v.z *= ndir;
+    [v scale:ndir];
 }
 
 -(void)init_tex {	

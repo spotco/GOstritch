@@ -9,8 +9,10 @@ static float NO_VAL = -99999.0;
     return NO_VAL;
 }
 
-@synthesize startX, startY, endX, endY, fill_hei;
+@synthesize startX, startY, endX, endY, fill_hei, ndir;
 @synthesize next;
+@synthesize normal_vec;
+@synthesize can_land;
 
 -(void)link_finish {
 }

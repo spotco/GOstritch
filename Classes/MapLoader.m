@@ -45,8 +45,10 @@
             } else if ([ndir_str isEqualToString:@"right"]) {
                 ndir = -1;
             }
+            BOOL can_land = ((NSString *)[currentIslandDict objectForKey:@"can_fall"]).boolValue;
+            NSLog(@"%@", can_land ? @"YES" : @"NO");
+            currentIsland = [LineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
             
-            currentIsland = [LineIsland init_pt1:start pt2:end height:height ndir:ndir];
             NSLog(@"add line island");
 		} else {
             NSLog(@"line read error");

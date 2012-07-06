@@ -20,6 +20,10 @@ static Vec3D* z_vec = NULL;
     return v;
 }
 
++(float) rad_angle_between_a:(Vec3D*)a and_b:(Vec3D*)b {
+    return acosf( [a dotWith:b] / ([a length]*[b length]) );
+}
+
 
 -(Vec3D*) add:(Vec3D*)v {
     return [Vec3D init_x:(x + v.x) y:(y+v.y) z:(z+v.z)];
@@ -29,8 +33,10 @@ static Vec3D* z_vec = NULL;
     return [Vec3D init_x:(x - v.x) y:(y-v.y) z:(z-v.z)];
 }
 
--(Vec3D*) scale:(float)sf {
-    return [Vec3D init_x:(x * sf) y:(y*sf) z:(z*sf)];
+-(void) scale:(float)sf {
+    x *= sf;
+    y *= sf;
+    z *= sf;
 }
 
 -(BOOL) eq:(Vec3D*)v {

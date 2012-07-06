@@ -122,7 +122,6 @@
     
     res = [Common rad_to_deg:res];
     return res;
-    
 }
 
 

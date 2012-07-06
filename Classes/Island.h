@@ -3,15 +3,19 @@
 #import "Common.h"
 
 @interface Island : CCSprite {
-	float startX, startY, endX, endY;
+	float startX, startY, endX, endY, ndir;
+    BOOL can_land;
     Island* next;
     
     float fill_hei;
+    Vec3D* normal_vec;
 }
 
 
-@property(readwrite,assign) float startX, startY, endX, endY, fill_hei;
+@property(readwrite,assign) float startX, startY, endX, endY, fill_hei, ndir;
 @property(readwrite,assign) Island* next;
+@property(readwrite,assign) Vec3D* normal_vec;
+@property(readwrite,assign) BOOL can_land;
 
 +(float) NO_VALUE;
 +(int)link_islands:(NSMutableArray*)islands;

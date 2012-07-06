@@ -1,5 +1,6 @@
 #import "GameEngineLayer.h"
 
+#define RENDER_FG_ISLAND_ORD 3
 #define RENDER_PLAYER_ORD 2
 #define RENDER_ISLAND_ORD 1
 #define RENDER_GAMEOBJ_ORD 0
@@ -13,9 +14,9 @@ static NSString *my_map_file_type;
 
 /**
  TODO:
-    -Running upsidedown + reverse rotation
-    -Line island rendering, fill triangles
-    -Ghost (stack loading, curl)
+    -Redo jump/touch code
+    -Particle effects
+    -Camera zoom code (faster == more zoomed? + higher above == more zoom)
     -Optimize background rendering
  **/
 
@@ -28,7 +29,7 @@ static NSString *my_map_file_type;
 	[[CCDirector sharedDirector] setDisplayFPS:NO];
 	CCScene *scene = [CCScene node];
 	BGLayer *bglayer = [BGLayer node];
-	//[scene addChild:bglayer];
+	[scene addChild:bglayer];
 	GameEngineLayer *layer = [GameEngineLayer node];
 
 	
@@ -49,8 +50,11 @@ static NSString *my_map_file_type;
 		[self schedule:@selector(update:)];
 		self.isTouchEnabled = YES;
         
-		[self.camera setCenterX:150 centerY:40 centerZ:0];
-        [self.camera setEyeX:150 eyeY:40 eyeZ:20];
+		//[self.camera setCenterX:150 centerY:40 centerZ:0];
+        //[self.camera setEyeX:150 eyeY:40 eyeZ:20];
+		[self.camera setCenterX:100 centerY:40 centerZ:0];
+        [self.camera setEyeX:100 eyeY:40 eyeZ:50];
+        
         
 		[self runAction:[CCFollow actionWithTarget:(player) worldBoundary:[self get_world_bounds] ]];
 	}
@@ -83,12 +87,16 @@ static NSString *my_map_file_type;
     
     
     for (Island* i in islands) {
-		[self addChild:i z:1];
+        if (i.can_land) {
+            [self addChild:i z:RENDER_ISLAND_ORD];
+        } else {
+            [self addChild:i z:RENDER_FG_ISLAND_ORD];
+        }
 	}
     
     game_objects = map.game_objects;
     for (GameObject* o in game_objects) {
-        [self addChild:o z:0];
+        [self addChild:o z:RENDER_GAMEOBJ_ORD];
     }
     
     return map.player_start_pt;
@@ -105,6 +113,16 @@ static NSString *my_map_file_type;
     [self update_static_x:pos_x y:pos_y];
     [self update_game_obj];
     
+    BOOL player_on_fg_island = (player.current_island != NULL) && (!player.current_island.can_land);
+    if (player_on_fg_island) {
+        if (player.zOrder != RENDER_FG_ISLAND_ORD+1) {
+            [self reorderChild:player z:RENDER_FG_ISLAND_ORD+1];
+        }
+    } else {
+        if (player.zOrder != RENDER_PLAYER_ORD) {
+            [self reorderChild:player z:RENDER_PLAYER_ORD];
+        }
+    }
 }
 
 -(void)update_game_obj {
@@ -151,23 +169,20 @@ static NSString *my_map_file_type;
     } else if (player.touch_count != 0) { 
         if (is_contact && player.current_island != NULL) {
             
-            float jump_power = 15;
-            
-            player.vy = MIN(player.touch_count,15);
-            
-            //add player up vector and player current island's tangent vector, normalize then apply as jump
+            float JUMP_POWER = 17.5;
+            float FORWARD_JUMP_SCALE = 0.4;
+
             Vec3D *up = player.up_vec;
-            //Vec3D *tangent = [player.current_island get_tangent_vec];
-            Vec3D *tangent = [Vec3D init_x:0 y:0 z:0];
+            Vec3D *tangent = [player.current_island get_tangent_vec];
+            [tangent scale:FORWARD_JUMP_SCALE];
             Vec3D *combined = [up add:tangent];
             [combined normalize];
             
             [tangent dealloc];
             
-            
             player.position = [player.up_vec transform_pt:player.position];
-            player.vx = combined.x*jump_power;
-            player.vy = combined.y*jump_power;
+            player.vx = combined.x*JUMP_POWER;
+            player.vy = combined.y*JUMP_POWER;
             
             [combined dealloc];
             
@@ -179,9 +194,9 @@ static NSString *my_map_file_type;
         player.touch_count = 0;
     }
     
-    if (!is_touch) {
+    /*if (!is_touch) {
         player.vx = MIN(player.vx*1.01,8);
-    }
+    }*/
 }
 
 -(void)check_sort_islands_given:(float)pos_x and:(float)pos_y {

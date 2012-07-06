@@ -87,6 +87,7 @@
 		7E93D6761592B97C00A83E9C /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E93D6751592B97C00A83E9C /* GameObject.m */; };
 		7E93D67A1592BABF00A83E9C /* Coin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E93D6791592BABF00A83E9C /* Coin.m */; };
 		7ECBC8671597FA5700B2BCFE /* Vec3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBC8661597FA5700B2BCFE /* Vec3D.m */; };
+		7ECE89DE15A69AAB002A2241 /* test2.map in Resources */ = {isa = PBXBuildFile; fileRef = 7ECE89DD15A69AAB002A2241 /* test2.map */; };
 		7EDF0444159C53A000E9ABDA /* 1_1Icon 250px.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF043F159C53A000E9ABDA /* 1_1Icon 250px.png */; };
 		7EDF0445159C53A000E9ABDA /* theme_selection_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0440159C53A000E9ABDA /* theme_selection_bg.jpg */; };
 		7EDF0446159C53A000E9ABDA /* theme1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0441159C53A000E9ABDA /* theme1.png */; };
@@ -396,7 +397,7 @@
 		7E89F274159ADF2C00A32F2B /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		7E89F2CE159AEC4A00A32F2B /* dog1runss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dog1runss.png; sourceTree = "<group>"; };
 		7E89F2DC159AEDEE00A32F2B /* looptest.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = looptest.map; sourceTree = "<group>"; };
-		7E89F2DD159AEDEE00A32F2B /* themes_info.theme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = themes_info.theme; sourceTree = "<group>"; };
+		7E89F2DD159AEDEE00A32F2B /* themes_info.theme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = themes_info.theme; path = map/themes_info.theme; sourceTree = "<group>"; };
 		7E8DF40115945E8C00B00340 /* LineIsland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineIsland.h; sourceTree = "<group>"; };
 		7E8DF40215945E8C00B00340 /* LineIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineIsland.m; sourceTree = "<group>"; };
 		7E8F90001568556900C2E30F /* BackgroundObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundObject.h; sourceTree = "<group>"; };
@@ -407,6 +408,7 @@
 		7E93D6791592BABF00A83E9C /* Coin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coin.m; sourceTree = "<group>"; };
 		7ECBC8651597FA5700B2BCFE /* Vec3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec3D.h; sourceTree = "<group>"; };
 		7ECBC8661597FA5700B2BCFE /* Vec3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vec3D.m; sourceTree = "<group>"; };
+		7ECE89DD15A69AAB002A2241 /* test2.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test2.map; sourceTree = "<group>"; };
 		7EDF043F159C53A000E9ABDA /* 1_1Icon 250px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1_1Icon 250px.png"; sourceTree = "<group>"; };
 		7EDF0440159C53A000E9ABDA /* theme_selection_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theme_selection_bg.jpg; sourceTree = "<group>"; };
 		7EDF0441159C53A000E9ABDA /* theme1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme1.png; sourceTree = "<group>"; };
@@ -808,6 +810,7 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7E89F2DD159AEDEE00A32F2B /* themes_info.theme */,
 				7E89F2DB159AEDEE00A32F2B /* map */,
 				7E89F2CC159AEC4A00A32F2B /* char */,
 				7E89F252159ADF2C00A32F2B /* bg */,
@@ -936,10 +939,10 @@
 			isa = PBXGroup;
 			children = (
 				7E89F2DC159AEDEE00A32F2B /* looptest.map */,
-				7E89F2DD159AEDEE00A32F2B /* themes_info.theme */,
 				7E455F2C159B018F00006895 /* curvetest.map */,
 				7EDF177E15A41A55006AA7E4 /* bigjump.map */,
 				7EDF178115A43C3A006AA7E4 /* test.map */,
+				7ECE89DD15A69AAB002A2241 /* test2.map */,
 			);
 			path = map;
 			sourceTree = "<group>";
@@ -1471,6 +1474,7 @@
 				7E733EF315A3BD1F00067EC5 /* goldenbone.png in Resources */,
 				7EDF177F15A41A55006AA7E4 /* bigjump.map in Resources */,
 				7EDF178215A43C3A006AA7E4 /* test.map in Resources */,
+				7ECE89DE15A69AAB002A2241 /* test2.map in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
