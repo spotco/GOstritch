@@ -8,20 +8,22 @@
 #define OFFSET -40
 static float INF = INFINITY;
 
-@synthesize min_range,max_range,t_min,t_max,slope;
+@synthesize min_range,max_range,t_min,t_max,slope,ndir;
 @synthesize main_fill,top_fill,corner_fill;
 
-+(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height {
++(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir {
 	LineIsland *new_island = [LineIsland node];
     new_island.fill_hei = height;
-    
+    new_island.ndir = ndir;
 	[new_island set_pt1:start pt2:end];
 	[new_island calc_init];
 	new_island.anchorPoint = ccp(0,0);
 	new_island.position = ccp(new_island.startX,new_island.startY);
 	[new_island init_tex];
 	[new_island init_top];
-
+    
+    NSLog(@"NDIR:%f",ndir);
+    
 	return new_island;
 	
 }
@@ -64,7 +66,7 @@ static float INF = INFINITY;
 }
 
 -(line_seg)get_line_seg_a:(float)pre_x b:(float)post_x {
-    return [super get_line_seg_a:pre_x b:post_x];
+    return [Common cons_line_seg_a:ccp(startX,startY) b:ccp(endX,endY)];
 }
 
 -(float)get_t_given_position:(CGPoint)position {
@@ -102,7 +104,7 @@ static float INF = INFINITY;
 	glTexCoordPointer(2, GL_FLOAT, 0, main_fill.tex_pts);
 	glDrawArrays(GL_TRIANGLES, 0, 3); //drawtype,offset,pts
 	glDrawArrays(GL_TRIANGLES, 1, 3);
-	
+    
     glBindTexture(GL_TEXTURE_2D, top_fill.texture.name);
     glVertexPointer(2,GL_FLOAT,0,top_fill.tri_pts);
     glTexCoordPointer(2,GL_FLOAT,0,top_fill.tex_pts);
@@ -110,6 +112,7 @@ static float INF = INFINITY;
     glDrawArrays(GL_TRIANGLES, 1, 3);
     
     if (next != NULL) {
+
         glBindTexture(GL_TEXTURE_2D, corner_fill.texture.name);
         glVertexPointer(2,GL_FLOAT,0,corner_fill.tri_pts);
         glTexCoordPointer(2,GL_FLOAT,0,corner_fill.tex_pts);
@@ -118,6 +121,12 @@ static float INF = INFINITY;
         glColor4f(0.29, 0.69, 0.03, 1.0);
         ccDrawSolidPoly(toppts, 3, YES);
     }
+}
+
+-(void)scale_ndir:(Vec3D*)v {
+    v.x *= ndir;
+    v.y *= ndir;
+    v.z *= ndir;
 }
 
 -(void)init_tex {	
@@ -134,6 +143,7 @@ static float INF = INFINITY;
     Vec3D *vZ = [Vec3D Z_VEC];
     Vec3D *v3t1 = [v3t2 crossWith:vZ];
     [v3t1 normalize];
+    [self scale_ndir:v3t1];
     
     float taille = fill_hei;
     
@@ -166,9 +176,12 @@ static float INF = INFINITY;
     
     Vec3D *v3t2 = [Vec3D init_x:(endX - startX) y:(endY - startY) z:0];
     Vec3D *vZ = [Vec3D init_x:0 y:0 z:1];
+    
     Vec3D *v3t1 = [v3t2 crossWith:vZ];
     [v3t1 normalize];
     [v3t1 negate];
+    [self scale_ndir:v3t1];
+    
     
     float hei = HEI;
     float offset = OFFSET;
@@ -202,6 +215,7 @@ static float INF = INFINITY;
     Vec3D *v3t1 = [v3t2 crossWith:vZ];
     [v3t1 normalize];
     [v3t1 negate];
+    [self scale_ndir:v3t1];
     
     float offset = OFFSET;
     float d_o_x = offset * v3t1.x;
@@ -242,6 +256,8 @@ static float INF = INFINITY;
     Vec3D *vZ = [Vec3D Z_VEC];
     Vec3D *v3t1 = [v3t2 crossWith:vZ];
     [v3t1 normalize];
+    [self scale_ndir:v3t1];
+    
     tri_pts[0] = ccp(endX-startX,endY-startY);
     tri_pts[1] = ccp(endX+v3t1.x*fill_hei-startX,endY+v3t1.y*fill_hei-startY);
     [v3t2 dealloc];
@@ -250,6 +266,7 @@ static float INF = INFINITY;
     v3t2 = [Vec3D init_x:(next.endX - next.startX) y:(next.endY - next.startY) z:0];
     v3t1 = [v3t2 crossWith:vZ];
     [v3t1 normalize];
+    [self scale_ndir:v3t1];
     tri_pts[2] = ccp(next.startX+v3t1.x*next.fill_hei-startX, next.startY+v3t1.y*next.fill_hei-startY);
     [v3t2 dealloc];
     [v3t1 dealloc];

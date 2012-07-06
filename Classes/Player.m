@@ -50,18 +50,6 @@
 	glColor4ub(255,0,0,100);
     glLineWidth(7.0f);
     ccDrawLine(ccp(-30,60),ccp(MIN(-30+(touch_count/15)*(50),20),60));
-    
-    if (false) { //enable to show player-gameobject hitbox
-        CGRect pathBox = [self get_hit_rect];
-        CGPoint verts[4] = {
-            ccp(pathBox.origin.x, pathBox.origin.y),
-            ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
-            ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
-            ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
-        };
-        
-        ccDrawPoly(verts, 4, YES);
-    }
 }
 
 /**
@@ -85,10 +73,6 @@
     } else {
         player.position = [Player player_move_along_island:player islands:islands];
     }
-    
-    //NSLog(@"{x:%f,y:%f,rotation:%f}",player.position.x,player.position.y,player.rotation);
-    //NSLog(@"VX:%f VY:%f",player.vx,player.vy);
-    //NSLog(@"UPX:%f UPY:%f",player.up_vec.x,player.up_vec.y);
     return player.current_island != NULL;
 }
 
@@ -125,7 +109,7 @@
         LIMIT_SPEED += (ABS_MAX_SPEED - LIMIT_SPEED)*(pct);
     }
     
-    float mov_speed = sqrtf(powf(player.vx, 2) + powf(player.vy, 2)); //TODO -- fall angle speed calc
+    float mov_speed = sqrtf(powf(player.vx, 2) + powf(player.vy, 2));
     if (mov_speed > ABS_MAX_SPEED) {
         mov_speed = ABS_MAX_SPEED;
     }

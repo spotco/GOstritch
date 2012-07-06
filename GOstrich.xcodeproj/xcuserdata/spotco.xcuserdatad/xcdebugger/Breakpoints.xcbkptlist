@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/Player.m"
-         timestampString = "363088595.57762"
+         timestampString = "363236566.491141"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "157"
-         endingLineNumber = "157"
+         startingLineNumber = "153"
+         endingLineNumber = "153"
          landmarkName = "+player_move_along_island:islands:"
          landmarkType = "5">
       </FileBreakpoint>

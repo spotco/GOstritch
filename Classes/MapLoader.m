@@ -38,13 +38,16 @@
         Island *currentIsland;
 		if ([type isEqualToString:@"line"]) {
             float height = ((NSString *)[currentIslandDict objectForKey:@"hei"]).floatValue;
-            currentIsland = [LineIsland init_pt1:start pt2:end height:height];
+            NSString *ndir_str = [currentIslandDict objectForKey:@"ndir"];
+            float ndir = 0;
+            if ([ndir_str isEqualToString:@"left"]) {
+                ndir = 1;
+            } else if ([ndir_str isEqualToString:@"right"]) {
+                ndir = -1;
+            }
+            
+            currentIsland = [LineIsland init_pt1:start pt2:end height:height ndir:ndir];
             NSLog(@"add line island");
-        /*} else if ([type isEqualToString:@"curve"]) {
-            float theta_i = ((NSString *)[currentIslandDict objectForKey:@"theta_i"]).floatValue;
-            float theta_f = ((NSString *)[currentIslandDict objectForKey:@"theta_f"]).floatValue;
-            currentIsland = [CurveIsland init_pt_i:start pt_f:end theta_i:theta_i*M_PI theta_f:theta_f*M_PI];
-            NSLog(@"add curve island");*/
 		} else {
             NSLog(@"line read error");
             continue;
@@ -73,11 +76,7 @@
             continue;
         }
     }
-     
-    
-    //map.n_islands = n_islands;
     NSLog(@"finish parse");
-    
     return map;
 }
 

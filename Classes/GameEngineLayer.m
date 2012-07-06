@@ -28,7 +28,7 @@ static NSString *my_map_file_type;
 	[[CCDirector sharedDirector] setDisplayFPS:NO];
 	CCScene *scene = [CCScene node];
 	BGLayer *bglayer = [BGLayer node];
-	[scene addChild:bglayer];
+	//[scene addChild:bglayer];
 	GameEngineLayer *layer = [GameEngineLayer node];
 
 	
@@ -157,7 +157,8 @@ static NSString *my_map_file_type;
             
             //add player up vector and player current island's tangent vector, normalize then apply as jump
             Vec3D *up = player.up_vec;
-            Vec3D *tangent = [player.current_island get_tangent_vec];
+            //Vec3D *tangent = [player.current_island get_tangent_vec];
+            Vec3D *tangent = [Vec3D init_x:0 y:0 z:0];
             Vec3D *combined = [up add:tangent];
             [combined normalize];
             
