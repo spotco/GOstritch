@@ -5,6 +5,7 @@
 @synthesize last_touch;
 @synthesize touch_timer,last_touch_time;
 @synthesize is_touch_down;
+@synthesize queue_jump,queue_roll;
 
 - (id)init {
     self = [super init];

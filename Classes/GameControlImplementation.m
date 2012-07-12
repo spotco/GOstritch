@@ -1,11 +1,18 @@
 #import "GameControlImplementation.h"
 
+#define SWIPE_SPEED 10
+#define TAP_MIN_DIST 20
+
 @implementation GameControlImplementation
 
 +(void)control_update_player:(Player*)player 
                        state:(GameControlState*)state 
                      islands:(NSMutableArray*)islands 
                      objects:(NSMutableArray*)game_objects {
+    
+    
+    
+    
 }
 
 +(void)touch_begin:(GameControlState*)state at:(CGPoint)pt {
@@ -18,8 +25,19 @@
     [state end_touch];
     
     float dist = sqrtf(powf(pt.y-last_touch.y, 2) + powf(pt.x - last_touch.x, 2));
-    NSLog(@"dist:%f",dist);
+    float dtime = state.touch_timer - state.last_touch_time;
+    float vel = dist/dtime;
     
+    
+    if (dist > TAP_MIN_DIST) {
+        if (vel > SWIPE_SPEED) { 
+            NSLog(@"SWIPE from (%f,%f) -> (%f,%f)",last_touch.x,last_touch.y,pt.x,pt.y);
+        } else {
+            NSLog(@"DRAG from (%f,%f) -> (%f,%f)",last_touch.x,last_touch.y,pt.x,pt.y);
+        }
+    } else {
+        NSLog(@"TAP from (%f,%f) -> (%f,%f)",last_touch.x,last_touch.y,pt.x,pt.y);
+    }
 }
 
 /*-(void)player_control_update {
