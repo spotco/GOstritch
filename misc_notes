@@ -1,3 +1,30 @@
+-(void)check_sort_islands_given:(float)pos_x and:(float)pos_y {
+	float tmp = FLT_MAX;
+	for (Island* i in islands) {
+		float h = [i get_height:pos_x];
+		if (h > tmp) {
+			[self sort_islands];
+			break;
+		}
+		tmp = h;
+	}
+}
+
+-(void)sort_islands {
+	[islands sortUsingComparator:^(id a, id b) {
+		float first = [a get_height:player.position.x];
+		float second = [b get_height:player.position.x];
+		if (first < second) {
+			return NSOrderedDescending;
+		} else if (first > second) {
+			return NSOrderedAscending;
+		} else {
+			return NSOrderedSame;
+		}
+	}];
+}
+
+
 STRUCTS R COOL
 typedef struct p_line_seg {
 	float cx;

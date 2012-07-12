@@ -98,10 +98,6 @@
     NSLog(@"%@ line segment (%f,%f) to (%f,%f)",msg,l.a.x,l.a.y,l.b.x,l.b.y);
 }
 
-+(BOOL)line_seg_valid:(line_seg)l {
-    return l.a.x != -1.0 && l.a.y != -1.0 && l.b.x != -1.0 && l.b.y != -1.0;
-}
-
 +(BOOL)pt_fuzzy_eq:(CGPoint)a b:(CGPoint)b {
     return ABS(a.x-b.x) <= 0.1 && ABS(a.y-b.y) <= 0.1;
 }
