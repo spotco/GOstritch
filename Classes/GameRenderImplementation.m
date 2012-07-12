@@ -5,6 +5,8 @@
 #define RENDER_ISLAND_ORD 1
 #define RENDER_GAMEOBJ_ORD 0
 
+#define VERT_CAMERA_OFFSET_SPD 65
+
 @implementation GameRenderImplementation
 
 +(void)update_render_on:(CCLayer*)layer 
@@ -13,7 +15,7 @@
                 objects:(NSMutableArray*)objects 
                 state:(GameRenderState*)state    {
     
-    //[GameRenderImplementation update_zoom:player layer:layer state:state];
+    [GameRenderImplementation update_zoom:player layer:layer state:state];
     
     BOOL player_on_fg_island = (player.current_island != NULL) && (!player.current_island.can_land);
     if (player_on_fg_island) {
@@ -28,26 +30,14 @@
 }
 
 +(void)update_zoom:(Player*)player layer:(CCLayer*)layer state:(GameRenderState*)state {
-    
-    
-    if (player.current_island != NULL) {
-        float tar = 50;
-        float spd = sqrtf(powf(player.vx,2) + powf(player.vy,2));
-        
-        if (spd > 15) {
-            tar = 200;
-        } else if (spd > 11) {
-            tar = 100;
+    float tar = 100;
+    if (player.current_island != NULL && ABS(((int)player.rotation)%360 - (-90)) < 10) {
+        if (player.current_island.ndir == 1) {
+            tar = -50;
         }
-        
-        if (tar > state.ez) {
-            state.ez+=1;
-        } else if (tar < state.ez) {
-            state.ez-=1;
-        }
-        
-        
     }
+    state.ex+=(tar-state.ex)/VERT_CAMERA_OFFSET_SPD;
+    state.cx = state.ex;
     
     [GameRenderImplementation update_camera_on:layer state:state];
 }

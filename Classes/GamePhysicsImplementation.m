@@ -1,5 +1,7 @@
 #import "GamePhysicsImplementation.h"
 
+
+
 @implementation GamePhysicsImplementation
 
 /**
@@ -39,8 +41,10 @@
     float ABS_MAX_SPEED = 20;
     float LIMIT_SPEED = 10;
     float MIN_SPEED = 8;
-    float SLOPE_ACCEL = 0.3;
-    float FRICTION = 0.98;
+    
+    
+    float SLOPE_ACCEL = 0.4;
+    float FRICTION = 0.96;
     float TO_GROUND_ROTATION_SPEED = 0.3;
     
     Island *i = player.current_island;
@@ -103,7 +107,6 @@
                 position_final = [player.current_island get_position_given_t:t_sum];
             } else {
                 position_final = ccp(player.current_island.endX,player.current_island.endY);
-                NSLog(@"GOTTA GO FAST");
             }
         } else {
             position_final = ccp(i.endX + tangent_vec.x*mov_speed, i.endY + tangent_vec.y*mov_speed);
@@ -178,10 +181,6 @@
     if (contact_island != NULL) {
         player.current_island = contact_island;
         player.position = contact_intersection;
-        
-        if (contact_island.ndir == -1) {
-            MAX_LOSS = 1;
-        }
         
         Vec3D *a = [Vec3D init_x:player_mov.b.x - player_mov.a.x y:player_mov.b.y - player_mov.a.y z:0];
         Vec3D *b = [Vec3D init_x:contact_segment.b.x - contact_segment.a.x y:contact_segment.b.y - contact_segment.a.y z:0];

@@ -51,7 +51,11 @@
     float mov_speed = sqrtf(powf(player.vx, 2) + powf(player.vy, 2));
     
     
-    Vec3D *up = [Vec3D init_x:player.up_vec.x y:player.up_vec.y z:0];
+    Vec3D *up = [[Vec3D Z_VEC] crossWith:[player.current_island get_tangent_vec]];
+    [up normalize];
+    if (player.current_island.ndir == -1) {
+        [up scale:-1];
+    }
     Vec3D *tangent = [player.current_island get_tangent_vec];
     
     [tangent scale:mov_speed];
@@ -59,12 +63,15 @@
     
     Vec3D *combined = [up add:tangent];
     
-    player.position = [player.up_vec transform_pt:player.position];
+    Vec3D *calc_up = [[Vec3D Z_VEC] crossWith:[player.current_island get_tangent_vec]];
+    [calc_up scale:2];
+    player.position = [calc_up transform_pt:player.position];
+    
     player.vx = combined.x;
     player.vy = combined.y;
     player.current_island = NULL;
     
-    
+    [calc_up dealloc];
     [up dealloc];
     [combined dealloc];
     [tangent dealloc];

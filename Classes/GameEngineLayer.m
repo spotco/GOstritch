@@ -126,7 +126,7 @@ static NSString *my_map_file_type;
         player.position = player_start_pt;
         player.vx = 0;
         player.vy = 0;
-        game_render_state.ez = 50;
+        player.rotation = 0;
         [GameRenderImplementation update_camera_on:self state:game_render_state];
         for (GameObject* o in game_objects) {
             [o set_active:YES];

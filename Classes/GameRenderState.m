@@ -7,7 +7,6 @@
 @implementation GameRenderState
 
 @synthesize cx,cy,cz,ex,ey,ez;
-@synthesize prevx,prevy;
 
 - (id)init
 {
