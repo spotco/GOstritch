@@ -3,13 +3,19 @@
 #import "Player.h"
 #import "Island.h"
 #import "GameObject.h"
+#import "GameRenderState.h"
+#import "Player.h"
+#import "ISland.h"
 
 @interface GameRenderImplementation : NSObject
 
 +(void)update_render_on:(CCLayer*)layer 
                  player:(Player*)player 
                 islands:(NSMutableArray*)islands 
-                objects:(NSMutableArray*)objects;
+                objects:(NSMutableArray*)objects
+                state:(GameRenderState*)state;
+
++(void)update_camera_on:(CCLayer*)layer state:(GameRenderState*)state;
 
 +(int)GET_RENDER_FG_ISLAND_ORD;
 +(int)GET_RENDER_PLAYER_ORD;

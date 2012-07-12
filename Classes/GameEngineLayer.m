@@ -27,6 +27,8 @@ static NSString *my_map_file_type;
 -(id) init{
 	if( (self=[super init])) {
         game_control_state = [[GameControlState alloc] init];
+        game_render_state = [[GameRenderState alloc] init];
+        
 		player_start_pt = [self loadMap];
         player = [Player init];
         player.position = player_start_pt;
@@ -37,8 +39,8 @@ static NSString *my_map_file_type;
 		[self schedule:@selector(update:)];
 		self.isTouchEnabled = YES;
         
-		[self.camera setCenterX:100 centerY:40 centerZ:0];
-        [self.camera setEyeX:100 eyeY:40 eyeZ:50];
+        
+        [GameRenderImplementation update_camera_on:self state:game_render_state];
         
         
 		[self runAction:[CCFollow actionWithTarget:(player) worldBoundary:[self get_world_bounds] ]];
@@ -84,18 +86,14 @@ static NSString *my_map_file_type;
     return map.player_start_pt;
 }
 
--(void)update:(ccTime)dt {
-	float pos_x = player.position.x;
-	float pos_y = player.position.y;
-	
-    [game_control_state update];
+-(void)update:(ccTime)dt {	
     [GamePhysicsImplementation player_move:player with_islands:islands];
-    //[GameControlImplementation control_update_player:player islands:islands objects:game_objects];
+    [GameControlImplementation control_update_player:player state:game_control_state islands:islands objects:game_objects];
     
     [self check_game_state];	
-    [self update_static_x:pos_x y:pos_y];
+    [self update_static_x:player.position.x y:player.position.y];
     [self update_game_obj];
-    [GameRenderImplementation update_render_on:self player:player islands:islands objects:game_objects];
+    [GameRenderImplementation update_render_on:self player:player islands:islands objects:game_objects state:game_render_state];
 }
 
 -(void)update_game_obj {
@@ -128,6 +126,8 @@ static NSString *my_map_file_type;
         player.position = player_start_pt;
         player.vx = 0;
         player.vy = 0;
+        game_render_state.ez = 50;
+        [GameRenderImplementation update_camera_on:self state:game_render_state];
         for (GameObject* o in game_objects) {
             [o set_active:YES];
         }

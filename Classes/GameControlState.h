@@ -1,25 +1,21 @@
 #import <Foundation/Foundation.h>
+#import "Vec3D.h"
 
 @interface GameControlState : NSObject {
-    CGPoint last_touch;
-    int last_touch_time;
-    
     BOOL is_touch_down;
-    int touch_timer;
     
-    BOOL queue_jump, queue_roll;
+    BOOL queue_jump;
+    int jump_hold_counter;
+    int airjump_count;
 }
 
-
-@property(readwrite,assign) CGPoint last_touch;
-@property(readwrite,assign) int touch_timer,last_touch_time;
 @property(readwrite,assign) BOOL is_touch_down;
 
-@property(readwrite,assign) BOOL queue_jump,queue_roll;
+@property(readwrite,assign) BOOL queue_jump;
+@property(readwrite,assign) int jump_hold_counter,airjump_count;
 
 
 -(void)start_touch:(CGPoint)pt;
 -(void)end_touch;
--(void)update;
 
 @end

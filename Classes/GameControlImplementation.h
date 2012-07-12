@@ -3,6 +3,7 @@
 #import "Island.h"
 #import "GameObject.h"
 #import "GameControlState.h"
+#import "Common.h"
 
 @interface GameControlImplementation : NSObject
 

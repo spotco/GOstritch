@@ -10,6 +10,7 @@
 #import "GameRenderImplementation.h"
 #import "GameControlImplementation.h"
 #import "GameControlState.h"
+#import "GameRenderState.h"
 
 @interface GameEngineLayer : CCLayer {
 	NSMutableArray *islands;
@@ -18,6 +19,7 @@
 	Player *player;
     CGPoint player_start_pt;
     GameControlState *game_control_state;
+    GameRenderState *game_render_state;
 }
 
 

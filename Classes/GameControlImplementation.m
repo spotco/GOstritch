@@ -1,7 +1,7 @@
 #import "GameControlImplementation.h"
 
-#define SWIPE_SPEED 10
-#define TAP_MIN_DIST 20
+#define JUMP_HOLD_TIME 15
+#define JUMP_POWER 9.5
 
 @implementation GameControlImplementation
 
@@ -10,79 +10,74 @@
                      islands:(NSMutableArray*)islands 
                      objects:(NSMutableArray*)game_objects {
     
+    float JUMP_FLOAT_SCALE = 1;
     
+    if (player.current_island != NULL) {
+        state.airjump_count = 1;
+    }
     
-    
-}
-
-+(void)touch_begin:(GameControlState*)state at:(CGPoint)pt {
-    [state start_touch:pt];
-    
-}
-
-+(void)touch_end:(GameControlState*)state at:(CGPoint)pt {
-    CGPoint last_touch = state.last_touch;
-    [state end_touch];
-    
-    float dist = sqrtf(powf(pt.y-last_touch.y, 2) + powf(pt.x - last_touch.x, 2));
-    float dtime = state.touch_timer - state.last_touch_time;
-    float vel = dist/dtime;
-    
-    
-    if (dist > TAP_MIN_DIST) {
-        if (vel > SWIPE_SPEED) { 
-            NSLog(@"SWIPE from (%f,%f) -> (%f,%f)",last_touch.x,last_touch.y,pt.x,pt.y);
-        } else {
-            NSLog(@"DRAG from (%f,%f) -> (%f,%f)",last_touch.x,last_touch.y,pt.x,pt.y);
+    if (state.queue_jump == YES) {
+        if (player.current_island != NULL) {
+            [GameControlImplementation player_jump_from_island:player state:state];
+            state.jump_hold_counter = JUMP_HOLD_TIME;
+        } else if (state.airjump_count > 0) {
+            [GameControlImplementation player_double_jump:player state:state];
+            state.jump_hold_counter = JUMP_HOLD_TIME;
+            state.airjump_count--;
         }
+    }
+    state.queue_jump = NO;
+    
+    
+    if (state.is_touch_down && state.jump_hold_counter > 0) {
+        state.jump_hold_counter--;
+        float pct_left = ((float)state.jump_hold_counter)/((float)JUMP_HOLD_TIME);
+        float scale = JUMP_FLOAT_SCALE;
+        player.vx += player.up_vec.x *pct_left*scale;
+        player.vy += player.up_vec.y *pct_left*scale;
     } else {
-        NSLog(@"TAP from (%f,%f) -> (%f,%f)",last_touch.x,last_touch.y,pt.x,pt.y);
+        state.jump_hold_counter = 0;
     }
 }
 
-/*-(void)player_control_update {
++(void)player_double_jump:(Player*)player state:(GameControlState*)state {    
+    player.vx += player.up_vec.x*JUMP_POWER;
+    player.vy = player.up_vec.y*JUMP_POWER;
+}
+
+
+
++(void)player_jump_from_island:(Player*)player state:(GameControlState*)state {
+    float mov_speed = sqrtf(powf(player.vx, 2) + powf(player.vy, 2));
     
-     if (player.vx < 3) {
-     player.vx += 0.1;
-     }
-     if (is_contact) {
-     player.airjump_count = MAX(player.airjump_count,1);
-     }
-     
-     if (is_touch) {
-     player.touch_count+=0.5;
-     player.vx = MAX(player.vx*0.99,4);
-     } else if (player.touch_count != 0) { 
-     if (is_contact && player.current_island != NULL) {
-     
-     float JUMP_POWER = 17.5;
-     float FORWARD_JUMP_SCALE = 0.4;
-     
-     Vec3D *up = player.up_vec;
-     Vec3D *tangent = [player.current_island get_tangent_vec];
-     [tangent scale:FORWARD_JUMP_SCALE];
-     Vec3D *combined = [up add:tangent];
-     [combined normalize];
-     
-     [tangent dealloc];
-     
-     player.position = [player.up_vec transform_pt:player.position];
-     player.vx = combined.x*JUMP_POWER;
-     player.vy = combined.y*JUMP_POWER;
-     
-     [combined dealloc];
-     
-     player.current_island = NULL;
-     } else if (player.airjump_count > 0) {
-     player.airjump_count--;
-     player.vy = MIN(player.touch_count,15);
-     }
-     player.touch_count = 0;
-     }
-     
-     if (!is_touch) {
-     player.vx = MIN(player.vx*1.01,8);
-     }
-}*/
+    
+    Vec3D *up = [Vec3D init_x:player.up_vec.x y:player.up_vec.y z:0];
+    Vec3D *tangent = [player.current_island get_tangent_vec];
+    
+    [tangent scale:mov_speed];
+    [up scale:JUMP_POWER];
+    
+    Vec3D *combined = [up add:tangent];
+    
+    player.position = [player.up_vec transform_pt:player.position];
+    player.vx = combined.x;
+    player.vy = combined.y;
+    player.current_island = NULL;
+    
+    
+    [up dealloc];
+    [combined dealloc];
+    [tangent dealloc];
+}
+
+
++(void)touch_begin:(GameControlState*)state at:(CGPoint)pt {
+    [state start_touch:pt];
+    state.queue_jump = YES;
+}
+
++(void)touch_end:(GameControlState*)state at:(CGPoint)pt {
+    [state end_touch];
+}
 
 @end
