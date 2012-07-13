@@ -39,6 +39,27 @@
     state.ex+=(tar-state.ex)/VERT_CAMERA_OFFSET_SPD;
     state.cx = state.ex;
     
+    
+    float default_zoom = 50;
+    float cur_spd = [player get_current_params].cur_min_speed;
+    float min = 6;
+    float max = 14;
+    
+    if (cur_spd > min) {
+        if (cur_spd > max) {
+            default_zoom = 200;
+        } else {
+            default_zoom = (200-50)*(cur_spd-min)/8;
+        }
+    }
+    
+    if (state.ez > default_zoom) {
+        state.ez--;
+    } else if (state.ez < default_zoom) {
+        state.ez++;
+    }
+    
+    
     [GameRenderImplementation update_camera_on:layer state:state];
 }
 

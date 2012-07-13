@@ -29,13 +29,10 @@ static NSString *my_map_file_type;
         game_control_state = [[GameControlState alloc] init];
         game_render_state = [[GameRenderState alloc] init];
         
-		player_start_pt = [self loadMap];
-        player = [Player init];
-        player.position = player_start_pt;
+		CGPoint player_start_pt = [self loadMap];
+        player = [Player init_at:player_start_pt];
         
 		[self addChild:player z:[GameRenderImplementation GET_RENDER_PLAYER_ORD]];
-		player.vy = 0;
-		player.vx = 0;
 		[self schedule:@selector(update:)];
 		self.isTouchEnabled = YES;
         
@@ -90,6 +87,8 @@ static NSString *my_map_file_type;
     [GamePhysicsImplementation player_move:player with_islands:islands];
     [GameControlImplementation control_update_player:player state:game_control_state islands:islands objects:game_objects];
     
+    [player update];
+    
     [self check_game_state];	
     [self update_static_x:player.position.x y:player.position.y];
     [self update_game_obj];
@@ -123,10 +122,9 @@ static NSString *my_map_file_type;
 
 -(void)check_game_state {
     if (!CGRectIntersectsRect([self get_world_bounds],[player get_hit_rect])) { 
-        player.position = player_start_pt;
-        player.vx = 0;
-        player.vy = 0;
-        player.rotation = 0;
+        [player reset];
+        [game_render_state dealloc];
+        game_render_state = [[GameRenderState alloc] init];
         [GameRenderImplementation update_camera_on:self state:game_render_state];
         for (GameObject* o in game_objects) {
             [o set_active:YES];
@@ -158,8 +156,9 @@ static NSString *my_map_file_type;
 	[super dealloc];
 }
 
-/*-(void)draw {
+-(void)draw {
      [super draw];
+    return;
      glColor4ub(255,0,0,100);
      glLineWidth(2.0f);
      CGRect pathBox = [player get_hit_rect];
@@ -181,7 +180,7 @@ static NSString *my_map_file_type;
      };
      ccDrawPoly(verts, 4, YES);
      }
- }*/
+ }
 
 
 @end

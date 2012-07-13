@@ -5,7 +5,7 @@
 @synthesize is_touch_down;
 
 @synthesize queue_jump;
-@synthesize jump_hold_counter,airjump_count;
+@synthesize jump_hold_counter;
 
 
 - (id)init {

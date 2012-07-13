@@ -17,7 +17,6 @@
     NSMutableArray *game_objects;
 
 	Player *player;
-    CGPoint player_start_pt;
     GameControlState *game_control_state;
     GameRenderState *game_render_state;
 }

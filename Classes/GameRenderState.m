@@ -1,7 +1,7 @@
 #import "GameRenderState.h"
 
-#define INIT_X 100
-#define INIT_Y 40
+#define INIT_X 80
+#define INIT_Y 80
 #define INIT_Z 50
 
 @implementation GameRenderState

@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/GameEngineLayer.m"
-         timestampString = "363772008.647352"
+         timestampString = "363843156.462131"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "35"
-         endingLineNumber = "35"
+         startingLineNumber = "34"
+         endingLineNumber = "34"
          landmarkName = "-init"
          landmarkType = "5">
       </FileBreakpoint>
@@ -54,6 +54,17 @@
          endingLineNumber = "8"
          landmarkName = "@implementation LineIsland"
          landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Classes/GamePhysicsImplementation.m"
+         timestampString = "363838446.456231"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "5"
+         endingLineNumber = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

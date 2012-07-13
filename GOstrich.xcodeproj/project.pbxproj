@@ -90,6 +90,7 @@
 		7ECBC8671597FA5700B2BCFE /* Vec3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBC8661597FA5700B2BCFE /* Vec3D.m */; };
 		7ECE89DE15A69AAB002A2241 /* test2.map in Resources */ = {isa = PBXBuildFile; fileRef = 7ECE89DD15A69AAB002A2241 /* test2.map */; };
 		7ED1D84F15AE68DC00B86562 /* GameControlState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED1D84E15AE68DC00B86562 /* GameControlState.m */; };
+		7EDC29FD15AFBD50008B0DC3 /* PlayerEffectParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC29FC15AFBD50008B0DC3 /* PlayerEffectParams.m */; };
 		7EDF0444159C53A000E9ABDA /* 1_1Icon 250px.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF043F159C53A000E9ABDA /* 1_1Icon 250px.png */; };
 		7EDF0445159C53A000E9ABDA /* theme_selection_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0440159C53A000E9ABDA /* theme_selection_bg.jpg */; };
 		7EDF0446159C53A000E9ABDA /* theme1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0441159C53A000E9ABDA /* theme1.png */; };
@@ -418,6 +419,8 @@
 		7ECE89DD15A69AAB002A2241 /* test2.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test2.map; sourceTree = "<group>"; };
 		7ED1D84D15AE68DC00B86562 /* GameControlState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameControlState.h; sourceTree = "<group>"; };
 		7ED1D84E15AE68DC00B86562 /* GameControlState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameControlState.m; sourceTree = "<group>"; };
+		7EDC29FB15AFBD50008B0DC3 /* PlayerEffectParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerEffectParams.h; sourceTree = "<group>"; };
+		7EDC29FC15AFBD50008B0DC3 /* PlayerEffectParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerEffectParams.m; sourceTree = "<group>"; };
 		7EDF043F159C53A000E9ABDA /* 1_1Icon 250px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1_1Icon 250px.png"; sourceTree = "<group>"; };
 		7EDF0440159C53A000E9ABDA /* theme_selection_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = theme_selection_bg.jpg; sourceTree = "<group>"; };
 		7EDF0441159C53A000E9ABDA /* theme1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme1.png; sourceTree = "<group>"; };
@@ -720,6 +723,7 @@
 		494E2593152C22BF004EBE74 /* player */ = {
 			isa = PBXGroup;
 			children = (
+				7EDC29F615AFB750008B0DC3 /* effectparams */,
 				49931E32152D6D5500E2B320 /* Player.h */,
 				49931E33152D6D5500E2B320 /* Player.m */,
 			);
@@ -1000,6 +1004,15 @@
 				7E93D6791592BABF00A83E9C /* Coin.m */,
 			);
 			name = game_obj;
+			sourceTree = "<group>";
+		};
+		7EDC29F615AFB750008B0DC3 /* effectparams */ = {
+			isa = PBXGroup;
+			children = (
+				7EDC29FB15AFBD50008B0DC3 /* PlayerEffectParams.h */,
+				7EDC29FC15AFBD50008B0DC3 /* PlayerEffectParams.m */,
+			);
+			name = effectparams;
 			sourceTree = "<group>";
 		};
 		7EE784B71593F9EB001704B1 /* islands */ = {
@@ -1563,6 +1576,7 @@
 				7EF654F715AA6D5F0094EA20 /* GameControlImplementation.m in Sources */,
 				7ED1D84F15AE68DC00B86562 /* GameControlState.m in Sources */,
 				7E8869B715AEB5CE00F99BB3 /* GameRenderState.m in Sources */,
+				7EDC29FD15AFBD50008B0DC3 /* PlayerEffectParams.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

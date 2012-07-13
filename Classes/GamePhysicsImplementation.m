@@ -1,6 +1,16 @@
 #import "GamePhysicsImplementation.h"
 
+//Used in move along island
+#define ABS_MAX_SPEED 20
+#define SLOPE_ACCEL 0.4
+#define FRICTION 0.96
+#define TO_GROUND_ROTATION_SPEED 0.3
 
+
+//Used in freefall
+#define CENTERING_ROTATION_SPD 0.1;
+#define CENTERING_UP_VEC_SPD 0.07
+#define MAX_LOSS 0.3
 
 @implementation GamePhysicsImplementation
 
@@ -27,6 +37,9 @@
     }
 }
 
+
+
+
 /**
  Player movement calculation when in contact with an island (any ground).
  @params
@@ -38,14 +51,8 @@
  A CGPoint of the player's calculated position after this update 'tick'
  **/
 +(CGPoint)player_move_along_island:(Player*)player islands:(NSMutableArray*)islands {
-    float ABS_MAX_SPEED = 20;
-    float LIMIT_SPEED = 10;
-    float MIN_SPEED = 8;
-    
-    
-    float SLOPE_ACCEL = 0.4;
-    float FRICTION = 0.96;
-    float TO_GROUND_ROTATION_SPEED = 0.3;
+    float LIMIT_SPEED = [player get_current_params].cur_limit_speed;
+    float MIN_SPEED = [player get_current_params].cur_min_speed;
     
     Island *i = player.current_island;
     Vec3D *tangent_vec = [i get_tangent_vec];
@@ -133,11 +140,7 @@
  A CGPoint of the player's calculated position after this update 'tick'
  **/
 +(CGPoint)player_free_fall:(Player*)player islands:(NSMutableArray*)islands {
-    float CENTERING_ROTATION_SPD = 0.1;
-    float CENTERING_UP_VEC_SPD = 0.07;
-    float MAX_LOSS = 0.3;
-    float GRAVITY = -0.5;
-    
+    float GRAVITY = [player get_current_params].cur_gravity;
     
     player.scaleX = 1;
     player.scaleY = 1;

@@ -13,17 +13,17 @@
     float JUMP_FLOAT_SCALE = 1;
     
     if (player.current_island != NULL) {
-        state.airjump_count = 1;
+        player.airjump_count = 1;
     }
     
     if (state.queue_jump == YES) {
         if (player.current_island != NULL) {
             [GameControlImplementation player_jump_from_island:player state:state];
             state.jump_hold_counter = JUMP_HOLD_TIME;
-        } else if (state.airjump_count > 0) {
+        } else if (player.airjump_count > 0) {
             [GameControlImplementation player_double_jump:player state:state];
             state.jump_hold_counter = JUMP_HOLD_TIME;
-            state.airjump_count--;
+            player.airjump_count--;
         }
     }
     state.queue_jump = NO;
