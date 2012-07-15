@@ -75,6 +75,12 @@
 		7E455F26159AFC8A00006895 /* Island4.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E455F19159AFC8A00006895 /* Island4.png */; };
 		7E455F27159AFC8A00006895 /* Island5.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E455F1A159AFC8A00006895 /* Island5.png */; };
 		7E455F2D159B018F00006895 /* curvetest.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E455F2C159B018F00006895 /* curvetest.map */; };
+		7E5EB92915B2C0C0000877A7 /* dogcape.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E5EB92715B2C0C0000877A7 /* dogcape.png */; };
+		7E5EB92A15B2C0C0000877A7 /* dogrocket.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E5EB92815B2C0C0000877A7 /* dogrocket.png */; };
+		7E5EB92F15B2C159000877A7 /* DogCape.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5EB92E15B2C159000877A7 /* DogCape.m */; };
+		7E5EB93215B2C3BB000877A7 /* DogRocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5EB93115B2C3BB000877A7 /* DogRocket.m */; };
+		7E5EB93515B2C809000877A7 /* DogCapeEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5EB93415B2C809000877A7 /* DogCapeEffect.m */; };
+		7E5EB93815B2CF48000877A7 /* DogRocketEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5EB93715B2CF48000877A7 /* DogRocketEffect.m */; };
 		7E733EF315A3BD1F00067EC5 /* goldenbone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E733EF215A3BD1F00067EC5 /* goldenbone.png */; };
 		7E8869B715AEB5CE00F99BB3 /* GameRenderState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E8869B615AEB5CE00F99BB3 /* GameRenderState.m */; };
 		7E89F24D159ADA3A00A32F2B /* GroundDetail.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E89F24B159ADA3A00A32F2B /* GroundDetail.h */; };
@@ -382,6 +388,16 @@
 		7E455F19159AFC8A00006895 /* Island4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Island4.png; sourceTree = "<group>"; };
 		7E455F1A159AFC8A00006895 /* Island5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Island5.png; sourceTree = "<group>"; };
 		7E455F2C159B018F00006895 /* curvetest.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = curvetest.map; sourceTree = "<group>"; };
+		7E5EB92715B2C0C0000877A7 /* dogcape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dogcape.png; sourceTree = "<group>"; };
+		7E5EB92815B2C0C0000877A7 /* dogrocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dogrocket.png; sourceTree = "<group>"; };
+		7E5EB92D15B2C159000877A7 /* DogCape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DogCape.h; sourceTree = "<group>"; };
+		7E5EB92E15B2C159000877A7 /* DogCape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DogCape.m; sourceTree = "<group>"; };
+		7E5EB93015B2C3BA000877A7 /* DogRocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DogRocket.h; sourceTree = "<group>"; };
+		7E5EB93115B2C3BB000877A7 /* DogRocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DogRocket.m; sourceTree = "<group>"; };
+		7E5EB93315B2C809000877A7 /* DogCapeEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DogCapeEffect.h; sourceTree = "<group>"; };
+		7E5EB93415B2C809000877A7 /* DogCapeEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DogCapeEffect.m; sourceTree = "<group>"; };
+		7E5EB93615B2CF48000877A7 /* DogRocketEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DogRocketEffect.h; sourceTree = "<group>"; };
+		7E5EB93715B2CF48000877A7 /* DogRocketEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DogRocketEffect.m; sourceTree = "<group>"; };
 		7E733EF215A3BD1F00067EC5 /* goldenbone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goldenbone.png; sourceTree = "<group>"; };
 		7E8869B515AEB5CE00F99BB3 /* GameRenderState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameRenderState.h; sourceTree = "<group>"; };
 		7E8869B615AEB5CE00F99BB3 /* GameRenderState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameRenderState.m; sourceTree = "<group>"; };
@@ -867,6 +883,19 @@
 			name = open_flow;
 			sourceTree = "<group>";
 		};
+		7E5EB92C15B2C125000877A7 /* powerups */ = {
+			isa = PBXGroup;
+			children = (
+				7E93D6781592BABF00A83E9C /* Coin.h */,
+				7E93D6791592BABF00A83E9C /* Coin.m */,
+				7E5EB92D15B2C159000877A7 /* DogCape.h */,
+				7E5EB92E15B2C159000877A7 /* DogCape.m */,
+				7E5EB93015B2C3BA000877A7 /* DogRocket.h */,
+				7E5EB93115B2C3BB000877A7 /* DogRocket.m */,
+			);
+			name = powerups;
+			sourceTree = "<group>";
+		};
 		7E89F252159ADF2C00A32F2B /* bg */ = {
 			isa = PBXGroup;
 			children = (
@@ -926,6 +955,8 @@
 		7E89F283159ADF2C00A32F2B /* object */ = {
 			isa = PBXGroup;
 			children = (
+				7E5EB92715B2C0C0000877A7 /* dogcape.png */,
+				7E5EB92815B2C0C0000877A7 /* dogrocket.png */,
 				7E733EF215A3BD1F00067EC5 /* goldenbone.png */,
 			);
 			path = object;
@@ -996,12 +1027,11 @@
 		7E93D6731592B69C00A83E9C /* game_obj */ = {
 			isa = PBXGroup;
 			children = (
+				7E5EB92C15B2C125000877A7 /* powerups */,
 				7E89F24B159ADA3A00A32F2B /* GroundDetail.h */,
 				7E89F24C159ADA3A00A32F2B /* GroundDetail.m */,
 				7E93D6741592B97C00A83E9C /* GameObject.h */,
 				7E93D6751592B97C00A83E9C /* GameObject.m */,
-				7E93D6781592BABF00A83E9C /* Coin.h */,
-				7E93D6791592BABF00A83E9C /* Coin.m */,
 			);
 			name = game_obj;
 			sourceTree = "<group>";
@@ -1011,6 +1041,10 @@
 			children = (
 				7EDC29FB15AFBD50008B0DC3 /* PlayerEffectParams.h */,
 				7EDC29FC15AFBD50008B0DC3 /* PlayerEffectParams.m */,
+				7E5EB93315B2C809000877A7 /* DogCapeEffect.h */,
+				7E5EB93415B2C809000877A7 /* DogCapeEffect.m */,
+				7E5EB93615B2CF48000877A7 /* DogRocketEffect.h */,
+				7E5EB93715B2CF48000877A7 /* DogRocketEffect.m */,
 			);
 			name = effectparams;
 			sourceTree = "<group>";
@@ -1537,6 +1571,8 @@
 				7EDF177F15A41A55006AA7E4 /* bigjump.map in Resources */,
 				7EDF178215A43C3A006AA7E4 /* test.map in Resources */,
 				7ECE89DE15A69AAB002A2241 /* test2.map in Resources */,
+				7E5EB92915B2C0C0000877A7 /* dogcape.png in Resources */,
+				7E5EB92A15B2C0C0000877A7 /* dogrocket.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1577,6 +1613,10 @@
 				7ED1D84F15AE68DC00B86562 /* GameControlState.m in Sources */,
 				7E8869B715AEB5CE00F99BB3 /* GameRenderState.m in Sources */,
 				7EDC29FD15AFBD50008B0DC3 /* PlayerEffectParams.m in Sources */,
+				7E5EB92F15B2C159000877A7 /* DogCape.m in Sources */,
+				7E5EB93215B2C3BB000877A7 /* DogRocket.m in Sources */,
+				7E5EB93515B2C809000877A7 /* DogCapeEffect.m in Sources */,
+				7E5EB93815B2CF48000877A7 /* DogRocketEffect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

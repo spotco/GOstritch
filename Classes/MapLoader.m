@@ -67,6 +67,16 @@
             Coin *c = [Coin init_x:((NSString *)[j_object  objectForKey:@"x"]).floatValue y:((NSString *)[j_object objectForKey:@"y"]).floatValue];
             [map.game_objects addObject:c];
             NSLog(@"add coin");
+        } else if ([type isEqualToString:@"cape"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            [map.game_objects addObject:[DogCape init_x:x y:y]];
+            NSLog(@"add cape");
+        } else if ([type isEqualToString:@"rocket"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            [map.game_objects addObject:[DogRocket init_x:x y:y]];
+            NSLog(@"add rocket");
         } else if ([type isEqualToString:@"ground_detail"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;

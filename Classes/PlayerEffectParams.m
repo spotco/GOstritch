@@ -7,12 +7,16 @@
 
 +(PlayerEffectParams*)init_copy:(PlayerEffectParams*)p {
     PlayerEffectParams *n = [[PlayerEffectParams alloc] init];
-    n.cur_accel_to_min = p.cur_accel_to_min;
-    n.cur_gravity = p.cur_gravity;
-    n.cur_limit_speed = p.cur_limit_speed;
-    n.cur_min_speed = p.cur_min_speed;
-    n.cur_airjump_count = p.cur_airjump_count;
+    [PlayerEffectParams copy_params_from:p to:n];
     return n;
+}
+
++(void)copy_params_from:(PlayerEffectParams *)a to:(PlayerEffectParams *)b {
+    b.cur_accel_to_min = a.cur_accel_to_min;
+    b.cur_gravity = a.cur_gravity;
+    b.cur_limit_speed = a.cur_limit_speed;
+    b.cur_min_speed = a.cur_min_speed;
+    b.cur_airjump_count = a.cur_airjump_count;
 }
 
 
@@ -34,7 +38,10 @@
     }
 }
 
--(void)update {}
+-(void)update:(Player*)p {
+
+}
+
 -(NSString*)info {
     return [NSString stringWithFormat:@"DefaultEffect(minspd:%1.1f,timeleft:%i)",cur_min_speed,time_left];
 }

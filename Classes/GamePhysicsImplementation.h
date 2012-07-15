@@ -4,7 +4,7 @@
 #import "Common.h"
 #import "Player.h"
 
-@interface GamePhysicsImplementation : NSObject
+@interface GamePhysicsImplementation
 
 +(void)player_move:(Player*)player with_islands:(NSMutableArray*)islands;
 +(CGPoint)player_free_fall:(Player*)player islands:(NSMutableArray*)islands;

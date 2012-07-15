@@ -12,5 +12,8 @@
 	],
 
 	"objects":[
+        {"type":"rocket", "x":"721", "y":"317", "label":"0"},
+		{"type":"rocket", "x":"808", "y":"319", "label":"1"},
+		{"type":"rocket", "x":"902", "y":"313", "label":"2"}
 	]
 }

@@ -4,10 +4,9 @@
 #import "Island.h"
 #import "GameObject.h"
 #import "GameRenderState.h"
-#import "Player.h"
-#import "ISland.h"
 
-@interface GameRenderImplementation : NSObject
+
+@interface GameRenderImplementation
 
 +(void)update_render_on:(CCLayer*)layer 
                  player:(Player*)player 

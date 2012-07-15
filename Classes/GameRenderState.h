@@ -1,6 +1,6 @@
-
 #import <Foundation/Foundation.h>
 
+@class GameRenderState;
 @interface GameRenderState : NSObject {
     float cx,cy,cz,ex,ey,ez;
 }

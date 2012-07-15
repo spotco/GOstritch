@@ -2,6 +2,7 @@
 #import "cocos2d.h"
 #import "Common.h"
 
+@class Island;
 @interface Island : CCSprite {
 	float startX, startY, endX, endY, ndir;
     BOOL can_land;

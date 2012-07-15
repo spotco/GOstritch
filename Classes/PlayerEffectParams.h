@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
+@class Player;
 
+@class PlayerEffectParams;
 @interface PlayerEffectParams : NSObject {
     float cur_gravity;
     float cur_limit_speed;
@@ -15,8 +17,9 @@
 @property(readwrite,assign) int time_left,cur_airjump_count;
 
 +(PlayerEffectParams*)init_copy:(PlayerEffectParams*)p;
++(void)copy_params_from:(PlayerEffectParams*)a to:(PlayerEffectParams*)b;
 
--(void)update;
+-(void)update:(Player*)p;
 
 -(void)add_airjump_count;
 -(void)decr_airjump_count;

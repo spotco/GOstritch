@@ -5,7 +5,7 @@
 #import "GameControlState.h"
 #import "Common.h"
 
-@interface GameControlImplementation : NSObject
+@interface GameControlImplementation
 
 +(void)control_update_player:(Player*)player 
                        state:(GameControlState*)state  

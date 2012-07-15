@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "Vec3D.h"
 
+@class GameControlState;
 @interface GameControlState : NSObject {
     BOOL is_touch_down;
     BOOL queue_jump;

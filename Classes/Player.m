@@ -76,6 +76,10 @@
 }
 
 -(void) reset_params {
+    if (temp_params != NULL) {
+        [temp_params dealloc];
+        temp_params = NULL;
+    }
     if (current_params != NULL) {
         [current_params dealloc];
     }
@@ -102,7 +106,7 @@
     float tar = current_params.cur_min_speed;
     
     if (temp_params != NULL) {
-        [temp_params update];
+        [temp_params update:self];
         NSLog(@"%@",[temp_params info]);
         temp_params.time_left--;
         if (temp_params.time_left <= 0) {

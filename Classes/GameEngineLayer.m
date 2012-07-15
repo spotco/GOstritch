@@ -156,22 +156,18 @@ static NSString *my_map_file_type;
 -(void)draw {
     [super draw];
     glColor4ub(255,0,0,100);
-    glLineWidth(2.0f);
+    glLineWidth(1.0f);
     HitRect re = [player get_hit_rect]; 
     CGPoint *verts = [Common hitrect_get_pts:re];
     ccDrawPoly(verts, 4, YES);
     free(verts);
      
-     /*for (GameObject* o in game_objects) {
-         CGRect pathBox = [o get_hit_rect];
-         CGPoint verts[4] = {
-             ccp(pathBox.origin.x, pathBox.origin.y),
-             ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
-             ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
-             ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
-         };
-         ccDrawPoly(verts, 4, YES);
-     }*/
+    for (GameObject* o in game_objects) {
+        HitRect pathBox = [o get_hit_rect];
+        verts = [Common hitrect_get_pts:pathBox];
+        ccDrawPoly(verts, 4, YES);
+        free(verts);
+    }
  }
 
 

@@ -1,10 +1,13 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Island.h"
+@class Island;
 #import "Resource.h"
-#import "PlayerEffectParams.h"
+#import "PlayerEffectParams.h" 
+@class PlayerEffectParams;
 #import "Common.h"
 
+@class Player;
 @interface Player : CCSprite {
 	float vx,vy;
 	CCSprite* player_img;

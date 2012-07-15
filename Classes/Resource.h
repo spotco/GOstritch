@@ -15,6 +15,8 @@
 #define TEX_BG_LAYER_1 @"BgLayer1"
 #define TEX_BG_LAYER_2 @"BgLayer2"
 #define TEX_GOLDEN_BONE @"GoldenBone"
+#define TEX_DOG_CAPE @"DogCape"
+#define TEX_DOG_ROCKET @"DogRocket"
 
 #define TEX_GROUND_DETAIL_1 @"GroundDetail1"
 #define TEX_GROUND_DETAIL_2 @"GroundDetail2"

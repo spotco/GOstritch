@@ -1,11 +1,13 @@
 #import <Foundation/Foundation.h>
 #import "CJSONDeserializer.h"
 #import "LineIsland.h"
-#import "CurveIsland.h"
 #import "Island.h"
 #import "Map.h"
+
 #import "Coin.h"
 #import "GroundDetail.h"
+#import "DogCape.h"
+#import "DogRocket.h"
 
 @interface MapLoader : NSObject
 

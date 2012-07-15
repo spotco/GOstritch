@@ -11,7 +11,6 @@
     CCSprite *img = [CCSprite spriteWithTexture:texture];
     [new_coin addChild:img];
     
-    //NSLog(@"%f,%f",new_coin.position.x,new_coin.position.y);
     return new_coin;
 }
 
