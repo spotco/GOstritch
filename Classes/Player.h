@@ -22,7 +22,7 @@
 -(void) reset;
 -(void) reset_params;
 -(void) update;
--(CGRect) get_hit_rect;
+-(HitRect) get_hit_rect;
 -(PlayerEffectParams*) get_current_params;
 
 @property(readwrite,assign) float vx,vy;

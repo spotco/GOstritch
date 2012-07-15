@@ -93,14 +93,51 @@
         
         current_params.cur_min_speed += ACCEL_INCR;
         current_params.cur_limit_speed = current_params.cur_min_speed + LIMITSPD_INCR;
-        
-        NSLog(@"accel:%f",current_params.cur_min_speed);
     }
+    refresh_hitrect = YES;
 }
 
--(CGRect) get_hit_rect {
-    return CGRectMake([self position].x-IMGHEI/2,  [self position].y, IMGWID, IMGHEI);
-    //return [self boundingBox];
+
+BOOL refresh_hitrect = YES;
+HitRect cached_rect;
+
+-(HitRect) get_hit_rect {
+    if (refresh_hitrect == NO) {
+        return cached_rect;
+    }
+    
+    Vec3D *v = [Vec3D init_x:up_vec.x y:up_vec.y z:0];
+    Vec3D *h = [v crossWith:[Vec3D Z_VEC]];
+    float x = self.position.x;
+    float y = self.position.y;
+    [h normalize];
+    [v normalize];
+    [h scale:IMGWID/2];
+    [v scale:IMGHEI];
+    CGPoint *pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+    pts[0] = ccp(x-h.x , y-h.y);
+    pts[1] = ccp(x+h.x , y+h.y);
+    pts[2] = ccp(x-h.x+v.x , y-h.y+v.y);
+    pts[3] = ccp(x+h.x+v.x , y+h.y+v.y);
+    
+    float x1 = pts[0].x;
+    float y1 = pts[0].y;
+    float x2 = pts[0].x;
+    float y2 = pts[0].y;
+
+    for (int i = 0; i < 4; i++) {
+        x1 = MIN(pts[i].x,x1);
+        y1 = MIN(pts[i].y,y1);
+        x2 = MAX(pts[i].x,x2);
+        y2 = MAX(pts[i].y,y2);
+    }
+    free(pts);
+    [v dealloc];
+    [h dealloc];
+    
+    refresh_hitrect = NO;
+    cached_rect = [Common hitrect_cons_x1:x1 y1:y1 x2:x2 y2:y2];
+    return cached_rect;
 }
 
 @end

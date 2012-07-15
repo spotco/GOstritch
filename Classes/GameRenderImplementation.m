@@ -30,7 +30,8 @@
 }
 
 +(void)update_zoom:(Player*)player layer:(CCLayer*)layer state:(GameRenderState*)state {
-    float tar = 100;
+    /*TODO:magic constants here, have them linked to GameRenderState constants*/
+    float tar = 140;
     if (player.current_island != NULL && ABS(((int)player.rotation)%360 - (-90)) < 10) {
         if (player.current_island.ndir == 1) {
             tar = -50;
@@ -39,7 +40,7 @@
     state.ex+=(tar-state.ex)/VERT_CAMERA_OFFSET_SPD;
     state.cx = state.ex;
     
-    
+    /*TODO: make this parameterized*/
     float default_zoom = 50;
     float cur_spd = [player get_current_params].cur_min_speed;
     float min = 6;
@@ -49,7 +50,7 @@
         if (cur_spd > max) {
             default_zoom = 200;
         } else {
-            default_zoom = (200-50)*(cur_spd-min)/8;
+            default_zoom = MAX(default_zoom,(200-50)*(cur_spd-min)/8+50);
         }
     }
     

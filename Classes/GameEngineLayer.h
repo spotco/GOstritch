@@ -26,7 +26,7 @@
 +(float) get_cur_pos_y;
 
 +(CCScene *) scene_with:(NSString *) map_file_name of_type:(NSString *) map_file_type;
--(CGRect) get_world_bounds;
+-(HitRect) get_world_bounds;
 -(CGPoint) loadMap;
 -(void) check_game_state;
 -(void) update_static_x:(float)pos_x y:(float)pos_y;

@@ -5,6 +5,40 @@
 
 @implementation Common
 
++(HitRect)hitrect_cons_x1:(float)x1 y1:(float)y1 x2:(float)x2 y2:(float)y2 {
+    struct HitRect n;
+    n.x1 = x1;
+    n.y1 = y1;
+    n.x2 = x2;
+    n.y2 = y2;
+    return n;
+}
+
++(HitRect)hitrect_cons_x1:(float)x1 y1:(float)y1 wid:(float)wid hei:(float)hei {
+    return [Common hitrect_cons_x1:x1 y1:y1 x2:x1+wid y2:y1+hei];
+}
+
++(CGRect)hitrect_to_cgrect:(HitRect)rect {
+    return CGRectMake(rect.x1, rect.y1, rect.x2-rect.x1, rect.y2-rect.y1);
+}
+
++(CGPoint*)hitrect_get_pts:(HitRect)rect {
+    CGPoint *pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+    pts[0] = ccp(rect.x1,rect.y1);
+    pts[1] = ccp(rect.x1+(rect.x2-rect.x1),rect.y1);
+    pts[2] = ccp(rect.x2,rect.y2);
+    pts[3] = ccp(rect.x1,rect.y1+(rect.y2-rect.y1));
+    return pts;
+    
+}
+
++(BOOL)hitrect_touch:(HitRect)r1 b:(HitRect)r2 {
+    return !(r1.x1 > r2.x2 ||
+             r2.x1 > r1.x2 ||
+             r1.y1 > r2.y2 ||
+             r2.y1 > r1.y2);
+}
+
 +(CGPoint)line_seg_intersection_a1:(CGPoint)a1 a2:(CGPoint)a2 b1:(CGPoint)b1 b2:(CGPoint)b2 {//2 line segment intersection (seg a1,a2) (seg b1,b2)
     CGPoint null_point = CGPointMake([Island NO_VALUE], [Island NO_VALUE]);
     double Ax = a1.x; double Ay = a1.y;

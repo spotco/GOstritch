@@ -16,7 +16,7 @@ static NSString *my_map_file_type;
 	[[CCDirector sharedDirector] setDisplayFPS:NO];
 	CCScene *scene = [CCScene node];
 	BGLayer *bglayer = [BGLayer node];
-	[scene addChild:bglayer];
+	//[scene addChild:bglayer];
 	GameEngineLayer *layer = [GameEngineLayer node];
 	
     [scene addChild: layer];
@@ -40,19 +40,19 @@ static NSString *my_map_file_type;
         [GameRenderImplementation update_camera_on:self state:game_render_state];
         
         
-		[self runAction:[CCFollow actionWithTarget:(player) worldBoundary:[self get_world_bounds] ]];
+		[self runAction:[CCFollow actionWithTarget:(player) worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]]];
 	}
 	return self;
 }
 
--(CGRect) get_world_bounds {
+-(HitRect) get_world_bounds {
     float max_x = 0;
     float max_y = 0;
     for (Island* i in islands) {
         max_x = MAX(max_x, i.endX);
         max_y = MAX(max_y, i.endY);
     }
-    return CGRectMake(-100, -100, max_x+600, max_y+600);
+    return [Common hitrect_cons_x1:-100 y1:-100 wid:max_x+600 hei:max_y+600];
 }
 
 
@@ -86,7 +86,6 @@ static NSString *my_map_file_type;
 -(void)update:(ccTime)dt {	
     [GamePhysicsImplementation player_move:player with_islands:islands];
     [GameControlImplementation control_update_player:player state:game_control_state islands:islands objects:game_objects];
-    
     [player update];
     
     [self check_game_state];	
@@ -117,12 +116,10 @@ static NSString *my_map_file_type;
     [GameControlImplementation touch_end:game_control_state at:touch];
 }
 
-
-//-(void) ccTouchesMoved:(NSSet*)touches withEvent:(UIEvent*)event {}
-
 -(void)check_game_state {
-    if (!CGRectIntersectsRect([self get_world_bounds],[player get_hit_rect])) { 
+    if (![Common hitrect_touch:[self get_world_bounds] b:[player get_hit_rect]]) {
         [player reset];
+        
         [game_render_state dealloc];
         game_render_state = [[GameRenderState alloc] init];
         [GameRenderImplementation update_camera_on:self state:game_render_state];
@@ -157,29 +154,24 @@ static NSString *my_map_file_type;
 }
 
 -(void)draw {
-     [super draw];
-    return;
-     glColor4ub(255,0,0,100);
-     glLineWidth(2.0f);
-     CGRect pathBox = [player get_hit_rect];
-     CGPoint verts[4] = {
-         ccp(pathBox.origin.x, pathBox.origin.y),
-         ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
-         ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
-         ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
-     };
-     ccDrawPoly(verts, 4, YES);
+    [super draw];
+    glColor4ub(255,0,0,100);
+    glLineWidth(2.0f);
+    HitRect re = [player get_hit_rect]; 
+    CGPoint *verts = [Common hitrect_get_pts:re];
+    ccDrawPoly(verts, 4, YES);
+    free(verts);
      
-     for (GameObject* o in game_objects) {
-     CGRect pathBox = [o get_hit_rect];
-     CGPoint verts[4] = {
-         ccp(pathBox.origin.x, pathBox.origin.y),
-         ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
-         ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
-         ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
-     };
-     ccDrawPoly(verts, 4, YES);
-     }
+     /*for (GameObject* o in game_objects) {
+         CGRect pathBox = [o get_hit_rect];
+         CGPoint verts[4] = {
+             ccp(pathBox.origin.x, pathBox.origin.y),
+             ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y),
+             ccp(pathBox.origin.x + pathBox.size.width, pathBox.origin.y + pathBox.size.height),
+             ccp(pathBox.origin.x, pathBox.origin.y + pathBox.size.height)
+         };
+         ccDrawPoly(verts, 4, YES);
+     }*/
  }
 
 

@@ -9,8 +9,8 @@
     return;
 }
 
--(CGRect)get_hit_rect {
-    return CGRectMake(0,0,0,0);
+-(HitRect)get_hit_rect {
+    return [Common hitrect_cons_x1:0 y1:0 x2:0 y2:0];
 }
 
 -(void)set_active:(BOOL)t_active {

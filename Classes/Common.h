@@ -2,9 +2,11 @@
 #import "cocos2d.h"
 #import "Vec3D.h"
 
-@interface Common : NSObject {
+@interface Common : NSObject 
 
-}
+typedef struct HitRect {
+    float x1,y1,x2,y2;
+} HitRect;
 
 typedef struct gl_render_obj {
 	CCTexture2D *texture;
@@ -20,11 +22,17 @@ typedef struct line_seg {
 +(CGPoint)line_seg_intersection_a1:(CGPoint)a1 a2:(CGPoint)a2 b1:(CGPoint)b1 b2:(CGPoint)b2;
 +(CGPoint)line_seg_intersection_a:(line_seg)a b:(line_seg)b;
 +(line_seg)cons_line_seg_a:(CGPoint)a b:(CGPoint)b;
-+(line_seg)double_extend_line_seg:(line_seg)seg;
-+(line_seg)left_extend_line_seg:(line_seg)seg;
+//+(line_seg)double_extend_line_seg:(line_seg)seg;
+//+(line_seg)left_extend_line_seg:(line_seg)seg;
 +(void)print_line_seg:(line_seg)l msg:(NSString*)msg;
 +(BOOL)point_fuzzy_on_line_seg:(line_seg)seg pt:(CGPoint)pt;
 +(BOOL)pt_fuzzy_eq:(CGPoint)a b:(CGPoint)b;
++(BOOL)hitrect_touch:(HitRect)r1 b:(HitRect)r2;
+
++(HitRect)hitrect_cons_x1:(float)x1 y1:(float)y1 x2:(float)x2 y2:(float)y2;
++(HitRect)hitrect_cons_x1:(float)x1 y1:(float)y1 wid:(float)wid hei:(float)hei;
++(CGPoint*)hitrect_get_pts:(HitRect)rect;
++(CGRect)hitrect_to_cgrect:(HitRect)rect;
 
 +(float)shortest_dist_from_cur:(float)a1 to:(float)a2;
 

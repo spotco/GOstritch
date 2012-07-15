@@ -116,7 +116,8 @@
                 position_final = ccp(player.current_island.endX,player.current_island.endY);
             }
         } else {
-            position_final = ccp(i.endX + tangent_vec.x*mov_speed, i.endY + tangent_vec.y*mov_speed);
+            //position_final = ccp(i.endX + tangent_vec.x*mov_speed, i.endY + tangent_vec.y*mov_speed);
+            position_final = ccp(player.position.x + tangent_vec.x*mov_speed, player.position.y + tangent_vec.y*mov_speed);
             player.current_island = NULL;
             player.vx = tangent_vec.x * mov_speed;
             player.vy = tangent_vec.y * mov_speed;

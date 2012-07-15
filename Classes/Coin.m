@@ -22,8 +22,8 @@
     ccDrawCircle(ccp(0,0), 10, 0, 10, NO);
 }*/
 
--(CGRect)get_hit_rect {
-    return CGRectMake([self position].x-10,[self position].y-10,20,20);
+-(HitRect)get_hit_rect {
+    return [Common hitrect_cons_x1:[self position].x-10 y1:[self position].y-10 wid:20 hei:20];
 }
 
 -(void)update:(Player*)player {
@@ -46,7 +46,7 @@
     [self setRotation:rot];
     
     
-    if (CGRectIntersectsRect([self get_hit_rect],[player get_hit_rect])) {
+    if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         player.vx *= 1.5;
         player.vy *= 1.2;
         [self set_active:NO];
