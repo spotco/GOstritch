@@ -13,12 +13,12 @@
     
     CGPoint start_pt;
     
-    int airjump_count;
     PlayerEffectParams *current_params;
     PlayerEffectParams *temp_params;
 }
 
 +(Player*)init_at:(CGPoint)pt;
+-(void)add_effect:(PlayerEffectParams*)effect;
 -(void) reset;
 -(void) reset_params;
 -(void) update;
@@ -29,7 +29,6 @@
 @property(readwrite,assign) CCSprite* player_img;
 @property(readwrite,assign) Island* current_island;
 @property(readwrite,assign) Vec3D* up_vec;
-@property(readwrite,assign) int airjump_count;
 @property(readwrite,assign) CGPoint start_pt;
 
 @end

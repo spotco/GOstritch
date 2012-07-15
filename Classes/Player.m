@@ -7,6 +7,7 @@
 
 #define DEFAULT_GRAVITY -0.5
 #define DEFAULT_MIN_SPEED 6
+#define DEFAULT_ACCEL_TO_MIN 5
 
 #define MIN_SPEED_MAX 14
 #define LIMITSPD_INCR 2
@@ -18,7 +19,6 @@
 @synthesize player_img;
 @synthesize current_island;
 @synthesize up_vec;
-@synthesize airjump_count;
 @synthesize start_pt;
 
 - (id)init
@@ -79,20 +79,45 @@
     if (current_params != NULL) {
         [current_params dealloc];
     }
-    current_params = [PlayerEffectParams init_with_gravity:DEFAULT_GRAVITY 
-                                                  limitvel:DEFAULT_MIN_SPEED + LIMITSPD_INCR
-                                                    minvel:DEFAULT_MIN_SPEED 
-                                                      time:-1];
+    
+    current_params = [[PlayerEffectParams alloc] init];
+    current_params.cur_gravity = DEFAULT_GRAVITY;
+    current_params.cur_accel_to_min = DEFAULT_ACCEL_TO_MIN;
+    current_params.cur_limit_speed = DEFAULT_MIN_SPEED + LIMITSPD_INCR;
+    current_params.cur_min_speed = DEFAULT_MIN_SPEED;
+    current_params.cur_airjump_count = 1;
+    current_params.time_left = -1;
+}
+
+-(void)add_effect:(PlayerEffectParams*)effect {
+    if (temp_params != NULL) {
+        [temp_params dealloc];
+        temp_params = NULL;
+    }
+    temp_params = effect;
 }
 
 -(void) update {
-    float vel = sqrtf(powf(vx, 2) + powf(vy, 2));
+    float vel = sqrtf(powf(vx,2)+powf(vy,2));
     float tar = current_params.cur_min_speed;
     
-    if (current_params.cur_min_speed < MIN_SPEED_MAX && temp_params == NULL && (vel >= tar || ABS(tar-vel) < 0.5)  ) {
-        
-        current_params.cur_min_speed += ACCEL_INCR;
-        current_params.cur_limit_speed = current_params.cur_min_speed + LIMITSPD_INCR;
+    if (temp_params != NULL) {
+        [temp_params update];
+        NSLog(@"%@",[temp_params info]);
+        temp_params.time_left--;
+        if (temp_params.time_left <= 0) {
+            [temp_params release];
+            temp_params = NULL;
+        }
+    } else {
+        if (current_island != NULL) {//momentum acceleration, TODO: tweak
+            if (current_params.cur_min_speed < MIN_SPEED_MAX && (vel >= tar || ABS(tar-vel) < tar * 0.4)  ) {
+                current_params.cur_min_speed += ACCEL_INCR;
+            } else if (current_params.cur_limit_speed > DEFAULT_MIN_SPEED && current_params.cur_min_speed*0.9 > DEFAULT_MIN_SPEED && (vel < tar*0.5)) {
+                current_params.cur_min_speed *= 0.9;
+            }
+            current_params.cur_limit_speed = current_params.cur_min_speed + LIMITSPD_INCR;
+        }
     }
     refresh_hitrect = YES;
 }

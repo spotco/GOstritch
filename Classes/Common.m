@@ -87,34 +87,6 @@
     return new;
 }
 
-+(line_seg)double_extend_line_seg:(line_seg)seg {
-    Vec3D *dir_vec = [Vec3D init_x:seg.b.x-seg.a.x y:seg.b.y-seg.a.y z:0];
-    line_seg new = [Common cons_line_seg_a:seg.a b:seg.b];
-    new.b.x += dir_vec.x;
-    new.b.y += dir_vec.y;
-    
-    [dir_vec negate];
-    
-    new.a.x += dir_vec.x;
-    new.a.y += dir_vec.y;
-    [dir_vec dealloc];
-    
-    return new;
-}
-
-+(line_seg)left_extend_line_seg:(line_seg)seg {
-    Vec3D *dir_vec = [Vec3D init_x:seg.b.x-seg.a.x y:seg.b.y-seg.a.y z:0];
-    line_seg new = [Common cons_line_seg_a:seg.a b:seg.b];
-    
-    [dir_vec negate];
-    
-    new.a.x += dir_vec.x;
-    new.a.y += dir_vec.y;
-    [dir_vec dealloc];
-    
-    return new;
-}
-
 +(BOOL)point_fuzzy_on_line_seg:(line_seg)seg pt:(CGPoint)pt {
     Vec3D *b_m_a = [Vec3D init_x:seg.b.x-seg.a.x y:seg.b.y-seg.a.y z:0];
     Vec3D *c_m_a = [Vec3D init_x:pt.x-seg.a.x y:pt.y-seg.a.y z:0];

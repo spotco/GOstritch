@@ -7,6 +7,7 @@
 #define TO_GROUND_ROTATION_SPEED 0.3
 
 
+
 //Used in freefall
 #define CENTERING_ROTATION_SPD 0.1;
 #define CENTERING_UP_VEC_SPD 0.07
@@ -53,6 +54,7 @@
 +(CGPoint)player_move_along_island:(Player*)player islands:(NSMutableArray*)islands {
     float LIMIT_SPEED = [player get_current_params].cur_limit_speed;
     float MIN_SPEED = [player get_current_params].cur_min_speed;
+    //float ACCEL_TO_MIN = [player get_current_params].cur_min_speed;
     
     Island *i = player.current_island;
     Vec3D *tangent_vec = [i get_tangent_vec];
@@ -116,7 +118,6 @@
                 position_final = ccp(player.current_island.endX,player.current_island.endY);
             }
         } else {
-            //position_final = ccp(i.endX + tangent_vec.x*mov_speed, i.endY + tangent_vec.y*mov_speed);
             position_final = ccp(player.position.x + tangent_vec.x*mov_speed, player.position.y + tangent_vec.y*mov_speed);
             player.current_island = NULL;
             player.vx = tangent_vec.x * mov_speed;
