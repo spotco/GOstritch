@@ -36,8 +36,7 @@
     
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
-        //TODO:have zoom out and center
-        PlayerEffectParams *e = [DogCapeEffect init_from:[player get_current_params]];
+        PlayerEffectParams *e = [DogCapeEffect init_from:[player get_default_params]];
         [player add_effect:e];
         [self set_active:NO];
     }

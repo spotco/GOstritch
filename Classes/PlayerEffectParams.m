@@ -38,6 +38,10 @@
     }
 }
 
+-(player_anim_mode)get_anim {
+    return player_anim_mode_RUN;
+}
+
 -(void)update:(Player*)p {
 
 }

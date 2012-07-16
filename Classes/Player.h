@@ -1,13 +1,10 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Island.h"
-@class Island;
 #import "Resource.h"
-#import "PlayerEffectParams.h" 
-@class PlayerEffectParams;
 #import "Common.h"
+@class PlayerEffectParams;
 
-@class Player;
 @interface Player : CCSprite {
 	float vx,vy;
 	CCSprite* player_img;
@@ -20,13 +17,21 @@
     PlayerEffectParams *temp_params;
 }
 
+typedef enum {
+    player_anim_mode_RUN,
+    player_anim_mode_CAPE,
+    player_anim_mode_ROCKET
+} player_anim_mode;
+
 +(Player*)init_at:(CGPoint)pt;
+-(void)init_anim;
 -(void)add_effect:(PlayerEffectParams*)effect;
 -(void) reset;
 -(void) reset_params;
 -(void) update;
 -(HitRect) get_hit_rect;
 -(PlayerEffectParams*) get_current_params;
+-(PlayerEffectParams*) get_default_params;
 
 @property(readwrite,assign) float vx,vy;
 @property(readwrite,assign) CCSprite* player_img;

@@ -36,10 +36,11 @@
     
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
-        PlayerEffectParams *e = [DogRocketEffect init_from:[player get_current_params]];
+        PlayerEffectParams *e = [DogRocketEffect init_from:[player get_default_params]];
         player.vx += ABS(player.vy);
         player.vy = 0;
         [player add_effect:e];
+        NSLog(@"FUCKr:%i",[player get_current_params].time_left);
         [self set_active:NO];
     }
 }

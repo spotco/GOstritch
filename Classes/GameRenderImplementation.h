@@ -4,6 +4,7 @@
 #import "Island.h"
 #import "GameObject.h"
 #import "GameRenderState.h"
+#import "PlayerEffectParams.h"
 
 
 @interface GameRenderImplementation

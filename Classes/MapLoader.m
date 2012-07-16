@@ -46,7 +46,6 @@
                 ndir = -1;
             }
             BOOL can_land = ((NSString *)[currentIslandDict objectForKey:@"can_fall"]).boolValue;
-            NSLog(@"%@", can_land ? @"YES" : @"NO");
             currentIsland = [LineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
             
             NSLog(@"add line island");

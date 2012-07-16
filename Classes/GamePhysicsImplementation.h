@@ -3,6 +3,7 @@
 #import "Island.h"
 #import "Common.h"
 #import "Player.h"
+#import "PlayerEffectParams.h"
 
 @interface GamePhysicsImplementation
 

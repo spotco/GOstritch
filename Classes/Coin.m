@@ -1,4 +1,5 @@
 #import "Coin.h"
+#import "PlayerEffectParams.h"
 
 @implementation Coin
 
@@ -46,12 +47,14 @@
     
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) { //TODO -- WORK ON MEMORY MANAGEMENT HERE
-        PlayerEffectParams *e = [PlayerEffectParams init_copy:player.get_current_params];
-        e.time_left = 100;
-        e.cur_accel_to_min = 1;
-        player.vx = MIN(15,player.vx+5);
-        e.cur_min_speed = 15;
-        [player add_effect:e];
+        if ([[player get_current_params] get_anim] == player_anim_mode_RUN) {
+            PlayerEffectParams *e = [PlayerEffectParams init_copy:player.get_default_params];
+            e.time_left = 100;
+            e.cur_accel_to_min = 1;
+            player.vx = MIN(15,player.vx+5);
+            e.cur_min_speed = 15;
+            [player add_effect:e];
+        }
         [self set_active:NO];
     }
 }

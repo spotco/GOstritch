@@ -4,6 +4,7 @@
 #import "GameObject.h"
 #import "GameControlState.h"
 #import "Common.h"
+#import "PlayerEffectParams.h"
 
 @interface GameControlImplementation
 

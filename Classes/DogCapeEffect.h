@@ -1,5 +1,4 @@
 #import "PlayerEffectParams.h"
-#import "Player.h"
 
 @interface DogCapeEffect : PlayerEffectParams
 

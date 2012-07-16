@@ -5,8 +5,10 @@
 +(DogCapeEffect*)init_from:(PlayerEffectParams*)base {
     DogCapeEffect *n = [[DogCapeEffect alloc] init];
     [PlayerEffectParams copy_params_from:base to:n];
-    n.time_left = 400;
+    n.time_left = 300;
     n.cur_airjump_count = 1;
+    n.cur_min_speed = 14;
+    n.cur_limit_speed = n.cur_min_speed + 2;
     return n;
 }
 
@@ -16,11 +18,15 @@
     }
 }
 
+-(player_anim_mode)get_anim {
+    return player_anim_mode_CAPE;
+}
+
 -(void)decr_airjump_count {
 }
 
 -(NSString*)info {
-    return [NSString stringWithFormat:@"DogCapeEffect(minspd:%1.1f,timeleft:%i)",cur_min_speed,time_left];
+    return [NSString stringWithFormat:@"DogCapeEffect(timeleft:%i)",time_left];
 }
 
 

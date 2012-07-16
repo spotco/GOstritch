@@ -9,7 +9,7 @@
 
 
 //Used in freefall
-#define CENTERING_ROTATION_SPD 0.1;
+//#define CENTERING_ROTATION_SPD 0.1;
 #define CENTERING_UP_VEC_SPD 0.07
 #define MAX_LOSS 0.3
 
@@ -147,10 +147,10 @@
     player.scaleX = 1;
     player.scaleY = 1;
     
-    float cur_deg = ((int)player.rotation)%360;
+    /*float cur_deg = ((int)player.rotation)%360;
     float tar_deg = 0;
     float dir = [Common shortest_dist_from_cur:cur_deg to:tar_deg];
-    player.rotation += dir*CENTERING_ROTATION_SPD;
+    player.rotation += dir*CENTERING_ROTATION_SPD;*/
     
     
     float cur_ang = [Common rad_to_deg:[player.up_vec get_angle_in_rad]];

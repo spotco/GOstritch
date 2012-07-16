@@ -155,13 +155,25 @@ static NSString *my_map_file_type;
 
 -(void)draw {
     [super draw];
+    return;
+    
     glColor4ub(255,0,0,100);
     glLineWidth(1.0f);
     HitRect re = [player get_hit_rect]; 
     CGPoint *verts = [Common hitrect_get_pts:re];
     ccDrawPoly(verts, 4, YES);
+    
+    if (player.current_island == NULL) {
+        CGPoint a = ccp(verts[2].x,verts[2].y);
+        Vec3D *dv = [Vec3D init_x:player.vx y:player.vy z:0];
+        [dv normalize];
+        [dv scale:50];
+        CGPoint b = ccp(a.x+dv.x,a.y+dv.y);
+        [dv dealloc];
+        ccDrawLine(a, b);
+    }
     free(verts);
-     
+    
     for (GameObject* o in game_objects) {
         HitRect pathBox = [o get_hit_rect];
         verts = [Common hitrect_get_pts:pathBox];

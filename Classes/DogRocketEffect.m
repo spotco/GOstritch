@@ -19,12 +19,16 @@
     }
 }
 
+-(player_anim_mode)get_anim {
+    return player_anim_mode_ROCKET;
+}
+
 -(void)add_airjump_count {
     cur_airjump_count = 0;
 }
 
 -(NSString*)info {
-    return [NSString stringWithFormat:@"DogRocketEffect(minspd:%1.1f,timeleft:%i)",cur_min_speed,time_left];
+    return [NSString stringWithFormat:@"DogRocketEffect(timeleft:%i)",time_left];
 }
 
 @end
