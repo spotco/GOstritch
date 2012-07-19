@@ -16,38 +16,25 @@ static NSMutableDictionary* textures = nil;
 +(void)init_bg1_textures {
     textures = [NSMutableDictionary dictionary];
     NSArray *temp = [[NSArray alloc] initWithObjects:
-                     @"GroundTexture.png", TEX_GROUND_TEX_1,
-                     @"GrassTexture1.png", TEX_GROUND_TOP_1,
-                     @"dog1ss.png", TEX_DOG_RUN_1,
+                     @"BG1_island_fill.png", TEX_GROUND_TEX_1,
+                     @"BG1_top_fill.png", TEX_GROUND_TOP_1,
                      
-                     @"1_1Background_Hills-and-Sky.png", TEX_BG_SKY,
-                     @"1_1Background_Hills.png", TEX_BG_LAYER_1,
-                     @"1_1Background_Cloud.png", TEX_BG_LAYER_2,
+                     @"BG1_sky.png", TEX_BG_SKY,
+                     @"BG1_layer_1.png", TEX_BG_LAYER_1,
+                     @"BG1_layer_2.png", TEX_BG_LAYER_2,
+                                          
+                     @"BG1_detail_1.png", TEX_GROUND_DETAIL_1,
+                     @"BG1_detail_2.png", TEX_GROUND_DETAIL_2,
+                     @"BG1_detail_3.png", TEX_GROUND_DETAIL_3,
+                     
+                     @"dog1ss.png", TEX_DOG_RUN_1,
                      @"goldenbone.png", TEX_GOLDEN_BONE,
                      @"dogcape.png", TEX_DOG_CAPE,
                      @"dogrocket.png", TEX_DOG_ROCKET,
                      
-                     @"1_1Background_Short-Fence.png", TEX_GROUND_DETAIL_1,
-                     @"1_1Background_Arrow-Up.png", TEX_GROUND_DETAIL_2,
-                     @"1_1Background_Finish_2.png", TEX_GROUND_DETAIL_3,
                      nil];
     [Resource load_tex_from_array:temp];
 }
-
-/*+(void)init_bgtest_textures {
-    textures = [NSMutableDictionary dictionary];
-    NSArray *temp = [[NSArray alloc] initWithObjects:
-                     @"fg_tex.png", @"level1_island1_tex",
-                     @"fg_top.png", @"level1_island1_top",
-                     @"dog1runss.png", @"char1_run1_ss",
-                     
-                     @"bgsky.png",@"bg_sky",
-                     @"bg_layer_1.png",@"bg_layer_1",
-                     @"bg_layer_2.png",@"bg_layer_2",
-                     @"goldenbone.png",@"golden_bone",
-                     nil];
-    [Resource load_tex_from_array:temp];
-}*/
 
 +(void)load_tex_from_array:(NSArray*)temp {
     ccTexParams texParams = { GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT };

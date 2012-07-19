@@ -16,7 +16,7 @@ static NSString *my_map_file_type;
 	[[CCDirector sharedDirector] setDisplayFPS:NO];
 	CCScene *scene = [CCScene node];
 	BGLayer *bglayer = [BGLayer node];
-	//[scene addChild:bglayer];
+	[scene addChild:bglayer];
 	GameEngineLayer *layer = [GameEngineLayer node];
 	
     [scene addChild: layer];
@@ -52,7 +52,7 @@ static NSString *my_map_file_type;
         max_x = MAX(max_x, i.endX);
         max_y = MAX(max_y, i.endY);
     }
-    return [Common hitrect_cons_x1:-100 y1:-100 wid:max_x+600 hei:max_y+600];
+    return [Common hitrect_cons_x1:-100 y1:50 wid:max_x+600 hei:max_y+600];
 }
 
 

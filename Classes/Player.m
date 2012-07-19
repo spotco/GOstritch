@@ -195,9 +195,9 @@ NSDictionary *dog_1_ss_plist_dict;
         [dv dealloc];
         
         float rot = -[Common rad_to_deg:[dv get_angle_in_rad]];
-        /*float sig = [Common sig:rot];
-        rot = sig*sqrtf(ABS(rot));*/
-        rot *=0.4;
+        float sig = [Common sig:rot];
+        rot = sig*sqrtf(ABS(rot));
+        //rot *=0.4;
         rotation_ = rot;
     }
     
