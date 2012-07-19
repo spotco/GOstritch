@@ -5,18 +5,23 @@
 @class Island;
 @interface Island : CCSprite {
 	float startX, startY, endX, endY, ndir;
-    BOOL can_land;
+    BOOL can_land,has_prev;
     Island* next;
     
     float fill_hei;
     Vec3D* normal_vec;
+    
+    CGPoint tl,bl,tr,br;
+    CGPoint bl1,bl2,br1,br2;
 }
 
 
 @property(readwrite,assign) float startX, startY, endX, endY, fill_hei, ndir;
 @property(readwrite,assign) Island* next;
 @property(readwrite,assign) Vec3D* normal_vec;
-@property(readwrite,assign) BOOL can_land;
+@property(readwrite,assign) BOOL can_land,has_prev;
+
+@property(readwrite,assign) CGPoint tl,bl,tr,br,bl1,bl2,br1,br2;;
 
 +(float) NO_VALUE;
 +(int)link_islands:(NSMutableArray*)islands;

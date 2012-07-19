@@ -12,7 +12,8 @@ static float NO_VAL = -99999.0;
 @synthesize startX, startY, endX, endY, fill_hei, ndir;
 @synthesize next;
 @synthesize normal_vec;
-@synthesize can_land;
+@synthesize can_land,has_prev;
+@synthesize tl,bl,tr,br,bl1,bl2,br1,br2;;
 
 -(void)link_finish {
 }
@@ -48,7 +49,9 @@ static float NO_VAL = -99999.0;
         for(Island *j in islands) {
             if ([Common pt_fuzzy_eq:ccp(i.endX,i.endY) b:ccp(j.startX,j.startY)]) {
                 i.next = j;
+                j.has_prev = YES;
                 ct++;
+                break;
             }
         }
     }

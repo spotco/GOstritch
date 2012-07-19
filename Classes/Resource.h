@@ -10,6 +10,8 @@
 
 #define TEX_GROUND_TEX_1 @"GroundTexture1"
 #define TEX_GROUND_TOP_1 @"GroundTop1"
+#define TEX_TOP_EDGE @"GroundTopEdge"
+
 #define TEX_CLOUD @"CloudTex"
 #define TEX_DOG_RUN_1 @"Dog1RunSSheet"
 #define TEX_BG_SKY @"BgSky"

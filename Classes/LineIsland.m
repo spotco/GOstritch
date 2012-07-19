@@ -102,8 +102,6 @@ static float INF = INFINITY;
 		return;
 	} 
 	[super draw];
-
-    
     
 	glBindTexture(GL_TEXTURE_2D, main_fill.texture.name);
 	glVertexPointer(2, GL_FLOAT, 0, main_fill.tri_pts); //coord per vertex, type, stride, pointer to array
@@ -117,8 +115,39 @@ static float INF = INFINITY;
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glDrawArrays(GL_TRIANGLES, 1, 3);
     
+    
+    
+    glColor4ub(109,110,112,255);
+    glLineWidth(5.0f);
+    
+    if (has_prev == NO) {
+        ccDrawLine(tl, bl1);
+        ccDrawQuadBezier(bl1, bl, bl2, 3);
+    }
+    if (next == NULL) {
+        ccDrawLine(tr, br1);
+        ccDrawQuadBezier(br1, br, br2, 3);
+    }
+    ccDrawLine(bl2, br2);
+    
+    
+    if (has_prev == NO) {
+        glBindTexture(GL_TEXTURE_2D, tl_top_corner.texture.name);
+        glVertexPointer(2, GL_FLOAT, 0, tl_top_corner.tri_pts);
+        glTexCoordPointer(2, GL_FLOAT, 0, tl_top_corner.tex_pts);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_TRIANGLES, 1, 3);
+    }
+    if (next == NULL) {
+        glBindTexture(GL_TEXTURE_2D, tr_top_corner.texture.name);
+        glVertexPointer(2, GL_FLOAT, 0, tr_top_corner.tri_pts);
+        glTexCoordPointer(2, GL_FLOAT, 0, tr_top_corner.tex_pts);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_TRIANGLES, 1, 3);
+    }
+    
+    
     if (next != NULL) {
-
         glBindTexture(GL_TEXTURE_2D, corner_fill.texture.name);
         glVertexPointer(2,GL_FLOAT,0,corner_fill.tri_pts);
         glTexCoordPointer(2,GL_FLOAT,0,corner_fill.tex_pts);
@@ -126,7 +155,12 @@ static float INF = INFINITY;
         
         glColor4f(0.29, 0.69, 0.03, 1.0);
         ccDrawSolidPoly(toppts, 3, YES);
+        
+        glColor4ub(109,110,112,255);
+        glLineWidth(5.0f);
+        ccDrawLine(br2, ccp(next.bl2.x-startX+next.startX,next.bl2.y-startY+next.startY));
     }
+    
 }
 
 -(void)scale_ndir:(Vec3D*)v {
@@ -160,6 +194,42 @@ static float INF = INFINITY;
 	tex_pts[3] = ccp(tri_pts[3].x/texture.pixelsWide, tri_pts[3].y/texture.pixelsWide);
 	tex_pts[0] = ccp(tri_pts[0].x/texture.pixelsWide, tri_pts[0].y/texture.pixelsWide);
 	tex_pts[1] = ccp(tri_pts[1].x/texture.pixelsWide, tri_pts[1].y/texture.pixelsWide);
+    
+    /**
+     TL                  TR
+     
+     BL1                 BR1
+     BL  BL2       BR2   BR
+     
+     **/
+    
+    
+    bl = main_fill.tri_pts[1];
+    br = main_fill.tri_pts[0];
+    tl = main_fill.tri_pts[3];
+    tr = main_fill.tri_pts[2];
+    
+    float R = 7.5;
+    [v3t1 negate];
+    [v3t1 scale:R];
+    
+    bl1 = ccp(bl.x + v3t1.x,bl.y + v3t1.y);
+    
+    [v3t2 normalize];
+    [v3t2 scale:R];
+    bl2 = ccp(bl.x + v3t2.x,bl.y+v3t2.y);
+    
+    br1 = ccp(br.x + v3t1.x,br.y + v3t1.y);
+    [v3t2 negate];
+    br2 = ccp(br.x + v3t2.x,br.y+v3t2.y);
+    
+    
+    float L = 20;
+    [v3t1 negate];
+    [v3t1 normalize];
+    [v3t1 scale:L];
+    tl = ccp(tl.x + v3t1.x, tl.y + v3t1.y);
+    tr = ccp(tr.x + v3t1.x, tr.y + v3t1.y);
     
     [v3t2 dealloc];
     [v3t1 dealloc];
@@ -204,6 +274,81 @@ static float INF = INFINITY;
     
     toppts[0] = ccp(endX-startX,endY-startY);
     toppts[1] = ccp(tri_pts[2].x,tri_pts[2].y);
+    
+    [v3t2 negate];
+    [v3t2 normalize];
+    [self init_tl_top:tri_pts[1] bot:tri_pts[3] vec:v3t2];
+    [v3t2 negate];
+    [self init_tr_top:tri_pts[2] bot:tri_pts[0] vec:v3t2];
+    
+    [v3t1 dealloc];
+    [v3t2 dealloc];
+}
+
+-(void)init_tl_top:(CGPoint)top bot:(CGPoint)bot vec:(Vec3D*)vec {
+    Vec3D *mvr = [Vec3D init_x:-vec.x y:-vec.y z:0];
+    [mvr scale:8];
+    
+    top = [mvr transform_pt:top];
+    bot = [mvr transform_pt:bot];
+    [mvr dealloc];
+    
+    
+    tl_top_corner.texture = [Resource get_tex:TEX_TOP_EDGE];
+	tl_top_corner.tri_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+	tl_top_corner.tex_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+	
+	CGPoint* tri_pts = tl_top_corner.tri_pts;
+	CGPoint* tex_pts = tl_top_corner.tex_pts;
+    
+    [vec scale:20];
+    
+    /**
+     2  3
+     
+     0  1
+     **/
+    tri_pts[0] = ccp(top.x+vec.x,top.y+vec.y);
+    tri_pts[1] = top;
+    tri_pts[2] = ccp(bot.x+vec.x,bot.y+vec.y);
+    tri_pts[3] = bot;
+    [vec normalize];
+    
+    tex_pts[0] = ccp(0,0);
+    tex_pts[1] = ccp(1,0);
+    tex_pts[3] = ccp(1,1);
+    tex_pts[2] = ccp(0,1);
+}
+
+-(void)init_tr_top:(CGPoint)top bot:(CGPoint)bot vec:(Vec3D*)vec {
+    Vec3D *mvr = [Vec3D init_x:-vec.x y:-vec.y z:0];
+    [mvr scale:8];
+    
+    top = [mvr transform_pt:top];
+    bot = [mvr transform_pt:bot];
+    [mvr dealloc];
+    
+    
+    tr_top_corner.texture = [Resource get_tex:TEX_TOP_EDGE];
+	tr_top_corner.tri_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+	tr_top_corner.tex_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+	
+	CGPoint* tri_pts = tr_top_corner.tri_pts;
+	CGPoint* tex_pts = tr_top_corner.tex_pts;
+    
+    [vec scale:20];
+    
+    tri_pts[0] = ccp(top.x+vec.x,top.y+vec.y);
+    tri_pts[1] = top;
+    tri_pts[2] = ccp(bot.x+vec.x,bot.y+vec.y);
+    tri_pts[3] = bot;
+    [vec normalize];
+    
+    tex_pts[2] = ccp(0,0);
+    tex_pts[3] = ccp(1,0);
+    tex_pts[1] = ccp(1,1);
+    tex_pts[0] = ccp(0,1);
+    
 }
 
 -(void)link_finish {

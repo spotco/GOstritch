@@ -9,6 +9,9 @@
 	float min_range, max_range,t_min,t_max,slope;
 	gl_render_obj main_fill,top_fill,corner_fill,corner_top_fill;
     
+    
+    gl_render_obj tl_top_corner,tr_top_corner;
+    
     CGPoint toppts[3];
 }
 

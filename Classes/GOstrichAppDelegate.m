@@ -112,7 +112,7 @@
 	// Run the intro Scene
 	//[[CCDirector sharedDirector] runWithScene: [GameEngineLayer scene]];
     //[[CCDirector sharedDirector] runWithScene:[ThemeSelectionPage scene]];
-    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"test" of_type:@"map"]];
+    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"looptest" of_type:@"map"]];
 }
 
 
