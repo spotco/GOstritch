@@ -48,7 +48,7 @@
             BOOL can_land = ((NSString *)[currentIslandDict objectForKey:@"can_fall"]).boolValue;
             currentIsland = [LineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
             
-            NSLog(@"add line island");
+            //NSLog(@"add line island");
 		} else {
             NSLog(@"line read error");
             continue;
@@ -65,23 +65,23 @@
         if([type isEqualToString:@"coin"]){
             Coin *c = [Coin init_x:((NSString *)[j_object  objectForKey:@"x"]).floatValue y:((NSString *)[j_object objectForKey:@"y"]).floatValue];
             [map.game_objects addObject:c];
-            NSLog(@"add coin");
+            //NSLog(@"add coin");
         } else if ([type isEqualToString:@"cape"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             [map.game_objects addObject:[DogCape init_x:x y:y]];
-            NSLog(@"add cape");
+            //NSLog(@"add cape");
         } else if ([type isEqualToString:@"rocket"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             [map.game_objects addObject:[DogRocket init_x:x y:y]];
-            NSLog(@"add rocket");
+            //NSLog(@"add rocket");
         } else if ([type isEqualToString:@"ground_detail"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             int type = ((NSString*)[j_object  objectForKey:@"img"]).intValue;
             [map.game_objects addObject:[GroundDetail init_x:x y:y type:type]];
-            NSLog(@"add ground detail x:%f y:%f",x,y);
+            //NSLog(@"add ground detail x:%f y:%f",x,y);
         } else {
             NSLog(@"item read error");
             continue;

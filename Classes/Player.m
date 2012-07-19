@@ -222,7 +222,7 @@ NSDictionary *dog_1_ss_plist_dict;
     
     if (temp_params != NULL) {
         [temp_params update:self];
-        NSLog(@"%@",[temp_params info]);
+        //NSLog(@"%@",[temp_params info]);
         temp_params.time_left--;
         if (temp_params.time_left <= 0) {
             [temp_params release];

@@ -10,10 +10,12 @@
 
 #define TEX_GROUND_TEX_1 @"GroundTexture1"
 #define TEX_GROUND_TOP_1 @"GroundTop1"
+#define TEX_CLOUD @"CloudTex"
 #define TEX_DOG_RUN_1 @"Dog1RunSSheet"
 #define TEX_BG_SKY @"BgSky"
 #define TEX_BG_LAYER_1 @"BgLayer1"
 #define TEX_BG_LAYER_2 @"BgLayer2"
+#define TEX_BG_LAYER_3 @"BgLayer3"
 #define TEX_GOLDEN_BONE @"GoldenBone"
 #define TEX_DOG_CAPE @"DogCape"
 #define TEX_DOG_ROCKET @"DogRocket"

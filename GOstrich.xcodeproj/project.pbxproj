@@ -103,6 +103,9 @@
 		7EF654F115AA62FA0094EA20 /* GamePhysicsImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF654F015AA62FA0094EA20 /* GamePhysicsImplementation.m */; };
 		7EF654F415AA64BE0094EA20 /* GameRenderImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF654F315AA64BE0094EA20 /* GameRenderImplementation.m */; };
 		7EF654F715AA6D5F0094EA20 /* GameControlImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF654F615AA6D5F0094EA20 /* GameControlImplementation.m */; };
+		7EFA3A4815B79B0000133CE3 /* BG1_cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA3A4715B79B0000133CE3 /* BG1_cloud.png */; };
+		7EFA3A4C15B79C5000133CE3 /* CloudGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA3A4B15B79C5000133CE3 /* CloudGenerator.m */; };
+		7EFA3A5115B7B93000133CE3 /* BG1_layer_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA3A5015B7B93000133CE3 /* BG1_layer_3.png */; };
 		8B4028D01592CDCF00A2E791 /* MapLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028CF1592CDCF00A2E791 /* MapLoader.m */; };
 		8B4028D31592D43900A2E791 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B4028D21592D43900A2E791 /* Map.m */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
@@ -436,6 +439,10 @@
 		7EF654F315AA64BE0094EA20 /* GameRenderImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameRenderImplementation.m; sourceTree = "<group>"; };
 		7EF654F515AA6D5F0094EA20 /* GameControlImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameControlImplementation.h; sourceTree = "<group>"; };
 		7EF654F615AA6D5F0094EA20 /* GameControlImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameControlImplementation.m; sourceTree = "<group>"; };
+		7EFA3A4715B79B0000133CE3 /* BG1_cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_cloud.png; path = Resources/bg/BG1/BG1_cloud.png; sourceTree = SOURCE_ROOT; };
+		7EFA3A4A15B79C5000133CE3 /* CloudGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudGenerator.h; sourceTree = "<group>"; };
+		7EFA3A4B15B79C5000133CE3 /* CloudGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudGenerator.m; sourceTree = "<group>"; };
+		7EFA3A5015B7B93000133CE3 /* BG1_layer_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_layer_3.png; path = Resources/bg/BG1/BG1_layer_3.png; sourceTree = SOURCE_ROOT; };
 		8B4028CE1592CDCF00A2E791 /* MapLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapLoader.h; sourceTree = "<group>"; };
 		8B4028CF1592CDCF00A2E791 /* MapLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapLoader.m; sourceTree = "<group>"; };
 		8B4028D11592D43900A2E791 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
@@ -893,6 +900,8 @@
 		7E89F253159ADF2C00A32F2B /* BG1 */ = {
 			isa = PBXGroup;
 			children = (
+				7EFA3A5015B7B93000133CE3 /* BG1_layer_3.png */,
+				7EFA3A4715B79B0000133CE3 /* BG1_cloud.png */,
 				7ECB83BF15B6590E00F52E55 /* BG1_detail_1.png */,
 				7ECB83C015B6590E00F52E55 /* BG1_detail_2.png */,
 				7ECB83C115B6590E00F52E55 /* BG1_detail_3.png */,
@@ -987,6 +996,8 @@
 			children = (
 				7E8F90001568556900C2E30F /* BackgroundObject.h */,
 				7E8F90011568556900C2E30F /* BackgroundObject.m */,
+				7EFA3A4A15B79C5000133CE3 /* CloudGenerator.h */,
+				7EFA3A4B15B79C5000133CE3 /* CloudGenerator.m */,
 			);
 			name = bg_obj;
 			sourceTree = "<group>";
@@ -1536,6 +1547,8 @@
 				7ECB83CC15B6590E00F52E55 /* BG1_layer_2.png in Resources */,
 				7ECB83CD15B6590E00F52E55 /* BG1_sky.png in Resources */,
 				7ECB83CE15B6590E00F52E55 /* BG1_top_fill.png in Resources */,
+				7EFA3A4815B79B0000133CE3 /* BG1_cloud.png in Resources */,
+				7EFA3A5115B7B93000133CE3 /* BG1_layer_3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1580,6 +1593,7 @@
 				7E5EB93215B2C3BB000877A7 /* DogRocket.m in Sources */,
 				7E5EB93515B2C809000877A7 /* DogCapeEffect.m in Sources */,
 				7E5EB93815B2CF48000877A7 /* DogRocketEffect.m in Sources */,
+				7EFA3A4C15B79C5000133CE3 /* CloudGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
