@@ -121,15 +121,35 @@ static float INF = INFINITY;
     glLineWidth(5.0f);
     
     if (has_prev == NO) {
-        ccDrawLine(tl, bl1);
+        //ccDrawLine(tl, bl1);
+        
+        glBindTexture(GL_TEXTURE_2D, left_line_fill.texture.name);
+        glVertexPointer(2, GL_FLOAT, 0, left_line_fill.tri_pts);
+        glTexCoordPointer(2, GL_FLOAT, 0, left_line_fill.tex_pts);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_TRIANGLES, 1, 3);
+         
         ccDrawQuadBezier(bl1, bl, bl2, 3);
     }
     if (next == NULL) {
-        ccDrawLine(tr, br1);
+        //ccDrawLine(tr, br1);
+        
+        glBindTexture(GL_TEXTURE_2D, right_line_fill.texture.name);
+        glVertexPointer(2, GL_FLOAT, 0, right_line_fill.tri_pts);
+        glTexCoordPointer(2, GL_FLOAT, 0, right_line_fill.tex_pts);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_TRIANGLES, 1, 3);
+        
         ccDrawQuadBezier(br1, br, br2, 3);
     }
-    ccDrawLine(bl2, br2);
     
+    //ccDrawLine(bl2, br2);
+    
+    glBindTexture(GL_TEXTURE_2D, bottom_line_fill.texture.name);
+    glVertexPointer(2, GL_FLOAT, 0, bottom_line_fill.tri_pts);
+    glTexCoordPointer(2, GL_FLOAT, 0, bottom_line_fill.tex_pts);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_TRIANGLES, 1, 3);
     
     if (has_prev == NO) {
         glBindTexture(GL_TEXTURE_2D, tl_top_corner.texture.name);
@@ -156,9 +176,14 @@ static float INF = INFINITY;
         glColor4f(0.29, 0.69, 0.03, 1.0);
         ccDrawSolidPoly(toppts, 3, YES);
         
-        glColor4ub(109,110,112,255);
+        /*glColor4ub(109,110,112,255);
         glLineWidth(5.0f);
-        ccDrawLine(br2, ccp(next.bl2.x-startX+next.startX,next.bl2.y-startY+next.startY));
+        ccDrawLine(br2, ccp(next.bl2.x-startX+next.startX,next.bl2.y-startY+next.startY));*/
+        glBindTexture(GL_TEXTURE_2D, corner_line_fill.texture.name);
+        glVertexPointer(2, GL_FLOAT, 0, corner_line_fill.tri_pts);
+        glTexCoordPointer(2, GL_FLOAT, 0, corner_line_fill.tex_pts);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_TRIANGLES, 1, 3);
     }
     
 }
@@ -231,6 +256,9 @@ static float INF = INFINITY;
     tl = ccp(tl.x + v3t1.x, tl.y + v3t1.y);
     tr = ccp(tr.x + v3t1.x, tr.y + v3t1.y);
     
+    [self init_left_line_fill];
+    [self init_right_line_fill];
+    
     [v3t2 dealloc];
     [v3t1 dealloc];
 }
@@ -280,6 +308,8 @@ static float INF = INFINITY;
     [self init_tl_top:tri_pts[1] bot:tri_pts[3] vec:v3t2];
     [v3t2 negate];
     [self init_tr_top:tri_pts[2] bot:tri_pts[0] vec:v3t2];
+    
+    [self init_bottom_line_fill];
     
     [v3t1 dealloc];
     [v3t2 dealloc];
@@ -348,13 +378,173 @@ static float INF = INFINITY;
     tex_pts[3] = ccp(1,0);
     tex_pts[1] = ccp(1,1);
     tex_pts[0] = ccp(0,1);
+}
+
+-(void)init_bottom_line_fill {
+    bottom_line_fill.texture = [Resource get_tex:TEX_ISLAND_BORDER];
+	bottom_line_fill.tri_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+	bottom_line_fill.tex_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+	
+	CGPoint* tri_pts = bottom_line_fill.tri_pts;
+	CGPoint* tex_pts = bottom_line_fill.tex_pts;
     
+    Vec3D *v = [Vec3D init_x:br2.x-bl2.x y:br2.y-bl2.y z:0];
+    Vec3D *dirv;
+    
+    if (ndir == -1) {
+        dirv = [[Vec3D Z_VEC] crossWith:v];
+    } else {
+        dirv = [v crossWith:[Vec3D Z_VEC]];
+    }
+    
+    [dirv normalize];
+    [dirv scale:5];
+    
+    //bl2,br2
+    tri_pts[0] = bl2;
+    tri_pts[1] = br2;
+    tri_pts[2] = ccp(bl2.x+dirv.x,bl2.y+dirv.y);
+    tri_pts[3] = ccp(br2.x+dirv.x,br2.y+dirv.y);
+    
+    tex_pts[0] = ccp(0,0);
+    tex_pts[1] = ccp(1,0);
+    tex_pts[2] = ccp(0,1);
+    tex_pts[3] = ccp(1,1);
+    
+    [v dealloc];
+    [dirv dealloc];
+}
+
+-(void)init_corner_line_fill {
+    if (next == NULL) {
+        return;
+    }
+    CGPoint a = br2;
+    CGPoint b = ccp(next.bl2.x-startX+next.startX,next.bl2.y-startY+next.startY);
+    
+    corner_line_fill.texture = [Resource get_tex:TEX_ISLAND_BORDER];
+	corner_line_fill.tri_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+	corner_line_fill.tex_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+    
+    CGPoint* tri_pts = corner_line_fill.tri_pts;
+	CGPoint* tex_pts = corner_line_fill.tex_pts;
+    
+    Vec3D *v = [Vec3D init_x:b.x-a.x y:b.y-a.y z:0];
+    Vec3D *dirv;
+    
+    if (ndir == -1) {
+        dirv = [[Vec3D Z_VEC] crossWith:v];
+    } else {
+        dirv = [v crossWith:[Vec3D Z_VEC]];
+    }
+    
+
+    [dirv normalize];
+    [dirv scale:5];
+    
+    
+    tri_pts[0] = a;
+    tri_pts[1] = b;
+    tri_pts[2] = ccp(a.x+dirv.x,a.y+dirv.y);
+    tri_pts[3] = ccp(b.x+dirv.x,b.y+dirv.y);
+
+    
+    tex_pts[0] = ccp(0,0);
+    tex_pts[1] = ccp(1,0);
+    tex_pts[2] = ccp(0,1);
+    tex_pts[3] = ccp(1,1);
+    
+    [v dealloc];
+    [dirv dealloc];
+}
+
+-(void)init_left_line_fill {
+    //tl,bl1
+    CGPoint a = tl;
+    CGPoint b = bl1;
+    
+    
+    left_line_fill.texture = [Resource get_tex:TEX_ISLAND_BORDER];
+	left_line_fill.tri_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+	left_line_fill.tex_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+    
+    CGPoint* tri_pts = left_line_fill.tri_pts;
+	CGPoint* tex_pts = left_line_fill.tex_pts;
+    
+    Vec3D *v = [Vec3D init_x:b.x-a.x y:b.y-a.y z:0];
+    Vec3D *dirv;
+    
+    if (ndir == -1) {
+        dirv = [[Vec3D Z_VEC] crossWith:v];
+    } else {
+        dirv = [v crossWith:[Vec3D Z_VEC]];
+    }
+    
+    
+    [dirv normalize];
+    [dirv scale:5];
+    
+    
+    tri_pts[0] = a;
+    tri_pts[1] = b;
+    tri_pts[2] = ccp(a.x+dirv.x,a.y+dirv.y);
+    tri_pts[3] = ccp(b.x+dirv.x,b.y+dirv.y);
+    
+    
+    tex_pts[0] = ccp(0,0);
+    tex_pts[1] = ccp(1,0);
+    tex_pts[2] = ccp(0,1);
+    tex_pts[3] = ccp(1,1);
+    
+    [v dealloc];
+    [dirv dealloc];
+}
+
+-(void)init_right_line_fill {
+    //tr,br1
+    CGPoint a = tr;
+    CGPoint b = br1;
+    
+    right_line_fill.texture = [Resource get_tex:TEX_ISLAND_BORDER];
+	right_line_fill.tri_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+	right_line_fill.tex_pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+    
+    CGPoint* tri_pts = right_line_fill.tri_pts;
+	CGPoint* tex_pts = right_line_fill.tex_pts;
+    
+    Vec3D *v = [Vec3D init_x:b.x-a.x y:b.y-a.y z:0];
+    Vec3D *dirv;
+    
+    if (ndir == -1) {
+        dirv = [[Vec3D Z_VEC] crossWith:v];
+    } else {
+        dirv = [v crossWith:[Vec3D Z_VEC]];
+    }
+    
+    [dirv normalize];
+    [dirv scale:-5];
+    
+    
+    tri_pts[0] = a;
+    tri_pts[1] = b;
+    tri_pts[2] = ccp(a.x+dirv.x,a.y+dirv.y);
+    tri_pts[3] = ccp(b.x+dirv.x,b.y+dirv.y);
+    
+    
+    tex_pts[0] = ccp(0,0);
+    tex_pts[1] = ccp(1,0);
+    tex_pts[2] = ccp(0,1);
+    tex_pts[3] = ccp(1,1);
+    
+    [v dealloc];
+    [dirv dealloc];
 }
 
 -(void)link_finish {
     if (next != NULL) {
         [self init_corner_tex];
         [self init_corner_top];
+        [self init_corner_line_fill];
     }
 }
 

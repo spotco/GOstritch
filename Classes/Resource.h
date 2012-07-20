@@ -12,6 +12,7 @@
 #define TEX_GROUND_TOP_1 @"GroundTop1"
 #define TEX_TOP_EDGE @"GroundTopEdge"
 
+#define TEX_ISLAND_BORDER @"IslandBorder"
 #define TEX_CLOUD @"CloudTex"
 #define TEX_DOG_RUN_1 @"Dog1RunSSheet"
 #define TEX_BG_SKY @"BgSky"
@@ -25,5 +26,9 @@
 #define TEX_GROUND_DETAIL_1 @"GroundDetail1"
 #define TEX_GROUND_DETAIL_2 @"GroundDetail2"
 #define TEX_GROUND_DETAIL_3 @"GroundDetail3"
+
+#define TEX_UI_COINCOUNT @"UICoinCount"
+#define TEX_UI_PAUSEICON @"UIPauseIcon"
+#define TEX_UI_PAUSEMENU @"UIPauseMenu"
 
 @end

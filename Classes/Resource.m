@@ -16,6 +16,11 @@ static NSMutableDictionary* textures = nil;
 +(void)init_bg1_textures {
     textures = [NSMutableDictionary dictionary];
     NSArray *temp = [[NSArray alloc] initWithObjects:
+                     
+                     @"coincount.png", TEX_UI_COINCOUNT,
+                     @"pauseicon.png", TEX_UI_PAUSEICON,
+                     @"pausescreen.png", TEX_UI_PAUSEMENU,
+                     
                      @"BG1_island_fill.png", TEX_GROUND_TEX_1,
                      @"BG1_top_fill.png", TEX_GROUND_TOP_1,
                      @"BG1_island_top_edge.png", TEX_TOP_EDGE,
@@ -24,6 +29,7 @@ static NSMutableDictionary* textures = nil;
                      @"BG1_layer_1.png", TEX_BG_LAYER_1,
                      @"BG1_layer_2.png", TEX_BG_LAYER_2,
                      @"BG1_layer_3.png", TEX_BG_LAYER_3,
+                     @"BG1_island_border.png", TEX_ISLAND_BORDER,
                      @"BG1_cloud.png", TEX_CLOUD,
                                           
                      @"BG1_detail_1.png", TEX_GROUND_DETAIL_1,

@@ -12,6 +12,8 @@
     
     gl_render_obj tl_top_corner,tr_top_corner;
     
+    gl_render_obj bottom_line_fill,corner_line_fill,left_line_fill,right_line_fill;
+    
     CGPoint toppts[3];
 }
 

@@ -4,6 +4,7 @@
 #import "Common.h"
 #import "GameObject.h"
 #import "BGLayer.h"
+#import "UILayer.h"
 #import "Resource.h"
 #import "MapLoader.h"
 #import "GamePhysicsImplementation.h"
@@ -19,7 +20,11 @@
 	Player *player;
     GameControlState *game_control_state;
     GameRenderState *game_render_state;
+    
+    BOOL paused;
 }
+
+@property(readwrite,assign) BOOL paused;
 
 
 +(float) get_cur_pos_x;
@@ -31,5 +36,7 @@
 -(void) check_game_state;
 -(void) update_static_x:(float)pos_x y:(float)pos_y;
 -(void) update_game_obj;
+
++(BOOL)singleton_toggle_pause;
 
 @end

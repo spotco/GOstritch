@@ -2,6 +2,8 @@
 
 @implementation GameEngineLayer
 
+@synthesize paused;
+
 static float cur_pos_x = 0;
 static float cur_pos_y = 0;
 static NSString *my_map_file_name;
@@ -13,19 +15,32 @@ static NSString *my_map_file_type;
     my_map_file_type = map_file_type;
     
     [Resource init_bg1_textures];
-	[[CCDirector sharedDirector] setDisplayFPS:NO];
+	[[CCDirector sharedDirector] setDisplayFPS:YES];
 	CCScene *scene = [CCScene node];
+    
 	BGLayer *bglayer = [BGLayer node];
 	[scene addChild:bglayer];
+    
 	GameEngineLayer *layer = [GameEngineLayer node];
-	
     [scene addChild: layer];
+    
+    UILayer* uilayer = [UILayer node];
+    [scene addChild:uilayer];
+    
 	return scene;
 }
 
+GameEngineLayer* singleton_instance;
+
++(BOOL)singleton_toggle_pause {
+    singleton_instance.paused = !singleton_instance.paused;
+    return singleton_instance.paused;
+}
 
 -(id) init{
 	if( (self=[super init])) {
+        singleton_instance = self;
+        
         game_control_state = [[GameControlState alloc] init];
         game_render_state = [[GameRenderState alloc] init];
         
@@ -36,6 +51,7 @@ static NSString *my_map_file_type;
 		[self schedule:@selector(update:)];
 		self.isTouchEnabled = YES;
         
+        paused = NO;
         
         [GameRenderImplementation update_camera_on:self state:game_render_state];
         
@@ -83,7 +99,11 @@ static NSString *my_map_file_type;
     return map.player_start_pt;
 }
 
--(void)update:(ccTime)dt {	
+-(void)update:(ccTime)dt {
+    if (paused) {
+        return;
+    }
+    
     [GamePhysicsImplementation player_move:player with_islands:islands];
     [GameControlImplementation control_update_player:player state:game_control_state islands:islands objects:game_objects];
     [player update];
