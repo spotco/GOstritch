@@ -8,8 +8,6 @@
 #define OFFSET -40
 static float INF = INFINITY;
 
-@synthesize min_range,max_range,t_min,t_max,slope;
-@synthesize main_fill,top_fill,corner_fill;
 
 +(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land {
 	LineIsland *new_island = [LineIsland node];
@@ -43,27 +41,8 @@ static float INF = INFINITY;
 }
 
 -(void)calc_init {
-	min_range = startX;
-	max_range = endX;
     t_min = 0;
     t_max = sqrtf(powf(endX - startX, 2) + powf(endY - startY, 2));
-    if (startX == endX) {
-        if (startY > endY){
-            slope = -INF;
-        } else {
-            slope = INF;
-        }
-    } else {
-        slope = (endY - startY)/(endX - startX);
-    }
-}
-
--(float)get_height:(float)pos {
-	if (pos < min_range || pos > max_range) {
-		return [Island NO_VALUE];
-	} else {
-		return startY+(pos-startX)*slope;
-	}
 }
 
 -(Vec3D*)get_tangent_vec {
@@ -176,9 +155,6 @@ static float INF = INFINITY;
         glColor4f(0.29, 0.69, 0.03, 1.0);
         ccDrawSolidPoly(toppts, 3, YES);
         
-        /*glColor4ub(109,110,112,255);
-        glLineWidth(5.0f);
-        ccDrawLine(br2, ccp(next.bl2.x-startX+next.startX,next.bl2.y-startY+next.startY));*/
         glBindTexture(GL_TEXTURE_2D, corner_line_fill.texture.name);
         glVertexPointer(2, GL_FLOAT, 0, corner_line_fill.tri_pts);
         glTexCoordPointer(2, GL_FLOAT, 0, corner_line_fill.tex_pts);

@@ -91,6 +91,10 @@
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             [map.game_objects addObject:[GameEndArea init_x:x y:y]];
+        } else if ([type isEqualToString:@"spike"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            [map.game_objects addObject:[Spike init_x:x y:y]];
         } else {
             NSLog(@"item read error");
             continue;

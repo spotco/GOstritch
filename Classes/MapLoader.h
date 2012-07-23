@@ -9,6 +9,7 @@
 #import "DogRocket.h"
 #import "CheckPoint.h"
 #import "GameEndArea.h"
+#import "Spike.h"
 
 @interface MapLoader : NSObject
 

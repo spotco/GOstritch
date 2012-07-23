@@ -112,6 +112,7 @@
 		7EDA90C615BCB5470004CED7 /* CheckPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDA90C515BCB5470004CED7 /* CheckPoint.m */; };
 		7EDA90CA15BCC3D50004CED7 /* BG1_layer_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDA90C915BCC3D50004CED7 /* BG1_layer_1.png */; };
 		7EDA90CD15BCC5990004CED7 /* GameEndArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDA90CC15BCC5990004CED7 /* GameEndArea.m */; };
+		7EDA90D015BCED590004CED7 /* Spike.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDA90CF15BCED580004CED7 /* Spike.m */; };
 		7EDC29FD15AFBD50008B0DC3 /* PlayerEffectParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDC29FC15AFBD50008B0DC3 /* PlayerEffectParams.m */; };
 		7EDF0444159C53A000E9ABDA /* 1_1Icon 250px.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF043F159C53A000E9ABDA /* 1_1Icon 250px.png */; };
 		7EDF0445159C53A000E9ABDA /* theme_selection_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0440159C53A000E9ABDA /* theme_selection_bg.jpg */; };
@@ -466,6 +467,8 @@
 		7EDA90C915BCC3D50004CED7 /* BG1_layer_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_layer_1.png; path = Resources/bg/BG1/BG1_layer_1.png; sourceTree = SOURCE_ROOT; };
 		7EDA90CB15BCC5980004CED7 /* GameEndArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameEndArea.h; sourceTree = "<group>"; };
 		7EDA90CC15BCC5990004CED7 /* GameEndArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameEndArea.m; sourceTree = "<group>"; };
+		7EDA90CE15BCED580004CED7 /* Spike.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spike.h; sourceTree = "<group>"; };
+		7EDA90CF15BCED580004CED7 /* Spike.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Spike.m; sourceTree = "<group>"; };
 		7EDC29FB15AFBD50008B0DC3 /* PlayerEffectParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerEffectParams.h; sourceTree = "<group>"; };
 		7EDC29FC15AFBD50008B0DC3 /* PlayerEffectParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerEffectParams.m; sourceTree = "<group>"; };
 		7EDF043F159C53A000E9ABDA /* 1_1Icon 250px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1_1Icon 250px.png"; sourceTree = "<group>"; };
@@ -1044,6 +1047,8 @@
 				7E89F24C159ADA3A00A32F2B /* GroundDetail.m */,
 				7E93D6741592B97C00A83E9C /* GameObject.h */,
 				7E93D6751592B97C00A83E9C /* GameObject.m */,
+				7EDA90CE15BCED580004CED7 /* Spike.h */,
+				7EDA90CF15BCED580004CED7 /* Spike.m */,
 			);
 			name = game_obj;
 			sourceTree = "<group>";
@@ -1738,6 +1743,7 @@
 				7E961F1115B90A540096F2C8 /* UILayer.m in Sources */,
 				7EDA90C615BCB5470004CED7 /* CheckPoint.m in Sources */,
 				7EDA90CD15BCC5990004CED7 /* GameEndArea.m in Sources */,
+				7EDA90D015BCED590004CED7 /* Spike.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
