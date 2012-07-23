@@ -214,7 +214,7 @@ NSDictionary *dog_1_ss_plist_dict;
                 [self start_anim:_RUN_ANIM_SLOW];
             }
         }
-    } else if (cur_anim_mode == player_anim_mode_CAPE) { //TODO -- powerup priority system
+    } else if (cur_anim_mode == player_anim_mode_CAPE) {
         [self start_anim:_CAPE_ANIM];
     } else if (cur_anim_mode == player_anim_mode_ROCKET) {
         [self start_anim:_ROCKET_ANIM];
@@ -229,7 +229,7 @@ NSDictionary *dog_1_ss_plist_dict;
             temp_params = NULL;
         }
     } else {
-        if (current_island != NULL) {//momentum acceleration, TODO: tweak
+        if (current_island != NULL) {
             if (current_params.cur_min_speed < MIN_SPEED_MAX && (vel >= tar || ABS(tar-vel) < tar * 0.4)  ) {
                 current_params.cur_min_speed += ACCEL_INCR;
             } else if (current_params.cur_limit_speed > DEFAULT_MIN_SPEED && current_params.cur_min_speed*0.9 > DEFAULT_MIN_SPEED && (vel < tar*0.5)) {

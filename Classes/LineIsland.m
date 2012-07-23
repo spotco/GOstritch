@@ -14,6 +14,7 @@
 #define CORNER_CURVATURE 7.5
 #define TL_DOWNOFFSET 20
 
+@synthesize tl,bl,tr,br,bl1,bl2,br1,br2;
 
 +(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land {
 	LineIsland *new_island = [LineIsland node];
@@ -26,17 +27,8 @@
     new_island.can_land = can_land;
 	[new_island init_tex];
 	[new_island init_top];
-    [new_island calculate_normal];
 	return new_island;
 	
-}
-
--(void)calculate_normal {
-    Vec3D *line_vec = [Vec3D init_x:endX-startX y:endY-startY z:0];
-    normal_vec = [[Vec3D Z_VEC] crossWith:line_vec];
-    [normal_vec normalize];
-    [line_vec dealloc];
-    [normal_vec scale:ndir];
 }
 
 -(void)set_pt1:(CGPoint)start pt2:(CGPoint)end {
@@ -49,36 +41,6 @@
 -(void)calc_init {
     t_min = 0;
     t_max = sqrtf(powf(endX - startX, 2) + powf(endY - startY, 2));
-}
-
--(Vec3D*)get_tangent_vec {
-    Vec3D *v = [Vec3D init_x:endX-startX y:endY-startY z:0];
-    [v normalize];
-    return v;
-}
-
--(line_seg)get_line_seg_a:(float)pre_x b:(float)post_x {
-    return [Common cons_line_seg_a:ccp(startX,startY) b:ccp(endX,endY)];
-}
-
--(float)get_t_given_position:(CGPoint)position {
-    float dx = powf(position.x - startX, 2);
-    float dy = powf(position.y - startY, 2);
-    float f = sqrtf( dx+dy );
-    return f;
-}
-
--(CGPoint)get_position_given_t:(float)t {
-    if (t > t_max || t < t_min) {
-         return ccp([Island NO_VALUE],[Island NO_VALUE]);
-    } else {
-        float frac = t/t_max;
-        Vec3D *dir_vec = [Vec3D init_x:endX-startX y:endY-startY z:0];
-        [dir_vec scale:frac];
-        CGPoint pos = ccp(startX+dir_vec.x,startY+dir_vec.y);
-        [dir_vec dealloc];
-        return pos;
-    }
 }
 
 -(void)draw_renderobj:(gl_render_obj)obj n_vtx:(int)n_vtx {
@@ -120,7 +82,6 @@
     if (next == NULL) {
         [self draw_renderobj:tr_top_corner n_vtx:4];
     }
-    
     
     if (next != NULL) {
         [self draw_renderobj:corner_fill n_vtx:3];
@@ -345,7 +306,10 @@
         return;
     }
     
-    corner_line_fill = [self line_from:br2 to:ccp(next.bl2.x-startX+next.startX,next.bl2.y-startY+next.startY) scale:1];
+    if ([next class] == [LineIsland class]) {
+        LineIsland *n = (LineIsland*)next;
+        corner_line_fill = [self line_from:br2 to:ccp(n.bl2.x-startX+n.startX,n.bl2.y-startY+n.startY) scale:1];
+    }
 }
 
 -(void)init_left_line_fill {    

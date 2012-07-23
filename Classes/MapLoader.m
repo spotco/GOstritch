@@ -38,6 +38,7 @@
         NSString *type = (NSString*)[currentIslandDict objectForKey:@"type"];
         
         Island *currentIsland;
+        
 		if ([type isEqualToString:@"line"]) {
             float height = ((NSString *)[currentIslandDict objectForKey:@"hei"]).floatValue;
             NSString *ndir_str = [currentIslandDict objectForKey:@"ndir"];
@@ -66,35 +67,38 @@
         if([type isEqualToString:@"coin"]){
             Coin *c = [Coin init_x:((NSString *)[j_object  objectForKey:@"x"]).floatValue y:((NSString *)[j_object objectForKey:@"y"]).floatValue];
             [map.game_objects addObject:c];
-            //NSLog(@"add coin");
+            
         } else if ([type isEqualToString:@"cape"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             [map.game_objects addObject:[DogCape init_x:x y:y]];
-            //NSLog(@"add cape");
+            
         } else if ([type isEqualToString:@"rocket"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             [map.game_objects addObject:[DogRocket init_x:x y:y]];
-            //NSLog(@"add rocket");
+            
         } else if ([type isEqualToString:@"ground_detail"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             int type = ((NSString*)[j_object  objectForKey:@"img"]).intValue;
             [map.game_objects addObject:[GroundDetail init_x:x y:y type:type]];
-            //NSLog(@"add ground detail x:%f y:%f",x,y);
+            
         } else if ([type isEqualToString:@"checkpoint"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             [map.game_objects addObject:[CheckPoint init_x:x y:y]];
+            
         } else if ([type isEqualToString:@"game_end"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             [map.game_objects addObject:[GameEndArea init_x:x y:y]];
+            
         } else if ([type isEqualToString:@"spike"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             [map.game_objects addObject:[Spike init_x:x y:y]];
+            
         } else {
             NSLog(@"item read error");
             continue;

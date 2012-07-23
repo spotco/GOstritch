@@ -9,39 +9,9 @@ static float NO_VAL = -99999.0;
     return NO_VAL;
 }
 
-@synthesize startX, startY, endX, endY, fill_hei, ndir;
+@synthesize startX, startY, endX, endY, fill_hei, ndir, t_min, t_max;
 @synthesize next;
-@synthesize normal_vec;
 @synthesize can_land,has_prev;
-@synthesize tl,bl,tr,br,bl1,bl2,br1,br2;;
-
--(void)link_finish {
-}
-
--(float)get_height:(float)pos {
-	return [Island NO_VALUE];
-}
-
--(line_seg)get_line_seg_a:(float)pre_x b:(float)post_x {
-    float island_start_x = pre_x;
-    float island_start_y = [self get_height:island_start_x];
-    if (island_start_y == [Island NO_VALUE]) {
-        island_start_x = startX;
-        island_start_y = startY;
-    }
-    
-    float island_end_x = post_x;
-    float island_end_y = [self get_height:island_end_x];
-    if (island_end_y == [Island NO_VALUE]) {
-        island_end_x = endX;
-        island_end_y = endY;
-    }
-    return [Common cons_line_seg_a:ccp(island_start_x,island_start_y) b:ccp(island_end_x,island_end_y)];
-}
-
--(Vec3D*)get_tangent_vec {
-    return [Vec3D init_x:0 y:0 z:0];
-}
 
 +(int) link_islands:(NSMutableArray*)islands {
     int ct = 0;
@@ -61,12 +31,48 @@ static float NO_VAL = -99999.0;
     return ct;
 }
 
+-(void)link_finish {
+}
+
+-(Vec3D*)get_normal_vec {
+    if (normal_vec == NULL) {
+        Vec3D *line_vec = [Vec3D init_x:endX-startX y:endY-startY z:0];
+        normal_vec = [[Vec3D Z_VEC] crossWith:line_vec];
+        [normal_vec normalize];
+        [line_vec dealloc];
+        [normal_vec scale:ndir];
+    }
+    return normal_vec;
+}
+
+-(line_seg)get_line_seg_a:(float)pre_x b:(float)post_x {
+    return [Common cons_line_seg_a:ccp(startX,startY) b:ccp(endX,endY)];
+}
+
+-(Vec3D*)get_tangent_vec {
+    Vec3D *v = [Vec3D init_x:endX-startX y:endY-startY z:0];
+    [v normalize];
+    return v;
+}
+
 -(float)get_t_given_position:(CGPoint)position {
-    return [Island NO_VALUE];
+    float dx = powf(position.x - startX, 2);
+    float dy = powf(position.y - startY, 2);
+    float f = sqrtf( dx+dy );
+    return f;
 }
 
 -(CGPoint)get_position_given_t:(float)t {
-    return ccp([Island NO_VALUE],[Island NO_VALUE]);
+    if (t > t_max || t < t_min) {
+        return ccp([Island NO_VALUE],[Island NO_VALUE]);
+    } else {
+        float frac = t/t_max;
+        Vec3D *dir_vec = [Vec3D init_x:endX-startX y:endY-startY z:0];
+        [dir_vec scale:frac];
+        CGPoint pos = ccp(startX+dir_vec.x,startY+dir_vec.y);
+        [dir_vec dealloc];
+        return pos;
+    }
 }
 
 @end

@@ -40,7 +40,6 @@
         player.vx += ABS(player.vy);
         player.vy = 0;
         [player add_effect:e];
-        NSLog(@"FUCKr:%i",[player get_current_params].time_left);
         [self set_active:NO];
     }
     

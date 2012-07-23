@@ -2,7 +2,7 @@
 
 @implementation GameEngineLayer
 
-static float cur_pos_x = 0;
+static float cur_pos_x = 0; //TODO -- WHY THE FUCK IS THIS STATIC
 static float cur_pos_y = 0;
 static NSString *my_map_file_name;
 static NSString *my_map_file_type;
@@ -16,8 +16,8 @@ static NSString *my_map_file_type;
 	[[CCDirector sharedDirector] setDisplayFPS:YES];
 	CCScene *scene = [CCScene node];
     
-	//BGLayer *bglayer = [BGLayer node];
-	//[scene addChild:bglayer];
+	BGLayer *bglayer = [BGLayer node];
+	[scene addChild:bglayer];
     
 	GameEngineLayer *layer = [GameEngineLayer node];
     [scene addChild: layer];

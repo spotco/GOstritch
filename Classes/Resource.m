@@ -55,6 +55,9 @@ static NSMutableDictionary* textures = nil;
     ccTexParams texParams = { GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT };
     for(int i = 0; i < [temp count]-1; i+=2) {
         NSLog(@"LOADING: %@->%@\n",[temp objectAtIndex:i], [temp objectAtIndex:(i+1)]);
+        
+        //[[NSBundle mainBundle] pathForResource:map_file_name ofType:map_file_type]  <--- TODO TRY THIS
+        
         CCTexture2D* tex = [[CCTextureCache sharedTextureCache] addImage:[temp objectAtIndex:i]];
         [textures setObject:tex forKey:[temp objectAtIndex:(i+1)]];
         [tex setTexParameters: &texParams];
