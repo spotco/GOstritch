@@ -50,20 +50,20 @@
 +(void)player_jump_from_island:(Player*)player state:(GameControlState*)state {
     float mov_speed = sqrtf(powf(player.vx, 2) + powf(player.vy, 2));
     
-    
-    Vec3D *up = [[Vec3D Z_VEC] crossWith:[player.current_island get_tangent_vec]];
+    Vec3D *tangent = [player.current_island get_tangent_vec];
+    Vec3D *up = [[Vec3D Z_VEC] crossWith:tangent];
     [up normalize];
     if (player.current_island.ndir == -1) {
         [up scale:-1];
     }
-    Vec3D *tangent = [player.current_island get_tangent_vec];
+    
     
     [tangent scale:mov_speed];
     [up scale:JUMP_POWER];
     
     Vec3D *combined = [up add:tangent];
-    
-    Vec3D *calc_up = [[Vec3D Z_VEC] crossWith:[player.current_island get_tangent_vec]];
+    Vec3D *cur_tangent_vec = [player.current_island get_tangent_vec];
+    Vec3D *calc_up = [[Vec3D Z_VEC] crossWith:cur_tangent_vec];
     [calc_up scale:2];
     player.position = [calc_up transform_pt:player.position];
     
@@ -75,6 +75,7 @@
     [up dealloc];
     [combined dealloc];
     [tangent dealloc];
+    [cur_tangent_vec dealloc];
 }
 
 

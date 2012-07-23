@@ -13,6 +13,12 @@
 #import "GameControlState.h"
 #import "GameRenderState.h"
 
+typedef enum {
+    GameEngineLayerMode_GAMEPLAY,
+    GameEngineLayerMode_PAUSED,
+    GameEngineLayerMode_ENDOUT
+} GameEngineLayerMode;
+
 @interface GameEngineLayer : CCLayer {
 	NSMutableArray *islands;
     NSMutableArray *game_objects;
@@ -21,10 +27,10 @@
     GameControlState *game_control_state;
     GameRenderState *game_render_state;
     
-    BOOL paused;
+    CCFollow *follow_action;
+    
+    GameEngineLayerMode current_mode;
 }
-
-@property(readwrite,assign) BOOL paused;
 
 
 +(float) get_cur_pos_x;

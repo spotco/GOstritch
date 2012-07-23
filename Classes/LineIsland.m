@@ -277,7 +277,7 @@ static float INF = INFINITY;
     
     
     Vec3D *v3t2 = [Vec3D init_x:(endX - startX) y:(endY - startY) z:0];
-    Vec3D *vZ = [Vec3D init_x:0 y:0 z:1];
+    Vec3D *vZ = [Vec3D Z_VEC];
     
     Vec3D *v3t1 = [v3t2 crossWith:vZ];
     [v3t1 normalize];
@@ -550,7 +550,7 @@ static float INF = INFINITY;
 
 -(void)init_corner_top {
     Vec3D *v3t2 = [Vec3D init_x:(next.endX - next.startX) y:(next.endY - next.startY) z:0];
-    Vec3D *vZ = [Vec3D init_x:0 y:0 z:1];
+    Vec3D *vZ = [Vec3D Z_VEC];
     Vec3D *v3t1 = [v3t2 crossWith:vZ];
     [v3t1 normalize];
     [v3t1 negate];
@@ -560,8 +560,7 @@ static float INF = INFINITY;
     float d_o_x = offset * v3t1.x;
     float d_o_y = offset * v3t1.y;
     toppts[2] = ccp( d_o_x+next.startX-startX ,d_o_y+next.startY-startY );
-    [v3t2 dealloc];
-    [v3t1 dealloc];
+
     
     float corner_top_scale = 0.65;
     
@@ -570,13 +569,18 @@ static float INF = INFINITY;
     [reduce_left normalize];
     leftlen = leftlen * corner_top_scale;
     toppts[1] = ccp( toppts[0].x + reduce_left.x * leftlen, toppts[0].y + reduce_left.y * leftlen);
-    [reduce_left dealloc];
+    
     
     Vec3D *reduce_right = [Vec3D init_x:toppts[2].x-toppts[0].x y:toppts[2].y-toppts[0].y z:0];
     float rightlen = [reduce_right length];
     [reduce_right normalize];
     rightlen = rightlen * corner_top_scale;
     toppts[2] = ccp( toppts[0].x + reduce_right.x * rightlen, toppts[0].y + reduce_right.y * rightlen);
+    
+    
+    [v3t2 dealloc];
+    [v3t1 dealloc];
+    [reduce_left dealloc];
     [reduce_right dealloc];
     
     

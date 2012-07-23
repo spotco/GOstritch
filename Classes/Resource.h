@@ -23,6 +23,10 @@
 #define TEX_DOG_CAPE @"DogCape"
 #define TEX_DOG_ROCKET @"DogRocket"
 
+#define TEX_CHECKPOINT_1 @"CheckPointPre"
+#define TEX_CHECKPOINT_2 @"CheckPointPost"
+#define TEX_CHECKERFLOOR @"CheckerFloor"
+
 #define TEX_GROUND_DETAIL_1 @"GroundDetail1"
 #define TEX_GROUND_DETAIL_2 @"GroundDetail2"
 #define TEX_GROUND_DETAIL_3 @"GroundDetail3"

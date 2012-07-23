@@ -9,8 +9,8 @@
     new_coin.position = ccp(posx,posy);
     
     CCTexture2D *texture = [Resource get_tex:TEX_GOLDEN_BONE];
-    CCSprite *img = [CCSprite spriteWithTexture:texture];
-    [new_coin addChild:img];
+    new_coin.img = [CCSprite spriteWithTexture:texture];
+    [new_coin addChild:new_coin.img];
     
     return new_coin;
 }
@@ -26,9 +26,9 @@
     return [Common hitrect_cons_x1:[self position].x-10 y1:[self position].y-10 wid:20 hei:20];
 }
 
--(void)update:(Player*)player {
+-(GameObjectReturnCode)update:(Player*)player {
     if (!active) {
-        return;
+        return GameObjectReturnCode_NONE;
     }
     
     float rot = [self rotation];
@@ -57,6 +57,8 @@
         }
         [self set_active:NO];
     }
+    
+    return GameObjectReturnCode_NONE;
 }
 
 -(void)set_active:(BOOL)t_active {

@@ -3,19 +3,21 @@
 
 @implementation MapLoader
 
-+(Map *) load_map:(NSString *)map_file_name oftype:(NSString *) map_file_type{
++(GameMap) load_map:(NSString *)map_file_name oftype:(NSString *) map_file_type{
     
     NSString *islandFilePath = [[NSBundle mainBundle] pathForResource:map_file_name ofType:map_file_type];
 	NSString *islandInputStr = [[NSString alloc] initWithContentsOfFile : islandFilePath encoding:NSUTF8StringEncoding error:nil];
-	
 	NSData *islandData  =  [islandInputStr dataUsingEncoding : NSUTF8StringEncoding];
+    [islandInputStr dealloc];
     
     NSDictionary *j_map_data = [[CJSONDeserializer deserializer] deserializeAsDictionary:islandData error:(nil)];
     
     NSArray *islandArray = [j_map_data objectForKey:(@"islands")];
 	int islandsCount = [islandArray count];
 	
-    Map *map = [[Map alloc] init];
+    struct GameMap map;
+    map.n_islands = [[NSMutableArray alloc] init];
+    map.game_objects = [[NSMutableArray alloc] init];
     
     float start_x = ((NSString*)[j_map_data objectForKey:(@"start_x")]).floatValue;
 	float start_y = ((NSString*)[j_map_data objectForKey:(@"start_y")]).floatValue;
@@ -48,7 +50,6 @@
             BOOL can_land = ((NSString *)[currentIslandDict objectForKey:@"can_fall"]).boolValue;
             currentIsland = [LineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
             
-            //NSLog(@"add line island");
 		} else {
             NSLog(@"line read error");
             continue;
@@ -82,11 +83,20 @@
             int type = ((NSString*)[j_object  objectForKey:@"img"]).intValue;
             [map.game_objects addObject:[GroundDetail init_x:x y:y type:type]];
             //NSLog(@"add ground detail x:%f y:%f",x,y);
+        } else if ([type isEqualToString:@"checkpoint"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            [map.game_objects addObject:[CheckPoint init_x:x y:y]];
+        } else if ([type isEqualToString:@"game_end"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            [map.game_objects addObject:[GameEndArea init_x:x y:y]];
         } else {
             NSLog(@"item read error");
             continue;
         }
     }
+
     NSLog(@"finish parse");
     return map;
 }

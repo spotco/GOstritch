@@ -4,9 +4,10 @@
 @implementation GameObject
 
 @synthesize active;
+@synthesize img;
 
--(void)update:(Player*)player  {
-    return;
+-(GameObjectReturnCode)update:(Player*)player  {
+    return GameObjectReturnCode_NONE;
 }
 
 -(HitRect)get_hit_rect {
@@ -15,6 +16,10 @@
 
 -(void)set_active:(BOOL)t_active {
     return;
+}
+
+-(int)get_render_ord {
+    return [GameRenderImplementation GET_RENDER_GAMEOBJ_ORD];
 }
 
 @end

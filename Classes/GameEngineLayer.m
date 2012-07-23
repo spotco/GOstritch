@@ -2,8 +2,6 @@
 
 @implementation GameEngineLayer
 
-@synthesize paused;
-
 static float cur_pos_x = 0;
 static float cur_pos_y = 0;
 static NSString *my_map_file_name;
@@ -18,8 +16,8 @@ static NSString *my_map_file_type;
 	[[CCDirector sharedDirector] setDisplayFPS:YES];
 	CCScene *scene = [CCScene node];
     
-	BGLayer *bglayer = [BGLayer node];
-	[scene addChild:bglayer];
+	//BGLayer *bglayer = [BGLayer node];
+	//[scene addChild:bglayer];
     
 	GameEngineLayer *layer = [GameEngineLayer node];
     [scene addChild: layer];
@@ -33,8 +31,17 @@ static NSString *my_map_file_type;
 GameEngineLayer* singleton_instance;
 
 +(BOOL)singleton_toggle_pause {
-    singleton_instance.paused = !singleton_instance.paused;
-    return singleton_instance.paused;
+    return [singleton_instance toggle_pause];
+}
+
+-(BOOL)toggle_pause {
+    if (current_mode == GameEngineLayerMode_PAUSED) {
+        current_mode = GameEngineLayerMode_GAMEPLAY;
+        return NO;
+    } else {
+        current_mode = GameEngineLayerMode_PAUSED;
+        return YES;
+    }
 }
 
 -(id) init{
@@ -51,12 +58,12 @@ GameEngineLayer* singleton_instance;
 		[self schedule:@selector(update:)];
 		self.isTouchEnabled = YES;
         
-        paused = NO;
+        current_mode = GameEngineLayerMode_GAMEPLAY;
         
         [GameRenderImplementation update_camera_on:self state:game_render_state];
         
-        
-		[self runAction:[CCFollow actionWithTarget:(player) worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]]];
+        follow_action = [CCFollow actionWithTarget:(player) worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]];
+		[self runAction:follow_action];
 	}
 	return self;
 }
@@ -73,7 +80,7 @@ GameEngineLayer* singleton_instance;
 
 
 -(CGPoint) loadMap{
-	Map *map = [MapLoader load_map:my_map_file_name oftype: my_map_file_type];
+	GameMap map = [MapLoader load_map:my_map_file_name oftype: my_map_file_type];
     
     islands = map.n_islands;
     int ct = [Island link_islands:islands];
@@ -93,30 +100,52 @@ GameEngineLayer* singleton_instance;
     
     game_objects = map.game_objects;
     for (GameObject* o in game_objects) {
-        [self addChild:o z:[GameRenderImplementation GET_RENDER_GAMEOBJ_ORD]];
+        [self addChild:o z:[o get_render_ord]];
     }
     
     return map.player_start_pt;
 }
 
 -(void)update:(ccTime)dt {
-    if (paused) {
-        return;
+    
+    if (current_mode == GameEngineLayerMode_GAMEPLAY) {    
+        [GamePhysicsImplementation player_move:player with_islands:islands];
+        [GameControlImplementation control_update_player:player state:game_control_state islands:islands objects:game_objects];
+        [player update];
+        
+        [self check_game_state];	
+        [self update_static_x:player.position.x y:player.position.y];
+        [self update_game_obj];
+        [GameRenderImplementation update_render_on:self player:player islands:islands objects:game_objects state:game_render_state];
+        
+    } else if (current_mode == GameEngineLayerMode_ENDOUT) {
+        if ([Common hitrect_touch:[player get_hit_rect] b:[self get_viewbox]]) {
+            [GamePhysicsImplementation player_move:player with_islands:islands];
+            [player update];  
+        } else {
+            [self end_game];
+            exit(0);
+        }
+
     }
     
-    [GamePhysicsImplementation player_move:player with_islands:islands];
-    [GameControlImplementation control_update_player:player state:game_control_state islands:islands objects:game_objects];
-    [player update];
-    
-    [self check_game_state];	
-    [self update_static_x:player.position.x y:player.position.y];
-    [self update_game_obj];
-    [GameRenderImplementation update_render_on:self player:player islands:islands objects:game_objects state:game_render_state];
+}
+
+-(HitRect)get_viewbox {
+    return [Common hitrect_cons_x1:-self.position.x-[CCDirector sharedDirector].winSize.width/2
+                                y1:-self.position.y-[CCDirector sharedDirector].winSize.height/2
+                               wid:[CCDirector sharedDirector].winSize.width*2.5
+                               hei:[CCDirector sharedDirector].winSize.height*2.5];
 }
 
 -(void)update_game_obj {
     for (GameObject* o in game_objects) {
-        [o update:player];
+        GameObjectReturnCode c = [o update:player];
+        
+        if (c == GameObjectReturnCode_ENDGAME) {
+            current_mode = GameEngineLayerMode_ENDOUT;
+            [self stopAction:follow_action];
+        }
     }
 }
 
@@ -162,15 +191,9 @@ GameEngineLayer* singleton_instance;
 	return cur_pos_y;
 }
 
-- (void) dealloc{
-    for (Island* i in islands) {
-        [i dealloc];
-    }
-    islands = nil;
-    [player dealloc];
-	[Resource dealloc_textures];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFrames];
-	[super dealloc];
+-(void) end_game {
+    [self removeAllChildrenWithCleanup:YES];
+    [[CCDirector sharedDirector] end];
 }
 
 -(void)draw {
@@ -200,6 +223,11 @@ GameEngineLayer* singleton_instance;
         ccDrawPoly(verts, 4, YES);
         free(verts);
     }
+    
+    HitRect viewbox = [self get_viewbox];
+    verts = [Common hitrect_get_pts:viewbox];
+    ccDrawPoly(verts, 4, YES);
+    free(verts);
  }
 
 

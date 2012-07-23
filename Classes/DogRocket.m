@@ -8,16 +8,16 @@
     new_rocket.position = ccp(x,y);
     
     CCTexture2D *texture = [Resource get_tex:TEX_DOG_ROCKET];
-    CCSprite *img = [CCSprite spriteWithTexture:texture];
-    [new_rocket addChild:img];
+    new_rocket.img = [CCSprite spriteWithTexture:texture];
+    [new_rocket addChild:new_rocket.img];
     
     return new_rocket;
 }
 
 //TODO -- launch in direction of slope
--(void)update:(Player*)player {
+-(GameObjectReturnCode)update:(Player*)player {
     if (!active) {
-        return;
+        return GameObjectReturnCode_NONE;
     }
     
     float rot = [self rotation];
@@ -43,6 +43,8 @@
         NSLog(@"FUCKr:%i",[player get_current_params].time_left);
         [self set_active:NO];
     }
+    
+    return GameObjectReturnCode_NONE;
 }
 
 -(HitRect)get_hit_rect {

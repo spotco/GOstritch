@@ -41,8 +41,13 @@ static NSMutableDictionary* textures = nil;
                      @"dogcape.png", TEX_DOG_CAPE,
                      @"dogrocket.png", TEX_DOG_ROCKET,
                      
+                     @"checkpoint1.png",TEX_CHECKPOINT_1,
+                     @"checkerfloor.png",TEX_CHECKERFLOOR,
+                     @"checkpoint2.png",TEX_CHECKPOINT_2,
+                     
                      nil];
     [Resource load_tex_from_array:temp];
+    [temp dealloc];
 }
 
 +(void)load_tex_from_array:(NSArray*)temp {
@@ -64,7 +69,7 @@ static NSMutableDictionary* textures = nil;
 }
 
 +(void)dealloc_textures {
-    for (NSString* key in textures) {
+    for (NSString* key in [textures keyEnumerator]) {
         [[CCTextureCache sharedTextureCache] removeTexture:[textures objectForKey:key]];
     }
     [textures dealloc];

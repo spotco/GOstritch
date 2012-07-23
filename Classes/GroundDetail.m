@@ -15,9 +15,9 @@
     } else {
         NSLog(@"GroundDetail init type error");
     }
-    CCSprite *img = [CCSprite spriteWithTexture:texture];
-    img.position = ccp(0,[img boundingBoxInPixels].size.height / 2.0);
-    [d addChild:img];
+    d.img = [CCSprite spriteWithTexture:texture];
+    d.img.position = ccp(0,[d.img boundingBoxInPixels].size.height / 2.0);
+    [d addChild:d.img];
     return d;
 }
 

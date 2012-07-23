@@ -9,15 +9,15 @@
     new_cape.position = ccp(x,y);
     
     CCTexture2D *texture = [Resource get_tex:TEX_DOG_CAPE];
-    CCSprite *img = [CCSprite spriteWithTexture:texture];
-    [new_cape addChild:img];
+    new_cape.img = [CCSprite spriteWithTexture:texture];
+    [new_cape addChild:new_cape.img];
     
     return new_cape;
 }
 
--(void)update:(Player*)player {
+-(GameObjectReturnCode)update:(Player*)player {
     if (!active) {
-        return;
+        return GameObjectReturnCode_NONE;
     }
     
     float rot = [self rotation];
@@ -40,6 +40,8 @@
         [player add_effect:e];
         [self set_active:NO];
     }
+    
+    return GameObjectReturnCode_NONE;
 }
 
 
