@@ -16,14 +16,15 @@ static NSString *my_map_file_type;
 	[[CCDirector sharedDirector] setDisplayFPS:YES];
 	CCScene *scene = [CCScene node];
     
+    GameEngineLayer *layer = [GameEngineLayer node];
 	BGLayer *bglayer = [BGLayer node];
-	[scene addChild:bglayer];
-    
-	GameEngineLayer *layer = [GameEngineLayer node];
-    [scene addChild: layer];
-    
     UILayer* uilayer = [UILayer node];
+    
+    [scene addChild:bglayer];
+    [scene addChild: layer];
     [scene addChild:uilayer];
+    
+    
     
 	return scene;
 }
@@ -35,7 +36,7 @@ GameEngineLayer* singleton_instance;
 }
 
 -(BOOL)toggle_pause {
-    if (current_mode == GameEngineLayerMode_PAUSED) {
+    if (current_mode == GameEngineLayerMode_PAUSED) { //TODO -- THIS IS NOT HOW YOU DO COCOS2D PAUSE
         current_mode = GameEngineLayerMode_GAMEPLAY;
         return NO;
     } else {
@@ -191,7 +192,7 @@ GameEngineLayer* singleton_instance;
 	return cur_pos_y;
 }
 
--(void) end_game {
+-(void) end_game { //TODO -- ACTUALLY DEALLOC SHIT
     [self removeAllChildrenWithCleanup:YES];
     [[CCDirector sharedDirector] end];
 }

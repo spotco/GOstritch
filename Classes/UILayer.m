@@ -3,6 +3,11 @@
 
 @implementation UILayer
 
++(UILayer*)init_with_gamelayer:(GameEngineLayer *)g {
+    UILayer* u = [UILayer node];
+    
+}
+
 -(id) init{
 	if( (self = [super init])) {
         CCSprite *a = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_COINCOUNT]];
@@ -31,9 +36,9 @@
 	return self;
 }
 
-CCSprite *coincount;
-CCSprite *menu;
-CCSprite *pausebutton;
+-(void)set_gameengine:(GameEngineLayer*)ref {
+    game_engine_layer = ref;
+}
 
 -(void) ccTouchesBegan:(NSSet*)pTouches withEvent:(UIEvent*)pEvent {
     BOOL toggle = NO;

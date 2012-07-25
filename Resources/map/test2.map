@@ -8,6 +8,6 @@
 	],
 
 	"objects":[
-		{"type":"spike", "x":"602", "y":"212", "label":"0"}
+		{"type":"game_end", "x":"602", "y":"212", "label":"0"}
 	]
 }
