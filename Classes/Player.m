@@ -70,6 +70,7 @@ id _ROCKET_ANIM,_CAPE_ANIM;
 
 -(id)init_run_anim_speed:(float)speed {
 	CCTexture2D *texture = [Resource get_tex:TEX_DOG_RUN_1];
+    [texture setAntiAliasTexParameters];
 	NSMutableArray *animFrames = [NSMutableArray array];
 	
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"run_0"]]];
@@ -81,6 +82,7 @@ id _ROCKET_ANIM,_CAPE_ANIM;
 
 -(id)init_rocket_anim_speed:(float)speed {
 	CCTexture2D *texture = [Resource get_tex:TEX_DOG_RUN_1];
+    [texture setAntiAliasTexParameters];
 	NSMutableArray *animFrames = [NSMutableArray array];
     
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"rocket_0"]]];
@@ -91,6 +93,7 @@ id _ROCKET_ANIM,_CAPE_ANIM;
 
 -(id)init_cape_anim_speed:(float)speed {
 	CCTexture2D *texture = [Resource get_tex:TEX_DOG_RUN_1];
+    [texture setAntiAliasTexParameters];
 	NSMutableArray *animFrames = [NSMutableArray array];
     
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"cape_0"]]];
@@ -104,6 +107,7 @@ id _ROCKET_ANIM,_CAPE_ANIM;
 +(id)make_anim_frames:(NSMutableArray*)animFrames speed:(float)speed {
 	id animate = [CCAnimate actionWithAnimation:[CCAnimation animationWithFrames:animFrames delay:speed] restoreOriginalFrame:YES];
     id m = [CCRepeatForever actionWithAction:animate];
+    
     [m retain];    
 	return m;
 }

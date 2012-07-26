@@ -5,10 +5,10 @@
 @interface UILayer : CCLayer {
     GameEngineLayer* game_engine_layer;
     
-    CCSprite *coincount;
-    CCSprite *menu;
-    CCSprite *pausebutton;
+    CCLabelTTF *count_disp;
+    CCMenu *ingame_ui;
     
+    CCLayer *pauselayer;
 }
 
 +(UILayer*)init_with_gamelayer:(GameEngineLayer*)g;

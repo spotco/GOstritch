@@ -6,7 +6,7 @@
 #import "Common.h"
 #import "PlayerEffectParams.h"
 
-@interface GameControlImplementation
+@interface GameControlImplementation:NSObject
 
 +(void)control_update_player:(Player*)player 
                        state:(GameControlState*)state  

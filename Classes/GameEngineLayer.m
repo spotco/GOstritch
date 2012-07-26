@@ -1,72 +1,52 @@
 #import "GameEngineLayer.h"
+#import "BGLayer.h"
 
 @implementation GameEngineLayer
 
-static float cur_pos_x = 0; //TODO -- WHY THE FUCK IS THIS STATIC
-static float cur_pos_y = 0;
-static NSString *my_map_file_name;
-static NSString *my_map_file_type;
+@synthesize paused;
 
 
-+(CCScene *) scene_with:(NSString *) map_file_name of_type:(NSString *) map_file_type{
-    my_map_file_name = map_file_name;
-    my_map_file_type = map_file_type;
-    
++(CCScene *) scene_with:(NSString *) map_file_name {
     [Resource init_bg1_textures];
-	[[CCDirector sharedDirector] setDisplayFPS:YES];
+	[[CCDirector sharedDirector] setDisplayFPS:NO];
 	CCScene *scene = [CCScene node];
     
-    GameEngineLayer *layer = [GameEngineLayer node];
-	BGLayer *bglayer = [BGLayer node];
-    UILayer* uilayer = [UILayer node];
+    GameEngineLayer *layer = [GameEngineLayer init_from_file:map_file_name];
+	BGLayer *bglayer = [BGLayer init_with_gamelayer:layer];
+    UILayer* uilayer = [UILayer init_with_gamelayer:layer];
     
     [scene addChild:bglayer];
     [scene addChild: layer];
     [scene addChild:uilayer];
-    
-    
+
     
 	return scene;
 }
 
-GameEngineLayer* singleton_instance;
-
-+(BOOL)singleton_toggle_pause {
-    return [singleton_instance toggle_pause];
++(GameEngineLayer*)init_from_file:(NSString*)file {
+    GameEngineLayer *g = [GameEngineLayer node];
+    [g initialize:file];
+    return g;
 }
 
--(BOOL)toggle_pause {
-    if (current_mode == GameEngineLayerMode_PAUSED) { //TODO -- THIS IS NOT HOW YOU DO COCOS2D PAUSE
-        current_mode = GameEngineLayerMode_GAMEPLAY;
-        return NO;
-    } else {
-        current_mode = GameEngineLayerMode_PAUSED;
-        return YES;
-    }
-}
 
--(id) init{
-	if( (self=[super init])) {
-        singleton_instance = self;
-        
-        game_control_state = [[GameControlState alloc] init];
-        game_render_state = [[GameRenderState alloc] init];
-        
-		CGPoint player_start_pt = [self loadMap];
-        player = [Player init_at:player_start_pt];
-        
-		[self addChild:player z:[GameRenderImplementation GET_RENDER_PLAYER_ORD]];
-		[self schedule:@selector(update:)];
-		self.isTouchEnabled = YES;
-        
-        current_mode = GameEngineLayerMode_GAMEPLAY;
-        
-        [GameRenderImplementation update_camera_on:self state:game_render_state];
-        
-        follow_action = [CCFollow actionWithTarget:(player) worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]];
-		[self runAction:follow_action];
-	}
-	return self;
+-(void)initialize:(NSString*)map_filename {
+    game_control_state = [[GameControlState alloc] init];
+    game_render_state = [[GameRenderState alloc] init];
+    
+    CGPoint player_start_pt = [self loadMap:map_filename];
+    player = [Player init_at:player_start_pt];
+    
+    [self addChild:player z:[GameRenderImplementation GET_RENDER_PLAYER_ORD]];
+    [self schedule:@selector(update:)];
+    self.isTouchEnabled = YES;
+    
+    current_mode = GameEngineLayerMode_GAMEPLAY;
+    
+    [GameRenderImplementation update_camera_on:self state:game_render_state];
+    
+    follow_action = [CCFollow actionWithTarget:(player) worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]];
+    [self runAction:follow_action];
 }
 
 -(HitRect) get_world_bounds {
@@ -80,8 +60,8 @@ GameEngineLayer* singleton_instance;
 }
 
 
--(CGPoint) loadMap{
-	GameMap map = [MapLoader load_map:my_map_file_name oftype: my_map_file_type];
+-(CGPoint) loadMap:(NSString*)filename {
+	GameMap map = [MapLoader load_map:filename oftype:@"map"];
     
     islands = map.n_islands;
     int ct = [Island link_islands:islands];
@@ -108,6 +88,9 @@ GameEngineLayer* singleton_instance;
 }
 
 -(void)update:(ccTime)dt {
+    if (paused) {
+        return;
+    }
     
     if (current_mode == GameEngineLayerMode_GAMEPLAY) {    
         [GamePhysicsImplementation player_move:player with_islands:islands];
@@ -115,7 +98,6 @@ GameEngineLayer* singleton_instance;
         [player update];
         
         [self check_game_state];	
-        [self update_static_x:player.position.x y:player.position.y];
         [self update_game_obj];
         [GameRenderImplementation update_render_on:self player:player islands:islands objects:game_objects state:game_render_state];
         
@@ -151,6 +133,10 @@ GameEngineLayer* singleton_instance;
 }
 
 -(void) ccTouchesBegan:(NSSet*)pTouches withEvent:(UIEvent*)pEvent {
+    if (paused) {
+        return;
+    }
+    
     CGPoint touch;
     for (UITouch *t in pTouches) {
         touch = [t locationInView:[t view]];
@@ -159,6 +145,10 @@ GameEngineLayer* singleton_instance;
 }
 
 -(void) ccTouchesEnded:(NSSet*)pTouches withEvent:(UIEvent*)event {
+    if (paused) {
+        return;
+    }
+    
     CGPoint touch;
     for (UITouch *t in pTouches) {
         touch = [t locationInView:[t view]];
@@ -179,17 +169,8 @@ GameEngineLayer* singleton_instance;
 	}
 }
 
--(void)update_static_x:(float)pos_x y:(float)pos_y {
-    cur_pos_x = pos_x;
-	cur_pos_y = pos_y;
-}
-
-+(float) get_cur_pos_x {
-	return cur_pos_x;
-}
-
-+(float) get_cur_pos_y {
-	return cur_pos_y;
+-(CGPoint)get_pos {
+    return player.position;
 }
 
 -(void) end_game { //TODO -- ACTUALLY DEALLOC SHIT
@@ -197,7 +178,7 @@ GameEngineLayer* singleton_instance;
     [[CCDirector sharedDirector] end];
 }
 
--(void)draw {
+/*-(void)draw {
     [super draw];
     return;
     
@@ -229,7 +210,7 @@ GameEngineLayer* singleton_instance;
     verts = [Common hitrect_get_pts:viewbox];
     ccDrawPoly(verts, 4, YES);
     free(verts);
- }
+ }*/
 
 
 @end

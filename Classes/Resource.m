@@ -19,7 +19,6 @@ static NSMutableDictionary* textures = nil;
                      
                      @"coincount.png", TEX_UI_COINCOUNT,
                      @"pauseicon.png", TEX_UI_PAUSEICON,
-                     @"pausescreen.png", TEX_UI_PAUSEMENU,
                      
                      @"BG1_island_fill.png", TEX_GROUND_TEX_1,
                      @"BG1_top_fill.png", TEX_GROUND_TOP_1,
@@ -45,6 +44,12 @@ static NSMutableDictionary* textures = nil;
                      @"checkpoint1.png",TEX_CHECKPOINT_1,
                      @"checkerfloor.png",TEX_CHECKERFLOOR,
                      @"checkpoint2.png",TEX_CHECKPOINT_2,
+                     
+                     @"pause_menu_back.png", TEX_UI_PAUSEMENU_BACK,
+                     @"pause_menu_levellist.png", TEX_UI_PAUSEMENU_LEVELLIST,
+                     @"pause_menu_music.png", TEX_UI_PAUSEMENU_MUSIC,
+                     @"pause_menu_play.png", TEX_UI_PAUSEMENU_PLAY,
+                     @"pause_menu_sound.png", TEX_UI_PAUSEMENU_SOUND,
                      
                      nil];
     [Resource load_tex_from_array:temp];

@@ -29,6 +29,7 @@
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         player.position = player.start_pt;
+        [player reset_params];
         
     }
     

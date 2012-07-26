@@ -53,10 +53,6 @@
 }
 
 -(void) draw {
-	if (endX < [GameEngineLayer get_cur_pos_x]-800 ||
-		startY > [GameEngineLayer get_cur_pos_y]+800) { //TODO -- FIXME
-		return;
-	} 
 	[super draw];
     
     [self draw_renderobj:main_fill n_vtx:4];

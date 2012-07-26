@@ -7,7 +7,7 @@
 #import "PlayerEffectParams.h"
 
 
-@interface GameRenderImplementation
+@interface GameRenderImplementation:NSObject
 
 +(void)update_render_on:(CCLayer*)layer 
                  player:(Player*)player 

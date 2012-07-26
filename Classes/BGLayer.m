@@ -1,6 +1,5 @@
 
 #import "BGLayer.h"
-#import "Resource.h"
 #import "GameEngineLayer.h"
 
 
@@ -9,7 +8,6 @@
 +(BGLayer*)init_with_gamelayer:(GameEngineLayer*)g {
     BGLayer *l = [BGLayer node];
     [l set_gameengine:g];
-
     return l;
 }
 
@@ -19,19 +17,15 @@
 		for (CCSprite* i in bg_elements) {
 			[self addChild:i];
 		}
-		
 	}
+    [self schedule:@selector(update:)];
 	return self;
 }
 
 -(void)set_gameengine:(GameEngineLayer*)ref {
     game_engine_layer = ref;
-    
 }
 
--(void)start_update {
-    [self schedule:@selector(update:)];
-}
 
 +(NSMutableArray*) loadBg {
 	NSMutableArray *a = [[NSMutableArray alloc] init];
@@ -46,8 +40,8 @@
 }
 
 -(void)update:(ccTime)dt {
-    float posx = [GameEngineLayer get_cur_pos_x];
-    float posy = [GameEngineLayer get_cur_pos_y];
+    float posx = [game_engine_layer get_pos].x;
+    float posy = [game_engine_layer get_pos].y;
     
 	for (BackgroundObject* s in bg_elements) {
         [s update_posx:posx posy:posy];

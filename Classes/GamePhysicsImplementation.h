@@ -5,7 +5,7 @@
 #import "Player.h"
 #import "PlayerEffectParams.h"
 
-@interface GamePhysicsImplementation
+@interface GamePhysicsImplementation:NSObject
 
 +(void)player_move:(Player*)player with_islands:(NSMutableArray*)islands;
 +(CGPoint)player_free_fall:(Player*)player islands:(NSMutableArray*)islands;
