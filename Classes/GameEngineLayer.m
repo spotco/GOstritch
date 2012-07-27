@@ -4,7 +4,7 @@
 @implementation GameEngineLayer
 
 @synthesize paused;
-
+@synthesize game_objects,islands;
 
 +(CCScene *) scene_with:(NSString *) map_file_name {
     [Resource init_bg1_textures];
@@ -15,7 +15,7 @@
 	BGLayer *bglayer = [BGLayer init_with_gamelayer:layer];
     UILayer* uilayer = [UILayer init_with_gamelayer:layer];
     
-    [scene addChild:bglayer];
+    //[scene addChild:bglayer];
     [scene addChild: layer];
     [scene addChild:uilayer];
 
@@ -35,10 +35,12 @@
     game_render_state = [[GameRenderState alloc] init];
     
     CGPoint player_start_pt = [self loadMap:map_filename];
+    map_start_pt = player_start_pt;
     player = [Player init_at:player_start_pt];
     
     [self addChild:player z:[GameRenderImplementation GET_RENDER_PLAYER_ORD]];
-    [self schedule:@selector(update:)];
+    [self schedule:@selector(update)];
+    
     self.isTouchEnabled = YES;
     
     current_mode = GameEngineLayerMode_GAMEPLAY;
@@ -87,15 +89,16 @@
     return map.player_start_pt;
 }
 
--(void)update:(ccTime)dt {
+-(void)update {
     if (paused) {
         return;
     }
     
-    if (current_mode == GameEngineLayerMode_GAMEPLAY) {    
+    if (current_mode == GameEngineLayerMode_GAMEPLAY) {
         [GamePhysicsImplementation player_move:player with_islands:islands];
         [GameControlImplementation control_update_player:player state:game_control_state islands:islands objects:game_objects];
-        [player update];
+        [player update:self];
+         
         
         [self check_game_state];	
         [self update_game_obj];
@@ -104,7 +107,7 @@
     } else if (current_mode == GameEngineLayerMode_ENDOUT) {
         if ([Common hitrect_touch:[player get_hit_rect] b:[self get_viewbox]]) {
             [GamePhysicsImplementation player_move:player with_islands:islands];
-            [player update];  
+            [player update:self];  
         } else {
             [self end_game];
             exit(0);
@@ -123,7 +126,7 @@
 
 -(void)update_game_obj {
     for (GameObject* o in game_objects) {
-        GameObjectReturnCode c = [o update:player];
+        GameObjectReturnCode c = [o update:player g:self];
         
         if (c == GameObjectReturnCode_ENDGAME) {
             current_mode = GameEngineLayerMode_ENDOUT;
@@ -158,15 +161,18 @@
 
 -(void)check_game_state {
     if (![Common hitrect_touch:[self get_world_bounds] b:[player get_hit_rect]]) {
-        [player reset];
-        
-        [game_render_state dealloc];
-        game_render_state = [[GameRenderState alloc] init];
-        [GameRenderImplementation update_camera_on:self state:game_render_state];
-        for (GameObject* o in game_objects) {
-            [o set_active:YES];
-        }
+        [self player_reset];
 	}
+}
+
+-(void)player_reset {
+    [player reset];
+    [game_render_state dealloc];
+    game_render_state = [[GameRenderState alloc] init];
+    [GameRenderImplementation update_camera_on:self state:game_render_state];
+    for (GameObject* o in game_objects) {
+        [o set_active:YES];
+    }
 }
 
 -(CGPoint)get_pos {
@@ -178,9 +184,9 @@
     [[CCDirector sharedDirector] end];
 }
 
-/*-(void)draw {
+-(void)draw {
     [super draw];
-    return;
+    //return;
     
     glColor4ub(255,0,0,100);
     glLineWidth(1.0f);
@@ -210,7 +216,7 @@
     verts = [Common hitrect_get_pts:viewbox];
     ccDrawPoly(verts, 4, YES);
     free(verts);
- }*/
+ }
 
 
 @end

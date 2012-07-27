@@ -3,6 +3,8 @@
 #import "Island.h"
 #import "Resource.h"
 #import "Common.h"
+@class GameEngineLayer;
+
 @class PlayerEffectParams;
 
 @interface Player : CCSprite {
@@ -20,7 +22,8 @@
 typedef enum {
     player_anim_mode_RUN,
     player_anim_mode_CAPE,
-    player_anim_mode_ROCKET
+    player_anim_mode_ROCKET,
+    player_anim_mode_HIT
 } player_anim_mode;
 
 +(Player*)init_at:(CGPoint)pt;
@@ -28,7 +31,7 @@ typedef enum {
 -(void)add_effect:(PlayerEffectParams*)effect;
 -(void) reset;
 -(void) reset_params;
--(void) update;
+-(void) update:(GameEngineLayer*)g;
 -(HitRect) get_hit_rect;
 -(PlayerEffectParams*) get_current_params;
 -(PlayerEffectParams*) get_default_params;

@@ -27,6 +27,7 @@ typedef enum {
     GameControlState *game_control_state;
     GameRenderState *game_render_state;
     
+    CGPoint map_start_pt;
     CCFollow *follow_action;
     
     GameEngineLayerMode current_mode;
@@ -35,13 +36,10 @@ typedef enum {
 
 
 @property(readwrite,assign) BOOL paused;
+@property(readwrite,assign) NSMutableArray *islands, *game_objects;
 
 +(CCScene *) scene_with:(NSString *)map_file_name;
--(HitRect) get_world_bounds;
--(CGPoint) loadMap:(NSString*)filename;
--(void) check_game_state;
--(void) update_game_obj;
-
+-(void)player_reset;
 -(CGPoint)get_pos;
 
 @end

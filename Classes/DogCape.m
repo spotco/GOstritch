@@ -15,7 +15,7 @@
     return new_cape;
 }
 
--(GameObjectReturnCode)update:(Player*)player {
+-(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g {
     if (!active) {
         return GameObjectReturnCode_NONE;
     }

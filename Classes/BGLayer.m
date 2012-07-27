@@ -8,6 +8,7 @@
 +(BGLayer*)init_with_gamelayer:(GameEngineLayer*)g {
     BGLayer *l = [BGLayer node];
     [l set_gameengine:g];
+    [l start_update];
     return l;
 }
 
@@ -18,12 +19,15 @@
 			[self addChild:i];
 		}
 	}
-    [self schedule:@selector(update:)];
 	return self;
 }
 
 -(void)set_gameengine:(GameEngineLayer*)ref {
     game_engine_layer = ref;
+}
+
+-(void)start_update {
+    [self schedule:@selector(update)];
 }
 
 
@@ -39,7 +43,7 @@
     return a;
 }
 
--(void)update:(ccTime)dt {
+-(void)update {
     float posx = [game_engine_layer get_pos].x;
     float posy = [game_engine_layer get_pos].y;
     

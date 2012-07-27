@@ -1,7 +1,7 @@
-
 #import "CCNode.h"
 #import "Player.h"
 #import "GameRenderImplementation.h"
+@class GameEngineLayer;
 
 @interface GameObject : CCNode {
     BOOL active;
@@ -16,7 +16,7 @@ typedef enum {
 @property(readwrite,assign) BOOL active;
 @property(readwrite,assign) CCSprite *img;
 
--(GameObjectReturnCode)update:(Player*)player;
+-(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g;
 -(HitRect) get_hit_rect;
 -(void)set_active:(BOOL)t_active;
 -(int)get_render_ord;

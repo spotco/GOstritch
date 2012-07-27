@@ -1,13 +1,22 @@
 {
-	"start_x":"123",
-	"start_y":"247",
+	"start_x":"113",
+	"start_y":"116",
 	"assert_links":"0",
 	"islands":[
-		{"type":"line", "x1":"86", "y1":"210", "x2":"913", "y2":"213", "hei":"100", "ndir":"left", "can_fall":"true", "label":""},
-		{"type":"line", "x1":"913", "y1":"213", "x2":"1323", "y2":"216", "hei":"100", "ndir":"left", "can_fall":"true", "label":""}
+		{"type":"line", "x1":"86", "y1":"47", "x2":"543", "y2":"103", "hei":"100", "ndir":"left", "can_fall":"true", "label":""},
+		{"type":"line", "x1":"543", "y1":"103", "x2":"911", "y2":"299", "hei":"100", "ndir":"left", "can_fall":"true", "label":""},
+		{"type":"line", "x1":"911", "y1":"299", "x2":"1094", "y2":"618", "hei":"100", "ndir":"left", "can_fall":"true", "label":""},
+		{"type":"line", "x1":"1094", "y1":"618", "x2":"1190", "y2":"1027", "hei":"100", "ndir":"left", "can_fall":"true", "label":""},
+		{"type":"line", "x1":"76", "y1":"255", "x2":"509", "y2":"320", "hei":"100", "ndir":"right", "can_fall":"true", "label":""},
+		{"type":"line", "x1":"509", "y1":"320", "x2":"762", "y2":"483", "hei":"100", "ndir":"right", "can_fall":"true", "label":""},
+		{"type":"line", "x1":"762", "y1":"483", "x2":"902", "y2":"753", "hei":"100", "ndir":"right", "can_fall":"true", "label":""},
+		{"type":"line", "x1":"902", "y1":"753", "x2":"986", "y2":"1108", "hei":"100", "ndir":"right", "can_fall":"true", "label":""}
 	],
 
 	"objects":[
-		{"type":"spike", "x":"602", "y":"212", "label":"0"}
+		{"type":"spike", "x":"424", "y":"306", "label":"0"},
+		{"type":"spike", "x":"832", "y":"254", "label":"1"},
+		{"type":"spike", "x":"827", "y":"602", "label":"2"},
+		{"type":"spike", "x":"1141", "y":"808", "label":"3"}
 	]
 }

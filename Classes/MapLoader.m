@@ -97,7 +97,7 @@
         } else if ([type isEqualToString:@"spike"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
-            [map.game_objects addObject:[Spike init_x:x y:y]];
+            [map.game_objects addObject:[Spike init_x:x y:y islands:map.n_islands]];
             
         } else {
             NSLog(@"item read error");

@@ -173,7 +173,7 @@
     line_seg contact_segment;
     
     for (Island *i in islands) {     
-        line_seg island_seg = [i get_line_seg_a:player_pre.x b:player_post.x];
+        line_seg island_seg = [i get_line_seg];
         CGPoint intersection = [Common line_seg_intersection_a:player_mov b:island_seg];
         if (i.can_land && intersection.x != [Island NO_VALUE] && intersection.y != [Island NO_VALUE] && ABS([Vec3D rad_angle_between_a:player_mov_vec and_b:[i get_normal_vec]]) >= M_PI / 2) {
             contact_island = i;

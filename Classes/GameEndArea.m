@@ -26,7 +26,7 @@
     return [Common hitrect_cons_x1:position_.x y1:position_.y wid:[img boundingBoxInPixels].size.width hei:1000];
 }
 
--(GameObjectReturnCode)update:(Player*)player {
+-(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g {
     if (active && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         NSLog(@"Reached end");
         active = NO;

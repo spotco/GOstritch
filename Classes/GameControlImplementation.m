@@ -1,7 +1,7 @@
 #import "GameControlImplementation.h"
 
 #define JUMP_HOLD_TIME 15
-#define JUMP_POWER 9.5
+#define JUMP_POWER 8.5
 
 @implementation GameControlImplementation
 
@@ -52,6 +52,7 @@
     
     Vec3D *tangent = [player.current_island get_tangent_vec];
     Vec3D *up = [[Vec3D Z_VEC] crossWith:tangent];
+    [tangent normalize];
     [up normalize];
     if (player.current_island.ndir == -1) {
         [up scale:-1];
@@ -76,6 +77,7 @@
     [combined dealloc];
     [tangent dealloc];
     [cur_tangent_vec dealloc];
+    
 }
 
 

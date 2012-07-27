@@ -77,6 +77,12 @@ static NSMutableDictionary* textures = nil;
     return ret;
 }
 
++(CCTexture2D*)get_aa_tex:(NSString*)key {
+    CCTexture2D* tex = [Resource get_tex:key];
+    [tex setAntiAliasTexParameters];
+    return tex;
+}
+
 +(void)dealloc_textures {
     for (NSString* key in [textures keyEnumerator]) {
         [[CCTextureCache sharedTextureCache] removeTexture:[textures objectForKey:key]];

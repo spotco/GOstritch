@@ -23,7 +23,7 @@
 
 -(void)link_finish;
 -(Vec3D*)get_normal_vec;
--(line_seg)get_line_seg_a:(float)pre_x b:(float)post_x;
+-(line_seg)get_line_seg;
 -(float)get_t_given_position:(CGPoint)position;
 -(CGPoint)get_position_given_t:(float)t;
 -(Vec3D*)get_tangent_vec;

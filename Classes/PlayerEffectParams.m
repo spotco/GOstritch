@@ -1,4 +1,5 @@
 #import "PlayerEffectParams.h"
+#import "GameEngineLayer.h"
 
 @implementation PlayerEffectParams
 
@@ -42,12 +43,14 @@
     return player_anim_mode_RUN;
 }
 
--(void)update:(Player*)p {
-
+-(void)update:(Player*)p g:(GameEngineLayer *)g{
 }
 
 -(NSString*)info {
     return [NSString stringWithFormat:@"DefaultEffect(minspd:%1.1f,timeleft:%i)",cur_min_speed,time_left];
+}
+
+-(void)effect_end:(Player*)p g:(GameEngineLayer*)g{
 }
 
 @end

@@ -6,7 +6,7 @@
 @synthesize active;
 @synthesize img;
 
--(GameObjectReturnCode)update:(Player*)player  {
+-(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g {
     return GameObjectReturnCode_NONE;
 }
 

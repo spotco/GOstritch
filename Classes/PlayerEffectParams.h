@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "Player.h"
+@class GameEngineLayer;
 
 
 @interface PlayerEffectParams : NSObject {
@@ -18,8 +19,10 @@
 +(PlayerEffectParams*)init_copy:(PlayerEffectParams*)p;
 +(void)copy_params_from:(PlayerEffectParams*)a to:(PlayerEffectParams*)b;
 -(player_anim_mode)get_anim;
--(void)update:(Player*)p;
+-(void)update:(Player*)p g:(GameEngineLayer *)g;
 
+-(BOOL)decrement_timer;
+-(void)effect_end:(Player*)p g:(GameEngineLayer*)g;
 -(void)add_airjump_count;
 -(void)decr_airjump_count;
 -(NSString*)info;

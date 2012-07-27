@@ -11,7 +11,6 @@
 }
 
 +(BGLayer*)init_with_gamelayer:(GameEngineLayer*)g;
-+(NSMutableArray*) loadBg;
 -(void)set_gameengine:(GameEngineLayer*)ref;
--(void)update:(ccTime)dt;
+
 @end

@@ -26,7 +26,7 @@
     return [Common hitrect_cons_x1:[self position].x-10 y1:[self position].y-10 wid:20 hei:20];
 }
 
--(GameObjectReturnCode)update:(Player*)player {
+-(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g{
     if (!active) {
         return GameObjectReturnCode_NONE;
     }

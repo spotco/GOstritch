@@ -12,7 +12,7 @@
     return n;
 }
 
--(void)update:(Player *)p {
+-(void)update:(Player*)p g:(GameEngineLayer *)g{
     if(p.vx < 10) {
         p.vx = 10;
     }

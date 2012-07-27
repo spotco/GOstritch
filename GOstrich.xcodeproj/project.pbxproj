@@ -65,6 +65,7 @@
 		7E5EB93215B2C3BB000877A7 /* DogRocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5EB93115B2C3BB000877A7 /* DogRocket.m */; };
 		7E5EB93515B2C809000877A7 /* DogCapeEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5EB93415B2C809000877A7 /* DogCapeEffect.m */; };
 		7E5EB93815B2CF48000877A7 /* DogRocketEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5EB93715B2CF48000877A7 /* DogRocketEffect.m */; };
+		7E6A873715C246B90022291A /* FlashEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6A873615C246B90022291A /* FlashEffect.m */; };
 		7E86BA5115B3F9060024003C /* dog1ss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E86BA5015B3F9060024003C /* dog1ss.plist */; };
 		7E878C3615C13F8200837E7B /* coincount.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E878C2E15C13F8200837E7B /* coincount.png */; };
 		7E878C3715C13F8200837E7B /* pauseicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E878C2F15C13F8200837E7B /* pauseicon.png */; };
@@ -125,6 +126,7 @@
 		7EDF0448159C53A000E9ABDA /* theme3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF0443159C53A000E9ABDA /* theme3.png */; };
 		7EDF177F15A41A55006AA7E4 /* bigjump.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF177E15A41A55006AA7E4 /* bigjump.map */; };
 		7EDF178215A43C3A006AA7E4 /* test.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EDF178115A43C3A006AA7E4 /* test.map */; };
+		7EDFC78D15C22D3F00DCB32C /* HitEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDFC78C15C22D3F00DCB32C /* HitEffect.m */; };
 		7EE2B78015B7E0DA00941C3B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EE2B77815B7E0DA00941C3B /* Default.png */; };
 		7EE2B78115B7E0DA00941C3B /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EE2B77915B7E0DA00941C3B /* fps_images.png */; };
 		7EE2B78215B7E0DA00941C3B /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EE2B77A15B7E0DA00941C3B /* Icon-72.png */; };
@@ -413,6 +415,8 @@
 		7E5EB93415B2C809000877A7 /* DogCapeEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DogCapeEffect.m; sourceTree = "<group>"; };
 		7E5EB93615B2CF48000877A7 /* DogRocketEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DogRocketEffect.h; sourceTree = "<group>"; };
 		7E5EB93715B2CF48000877A7 /* DogRocketEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DogRocketEffect.m; sourceTree = "<group>"; };
+		7E6A873515C246B90022291A /* FlashEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashEffect.h; sourceTree = "<group>"; };
+		7E6A873615C246B90022291A /* FlashEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashEffect.m; sourceTree = "<group>"; };
 		7E86BA5015B3F9060024003C /* dog1ss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dog1ss.plist; sourceTree = "<group>"; };
 		7E878C2E15C13F8200837E7B /* coincount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coincount.png; sourceTree = "<group>"; };
 		7E878C2F15C13F8200837E7B /* pauseicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseicon.png; sourceTree = "<group>"; };
@@ -486,6 +490,8 @@
 		7EDF0443159C53A000E9ABDA /* theme3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = theme3.png; sourceTree = "<group>"; };
 		7EDF177E15A41A55006AA7E4 /* bigjump.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bigjump.map; sourceTree = "<group>"; };
 		7EDF178115A43C3A006AA7E4 /* test.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.map; sourceTree = "<group>"; };
+		7EDFC78B15C22D3F00DCB32C /* HitEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HitEffect.h; sourceTree = "<group>"; };
+		7EDFC78C15C22D3F00DCB32C /* HitEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HitEffect.m; sourceTree = "<group>"; };
 		7EE2B77815B7E0DA00941C3B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		7EE2B77915B7E0DA00941C3B /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
 		7EE2B77A15B7E0DA00941C3B /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -1158,6 +1164,10 @@
 				7E5EB93415B2C809000877A7 /* DogCapeEffect.m */,
 				7E5EB93615B2CF48000877A7 /* DogRocketEffect.h */,
 				7E5EB93715B2CF48000877A7 /* DogRocketEffect.m */,
+				7EDFC78B15C22D3F00DCB32C /* HitEffect.h */,
+				7EDFC78C15C22D3F00DCB32C /* HitEffect.m */,
+				7E6A873515C246B90022291A /* FlashEffect.h */,
+				7E6A873615C246B90022291A /* FlashEffect.m */,
 			);
 			name = effectparams;
 			sourceTree = "<group>";
@@ -1776,6 +1786,8 @@
 				7EDA90C615BCB5470004CED7 /* CheckPoint.m in Sources */,
 				7EDA90CD15BCC5990004CED7 /* GameEndArea.m in Sources */,
 				7EDA90D015BCED590004CED7 /* Spike.m in Sources */,
+				7EDFC78D15C22D3F00DCB32C /* HitEffect.m in Sources */,
+				7E6A873715C246B90022291A /* FlashEffect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

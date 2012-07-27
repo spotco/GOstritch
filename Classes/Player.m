@@ -1,5 +1,6 @@
 #import "Player.h"
 #import "PlayerEffectParams.h"
+#import "GameEngineLayer.h"
 
 #define IMGWID 64
 #define IMGHEI 58
@@ -13,6 +14,8 @@
 #define MIN_SPEED_MAX 14
 #define LIMITSPD_INCR 2
 #define ACCEL_INCR 0.01
+
+#define HITBOX_RESCALE 0.7
 
 
 @implementation Player
@@ -52,10 +55,20 @@
 	return new_player;
 }
 
+- (void)setOpacity:(GLubyte)opacity {
+	[super setOpacity:opacity];
+    
+	for(CCSprite *sprite in [self children]) {
+        
+		sprite.opacity = opacity;
+	}
+}
+
+
 
 id current_anim;
 id _RUN_ANIM_SLOW,_RUN_ANIM_MED,_RUN_ANIM_FAST,_RUN_ANIM_NONE;
-id _ROCKET_ANIM,_CAPE_ANIM;
+id _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM;
 
 -(void)init_anim {
     _RUN_ANIM_SLOW = [self init_run_anim_speed:0.1];
@@ -64,13 +77,22 @@ id _ROCKET_ANIM,_CAPE_ANIM;
     _RUN_ANIM_NONE = [self init_run_anim_speed:1000];
     _ROCKET_ANIM = [self init_rocket_anim_speed:0.1];
     _CAPE_ANIM = [self init_cape_anim_speed:0.1];
+    _HIT_ANIM = [self init_hit_anim_speed:0.1];
     
     [self start_anim:_RUN_ANIM_SLOW];
 }
 
+-(id)init_hit_anim_speed:(float)speed {
+    CCTexture2D *texture = [Resource get_tex:TEX_DOG_RUN_1];
+    NSMutableArray *animFrames = [NSMutableArray array];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"hit_0"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"hit_1"]]];
+    
+    return [Player make_anim_frames:animFrames speed:speed];
+}
+
 -(id)init_run_anim_speed:(float)speed {
-	CCTexture2D *texture = [Resource get_tex:TEX_DOG_RUN_1];
-    [texture setAntiAliasTexParameters];
+	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
 	NSMutableArray *animFrames = [NSMutableArray array];
 	
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"run_0"]]];
@@ -81,7 +103,7 @@ id _ROCKET_ANIM,_CAPE_ANIM;
 }
 
 -(id)init_rocket_anim_speed:(float)speed {
-	CCTexture2D *texture = [Resource get_tex:TEX_DOG_RUN_1];
+	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
     [texture setAntiAliasTexParameters];
 	NSMutableArray *animFrames = [NSMutableArray array];
     
@@ -92,7 +114,7 @@ id _ROCKET_ANIM,_CAPE_ANIM;
 }
 
 -(id)init_cape_anim_speed:(float)speed {
-	CCTexture2D *texture = [Resource get_tex:TEX_DOG_RUN_1];
+	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
     [texture setAntiAliasTexParameters];
 	NSMutableArray *animFrames = [NSMutableArray array];
     
@@ -158,6 +180,9 @@ NSDictionary *dog_1_ss_plist_dict;
 
 -(void) reset {
     position_ = start_pt;
+    current_island = NULL;
+    [up_vec dealloc];
+    up_vec = [Vec3D init_x:0 y:1 z:0];
     vx = 0;
     vy = 0;
     rotation_ = 0;
@@ -189,7 +214,7 @@ NSDictionary *dog_1_ss_plist_dict;
     temp_params = effect;
 }
 
--(void) update {
+-(void) update:(GameEngineLayer*)g {
     float vel = sqrtf(powf(vx,2)+powf(vy,2));
     float tar = current_params.cur_min_speed;
     
@@ -222,15 +247,21 @@ NSDictionary *dog_1_ss_plist_dict;
         [self start_anim:_CAPE_ANIM];
     } else if (cur_anim_mode == player_anim_mode_ROCKET) {
         [self start_anim:_ROCKET_ANIM];
+    } else if (cur_anim_mode == player_anim_mode_HIT) {
+        [self start_anim:_HIT_ANIM];
     }
     
     if (temp_params != NULL) {
-        [temp_params update:self];
+        [temp_params update:self g:g];
         //NSLog(@"%@",[temp_params info]);
-        temp_params.time_left--;
+        [temp_params decrement_timer];
+        
         if (temp_params.time_left <= 0) {
-            [temp_params release];
-            temp_params = NULL;
+            [temp_params effect_end:self g:g];
+            if (temp_params.time_left <= 0) {
+                [temp_params release];
+                temp_params = NULL;
+            }
         }
     } else {
         if (current_island != NULL) {
@@ -260,8 +291,8 @@ HitRect cached_rect;
     float y = self.position.y;
     [h normalize];
     [v normalize];
-    [h scale:IMGWID/2];
-    [v scale:IMGHEI];
+    [h scale:IMGWID/2 * HITBOX_RESCALE];
+    [v scale:IMGHEI * HITBOX_RESCALE];
     CGPoint *pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
     pts[0] = ccp(x-h.x , y-h.y);
     pts[1] = ccp(x+h.x , y+h.y);

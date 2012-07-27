@@ -45,7 +45,7 @@ static float NO_VAL = -99999.0;
     return normal_vec;
 }
 
--(line_seg)get_line_seg_a:(float)pre_x b:(float)post_x {
+-(line_seg)get_line_seg {
     return [Common cons_line_seg_a:ccp(startX,startY) b:ccp(endX,endY)];
 }
 
