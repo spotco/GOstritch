@@ -79,6 +79,10 @@
 		7E89F24E159ADA3A00A32F2B /* GroundDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E89F24C159ADA3A00A32F2B /* GroundDetail.m */; };
 		7E89F2DE159AEDEE00A32F2B /* looptest.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E89F2DC159AEDEE00A32F2B /* looptest.map */; };
 		7E89F2DF159AEDEE00A32F2B /* themes_info.theme in Resources */ = {isa = PBXBuildFile; fileRef = 7E89F2DD159AEDEE00A32F2B /* themes_info.theme */; };
+		7E8C080815C3CAF600FE9341 /* Water.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E8C080715C3CAF600FE9341 /* Water.m */; };
+		7E8C080D15C3ECBD00FE9341 /* JumpPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E8C080C15C3ECBD00FE9341 /* JumpPad.m */; };
+		7E8C081015C3EE9E00FE9341 /* jumppadss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E8C080E15C3EE9E00FE9341 /* jumppadss.plist */; };
+		7E8C081115C3EE9E00FE9341 /* jumppadss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E8C080F15C3EE9E00FE9341 /* jumppadss.png */; };
 		7E8DF40315945E8C00B00340 /* LineIsland.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E8DF40215945E8C00B00340 /* LineIsland.m */; };
 		7E8F90021568556900C2E30F /* BackgroundObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8F90001568556900C2E30F /* BackgroundObject.h */; };
 		7E8F90031568556900C2E30F /* BackgroundObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E8F90011568556900C2E30F /* BackgroundObject.m */; };
@@ -108,9 +112,6 @@
 		7ED863E115B806C3005FBDBB /* dogcape.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863D015B806C3005FBDBB /* dogcape.png */; };
 		7ED863E215B806C3005FBDBB /* dogrocket.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863D115B806C3005FBDBB /* dogrocket.png */; };
 		7ED863E315B806C3005FBDBB /* goldenbone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863D215B806C3005FBDBB /* goldenbone.png */; };
-		7ED863E415B806C3005FBDBB /* jumppad1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863D415B806C3005FBDBB /* jumppad1.png */; };
-		7ED863E515B806C3005FBDBB /* jumppad2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863D515B806C3005FBDBB /* jumppad2.png */; };
-		7ED863E615B806C3005FBDBB /* jumppad3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863D615B806C3005FBDBB /* jumppad3.png */; };
 		7ED863E715B806C3005FBDBB /* spikes.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863D715B806C3005FBDBB /* spikes.png */; };
 		7ED863E815B806C3005FBDBB /* water.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863D815B806C3005FBDBB /* water.png */; };
 		7ED863EA15B81A4A005FBDBB /* BG1_island_top_edge.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863E915B81A4A005FBDBB /* BG1_island_top_edge.png */; };
@@ -433,6 +434,12 @@
 		7E89F274159ADF2C00A32F2B /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		7E89F2DC159AEDEE00A32F2B /* looptest.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = looptest.map; sourceTree = "<group>"; };
 		7E89F2DD159AEDEE00A32F2B /* themes_info.theme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = themes_info.theme; path = ../map/themes_info.theme; sourceTree = "<group>"; };
+		7E8C080615C3CAF600FE9341 /* Water.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Water.h; sourceTree = "<group>"; };
+		7E8C080715C3CAF600FE9341 /* Water.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Water.m; sourceTree = "<group>"; };
+		7E8C080B15C3ECBD00FE9341 /* JumpPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpPad.h; sourceTree = "<group>"; };
+		7E8C080C15C3ECBD00FE9341 /* JumpPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JumpPad.m; sourceTree = "<group>"; };
+		7E8C080E15C3EE9E00FE9341 /* jumppadss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = jumppadss.plist; sourceTree = "<group>"; };
+		7E8C080F15C3EE9E00FE9341 /* jumppadss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumppadss.png; sourceTree = "<group>"; };
 		7E8DF40115945E8C00B00340 /* LineIsland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineIsland.h; sourceTree = "<group>"; };
 		7E8DF40215945E8C00B00340 /* LineIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineIsland.m; sourceTree = "<group>"; };
 		7E8F90001568556900C2E30F /* BackgroundObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundObject.h; sourceTree = "<group>"; };
@@ -468,9 +475,6 @@
 		7ED863D015B806C3005FBDBB /* dogcape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dogcape.png; sourceTree = "<group>"; };
 		7ED863D115B806C3005FBDBB /* dogrocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dogrocket.png; sourceTree = "<group>"; };
 		7ED863D215B806C3005FBDBB /* goldenbone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goldenbone.png; sourceTree = "<group>"; };
-		7ED863D415B806C3005FBDBB /* jumppad1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumppad1.png; sourceTree = "<group>"; };
-		7ED863D515B806C3005FBDBB /* jumppad2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumppad2.png; sourceTree = "<group>"; };
-		7ED863D615B806C3005FBDBB /* jumppad3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jumppad3.png; sourceTree = "<group>"; };
 		7ED863D715B806C3005FBDBB /* spikes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spikes.png; sourceTree = "<group>"; };
 		7ED863D815B806C3005FBDBB /* water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = water.png; sourceTree = "<group>"; };
 		7ED863E915B81A4A005FBDBB /* BG1_island_top_edge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_island_top_edge.png; path = Resources/bg/BG1/BG1_island_top_edge.png; sourceTree = SOURCE_ROOT; };
@@ -1037,6 +1041,19 @@
 			path = map;
 			sourceTree = "<group>";
 		};
+		7E8C080A15C3EBD300FE9341 /* envr_obj */ = {
+			isa = PBXGroup;
+			children = (
+				7EDA90CE15BCED580004CED7 /* Spike.h */,
+				7EDA90CF15BCED580004CED7 /* Spike.m */,
+				7E8C080615C3CAF600FE9341 /* Water.h */,
+				7E8C080715C3CAF600FE9341 /* Water.m */,
+				7E8C080B15C3ECBD00FE9341 /* JumpPad.h */,
+				7E8C080C15C3ECBD00FE9341 /* JumpPad.m */,
+			);
+			name = envr_obj;
+			sourceTree = "<group>";
+		};
 		7E8DF4051594600600B00340 /* cocos2d-impl */ = {
 			isa = PBXGroup;
 			children = (
@@ -1076,14 +1093,13 @@
 		7E93D6731592B69C00A83E9C /* game_obj */ = {
 			isa = PBXGroup;
 			children = (
+				7E8C080A15C3EBD300FE9341 /* envr_obj */,
 				7EDA90C215BCB51A0004CED7 /* checkpoint */,
 				7E5EB92C15B2C125000877A7 /* powerups */,
 				7E89F24B159ADA3A00A32F2B /* GroundDetail.h */,
 				7E89F24C159ADA3A00A32F2B /* GroundDetail.m */,
 				7E93D6741592B97C00A83E9C /* GameObject.h */,
 				7E93D6751592B97C00A83E9C /* GameObject.m */,
-				7EDA90CE15BCED580004CED7 /* Spike.h */,
-				7EDA90CF15BCED580004CED7 /* Spike.m */,
 			);
 			name = game_obj;
 			sourceTree = "<group>";
@@ -1137,9 +1153,8 @@
 		7ED863D315B806C3005FBDBB /* jumppad */ = {
 			isa = PBXGroup;
 			children = (
-				7ED863D415B806C3005FBDBB /* jumppad1.png */,
-				7ED863D515B806C3005FBDBB /* jumppad2.png */,
-				7ED863D615B806C3005FBDBB /* jumppad3.png */,
+				7E8C080E15C3EE9E00FE9341 /* jumppadss.plist */,
+				7E8C080F15C3EE9E00FE9341 /* jumppadss.png */,
 			);
 			path = jumppad;
 			sourceTree = "<group>";
@@ -1722,9 +1737,6 @@
 				7ED863E115B806C3005FBDBB /* dogcape.png in Resources */,
 				7ED863E215B806C3005FBDBB /* dogrocket.png in Resources */,
 				7ED863E315B806C3005FBDBB /* goldenbone.png in Resources */,
-				7ED863E415B806C3005FBDBB /* jumppad1.png in Resources */,
-				7ED863E515B806C3005FBDBB /* jumppad2.png in Resources */,
-				7ED863E615B806C3005FBDBB /* jumppad3.png in Resources */,
 				7ED863E715B806C3005FBDBB /* spikes.png in Resources */,
 				7ED863E815B806C3005FBDBB /* water.png in Resources */,
 				7ED863EA15B81A4A005FBDBB /* BG1_island_top_edge.png in Resources */,
@@ -1738,6 +1750,8 @@
 				7E878C3A15C13F8200837E7B /* pause_menu_music.png in Resources */,
 				7E878C3B15C13F8200837E7B /* pause_menu_play.png in Resources */,
 				7E878C3C15C13F8200837E7B /* pause_menu_sound.png in Resources */,
+				7E8C081015C3EE9E00FE9341 /* jumppadss.plist in Resources */,
+				7E8C081115C3EE9E00FE9341 /* jumppadss.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1788,6 +1802,8 @@
 				7EDA90D015BCED590004CED7 /* Spike.m in Sources */,
 				7EDFC78D15C22D3F00DCB32C /* HitEffect.m in Sources */,
 				7E6A873715C246B90022291A /* FlashEffect.m in Sources */,
+				7E8C080815C3CAF600FE9341 /* Water.m in Sources */,
+				7E8C080D15C3ECBD00FE9341 /* JumpPad.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

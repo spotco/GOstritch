@@ -3,7 +3,7 @@
 #import "GameRenderImplementation.h"
 @class GameEngineLayer;
 
-@interface GameObject : CCNode {
+@interface GameObject : CCSprite {
     BOOL active;
     CCSprite *img;
 }

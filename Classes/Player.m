@@ -104,7 +104,6 @@ id _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM;
 
 -(id)init_rocket_anim_speed:(float)speed {
 	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
-    [texture setAntiAliasTexParameters];
 	NSMutableArray *animFrames = [NSMutableArray array];
     
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"rocket_0"]]];
@@ -115,7 +114,6 @@ id _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM;
 
 -(id)init_cape_anim_speed:(float)speed {
 	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
-    [texture setAntiAliasTexParameters];
 	NSMutableArray *animFrames = [NSMutableArray array];
     
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"cape_0"]]];

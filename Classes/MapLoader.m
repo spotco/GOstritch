@@ -99,6 +99,17 @@
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             [map.game_objects addObject:[Spike init_x:x y:y islands:map.n_islands]];
             
+        } else if ([type isEqualToString:@"water"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            float width = ((NSString*)[j_object  objectForKey:@"width"]).floatValue;
+            [map.game_objects addObject:[Water init_x:x y:y width:width]];
+            
+        } else if ([type isEqualToString:@"jumppad"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            [map.game_objects addObject:[JumpPad init_x:x y:y islands:map.n_islands]];
+            
         } else {
             NSLog(@"item read error");
             continue;

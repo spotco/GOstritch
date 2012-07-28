@@ -43,47 +43,38 @@
     t_max = sqrtf(powf(endX - startX, 2) + powf(endY - startY, 2));
 }
 
--(void)draw_renderobj:(gl_render_obj)obj n_vtx:(int)n_vtx {
-    glBindTexture(GL_TEXTURE_2D, obj.texture.name);
-	glVertexPointer(2, GL_FLOAT, 0, obj.tri_pts); 
-	glTexCoordPointer(2, GL_FLOAT, 0, obj.tex_pts);
-    
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-    if (n_vtx == 4)glDrawArrays(GL_TRIANGLES, 1, 3);
-}
-
 -(void) draw {
 	[super draw];
     
-    [self draw_renderobj:main_fill n_vtx:4];
-    [self draw_renderobj:top_fill n_vtx:4];
+    [Common draw_renderobj:main_fill n_vtx:4];
+    [Common draw_renderobj:top_fill n_vtx:4];
     
     glColor4ub(109,110,112,255);
     glLineWidth(5.0f);
     
     if (has_prev == NO) {
-        [self draw_renderobj:left_line_fill n_vtx:4]; //ccDrawLine(tl, bl1);    
+        [Common draw_renderobj:left_line_fill n_vtx:4]; //ccDrawLine(tl, bl1);    
         ccDrawQuadBezier(bl1, bl, bl2, 3);
     }
     if (next == NULL) {
-        [self draw_renderobj:right_line_fill n_vtx:4]; //ccDrawLine(tr, br1);
+        [Common draw_renderobj:right_line_fill n_vtx:4]; //ccDrawLine(tr, br1);
         ccDrawQuadBezier(br1, br, br2, 3);
     }
     
-    [self draw_renderobj:bottom_line_fill n_vtx:4]; //ccDrawLine(bl2, br2);
+    [Common draw_renderobj:bottom_line_fill n_vtx:4]; //ccDrawLine(bl2, br2);
     
     if (has_prev == NO) {
-        [self draw_renderobj:tl_top_corner n_vtx:4];
+        [Common draw_renderobj:tl_top_corner n_vtx:4];
     }
     if (next == NULL) {
-        [self draw_renderobj:tr_top_corner n_vtx:4];
+        [Common draw_renderobj:tr_top_corner n_vtx:4];
     }
     
     if (next != NULL) {
-        [self draw_renderobj:corner_fill n_vtx:3];
+        [Common draw_renderobj:corner_fill n_vtx:3];
         glColor4f(0.29, 0.69, 0.03, 1.0);
         ccDrawSolidPoly(toppts, 3, YES);
-        [self draw_renderobj:corner_line_fill n_vtx:4];
+        [Common draw_renderobj:corner_line_fill n_vtx:4];
     }
     
 }
@@ -92,16 +83,8 @@
     [v scale:ndir];
 }
 
--(gl_render_obj)init_render_obj:(CCTexture2D*)tex npts:(int)npts {
-    struct gl_render_obj n;
-    n.texture = tex;
-    n.tri_pts = (CGPoint*) malloc(sizeof(CGPoint)*npts);
-    n.tex_pts = (CGPoint*) malloc(sizeof(CGPoint)*npts);
-    return n;
-}
-
 -(void)init_tex {	
-    main_fill = [self init_render_obj:[Resource get_tex:TEX_GROUND_TEX_1] npts:4];
+    main_fill = [Common init_render_obj:[Resource get_tex:TEX_GROUND_TEX_1] npts:4];
 	
 	CGPoint* tri_pts = main_fill.tri_pts;
     
@@ -118,7 +101,7 @@
     tri_pts[1] = ccp(0+v3t1.x * taille,0+v3t1.y * taille);
     tri_pts[0] = ccp(endX-startX +v3t1.x * taille ,endY-startY +v3t1.y * taille);
 	
-    [self tex_map_to_tri_loc:main_fill len:4];
+    [Common tex_map_to_tri_loc:main_fill len:4];
 
     [self init_LR_line_with_v3t1:v3t1 v3t2:v3t2];
     
@@ -166,7 +149,7 @@
 }
 
 -(void)init_top {
-    top_fill = [self init_render_obj:[Resource get_tex:TEX_GROUND_TOP_1] npts:4];
+    top_fill = [Common init_render_obj:[Resource get_tex:TEX_GROUND_TOP_1] npts:4];
     
 	CGPoint* tri_pts = top_fill.tri_pts;
 	CGPoint* tex_pts = top_fill.tex_pts;
@@ -221,7 +204,7 @@
     bot = [mvr transform_pt:bot];
     [mvr dealloc];
     
-    gl_render_obj o = [self init_render_obj:[Resource get_tex:TEX_TOP_EDGE] npts:4];
+    gl_render_obj o = [Common init_render_obj:[Resource get_tex:TEX_TOP_EDGE] npts:4];
 	
 	CGPoint* tri_pts = o.tri_pts;
     
@@ -260,7 +243,7 @@
 
 -(gl_render_obj)line_from:(CGPoint)a to:(CGPoint)b scale:(float)scale {
     struct gl_render_obj n;
-    n = [self init_render_obj:[Resource get_tex:TEX_ISLAND_BORDER] npts:4];
+    n = [Common init_render_obj:[Resource get_tex:TEX_ISLAND_BORDER] npts:4];
     
     CGPoint* tri_pts = n.tri_pts;
 	CGPoint* tex_pts = n.tex_pts;
@@ -360,7 +343,7 @@
 }
 
 -(void)init_corner_tex {
-    corner_fill = [self init_render_obj:[Resource get_tex:TEX_GROUND_TEX_1] npts:3];
+    corner_fill = [Common init_render_obj:[Resource get_tex:TEX_GROUND_TEX_1] npts:3];
     
     CGPoint* tri_pts = corner_fill.tri_pts;
     
@@ -383,13 +366,7 @@
     [v3t2 dealloc];
     [v3t1 dealloc];
 
-    [self tex_map_to_tri_loc:corner_fill len:3]; 
-}
-
--(void)tex_map_to_tri_loc:(gl_render_obj)o len:(int)len {
-    for (int i = 0; i < len; i++) {
-        o.tex_pts[i] = ccp(o.tri_pts[i].x/o.texture.pixelsWide, o.tri_pts[i].y/o.texture.pixelsHigh);
-    }
+    [Common tex_map_to_tri_loc:corner_fill len:3]; 
 }
 
 

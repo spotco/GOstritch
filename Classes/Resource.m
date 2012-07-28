@@ -30,6 +30,8 @@ static NSMutableDictionary* textures = nil;
                      @"BG1_layer_3.png", TEX_BG_LAYER_3,
                      @"BG1_island_border.png", TEX_ISLAND_BORDER,
                      @"BG1_cloud.png", TEX_CLOUD,
+                     @"water.png", TEX_WATER,
+                     @"jumppadss.png", TEX_JUMPPAD,
                                           
                      @"BG1_detail_1.png", TEX_GROUND_DETAIL_1,
                      @"BG1_detail_2.png", TEX_GROUND_DETAIL_2,
@@ -50,6 +52,7 @@ static NSMutableDictionary* textures = nil;
                      @"pause_menu_music.png", TEX_UI_PAUSEMENU_MUSIC,
                      @"pause_menu_play.png", TEX_UI_PAUSEMENU_PLAY,
                      @"pause_menu_sound.png", TEX_UI_PAUSEMENU_SOUND,
+                     
                      
                      nil];
     [Resource load_tex_from_array:temp];

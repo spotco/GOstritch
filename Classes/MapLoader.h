@@ -10,6 +10,8 @@
 #import "CheckPoint.h"
 #import "GameEndArea.h"
 #import "Spike.h"
+#import "Water.h"
+#import "JumpPad.h"
 
 @interface MapLoader : NSObject
 

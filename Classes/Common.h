@@ -38,4 +38,8 @@ typedef struct line_seg {
 +(float)rad_to_deg:(float)rad;
 +(float)sig:(float)n;
 
++(void)draw_renderobj:(gl_render_obj)obj n_vtx:(int)n_vtx;
++(void)tex_map_to_tri_loc:(gl_render_obj)o len:(int)len;
++(gl_render_obj)init_render_obj:(CCTexture2D*)tex npts:(int)npts;
+
 @end

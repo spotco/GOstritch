@@ -91,6 +91,7 @@
 
 -(void)update {
     if (paused) {
+        //[self update_game_obj];
         return;
     }
     
