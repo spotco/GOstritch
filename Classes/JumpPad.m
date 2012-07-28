@@ -2,6 +2,7 @@
 #import "Player.h"
 
 #define JUMP_POWER 20
+#define RECHARGE_TIME 15
 
 @implementation JumpPad
 
@@ -18,13 +19,20 @@
     return [Common hitrect_cons_x1:[self position].x-10 y1:[self position].y-10 wid:20 hei:20];
 }
 
--(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g{    
+-(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g{
+    if (recharge_ct >= 0) {
+        recharge_ct--;
+        if (recharge_ct == 0) {
+            [self set_active:YES];
+        }
+    }
     if(!active) {
         return GameObjectReturnCode_NONE;
     }
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         [self set_active:NO];
+        recharge_ct = RECHARGE_TIME;
         [self boostjump:player];
     }
     
@@ -41,12 +49,9 @@
     [up normalize];
     
     if (player.current_island != NULL) {
-        if (player.current_island.ndir == -1) {
-            [up scale:-1];
-        }
+        [tangent scale:-player.current_island.ndir];
         player.current_island = NULL;
     }
-    
     
     [tangent scale:mov_speed];
     [up scale:JUMP_POWER];
@@ -139,10 +144,10 @@ NSDictionary *jumppad_ss_plist_dict;
             [normal_vec retain];
             
             [tangent_vec dealloc];
-            break;
+            return;
         }
     }
-    
+    NSLog(@"island not found");
     normal_vec = [Vec3D init_x:0 y:1 z:0];
     [normal_vec retain];
 }

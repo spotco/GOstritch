@@ -58,7 +58,6 @@
         [up scale:-1];
     }
     
-    
     [tangent scale:mov_speed];
     [up scale:JUMP_POWER];
     

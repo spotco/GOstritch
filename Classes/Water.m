@@ -8,7 +8,7 @@
 +(Water*)init_x:(float)x y:(float)y width:(float)width {
     Water *w = [Water node];
     w.position = ccp(x,y);
-    [w init_body:400];
+    [w init_body:width];
     
     return w;
 }
