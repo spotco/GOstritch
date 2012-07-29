@@ -44,6 +44,9 @@
 #define TEX_UI_PAUSEMENU_PLAY @"PauseMenuPlay"
 #define TEX_UI_PAUSEMENU_SOUND @"PauseMenuSound"
 
+#define TEX_UI_STARTGAME_GO @"UIStartGameGo"
+#define TEX_UI_STARTGAME_READY @"UIStartGameReady"
+
 
 
 @end

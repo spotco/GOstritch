@@ -1,24 +1,29 @@
 #import "GameEngineLayer.h"
 #import "BGLayer.h"
+#import "UILayer.h"
 
 @implementation GameEngineLayer
 
-@synthesize paused;
+@synthesize current_mode;
 @synthesize game_objects,islands;
+@synthesize player;
+@synthesize load_game_end_menu;
 
 +(CCScene *) scene_with:(NSString *) map_file_name {
     [Resource init_bg1_textures];
 	[[CCDirector sharedDirector] setDisplayFPS:NO];
 	CCScene *scene = [CCScene node];
     
-    GameEngineLayer *layer = [GameEngineLayer init_from_file:map_file_name];
-	BGLayer *bglayer = [BGLayer init_with_gamelayer:layer];
-    UILayer* uilayer = [UILayer init_with_gamelayer:layer];
+    GameEngineLayer *glayer = [GameEngineLayer init_from_file:map_file_name];
+	BGLayer *bglayer = [BGLayer init_with_gamelayer:glayer];
+    UILayer* uilayer = [UILayer init_with_gamelayer:glayer];
+    
+    [uilayer start_initial_anim];
+    [glayer start];
     
     //[scene addChild:bglayer];
-    [scene addChild: layer];
+    [scene addChild:glayer];
     [scene addChild:uilayer];
-
     
 	return scene;
 }
@@ -39,16 +44,18 @@
     player = [Player init_at:player_start_pt];
     
     [self addChild:player z:[GameRenderImplementation GET_RENDER_PLAYER_ORD]];
-    [self schedule:@selector(update)];
-    
     self.isTouchEnabled = YES;
     
     current_mode = GameEngineLayerMode_GAMEPLAY;
     
     [GameRenderImplementation update_camera_on:self state:game_render_state];
     
-    follow_action = [CCFollow actionWithTarget:(player) worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]];
+    follow_action = [CCFollow actionWithTarget:player worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]];
     [self runAction:follow_action];
+}
+
+-(void)start {
+    [self schedule:@selector(update)];
 }
 
 -(HitRect) get_world_bounds {
@@ -90,12 +97,9 @@
 }
 
 -(void)update {
-    if (paused) {
-        //[self update_game_obj];
+    if (current_mode == GameEngineLayerMode_PAUSED) {
         return;
-    }
-    
-    if (current_mode == GameEngineLayerMode_GAMEPLAY) {
+    } else if (current_mode == GameEngineLayerMode_GAMEPLAY || current_mode == GameEngineLayerMode_OBJECTANIM) {
         [GamePhysicsImplementation player_move:player with_islands:islands];
         [GameControlImplementation control_update_player:player state:game_control_state islands:islands objects:game_objects];
         [player update:self];
@@ -106,14 +110,15 @@
         [GameRenderImplementation update_render_on:self player:player islands:islands objects:game_objects state:game_render_state];
         
     } else if (current_mode == GameEngineLayerMode_ENDOUT) {
+                
         if ([Common hitrect_touch:[player get_hit_rect] b:[self get_viewbox]]) {
             [GamePhysicsImplementation player_move:player with_islands:islands];
             [player update:self];  
-        } else {
-            [self end_game];
-            exit(0);
+        } else if (!gameend_hascalled) {
+            [Common run_callback:load_game_end_menu];
+            gameend_hascalled = YES;
         }
-
+        
     }
     
 }
@@ -137,7 +142,7 @@
 }
 
 -(void) ccTouchesBegan:(NSSet*)pTouches withEvent:(UIEvent*)pEvent {
-    if (paused) {
+    if (current_mode != GameEngineLayerMode_GAMEPLAY) {
         return;
     }
     
@@ -149,7 +154,7 @@
 }
 
 -(void) ccTouchesEnded:(NSSet*)pTouches withEvent:(UIEvent*)event {
-    if (paused) {
+    if (current_mode != GameEngineLayerMode_GAMEPLAY) {
         return;
     }
     
@@ -174,20 +179,25 @@
     for (GameObject* o in game_objects) {
         [o set_active:YES];
     }
+    current_mode = GameEngineLayerMode_GAMEPLAY;
 }
 
 -(CGPoint)get_pos {
     return player.position;
 }
 
--(void) end_game { //TODO -- ACTUALLY DEALLOC SHIT
+-(void) cleanup_anims {
+    [self unschedule:@selector(update)];
+    NSLog(@"compile 2");
+    [player cleanup_anims];
+    
     [self removeAllChildrenWithCleanup:YES];
-    [[CCDirector sharedDirector] end];
 }
+
 
 -(void)draw {
     [super draw];
-    //return;
+    return;
     
     glColor4ub(255,0,0,100);
     glLineWidth(1.0f);

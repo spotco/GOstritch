@@ -1,24 +1,81 @@
 #import "UILayer.h"
-#import "GameEngineLayer.h"
+#import "Player.h"
 
 @implementation UILayer
 
 +(UILayer*)init_with_gamelayer:(GameEngineLayer *)g {
     UILayer* u = [UILayer node];
     [u set_gameengine:g];
+    [u initialize];
     return u;
 }
 
--(id) init{
-	if( (self = [super init])) {        
-        [self init_ingame_ui];
-        
-        [self init_pause_menu];
-        
-        self.isTouchEnabled = YES;
-	}
-	return self;
+
+-(void)initialize {
+    [self init_ingame_ui];
+    [self init_pause_menu];
+    [self init_game_end_menu];
+    self.isTouchEnabled = YES;
+    [self add_gameenginelayer_callbacks];
 }
+
+-(void)add_gameenginelayer_callbacks {
+    struct callback load_game_end_menu;
+    load_game_end_menu.target = self;
+    load_game_end_menu.selector = @selector(load_game_end_menu);
+    
+    game_engine_layer.load_game_end_menu = load_game_end_menu;
+}
+
+-(void)load_game_end_menu {
+    game_end_menu_layer.isTouchEnabled = NO;
+    ingame_ui.visible = NO;
+    [[[CCDirector sharedDirector] runningScene] addChild:game_end_menu_layer];
+}
+
+-(void)init_game_end_menu {
+    ccColor4B c = {0,0,0,200};
+    CGSize s = [[UIScreen mainScreen] bounds].size;
+    game_end_menu_layer= [CCLayerColor layerWithColor:c width:s.height height:s.width];
+    game_end_menu_layer.anchorPoint = ccp(0,0);
+    [game_end_menu_layer retain];
+    
+    CCSprite *backimg = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEMENU_BACK]];
+    CCSprite *backimgzoom = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEMENU_BACK]];
+    [UILayer set_zoom_pos_align:backimg zoomed:backimgzoom scale:1.4];
+    
+    CCMenuItemImage *back = [CCMenuItemImage itemFromNormalSprite:backimg 
+                                                   selectedSprite:backimgzoom
+                                                           target:self 
+                                                         selector:@selector(nextlevel)];
+    back.position = ccp(s.height/2,s.width/2);
+    
+    CCMenu* gameendmenu = [CCMenu menuWithItems:back, nil];
+    gameendmenu.position = ccp(0,0);
+    
+    [game_end_menu_layer addChild:gameendmenu];
+}
+
+-(void)nextlevel {
+    [game_engine_layer cleanup_anims];
+    [Resource dealloc_textures];
+    [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene_with:@"test2"]];
+}
+
+-(void)start_initial_anim {
+    game_engine_layer.current_mode = GameEngineLayerMode_UIANIM;
+    
+    ingame_ui.visible = NO;
+    curanim = [GameStartAnim init_endcallback:@selector(end_initial_anim) on_target:self];
+    [self addChild:curanim];
+}
+     
+ -(void)end_initial_anim {
+     game_engine_layer.current_mode = GameEngineLayerMode_GAMEPLAY;
+     ingame_ui.visible = YES;
+     [self removeChild:curanim cleanup:YES];
+ }
+
 
 -(void)init_ingame_ui {
     CCSprite *pauseicon = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEICON]];
@@ -32,8 +89,6 @@
     ingamepause.position = ccp([[UIScreen mainScreen] bounds].size.height - pauseicon.boundingBox.size.width +20, 
                                [[UIScreen mainScreen] bounds].size.width - pauseicon.boundingBox.size.height +20);
     
-    
-
     CCMenuItemImage *count_disp_bg = [CCMenuItemSprite itemFromNormalSprite:[CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_COINCOUNT]]
                                                              selectedSprite:[CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_COINCOUNT]]];
     count_disp_bg.anchorPoint = ccp(0,0);
@@ -104,8 +159,10 @@ int tapcount = 0;
 
 
 -(void)pause {
-    if (!game_engine_layer.paused) {
-        game_engine_layer.paused = YES;
+    if (game_engine_layer.current_mode != GameEngineLayerMode_PAUSED) {
+        prevmode = game_engine_layer.current_mode;
+        game_engine_layer.current_mode = GameEngineLayerMode_PAUSED;
+        
         ingame_ui.visible = NO;
         [[CCDirector sharedDirector] pause];
         [[[CCDirector sharedDirector] runningScene] addChild:pauselayer];
@@ -113,8 +170,9 @@ int tapcount = 0;
 }
                          
 -(void)unpause {
-    if (game_engine_layer.paused) {
-        game_engine_layer.paused = NO;
+    if (game_engine_layer.current_mode == GameEngineLayerMode_PAUSED) {
+        game_engine_layer.current_mode = prevmode;
+        
         ingame_ui.visible = YES;
         [[CCDirector sharedDirector] resume];
         [[[CCDirector sharedDirector] runningScene] removeChild:pauselayer cleanup:NO];

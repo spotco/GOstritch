@@ -24,7 +24,7 @@
 	"objects":[
 		{"type":"water", "x":"2223", "y":"522", "label":"7","width":"1000"},
 		{"type":"jumppad", "x":"982", "y":"795", "label":"8"},
-		{"type":"jumppad", "x":"1741", "y":"1521", "label":"9"},
+		{"type":"spike", "x":"1741", "y":"1521", "label":"9"},
 		{"type":"jumppad", "x":"509", "y":"302", "label":"11"}
 	]
 }

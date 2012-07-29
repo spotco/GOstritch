@@ -112,7 +112,7 @@
 	// Run the intro Scene
 	//[[CCDirector sharedDirector] runWithScene: [GameEngineLayer scene]];
     //[[CCDirector sharedDirector] runWithScene:[ThemeSelectionPage scene]];
-    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"test2"]];
+    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"bigjump"]];
 }
 
 

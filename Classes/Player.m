@@ -64,13 +64,8 @@
 	}
 }
 
-
-
-id current_anim;
-id _RUN_ANIM_SLOW,_RUN_ANIM_MED,_RUN_ANIM_FAST,_RUN_ANIM_NONE;
-id _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM;
-
 -(void)init_anim {
+    
     _RUN_ANIM_SLOW = [self init_run_anim_speed:0.1];
     _RUN_ANIM_MED = [self init_run_anim_speed:0.075];
     _RUN_ANIM_FAST = [self init_run_anim_speed:0.05];
@@ -79,7 +74,7 @@ id _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM;
     _CAPE_ANIM = [self init_cape_anim_speed:0.1];
     _HIT_ANIM = [self init_hit_anim_speed:0.1];
     
-    [self start_anim:_RUN_ANIM_SLOW];
+    [self start_anim:_RUN_ANIM_NONE];
 }
 
 -(id)init_hit_anim_speed:(float)speed {
@@ -88,7 +83,7 @@ id _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM;
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"hit_0"]]];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"hit_1"]]];
     
-    return [Player make_anim_frames:animFrames speed:speed];
+    return [self make_anim_frames:animFrames speed:speed];
 }
 
 -(id)init_run_anim_speed:(float)speed {
@@ -99,7 +94,7 @@ id _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM;
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"run_1"]]];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"run_2"]]];
    
-	return [Player make_anim_frames:animFrames speed:speed];
+	return [self make_anim_frames:animFrames speed:speed];
 }
 
 -(id)init_rocket_anim_speed:(float)speed {
@@ -109,7 +104,7 @@ id _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM;
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"rocket_0"]]];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"rocket_1"]]];
 	
-    return [Player make_anim_frames:animFrames speed:speed];
+    return [self make_anim_frames:animFrames speed:speed];
 }
 
 -(id)init_cape_anim_speed:(float)speed {
@@ -119,16 +114,16 @@ id _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM;
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"cape_0"]]];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"cape_1"]]];
 	
-    return [Player make_anim_frames:animFrames speed:speed];
+    return [self make_anim_frames:animFrames speed:speed];
 }
 
 
 
-+(id)make_anim_frames:(NSMutableArray*)animFrames speed:(float)speed {
+-(id)make_anim_frames:(NSMutableArray*)animFrames speed:(float)speed {
 	id animate = [CCAnimate actionWithAnimation:[CCAnimation animationWithFrames:animFrames delay:speed] restoreOriginalFrame:YES];
     id m = [CCRepeatForever actionWithAction:animate];
     
-    [m retain];    
+    [m retain];
 	return m;
 }
 
@@ -315,6 +310,23 @@ HitRect cached_rect;
     refresh_hitrect = NO;
     cached_rect = [Common hitrect_cons_x1:x1 y1:y1 x2:x2 y2:y2];
     return cached_rect;
+}
+
+-(void)cleanup_anims {
+    NSLog(@"fuck");
+    [self stopAction:current_anim]; 
+    
+    [_RUN_ANIM_FAST dealloc];
+    [_RUN_ANIM_MED dealloc];
+    [_RUN_ANIM_NONE dealloc];
+    [_RUN_ANIM_SLOW dealloc];
+    
+    [_ROCKET_ANIM dealloc];
+    [_CAPE_ANIM dealloc];
+    [_HIT_ANIM dealloc];
+    
+    
+    [self removeAllChildrenWithCleanup:NO];
 }
 
 @end

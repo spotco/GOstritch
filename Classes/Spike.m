@@ -45,36 +45,22 @@
 }
 
 -(void)attach_toisland:(NSMutableArray*)islands {
-    CGPoint p = [self position];
-    line_seg vert = [Common cons_line_seg_a:ccp(p.x,p.y-10) b:ccp(p.x,p.y+10)];
-    line_seg horiz = [Common cons_line_seg_a:ccp(p.x-10,p.y) b:ccp(p.x+10,p.y)];
-    
-    for (Island* i in islands) {
-        line_seg iseg = [i get_line_seg];
-        CGPoint vert_ins = [Common line_seg_intersection_a:vert b:iseg];
-        CGPoint horiz_ins = [Common line_seg_intersection_a:horiz b:iseg];
-        if ((vert_ins.x != [Island NO_VALUE] && vert_ins.y != [Island NO_VALUE]) ||
-            (horiz_ins.x != [Island NO_VALUE] && horiz_ins.y != [Island NO_VALUE])){
-            
-            Vec3D *tangent_vec = [i get_tangent_vec];
-            [tangent_vec scale:[i ndir]];
-            float tar_rad = -[tangent_vec get_angle_in_rad];
-            float tar_deg = [Common rad_to_deg:tar_rad];
-            img.rotation = tar_deg;
-            
-            [tangent_vec normalize];
-            Vec3D *normal_vec = [[Vec3D Z_VEC] crossWith:tangent_vec];
-            [normal_vec scale:15];
-            img.position = ccp(normal_vec.x,normal_vec.y);
-            
-            
-            [tangent_vec dealloc];
-            [normal_vec dealloc];
-            
-            return;
-        }
+    Island* i = [self get_connecting_island:islands];
+    if (i != NULL) {
+        Vec3D *tangent_vec = [i get_tangent_vec];
+        [tangent_vec scale:[i ndir]];
+        float tar_rad = -[tangent_vec get_angle_in_rad];
+        float tar_deg = [Common rad_to_deg:tar_rad];
+        img.rotation = tar_deg;
+        
+        [tangent_vec normalize];
+        Vec3D *normal_vec = [[Vec3D Z_VEC] crossWith:tangent_vec];
+        [normal_vec scale:15];
+        img.position = ccp(normal_vec.x,normal_vec.y);
+        
+        [tangent_vec dealloc];
+        [normal_vec dealloc];
     }
-    NSLog(@"no island found");
 }
 
 @end

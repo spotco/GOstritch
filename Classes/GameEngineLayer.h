@@ -4,7 +4,7 @@
 #import "Common.h"
 #import "GameObject.h"
 @class BGLayer;
-#import "UILayer.h"
+@class UILayer;
 #import "Resource.h"
 #import "MapLoader.h"
 #import "GamePhysicsImplementation.h"
@@ -14,9 +14,11 @@
 #import "GameRenderState.h"
 
 typedef enum {
+    GameEngineLayerMode_UIANIM,
     GameEngineLayerMode_GAMEPLAY,
     GameEngineLayerMode_PAUSED,
-    GameEngineLayerMode_ENDOUT
+    GameEngineLayerMode_ENDOUT,
+    GameEngineLayerMode_OBJECTANIM
 } GameEngineLayerMode;
 
 @interface GameEngineLayer : CCLayer {
@@ -31,15 +33,21 @@ typedef enum {
     CCFollow *follow_action;
     
     GameEngineLayerMode current_mode;
-    BOOL paused;
+    
+    callback load_game_end_menu;
+    BOOL gameend_hascalled;
 }
 
 
-@property(readwrite,assign) BOOL paused;
+@property(readwrite,assign) GameEngineLayerMode current_mode;
 @property(readwrite,assign) NSMutableArray *islands, *game_objects;
+@property(readwrite,assign) Player* player;
+
+@property(readwrite,assign) callback load_game_end_menu;
 
 +(CCScene *) scene_with:(NSString *)map_file_name;
 -(void)player_reset;
 -(CGPoint)get_pos;
+-(void)cleanup_anims;
 
 @end

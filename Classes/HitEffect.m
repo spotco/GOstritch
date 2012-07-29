@@ -16,6 +16,7 @@
 }
 
 -(void)update:(Player*)p g:(GameEngineLayer *)g{
+    g.current_mode = GameEngineLayerMode_OBJECTANIM;
     p.vx = 0;
     p.vy = 0;
 }

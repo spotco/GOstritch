@@ -5,6 +5,14 @@
 
 @implementation Common
 
++(void)run_callback:(callback)c {
+    if (c.target != NULL) {
+        [c.target performSelector:c.selector];
+    } else {
+        NSLog(@"callback target is null");
+    }
+}
+
 +(HitRect)hitrect_cons_x1:(float)x1 y1:(float)y1 x2:(float)x2 y2:(float)y2 {
     struct HitRect n;
     n.x1 = x1;

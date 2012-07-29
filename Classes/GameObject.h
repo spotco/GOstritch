@@ -21,4 +21,6 @@ typedef enum {
 -(void)set_active:(BOOL)t_active;
 -(int)get_render_ord;
 
+-(Island*)get_connecting_island:(NSMutableArray*)islands;
+
 @end

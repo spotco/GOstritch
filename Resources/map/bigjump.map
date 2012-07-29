@@ -1,13 +1,13 @@
 {
-	"start_x":"178",
-	"start_y":"334",
+	"start_x":"146",
+	"start_y":"237",
 	"assert_links":"0",
 	"islands":[
-		{"type":"line", "x1":"160", "y1":"219", "x2":"488", "y2":"256", "hei":"100", "ndir":"left", "can_fall":"true", "label":""},
-		{"type":"line", "x1":"482", "y1":"141", "x2":"876", "y2":"229", "hei":"100", "ndir":"left", "can_fall":"true", "label":""},
-		{"type":"line", "x1":"814", "y1":"333", "x2":"1212", "y2":"339", "hei":"100", "ndir":"left", "can_fall":"true", "label":""}
+		{"type":"line", "x1":"103", "y1":"151", "x2":"917", "y2":"207", "hei":"100", "ndir":"left", "can_fall":"true", "label":""},
+        {"type":"line", "x1":"917", "y1":"207", "x2":"1488", "y2":"478", "hei":"100", "ndir":"left", "can_fall":"true", "label":""}
 	],
 
 	"objects":[
+		{"type":"game_end", "x":"806", "y":"197", "label":"0"}
 	]
 }

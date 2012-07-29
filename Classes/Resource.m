@@ -53,6 +53,8 @@ static NSMutableDictionary* textures = nil;
                      @"pause_menu_play.png", TEX_UI_PAUSEMENU_PLAY,
                      @"pause_menu_sound.png", TEX_UI_PAUSEMENU_SOUND,
                      
+                     @"GO.png", TEX_UI_STARTGAME_GO,
+                     @"READY.png", TEX_UI_STARTGAME_READY,
                      
                      nil];
     [Resource load_tex_from_array:temp];
@@ -87,10 +89,8 @@ static NSMutableDictionary* textures = nil;
 }
 
 +(void)dealloc_textures {
-    for (NSString* key in [textures keyEnumerator]) {
-        [[CCTextureCache sharedTextureCache] removeTexture:[textures objectForKey:key]];
-    }
-    [textures dealloc];
+    NSLog(@"clearing textures...");
+    [[CCTextureCache sharedTextureCache] removeAllTextures];    
 }
 
 

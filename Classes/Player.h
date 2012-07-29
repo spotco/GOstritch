@@ -17,6 +17,10 @@
     
     PlayerEffectParams *current_params;
     PlayerEffectParams *temp_params;
+    
+    id current_anim;
+    id _RUN_ANIM_SLOW,_RUN_ANIM_MED,_RUN_ANIM_FAST,_RUN_ANIM_NONE;
+    id _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM;
 }
 
 typedef enum {
@@ -32,6 +36,9 @@ typedef enum {
 -(void) reset;
 -(void) reset_params;
 -(void) update:(GameEngineLayer*)g;
+
+-(void)cleanup_anims;
+
 -(HitRect) get_hit_rect;
 -(PlayerEffectParams*) get_current_params;
 -(PlayerEffectParams*) get_default_params;
