@@ -142,6 +142,7 @@
 }
 
 -(void) ccTouchesBegan:(NSSet*)pTouches withEvent:(UIEvent*)pEvent {
+    NSLog(@"touchbegin");
     if (current_mode != GameEngineLayerMode_GAMEPLAY) {
         return;
     }

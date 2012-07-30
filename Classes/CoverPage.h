@@ -12,7 +12,7 @@
 
 @interface CoverPage : CCLayer{
  
-    CCSprite *titleBoard;
+    /*CCSprite *titleBoard;
     CCSprite *playButton;
     CCSprite *scoreButton;
     CCSprite *settingButton;
@@ -23,23 +23,22 @@
     
     int playButtonShiftX;
     int playButtonShiftY;
-    
     int settingButtonShiftX;
+    int scoreButtonShiftY;*/
     
-    int scoreButtonShiftY;
+    CCMenu *front_menu;
+    CCSprite *bg_img;
     
 }
 
--(CCScene *) scene;
++(CCScene *) scene;
 
 //create and return background layer
--(CCLayer *) createBGLayer;
+/*-(void) init_bg_layer;
 
 //setup sprite with given properties and return the sprite
 -(CCSprite *) getSpritesWithFile:(NSString *) fileName atPositionX:(int) x andY:(int)y;
 
--(void)setupImages;
-
--(void)update:(ccTime)dt;
+-(void)setupImages;*/
 
 @end

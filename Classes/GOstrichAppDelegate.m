@@ -114,7 +114,7 @@
 	//[[CCDirector sharedDirector] runWithScene: [GameEngineLayer scene]];
     //[[CCDirector sharedDirector] runWithScene:[ThemeSelectionPage scene]];
 //    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"bigjump"]];
-    [[CCDirector sharedDirector] runWithScene:[[[CoverPage alloc] init] scene]];
+    [[CCDirector sharedDirector] runWithScene:[CoverPage scene]];
 }
 
 
