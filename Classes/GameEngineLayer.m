@@ -188,10 +188,13 @@
 
 -(void) cleanup_anims {
     [self unschedule:@selector(update)];
-    NSLog(@"compile 2");
     [player cleanup_anims];
-    
     [self removeAllChildrenWithCleanup:YES];
+    for (Island *i in islands) {
+        [i cleanup_anims];
+    }
+    [islands removeAllObjects];
+    [game_objects removeAllObjects];
 }
 
 

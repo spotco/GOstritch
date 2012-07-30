@@ -28,7 +28,6 @@
 	[new_island init_tex];
 	[new_island init_top];
 	return new_island;
-	
 }
 
 -(void)set_pt1:(CGPoint)start pt2:(CGPoint)end {
@@ -367,6 +366,27 @@
     [v3t1 dealloc];
 
     [Common tex_map_to_tri_loc:corner_fill len:3]; 
+}
+
+-(void)cleanup_anims {    
+    [self cleanup_renderobj:main_fill];
+    [self cleanup_renderobj:top_fill];
+    [self cleanup_renderobj:bottom_line_fill];
+    
+    [self cleanup_renderobj:corner_line_fill];
+    [self cleanup_renderobj:corner_fill];
+    [self cleanup_renderobj:tl_top_corner];
+    [self cleanup_renderobj:tr_top_corner];
+    [self cleanup_renderobj:corner_top_fill];
+    [self cleanup_renderobj:left_line_fill];
+    [self cleanup_renderobj:right_line_fill];
+}
+
+-(void)cleanup_renderobj:(gl_render_obj)g {
+    if(g.isalloc == 1) {
+        free(g.tex_pts);
+        free(g.tri_pts);
+    }
 }
 
 

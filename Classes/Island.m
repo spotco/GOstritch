@@ -75,4 +75,7 @@ static float NO_VAL = -99999.0;
     }
 }
 
+-(void)cleanup_anims {
+}
+
 @end

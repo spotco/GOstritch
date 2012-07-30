@@ -189,6 +189,7 @@ NSDictionary *dog_1_ss_plist_dict;
     }
     if (current_params != NULL) {
         [current_params dealloc];
+        current_params = NULL;
     }
     current_params = [[PlayerEffectParams alloc] init];
     current_params.cur_gravity = DEFAULT_GRAVITY;

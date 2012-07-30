@@ -162,10 +162,13 @@
 +(gl_render_obj)init_render_obj:(CCTexture2D*)tex npts:(int)npts {
     struct gl_render_obj n;
     n.texture = tex;
-    n.tri_pts = (CGPoint*) malloc(sizeof(CGPoint)*npts);
-    n.tex_pts = (CGPoint*) malloc(sizeof(CGPoint)*npts);
+    n.tri_pts = calloc(npts, sizeof(CGPoint));
+    n.tex_pts = calloc(npts, sizeof(CGPoint));
+    n.isalloc = 1;
     return n;
 }
+
+
 
 
 

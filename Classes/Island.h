@@ -28,6 +28,8 @@
 -(CGPoint)get_position_given_t:(float)t;
 -(Vec3D*)get_tangent_vec;
 
+-(void)cleanup_anims;
+
 
 
 
