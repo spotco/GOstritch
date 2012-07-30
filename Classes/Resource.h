@@ -38,11 +38,9 @@
 #define TEX_UI_COINCOUNT @"UICoinCount"
 #define TEX_UI_PAUSEICON @"UIPauseIcon"
 
-#define TEX_UI_PAUSEMENU_BACK @"PauseMenuBack"
-#define TEX_UI_PAUSEMENU_LEVELLIST @"PauseMenuLevelList"
-#define TEX_UI_PAUSEMENU_MUSIC @"PauseMenuMusic"
+#define TEX_UI_PAUSEMENU_RETURN @"PauseMenuReturn"
 #define TEX_UI_PAUSEMENU_PLAY @"PauseMenuPlay"
-#define TEX_UI_PAUSEMENU_SOUND @"PauseMenuSound"
+#define TEX_UI_PAUSEMENU_BACK @"PauseMenuBack"
 
 #define TEX_UI_STARTGAME_GO @"UIStartGameGo"
 #define TEX_UI_STARTGAME_READY @"UIStartGameReady"

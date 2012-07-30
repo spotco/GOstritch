@@ -42,12 +42,10 @@ typedef enum {
 @property(readwrite,assign) GameEngineLayerMode current_mode;
 @property(readwrite,assign) NSMutableArray *islands, *game_objects;
 @property(readwrite,assign) Player* player;
-
 @property(readwrite,assign) callback load_game_end_menu;
 
 +(CCScene *) scene_with:(NSString *)map_file_name;
 -(void)player_reset;
 -(CGPoint)get_pos;
--(void)cleanup_anims;
 
 @end

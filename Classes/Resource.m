@@ -15,6 +15,7 @@ static NSMutableDictionary* textures = nil;
 
 +(void)init_bg1_textures {
     textures = [NSMutableDictionary dictionary];
+    [textures retain];
     NSArray *temp = [[NSArray alloc] initWithObjects:
                      
                      @"coincount.png", TEX_UI_COINCOUNT,
@@ -48,10 +49,8 @@ static NSMutableDictionary* textures = nil;
                      @"checkpoint2.png",TEX_CHECKPOINT_2,
                      
                      @"pause_menu_back.png", TEX_UI_PAUSEMENU_BACK,
-                     @"pause_menu_levellist.png", TEX_UI_PAUSEMENU_LEVELLIST,
-                     @"pause_menu_music.png", TEX_UI_PAUSEMENU_MUSIC,
                      @"pause_menu_play.png", TEX_UI_PAUSEMENU_PLAY,
-                     @"pause_menu_sound.png", TEX_UI_PAUSEMENU_SOUND,
+                     @"pause_menu_return.png", TEX_UI_PAUSEMENU_RETURN,
                      
                      @"GO.png", TEX_UI_STARTGAME_GO,
                      @"READY.png", TEX_UI_STARTGAME_READY,
@@ -89,7 +88,7 @@ static NSMutableDictionary* textures = nil;
 }
 
 +(void)dealloc_textures {
-    NSLog(@"clearing textures...");
+    [textures dealloc];
     [[CCTextureCache sharedTextureCache] removeAllTextures];    
 }
 

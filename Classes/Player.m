@@ -314,7 +314,6 @@ HitRect cached_rect;
 }
 
 -(void)cleanup_anims {
-    NSLog(@"fuck");
     [self stopAction:current_anim]; 
     
     [_RUN_ANIM_FAST dealloc];

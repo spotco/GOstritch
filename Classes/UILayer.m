@@ -40,8 +40,8 @@
     game_end_menu_layer.anchorPoint = ccp(0,0);
     [game_end_menu_layer retain];
     
-    CCSprite *backimg = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEMENU_BACK]];
-    CCSprite *backimgzoom = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEMENU_BACK]];
+    CCSprite *backimg = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEMENU_RETURN]];
+    CCSprite *backimgzoom = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEMENU_RETURN]];
     [UILayer set_zoom_pos_align:backimg zoomed:backimgzoom scale:1.4];
     
     CCMenuItemImage *back = [CCMenuItemImage itemFromNormalSprite:backimg 
@@ -57,7 +57,6 @@
 }
 
 -(void)nextlevel {
-    [game_engine_layer cleanup_anims];
     [Resource dealloc_textures];
     [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene_with:@"test2"]];
 }
@@ -134,7 +133,16 @@
                                                          selector:@selector(unpause)];
     play.position = ccp(s.height/2,s.width/2);
     
-    CCMenu* pausemenu = [CCMenu menuWithItems:play, nil];
+    CCSprite *backimg = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEMENU_BACK]];
+    CCSprite *backimgzoom = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEMENU_BACK]];
+    [UILayer set_zoom_pos_align:backimg zoomed:backimgzoom scale:1.4];
+    CCMenuItemImage *back = [CCMenuItemImage itemFromNormalSprite:backimg 
+                                                   selectedSprite:backimgzoom 
+                                                           target:self 
+                                                         selector:@selector(exit_to_menu)];
+    back.position = ccp(s.height/2-100,s.width/2);
+    
+    CCMenu* pausemenu = [CCMenu menuWithItems:play,back, nil];
     pausemenu.position = ccp(0,0);
     
     [pauselayer addChild:pausemenu];
@@ -151,10 +159,16 @@
 }
 
 int tapcount = 0;
-
 -(void) ccTouchesBegan:(NSSet*)pTouches withEvent:(UIEvent*)pEvent {
     tapcount++;
     [count_disp setString:[NSString stringWithFormat:@"%i",tapcount]];
+}
+
+
+-(void)exit_to_menu {
+    [Resource dealloc_textures];
+    [[CCDirector sharedDirector] resume];
+    [[CCDirector sharedDirector] replaceScene:[CoverPage scene]];
 }
 
 

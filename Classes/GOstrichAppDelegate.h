@@ -1,4 +1,5 @@
 #import <UIKit/UIKit.h>
+#import "GameMain.h"
 
 @class RootViewController;
 

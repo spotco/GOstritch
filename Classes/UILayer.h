@@ -2,6 +2,7 @@
 #import "Resource.h"
 #import "GameEngineLayer.h"
 #import "GameStartAnim.h"
+#import "CoverPage.h"
 
 @interface UILayer : CCLayer {
     GameEngineLayer* game_engine_layer;

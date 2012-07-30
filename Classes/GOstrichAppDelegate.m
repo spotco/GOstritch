@@ -110,11 +110,7 @@
 	// Removes the startup flicker
 	[self removeStartupFlicker];
 	
-	// Run the intro Scene
-	//[[CCDirector sharedDirector] runWithScene: [GameEngineLayer scene]];
-    //[[CCDirector sharedDirector] runWithScene:[ThemeSelectionPage scene]];
-//    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"bigjump"]];
-    [[CCDirector sharedDirector] runWithScene:[CoverPage scene]];
+    [GameMain main];
 }
 
 

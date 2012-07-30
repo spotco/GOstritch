@@ -20,7 +20,6 @@
 }
 
 -(void)initanim {
-    
     readyimg = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_STARTGAME_READY]];
     goimg = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_STARTGAME_GO]];
     
@@ -35,6 +34,7 @@
 }
 
 -(void)update {
+    
     ct--;
     if (ct <= 0) {
         [self anim_finished];

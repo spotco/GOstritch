@@ -11,20 +11,18 @@
 
 +(CCScene *) scene_with:(NSString *) map_file_name {
     [Resource init_bg1_textures];
-	[[CCDirector sharedDirector] setDisplayFPS:NO];
+
 	CCScene *scene = [CCScene node];
     
     GameEngineLayer *glayer = [GameEngineLayer init_from_file:map_file_name];
 	BGLayer *bglayer = [BGLayer init_with_gamelayer:glayer];
     UILayer* uilayer = [UILayer init_with_gamelayer:glayer];
     
-    [uilayer start_initial_anim];
-    [glayer start];
-    
     //[scene addChild:bglayer];
     [scene addChild:glayer];
     [scene addChild:uilayer];
     
+    [uilayer start_initial_anim];
 	return scene;
 }
 
@@ -33,7 +31,6 @@
     [g initialize:file];
     return g;
 }
-
 
 -(void)initialize:(NSString*)map_filename {
     game_control_state = [[GameControlState alloc] init];
@@ -52,9 +49,7 @@
     
     follow_action = [CCFollow actionWithTarget:player worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]];
     [self runAction:follow_action];
-}
-
--(void)start {
+    
     [self schedule:@selector(update)];
 }
 
@@ -142,7 +137,6 @@
 }
 
 -(void) ccTouchesBegan:(NSSet*)pTouches withEvent:(UIEvent*)pEvent {
-    NSLog(@"touchbegin");
     if (current_mode != GameEngineLayerMode_GAMEPLAY) {
         return;
     }
@@ -187,7 +181,7 @@
     return player.position;
 }
 
--(void) cleanup_anims {
+-(void)dealloc {
     [self unschedule:@selector(update)];
     [player cleanup_anims];
     [self removeAllChildrenWithCleanup:YES];
@@ -196,6 +190,10 @@
     }
     [islands removeAllObjects];
     [game_objects removeAllObjects];
+    
+    NSLog(@"dealloc gameengine");
+    
+    [super dealloc];
 }
 
 

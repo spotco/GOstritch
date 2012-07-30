@@ -5,9 +5,7 @@
 
 @implementation CoverPage
 
-
 +(CCScene *) scene{
-    [[CCDirector sharedDirector] setDisplayFPS:NO];		
 	CCScene *scene = [CCScene node];
     CoverPage *coverPage = [CoverPage node];
     [coverPage init_bg];
@@ -18,9 +16,9 @@
 }
 
 -(void) init_bg {
-    CCSprite *bg = [CCSprite spriteWithFile:@"Front-Page_background.png"];
-    bg.position = ccp([UIScreen mainScreen].bounds.size.height/2, [UIScreen mainScreen].bounds.size.width/2);
-    [self addChild:bg];
+    bg_img = [CCSprite spriteWithFile:@"Front-Page_background.png"];
+    bg_img.position = ccp([UIScreen mainScreen].bounds.size.height/2, [UIScreen mainScreen].bounds.size.width/2);
+    [self addChild:bg_img];
 }
 
 -(void) init_img {
@@ -51,7 +49,6 @@
 
 -(void)playbutton_action {
     [[[CCDirector sharedDirector] runningScene] removeAllChildrenWithCleanup:YES];
-    [[CCTextureCache sharedTextureCache] removeAllTextures];
     [[CCDirector sharedDirector] replaceScene: [GameEngineLayer scene_with:@"test"]];
 }
 
@@ -61,6 +58,11 @@
 
 -(void)scoresbutton_action {
     NSLog(@"scoresbutton");
+}
+
+-(void)dealloc{
+    [self removeAllChildrenWithCleanup:YES];
+    [super dealloc];
 }
 
 +(CCMenuItem*)make_button_img:(NSString*)imgfile imgsel:(NSString*)imgselfile onclick_target:(NSObject*)tar selector:(SEL)sel {
@@ -77,10 +79,5 @@
                           ,(-[zoomed contentSize].height * zoomed.scale + [zoomed contentSize].height)/2);
 }
 
--(void)dealloc{
-    [front_menu removeAllChildrenWithCleanup:YES];
-    [self removeAllChildrenWithCleanup:YES];
-    [super dealloc];
-}
 
 @end
