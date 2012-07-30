@@ -13,6 +13,7 @@
 #import "GameEngineLayer.h"
 #import "ThemeSelectionPage.h"
 #import "RootViewController.h"
+#import "CoverPage.h"
 
 @implementation GOstrichAppDelegate
 
@@ -112,7 +113,8 @@
 	// Run the intro Scene
 	//[[CCDirector sharedDirector] runWithScene: [GameEngineLayer scene]];
     //[[CCDirector sharedDirector] runWithScene:[ThemeSelectionPage scene]];
-    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"bigjump"]];
+//    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"bigjump"]];
+    [[CCDirector sharedDirector] runWithScene:[[[CoverPage alloc] init] scene]];
 }
 
 
