@@ -18,7 +18,7 @@
 	BGLayer *bglayer = [BGLayer init_with_gamelayer:glayer];
     UILayer* uilayer = [UILayer init_with_gamelayer:glayer];
     
-    //[scene addChild:bglayer];
+    [scene addChild:bglayer];
     [scene addChild:glayer];
     [scene addChild:uilayer];
     
