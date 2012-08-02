@@ -12,6 +12,7 @@
 #import "Spike.h"
 #import "Water.h"
 #import "JumpPad.h"
+#import "BirdFlock.h"
 
 @interface MapLoader : NSObject
 

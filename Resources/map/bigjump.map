@@ -1,15 +1,7 @@
 {
-    "objects": [
-        {"y": 151, "type": "jumppad", "label": "0", "x": 676},
-        {"y": 318, "type": "spike", "label": "1", "x": 924}
-    ],
+    "start_y": 101,
+    "start_x": 176,
     "assert_links": 0,
-    "start_x": 121,
-    "islands": [
-        {"x2": 243, "type":"line", "hei":100, "label": "", "can_fall": true, "y2": 90, "x1": 49, "ndir": "left", "y1": 110},
-        {"x2": 485,"type":"line","hei":100, "label": "", "can_fall": true, "y2": 104, "x1": 243, "ndir": "left", "y1": 90},
-        {"x2": 757,"type":"line", "hei":100,"label": "", "can_fall": true, "y2": 172, "x1": 485, "ndir": "left", "y1": 104},
-        {"x2": 948, "type":"line","heisaasadscdssd":100,"label": "", "can_fall": true, "y2": 340, "x1": 757, "ndir": "left", "y1": 172}
-    ],
-    "start_y": 460
+    "islands": [{"can_fall": true, "y2": 100, "x1": 92, "x2": 1149, "ndir": "left", "y1": 100, "hei": 50, "label": "", "type": "line"}],
+    "objects": [{"label": "3", "y": 100, "type": "birdflock", "x": 701}]
 }

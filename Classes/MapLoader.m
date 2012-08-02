@@ -111,6 +111,11 @@
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             [map.game_objects addObject:[JumpPad init_x:x y:y islands:map.n_islands]];
             
+        } else if ([type isEqualToString:@"birdflock"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            [map.game_objects addObject:[BirdFlock init_x:x y:y]];
+            
         } else {
             NSLog(@"item read error");
             continue;
