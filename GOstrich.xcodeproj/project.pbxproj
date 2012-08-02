@@ -164,6 +164,7 @@
 		7EF1246615CA52AA00B91A91 /* splash_ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1246415CA52AA00B91A91 /* splash_ss.png */; };
 		7EF1246915CA584300B91A91 /* SplashEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1246815CA584300B91A91 /* SplashEffect.m */; };
 		7EF1246C15CA612100B91A91 /* FishGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1246B15CA612100B91A91 /* FishGenerator.m */; };
+		7EF1246F15CA7D5100B91A91 /* BirdFlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1246E15CA7D5100B91A91 /* BirdFlock.m */; };
 		7EF654F115AA62FA0094EA20 /* GamePhysicsImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF654F015AA62FA0094EA20 /* GamePhysicsImplementation.m */; };
 		7EF654F415AA64BE0094EA20 /* GameRenderImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF654F315AA64BE0094EA20 /* GameRenderImplementation.m */; };
 		7EF654F715AA6D5F0094EA20 /* GameControlImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF654F615AA6D5F0094EA20 /* GameControlImplementation.m */; };
@@ -565,6 +566,8 @@
 		7EF1246815CA584300B91A91 /* SplashEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashEffect.m; sourceTree = "<group>"; };
 		7EF1246A15CA612100B91A91 /* FishGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishGenerator.h; sourceTree = "<group>"; };
 		7EF1246B15CA612100B91A91 /* FishGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishGenerator.m; sourceTree = "<group>"; };
+		7EF1246D15CA7D5000B91A91 /* BirdFlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BirdFlock.h; sourceTree = "<group>"; };
+		7EF1246E15CA7D5100B91A91 /* BirdFlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BirdFlock.m; sourceTree = "<group>"; };
 		7EF654EF15AA62FA0094EA20 /* GamePhysicsImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePhysicsImplementation.h; sourceTree = "<group>"; };
 		7EF654F015AA62FA0094EA20 /* GamePhysicsImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamePhysicsImplementation.m; sourceTree = "<group>"; };
 		7EF654F215AA64BE0094EA20 /* GameRenderImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameRenderImplementation.h; sourceTree = "<group>"; };
@@ -1115,6 +1118,8 @@
 		7E8C080A15C3EBD300FE9341 /* envr_obj */ = {
 			isa = PBXGroup;
 			children = (
+				7EF1246D15CA7D5000B91A91 /* BirdFlock.h */,
+				7EF1246E15CA7D5100B91A91 /* BirdFlock.m */,
 				7EDA90CE15BCED580004CED7 /* Spike.h */,
 				7EDA90CF15BCED580004CED7 /* Spike.m */,
 				7E8C080615C3CAF600FE9341 /* Water.h */,
@@ -1989,6 +1994,7 @@
 				7EA586A715C67CBD00D83473 /* GameMain.m in Sources */,
 				7EF1246915CA584300B91A91 /* SplashEffect.m in Sources */,
 				7EF1246C15CA612100B91A91 /* FishGenerator.m in Sources */,
+				7EF1246F15CA7D5100B91A91 /* BirdFlock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

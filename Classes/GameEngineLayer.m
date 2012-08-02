@@ -106,7 +106,6 @@
         [GamePhysicsImplementation player_move:player with_islands:islands];
         [GameControlImplementation control_update_player:player state:game_control_state islands:islands objects:game_objects];
         [player update:self];
-         
         
         [self check_game_state];	
         [self update_game_obj];

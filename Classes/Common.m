@@ -168,7 +168,19 @@
     return n;
 }
 
++(CGRect)ssrect_from_dict:(NSDictionary*)dict tar:(NSString*)tar {    
+    NSDictionary *frames_dict = [dict objectForKey:@"frames"];
+    NSDictionary *obj_info = [frames_dict objectForKey:tar];
+    NSString *txt = [obj_info objectForKey:@"textureRect"];
+    CGRect r = CGRectFromString(txt);
+    return r;
+}
 
++(id)make_anim_frames:(NSMutableArray*)animFrames speed:(float)speed {
+	id animate = [CCAnimate actionWithAnimation:[CCAnimation animationWithFrames:animFrames delay:speed] restoreOriginalFrame:YES];
+    id m = [CCRepeatForever actionWithAction:animate];
+	return m;
+}
 
 
 

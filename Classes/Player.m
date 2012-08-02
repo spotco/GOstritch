@@ -75,7 +75,7 @@
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_0"]]];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_1"]]];
     
-    return [self make_anim_frames:animFrames speed:speed];
+    return [[Common make_anim_frames:animFrames speed:speed] retain];
 }
 
 -(id)init_run_anim_speed:(float)speed {
@@ -86,7 +86,7 @@
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_1"]]];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_2"]]];
    
-	return [self make_anim_frames:animFrames speed:speed];
+	return [[Common make_anim_frames:animFrames speed:speed] retain];
 }
 
 -(id)init_rocket_anim_speed:(float)speed {
@@ -96,7 +96,7 @@
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rocket_0"]]];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rocket_1"]]];
 	
-    return [self make_anim_frames:animFrames speed:speed];
+    return [[Common make_anim_frames:animFrames speed:speed] retain];
 }
 
 -(id)init_cape_anim_speed:(float)speed {
@@ -106,7 +106,7 @@
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"cape_0"]]];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"cape_1"]]];
 	
-    return [self make_anim_frames:animFrames speed:speed];
+    return [[Common make_anim_frames:animFrames speed:speed] retain];
 }
 
 -(id)init_splash_anim_speed:(float)speed {
@@ -123,37 +123,23 @@
     return anim;
 }
 
-
-
--(id)make_anim_frames:(NSMutableArray*)animFrames speed:(float)speed {
-	id animate = [CCAnimate actionWithAnimation:[CCAnimation animationWithFrames:animFrames delay:speed] restoreOriginalFrame:YES];
-    id m = [CCRepeatForever actionWithAction:animate];
-    
-    [m retain];
-	return m;
-}
-
 #define SPLASH_SS_FILENAME @"splash_ss"
 #define DOG_1_SS_FILENAME @"dog1ss"
-NSDictionary *dog_1_ss_plist_dict;
-NSDictionary *splash_ss_plist_dict;
+NSDictionary *dog_1_ss_plist_dict = NULL;
+NSDictionary *splash_ss_plist_dict = NULL;
 
 +(CGRect)splash_ss_plist_dict:(NSString*)tar {
-    NSDictionary *dict = splash_ss_plist_dict == NULL ? [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:SPLASH_SS_FILENAME ofType:@"plist"]] : splash_ss_plist_dict;
-    return [Player ssrect_from_dict:dict tar:tar];
+    if (splash_ss_plist_dict == NULL) {
+        splash_ss_plist_dict =[[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:SPLASH_SS_FILENAME ofType:@"plist"]];
+    }
+    return [Common ssrect_from_dict:splash_ss_plist_dict tar:tar];
 }
 
 +(CGRect)dog1ss_spritesheet_rect_tar:(NSString*)tar {
-    NSDictionary *dict = dog_1_ss_plist_dict == NULL ? [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:DOG_1_SS_FILENAME ofType:@"plist"]] : dog_1_ss_plist_dict;
-    return [Player ssrect_from_dict:dict tar:tar];
-}
-
-+(CGRect)ssrect_from_dict:(NSDictionary*)dict tar:(NSString*)tar {    
-    NSDictionary *frames_dict = [dict objectForKey:@"frames"];
-    NSDictionary *obj_info = [frames_dict objectForKey:tar];
-    NSString *txt = [obj_info objectForKey:@"textureRect"];
-    CGRect r = CGRectFromString(txt);
-    return r;
+    if (dog_1_ss_plist_dict == NULL) {
+        dog_1_ss_plist_dict =[[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:DOG_1_SS_FILENAME ofType:@"plist"]];
+    }
+    return [Common ssrect_from_dict:dog_1_ss_plist_dict tar:tar];
 }
 
 
@@ -225,13 +211,13 @@ NSDictionary *splash_ss_plist_dict;
     if (current_island == NULL) {
         Vec3D *dv = [Vec3D init_x:vx y:vy z:0];
         [dv normalize];
-        [dv dealloc];
         
         float rot = -[Common rad_to_deg:[dv get_angle_in_rad]];
         float sig = [Common sig:rot];
         rot = sig*sqrtf(ABS(rot));
         //rot *=0.4;
         rotation_ = rot;
+        [dv dealloc];
     }
     
     player_anim_mode cur_anim_mode = [[self get_current_params] get_anim];

@@ -27,6 +27,7 @@
 #define TEX_DOG_ROCKET @"DogRocket"
 #define TEX_SPIKE @"Spike"
 #define TEX_WATER @"Water"
+#define TEX_FISH_SS @"FishSS"
 #define TEX_JUMPPAD @"JumpPad"
 
 #define TEX_CHECKPOINT_1 @"CheckPointPre"

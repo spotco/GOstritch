@@ -31,14 +31,12 @@
     [fillsprite setTextureRect:CGRectMake(0, 0, bwidth, -bheight)];
     [self addChild:fillsprite];
     
-    /*CCSprite *test = [CCSprite node];
-    test.color = ccc3(255, 0, 0);
-    [test setTextureRect:CGRectMake(0, 0, 100, -400)];
-    [self addChild:test z:-1];*/
-    
+    fishes = [FishGenerator init_ofwidth:bwidth];
+    [self addChild:fishes z:-1];
 }
 
 -(GameObjectReturnCode)update:(Player *)player g:(GameEngineLayer *)g {
+    [fishes update];
     [self update_body_tex_offset];
     if(!active) {
         return GameObjectReturnCode_NONE;
