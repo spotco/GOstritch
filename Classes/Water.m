@@ -94,6 +94,14 @@
     if (n_vtx == 4)glDrawArrays(GL_TRIANGLES, 1, 3);
 }
 
+-(void)dealloc {
+    free(body.tex_pts);
+    free(body.tri_pts);
+    free(body_tex_offset);
+    
+    [super dealloc];
+}
+
 
 
 @end

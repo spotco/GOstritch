@@ -18,6 +18,7 @@ typedef enum {
     GameEngineLayerMode_GAMEPLAY,
     GameEngineLayerMode_PAUSED,
     GameEngineLayerMode_ENDOUT,
+    GameEngineLayerMode_ENDED,
     GameEngineLayerMode_OBJECTANIM
 } GameEngineLayerMode;
 
@@ -34,8 +35,8 @@ typedef enum {
     
     GameEngineLayerMode current_mode;
     
+    callback bg_update;
     callback load_game_end_menu;
-    BOOL gameend_hascalled;
 }
 
 

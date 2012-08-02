@@ -6,11 +6,11 @@
 +(GameMap) load_map:(NSString *)map_file_name oftype:(NSString *) map_file_type{
     
     NSString *islandFilePath = [[NSBundle mainBundle] pathForResource:map_file_name ofType:map_file_type];
-	NSString *islandInputStr = [[NSString alloc] initWithContentsOfFile : islandFilePath encoding:NSUTF8StringEncoding error:nil];
+	NSString *islandInputStr = [[NSString alloc] initWithContentsOfFile : islandFilePath encoding:NSUTF8StringEncoding error:NULL];
 	NSData *islandData  =  [islandInputStr dataUsingEncoding : NSUTF8StringEncoding];
     [islandInputStr dealloc];
     
-    NSDictionary *j_map_data = [[CJSONDeserializer deserializer] deserializeAsDictionary:islandData error:(nil)];
+    NSDictionary *j_map_data = [[CJSONDeserializer deserializer] deserializeAsDictionary:islandData error:NULL];
     
     NSArray *islandArray = [j_map_data objectForKey:(@"islands")];
 	int islandsCount = [islandArray count];

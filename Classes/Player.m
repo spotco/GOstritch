@@ -25,18 +25,9 @@
 @synthesize up_vec;
 @synthesize start_pt;
 
-//todo -- dealloc the plist dict, animations
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        [self reset_params];
-    }
-    return self;
-}
-
 +(Player*)init_at:(CGPoint)pt {
 	Player *new_player = [Player node];
+    [new_player reset_params];
 	CCSprite *player_img = [CCSprite node];
     new_player.player_img = player_img;
     
@@ -253,7 +244,7 @@ NSDictionary *dog_1_ss_plist_dict;
         if (temp_params.time_left <= 0) {
             [temp_params effect_end:self g:g];
             if (temp_params.time_left <= 0) {
-                [temp_params release];
+                [temp_params dealloc];
                 temp_params = NULL;
             }
         }

@@ -193,4 +193,12 @@ int tapcount = 0;
     }
  }
 
+-(void)dealloc {
+    [pauselayer release];
+    [game_end_menu_layer removeAllChildrenWithCleanup:YES];
+    [game_end_menu_layer release];
+    [self removeAllChildrenWithCleanup:YES];
+    [super dealloc];
+}
+
 @end

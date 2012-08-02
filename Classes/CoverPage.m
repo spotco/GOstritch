@@ -49,7 +49,7 @@
 
 -(void)playbutton_action {
     [[[CCDirector sharedDirector] runningScene] removeAllChildrenWithCleanup:YES];
-    [[CCDirector sharedDirector] replaceScene: [GameEngineLayer scene_with:@"test"]];
+    [[CCDirector sharedDirector] replaceScene: [GameEngineLayer scene_with:@"curvetest"]];
 }
 
 -(void)settingsbutton_action {

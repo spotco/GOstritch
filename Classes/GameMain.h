@@ -6,4 +6,6 @@
 
 +(void)main;
 
++(BOOL)GET_USE_BG;
+
 @end

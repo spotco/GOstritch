@@ -17,6 +17,8 @@
     GameEngineLayer *glayer = [GameEngineLayer init_from_file:map_file_name];
 	BGLayer *bglayer = [BGLayer init_with_gamelayer:glayer];
     UILayer* uilayer = [UILayer init_with_gamelayer:glayer];
+    [glayer set_bg_update_callback:bglayer];
+    
     
     [scene addChild:bglayer];
     [scene addChild:glayer];
@@ -51,6 +53,12 @@
     [self runAction:follow_action];
     
     [self schedule:@selector(update)];
+}
+
+-(void)set_bg_update_callback:(NSObject*)tar {
+    bg_update.target = tar;
+    bg_update.selector = @selector(update);
+    [Common run_callback:bg_update];
 }
 
 -(HitRect) get_world_bounds {
@@ -103,17 +111,16 @@
         [self check_game_state];	
         [self update_game_obj];
         [GameRenderImplementation update_render_on:self player:player islands:islands objects:game_objects state:game_render_state];
-        
+        [Common run_callback:bg_update];
     } else if (current_mode == GameEngineLayerMode_ENDOUT) {
                 
         if ([Common hitrect_touch:[player get_hit_rect] b:[self get_viewbox]]) {
             [GamePhysicsImplementation player_move:player with_islands:islands];
             [player update:self];  
-        } else if (!gameend_hascalled) {
+        } else {
             [Common run_callback:load_game_end_menu];
-            gameend_hascalled = YES;
+            current_mode = GameEngineLayerMode_ENDED;
         }
-        
     }
     
 }
@@ -190,8 +197,6 @@
     }
     [islands removeAllObjects];
     [game_objects removeAllObjects];
-    
-    NSLog(@"dealloc gameengine");
     
     [super dealloc];
 }

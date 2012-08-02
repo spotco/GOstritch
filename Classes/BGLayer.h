@@ -3,6 +3,7 @@
 #import "BackgroundObject.h"
 #import "CloudGenerator.h"
 #import "GameEngineLayer.h"
+#import "GameMain.h"
 
 
 @interface BGLayer : CCLayer {
