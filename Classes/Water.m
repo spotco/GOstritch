@@ -5,23 +5,37 @@
 
 @implementation Water
 
-+(Water*)init_x:(float)x y:(float)y width:(float)width {
++(Water*)init_x:(float)x y:(float)y width:(float)width height:(float)height {
     Water *w = [Water node];
     w.position = ccp(x,y);
-    [w init_body:width];
+    [w init_body_ofwidth:width height:height];
     
     return w;
 }
 
--(void)init_body:(float)width {
+-(void)init_body_ofwidth:(float)width height:(float)height {
     body = [self init_drawbody_ofwidth:width];
     bwidth = width;
+    bheight = height;
     
     body_tex_offset = (CGPoint*) malloc(sizeof(CGPoint)*4);
     offset_ct = 0;
     [self update_body_tex_offset];
     
     active = YES;
+    
+    CCSprite *fillsprite = [CCSprite node];
+    fillsprite.anchorPoint = ccp(0,0);
+    fillsprite.position = ccp(0,-((float)body.texture.pixelsHigh)+OFFSET_V);
+    fillsprite.color = ccc3(18, 64, 100);
+    [fillsprite setTextureRect:CGRectMake(0, 0, bwidth, -bheight)];
+    [self addChild:fillsprite];
+    
+    /*CCSprite *test = [CCSprite node];
+    test.color = ccc3(255, 0, 0);
+    [test setTextureRect:CGRectMake(0, 0, 100, -400)];
+    [self addChild:test z:-1];*/
+    
 }
 
 -(GameObjectReturnCode)update:(Player *)player g:(GameEngineLayer *)g {
@@ -33,7 +47,7 @@
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         [player reset_params];
         [self setActive:NO];
-        [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
+        [player add_effect:[SplashEffect init_from:[player get_default_params] time:40]];
     }
     
     return GameObjectReturnCode_NONE;
@@ -98,7 +112,7 @@
     free(body.tex_pts);
     free(body.tri_pts);
     free(body_tex_offset);
-    
+    [self removeAllChildrenWithCleanup:YES];
     [super dealloc];
 }
 

@@ -103,7 +103,8 @@
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             float width = ((NSString*)[j_object  objectForKey:@"width"]).floatValue;
-            [map.game_objects addObject:[Water init_x:x y:y width:width]];
+            float hei = ((NSString*)[j_object  objectForKey:@"height"]).floatValue;
+            [map.game_objects addObject:[Water init_x:x y:y width:width height:hei]];
             
         } else if ([type isEqualToString:@"jumppad"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;

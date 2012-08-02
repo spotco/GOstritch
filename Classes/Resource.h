@@ -13,9 +13,11 @@
 #define TEX_GROUND_TOP_1 @"GroundTop1"
 #define TEX_TOP_EDGE @"GroundTopEdge"
 
+#define TEX_DOG_RUN_1 @"Dog1RunSSheet"
+#define TEX_DOG_SPLASH @"DogSplash"
+
 #define TEX_ISLAND_BORDER @"IslandBorder"
 #define TEX_CLOUD @"CloudTex"
-#define TEX_DOG_RUN_1 @"Dog1RunSSheet"
 #define TEX_BG_SKY @"BgSky"
 #define TEX_BG_LAYER_1 @"BgLayer1"
 #define TEX_BG_LAYER_2 @"BgLayer2"

@@ -1,14 +1,15 @@
 #import "GameObject.h"
-#import "HitEffect.h"
+#import "SplashEffect.h"
 #import "GameRenderImplementation.h"
+#import "FishGenerator.h"
 
 @interface Water : GameObject {
     gl_render_obj body;
     
     CGPoint* body_tex_offset;
-    float bwidth, offset_ct;
+    float bwidth,bheight,offset_ct;
 }
 
-+(Water*)init_x:(float)x y:(float)y width:(float)width;
++(Water*)init_x:(float)x y:(float)y width:(float)width height:(float)height;
 
 @end

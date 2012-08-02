@@ -64,6 +64,7 @@
     _ROCKET_ANIM = [self init_rocket_anim_speed:0.1];
     _CAPE_ANIM = [self init_cape_anim_speed:0.1];
     _HIT_ANIM = [self init_hit_anim_speed:0.1];
+    _SPLASH_ANIM = [self init_splash_anim_speed:0.1];
     
     [self start_anim:_RUN_ANIM_NONE];
 }
@@ -71,8 +72,8 @@
 -(id)init_hit_anim_speed:(float)speed {
     CCTexture2D *texture = [Resource get_tex:TEX_DOG_RUN_1];
     NSMutableArray *animFrames = [NSMutableArray array];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"hit_0"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"hit_1"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_0"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_1"]]];
     
     return [self make_anim_frames:animFrames speed:speed];
 }
@@ -81,9 +82,9 @@
 	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
 	NSMutableArray *animFrames = [NSMutableArray array];
 	
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"run_0"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"run_1"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"run_2"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_0"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_1"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_2"]]];
    
 	return [self make_anim_frames:animFrames speed:speed];
 }
@@ -92,8 +93,8 @@
 	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
 	NSMutableArray *animFrames = [NSMutableArray array];
     
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"rocket_0"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"rocket_1"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rocket_0"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rocket_1"]]];
 	
     return [self make_anim_frames:animFrames speed:speed];
 }
@@ -102,10 +103,24 @@
 	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
 	NSMutableArray *animFrames = [NSMutableArray array];
     
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"cape_0"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player spritesheet_rect_tar:@"cape_1"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"cape_0"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"cape_1"]]];
 	
     return [self make_anim_frames:animFrames speed:speed];
+}
+
+-(id)init_splash_anim_speed:(float)speed {
+    CCTexture2D *tex = [Resource get_tex:TEX_DOG_SPLASH];
+    NSMutableArray *animFrames = [NSMutableArray array];
+    
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:tex rect:[Player splash_ss_plist_dict:@"splash1"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:tex rect:[Player splash_ss_plist_dict:@"splash2"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:tex rect:[Player splash_ss_plist_dict:@"splash3"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:tex rect:CGRectMake(0, 0, 0, 0)]];
+    
+    id anim = [CCAnimate actionWithAnimation:[CCAnimation animationWithFrames:animFrames delay:speed] restoreOriginalFrame:NO];
+    [anim retain];
+    return anim;
 }
 
 
@@ -118,18 +133,22 @@
 	return m;
 }
 
-
+#define SPLASH_SS_FILENAME @"splash_ss"
 #define DOG_1_SS_FILENAME @"dog1ss"
 NSDictionary *dog_1_ss_plist_dict;
+NSDictionary *splash_ss_plist_dict;
 
-+(CGRect)spritesheet_rect_tar:(NSString*)tar {
-    NSDictionary *dict;
-    if (dog_1_ss_plist_dict == NULL) {
-        NSString* plistPath = [[NSBundle mainBundle] pathForResource:DOG_1_SS_FILENAME ofType:@"plist"];
-        dog_1_ss_plist_dict = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    }
-    dict = dog_1_ss_plist_dict;
-    
++(CGRect)splash_ss_plist_dict:(NSString*)tar {
+    NSDictionary *dict = splash_ss_plist_dict == NULL ? [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:SPLASH_SS_FILENAME ofType:@"plist"]] : splash_ss_plist_dict;
+    return [Player ssrect_from_dict:dict tar:tar];
+}
+
++(CGRect)dog1ss_spritesheet_rect_tar:(NSString*)tar {
+    NSDictionary *dict = dog_1_ss_plist_dict == NULL ? [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:DOG_1_SS_FILENAME ofType:@"plist"]] : dog_1_ss_plist_dict;
+    return [Player ssrect_from_dict:dict tar:tar];
+}
+
++(CGRect)ssrect_from_dict:(NSDictionary*)dict tar:(NSString*)tar {    
     NSDictionary *frames_dict = [dict objectForKey:@"frames"];
     NSDictionary *obj_info = [frames_dict objectForKey:tar];
     NSString *txt = [obj_info objectForKey:@"textureRect"];
@@ -234,11 +253,12 @@ NSDictionary *dog_1_ss_plist_dict;
         [self start_anim:_ROCKET_ANIM];
     } else if (cur_anim_mode == player_anim_mode_HIT) {
         [self start_anim:_HIT_ANIM];
+    } else if (cur_anim_mode == player_anim_mode_SPLASH) {
+        [self start_anim:_SPLASH_ANIM];
     }
     
     if (temp_params != NULL) {
         [temp_params update:self g:g];
-        //NSLog(@"%@",[temp_params info]);
         [temp_params decrement_timer];
         
         if (temp_params.time_left <= 0) {
@@ -315,7 +335,7 @@ HitRect cached_rect;
     [_ROCKET_ANIM dealloc];
     [_CAPE_ANIM dealloc];
     [_HIT_ANIM dealloc];
-    
+    [_SPLASH_ANIM dealloc];
     
     [self removeAllChildrenWithCleanup:NO];
 }

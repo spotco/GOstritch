@@ -145,8 +145,6 @@
 		7EE2B78715B7E0DA00941C3B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EE2B77F15B7E0DA00941C3B /* Icon@2x.png */; };
 		7EF1243715CA4FC500B91A91 /* fish_ss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1243515CA4FC500B91A91 /* fish_ss.plist */; };
 		7EF1243815CA4FC500B91A91 /* fish_ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1243615CA4FC500B91A91 /* fish_ss.png */; };
-		7EF1243F15CA506A00B91A91 /* spash_ss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1243D15CA506A00B91A91 /* spash_ss.plist */; };
-		7EF1244015CA506A00B91A91 /* spash_ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1243E15CA506A00B91A91 /* spash_ss.png */; };
 		7EF1244415CA509800B91A91 /* bird_ss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1244215CA509800B91A91 /* bird_ss.plist */; };
 		7EF1244515CA509800B91A91 /* bird_ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1244315CA509800B91A91 /* bird_ss.png */; };
 		7EF1244B15CA50C700B91A91 /* speedup_ss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1244715CA50C700B91A91 /* speedup_ss.plist */; };
@@ -162,6 +160,10 @@
 		7EF1245E15CA511700B91A91 /* goldenbone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1245B15CA511700B91A91 /* goldenbone.png */; };
 		7EF1246015CA512A00B91A91 /* checkerfloor.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1245F15CA512A00B91A91 /* checkerfloor.png */; };
 		7EF1246215CA513800B91A91 /* mud.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1246115CA513800B91A91 /* mud.png */; };
+		7EF1246515CA52AA00B91A91 /* splash_ss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1246315CA52AA00B91A91 /* splash_ss.plist */; };
+		7EF1246615CA52AA00B91A91 /* splash_ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1246415CA52AA00B91A91 /* splash_ss.png */; };
+		7EF1246915CA584300B91A91 /* SplashEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1246815CA584300B91A91 /* SplashEffect.m */; };
+		7EF1246C15CA612100B91A91 /* FishGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1246B15CA612100B91A91 /* FishGenerator.m */; };
 		7EF654F115AA62FA0094EA20 /* GamePhysicsImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF654F015AA62FA0094EA20 /* GamePhysicsImplementation.m */; };
 		7EF654F415AA64BE0094EA20 /* GameRenderImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF654F315AA64BE0094EA20 /* GameRenderImplementation.m */; };
 		7EF654F715AA6D5F0094EA20 /* GameControlImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF654F615AA6D5F0094EA20 /* GameControlImplementation.m */; };
@@ -542,8 +544,6 @@
 		7EE2B77F15B7E0DA00941C3B /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		7EF1243515CA4FC500B91A91 /* fish_ss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fish_ss.plist; sourceTree = "<group>"; };
 		7EF1243615CA4FC500B91A91 /* fish_ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fish_ss.png; sourceTree = "<group>"; };
-		7EF1243D15CA506A00B91A91 /* spash_ss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = spash_ss.plist; sourceTree = "<group>"; };
-		7EF1243E15CA506A00B91A91 /* spash_ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spash_ss.png; sourceTree = "<group>"; };
 		7EF1244215CA509800B91A91 /* bird_ss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bird_ss.plist; sourceTree = "<group>"; };
 		7EF1244315CA509800B91A91 /* bird_ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bird_ss.png; sourceTree = "<group>"; };
 		7EF1244715CA50C700B91A91 /* speedup_ss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = speedup_ss.plist; sourceTree = "<group>"; };
@@ -559,6 +559,12 @@
 		7EF1245B15CA511700B91A91 /* goldenbone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goldenbone.png; sourceTree = "<group>"; };
 		7EF1245F15CA512A00B91A91 /* checkerfloor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkerfloor.png; sourceTree = "<group>"; };
 		7EF1246115CA513800B91A91 /* mud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mud.png; sourceTree = "<group>"; };
+		7EF1246315CA52AA00B91A91 /* splash_ss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = splash_ss.plist; sourceTree = "<group>"; };
+		7EF1246415CA52AA00B91A91 /* splash_ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_ss.png; sourceTree = "<group>"; };
+		7EF1246715CA584300B91A91 /* SplashEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashEffect.h; sourceTree = "<group>"; };
+		7EF1246815CA584300B91A91 /* SplashEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashEffect.m; sourceTree = "<group>"; };
+		7EF1246A15CA612100B91A91 /* FishGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishGenerator.h; sourceTree = "<group>"; };
+		7EF1246B15CA612100B91A91 /* FishGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishGenerator.m; sourceTree = "<group>"; };
 		7EF654EF15AA62FA0094EA20 /* GamePhysicsImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePhysicsImplementation.h; sourceTree = "<group>"; };
 		7EF654F015AA62FA0094EA20 /* GamePhysicsImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamePhysicsImplementation.m; sourceTree = "<group>"; };
 		7EF654F215AA64BE0094EA20 /* GameRenderImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameRenderImplementation.h; sourceTree = "<group>"; };
@@ -1115,6 +1121,8 @@
 				7E8C080715C3CAF600FE9341 /* Water.m */,
 				7E8C080B15C3ECBD00FE9341 /* JumpPad.h */,
 				7E8C080C15C3ECBD00FE9341 /* JumpPad.m */,
+				7EF1246A15CA612100B91A91 /* FishGenerator.h */,
+				7EF1246B15CA612100B91A91 /* FishGenerator.m */,
 			);
 			name = envr_obj;
 			sourceTree = "<group>";
@@ -1251,6 +1259,8 @@
 				7EDFC78C15C22D3F00DCB32C /* HitEffect.m */,
 				7E6A873515C246B90022291A /* FlashEffect.h */,
 				7E6A873615C246B90022291A /* FlashEffect.m */,
+				7EF1246715CA584300B91A91 /* SplashEffect.h */,
+				7EF1246815CA584300B91A91 /* SplashEffect.m */,
 			);
 			name = effectparams;
 			sourceTree = "<group>";
@@ -1315,8 +1325,8 @@
 		7EF1243C15CA506A00B91A91 /* effects */ = {
 			isa = PBXGroup;
 			children = (
-				7EF1243D15CA506A00B91A91 /* spash_ss.plist */,
-				7EF1243E15CA506A00B91A91 /* spash_ss.png */,
+				7EF1246315CA52AA00B91A91 /* splash_ss.plist */,
+				7EF1246415CA52AA00B91A91 /* splash_ss.png */,
 			);
 			path = effects;
 			sourceTree = "<group>";
@@ -1905,8 +1915,6 @@
 				7EA586D415C6855800D83473 /* pause_menu_return.png in Resources */,
 				7EF1243715CA4FC500B91A91 /* fish_ss.plist in Resources */,
 				7EF1243815CA4FC500B91A91 /* fish_ss.png in Resources */,
-				7EF1243F15CA506A00B91A91 /* spash_ss.plist in Resources */,
-				7EF1244015CA506A00B91A91 /* spash_ss.png in Resources */,
 				7EF1244415CA509800B91A91 /* bird_ss.plist in Resources */,
 				7EF1244515CA509800B91A91 /* bird_ss.png in Resources */,
 				7EF1244B15CA50C700B91A91 /* speedup_ss.plist in Resources */,
@@ -1922,6 +1930,8 @@
 				7EF1245E15CA511700B91A91 /* goldenbone.png in Resources */,
 				7EF1246015CA512A00B91A91 /* checkerfloor.png in Resources */,
 				7EF1246215CA513800B91A91 /* mud.png in Resources */,
+				7EF1246515CA52AA00B91A91 /* splash_ss.plist in Resources */,
+				7EF1246615CA52AA00B91A91 /* splash_ss.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1977,6 +1987,8 @@
 				7EDE471515C51F4F00BC1CEB /* GameStartAnim.m in Sources */,
 				7EDE471815C51FEE00BC1CEB /* UIAnim.m in Sources */,
 				7EA586A715C67CBD00D83473 /* GameMain.m in Sources */,
+				7EF1246915CA584300B91A91 /* SplashEffect.m in Sources */,
+				7EF1246C15CA612100B91A91 /* FishGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

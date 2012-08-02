@@ -7,7 +7,7 @@
 +(void)main {
     [[CCDirector sharedDirector] setDisplayFPS:NO];
     //[[CCDirector sharedDirector] runWithScene:[CoverPage scene]];
-    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"test"]];
+    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"curvetest"]];
 }
 
 +(BOOL)GET_USE_BG {
