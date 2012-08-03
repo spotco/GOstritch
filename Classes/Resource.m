@@ -4,7 +4,6 @@
 @implementation Resource
 
 
-
 static NSMutableDictionary* textures = nil;
 
 +(void)init_menu_textures:(NSArray *)pic_names{

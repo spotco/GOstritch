@@ -2,6 +2,8 @@
 #import "cocos2d.h"
 #import "Vec3D.h"
 
+#define float_random(smallNumber, bigNumber) ((((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * (bigNumber - smallNumber)) + smallNumber)
+
 @interface Common : NSObject 
 
 typedef struct HitRect {

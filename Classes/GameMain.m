@@ -2,7 +2,7 @@
 
 @implementation GameMain
 
-#define USE_BG NO
+#define USE_BG YES
 
 +(void)main {
     [[CCDirector sharedDirector] setDisplayFPS:NO];

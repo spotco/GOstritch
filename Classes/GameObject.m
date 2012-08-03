@@ -42,6 +42,10 @@
     return NULL;
 }
 
+-(void)reset {
+    [self set_active:YES];
+}
+
 
 
 @end

@@ -178,7 +178,7 @@
     game_render_state = [[GameRenderState alloc] init];
     [GameRenderImplementation update_camera_on:self state:game_render_state];
     for (GameObject* o in game_objects) {
-        [o set_active:YES];
+        [o reset];
     }
     current_mode = GameEngineLayerMode_GAMEPLAY;
 }
