@@ -1,5 +1,4 @@
 #import "MapLoader.h"
-#import "ThemeInfo.h"
 
 @implementation MapLoader
 
@@ -124,29 +123,6 @@
 
     NSLog(@"finish parse");
     return map;
-}
-
-+(NSArray *) load_themes_info{
-    
-    NSString *themes_info_path = [[NSBundle mainBundle] pathForResource:@"themes_info" ofType:@"theme"];
-	NSString *themes_info_str = [[NSString alloc] initWithContentsOfFile : themes_info_path encoding:NSUTF8StringEncoding error:nil];
-	
-	NSData *themes_info_data  =  [themes_info_str dataUsingEncoding : NSUTF8StringEncoding];
-    NSArray *jArray = [[CJSONDeserializer deserializer] deserializeAsArray:themes_info_data error:nil];
-    
-    int size = [jArray count];
-    NSMutableArray *theme_array = [[NSMutableArray alloc] init ];
-    for(int i = 0; i < size; i++){
-        NSDictionary *jTheme = (NSDictionary*)[jArray objectAtIndex:i];
-        ThemeInfo *ti = [[ThemeInfo alloc ] init];
-        ti.pic_name = [jTheme objectForKey:@"pic"];
-        ti.map_name = [jTheme objectForKey:@"map"];
-        ti.map_type = [jTheme objectForKey:@"map_type"];
-        [theme_array addObject:ti];
-    }
-    
-    return [[NSArray alloc] initWithArray:theme_array];
-    
 }
 
 @end

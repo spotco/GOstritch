@@ -59,7 +59,7 @@
     return [Common hitrect_cons_x1:self.position.x 
                                 y1:self.position.y-body.texture.pixelsHigh
                                wid:bwidth 
-                               hei:body.texture.pixelsHigh];
+                               hei:body.texture.pixelsHigh-15];
 }
 
 -(void)update_body_tex_offset {

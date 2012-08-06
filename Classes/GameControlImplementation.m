@@ -20,6 +20,7 @@
         if (player.current_island != NULL) {
             [GameControlImplementation player_jump_from_island:player state:state];
             state.jump_hold_counter = JUMP_HOLD_TIME;
+            [[player get_current_params] decr_airjump_count];
         } else if ([player get_current_params].cur_airjump_count > 0) {
             [GameControlImplementation player_double_jump:player state:state];
             state.jump_hold_counter = JUMP_HOLD_TIME;

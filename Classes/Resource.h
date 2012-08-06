@@ -39,6 +39,8 @@
 #define TEX_GROUND_DETAIL_2 @"GroundDetail2"
 #define TEX_GROUND_DETAIL_3 @"GroundDetail3"
 
+#define TEX_GREY_PARTICLE @"GreyParticle"
+
 #define TEX_UI_COINCOUNT @"UICoinCount"
 #define TEX_UI_PAUSEICON @"UIPauseIcon"
 

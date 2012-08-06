@@ -3,6 +3,7 @@
 #import "Player.h"
 #import "Common.h"
 #import "GameObject.h"
+#import "Particle.h"
 @class BGLayer;
 @class UILayer;
 #import "Resource.h"
@@ -25,6 +26,7 @@ typedef enum {
 @interface GameEngineLayer : CCLayer {
 	NSMutableArray *islands;
     NSMutableArray *game_objects;
+    NSMutableArray *particles;
 
 	Player *player;
     GameControlState *game_control_state;
@@ -47,6 +49,7 @@ typedef enum {
 
 +(CCScene *) scene_with:(NSString *)map_file_name;
 -(void)player_reset;
+-(void)add_particle:(Particle*)p;
 -(CGPoint)get_pos;
 
 @end

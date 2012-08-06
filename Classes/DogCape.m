@@ -8,7 +8,7 @@
     new_cape.active = YES;
     new_cape.position = ccp(x,y);
     
-    CCTexture2D *texture = [Resource get_tex:TEX_DOG_CAPE];
+    CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_CAPE];
     new_cape.img = [CCSprite spriteWithTexture:texture];
     [new_cape addChild:new_cape.img];
     

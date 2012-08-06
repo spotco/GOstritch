@@ -31,6 +31,14 @@ static float NO_VAL = -99999.0;
     return ct;
 }
 
+-(float)get_height:(float)pos {
+	if (pos < startX || pos > endX) {
+		return [Island NO_VALUE];
+	} else {
+		return startY+(pos-startX)*((endY-startY)/(endX-startX));
+	}
+}
+
 -(void)link_finish {
 }
 

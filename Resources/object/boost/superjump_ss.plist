@@ -4,13 +4,10 @@
 <dict>
 	<key>frames</key>
 	<dict>
-		
-		<key>superjump1.png</key>
+		<key>jumppad1</key>
 		<dict>
 			<key>aliases</key>
-			<array>
-			
-			</array>
+			<array/>
 			<key>spriteColorRect</key>
 			<string>{{9, 19}, {60, 39}}</string>
 			<key>spriteOffset</key>
@@ -26,13 +23,10 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		
-		<key>superjump2.png</key>
+		<key>jumppad2</key>
 		<dict>
 			<key>aliases</key>
-			<array>
-			
-			</array>
+			<array/>
 			<key>spriteColorRect</key>
 			<string>{{9, 19}, {60, 39}}</string>
 			<key>spriteOffset</key>
@@ -48,13 +42,10 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		
-		<key>superjump3.png</key>
+		<key>jumppad3</key>
 		<dict>
 			<key>aliases</key>
-			<array>
-			
-			</array>
+			<array/>
 			<key>spriteColorRect</key>
 			<string>{{9, 19}, {60, 39}}</string>
 			<key>spriteOffset</key>
@@ -70,7 +61,6 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		
 	</dict>
 	<key>metadata</key>
 	<dict>

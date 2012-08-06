@@ -5,6 +5,10 @@
 #define RENDER_ISLAND_ORD 1
 #define RENDER_GAMEOBJ_ORD 0
 
+#define YDIR_ZOOMSCALE 70.0
+#define YDIR_DEFAULT 80.0
+#define YDIR_ZOOMMAX 130.0
+
 #define VERT_CAMERA_OFFSET_SPD 65
 
 @implementation GameRenderImplementation
@@ -15,7 +19,9 @@
                 objects:(NSMutableArray*)objects 
                 state:(GameRenderState*)state    {
     
-    [GameRenderImplementation update_zoom:player layer:layer state:state];
+    float g_dist = [GameRenderImplementation calc_g_dist:player islands:islands];
+    //NSLog(@"GDIST:%f",g_dist);
+    [GameRenderImplementation update_zoom:player layer:layer state:state g_dist:g_dist];
     
     BOOL player_on_fg_island = (player.current_island != NULL) && (!player.current_island.can_land);
     if (player_on_fg_island) {
@@ -29,7 +35,23 @@
     }
 }
 
-+(void)update_zoom:(Player*)player layer:(CCLayer*)layer state:(GameRenderState*)state {
++(float)calc_g_dist:(Player*)player islands:(NSMutableArray*)islands {
+    if (player.current_island != NULL) {
+        return 0;
+    }
+    
+    float max = INFINITY;
+    CGPoint pos = player.position;
+    for (Island* i in islands) {
+        float ipos = [i get_height:pos.x];
+        if (ipos != [Island NO_VALUE] && pos.y > ipos) {
+            max = MIN(max,pos.y - ipos);
+        }
+    }
+    return max;
+}
+
++(void)update_zoom:(Player*)player layer:(CCLayer*)layer state:(GameRenderState*)state g_dist:(float)g_dist {
     /*TODO:magic constants here, have them linked to GameRenderState constants*/
     float tar = 140;
     if (player.current_island != NULL && ABS(((int)player.rotation)%360 - (-90)) < 10) {
@@ -60,6 +82,18 @@
         state.ez++;
     }
     
+    //state.cy = 80-130;
+    if (g_dist > 0) {
+        if (state.cy > YDIR_DEFAULT-YDIR_ZOOMMAX) {
+            state.cy -= (state.cy - (YDIR_DEFAULT-YDIR_ZOOMMAX))/YDIR_ZOOMSCALE;
+        }
+    } else {
+        if (state.cy < YDIR_DEFAULT) {
+            state.cy += (YDIR_DEFAULT-state.cy)/ (YDIR_ZOOMSCALE/2.0);
+        }
+    }
+    state.ey = state.cy;
+    //NSLog(@"ey:%f",state.ey);
     
     [GameRenderImplementation update_camera_on:layer state:state];
 }

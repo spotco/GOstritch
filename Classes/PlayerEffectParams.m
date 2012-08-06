@@ -30,7 +30,7 @@
 }
 
 -(void)add_airjump_count {
-    cur_airjump_count = 1;
+    cur_airjump_count = 2;
 }
 
 -(void)decr_airjump_count {

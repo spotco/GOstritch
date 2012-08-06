@@ -1,17 +1,10 @@
-//
-//  GOstrichAppDelegate.m
-//  GOstrich
-//
-//  Created by Pingyang He on 4/2/12.
-//  Copyright University of Washington 2012. All rights reserved.
-//
+
 
 #import "cocos2d.h"
 
 #import "GOstrichAppDelegate.h"
 #import "GameConfig.h"
 #import "GameEngineLayer.h"
-#import "ThemeSelectionPage.h"
 #import "RootViewController.h"
 #import "CoverPage.h"
 

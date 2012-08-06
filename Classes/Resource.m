@@ -33,7 +33,7 @@ static NSMutableDictionary* textures = nil;
                      @"water.png", TEX_WATER,
                      @"fish_ss.png", TEX_FISH_SS,
                      @"bird_ss.png", TEX_BIRD_SS,
-                     @"jumppadss.png", TEX_JUMPPAD,
+                     @"superjump_ss.png", TEX_JUMPPAD,
                                           
                      @"BG1_detail_1.png", TEX_GROUND_DETAIL_1,
                      @"BG1_detail_2.png", TEX_GROUND_DETAIL_2,
@@ -50,6 +50,8 @@ static NSMutableDictionary* textures = nil;
                      @"checkpoint1.png",TEX_CHECKPOINT_1,
                      @"checkerfloor.png",TEX_CHECKERFLOOR,
                      @"checkpoint2.png",TEX_CHECKPOINT_2,
+                     
+                     @"grey_particle.png",TEX_GREY_PARTICLE,
                      
                      @"pause_menu_back.png", TEX_UI_PAUSEMENU_BACK,
                      @"pause_menu_play.png", TEX_UI_PAUSEMENU_PLAY,

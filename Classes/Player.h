@@ -3,6 +3,8 @@
 #import "Island.h"
 #import "Resource.h"
 #import "Common.h"
+#import "StreamParticle.h"
+#import "RocketParticle.h"
 @class GameEngineLayer;
 
 @class PlayerEffectParams;

@@ -147,12 +147,6 @@
     player.scaleX = 1;
     player.scaleY = 1;
     
-    /*float cur_deg = ((int)player.rotation)%360;
-    float tar_deg = 0;
-    float dir = [Common shortest_dist_from_cur:cur_deg to:tar_deg];
-    player.rotation += dir*CENTERING_ROTATION_SPD;*/
-    
-    
     float cur_ang = [Common rad_to_deg:[player.up_vec get_angle_in_rad]];
     float tar_ang = 90;
     float rot_by = [Common shortest_dist_from_cur:cur_ang to:tar_ang]*CENTERING_UP_VEC_SPD;

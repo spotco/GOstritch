@@ -44,10 +44,6 @@
 
 -(void) draw {
 	[super draw];
-    
-    [Common draw_renderobj:main_fill n_vtx:4];
-    [Common draw_renderobj:top_fill n_vtx:4];
-    
     glColor4ub(109,110,112,255);
     glLineWidth(5.0f);
     
@@ -59,9 +55,10 @@
         [Common draw_renderobj:right_line_fill n_vtx:4]; //ccDrawLine(tr, br1);
         ccDrawQuadBezier(br1, br, br2, 3);
     }
-    
-    [Common draw_renderobj:bottom_line_fill n_vtx:4]; //ccDrawLine(bl2, br2);
-    
+    if (bottom_line_fill.isalloc == 1) {
+        [Common draw_renderobj:bottom_line_fill n_vtx:4]; //ccDrawLine(bl2, br2);
+    }
+        
     if (has_prev == NO) {
         [Common draw_renderobj:tl_top_corner n_vtx:4];
     }
@@ -75,6 +72,8 @@
         ccDrawSolidPoly(toppts, 3, YES);
         [Common draw_renderobj:corner_line_fill n_vtx:4];
     }
+    [Common draw_renderobj:main_fill n_vtx:4];
+    [Common draw_renderobj:top_fill n_vtx:4];
     
 }
 
@@ -243,7 +242,7 @@
 -(gl_render_obj)line_from:(CGPoint)a to:(CGPoint)b scale:(float)scale {
     struct gl_render_obj n;
     n = [Common init_render_obj:[Resource get_tex:TEX_ISLAND_BORDER] npts:4];
-    
+    n.isalloc = 1;
     CGPoint* tri_pts = n.tri_pts;
 	CGPoint* tex_pts = n.tex_pts;
     

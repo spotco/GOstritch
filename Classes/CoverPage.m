@@ -18,7 +18,7 @@
 -(void) init_bg {
     bg_img = [CCSprite spriteWithFile:@"Front-Page_background.png"];
     bg_img.position = ccp([UIScreen mainScreen].bounds.size.height/2, [UIScreen mainScreen].bounds.size.width/2);
-    [self addChild:bg_img];
+    [self addChild:bg_img];    
 }
 
 -(void) init_img {

@@ -27,6 +27,7 @@
 -(float)get_t_given_position:(CGPoint)position;
 -(CGPoint)get_position_given_t:(float)t;
 -(Vec3D*)get_tangent_vec;
+-(float)get_height:(float)pos;
 
 -(void)cleanup_anims;
 

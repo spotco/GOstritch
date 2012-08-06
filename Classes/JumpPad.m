@@ -1,5 +1,6 @@
 #import "JumpPad.h"
 #import "Player.h"
+#import "GameEngineLayer.h"
 
 #define JUMP_POWER 20
 #define RECHARGE_TIME 15
@@ -34,6 +35,15 @@
         [self set_active:NO];
         recharge_ct = RECHARGE_TIME;
         [self boostjump:player];
+        
+        for(int i = 0; i < 10; i++) {
+            int pspd = arc4random_uniform(8)+8;
+            float r = float_random(0, (float)pspd);
+            [g add_particle:[JumpPadParticle init_x:player.position.x 
+                                                  y:player.position.y 
+                                                 vx:(r)*normal_vec.x
+                                                 vy:(pspd-r)*normal_vec.y]];
+        }
     }
     
     return GameObjectReturnCode_NONE;
@@ -78,7 +88,7 @@
 }
 
 -(void)initialize_anim {
-    anim = [self init_anim_ofspeed:0.3];
+    anim = [self init_anim_ofspeed:0.2];
     [self runAction:anim];
 }
 
@@ -104,7 +114,7 @@
 }
 
 
-#define JUMPPAD_SS_FILENAME @"jumppadss"
+#define JUMPPAD_SS_FILENAME @"superjump_ss"
 NSDictionary *jumppad_ss_plist_dict;
 
 +(CGRect)spritesheet_rect_tar:(NSString*)tar {
@@ -157,6 +167,11 @@ NSDictionary *jumppad_ss_plist_dict;
 	for(CCSprite *sprite in [self children]) {
 		sprite.opacity = opacity;
 	}
+}
+
+-(void)dealloc {
+    [normal_vec dealloc];
+    [super dealloc];
 }
 
 @end

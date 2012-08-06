@@ -9,6 +9,11 @@
 @synthesize player;
 @synthesize load_game_end_menu;
 
+/**
+ -Blocker type object
+ -Bone,superjump,speedup
+ **/
+
 +(CCScene *) scene_with:(NSString *) map_file_name {
     [Resource init_bg1_textures];
 
@@ -39,6 +44,7 @@
     game_render_state = [[GameRenderState alloc] init];
     
     CGPoint player_start_pt = [self loadMap:map_filename];
+    particles = [[NSMutableArray array] retain];
     map_start_pt = player_start_pt;
     player = [Player init_at:player_start_pt];
     
@@ -109,6 +115,7 @@
         
         [self check_game_state];	
         [self update_game_obj];
+        [self update_particles];
         [GameRenderImplementation update_render_on:self player:player islands:islands objects:game_objects state:game_render_state];
         [Common run_callback:bg_update];
     } else if (current_mode == GameEngineLayerMode_ENDOUT) {
@@ -116,12 +123,31 @@
         if ([Common hitrect_touch:[player get_hit_rect] b:[self get_viewbox]]) {
             [GamePhysicsImplementation player_move:player with_islands:islands];
             [player update:self];  
+            [self update_particles];
         } else {
             [Common run_callback:load_game_end_menu];
             current_mode = GameEngineLayerMode_ENDED;
         }
     }
     
+}
+
+-(void)add_particle:(Particle*)p {
+    [particles addObject:p];
+    [self addChild:p z:[p get_render_ord]];
+}
+
+-(void)update_particles {
+    NSMutableArray *toremove = [NSMutableArray array];
+    for (Particle *i in particles) {
+        [i update];
+        if ([i should_remove]) {
+            [self removeChild:i cleanup:NO];
+            [toremove addObject:i];
+        }
+    }
+    
+    [particles removeObjectsInArray:toremove];
 }
 
 -(HitRect)get_viewbox {
@@ -196,6 +222,12 @@
     }
     [islands removeAllObjects];
     [game_objects removeAllObjects];
+    [particles removeAllObjects];
+    
+    [islands release];
+    [game_objects release];
+    [particles release];
+    
     
     [super dealloc];
 }

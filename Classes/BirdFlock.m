@@ -61,6 +61,7 @@
     [_STANDANIM dealloc];
     [_FLYANIM dealloc];
     [super dealloc];
+    NSLog(@"dealloc bird");
 }
 @end
 
@@ -167,6 +168,7 @@ NSDictionary *bird_ss_plist_dict = NULL;
 }
 
 -(void)dealloc {
+    [birds removeAllObjects];
     [self removeAllChildrenWithCleanup:YES];
     [super dealloc];
 }

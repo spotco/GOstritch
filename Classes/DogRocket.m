@@ -7,7 +7,7 @@
     new_rocket.active = YES;
     new_rocket.position = ccp(x,y);
     
-    CCTexture2D *texture = [Resource get_tex:TEX_DOG_ROCKET];
+    CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_ROCKET];
     new_rocket.img = [CCSprite spriteWithTexture:texture];
     [new_rocket addChild:new_rocket.img];
     

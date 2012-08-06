@@ -17,6 +17,9 @@
 
 #define HITBOX_RESCALE 0.7
 
+#define TRAIL_MIN 10
+#define TRAIL_MAX 15
+
 
 @implementation Player
 @synthesize vx,vy;
@@ -215,9 +218,15 @@ NSDictionary *splash_ss_plist_dict = NULL;
         float rot = -[Common rad_to_deg:[dv get_angle_in_rad]];
         float sig = [Common sig:rot];
         rot = sig*sqrtf(ABS(rot));
-        //rot *=0.4;
         rotation_ = rot;
         [dv dealloc];
+    } else {
+        if (vel > TRAIL_MIN) {
+            float ch = (vel-TRAIL_MIN)/(TRAIL_MAX - TRAIL_MIN)*100;
+            if (arc4random_uniform(100) < ch) {
+                [g add_particle:[StreamParticle init_x:position_.x y:position_.y]];
+            }
+        }
     }
     
     player_anim_mode cur_anim_mode = [[self get_current_params] get_anim];
@@ -237,6 +246,7 @@ NSDictionary *splash_ss_plist_dict = NULL;
         [self start_anim:_CAPE_ANIM];
     } else if (cur_anim_mode == player_anim_mode_ROCKET) {
         [self start_anim:_ROCKET_ANIM];
+        [g add_particle:[RocketParticle init_x:position_.x-40 y:position_.y+20]];
     } else if (cur_anim_mode == player_anim_mode_HIT) {
         [self start_anim:_HIT_ANIM];
     } else if (cur_anim_mode == player_anim_mode_SPLASH) {
