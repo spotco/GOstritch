@@ -4,13 +4,10 @@
 <dict>
 	<key>frames</key>
 	<dict>
-		
-		<key>speedup1.png</key>
+		<key>speedup1</key>
 		<dict>
 			<key>aliases</key>
-			<array>
-			
-			</array>
+			<array/>
 			<key>spriteColorRect</key>
 			<string>{{13, 18}, {52, 37}}</string>
 			<key>spriteOffset</key>
@@ -26,13 +23,10 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		
-		<key>speedup2.png</key>
+		<key>speedup2</key>
 		<dict>
 			<key>aliases</key>
-			<array>
-			
-			</array>
+			<array/>
 			<key>spriteColorRect</key>
 			<string>{{13, 18}, {52, 37}}</string>
 			<key>spriteOffset</key>
@@ -48,13 +42,10 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		
-		<key>speedup3.png</key>
+		<key>speedup3</key>
 		<dict>
 			<key>aliases</key>
-			<array>
-			
-			</array>
+			<array/>
 			<key>spriteColorRect</key>
 			<string>{{13, 18}, {52, 37}}</string>
 			<key>spriteOffset</key>
@@ -70,7 +61,6 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		
 	</dict>
 	<key>metadata</key>
 	<dict>

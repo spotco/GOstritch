@@ -36,13 +36,16 @@
         recharge_ct = RECHARGE_TIME;
         [self boostjump:player];
         
-        for(int i = 0; i < 10; i++) {
-            int pspd = arc4random_uniform(8)+8;
-            float r = float_random(0, (float)pspd);
-            [g add_particle:[JumpPadParticle init_x:player.position.x 
-                                                  y:player.position.y 
-                                                 vx:(r)*normal_vec.x
-                                                 vy:(pspd-r)*normal_vec.y]];
+        for(int i = 0; i < 8; i++) {
+            float r = ((float)i);
+            r = r/4.0 * M_PI;
+            
+            float dvx = cosf(r)*8+float_random(0, 1);
+            float dvy = sinf(r)*8+float_random(0, 1);
+            [g add_particle:[JumpPadParticle init_x:position_.x 
+                                                  y:position_.y
+                                                 vx:dvx
+                                                 vy:dvy]];
         }
     }
     
@@ -61,6 +64,8 @@
     if (player.current_island != NULL) {
         [tangent scale:-player.current_island.ndir];
         player.current_island = NULL;
+    } else {
+        [tangent scale:-1];
     }
     
     [tangent scale:mov_speed];
@@ -74,6 +79,8 @@
     
     player.vx = combined.x;
     player.vy = combined.y;
+    
+    //NSLog(@"<%f,%f>",player.vx,player.vy);
     
     
     [calc_up dealloc];
@@ -115,7 +122,7 @@
 
 
 #define JUMPPAD_SS_FILENAME @"superjump_ss"
-NSDictionary *jumppad_ss_plist_dict;
+static NSDictionary *jumppad_ss_plist_dict;
 
 +(CGRect)spritesheet_rect_tar:(NSString*)tar {
     NSDictionary *dict;
@@ -171,6 +178,8 @@ NSDictionary *jumppad_ss_plist_dict;
 
 -(void)dealloc {
     [normal_vec dealloc];
+    [self stopAllActions];
+    [anim release];
     [super dealloc];
 }
 

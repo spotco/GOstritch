@@ -158,12 +158,16 @@
     game_engine_layer = ref;
 }
 
-int tapcount = 0;
--(void) ccTouchesBegan:(NSSet*)pTouches withEvent:(UIEvent*)pEvent {
-    tapcount++;
-    [count_disp setString:[NSString stringWithFormat:@"%i",tapcount]];
-}
+//int tapcount = 0;
+//-(void) ccTouchesBegan:(NSSet*)pTouches withEvent:(UIEvent*)pEvent {
+//    tapcount++;
+//    [count_disp setString:[NSString stringWithFormat:@"%i",tapcount]];
+//}
 
+-(void)update {
+    bone_status b = [game_engine_layer get_bonestatus];
+    [count_disp setString:[NSString stringWithFormat:@"%i",b.hasgets+b.savedgets]];
+}
 
 -(void)exit_to_menu {
     [Resource dealloc_textures];

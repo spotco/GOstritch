@@ -63,9 +63,13 @@
     for(int i = 0; i < [coins_array count]; i++){
         NSDictionary *j_object = (NSDictionary *)[coins_array objectAtIndex:i];
         NSString *type = (NSString *)[j_object objectForKey:@"type"];
+        
         if([type isEqualToString:@"coin"]){
-            Coin *c = [Coin init_x:((NSString *)[j_object  objectForKey:@"x"]).floatValue y:((NSString *)[j_object objectForKey:@"y"]).floatValue];
-            [map.game_objects addObject:c];
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            int bid = ((NSString*)[j_object  objectForKey:@"bid"]).intValue;
+            [map.game_objects addObject:[Coin init_x:x y:y bid:bid]];
+            
             
         } else if ([type isEqualToString:@"cape"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
@@ -114,6 +118,20 @@
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             [map.game_objects addObject:[BirdFlock init_x:x y:y]];
+            
+        } else if([type isEqualToString:@"blocker"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            float width = ((NSString*)[j_object  objectForKey:@"width"]).floatValue;
+            float height = ((NSString*)[j_object  objectForKey:@"height"]).floatValue;
+            
+            [map.game_objects addObject:[Blocker init_x:x y:y width:width height:height]];
+            
+        } else if([type isEqualToString:@"speedup"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            
+            [map.game_objects addObject:[SpeedUp init_x:x y:y islands:map.n_islands]];
             
         } else {
             NSLog(@"item read error");

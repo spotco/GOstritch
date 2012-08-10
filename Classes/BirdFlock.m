@@ -159,7 +159,7 @@
 
 
 #define BIRD_SS_FILENAME @"bird_ss"
-NSDictionary *bird_ss_plist_dict = NULL;
+static NSDictionary *bird_ss_plist_dict = NULL;
 +(CGRect)bird_ss_rect_tar:(NSString*)tar {
     if (bird_ss_plist_dict == NULL) {
         bird_ss_plist_dict =[[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:BIRD_SS_FILENAME ofType:@"plist"]];

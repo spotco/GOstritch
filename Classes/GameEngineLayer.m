@@ -9,10 +9,6 @@
 @synthesize player;
 @synthesize load_game_end_menu;
 
-/**
- -Blocker type object
- -Bone,superjump,speedup
- **/
 
 +(CCScene *) scene_with:(NSString *) map_file_name {
     [Resource init_bg1_textures];
@@ -23,6 +19,7 @@
 	BGLayer *bglayer = [BGLayer init_with_gamelayer:glayer];
     UILayer* uilayer = [UILayer init_with_gamelayer:glayer];
     [glayer set_bg_update_callback:bglayer];
+    [glayer set_ui_update_callback:uilayer];
     
     
     [scene addChild:bglayer];
@@ -44,6 +41,7 @@
     game_render_state = [[GameRenderState alloc] init];
     
     CGPoint player_start_pt = [self loadMap:map_filename];
+    [self init_bones];
     particles = [[NSMutableArray array] retain];
     map_start_pt = player_start_pt;
     player = [Player init_at:player_start_pt];
@@ -61,10 +59,59 @@
     [self schedule:@selector(update)];
 }
 
+-(void)init_bones {
+    bones = [[[NSMutableDictionary alloc]init]retain]; //bid -> status
+    
+    for (GameObject *i in game_objects) {
+        if ([i class] == [Coin class]) {
+            Coin *c = (Coin*)i;
+            NSNumber *bid = [NSNumber numberWithInt:c.bid];
+            if ([bones objectForKey:bid]) {
+                NSLog(@"ERROR:duplicate (bone)id");
+            } else {
+                [bones setObject:[NSNumber numberWithInt:Coin_Status_TOGET] forKey:bid];
+            }
+        }
+    }
+    NSLog(@"Bones loaded (%i bones total)",[bones count]);
+    
+//    for(NSNumber* bid in [bones allKeys]) {
+//        NSLog(@"testloop:%i",bid.intValue);
+//    }
+}
+
+-(void)set_bid_tohasget:(int)tbid {
+    
+    for(NSNumber* bid in [bones allKeys]) {
+        if (bid.intValue == tbid) {
+            [bones setObject:[NSNumber numberWithInt:Coin_Status_HASGET] forKey:bid];
+            return;
+        }
+    }
+    
+    NSLog(@"ERROR: bid_tohasget_set failed, tar:%i",tbid);
+}
+
+-(void)set_checkpoint_to:(CGPoint)pt {
+    player.start_pt = pt;
+    
+    for(NSNumber* bid in [bones allKeys]) {
+        int status = ((NSNumber*)[bones objectForKey:bid]).intValue;
+        if (status == Coin_Status_HASGET) {
+            [bones setObject:[NSNumber numberWithInt:Coin_Status_SAVEDGET] forKey:bid];
+        }
+    }
+}
+
 -(void)set_bg_update_callback:(NSObject*)tar {
     bg_update.target = tar;
     bg_update.selector = @selector(update);
     [Common run_callback:bg_update];
+}
+
+-(void)set_ui_update_callback:(NSObject*)tar {
+    ui_update.target = tar;
+    ui_update.selector = @selector(update);
 }
 
 -(HitRect) get_world_bounds {
@@ -105,7 +152,26 @@
     return map.player_start_pt;
 }
 
+-(void)player_reset {
+    [player reset];
+    [game_render_state dealloc];
+    game_render_state = [[GameRenderState alloc] init];
+    [GameRenderImplementation update_camera_on:self state:game_render_state];
+    for (GameObject* o in game_objects) {
+        [o reset];
+    }
+    current_mode = GameEngineLayerMode_GAMEPLAY;
+    
+    for(NSNumber* bid in [bones allKeys]) {
+        int status = ((NSNumber*)[bones objectForKey:bid]).intValue;
+        if (status == Coin_Status_HASGET) {
+            [bones setObject:[NSNumber numberWithInt:Coin_Status_TOGET] forKey:bid];
+        }
+    }
+}
+
 -(void)update {
+    //[self print_bonestatus];
     if (current_mode == GameEngineLayerMode_PAUSED) {
         return;
     } else if (current_mode == GameEngineLayerMode_GAMEPLAY || current_mode == GameEngineLayerMode_OBJECTANIM) {
@@ -118,6 +184,7 @@
         [self update_particles];
         [GameRenderImplementation update_render_on:self player:player islands:islands objects:game_objects state:game_render_state];
         [Common run_callback:bg_update];
+        [Common run_callback:ui_update];
     } else if (current_mode == GameEngineLayerMode_ENDOUT) {
                 
         if ([Common hitrect_touch:[player get_hit_rect] b:[self get_viewbox]]) {
@@ -198,17 +265,6 @@
 	}
 }
 
--(void)player_reset {
-    [player reset];
-    [game_render_state dealloc];
-    game_render_state = [[GameRenderState alloc] init];
-    [GameRenderImplementation update_camera_on:self state:game_render_state];
-    for (GameObject* o in game_objects) {
-        [o reset];
-    }
-    current_mode = GameEngineLayerMode_GAMEPLAY;
-}
-
 -(CGPoint)get_pos {
     return player.position;
 }
@@ -223,15 +279,39 @@
     [islands removeAllObjects];
     [game_objects removeAllObjects];
     [particles removeAllObjects];
+    [bones removeAllObjects];
     
     [islands release];
     [game_objects release];
     [particles release];
+    [bones release];
     
     
     [super dealloc];
 }
 
+
+-(bone_status)get_bonestatus {
+    struct bone_status n;
+    n.togets = n.savedgets = n.hasgets = n.alreadygets = 0;
+    for (NSNumber* bid in bones) {
+        NSNumber* status = [bones objectForKey:bid];
+        if (status.intValue == Coin_Status_TOGET) {
+            n.togets++;
+        } else if (status.intValue == Coin_Status_SAVEDGET) {
+            n.savedgets++;
+        } else if (status.intValue == Coin_Status_HASGET) {
+            n.hasgets++;
+        } else if (status.intValue == Coin_Status_ALREADYGET) {
+            n.alreadygets++;
+        }
+    }
+    return n;
+}
+
++(void)print_bonestatus:(bone_status)b {
+    NSLog(@"TOGET:%i SAVEDGET:%i HASGET:%i ALREADYGET:%i",b.togets,b.savedgets,b.hasgets,b.alreadygets);
+}
 
 -(void)draw {
     [super draw];

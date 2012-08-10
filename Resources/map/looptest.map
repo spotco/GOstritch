@@ -56,6 +56,6 @@
 	],
 
 	"objects":[
-		{"type":"coin", "x":"989", "y":"372", "label":"4"}
+		{"type":"speedup", "x":"989", "y":"372", "label":"4"}
 	]
 }

@@ -2,7 +2,7 @@
 
 //Used in move along island
 #define ABS_MAX_SPEED 20
-#define SLOPE_ACCEL 0.4
+#define SLOPE_ACCEL 0.5
 #define FRICTION 0.96
 #define TO_GROUND_ROTATION_SPEED 0.3
 
@@ -70,9 +70,11 @@
         if (ang < -M_PI_2) {
             ang = ang + M_PI;
         }
-        player.vx += SLOPE_ACCEL;
-        player.vy += SLOPE_ACCEL;
         float pct = ABS(ang/M_PI_2);
+        
+        player.vx += SLOPE_ACCEL *pct;
+        player.vy += SLOPE_ACCEL *pct;
+        
         LIMIT_SPEED += (ABS_MAX_SPEED - LIMIT_SPEED)*(pct);
     }
     

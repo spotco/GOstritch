@@ -1,7 +1,8 @@
 {
     "start_y": 442,
-    "islands": [{"label": "", "type": "line", "x2": 2018, "y2": 158, "ndir": "left", "x1": 62, "hei": 50, "can_fall": true, "y1": 171}],
+    "islands": [{"label": "", "type": "line", "x2": 3018, "y2": 158, "ndir": "left", "x1": 62, "hei": 50, "can_fall": true, "y1": 171}],
     "start_x": 118,
-    "objects": [{"label": "0", "type": "rocket", "x": 532, "y": 240}],
+    "objects": [{"label": "0", "type": "speedup", "x": 532, "y": 240,"width":500,"height":500},
+    {"label": "0", "type": "jumppad", "x": 2032, "y": 210,"width":500,"height":500}],
     "assert_links": 0
 }

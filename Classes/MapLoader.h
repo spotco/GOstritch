@@ -13,6 +13,8 @@
 #import "Water.h"
 #import "JumpPad.h"
 #import "BirdFlock.h"
+#import "Blocker.h"
+#import "SpeedUp.h"
 
 @interface MapLoader : NSObject
 

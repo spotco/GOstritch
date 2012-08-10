@@ -23,10 +23,19 @@ typedef enum {
     GameEngineLayerMode_OBJECTANIM
 } GameEngineLayerMode;
 
+typedef struct bone_status {
+    int togets;
+    int savedgets;
+    int hasgets;
+    int alreadygets;
+} bone_status;
+
 @interface GameEngineLayer : CCLayer {
 	NSMutableArray *islands;
     NSMutableArray *game_objects;
     NSMutableArray *particles;
+    
+    NSMutableDictionary *bones;
 
 	Player *player;
     GameControlState *game_control_state;
@@ -38,6 +47,7 @@ typedef enum {
     GameEngineLayerMode current_mode;
     
     callback bg_update;
+    callback ui_update;
     callback load_game_end_menu;
 }
 
@@ -51,5 +61,9 @@ typedef enum {
 -(void)player_reset;
 -(void)add_particle:(Particle*)p;
 -(CGPoint)get_pos;
+
+-(void)set_checkpoint_to:(CGPoint)pt;
+-(void)set_bid_tohasget:(int)tbid;
+-(bone_status)get_bonestatus;
 
 @end

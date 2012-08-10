@@ -47,6 +47,9 @@
     glColor4ub(109,110,112,255);
     glLineWidth(5.0f);
     
+    [Common draw_renderobj:main_fill n_vtx:4];
+    [Common draw_renderobj:top_fill n_vtx:4];
+    
     if (has_prev == NO) {
         [Common draw_renderobj:left_line_fill n_vtx:4]; //ccDrawLine(tl, bl1);    
         ccDrawQuadBezier(bl1, bl, bl2, 3);
@@ -72,8 +75,6 @@
         ccDrawSolidPoly(toppts, 3, YES);
         [Common draw_renderobj:corner_line_fill n_vtx:4];
     }
-    [Common draw_renderobj:main_fill n_vtx:4];
-    [Common draw_renderobj:top_fill n_vtx:4];
     
 }
 

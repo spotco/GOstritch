@@ -1,4 +1,5 @@
 #import "CheckPoint.h"
+#import "GameEngineLayer.h"
 
 @implementation CheckPoint
 
@@ -50,7 +51,7 @@ float texwid,texhei;
         inactive_img.visible = NO;
         active_img.visible = YES;
         
-        player.start_pt = [self get_center];
+        [g set_checkpoint_to:[self get_center]];
     }
     
     return GameObjectReturnCode_NONE;

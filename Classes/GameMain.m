@@ -7,7 +7,7 @@
 +(void)main {
     [[CCDirector sharedDirector] setDisplayFPS:NO];
     //[[CCDirector sharedDirector] runWithScene:[CoverPage scene]];
-    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"bigjump"]];
+    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"test2"]];
 }
 
 +(BOOL)GET_USE_BG {

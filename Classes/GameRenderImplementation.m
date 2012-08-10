@@ -5,9 +5,9 @@
 #define RENDER_ISLAND_ORD 1
 #define RENDER_GAMEOBJ_ORD 0
 
-#define YDIR_ZOOMSCALE 70.0
+#define YDIR_ZOOMSCALE 50.0
 #define YDIR_DEFAULT 80.0
-#define YDIR_ZOOMMAX 130.0
+#define YDIR_ZOOMMAX 180.0
 
 #define VERT_CAMERA_OFFSET_SPD 65
 
@@ -84,19 +84,29 @@
     
     //state.cy = 80-130;
     if (g_dist > 0) {
-        if (state.cy > YDIR_DEFAULT-YDIR_ZOOMMAX) {
-            state.cy -= (state.cy - (YDIR_DEFAULT-YDIR_ZOOMMAX))/YDIR_ZOOMSCALE;
+        
+        float tmp = g_dist > 500.0 ? 500.0 : g_dist;
+        
+        float tar_yoff = 80.0 + (tmp / 500.0)*60.0;
+            
+        //NSLog(@"tar_yoff:%f",tar_yoff);
+        if (state.cy > YDIR_DEFAULT-tar_yoff) {
+            state.cy -= (state.cy - (YDIR_DEFAULT-tar_yoff))/YDIR_ZOOMSCALE;
+        } else {
+            state.cy += ((YDIR_DEFAULT-tar_yoff)-state.cy)/YDIR_ZOOMSCALE;
         }
+        
     } else {
         if (state.cy < YDIR_DEFAULT) {
             state.cy += (YDIR_DEFAULT-state.cy)/ (YDIR_ZOOMSCALE/2.0);
         }
     }
     state.ey = state.cy;
-    //NSLog(@"ey:%f",state.ey);
-    
+        
     [GameRenderImplementation update_camera_on:layer state:state];
 }
+
+int zct = 0;
 
 +(void)update_camera_on:(CCLayer*)layer state:(GameRenderState*)state {
     [layer.camera setCenterX:state.cx centerY:state.cy centerZ:state.cz];

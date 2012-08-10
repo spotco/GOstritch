@@ -90,7 +90,7 @@
 }
 
 #define FISH_SS_FILENAME @"fish_ss"
-NSDictionary *fish_ss_plist_dict = NULL;
+static NSDictionary *fish_ss_plist_dict = NULL;
 +(CGRect)fish_ss_spritesheet_rect_tar:(NSString*)tar {
     if (fish_ss_plist_dict == NULL) {
         fish_ss_plist_dict = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:FISH_SS_FILENAME ofType:@"plist"]];

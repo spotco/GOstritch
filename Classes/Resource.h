@@ -30,6 +30,7 @@
 #define TEX_FISH_SS @"FishSS"
 #define TEX_BIRD_SS @"BirdSS"
 #define TEX_JUMPPAD @"JumpPad"
+#define TEX_SPEEDUP @"SpeedUp"
 
 #define TEX_CHECKPOINT_1 @"CheckPointPre"
 #define TEX_CHECKPOINT_2 @"CheckPointPost"

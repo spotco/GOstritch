@@ -20,7 +20,7 @@
 
 -(void)update {
     [super update];
-    int pct_y = (int)(((float)ct/STREAMPARTICLE_CT_DEFAULT)*140);
+    int pct_y = (int)(((float)ct/STREAMPARTICLE_CT_DEFAULT)*200);
     //NSLog(@"pct:%i",pct_y);
     [self setColor:ccc3(255,pct_y,0)];
 }
