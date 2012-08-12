@@ -61,7 +61,7 @@
     [_STANDANIM dealloc];
     [_FLYANIM dealloc];
     [super dealloc];
-    NSLog(@"dealloc bird");
+    //NSLog(@"dealloc bird");
 }
 @end
 

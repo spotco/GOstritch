@@ -58,7 +58,7 @@
 
 -(void)nextlevel {
     [Resource dealloc_textures];
-    [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene_with:@"test2"]];
+    [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene_with:@"vertical_test"]];
 }
 
 -(void)start_initial_anim {
@@ -158,14 +158,8 @@
     game_engine_layer = ref;
 }
 
-//int tapcount = 0;
-//-(void) ccTouchesBegan:(NSSet*)pTouches withEvent:(UIEvent*)pEvent {
-//    tapcount++;
-//    [count_disp setString:[NSString stringWithFormat:@"%i",tapcount]];
-//}
-
 -(void)update {
-    bone_status b = [game_engine_layer get_bonestatus];
+    level_bone_status b = [game_engine_layer get_bonestatus];
     [count_disp setString:[NSString stringWithFormat:@"%i",b.hasgets+b.savedgets]];
 }
 

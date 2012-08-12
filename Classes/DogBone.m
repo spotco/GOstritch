@@ -1,13 +1,13 @@
-#import "Coin.h"
+#import "DogBone.h"
 #import "PlayerEffectParams.h"
 #import "GameEngineLayer.h"
 
-@implementation Coin
+@implementation DogBone
 
 @synthesize bid;
 
-+(Coin*)init_x:(float)posx y:(float)posy bid:(int)bid {
-    Coin *new_coin = [Coin node];
++(DogBone*)init_x:(float)posx y:(float)posy bid:(int)bid {
+    DogBone *new_coin = [DogBone node];
     new_coin.active = YES;
     new_coin.position = ccp(posx,posy);
     new_coin.bid = bid;
@@ -45,12 +45,6 @@
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         if ([[player get_current_params] get_anim] == player_anim_mode_RUN) {
-//            PlayerEffectParams *e = [PlayerEffectParams init_copy:player.get_default_params];
-//            e.time_left = 100;
-//            e.cur_accel_to_min = 1;
-//            player.vx = MIN(15,player.vx+5);
-//            e.cur_min_speed = 15;
-//            [player add_effect:e];
             [g set_bid_tohasget:bid];
         }
         [self set_active:NO];

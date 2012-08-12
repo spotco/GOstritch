@@ -3,7 +3,7 @@
 #import "LineIsland.h"
 #import "Island.h"
 
-#import "Coin.h"
+#import "DogBone.h"
 #import "GroundDetail.h"
 #import "DogCape.h"
 #import "DogRocket.h"

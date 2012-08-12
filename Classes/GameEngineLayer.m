@@ -9,6 +9,17 @@
 @synthesize player;
 @synthesize load_game_end_menu;
 
+/**
+ TODO --
+ -LevelEditor fixes:
+    -birdflock broken
+    -faster scrolling
+    -shift all to right
+ -Game fixes:
+    zoom up when going downhill
+    add ground details to level
+ **/
+
 
 +(CCScene *) scene_with:(NSString *) map_file_name {
     [Resource init_bg1_textures];
@@ -63,13 +74,13 @@
     bones = [[[NSMutableDictionary alloc]init]retain]; //bid -> status
     
     for (GameObject *i in game_objects) {
-        if ([i class] == [Coin class]) {
-            Coin *c = (Coin*)i;
+        if ([i class] == [DogBone class]) {
+            DogBone *c = (DogBone*)i;
             NSNumber *bid = [NSNumber numberWithInt:c.bid];
             if ([bones objectForKey:bid]) {
                 NSLog(@"ERROR:duplicate (bone)id");
             } else {
-                [bones setObject:[NSNumber numberWithInt:Coin_Status_TOGET] forKey:bid];
+                [bones setObject:[NSNumber numberWithInt:Bone_Status_TOGET] forKey:bid];
             }
         }
     }
@@ -84,7 +95,7 @@
     
     for(NSNumber* bid in [bones allKeys]) {
         if (bid.intValue == tbid) {
-            [bones setObject:[NSNumber numberWithInt:Coin_Status_HASGET] forKey:bid];
+            [bones setObject:[NSNumber numberWithInt:Bone_Status_HASGET] forKey:bid];
             return;
         }
     }
@@ -97,8 +108,8 @@
     
     for(NSNumber* bid in [bones allKeys]) {
         int status = ((NSNumber*)[bones objectForKey:bid]).intValue;
-        if (status == Coin_Status_HASGET) {
-            [bones setObject:[NSNumber numberWithInt:Coin_Status_SAVEDGET] forKey:bid];
+        if (status == Bone_Status_HASGET) {
+            [bones setObject:[NSNumber numberWithInt:Bone_Status_SAVEDGET] forKey:bid];
         }
     }
 }
@@ -164,8 +175,8 @@
     
     for(NSNumber* bid in [bones allKeys]) {
         int status = ((NSNumber*)[bones objectForKey:bid]).intValue;
-        if (status == Coin_Status_HASGET) {
-            [bones setObject:[NSNumber numberWithInt:Coin_Status_TOGET] forKey:bid];
+        if (status == Bone_Status_HASGET) {
+            [bones setObject:[NSNumber numberWithInt:Bone_Status_TOGET] forKey:bid];
         }
     }
 }
@@ -291,25 +302,25 @@
 }
 
 
--(bone_status)get_bonestatus {
-    struct bone_status n;
+-(level_bone_status)get_bonestatus {
+    struct level_bone_status n;
     n.togets = n.savedgets = n.hasgets = n.alreadygets = 0;
     for (NSNumber* bid in bones) {
         NSNumber* status = [bones objectForKey:bid];
-        if (status.intValue == Coin_Status_TOGET) {
+        if (status.intValue == Bone_Status_TOGET) {
             n.togets++;
-        } else if (status.intValue == Coin_Status_SAVEDGET) {
+        } else if (status.intValue == Bone_Status_SAVEDGET) {
             n.savedgets++;
-        } else if (status.intValue == Coin_Status_HASGET) {
+        } else if (status.intValue == Bone_Status_HASGET) {
             n.hasgets++;
-        } else if (status.intValue == Coin_Status_ALREADYGET) {
+        } else if (status.intValue == Bone_Status_ALREADYGET) {
             n.alreadygets++;
         }
     }
     return n;
 }
 
-+(void)print_bonestatus:(bone_status)b {
++(void)print_bonestatus:(level_bone_status)b {
     NSLog(@"TOGET:%i SAVEDGET:%i HASGET:%i ALREADYGET:%i",b.togets,b.savedgets,b.hasgets,b.alreadygets);
 }
 

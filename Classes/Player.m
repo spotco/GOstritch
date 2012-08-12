@@ -267,7 +267,7 @@ static NSDictionary *splash_ss_plist_dict = NULL;
     } else {
         if (current_island != NULL) {
             if (current_params.cur_min_speed < MIN_SPEED_MAX && (vel >= tar || ABS(tar-vel) < tar * 0.4)  ) {
-                current_params.cur_min_speed += ACCEL_INCR;
+                //current_params.cur_min_speed += ACCEL_INCR;
             } else if (current_params.cur_limit_speed > DEFAULT_MIN_SPEED && current_params.cur_min_speed*0.9 > DEFAULT_MIN_SPEED && (vel < tar*0.5)) {
                 current_params.cur_min_speed *= 0.98;
             }

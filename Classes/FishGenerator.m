@@ -1,36 +1,46 @@
 #import "FishGenerator.h"
 
+#define SPAWN_MARGIN 25
+#define SPAWN_WAIT_BASE 100
+
+#define FISH_GRAVITY 0.1
+#define FISH_VEL_VARIANCE 5
+#define FISH_XVEL_OFFSET -2
+#define FISH_YVEL_OFFSET 3
+
 @interface Fish: CCSprite {
     float vx,vy;
     int wait;
 }
--(void)update:(float)bwidth;
+-(void)update:(float)bwidth hei:(float)hei;
 @end
 
 @implementation Fish
 -(id)init{
-    wait = rand()%200;
+    wait = rand()%((int)SPAWN_MARGIN*5);
     return [super init];
 }
--(void)update:(float)bwidth {    
+-(void)update:(float)bwidth hei:(float)hei {    
     if(wait > 0) {
         wait--;
         if (wait == 0) {
-            float npos = rand()%((int)bwidth-50);
-            npos+=25;
-            [self setPosition:ccp(npos,0)];
-            vx = (rand()%5)-2;
-            vy = rand()%5+3;
+            float npos = rand()%((int)(bwidth-SPAWN_MARGIN*2));
+            npos+=SPAWN_MARGIN;
+            [self setVisible:YES];
+            [self setPosition:ccp(npos,hei)];
+            vx = (rand()%FISH_VEL_VARIANCE)+FISH_XVEL_OFFSET;
+            vy = rand()%FISH_VEL_VARIANCE+FISH_YVEL_OFFSET;
         }
         return;
     }
     
     [self setPosition:ccp(position_.x+vx,position_.y+vy)];
-    vy-=0.1;
+    vy-=FISH_GRAVITY;
     
-    if(position_.y < 0) {
-        [self setPosition:ccp(0,-100)];
-        wait = 100;
+    if(position_.y < hei) {
+        [self setPosition:ccp(0,0)];
+        [self setVisible:NO];
+        wait = SPAWN_WAIT_BASE;
     }
     
     Vec3D *dv = [Vec3D init_x:vx y:vy z:0];
@@ -47,15 +57,16 @@
 
 @implementation FishGenerator
 
-+(FishGenerator*)init_ofwidth:(float)wid {
++(FishGenerator*)init_ofwidth:(float)wid basehei:(float)hei {
     FishGenerator *n = [FishGenerator node];
     n.anchorPoint = ccp(0,0);
-    [n init_given_width:wid];
+    [n init_given_width:wid basehei:hei];
     return n;
 }
 
--(void)init_given_width:(float)wid {
+-(void)init_given_width:(float)wid basehei:(float)hei {
     bwidth = wid;
+    bheight = hei;
     
     CCTexture2D *tex = [Resource get_aa_tex:TEX_FISH_SS];
     NSMutableArray *names = [NSMutableArray arrayWithObjects:@"green_%i",@"purple_%i",@"red_%i",@"yellow_%i", nil];
@@ -85,7 +96,7 @@
 
 -(void)update {
     for (Fish* i in fishes) {
-        [i update:bwidth];
+        [i update:bwidth hei:bheight];
     }
 }
 

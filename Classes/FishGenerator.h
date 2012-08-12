@@ -4,11 +4,11 @@
 #import "Common.h"
 
 @interface FishGenerator : CCSprite {
-    float bwidth;
+    float bwidth,bheight;
     NSMutableArray *fishes;
 }
 
-+(FishGenerator*)init_ofwidth:(float)wid;
++(FishGenerator*)init_ofwidth:(float)wid basehei:(float)hei;
 -(void)update;
 
 @end

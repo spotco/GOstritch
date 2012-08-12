@@ -71,7 +71,8 @@
     
     if (next != NULL) {
         [Common draw_renderobj:corner_fill n_vtx:3];
-        glColor4f(0.29, 0.69, 0.03, 1.0);
+        //glColor4f(TEX_ISLAND_WORLD1_CORNERFILLCOLOR, 1.0);
+        glColor4f(TEX_ISLAND_CAVE_CORNERFILLCOLOR, 1.0);
         ccDrawSolidPoly(toppts, 3, YES);
         [Common draw_renderobj:corner_line_fill n_vtx:4];
     }

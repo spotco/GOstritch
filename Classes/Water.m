@@ -2,6 +2,7 @@
 
 #define ANIM_SPEED 0.0025
 #define OFFSET_V 10
+#define FILL_COLOR 18, 64, 100
 
 @implementation Water
 
@@ -14,9 +15,10 @@
 }
 
 -(void)init_body_ofwidth:(float)width height:(float)height {
-    body = [self init_drawbody_ofwidth:width];
+    
     bwidth = width;
     bheight = height;
+    body = [self init_drawbody_ofwidth:width];
     
     body_tex_offset = (CGPoint*) malloc(sizeof(CGPoint)*4);
     offset_ct = 0;
@@ -26,13 +28,12 @@
     
     CCSprite *fillsprite = [CCSprite node];
     fillsprite.anchorPoint = ccp(0,0);
-    fillsprite.position = ccp(0,-((float)body.texture.pixelsHigh)+OFFSET_V);
-    fillsprite.color = ccc3(18, 64, 100);
-    [fillsprite setTextureRect:CGRectMake(0, 0, bwidth, -bheight)];
-    [self addChild:fillsprite];
+    fillsprite.color = ccc3(FILL_COLOR);
+    [fillsprite setTextureRect:CGRectMake(0, 0, bwidth, bheight)];
+    [self addChild:fillsprite z:-1];
     
-    fishes = [FishGenerator init_ofwidth:bwidth];
-    [self addChild:fishes z:-1];
+    fishes = [FishGenerator init_ofwidth:bwidth basehei:bheight];
+    [self addChild:fishes z:-2];
 }
 
 -(GameObjectReturnCode)update:(Player *)player g:(GameEngineLayer *)g {
@@ -57,9 +58,9 @@
 
 -(HitRect)get_hit_rect {
     return [Common hitrect_cons_x1:self.position.x 
-                                y1:self.position.y-body.texture.pixelsHigh
+                                y1:self.position.y
                                wid:bwidth 
-                               hei:body.texture.pixelsHigh-15];
+                               hei:bheight];
 }
 
 -(void)update_body_tex_offset {
@@ -78,10 +79,10 @@
     int twid = o.texture.pixelsWide;
     int thei = o.texture.pixelsHigh;
     
-    o.tri_pts[0] = ccp(0,-thei + OFFSET_V);
-    o.tri_pts[1] = ccp(width,-thei + OFFSET_V);
-    o.tri_pts[2] = ccp(0,0 + OFFSET_V);
-    o.tri_pts[3] = ccp(width,0 + OFFSET_V);
+    o.tri_pts[0] = ccp(0,bheight - thei + OFFSET_V);
+    o.tri_pts[1] = ccp(width,bheight -thei + OFFSET_V);
+    o.tri_pts[2] = ccp(0,bheight + OFFSET_V);
+    o.tri_pts[3] = ccp(width,bheight + OFFSET_V);
     
     o.tex_pts[0] = ccp(0,1);
     o.tex_pts[1] = ccp(o.tri_pts[1].x/twid,1);

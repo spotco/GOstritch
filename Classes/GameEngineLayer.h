@@ -23,12 +23,12 @@ typedef enum {
     GameEngineLayerMode_OBJECTANIM
 } GameEngineLayerMode;
 
-typedef struct bone_status {
+typedef struct level_bone_status {
     int togets;
     int savedgets;
     int hasgets;
     int alreadygets;
-} bone_status;
+} level_bone_status;
 
 @interface GameEngineLayer : CCLayer {
 	NSMutableArray *islands;
@@ -64,6 +64,6 @@ typedef struct bone_status {
 
 -(void)set_checkpoint_to:(CGPoint)pt;
 -(void)set_bid_tohasget:(int)tbid;
--(bone_status)get_bonestatus;
+-(level_bone_status)get_bonestatus;
 
 @end

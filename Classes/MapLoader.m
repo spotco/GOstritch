@@ -64,19 +64,19 @@
         NSDictionary *j_object = (NSDictionary *)[coins_array objectAtIndex:i];
         NSString *type = (NSString *)[j_object objectForKey:@"type"];
         
-        if([type isEqualToString:@"coin"]){
+        if([type isEqualToString:@"dogbone"]){
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             int bid = ((NSString*)[j_object  objectForKey:@"bid"]).intValue;
-            [map.game_objects addObject:[Coin init_x:x y:y bid:bid]];
+            [map.game_objects addObject:[DogBone init_x:x y:y bid:bid]];
             
             
-        } else if ([type isEqualToString:@"cape"]) {
+        } else if ([type isEqualToString:@"dogcape"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             [map.game_objects addObject:[DogCape init_x:x y:y]];
             
-        } else if ([type isEqualToString:@"rocket"]) {
+        } else if ([type isEqualToString:@"dogrocket"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             [map.game_objects addObject:[DogRocket init_x:x y:y]];
