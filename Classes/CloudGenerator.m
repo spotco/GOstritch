@@ -17,6 +17,7 @@
                      baseHeight:(float)hei {
     
     CloudGenerator* c = [CloudGenerator node];
+    
     c.cloud_tex = tex;
     c.scrollspd_x = spdx;
     c.scrollspd_y = spdy;
@@ -31,6 +32,7 @@
 }
 
 -(void)init_gen {
+   
     clouds = [[NSMutableArray alloc] init];
     float scrwid = [[UIScreen mainScreen] bounds].size.height;
     for (int i = 0; i < scrwid; i++) {
@@ -55,10 +57,10 @@
     [self addChild:c];
 }
 
-float ct = 0;
-float next;
-float prevx = 0;
-float prevy = 0;
+static float ct = 0;
+static float next;
+static float prevx = 0;
+static float prevy = 0;
 
 -(void)update_posx:(float)posx posy:(float)posy {
     float dx = posx - prevx;

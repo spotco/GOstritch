@@ -61,6 +61,7 @@ typedef struct level_bone_status {
 -(void)player_reset;
 -(void)add_particle:(Particle*)p;
 -(CGPoint)get_pos;
+-(HitRect)get_viewbox;
 
 -(void)set_checkpoint_to:(CGPoint)pt;
 -(void)set_bid_tohasget:(int)tbid;

@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Common.h"
+@class GameEngineLayer;
 
 @interface Island : CCSprite {
 	float startX, startY, endX, endY, ndir;
@@ -20,6 +21,7 @@
 
 +(float) NO_VALUE;
 +(int)link_islands:(NSMutableArray*)islands;
+-(void)update:(GameEngineLayer*)g;
 
 -(void)link_finish;
 -(Vec3D*)get_normal_vec;

@@ -17,7 +17,7 @@
 
 #define HITBOX_RESCALE 0.7
 
-#define TRAIL_MIN 10
+#define TRAIL_MIN 8
 #define TRAIL_MAX 15
 
 
@@ -210,6 +210,8 @@ static NSDictionary *splash_ss_plist_dict = NULL;
 -(void) update:(GameEngineLayer*)g {
     float vel = sqrtf(powf(vx,2)+powf(vy,2));
     float tar = current_params.cur_min_speed;
+    
+  
     
     if (current_island == NULL) {
         Vec3D *dv = [Vec3D init_x:vx y:vy z:0];

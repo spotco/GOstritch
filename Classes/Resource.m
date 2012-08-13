@@ -21,10 +21,10 @@ static NSMutableDictionary* textures = nil;
                      @"pauseicon.png", TEX_UI_PAUSEICON,
                      
                      @"BG1_island_fill.png", TEX_GROUND_TEX_1,
-                     //@"BG1_top_fill.png", TEX_GROUND_TOP_1,
-                     //@"BG1_island_top_edge.png", TEX_TOP_EDGE,
-                     @"BG_cave_top_fill.png", TEX_GROUND_TOP_1,
-                     @"BG_cave_top_edge.png", TEX_TOP_EDGE,
+                     @"BG1_top_fill.png", TEX_GROUND_TOP_1,
+                     @"BG1_island_top_edge.png", TEX_TOP_EDGE,
+                     //@"BG_cave_top_fill.png", TEX_GROUND_TOP_1,
+                     //@"BG_cave_top_edge.png", TEX_TOP_EDGE,
                      
                      @"BG1_sky.png", TEX_BG_SKY,
                      @"BG1_layer_1.png", TEX_BG_LAYER_1,
@@ -41,6 +41,10 @@ static NSMutableDictionary* textures = nil;
                      @"BG1_detail_1.png", TEX_GROUND_DETAIL_1,
                      @"BG1_detail_2.png", TEX_GROUND_DETAIL_2,
                      @"BG1_detail_3.png", TEX_GROUND_DETAIL_3,
+                     @"BG1_detail_4.png", TEX_GROUND_DETAIL_4,
+                     @"BG1_detail_5.png", TEX_GROUND_DETAIL_5,
+                     @"BG1_detail_6.png", TEX_GROUND_DETAIL_6,
+                     @"BG1_detail_7.png", TEX_GROUND_DETAIL_7,                     
                      
                      @"dog1ss.png", TEX_DOG_RUN_1,
                      @"splash_ss.png", TEX_DOG_SPLASH,

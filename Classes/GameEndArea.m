@@ -27,6 +27,7 @@
 }
 
 -(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g {
+    [super update:player g:g];
     if (active && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         NSLog(@"Reached end");
         active = NO;

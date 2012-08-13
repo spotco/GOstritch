@@ -21,6 +21,7 @@
 }
 
 -(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g{
+    [super update:player g:g];
     if (recharge_ct >= 0) {
         recharge_ct--;
         if (recharge_ct == 0) {

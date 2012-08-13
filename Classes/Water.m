@@ -37,6 +37,7 @@
 }
 
 -(GameObjectReturnCode)update:(Player *)player g:(GameEngineLayer *)g {
+    [super update:player g:g];
     [fishes update];
     [self update_body_tex_offset];
     if(!active) {
@@ -95,7 +96,9 @@
 
 -(void) draw {
     [super draw];
-    [self draw_renderobj:body n_vtx:4];
+    if (do_render) {
+        [self draw_renderobj:body n_vtx:4];
+    }
 }
 
 -(void)draw_renderobj:(gl_render_obj)obj n_vtx:(int)n_vtx {

@@ -30,6 +30,28 @@
 	return new_island;
 }
 
+-(void)update:(GameEngineLayer *)g {
+    if ([Common hitrect_touch:[g get_viewbox] b:[self get_hitrect]]) {
+        do_draw = YES;
+    } else {
+        do_draw = NO;
+    }
+}
+
+-(HitRect)get_hitrect {
+    int x_max = main_fill.tri_pts[0].x+position_.x;
+    int x_min = main_fill.tri_pts[0].x+position_.x;
+    int y_max = main_fill.tri_pts[0].y+position_.y;
+    int y_min = main_fill.tri_pts[0].y+position_.y;
+    for (int i = 0; i < 4; i++) {
+        x_max = MAX(main_fill.tri_pts[i].x+position_.x,x_max);
+        x_min = MIN(main_fill.tri_pts[i].x+position_.x,x_min);
+        y_max = MAX(main_fill.tri_pts[i].y+position_.y,y_max);
+        y_min = MIN(main_fill.tri_pts[i].y+position_.y,y_min);
+    }
+    return [Common hitrect_cons_x1:x_min y1:y_min x2:x_max y2:y_max];
+}
+
 -(void)set_pt1:(CGPoint)start pt2:(CGPoint)end {
 	startX = start.x;
 	startY = start.y;
@@ -40,9 +62,13 @@
 -(void)calc_init {
     t_min = 0;
     t_max = sqrtf(powf(endX - startX, 2) + powf(endY - startY, 2));
+    do_draw = YES;
 }
 
 -(void) draw {
+    if (!do_draw) {
+        return;
+    }
 	[super draw];
     glColor4ub(109,110,112,255);
     glLineWidth(5.0f);
@@ -71,8 +97,8 @@
     
     if (next != NULL) {
         [Common draw_renderobj:corner_fill n_vtx:3];
-        //glColor4f(TEX_ISLAND_WORLD1_CORNERFILLCOLOR, 1.0);
-        glColor4f(TEX_ISLAND_CAVE_CORNERFILLCOLOR, 1.0);
+        glColor4f(TEX_ISLAND_WORLD1_CORNERFILLCOLOR, 1.0);
+        //glColor4f(TEX_ISLAND_CAVE_CORNERFILLCOLOR, 1.0);
         ccDrawSolidPoly(toppts, 3, YES);
         [Common draw_renderobj:corner_line_fill n_vtx:4];
     }

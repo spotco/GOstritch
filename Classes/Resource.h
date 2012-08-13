@@ -39,6 +39,11 @@
 #define TEX_GROUND_DETAIL_1 @"GroundDetail1"
 #define TEX_GROUND_DETAIL_2 @"GroundDetail2"
 #define TEX_GROUND_DETAIL_3 @"GroundDetail3"
+#define TEX_GROUND_DETAIL_4 @"GroundDetail4"
+#define TEX_GROUND_DETAIL_5 @"GroundDetail5"
+#define TEX_GROUND_DETAIL_6 @"GroundDetail6"
+#define TEX_GROUND_DETAIL_7 @"GroundDetail7"
+
 
 #define TEX_GREY_PARTICLE @"GreyParticle"
 

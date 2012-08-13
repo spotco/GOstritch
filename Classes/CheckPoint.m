@@ -46,6 +46,7 @@ float texwid,texhei;
 }
 
 -(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g{
+    [super update:player g:g];
     if (self.active && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         self.active = NO;
         inactive_img.visible = NO;

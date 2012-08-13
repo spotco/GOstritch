@@ -12,6 +12,14 @@
         texture = [Resource get_tex:TEX_GROUND_DETAIL_2];
     } else if (type == 3) {
         texture = [Resource get_tex:TEX_GROUND_DETAIL_3];
+    } else if (type == 4) {
+        texture = [Resource get_tex:TEX_GROUND_DETAIL_4];
+    } else if (type == 5) {
+        texture = [Resource get_tex:TEX_GROUND_DETAIL_5];
+    } else if (type == 6) {
+        texture = [Resource get_tex:TEX_GROUND_DETAIL_6];
+    } else if (type == 7) {
+        texture = [Resource get_tex:TEX_GROUND_DETAIL_7];
     } else {
         NSLog(@"GroundDetail init type error");
     }
@@ -20,14 +28,5 @@
     [d addChild:d.img];
     return d;
 }
-
-/*-(void)draw {
-    [super draw];
-    CGPoint points[1];
-    points[0] = ccp(0,0);
-    glPointSize(3);
-    glColor4ub(255,0,0,255);
-    ccDrawPoints( points, 1);
-}*/
 
 @end

@@ -12,12 +12,21 @@
 /**
  TODO --
  -LevelEditor fixes:
+    -bone BID auto assign
     -birdflock broken
     -faster scrolling
-    -shift all to right
+    -shift all to right/left tool
+    -cave area
  -Game fixes:
-    zoom up when going downhill
-    add ground details to level
+    world 1 particles
+    trail particle in direction of velocity
+    blocker in test level
+    manual zoom in level
+    fish speed depends on water width
+    sun in bg 
+    start area fix with animation and new graphisme
+    bird respawn re-fit hitbox
+    bone collect animation
  **/
 
 
@@ -52,6 +61,7 @@
     game_render_state = [[GameRenderState alloc] init];
     
     CGPoint player_start_pt = [self loadMap:map_filename];
+    [self update_islands];
     [self init_bones];
     particles = [[NSMutableArray array] retain];
     map_start_pt = player_start_pt;
@@ -85,14 +95,9 @@
         }
     }
     NSLog(@"Bones loaded (%i bones total)",[bones count]);
-    
-//    for(NSNumber* bid in [bones allKeys]) {
-//        NSLog(@"testloop:%i",bid.intValue);
-//    }
 }
 
 -(void)set_bid_tohasget:(int)tbid {
-    
     for(NSNumber* bid in [bones allKeys]) {
         if (bid.intValue == tbid) {
             [bones setObject:[NSNumber numberWithInt:Bone_Status_HASGET] forKey:bid];
@@ -105,7 +110,6 @@
 
 -(void)set_checkpoint_to:(CGPoint)pt {
     player.start_pt = pt;
-    
     for(NSNumber* bid in [bones allKeys]) {
         int status = ((NSNumber*)[bones objectForKey:bid]).intValue;
         if (status == Bone_Status_HASGET) {
@@ -193,6 +197,7 @@
         [self check_game_state];	
         [self update_game_obj];
         [self update_particles];
+        [self update_islands];
         [GameRenderImplementation update_render_on:self player:player islands:islands objects:game_objects state:game_render_state];
         [Common run_callback:bg_update];
         [Common run_callback:ui_update];
@@ -210,6 +215,12 @@
     
 }
 
+-(void)update_islands {
+    for (Island* i in islands) {
+        [i update:self];
+    }
+}
+
 -(void)add_particle:(Particle*)p {
     [particles addObject:p];
     [self addChild:p z:[p get_render_ord]];
@@ -224,7 +235,6 @@
             [toremove addObject:i];
         }
     }
-    
     [particles removeObjectsInArray:toremove];
 }
 

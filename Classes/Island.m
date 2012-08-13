@@ -42,6 +42,10 @@ static float NO_VAL = -99999.0;
 -(void)link_finish {
 }
 
+-(void)update:(GameEngineLayer *)g {
+    
+}
+
 -(Vec3D*)get_normal_vec {
     if (normal_vec == NULL) {
         Vec3D *line_vec = [Vec3D init_x:endX-startX y:endY-startY z:0];

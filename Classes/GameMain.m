@@ -2,10 +2,10 @@
 
 @implementation GameMain
 
-#define USE_BG NO
+#define USE_BG YES
 
 +(void)main {
-    [[CCDirector sharedDirector] setDisplayFPS:NO];
+    [[CCDirector sharedDirector] setDisplayFPS:YES];
     //[[CCDirector sharedDirector] runWithScene:[CoverPage scene]];
     [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"item_test"]];
 }

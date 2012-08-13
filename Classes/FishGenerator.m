@@ -20,7 +20,7 @@
     wait = rand()%((int)SPAWN_MARGIN*5);
     return [super init];
 }
--(void)update:(float)bwidth hei:(float)hei {    
+-(void)update:(float)bwidth hei:(float)hei {  
     if(wait > 0) {
         wait--;
         if (wait == 0) {

@@ -30,7 +30,8 @@
     active = t_active;
 }
 
--(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g {    
+-(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g {
+    [super update:player g:g];
     if(!active) {
         return GameObjectReturnCode_NONE;
     }

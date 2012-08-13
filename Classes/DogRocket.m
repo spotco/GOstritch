@@ -16,6 +16,7 @@
 
 //TODO -- launch in direction of slope
 -(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g{
+    [super update:player g:g];
     if (!active) {
         return GameObjectReturnCode_NONE;
     }

@@ -4,7 +4,7 @@
 @class GameEngineLayer;
 
 @interface GameObject : CCSprite {
-    BOOL active;
+    BOOL active,do_render;
     CCSprite *img;
 }
 
@@ -13,7 +13,7 @@ typedef enum {
     GameObjectReturnCode_ENDGAME
 } GameObjectReturnCode;
 
-@property(readwrite,assign) BOOL active;
+@property(readwrite,assign) BOOL active,do_render;
 @property(readwrite,assign) CCSprite *img;
 
 -(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g;
