@@ -47,13 +47,12 @@ static float NO_VAL = -99999.0;
 }
 
 -(Vec3D*)get_normal_vec {
-    if (normal_vec == NULL) {
-        Vec3D *line_vec = [Vec3D init_x:endX-startX y:endY-startY z:0];
-        normal_vec = [[Vec3D Z_VEC] crossWith:line_vec];
-        [normal_vec normalize];
-        [line_vec dealloc];
-        [normal_vec scale:ndir];
-    }
+    Vec3D *normal_vec;
+    Vec3D *line_vec = [Vec3D init_x:endX-startX y:endY-startY z:0];
+    normal_vec = [[Vec3D Z_VEC] crossWith:line_vec];
+    [normal_vec normalize];
+    [line_vec dealloc];
+    [normal_vec scale:ndir];
     return normal_vec;
 }
 

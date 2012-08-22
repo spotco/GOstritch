@@ -3,6 +3,8 @@
 #import "GameEngineLayer.h"
 #import "GameStartAnim.h"
 #import "CoverPage.h"
+#import "UIIngameAnimation.h"
+#import "BoneCollectUIAnimation.h"
 
 @interface UILayer : CCLayer {
     GameEngineLayer* game_engine_layer;
@@ -17,6 +19,7 @@
     GameEngineLayerMode prevmode;
     
     UIAnim *curanim;
+    NSMutableArray* ingame_ui_anims;
 }
 
 +(UILayer*)init_with_gamelayer:(GameEngineLayer*)g;

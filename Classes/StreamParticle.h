@@ -9,6 +9,7 @@
 @property(readwrite,assign) int ct;
 
 +(StreamParticle*)init_x:(float)x y:(float)y;
++(StreamParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy;
 -(void)initialize;
 
 @end

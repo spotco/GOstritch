@@ -49,6 +49,7 @@ typedef struct level_bone_status {
     callback bg_update;
     callback ui_update;
     callback load_game_end_menu;
+    callback bone_collect_ui_animation;
 }
 
 
@@ -56,6 +57,7 @@ typedef struct level_bone_status {
 @property(readwrite,assign) NSMutableArray *islands, *game_objects;
 @property(readwrite,assign) Player* player;
 @property(readwrite,assign) callback load_game_end_menu;
+@property(readwrite,assign) GameRenderState* game_render_state;
 
 +(CCScene *) scene_with:(NSString *)map_file_name;
 -(void)player_reset;

@@ -108,7 +108,7 @@
 
 int zct = 0;
 
-+(void)update_camera_on:(CCLayer*)layer state:(GameRenderState*)state {
++(void)update_camera_on:(CCLayer*)layer state:(GameRenderState*)state {    
     [layer.camera setCenterX:state.cx centerY:state.cy centerZ:state.cz];
     [layer.camera setEyeX:state.ex  eyeY:state.ey eyeZ:state.ez];
 }

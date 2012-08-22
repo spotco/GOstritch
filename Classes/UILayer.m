@@ -15,8 +15,13 @@
     [self init_ingame_ui];
     [self init_pause_menu];
     [self init_game_end_menu];
+    [self init_ui_ingame_animations];
     self.isTouchEnabled = YES;
     [self add_gameenginelayer_callbacks];
+}
+
+-(void)init_ui_ingame_animations {
+    ingame_ui_anims = [[NSMutableArray array] retain];
 }
 
 -(void)add_gameenginelayer_callbacks {
@@ -158,10 +163,29 @@
     game_engine_layer = ref;
 }
 
+-(void)start_bone_collect_anim {
+    BoneCollectUIAnimation* b = [BoneCollectUIAnimation init_start:[UILayer player_approx_position:game_engine_layer] end:ccp(0,[[UIScreen mainScreen] bounds].size.width)];
+    [self addChild:b];
+    [ingame_ui_anims addObject:b];
+}
+
 -(void)update {
     level_bone_status b = [game_engine_layer get_bonestatus];
     [count_disp setString:[NSString stringWithFormat:@"%i",b.hasgets+b.savedgets]];
+    
+    NSMutableArray *toremove = [NSMutableArray array];
+    for (UIIngameAnimation *i in ingame_ui_anims) {
+        [i update];
+        if (i.ct <= 0) {
+            [self removeChild:i cleanup:NO];
+            [toremove addObject:i];
+        }
+    }
+    [ingame_ui_anims removeObjectsInArray:toremove];
+    [toremove removeAllObjects];
 }
+
+
 
 -(void)exit_to_menu {
     [Resource dealloc_textures];
@@ -192,11 +216,41 @@
  }
 
 -(void)dealloc {
+    [ingame_ui_anims removeAllObjects];
+    [ingame_ui_anims release];
     [pauselayer release];
     [game_end_menu_layer removeAllChildrenWithCleanup:YES];
     [game_end_menu_layer release];
     [self removeAllChildrenWithCleanup:YES];
     [super dealloc];
+}
+
++(CGPoint)player_approx_position:(GameEngineLayer*)game_engine_layer {
+    CGPoint player_scr_pos = [game_engine_layer.player convertToWorldSpace:CGPointZero];
+    player_scr_pos.x -= game_engine_layer.game_render_state.cx;
+    player_scr_pos.y -= game_engine_layer.game_render_state.cy;
+    
+    player_scr_pos.x += 15;
+    player_scr_pos.y += 0;
+    
+    if (game_engine_layer.game_render_state.ez > 50) {
+        float delta = game_engine_layer.game_render_state.ez - 50;
+        float deltamax = 150;
+        player_scr_pos.x += (delta/deltamax)*20;
+        player_scr_pos.y += (delta/deltamax)*20;
+    }
+    
+    if (game_engine_layer.player.current_island != NULL) {
+        Vec3D *normal = [game_engine_layer.player.current_island get_normal_vec];
+        [normal scale:10];
+        player_scr_pos.x += normal.x;
+        player_scr_pos.y += normal.y;
+    } else {
+        player_scr_pos.x += 10;
+        player_scr_pos.y += 10;
+    }
+    
+    return player_scr_pos;
 }
 
 @end

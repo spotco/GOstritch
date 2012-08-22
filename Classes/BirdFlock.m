@@ -55,6 +55,7 @@
     flying = NO;
     [self stopAllActions];
     [self runAction:_STANDANIM];
+    [self setVisible:NO];
 }
 -(void)dealloc {
     [self stopAllActions];
@@ -135,6 +136,7 @@
     [super reset];
     for (Bird *i in birds) {
         [i reset];
+        [i setVisible:YES];
     }
 }
 

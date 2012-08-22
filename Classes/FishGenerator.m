@@ -12,17 +12,23 @@
     float vx,vy;
     int wait;
 }
--(void)update:(float)bwidth hei:(float)hei;
+@property(readwrite,assign) int wait;
+-(void)update:(float)bwidth hei:(float)hei numactive:(int)numactive;
 @end
 
 @implementation Fish
+@synthesize wait;
 -(id)init{
     wait = rand()%((int)SPAWN_MARGIN*5);
     return [super init];
 }
--(void)update:(float)bwidth hei:(float)hei {  
+-(void)update:(float)bwidth hei:(float)hei numactive:(int)numactive {  
     if(wait > 0) {
         wait--;
+        if (wait == 0 && numactive >= 2) {
+            wait = 1;
+            return;
+        }
         if (wait == 0) {
             float npos = rand()%((int)(bwidth-SPAWN_MARGIN*2));
             npos+=SPAWN_MARGIN;
@@ -95,8 +101,14 @@
 }
 
 -(void)update {
+    int activect = 0;
+    for(Fish* i in fishes) {
+        if (i.wait == 0) {
+            activect++;
+        }
+    }
     for (Fish* i in fishes) {
-        [i update:bwidth hei:bheight];
+        [i update:bwidth hei:bheight numactive:activect];
     }
 }
 

@@ -8,6 +8,7 @@
 @synthesize game_objects,islands;
 @synthesize player;
 @synthesize load_game_end_menu;
+@synthesize game_render_state;
 
 /**
  TODO --
@@ -17,16 +18,12 @@
     -faster scrolling
     -shift all to right/left tool
     -cave area
+    -blocker in test level
  -Game fixes:
     world 1 particles
-    trail particle in direction of velocity
-    blocker in test level
     manual zoom in level
-    fish speed depends on water width
-    sun in bg 
     start area fix with animation and new graphisme
-    bird respawn re-fit hitbox
-    bone collect animation
+
  **/
 
 
@@ -101,6 +98,7 @@
     for(NSNumber* bid in [bones allKeys]) {
         if (bid.intValue == tbid) {
             [bones setObject:[NSNumber numberWithInt:Bone_Status_HASGET] forKey:bid];
+            [Common run_callback:bone_collect_ui_animation];
             return;
         }
     }
@@ -127,6 +125,9 @@
 -(void)set_ui_update_callback:(NSObject*)tar {
     ui_update.target = tar;
     ui_update.selector = @selector(update);
+    
+    bone_collect_ui_animation.target = tar;
+    bone_collect_ui_animation.selector = @selector(start_bone_collect_anim);
 }
 
 -(HitRect) get_world_bounds {

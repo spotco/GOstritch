@@ -45,9 +45,7 @@
     
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
-        if ([[player get_current_params] get_anim] == player_anim_mode_RUN) {
-            [g set_bid_tohasget:bid];
-        }
+        [g set_bid_tohasget:bid];
         [self set_active:NO];
     }
     

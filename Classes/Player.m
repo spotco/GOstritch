@@ -59,7 +59,6 @@
 }
 
 -(void)init_anim {
-    
     _RUN_ANIM_SLOW = [self init_run_anim_speed:0.1];
     _RUN_ANIM_MED = [self init_run_anim_speed:0.075];
     _RUN_ANIM_FAST = [self init_run_anim_speed:0.05];
@@ -226,7 +225,13 @@ static NSDictionary *splash_ss_plist_dict = NULL;
         if (vel > TRAIL_MIN) {
             float ch = (vel-TRAIL_MIN)/(TRAIL_MAX - TRAIL_MIN)*100;
             if (arc4random_uniform(100) < ch) {
-                [g add_particle:[StreamParticle init_x:position_.x y:position_.y]];
+                Vec3D *dv = [current_island get_tangent_vec];
+                [dv normalize];
+                [dv scale:-2.5];
+                dv.x += float_random(-3, 3);
+                dv.y += float_random(-3, 3);
+                [g add_particle:[StreamParticle init_x:position_.x y:position_.y vx:dv.x vy:dv.y]];
+                [dv dealloc];
             }
         }
     }

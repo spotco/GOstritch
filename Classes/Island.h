@@ -11,7 +11,6 @@
     Island* next;
     
     float fill_hei;
-    Vec3D* normal_vec;
 }
 
 
