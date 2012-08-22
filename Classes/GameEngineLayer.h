@@ -14,6 +14,8 @@
 #import "GameControlState.h"
 #import "GameRenderState.h"
 
+#import "World1ParticleGenerator.h"
+
 typedef enum {
     GameEngineLayerMode_UIANIM,
     GameEngineLayerMode_GAMEPLAY,

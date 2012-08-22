@@ -20,10 +20,11 @@
     -cave area
     -blocker in test level
  -Game fixes:
-    world 1 particles
     manual zoom in level
-    start area fix with animation and new graphisme
-
+    start/end area new graphics
+    hold to float
+    swipe to dash
+    sun in background
  **/
 
 
@@ -164,6 +165,10 @@
     for (GameObject* o in game_objects) {
         [self addChild:o z:[o get_render_ord]];
     }
+    
+    World1ParticleGenerator *w1 = [World1ParticleGenerator init];
+    [game_objects addObject:w1];
+    [self addChild:w1];
     
     return map.player_start_pt;
 }
