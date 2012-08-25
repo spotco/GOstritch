@@ -12,8 +12,6 @@
 
 /**
  TODO --
- -LevelEditor fixes:
-    -blocker in test level
  -Game fixes:
     manual zoom in level
     start/end area new graphics
@@ -49,6 +47,10 @@
 
 -(void)initialize:(NSString*)map_filename {
     game_render_state = [[GameRenderState alloc] init];
+    
+    if (particles_tba == NULL) {
+        particles_tba = [[NSMutableArray alloc] init];
+    }
     
     CGPoint player_start_pt = [self loadMap:map_filename];
     [self update_islands];
@@ -195,12 +197,12 @@
         [self check_game_state];	
         [self update_game_obj];
         [self update_particles];
+        [self push_added_particles];
         [self update_islands];
         [GameRenderImplementation update_render_on:self player:player islands:islands objects:game_objects state:game_render_state];
         [Common run_callback:bg_update];
         [Common run_callback:ui_update];
     } else if (current_mode == GameEngineLayerMode_ENDOUT) {
-                
         if ([Common hitrect_touch:[player get_hit_rect] b:[self get_viewbox]]) {
             [GamePhysicsImplementation player_move:player with_islands:islands];
             [player update:self];  
@@ -219,15 +221,26 @@
     }
 }
 
+static NSMutableArray* particles_tba;
+
 -(void)add_particle:(Particle*)p {
-    [particles addObject:p];
-    [self addChild:p z:[p get_render_ord]];
+    [particles_tba addObject:p];
+    
+
+}
+
+-(void)push_added_particles {
+    for (Particle *p in particles_tba) {
+        [particles addObject:p];
+        [self addChild:p z:[p get_render_ord]];
+    }
+    [particles_tba removeAllObjects];
 }
 
 -(void)update_particles {
     NSMutableArray *toremove = [NSMutableArray array];
     for (Particle *i in particles) {
-        [i update];
+        [i update:self];
         if ([i should_remove]) {
             [self removeChild:i cleanup:NO];
             [toremove addObject:i];
@@ -344,6 +357,16 @@
 
 +(void)print_bonestatus:(level_bone_status)b {
     NSLog(@"TOGET:%i SAVEDGET:%i HASGET:%i ALREADYGET:%i",b.togets,b.savedgets,b.hasgets,b.alreadygets);
+}
+
+-(void)setColor:(ccColor3B)color {
+	for(CCSprite *sprite in islands) {
+        [sprite setColor:color];
+	}
+    for(CCSprite *sprite in game_objects) {
+        [sprite setColor:color];
+    }
+    [player setColor:color];
 }
 
 -(void)draw {

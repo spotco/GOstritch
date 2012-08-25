@@ -42,7 +42,6 @@
             
             PlayerEffectParams *e = [PlayerEffectParams init_copy:player.get_default_params];
             e.time_left = 100;
-            e.cur_accel_to_min = 1;
             player.vx = MIN(15,player.vx+5);
             e.cur_min_speed = 15;
             [player add_effect:e];

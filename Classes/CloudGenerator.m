@@ -31,6 +31,13 @@
     return c;
 }
 
+-(void)setColor:(ccColor3B)color {
+    [super setColor:color];
+	for(CCSprite *sprite in [self children]) {
+        [sprite setColor:color];
+	}
+}
+
 -(void)init_gen {
    
     clouds = [[NSMutableArray alloc] init];

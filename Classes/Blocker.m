@@ -22,9 +22,9 @@
         return GameObjectReturnCode_NONE;
     }
     
-    if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
-        player.vx = 0;
-        player.vy = 0;
+    if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]] && player.current_island == NULL) {
+        [player add_effect:[BlockerEffect init_from:[player get_default_params]]];
+        player.vy = ABS(player.vy)*-1;
         active = NO;
     }
     

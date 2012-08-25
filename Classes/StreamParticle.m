@@ -32,7 +32,7 @@
     ct = (int)STREAMPARTICLE_CT_DEFAULT;
 }
 
--(void)update {
+-(void)update:(GameEngineLayer*)g{
     [self setPosition:ccp(position_.x+vx,position_.y+vy)];
     [self setOpacity:((int)(ct/STREAMPARTICLE_CT_DEFAULT*255))];
     ct--;

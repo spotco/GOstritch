@@ -20,7 +20,7 @@
     ct = 800;
 }
 
--(void)update {
+-(void)update:(GameEngineLayer*)g{
     theta += vtheta;
     [self setPosition:ccp(position_.x+vx,baseline+sinf(theta)*30)];
     [self setOpacity:ct/800.0*255];

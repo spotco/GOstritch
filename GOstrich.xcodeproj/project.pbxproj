@@ -54,8 +54,10 @@
 		62D3C2F515C6152A00E67ABC /* CoverPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 62D3C2F315C6152A00E67ABC /* CoverPage.h */; };
 		62D3C2F615C6152A00E67ABC /* CoverPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D3C2F415C6152A00E67ABC /* CoverPage.m */; };
 		7E1456A915E85771007CC9E4 /* DashEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1456A815E85771007CC9E4 /* DashEffect.m */; };
+		7E1456AD15E86898007CC9E4 /* BlockerEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1456AC15E86897007CC9E4 /* BlockerEffect.m */; };
+		7E1456B015E873F2007CC9E4 /* FireworksParticleA.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1456AF15E873F2007CC9E4 /* FireworksParticleA.m */; };
+		7E1456B315E87EEF007CC9E4 /* grey_particle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E1456B215E87EEF007CC9E4 /* grey_particle.png */; };
 		7E28310415CF4E39002EB07B /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28310315CF4E39002EB07B /* Particle.m */; };
-		7E28310715CF4F47002EB07B /* grey_particle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E28310615CF4F47002EB07B /* grey_particle.png */; };
 		7E28310A15CF4FA7002EB07B /* StreamParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28310915CF4FA7002EB07B /* StreamParticle.m */; };
 		7E28310D15CF5D90002EB07B /* RocketParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28310C15CF5D90002EB07B /* RocketParticle.m */; };
 		7E28311015CF66F7002EB07B /* JumpPadParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28310F15CF66F6002EB07B /* JumpPadParticle.m */; };
@@ -504,9 +506,13 @@
 		62D3C2F415C6152A00E67ABC /* CoverPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverPage.m; sourceTree = "<group>"; };
 		7E1456A715E85771007CC9E4 /* DashEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashEffect.h; sourceTree = "<group>"; };
 		7E1456A815E85771007CC9E4 /* DashEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashEffect.m; sourceTree = "<group>"; };
+		7E1456AB15E86897007CC9E4 /* BlockerEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockerEffect.h; sourceTree = "<group>"; };
+		7E1456AC15E86897007CC9E4 /* BlockerEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockerEffect.m; sourceTree = "<group>"; };
+		7E1456AE15E873F2007CC9E4 /* FireworksParticleA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FireworksParticleA.h; sourceTree = "<group>"; };
+		7E1456AF15E873F2007CC9E4 /* FireworksParticleA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FireworksParticleA.m; sourceTree = "<group>"; };
+		7E1456B215E87EEF007CC9E4 /* grey_particle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grey_particle.png; sourceTree = "<group>"; };
 		7E28310215CF4E39002EB07B /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 		7E28310315CF4E39002EB07B /* Particle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Particle.m; sourceTree = "<group>"; };
-		7E28310615CF4F47002EB07B /* grey_particle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grey_particle.png; sourceTree = "<group>"; };
 		7E28310815CF4FA7002EB07B /* StreamParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamParticle.h; sourceTree = "<group>"; };
 		7E28310915CF4FA7002EB07B /* StreamParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamParticle.m; sourceTree = "<group>"; };
 		7E28310B15CF5D8F002EB07B /* RocketParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocketParticle.h; sourceTree = "<group>"; };
@@ -1172,6 +1178,8 @@
 				7E28310F15CF66F6002EB07B /* JumpPadParticle.m */,
 				7E786E0515E4D334000E1946 /* WaveParticle.h */,
 				7E786E0615E4D334000E1946 /* WaveParticle.m */,
+				7E1456AE15E873F2007CC9E4 /* FireworksParticleA.h */,
+				7E1456AF15E873F2007CC9E4 /* FireworksParticleA.m */,
 			);
 			name = particle;
 			sourceTree = "<group>";
@@ -1179,7 +1187,7 @@
 		7E28310515CF4F47002EB07B /* particle */ = {
 			isa = PBXGroup;
 			children = (
-				7E28310615CF4F47002EB07B /* grey_particle.png */,
+				7E1456B215E87EEF007CC9E4 /* grey_particle.png */,
 			);
 			path = particle;
 			sourceTree = "<group>";
@@ -1612,6 +1620,8 @@
 		7EDC29F615AFB750008B0DC3 /* effectparams */ = {
 			isa = PBXGroup;
 			children = (
+				7E1456AB15E86897007CC9E4 /* BlockerEffect.h */,
+				7E1456AC15E86897007CC9E4 /* BlockerEffect.m */,
 				7EDC29FB15AFBD50008B0DC3 /* PlayerEffectParams.h */,
 				7EDC29FC15AFBD50008B0DC3 /* PlayerEffectParams.m */,
 				7E5EB93315B2C809000877A7 /* DogCapeEffect.h */,
@@ -2282,7 +2292,6 @@
 				7EF1246215CA513800B91A91 /* mud.png in Resources */,
 				7EF1246515CA52AA00B91A91 /* splash_ss.plist in Resources */,
 				7EF1246615CA52AA00B91A91 /* splash_ss.png in Resources */,
-				7E28310715CF4F47002EB07B /* grey_particle.png in Resources */,
 				7E3B977915D7A6A4001859CB /* BG_cave_top_edge.png in Resources */,
 				7E3B977A15D7A6A4001859CB /* BG_cave_top_fill.png in Resources */,
 				7E3B977B15D7A6A4001859CB /* BG_cave_wall.png in Resources */,
@@ -2374,6 +2383,7 @@
 				7E9D32E815D8A94000AF52AD /* 5City_background.png in Resources */,
 				7E9D32E915D8A94000AF52AD /* 5City_sample.png in Resources */,
 				7E9D32EA15D8A94000AF52AD /* World_5.png in Resources */,
+				7E1456B315E87EEF007CC9E4 /* grey_particle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2432,6 +2442,8 @@
 				7E786E0415E4D275000E1946 /* World1ParticleGenerator.m in Sources */,
 				7E786E0715E4D335000E1946 /* WaveParticle.m in Sources */,
 				7E1456A915E85771007CC9E4 /* DashEffect.m in Sources */,
+				7E1456AD15E86898007CC9E4 /* BlockerEffect.m in Sources */,
+				7E1456B015E873F2007CC9E4 /* FireworksParticleA.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

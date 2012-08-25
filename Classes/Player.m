@@ -219,6 +219,7 @@ static NSDictionary *splash_ss_plist_dict = NULL;
     current_params.cur_limit_speed = DEFAULT_MIN_SPEED + LIMITSPD_INCR;
     current_params.cur_min_speed = DEFAULT_MIN_SPEED;
     current_params.cur_airjump_count = 1;
+    current_params.cur_dash_count = 1;
     current_params.time_left = -1;
 }
 
@@ -261,8 +262,7 @@ static NSDictionary *splash_ss_plist_dict = NULL;
     
     if (cur_anim_mode == player_anim_mode_DASH) {
         dashing = YES;
-    }
-    
+    } 
     if (cur_anim_mode == player_anim_mode_RUN) {
         if (current_island == NULL) {
             if (floating) {
@@ -296,8 +296,8 @@ static NSDictionary *splash_ss_plist_dict = NULL;
     if (temp_params != NULL) {
         [temp_params update:self g:g];
         [temp_params decrement_timer];
-        
-        if (temp_params.time_left <= 0) {
+        //NSLog([temp_params info]);
+        if (temp_params.time_left == 0) {
             [temp_params effect_end:self g:g];
             if (temp_params.time_left <= 0) {
                 [temp_params dealloc];
@@ -313,7 +313,9 @@ BOOL refresh_hitrect = YES;
 HitRect cached_rect;
 
 -(HitRect) get_hit_rect {
-    if (refresh_hitrect == NO) {
+    if ([self get_current_params].noclip) {
+        return [Common hitrect_cons_x1:0 y1:0 wid:0 hei:0];
+    } else if (refresh_hitrect == NO) {
         return cached_rect;
     }
     
@@ -349,6 +351,13 @@ HitRect cached_rect;
     refresh_hitrect = NO;
     cached_rect = [Common hitrect_cons_x1:x1 y1:y1 x2:x2 y2:y2];
     return cached_rect;
+}
+
+-(void)setColor:(ccColor3B)color {
+    [super setColor:color];
+	for(CCSprite *sprite in [self children]) {
+        [sprite setColor:color];
+	}
 }
 
 -(void)cleanup_anims {

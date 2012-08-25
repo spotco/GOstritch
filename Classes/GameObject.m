@@ -58,6 +58,22 @@
     [self set_active:YES];
 }
 
+-(void)setColor:(ccColor3B)color {
+    [super setColor:color];
+	for(CCSprite *sprite in [self children]) {
+        [sprite setColor:color];
+	}
+}
+
+- (void)setOpacity:(GLubyte)opacity {
+	[super setOpacity:opacity];
+    
+	for(CCSprite *sprite in [self children]) {
+        
+		sprite.opacity = opacity;
+	}
+}
+
 
 
 @end

@@ -47,15 +47,23 @@ float texwid,texhei;
 
 -(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g{
     [super update:player g:g];
-    if (self.active && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
+    if (self.active && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]] && ![self is_activated]) {
         self.active = NO;
         inactive_img.visible = NO;
         active_img.visible = YES;
         
-        [g set_checkpoint_to:[self get_center]];
+        CGPoint center = [self get_center];
+        [g set_checkpoint_to:center];
+        for(int i = 0; i < 5; i++) {
+            [g add_particle:[FireworksParticleA init_x:center.x y:center.y vx:float_random(-3,3) vy:float_random(9,14) ct:arc4random_uniform(20)+10]];
+        }
     }
     
     return GameObjectReturnCode_NONE;
+}
+
+-(BOOL)is_activated {
+    return active_img.visible;
 }
 
 

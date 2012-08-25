@@ -69,4 +69,6 @@ typedef struct level_bone_status {
 -(void)set_bid_tohasget:(int)tbid;
 -(level_bone_status)get_bonestatus;
 
+-(void)setColor:(ccColor3B)color;
+
 @end

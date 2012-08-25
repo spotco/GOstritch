@@ -1,4 +1,5 @@
 #import "GameObject.h"
+#import "FireworksParticleA.h"
 
 @interface CheckPoint : GameObject {
     CCSprite *inactive_img,*active_img;

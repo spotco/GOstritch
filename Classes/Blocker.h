@@ -1,4 +1,5 @@
 #import "GameObject.h"
+#import "BlockerEffect.h"
 
 @interface Blocker : GameObject {
     float width,height;
