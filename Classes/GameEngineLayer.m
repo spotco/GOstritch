@@ -12,8 +12,20 @@
 
 /**
  TODO --
+ -Leveleditor:
+    load island ground broken
+ 
  -Game fixes:
-    manual zoom in level
+    stop world1particles if in cave
+    increase min_speed if ndir is -1
+ 
+    breakable walls
+    make the one level
+    new spikes
+    
+    hot tomale item pickup
+ 
+    implement manual zoom
     start/end area new graphics
     sun in background
  **/

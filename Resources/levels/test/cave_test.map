@@ -1,0 +1,29 @@
+{
+    "islands": [
+        {"ndir": "left", "hei": 500, "x1": 77, "y2": 101, "can_fall": true, "x2": 585, "y1": 81, "ground": "open", "type": "line"},
+        {"ndir": "left", "hei": 500, "x1": 585, "y2": 149, "can_fall": true, "x2": 1106, "y1": 101, "ground": "cave", "type": "line"},
+        {"ndir": "left", "hei": 500, "x1": 1106, "y2": 334, "can_fall": true, "x2": 1523, "y1": 149, "ground": "cave", "type": "line"},
+        {"ndir": "left", "hei": 500, "x1": 1523, "y2": 597, "can_fall": true, "x2": 1807, "y1": 334, "ground": "cave", "type": "line"},
+        {"ndir": "right", "hei": 500, "x1": 573, "y2": 349, "can_fall": true, "x2": 1071, "y1": 321, "ground": "cave", "type": "line"},
+        {"ndir": "right", "hei": 500, "x1": 1071, "y2": 596, "can_fall": true, "x2": 1377, "y1": 349, "ground": "cave", "type": "line"},
+        {"ndir": "right", "hei": 500, "x1": 1377, "y2": 925, "can_fall": true, "x2": 1629, "y1": 596, "ground": "cave", "type": "line"},
+        {"ndir": "right", "hei": 500, "x1": 1629, "y2": 1027, "can_fall": true, "x2": 2076, "y1": 925, "ground": "cave", "type": "line"},
+        {"ndir": "right", "hei": 500, "x1": 2076, "y2": 902, "can_fall": true, "x2": 2359, "y1": 1027, "ground": "cave", "type": "line"},
+        {"ndir": "right", "hei": 500, "x1": 2359, "y2": 755, "can_fall": true, "x2": 2385, "y1": 902, "ground": "cave", "type": "line"},
+        {"ndir": "left", "hei": 500, "x1": 1807, "y2": 677, "can_fall": true, "x2": 2021, "y1": 597, "ground": "cave", "type": "line"},
+        {"ndir": "left", "hei": 500, "x1": 2021, "y2": 600, "can_fall": true, "x2": 2209, "y1": 677, "ground": "cave", "type": "line"},
+        {"ndir": "left", "hei": 500, "x1": 2209, "y2": 524, "can_fall": true, "x2": 2444, "y1": 600, "ground": "cave", "type": "line"},
+        {"ndir": "left", "hei": 500, "x1": 2444, "y2": 488, "can_fall": true, "x2": 2668, "y1": 524, "ground": "open", "type": "line"},
+        {"ndir": "left", "hei": 500, "x1": 2668, "y2": 515, "can_fall": true, "x2": 2913, "y1": 488, "ground": "open", "type": "line"},
+        {"ndir": "left", "hei": 500, "x1": 2913, "y2": 589, "can_fall": true, "x2": 3085, "y1": 515, "ground": "open", "type": "line"}
+    ],
+    "objects": [
+        {"x": 592, "y": 60, "width": 511, "height": 345, "label": "0", "type": "cavewall"},
+        {"x": 1092, "y": 74, "width": 434, "height": 742, "label": "1", "type": "cavewall"},
+        {"x": 1515, "y": 255, "width": 526, "height": 776, "label": "2", "type": "cavewall"},
+        {"x": 2036, "y": 377, "width": 409, "height": 731, "label": "3", "type": "cavewall"}
+    ],
+    "start_x": 148,
+    "assert_links": 15,
+    "start_y": 148
+}

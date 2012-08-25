@@ -3,19 +3,19 @@
 
 @implementation SpeedUp
 
-+(SpeedUp*)init_x:(float)x y:(float)y islands:(NSMutableArray*)islands {
++(SpeedUp*)init_x:(float)x y:(float)y dirvec:(Vec3D *)vec{
     SpeedUp *s = [SpeedUp node];
     s.position = ccp(x,y);
-    s.anchorPoint = ccp(s.anchorPoint.x,0);
+    //s.anchorPoint = ccp(s.anchorPoint.x,0);
     [s initialize_anim];
-    [s attach_toisland:islands];
+    [s set_dir:vec];
     [s setActive:YES];
     
     return s;
 }
 
 -(HitRect)get_hit_rect {
-     return [Common hitrect_cons_x1:[self position].x-10 y1:[self position].y-10 wid:20 hei:20];
+     return [Common hitrect_cons_x1:[self position].x-30 y1:[self position].y-30 wid:60 hei:60];
 }
 
 -(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g{
@@ -24,32 +24,31 @@
         return GameObjectReturnCode_NONE;
     }
     
-    if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
-        if ([[player get_current_params] get_anim] == player_anim_mode_RUN) {
-            
-            for(int i = 0; i < 8; i++) {
-                float r = ((float)i);
-                r = r/4.0 * M_PI;
-                
-                float dvx = cosf(r)*8+float_random(0, 1);
-                float dvy = sinf(r)*8+float_random(0, 1);
-                [g add_particle:[JumpPadParticle init_x:position_.x 
-                                                      y:position_.y
-                                                     vx:dvx
-                                                     vy:dvy]];
-            }
-            
-            
-            PlayerEffectParams *e = [PlayerEffectParams init_copy:player.get_default_params];
-            e.time_left = 100;
-            player.vx = MIN(15,player.vx+5);
-            e.cur_min_speed = 15;
-            [player add_effect:e];
-        }
+    if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {            
+        [self particle_effect:g];
+                    player.vx += normal_vec.x*6;
+            player.vy += normal_vec.y*6;
+        
+        
+        PlayerEffectParams *e = [PlayerEffectParams init_copy:player.get_default_params];
+         e.time_left = 100;
+         e.cur_min_speed = 15;
+         [player add_effect:e];
+        
         [self set_active:NO];
     }
     
     return GameObjectReturnCode_NONE;
+}
+
+-(void)particle_effect:(GameEngineLayer*)g {
+    for(int i = 0; i < 6; i++) {
+        float spd = float_random(4, 10);
+    [g add_particle:[JumpPadParticle init_x:position_.x 
+                                          y:position_.y
+                                         vx:-normal_vec.x*spd+float_random(-5, 5)
+                                         vy:-normal_vec.y*spd+float_random(-5, 5)]];
+    }
 }
 
 -(void)set_active:(BOOL)t_active {
@@ -105,7 +104,16 @@ static NSDictionary *speedup_ss_plist_dict;
     return r;
 }
 
--(void)attach_toisland:(NSMutableArray*)islands {
+-(void)set_dir:(Vec3D*)vec {
+    normal_vec = [Vec3D init_x:vec.x y:vec.y z:0];
+    
+    Vec3D* tangent = [vec crossWith:[Vec3D Z_VEC]];
+    float tar_rad = -[tangent get_angle_in_rad] - M_PI/2;
+    rotation_ = [Common rad_to_deg:tar_rad];
+    [tangent dealloc];
+}
+
+/*-(void)attach_toisland:(NSMutableArray*)islands {
     Island *i = [self get_connecting_island:islands];
     
     if (i != NULL) {
@@ -125,7 +133,7 @@ static NSDictionary *speedup_ss_plist_dict;
         normal_vec = [Vec3D init_x:0 y:1 z:0];
         [normal_vec retain];
     }
-}
+}*/
 
 -(void)dealloc {
     [normal_vec dealloc];

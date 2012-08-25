@@ -97,20 +97,40 @@
     
     if (next != NULL) {
         [Common draw_renderobj:corner_fill n_vtx:3];
-        glColor4f(TEX_ISLAND_WORLD1_CORNERFILLCOLOR, 1.0);
-        //glColor4f(TEX_ISLAND_CAVE_CORNERFILLCOLOR, 1.0);
+        
+        ccColor4F fc = [self get_corner_fill_color];
+        glColor4f(fc.r, fc.g, fc.b, 1.0);
+        
         ccDrawSolidPoly(toppts, 3, YES);
         [Common draw_renderobj:corner_line_fill n_vtx:4];
     }
     
 }
 
+-(CCTexture2D*)get_tex_fill {
+    return [Resource get_tex:TEX_GROUND_TEX_1];
+}
+-(CCTexture2D*)get_tex_corner {
+    return [Resource get_tex:TEX_TOP_EDGE];
+}
+-(CCTexture2D*)get_tex_border {
+    return [Resource get_tex:TEX_ISLAND_BORDER];
+}
+-(CCTexture2D*)get_tex_top {
+    return [Resource get_tex:TEX_GROUND_TOP_1];
+}
+-(ccColor4F)get_corner_fill_color {
+    return ccc4f(TEX_ISLAND_WORLD1_CORNERFILLCOLOR, 1.0);
+}
+
+
+
 -(void)scale_ndir:(Vec3D*)v {
     [v scale:ndir];
 }
 
 -(void)init_tex {	
-    main_fill = [Common init_render_obj:[Resource get_tex:TEX_GROUND_TEX_1] npts:4];
+    main_fill = [Common init_render_obj:[self get_tex_fill] npts:4];
 	
 	CGPoint* tri_pts = main_fill.tri_pts;
     
@@ -128,7 +148,6 @@
     tri_pts[0] = ccp(endX-startX +v3t1.x * taille ,endY-startY +v3t1.y * taille);
 	
     [Common tex_map_to_tri_loc:main_fill len:4];
-
     [self init_LR_line_with_v3t1:v3t1 v3t2:v3t2];
     
     [v3t2 dealloc];
@@ -175,7 +194,7 @@
 }
 
 -(void)init_top {
-    top_fill = [Common init_render_obj:[Resource get_tex:TEX_GROUND_TOP_1] npts:4];
+    top_fill = [Common init_render_obj:[self get_tex_top] npts:4];
     
 	CGPoint* tri_pts = top_fill.tri_pts;
 	CGPoint* tex_pts = top_fill.tex_pts;
@@ -230,7 +249,7 @@
     bot = [mvr transform_pt:bot];
     [mvr dealloc];
     
-    gl_render_obj o = [Common init_render_obj:[Resource get_tex:TEX_TOP_EDGE] npts:4];
+    gl_render_obj o = [Common init_render_obj:[self get_tex_corner] npts:4];
 	
 	CGPoint* tri_pts = o.tri_pts;
     
@@ -269,7 +288,7 @@
 
 -(gl_render_obj)line_from:(CGPoint)a to:(CGPoint)b scale:(float)scale {
     struct gl_render_obj n;
-    n = [Common init_render_obj:[Resource get_tex:TEX_ISLAND_BORDER] npts:4];
+    n = [Common init_render_obj:[self get_tex_border] npts:4];
     n.isalloc = 1;
     CGPoint* tri_pts = n.tri_pts;
 	CGPoint* tex_pts = n.tex_pts;
@@ -311,10 +330,12 @@
         return;
     }
     
-    if ([next class] == [LineIsland class]) {
-        LineIsland *n = (LineIsland*)next;
-        corner_line_fill = [self line_from:br2 to:ccp(n.bl2.x-startX+n.startX,n.bl2.y-startY+n.startY) scale:1];
-    }
+    //if ([[next class] isKindOfClass:[LineIsland class]]) {
+    LineIsland *n = (LineIsland*)next;
+    corner_line_fill = [self line_from:br2 to:ccp(n.bl2.x-startX+n.startX,n.bl2.y-startY+n.startY) scale:1];
+    /*} else {
+        NSLog(@"error here!");
+    }*/
 }
 
 -(void)init_left_line_fill {    
@@ -369,7 +390,7 @@
 }
 
 -(void)init_corner_tex {
-    corner_fill = [Common init_render_obj:[Resource get_tex:TEX_GROUND_TEX_1] npts:3];
+    corner_fill = [Common init_render_obj:[self get_tex_fill] npts:3];
     
     CGPoint* tri_pts = corner_fill.tri_pts;
     

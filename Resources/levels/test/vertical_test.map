@@ -1,7 +1,0 @@
-{
-    "islands": [{"ndir": "left", "hei": 50, "x1": 94, "y2": 262, "can_fall": true, "x2": 949, "y1": 149, "ground": "open", "type": "line"}],
-    "start_x": 130,
-    "objects": [{"x": 739, "label": "0", "y": 230, "type": "checkpoint"}],
-    "assert_links": 0,
-    "start_y": 231
-}

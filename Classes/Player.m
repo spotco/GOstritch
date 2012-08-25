@@ -225,13 +225,21 @@ static NSDictionary *splash_ss_plist_dict = NULL;
 
 -(void)add_effect:(PlayerEffectParams*)effect {
     if (temp_params != NULL) {
+        if (game_engine_layer != NULL) {
+            [temp_params effect_end:self g:game_engine_layer];
+        } else {
+            NSLog(@"ERROR: add effect before player has reference to gameengine, check add_effect method of player");
+        }
         [temp_params dealloc];
         temp_params = NULL;
     }
     temp_params = effect;
 }
 
+static GameEngineLayer* game_engine_layer;
+
 -(void) update:(GameEngineLayer*)g {
+    game_engine_layer = g;
     float vel = sqrtf(powf(vx,2)+powf(vy,2));
     
     if (current_island == NULL) {
@@ -372,6 +380,7 @@ HitRect cached_rect;
     [_CAPE_ANIM dealloc];
     [_HIT_ANIM dealloc];
     [_SPLASH_ANIM dealloc];
+    [_DASH_ANIM dealloc];
     
     [self removeAllChildrenWithCleanup:NO];
 }

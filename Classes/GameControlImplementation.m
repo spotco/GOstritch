@@ -11,8 +11,8 @@ static BOOL queue_jump = NO;
 static int jump_hold_timer = 0;
 
 static BOOL is_touch_down = NO;
-static int touch_move_counter = 0;
 static int touch_timer = 0;
+static int touch_move_counter = 0;
 static float touch_dist_sum = 0;
 static CGPoint prev;
 
@@ -30,11 +30,13 @@ static CGPoint prev;
     touch_move_counter++;
     touch_dist_sum += [Common distanceBetween:prev and:pt];
     
-    if(touch_move_counter == 4) {
+    if(touch_move_counter == 5) {
         float avg = touch_dist_sum/touch_move_counter;
         if (avg > 10) {
             queue_swipe = YES;
         }
+        touch_move_counter = 0;
+        touch_dist_sum = 0;
     }
     
     prev = pt;

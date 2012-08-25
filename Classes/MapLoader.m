@@ -48,7 +48,14 @@
                 ndir = -1;
             }
             BOOL can_land = ((NSString *)[currentIslandDict objectForKey:@"can_fall"]).boolValue;
-            currentIsland = [LineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
+            
+            NSString *ground_type = (NSString *)[currentIslandDict objectForKey:@"ground"];
+            
+            if (ground_type == NULL || [ground_type isEqualToString:@"open"]) {
+                currentIsland = [LineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
+            } else if ([ground_type isEqualToString:@"cave"]) {
+                currentIsland = [CaveLineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
+            }
             
 		} else {
             NSLog(@"line read error");
@@ -112,7 +119,14 @@
         } else if ([type isEqualToString:@"jumppad"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
-            [map.game_objects addObject:[JumpPad init_x:x y:y islands:map.n_islands]];
+            
+            NSDictionary* dir_obj = [j_object objectForKey:@"dir"];
+            float dir_x = ((NSString*)[dir_obj objectForKey:@"x"]).floatValue;
+            float dir_y = ((NSString*)[dir_obj objectForKey:@"y"]).floatValue;
+            Vec3D* dir_vec = [Vec3D init_x:dir_x y:dir_y z:0];
+            [map.game_objects addObject:[JumpPad init_x:x y:y dirvec:dir_vec]];
+            
+            [dir_vec dealloc];
             
         } else if ([type isEqualToString:@"birdflock"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
@@ -131,7 +145,20 @@
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             
-            [map.game_objects addObject:[SpeedUp init_x:x y:y islands:map.n_islands]];
+            NSDictionary* dir_obj = [j_object objectForKey:@"dir"];
+            float dir_x = ((NSString*)[dir_obj objectForKey:@"x"]).floatValue;
+            float dir_y = ((NSString*)[dir_obj objectForKey:@"y"]).floatValue;
+            Vec3D* dir_vec = [Vec3D init_x:dir_x y:dir_y z:0];
+            [map.game_objects addObject:[SpeedUp init_x:x y:y dirvec:dir_vec]];
+            
+            [dir_vec dealloc];
+            
+        } else if ([type isEqualToString:@"cavewall"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            float width = ((NSString*)[j_object  objectForKey:@"width"]).floatValue;
+            float hei = ((NSString*)[j_object  objectForKey:@"height"]).floatValue;
+            [map.game_objects addObject:[CaveWall init_x:x y:y width:width height:hei]];
             
         } else {
             NSLog(@"item read error");

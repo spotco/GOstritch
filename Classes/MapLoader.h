@@ -1,7 +1,9 @@
 #import <Foundation/Foundation.h>
 #import "CJSONDeserializer.h"
+
 #import "LineIsland.h"
 #import "Island.h"
+#import "CaveLineIsland.h"
 
 #import "DogBone.h"
 #import "GroundDetail.h"
@@ -15,6 +17,7 @@
 #import "BirdFlock.h"
 #import "Blocker.h"
 #import "SpeedUp.h"
+#import "CaveWall.h"
 
 @interface MapLoader : NSObject
 

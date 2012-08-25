@@ -23,8 +23,10 @@ static NSMutableDictionary* textures = nil;
                      @"BG1_island_fill.png", TEX_GROUND_TEX_1,
                      @"BG1_top_fill.png", TEX_GROUND_TOP_1,
                      @"BG1_island_top_edge.png", TEX_TOP_EDGE,
-                     //@"BG_cave_top_fill.png", TEX_GROUND_TOP_1,
-                     //@"BG_cave_top_edge.png", TEX_TOP_EDGE,
+                     
+                     @"BG_cave_top_fill.png", TEX_CAVE_TOP_TEX,
+                     @"BG_cave_top_edge.png", TEX_CAVE_CORNER_TEX,
+                     @"BG_cave_wall.png", TEX_CAVEWALL,
                      
                      @"BG1_sky.png", TEX_BG_SKY,
                      @"BG1_layer_1.png", TEX_BG_LAYER_1,

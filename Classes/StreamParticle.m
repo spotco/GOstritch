@@ -23,6 +23,7 @@
     vy = tvy;
     [self setScale:float_random(0.5, 2)];
     ct = (int)STREAMPARTICLE_CT_DEFAULT;
+    [self setColor:ccc3(200, 200, 200)];
 }
 
 -(void)initialize {

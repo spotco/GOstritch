@@ -7,6 +7,6 @@
     int recharge_ct;
 }
 
-+(JumpPad*)init_x:(float)x y:(float)y islands:(NSMutableArray*)islands;
++(JumpPad*)init_x:(float)x y:(float)y dirvec:(Vec3D*)vec;
 
 @end

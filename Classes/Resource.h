@@ -13,6 +13,10 @@
 #define TEX_GROUND_TOP_1 @"GroundTop1"
 #define TEX_TOP_EDGE @"GroundTopEdge"
 
+#define TEX_CAVE_TOP_TEX @"CaveTopTex"
+#define TEX_CAVE_CORNER_TEX @"CaveCornerTex"
+#define TEX_CAVEWALL @"CaveWall"
+
 #define TEX_DOG_RUN_1 @"Dog1RunSSheet"
 #define TEX_DOG_SPLASH @"DogSplash"
 
@@ -43,7 +47,6 @@
 #define TEX_GROUND_DETAIL_5 @"GroundDetail5"
 #define TEX_GROUND_DETAIL_6 @"GroundDetail6"
 #define TEX_GROUND_DETAIL_7 @"GroundDetail7"
-
 
 #define TEX_GREY_PARTICLE @"GreyParticle"
 

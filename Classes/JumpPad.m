@@ -7,17 +7,19 @@
 
 @implementation JumpPad
 
-+(JumpPad*)init_x:(float)x y:(float)y islands:(NSMutableArray*)islands{
++(JumpPad*)init_x:(float)x y:(float)y dirvec:(Vec3D *)vec{
     JumpPad *j = [JumpPad node];
     j.position = ccp(x,y);
     [j initialize_anim];
-    [j attach_toisland:islands];
+    
+    [j set_dir:vec];
+    
     [j setActive:YES];
     return j;
 }
 
 -(HitRect)get_hit_rect {
-    return [Common hitrect_cons_x1:[self position].x-10 y1:[self position].y-10 wid:20 hei:20];
+    return [Common hitrect_cons_x1:[self position].x-20 y1:[self position].y-20 wid:40 hei:40];
 }
 
 -(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g{
@@ -54,41 +56,19 @@
 }
 
 -(void)boostjump:(Player*)player {
-    float mov_speed = sqrtf(powf(player.vx, 2) + powf(player.vy, 2));
+    Vec3D *jnormal = [Vec3D init_x:normal_vec.x y:normal_vec.y z:0];
+    [jnormal normalize];
+    [jnormal scale:2];
     
-    Vec3D *tangent = [[Vec3D Z_VEC] crossWith:normal_vec];
-    Vec3D *cur_tangent_vec = [[Vec3D Z_VEC] crossWith:normal_vec];
-    Vec3D *up = [Vec3D init_x:normal_vec.x y:normal_vec.y z:0];
-    [tangent normalize];
-    [up normalize];
+    player.current_island = NULL;
+    player.position = [jnormal transform_pt:player.position];
     
-    if (player.current_island != NULL) {
-        [tangent scale:-player.current_island.ndir];
-        player.current_island = NULL;
-    } else {
-        [tangent scale:-1];
-    }
+    [jnormal normalize];
+    [jnormal scale:JUMP_POWER];
     
-    [tangent scale:mov_speed];
-    [up scale:JUMP_POWER];
+    player.vx = jnormal.x;
+    player.vy = jnormal.y;
     
-    Vec3D *combined = [up add:tangent];
-    
-    Vec3D *calc_up = [[Vec3D Z_VEC] crossWith:cur_tangent_vec];
-    [calc_up scale:2];
-    player.position = [calc_up transform_pt:player.position];
-    
-    player.vx = combined.x;
-    player.vy = combined.y;
-    
-    //NSLog(@"<%f,%f>",player.vx,player.vy);
-    
-    
-    [calc_up dealloc];
-    [up dealloc];
-    [combined dealloc];
-    [tangent dealloc];
-    [cur_tangent_vec dealloc];
 }
 
 -(int)get_render_ord {
@@ -140,25 +120,13 @@ static NSDictionary *jumppad_ss_plist_dict;
     return r;
 }
 
--(void)attach_toisland:(NSMutableArray*)islands {
-    Island *i = [self get_connecting_island:islands];
+-(void)set_dir:(Vec3D*)vec {
+    normal_vec = [Vec3D init_x:vec.x y:vec.y z:0];
     
-    if (i != NULL) {
-        Vec3D *tangent_vec = [i get_tangent_vec];
-        [tangent_vec scale:[i ndir]];
-        float tar_rad = -[tangent_vec get_angle_in_rad];
-        float tar_deg = [Common rad_to_deg:tar_rad];
-        rotation_ = tar_deg;
-        
-        normal_vec = [[Vec3D Z_VEC] crossWith:tangent_vec];
-        [normal_vec normalize];
-        [normal_vec retain];
-        
-        [tangent_vec dealloc];
-    } else {
-        normal_vec = [Vec3D init_x:0 y:1 z:0];
-        [normal_vec retain];
-    }
+    Vec3D* tangent = [vec crossWith:[Vec3D Z_VEC]];
+    float tar_rad = -[tangent get_angle_in_rad];
+    rotation_ = [Common rad_to_deg:tar_rad];
+    [tangent dealloc];
 }
 
 -(void)set_active:(BOOL)t_active {
@@ -183,5 +151,26 @@ static NSDictionary *jumppad_ss_plist_dict;
     [anim release];
     [super dealloc];
 }
+
+/*-(void)attach_toisland:(NSMutableArray*)islands {
+ Island *i = [self get_connecting_island:islands];
+ 
+ if (i != NULL) {
+ Vec3D *tangent_vec = [i get_tangent_vec];
+ [tangent_vec scale:[i ndir]];
+ float tar_rad = -[tangent_vec get_angle_in_rad];
+ float tar_deg = [Common rad_to_deg:tar_rad];
+ rotation_ = tar_deg;
+ 
+ normal_vec = [[Vec3D Z_VEC] crossWith:tangent_vec];
+ [normal_vec normalize];
+ [normal_vec retain];
+ 
+ [tangent_vec dealloc];
+ } else {
+ normal_vec = [Vec3D init_x:0 y:1 z:0];
+ [normal_vec retain];
+ }
+ }*/
 
 @end

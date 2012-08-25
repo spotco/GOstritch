@@ -56,6 +56,10 @@
 }
 
 -(void)effect_end:(Player*)p g:(GameEngineLayer*)g{
+    [p get_current_params].cur_dash_count = cur_dash_count;
+    [p get_current_params].cur_airjump_count = cur_airjump_count;
+    [p get_default_params].cur_dash_count = cur_dash_count;
+    [p get_default_params].cur_airjump_count = cur_airjump_count;
 }
 
 @end

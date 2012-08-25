@@ -6,6 +6,6 @@
     Vec3D* normal_vec;
 }
 
-+(SpeedUp*)init_x:(float)x y:(float)y islands:(NSMutableArray*)islands;
++(SpeedUp*)init_x:(float)x y:(float)y dirvec:(Vec3D *)vec;
 
 @end

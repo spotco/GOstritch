@@ -1,0 +1,18 @@
+{
+    "islands": [
+        {"ndir": "left", "hei": 50, "x1": 100, "y2": 140, "can_fall": true, "x2": 891, "y1": 108, "type": "line", "ground": "open"},
+        {"ndir": "left", "hei": 50, "x1": 1088, "y2": 188, "can_fall": true, "x2": 2191, "y1": 148, "type": "line", "ground": "open"}
+    ],
+    "objects": [
+        {"x": 700, "label": "6", "y": 263, "type": "jumppad", "dir": {"y": 0.08, "x": 1}},
+        {"x": 710, "label": "7", "y": 130, "type": "jumppad", "dir": {"y": 1, "x": -0.07}},
+        {"x": 812, "label": "8", "y": 229, "type": "jumppad", "dir": {"y": 1, "x": -0.05}},
+        {"x": 803, "label": "9", "y": 357, "type": "jumppad", "dir": {"y": 0.65, "x": 0.76}},
+        {"x": 900, "label": "10", "y": 447, "type": "jumppad", "dir": {"y": -0.97, "x": 0.23}},
+        {"x": 954, "label": "11", "y": 200, "type": "jumppad", "dir": {"y": 0.56, "x": 0.83}},
+        {"x": 440, "label": "13", "y": 121, "type": "jumppad", "dir": {"y": -1, "x": 0.07}}
+    ],
+    "start_x": 168,
+    "assert_links": 0,
+    "start_y": 172
+}
