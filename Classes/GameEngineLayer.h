@@ -11,7 +11,6 @@
 #import "GamePhysicsImplementation.h"
 #import "GameRenderImplementation.h"
 #import "GameControlImplementation.h"
-#import "GameControlState.h"
 #import "GameRenderState.h"
 
 #import "World1ParticleGenerator.h"
@@ -40,7 +39,6 @@ typedef struct level_bone_status {
     NSMutableDictionary *bones;
 
 	Player *player;
-    GameControlState *game_control_state;
     GameRenderState *game_render_state;
     
     CGPoint map_start_pt;

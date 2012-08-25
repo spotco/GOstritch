@@ -8,5 +8,14 @@
 -(BOOL)should_remove { return YES; }
 -(int)get_render_ord { return [GameRenderImplementation GET_RENDER_GAMEOBJ_ORD]; }
 
+- (void)setOpacity:(GLubyte)opacity {
+	[super setOpacity:opacity];
+    
+	for(CCSprite *sprite in [self children]) {
+        
+		sprite.opacity = opacity;
+	}
+}
+
 
 @end

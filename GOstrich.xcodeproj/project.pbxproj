@@ -53,6 +53,7 @@
 		50F41333106926B2002A0D5E /* ZFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F41310106926B2002A0D5E /* ZFont.m */; };
 		62D3C2F515C6152A00E67ABC /* CoverPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 62D3C2F315C6152A00E67ABC /* CoverPage.h */; };
 		62D3C2F615C6152A00E67ABC /* CoverPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D3C2F415C6152A00E67ABC /* CoverPage.m */; };
+		7E1456A915E85771007CC9E4 /* DashEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1456A815E85771007CC9E4 /* DashEffect.m */; };
 		7E28310415CF4E39002EB07B /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28310315CF4E39002EB07B /* Particle.m */; };
 		7E28310715CF4F47002EB07B /* grey_particle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E28310615CF4F47002EB07B /* grey_particle.png */; };
 		7E28310A15CF4FA7002EB07B /* StreamParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28310915CF4FA7002EB07B /* StreamParticle.m */; };
@@ -207,7 +208,6 @@
 		7ECB83CD15B6590E00F52E55 /* BG1_sky.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ECB83C515B6590E00F52E55 /* BG1_sky.png */; };
 		7ECB83CE15B6590E00F52E55 /* BG1_top_fill.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ECB83C615B6590E00F52E55 /* BG1_top_fill.png */; };
 		7ECBC8671597FA5700B2BCFE /* Vec3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBC8661597FA5700B2BCFE /* Vec3D.m */; };
-		7ED1D84F15AE68DC00B86562 /* GameControlState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED1D84E15AE68DC00B86562 /* GameControlState.m */; };
 		7ED863DF15B806C3005FBDBB /* checkpoint1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863CE15B806C3005FBDBB /* checkpoint1.png */; };
 		7ED863E015B806C3005FBDBB /* checkpoint2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863CF15B806C3005FBDBB /* checkpoint2.png */; };
 		7ED863EA15B81A4A005FBDBB /* BG1_island_top_edge.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863E915B81A4A005FBDBB /* BG1_island_top_edge.png */; };
@@ -502,6 +502,8 @@
 		50F41310106926B2002A0D5E /* ZFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFont.m; sourceTree = "<group>"; };
 		62D3C2F315C6152A00E67ABC /* CoverPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverPage.h; sourceTree = "<group>"; };
 		62D3C2F415C6152A00E67ABC /* CoverPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverPage.m; sourceTree = "<group>"; };
+		7E1456A715E85771007CC9E4 /* DashEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashEffect.h; sourceTree = "<group>"; };
+		7E1456A815E85771007CC9E4 /* DashEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashEffect.m; sourceTree = "<group>"; };
 		7E28310215CF4E39002EB07B /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 		7E28310315CF4E39002EB07B /* Particle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Particle.m; sourceTree = "<group>"; };
 		7E28310615CF4F47002EB07B /* grey_particle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grey_particle.png; sourceTree = "<group>"; };
@@ -689,8 +691,6 @@
 		7ECB83C615B6590E00F52E55 /* BG1_top_fill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_top_fill.png; path = Resources/bg/BG1/BG1_top_fill.png; sourceTree = SOURCE_ROOT; };
 		7ECBC8651597FA5700B2BCFE /* Vec3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec3D.h; sourceTree = "<group>"; };
 		7ECBC8661597FA5700B2BCFE /* Vec3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vec3D.m; sourceTree = "<group>"; };
-		7ED1D84D15AE68DC00B86562 /* GameControlState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameControlState.h; sourceTree = "<group>"; };
-		7ED1D84E15AE68DC00B86562 /* GameControlState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameControlState.m; sourceTree = "<group>"; };
 		7ED863CE15B806C3005FBDBB /* checkpoint1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkpoint1.png; sourceTree = "<group>"; };
 		7ED863CF15B806C3005FBDBB /* checkpoint2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkpoint2.png; sourceTree = "<group>"; };
 		7ED863E915B81A4A005FBDBB /* BG1_island_top_edge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_island_top_edge.png; path = Resources/bg/BG1/BG1_island_top_edge.png; sourceTree = SOURCE_ROOT; };
@@ -1624,6 +1624,8 @@
 				7E6A873615C246B90022291A /* FlashEffect.m */,
 				7EF1246715CA584300B91A91 /* SplashEffect.h */,
 				7EF1246815CA584300B91A91 /* SplashEffect.m */,
+				7E1456A715E85771007CC9E4 /* DashEffect.h */,
+				7E1456A815E85771007CC9E4 /* DashEffect.m */,
 			);
 			name = effectparams;
 			sourceTree = "<group>";
@@ -1772,8 +1774,6 @@
 				7EF654F315AA64BE0094EA20 /* GameRenderImplementation.m */,
 				7EF654F515AA6D5F0094EA20 /* GameControlImplementation.h */,
 				7EF654F615AA6D5F0094EA20 /* GameControlImplementation.m */,
-				7ED1D84D15AE68DC00B86562 /* GameControlState.h */,
-				7ED1D84E15AE68DC00B86562 /* GameControlState.m */,
 				7E8869B515AEB5CE00F99BB3 /* GameRenderState.h */,
 				7E8869B615AEB5CE00F99BB3 /* GameRenderState.m */,
 			);
@@ -2400,7 +2400,6 @@
 				7EF654F115AA62FA0094EA20 /* GamePhysicsImplementation.m in Sources */,
 				7EF654F415AA64BE0094EA20 /* GameRenderImplementation.m in Sources */,
 				7EF654F715AA6D5F0094EA20 /* GameControlImplementation.m in Sources */,
-				7ED1D84F15AE68DC00B86562 /* GameControlState.m in Sources */,
 				7E8869B715AEB5CE00F99BB3 /* GameRenderState.m in Sources */,
 				7EDC29FD15AFBD50008B0DC3 /* PlayerEffectParams.m in Sources */,
 				7E5EB92F15B2C159000877A7 /* DogCape.m in Sources */,
@@ -2432,6 +2431,7 @@
 				7E786E0015E4BB61000E1946 /* BoneCollectUIAnimation.m in Sources */,
 				7E786E0415E4D275000E1946 /* World1ParticleGenerator.m in Sources */,
 				7E786E0715E4D335000E1946 /* WaveParticle.m in Sources */,
+				7E1456A915E85771007CC9E4 /* DashEffect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

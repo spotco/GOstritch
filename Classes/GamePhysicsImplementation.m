@@ -52,9 +52,8 @@
  A CGPoint of the player's calculated position after this update 'tick'
  **/
 +(CGPoint)player_move_along_island:(Player*)player islands:(NSMutableArray*)islands {
-    float LIMIT_SPEED = [player get_current_params].cur_limit_speed;
+    //float LIMIT_SPEED = [player get_current_params].cur_limit_speed;
     float MIN_SPEED = [player get_current_params].cur_min_speed;
-    //float ACCEL_TO_MIN = [player get_current_params].cur_min_speed;
     
     Island *i = player.current_island;
     Vec3D *tangent_vec = [i get_tangent_vec];
@@ -75,7 +74,7 @@
         player.vx += SLOPE_ACCEL *pct;
         player.vy += SLOPE_ACCEL *pct;
         
-        LIMIT_SPEED += (ABS_MAX_SPEED - LIMIT_SPEED)*(pct);
+        MIN_SPEED += (ABS_MAX_SPEED - MIN_SPEED)*(pct);
     }
     
     float mov_speed = sqrtf(powf(player.vx, 2) + powf(player.vy, 2));
@@ -83,7 +82,7 @@
     if (mov_speed > ABS_MAX_SPEED) {
         mov_speed = ABS_MAX_SPEED;
     }
-    if (mov_speed > LIMIT_SPEED) {
+    if (mov_speed > MIN_SPEED) {
         player.vx *= FRICTION;
         player.vy *= FRICTION;
     }
@@ -145,6 +144,9 @@
  **/
 +(CGPoint)player_free_fall:(Player*)player islands:(NSMutableArray*)islands {
     float GRAVITY = [player get_current_params].cur_gravity;
+    if (player.floating) {
+        GRAVITY = GRAVITY * 0.55;
+    }
     
     player.scaleX = 1;
     player.scaleY = 1;

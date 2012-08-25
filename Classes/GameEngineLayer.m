@@ -13,17 +13,10 @@
 /**
  TODO --
  -LevelEditor fixes:
-    -bone BID auto assign
-    -birdflock broken
-    -faster scrolling
-    -shift all to right/left tool
-    -cave area
     -blocker in test level
  -Game fixes:
     manual zoom in level
     start/end area new graphics
-    hold to float
-    swipe to dash
     sun in background
  **/
 
@@ -55,7 +48,6 @@
 }
 
 -(void)initialize:(NSString*)map_filename {
-    game_control_state = [[GameControlState alloc] init];
     game_render_state = [[GameRenderState alloc] init];
     
     CGPoint player_start_pt = [self loadMap:map_filename];
@@ -197,7 +189,7 @@
         return;
     } else if (current_mode == GameEngineLayerMode_GAMEPLAY || current_mode == GameEngineLayerMode_OBJECTANIM) {
         [GamePhysicsImplementation player_move:player with_islands:islands];
-        [GameControlImplementation control_update_player:player state:game_control_state islands:islands objects:game_objects];
+        [GameControlImplementation control_update_player:player islands:islands objects:game_objects];
         [player update:self];
         
         [self check_game_state];	
@@ -271,8 +263,22 @@
     for (UITouch *t in pTouches) {
         touch = [t locationInView:[t view]];
     }
-    [GameControlImplementation touch_begin:game_control_state at:touch];
+    [GameControlImplementation touch_begin:touch];
 }
+
+-(void)ccTouchesMoved:(NSSet *)pTouches withEvent:(UIEvent *)event {
+    if (current_mode != GameEngineLayerMode_GAMEPLAY) {
+        return;
+    }
+    
+    CGPoint touch;
+    for (UITouch *t in pTouches) {
+        touch = [t locationInView:[t view]];
+    }
+    [GameControlImplementation touch_move:touch];
+}
+
+
 
 -(void) ccTouchesEnded:(NSSet*)pTouches withEvent:(UIEvent*)event {
     if (current_mode != GameEngineLayerMode_GAMEPLAY) {
@@ -283,7 +289,7 @@
     for (UITouch *t in pTouches) {
         touch = [t locationInView:[t view]];
     }
-    [GameControlImplementation touch_end:game_control_state at:touch];
+    [GameControlImplementation touch_end:touch];
 }
 
 -(void)check_game_state {

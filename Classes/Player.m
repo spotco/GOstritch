@@ -8,12 +8,10 @@
 #define IMG_OFFSET_Y -3
 
 #define DEFAULT_GRAVITY -0.5
-#define DEFAULT_MIN_SPEED 6
-#define DEFAULT_ACCEL_TO_MIN 5
+#define DEFAULT_MIN_SPEED 7
 
 #define MIN_SPEED_MAX 14
 #define LIMITSPD_INCR 2
-#define ACCEL_INCR 0.01
 
 #define HITBOX_RESCALE 0.7
 
@@ -27,6 +25,7 @@
 @synthesize current_island;
 @synthesize up_vec;
 @synthesize start_pt;
+@synthesize floating,dashing;
 
 +(Player*)init_at:(CGPoint)pt {
 	Player *new_player = [Player node];
@@ -59,14 +58,15 @@
 }
 
 -(void)init_anim {
-    _RUN_ANIM_SLOW = [self init_run_anim_speed:0.1];
-    _RUN_ANIM_MED = [self init_run_anim_speed:0.075];
+    _RUN_ANIM_SLOW = [self init_run_anim_speed:0.075];
+    _RUN_ANIM_MED = [self init_run_anim_speed:0.06];
     _RUN_ANIM_FAST = [self init_run_anim_speed:0.05];
-    _RUN_ANIM_NONE = [self init_run_anim_speed:1000];
+    _RUN_ANIM_NONE = [self init_none_anim];
     _ROCKET_ANIM = [self init_rocket_anim_speed:0.1];
     _CAPE_ANIM = [self init_cape_anim_speed:0.1];
     _HIT_ANIM = [self init_hit_anim_speed:0.1];
     _SPLASH_ANIM = [self init_splash_anim_speed:0.1];
+    _DASH_ANIM = [self init_rolldash_anim:0.05];
     
     [self start_anim:_RUN_ANIM_NONE];
 }
@@ -80,15 +80,40 @@
     return [[Common make_anim_frames:animFrames speed:speed] retain];
 }
 
+-(id)init_rolldash_anim:(float)speed {
+	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
+	NSMutableArray *animFrames = [NSMutableArray array];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rolldash_0"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rolldash_1"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rolldash_2"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rolldash_3"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rolldash_4"]]];
+    return [[Common make_anim_frames:animFrames speed:speed] retain];
+}
+
 -(id)init_run_anim_speed:(float)speed {
 	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
 	NSMutableArray *animFrames = [NSMutableArray array];
-	
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_0"]]];
+    
+    for(int i = 0; i < 5; i++) {
+        [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_0"]]];
+        [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_1"]]];
+        [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_2"]]];
+        [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_3"]]];
+    }
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_blink"]]];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_1"]]];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_2"]]];
-   
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_3"]]];
+    
 	return [[Common make_anim_frames:animFrames speed:speed] retain];
+}
+
+-(id)init_none_anim {
+	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
+	NSMutableArray *animFrames = [NSMutableArray array];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_0"]]];
+    return [[Common make_anim_frames:animFrames speed:1] retain];
 }
 
 -(id)init_rocket_anim_speed:(float)speed {
@@ -191,7 +216,6 @@ static NSDictionary *splash_ss_plist_dict = NULL;
     }
     current_params = [[PlayerEffectParams alloc] init];
     current_params.cur_gravity = DEFAULT_GRAVITY;
-    current_params.cur_accel_to_min = DEFAULT_ACCEL_TO_MIN;
     current_params.cur_limit_speed = DEFAULT_MIN_SPEED + LIMITSPD_INCR;
     current_params.cur_min_speed = DEFAULT_MIN_SPEED;
     current_params.cur_airjump_count = 1;
@@ -208,9 +232,6 @@ static NSDictionary *splash_ss_plist_dict = NULL;
 
 -(void) update:(GameEngineLayer*)g {
     float vel = sqrtf(powf(vx,2)+powf(vy,2));
-    float tar = current_params.cur_min_speed;
-    
-  
     
     if (current_island == NULL) {
         Vec3D *dv = [Vec3D init_x:vx y:vy z:0];
@@ -237,18 +258,30 @@ static NSDictionary *splash_ss_plist_dict = NULL;
     }
     
     player_anim_mode cur_anim_mode = [[self get_current_params] get_anim];
+    
+    if (cur_anim_mode == player_anim_mode_DASH) {
+        dashing = YES;
+    }
+    
     if (cur_anim_mode == player_anim_mode_RUN) {
         if (current_island == NULL) {
-            [self start_anim:_RUN_ANIM_NONE];
-        } else {
-            if (vel > 13) {
+            if (floating) {
                 [self start_anim:_RUN_ANIM_FAST];
-            } else if (vel > 10) {
+            } else {
+                [self start_anim:_RUN_ANIM_NONE];
+            }
+            
+        } else {
+            if (vel > 10) {
+                [self start_anim:_RUN_ANIM_FAST];
+            } else if (vel > 6.9) {
                 [self start_anim:_RUN_ANIM_MED];
             } else {
                 [self start_anim:_RUN_ANIM_SLOW];
             }
         }
+    } else if (cur_anim_mode == player_anim_mode_DASH) {
+        [self start_anim:_DASH_ANIM];
     } else if (cur_anim_mode == player_anim_mode_CAPE) {
         [self start_anim:_CAPE_ANIM];
     } else if (cur_anim_mode == player_anim_mode_ROCKET) {
@@ -270,15 +303,6 @@ static NSDictionary *splash_ss_plist_dict = NULL;
                 [temp_params dealloc];
                 temp_params = NULL;
             }
-        }
-    } else {
-        if (current_island != NULL) {
-            if (current_params.cur_min_speed < MIN_SPEED_MAX && (vel >= tar || ABS(tar-vel) < tar * 0.4)  ) {
-                //current_params.cur_min_speed += ACCEL_INCR;
-            } else if (current_params.cur_limit_speed > DEFAULT_MIN_SPEED && current_params.cur_min_speed*0.9 > DEFAULT_MIN_SPEED && (vel < tar*0.5)) {
-                current_params.cur_min_speed *= 0.98;
-            }
-            current_params.cur_limit_speed = current_params.cur_min_speed + LIMITSPD_INCR;
         }
     }
     refresh_hitrect = YES;

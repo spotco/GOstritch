@@ -15,7 +15,7 @@
 -(void)update:(Player*)p g:(GameEngineLayer *)g{
     p.vy *= 0.9;
     if (p.vx < cur_min_speed) {
-        p.vx += cur_accel_to_min;
+        p.vx += 1;
     }
 }
 

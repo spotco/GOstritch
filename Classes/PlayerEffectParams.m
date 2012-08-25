@@ -3,7 +3,7 @@
 
 @implementation PlayerEffectParams
 
-@synthesize cur_min_speed,cur_gravity,cur_limit_speed,cur_accel_to_min,cur_airjump_count,time_left;
+@synthesize cur_min_speed,cur_gravity,cur_limit_speed,cur_accel_to_min,cur_airjump_count,time_left,cur_dash_count;
 
 
 +(PlayerEffectParams*)init_copy:(PlayerEffectParams*)p {
@@ -18,6 +18,7 @@
     b.cur_limit_speed = a.cur_limit_speed;
     b.cur_min_speed = a.cur_min_speed;
     b.cur_airjump_count = a.cur_airjump_count;
+    b.cur_dash_count = a.cur_dash_count;
 }
 
 
@@ -31,6 +32,13 @@
 
 -(void)add_airjump_count {
     cur_airjump_count = 2;
+    cur_dash_count = 1;
+}
+
+-(void)decr_dash_count {
+    if (cur_dash_count > 0) {
+        cur_dash_count--;
+    }
 }
 
 -(void)decr_airjump_count {

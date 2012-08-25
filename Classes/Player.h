@@ -19,10 +19,12 @@
     
     PlayerEffectParams *current_params;
     PlayerEffectParams *temp_params;
+    BOOL floating;
+    BOOL dashing;
     
     id current_anim;
     id _RUN_ANIM_SLOW,_RUN_ANIM_MED,_RUN_ANIM_FAST,_RUN_ANIM_NONE;
-    id _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM,_SPLASH_ANIM;
+    id _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM,_SPLASH_ANIM, _DASH_ANIM;
 }
 
 typedef enum {
@@ -30,7 +32,8 @@ typedef enum {
     player_anim_mode_CAPE,
     player_anim_mode_ROCKET,
     player_anim_mode_HIT,
-    player_anim_mode_SPLASH
+    player_anim_mode_SPLASH,
+    player_anim_mode_DASH
 } player_anim_mode;
 
 +(Player*)init_at:(CGPoint)pt;
@@ -51,5 +54,6 @@ typedef enum {
 @property(readwrite,assign) Island* current_island;
 @property(readwrite,assign) Vec3D* up_vec;
 @property(readwrite,assign) CGPoint start_pt;
+@property(readwrite,assign) BOOL floating,dashing;
 
 @end

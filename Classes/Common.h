@@ -53,5 +53,6 @@ typedef struct callback {
 
 +(CGRect)ssrect_from_dict:(NSDictionary*)dict tar:(NSString*)tar;
 +(id)make_anim_frames:(NSMutableArray*)animFrames speed:(float)speed;
++(CGFloat) distanceBetween: (CGPoint)point1 and: (CGPoint)point2;
 
 @end

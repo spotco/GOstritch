@@ -1,6 +1,6 @@
 {
     "objects": [
-        {"label": "0", "type": "dogrocket", "x": 851, "y": 425,"bid":1},
+        {"label": "0", "type": "dogbone", "x": 851, "y": 425,"bid":1},
         {"label": "1", "type": "dogbone", "x": 2550, "y": 740,"bid":2},
         {"label": "0", "type": "dogbone", "x": 3236, "y": 952,"bid":3},
         {"label": "1", "type": "checkpoint", "x": 4702, "y": 922},

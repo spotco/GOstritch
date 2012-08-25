@@ -182,6 +182,12 @@
 	return m;
 }
 
++(CGFloat) distanceBetween: (CGPoint)point1 and: (CGPoint)point2 {
+    CGFloat dx = point2.x - point1.x;
+    CGFloat dy = point2.y - point1.y;
+    return sqrt(dx*dx + dy*dy );
+}
+
 
 
 
