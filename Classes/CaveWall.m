@@ -13,7 +13,7 @@
     wid = width;
     hei = height;
     
-    tex = [Common init_render_obj:[Resource get_tex:TEX_CAVEWALL] npts:4];
+    tex = [Common init_render_obj:[self get_tex] npts:4];
     
     /*10
       32*/
@@ -24,7 +24,10 @@
     tex.tri_pts[0] = ccp(width,height);
     
     [Common tex_map_to_tri_loc:tex len:4];
-    
+}
+
+-(CCTexture2D*)get_tex {
+    return [Resource get_tex:TEX_CAVEWALL];
 }
 
 -(void)draw {

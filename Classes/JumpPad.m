@@ -57,6 +57,12 @@
 
 -(void)boostjump:(Player*)player {
     Vec3D *jnormal = [Vec3D init_x:normal_vec.x y:normal_vec.y z:0];
+    
+    float ang = [jnormal get_angle_in_rad];
+    if (ABS(ang) > M_PI * (3/4)) {
+        player.last_ndir = -1;
+    }
+    
     [jnormal normalize];
     [jnormal scale:2];
     
@@ -69,6 +75,9 @@
     player.vx = jnormal.x;
     player.vy = jnormal.y;
     
+    
+    
+    [jnormal dealloc];
 }
 
 -(int)get_render_ord {

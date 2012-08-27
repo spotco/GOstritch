@@ -60,6 +60,8 @@
 		7E1456B515E8BF63007CC9E4 /* cave_test.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E1456B415E8BF62007CC9E4 /* cave_test.map */; };
 		7E1456B815E8C0E0007CC9E4 /* CaveLineIsland.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1456B715E8C0E0007CC9E4 /* CaveLineIsland.m */; };
 		7E1456BB15E8C66D007CC9E4 /* CaveWall.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1456BA15E8C66A007CC9E4 /* CaveWall.m */; };
+		7E22750E15EB3AB1009ED6DC /* misc_test.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E22750D15EB3AB1009ED6DC /* misc_test.map */; };
+		7E22751115EB443A009ED6DC /* IslandFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E22751015EB443A009ED6DC /* IslandFill.m */; };
 		7E28310415CF4E39002EB07B /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28310315CF4E39002EB07B /* Particle.m */; };
 		7E28310A15CF4FA7002EB07B /* StreamParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28310915CF4FA7002EB07B /* StreamParticle.m */; };
 		7E28310D15CF5D90002EB07B /* RocketParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28310C15CF5D90002EB07B /* RocketParticle.m */; };
@@ -519,6 +521,9 @@
 		7E1456B715E8C0E0007CC9E4 /* CaveLineIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaveLineIsland.m; sourceTree = "<group>"; };
 		7E1456B915E8C669007CC9E4 /* CaveWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaveWall.h; sourceTree = "<group>"; };
 		7E1456BA15E8C66A007CC9E4 /* CaveWall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaveWall.m; sourceTree = "<group>"; };
+		7E22750D15EB3AB1009ED6DC /* misc_test.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = misc_test.map; sourceTree = "<group>"; };
+		7E22750F15EB443A009ED6DC /* IslandFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IslandFill.h; sourceTree = "<group>"; };
+		7E22751015EB443A009ED6DC /* IslandFill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IslandFill.m; sourceTree = "<group>"; };
 		7E28310215CF4E39002EB07B /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 		7E28310315CF4E39002EB07B /* Particle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Particle.m; sourceTree = "<group>"; };
 		7E28310815CF4FA7002EB07B /* StreamParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamParticle.h; sourceTree = "<group>"; };
@@ -1228,6 +1233,7 @@
 				7E3B978A15D7ADBC001859CB /* speedup_fun.map */,
 				7E3B978B15D7ADBC001859CB /* jumppad_fun.map */,
 				7E1456B415E8BF62007CC9E4 /* cave_test.map */,
+				7E22750D15EB3AB1009ED6DC /* misc_test.map */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -1339,6 +1345,7 @@
 		7E8C080A15C3EBD300FE9341 /* envr_obj */ = {
 			isa = PBXGroup;
 			children = (
+				7E8C080B15C3ECBD00FE9341 /* JumpPad.h */,
 				7E8C080C15C3ECBD00FE9341 /* JumpPad.m */,
 				7EC6CB7015D36CBE0068F574 /* SpeedUp.h */,
 				7EC6CB7115D36CBE0068F574 /* SpeedUp.m */,
@@ -1348,11 +1355,12 @@
 				7EDA90CF15BCED580004CED7 /* Spike.m */,
 				7E8C080615C3CAF600FE9341 /* Water.h */,
 				7E8C080715C3CAF600FE9341 /* Water.m */,
-				7E8C080B15C3ECBD00FE9341 /* JumpPad.h */,
 				7EF1246A15CA612100B91A91 /* FishGenerator.h */,
 				7EF1246B15CA612100B91A91 /* FishGenerator.m */,
 				7E1456B915E8C669007CC9E4 /* CaveWall.h */,
 				7E1456BA15E8C66A007CC9E4 /* CaveWall.m */,
+				7E22750F15EB443A009ED6DC /* IslandFill.h */,
+				7E22751015EB443A009ED6DC /* IslandFill.m */,
 			);
 			name = envr_obj;
 			sourceTree = "<group>";
@@ -2398,6 +2406,7 @@
 				7E9D32EA15D8A94000AF52AD /* World_5.png in Resources */,
 				7E1456B315E87EEF007CC9E4 /* grey_particle.png in Resources */,
 				7E1456B515E8BF63007CC9E4 /* cave_test.map in Resources */,
+				7E22750E15EB3AB1009ED6DC /* misc_test.map in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2460,6 +2469,7 @@
 				7E1456B015E873F2007CC9E4 /* FireworksParticleA.m in Sources */,
 				7E1456B815E8C0E0007CC9E4 /* CaveLineIsland.m in Sources */,
 				7E1456BB15E8C66D007CC9E4 /* CaveWall.m in Sources */,
+				7E22751115EB443A009ED6DC /* IslandFill.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

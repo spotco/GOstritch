@@ -60,9 +60,12 @@
     
     if (i.ndir < 0) {
         player.scaleY = -1;
+        player.last_ndir = -1;
     } else {
         player.scaleY = 1;
+        player.last_ndir = 1;
     }
+    player.scaleX = 1;
     
     if (tangent_vec.y < 0) {
         float ang = [tangent_vec get_angle_in_rad];
@@ -148,7 +151,11 @@
         GRAVITY = GRAVITY * 0.55;
     }
     
-    player.scaleX = 1;
+    if (player.last_ndir == -1 && player.vx < 0) {
+        player.scaleX = -1;
+    } else if (player.last_ndir == 1) {
+        player.scaleX = 1;
+    }
     player.scaleY = 1;
     
     float cur_ang = [Common rad_to_deg:[player.up_vec get_angle_in_rad]];
@@ -204,6 +211,7 @@
         float grav_const = GRAVITY;
         player.vx += grav_const * player.up_vec.x;
         player.vy += grav_const * player.up_vec.y;
+        //player.vy += grav_const;
     }
     
     return player_post;

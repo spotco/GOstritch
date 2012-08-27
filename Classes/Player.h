@@ -19,6 +19,7 @@
     
     PlayerEffectParams *current_params;
     PlayerEffectParams *temp_params;
+    int last_ndir;
     BOOL floating;
     BOOL dashing;
     
@@ -50,6 +51,7 @@ typedef enum {
 -(PlayerEffectParams*) get_default_params;
 
 @property(readwrite,assign) float vx,vy;
+@property(readwrite,assign) int last_ndir;
 @property(readwrite,assign) CCSprite* player_img;
 @property(readwrite,assign) Island* current_island;
 @property(readwrite,assign) Vec3D* up_vec;

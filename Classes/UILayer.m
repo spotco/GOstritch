@@ -63,7 +63,7 @@
 
 -(void)nextlevel {
     [Resource dealloc_textures];
-    [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene_with:@"vertical_test"]];
+    [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene_with:@"cave_test"]];
 }
 
 -(void)start_initial_anim {

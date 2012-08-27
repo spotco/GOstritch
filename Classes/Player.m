@@ -25,6 +25,7 @@
 @synthesize current_island;
 @synthesize up_vec;
 @synthesize start_pt;
+@synthesize last_ndir;
 @synthesize floating,dashing;
 
 +(Player*)init_at:(CGPoint)pt {
@@ -32,7 +33,7 @@
     [new_player reset_params];
 	CCSprite *player_img = [CCSprite node];
     new_player.player_img = player_img;
-    
+    new_player.last_ndir = 1;
     new_player.current_island = NULL;
 	player_img.anchorPoint = ccp(0,0);
 	player_img.position = ccp(IMG_OFFSET_X,IMG_OFFSET_Y);
