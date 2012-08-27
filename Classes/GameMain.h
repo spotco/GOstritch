@@ -7,5 +7,6 @@
 +(void)main;
 
 +(BOOL)GET_USE_BG;
++(BOOL)GET_ENABLE_BG_PARTICLES;
 
 @end

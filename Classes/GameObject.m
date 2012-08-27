@@ -8,12 +8,20 @@
 @synthesize img;
 
 -(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g {
+    [self check_should_render:g];
+    return GameObjectReturnCode_NONE;
+}
+
+-(void)check_should_render:(GameEngineLayer *)g {
     if ([Common hitrect_touch:[g get_viewbox] b:[self get_hit_rect]]) {
         do_render = YES;
     } else {
         do_render = NO;
     }
-    return GameObjectReturnCode_NONE;
+}
+
+-(void)min_update:(Player*)player g:(GameEngineLayer *)g {
+    [self check_should_render:g];
 }
 
 -(void)draw {

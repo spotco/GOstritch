@@ -62,6 +62,17 @@
 		7E1456BB15E8C66D007CC9E4 /* CaveWall.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1456BA15E8C66A007CC9E4 /* CaveWall.m */; };
 		7E22750E15EB3AB1009ED6DC /* misc_test.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E22750D15EB3AB1009ED6DC /* misc_test.map */; };
 		7E22751115EB443A009ED6DC /* IslandFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E22751015EB443A009ED6DC /* IslandFill.m */; };
+		7E22751615EB6A53009ED6DC /* BG_cave_rock_wall_base.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E22751215EB6A52009ED6DC /* BG_cave_rock_wall_base.png */; };
+		7E22751715EB6A53009ED6DC /* BG_cave_rock_wall_section.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E22751315EB6A53009ED6DC /* BG_cave_rock_wall_section.png */; };
+		7E22751815EB6A53009ED6DC /* BG_cave_rock.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E22751415EB6A53009ED6DC /* BG_cave_rock.png */; };
+		7E22751915EB6A53009ED6DC /* BG_cave_spike.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E22751515EB6A53009ED6DC /* BG_cave_spike.png */; };
+		7E22751C15EB6AA3009ED6DC /* startbanner_banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E22751A15EB6AA3009ED6DC /* startbanner_banner.png */; };
+		7E22751D15EB6AA3009ED6DC /* startbanner_pole.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E22751B15EB6AA3009ED6DC /* startbanner_pole.png */; };
+		7E22752015EB6ADB009ED6DC /* BG1_bridge_edge.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E22751E15EB6ADB009ED6DC /* BG1_bridge_edge.png */; };
+		7E22752115EB6ADB009ED6DC /* BG1_bridge_section.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E22751F15EB6ADB009ED6DC /* BG1_bridge_section.png */; };
+		7E22752615EB6D8D009ED6DC /* spike_vine_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E22752315EB6D8D009ED6DC /* spike_vine_left.png */; };
+		7E22752715EB6D8D009ED6DC /* spike_vine_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E22752415EB6D8D009ED6DC /* spike_vine_right.png */; };
+		7E22752815EB6D8D009ED6DC /* spike_vine_section.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E22752515EB6D8D009ED6DC /* spike_vine_section.png */; };
 		7E28310415CF4E39002EB07B /* Particle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28310315CF4E39002EB07B /* Particle.m */; };
 		7E28310A15CF4FA7002EB07B /* StreamParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28310915CF4FA7002EB07B /* StreamParticle.m */; };
 		7E28310D15CF5D90002EB07B /* RocketParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28310C15CF5D90002EB07B /* RocketParticle.m */; };
@@ -524,6 +535,17 @@
 		7E22750D15EB3AB1009ED6DC /* misc_test.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = misc_test.map; sourceTree = "<group>"; };
 		7E22750F15EB443A009ED6DC /* IslandFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IslandFill.h; sourceTree = "<group>"; };
 		7E22751015EB443A009ED6DC /* IslandFill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IslandFill.m; sourceTree = "<group>"; };
+		7E22751215EB6A52009ED6DC /* BG_cave_rock_wall_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BG_cave_rock_wall_base.png; sourceTree = "<group>"; };
+		7E22751315EB6A53009ED6DC /* BG_cave_rock_wall_section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BG_cave_rock_wall_section.png; sourceTree = "<group>"; };
+		7E22751415EB6A53009ED6DC /* BG_cave_rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BG_cave_rock.png; sourceTree = "<group>"; };
+		7E22751515EB6A53009ED6DC /* BG_cave_spike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BG_cave_spike.png; sourceTree = "<group>"; };
+		7E22751A15EB6AA3009ED6DC /* startbanner_banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startbanner_banner.png; sourceTree = "<group>"; };
+		7E22751B15EB6AA3009ED6DC /* startbanner_pole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startbanner_pole.png; sourceTree = "<group>"; };
+		7E22751E15EB6ADB009ED6DC /* BG1_bridge_edge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_bridge_edge.png; path = Resources/bg/BG1/BG1_bridge_edge.png; sourceTree = SOURCE_ROOT; };
+		7E22751F15EB6ADB009ED6DC /* BG1_bridge_section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_bridge_section.png; path = Resources/bg/BG1/BG1_bridge_section.png; sourceTree = SOURCE_ROOT; };
+		7E22752315EB6D8D009ED6DC /* spike_vine_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spike_vine_left.png; sourceTree = "<group>"; };
+		7E22752415EB6D8D009ED6DC /* spike_vine_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spike_vine_right.png; sourceTree = "<group>"; };
+		7E22752515EB6D8D009ED6DC /* spike_vine_section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spike_vine_section.png; sourceTree = "<group>"; };
 		7E28310215CF4E39002EB07B /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 		7E28310315CF4E39002EB07B /* Particle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Particle.m; sourceTree = "<group>"; };
 		7E28310815CF4FA7002EB07B /* StreamParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamParticle.h; sourceTree = "<group>"; };
@@ -1178,6 +1200,16 @@
 			name = page;
 			sourceTree = "<group>";
 		};
+		7E22752215EB6D8D009ED6DC /* spikevine */ = {
+			isa = PBXGroup;
+			children = (
+				7E22752315EB6D8D009ED6DC /* spike_vine_left.png */,
+				7E22752415EB6D8D009ED6DC /* spike_vine_right.png */,
+				7E22752515EB6D8D009ED6DC /* spike_vine_section.png */,
+			);
+			path = spikevine;
+			sourceTree = "<group>";
+		};
 		7E28310115CF4E1D002EB07B /* particle */ = {
 			isa = PBXGroup;
 			children = (
@@ -1208,6 +1240,10 @@
 		7E3B977515D7A6A4001859CB /* BG_cave */ = {
 			isa = PBXGroup;
 			children = (
+				7E22751215EB6A52009ED6DC /* BG_cave_rock_wall_base.png */,
+				7E22751315EB6A53009ED6DC /* BG_cave_rock_wall_section.png */,
+				7E22751415EB6A53009ED6DC /* BG_cave_rock.png */,
+				7E22751515EB6A53009ED6DC /* BG_cave_spike.png */,
 				7E3B977615D7A6A4001859CB /* BG_cave_top_edge.png */,
 				7E3B977715D7A6A4001859CB /* BG_cave_top_fill.png */,
 				7E3B977815D7A6A4001859CB /* BG_cave_wall.png */,
@@ -1303,6 +1339,8 @@
 		7E89F253159ADF2C00A32F2B /* BG1 */ = {
 			isa = PBXGroup;
 			children = (
+				7E22751E15EB6ADB009ED6DC /* BG1_bridge_edge.png */,
+				7E22751F15EB6ADB009ED6DC /* BG1_bridge_section.png */,
 				7EFA3A4715B79B0000133CE3 /* BG1_cloud.png */,
 				7ECB83BF15B6590E00F52E55 /* BG1_detail_1.png */,
 				7ECB83C015B6590E00F52E55 /* BG1_detail_2.png */,
@@ -1618,6 +1656,8 @@
 		7ED863CD15B806C3005FBDBB /* checkpoint */ = {
 			isa = PBXGroup;
 			children = (
+				7E22751A15EB6AA3009ED6DC /* startbanner_banner.png */,
+				7E22751B15EB6AA3009ED6DC /* startbanner_pole.png */,
 				7EF1245F15CA512A00B91A91 /* checkerfloor.png */,
 				7ED863CE15B806C3005FBDBB /* checkpoint1.png */,
 				7ED863CF15B806C3005FBDBB /* checkpoint2.png */,
@@ -1753,6 +1793,7 @@
 		7EF1244F15CA50F900B91A91 /* obstacle */ = {
 			isa = PBXGroup;
 			children = (
+				7E22752215EB6D8D009ED6DC /* spikevine */,
 				7EF1246115CA513800B91A91 /* mud.png */,
 				7EF1245015CA50F900B91A91 /* bomb.png */,
 				7EF1245115CA50F900B91A91 /* catrocket.png */,
@@ -2407,6 +2448,17 @@
 				7E1456B315E87EEF007CC9E4 /* grey_particle.png in Resources */,
 				7E1456B515E8BF63007CC9E4 /* cave_test.map in Resources */,
 				7E22750E15EB3AB1009ED6DC /* misc_test.map in Resources */,
+				7E22751615EB6A53009ED6DC /* BG_cave_rock_wall_base.png in Resources */,
+				7E22751715EB6A53009ED6DC /* BG_cave_rock_wall_section.png in Resources */,
+				7E22751815EB6A53009ED6DC /* BG_cave_rock.png in Resources */,
+				7E22751915EB6A53009ED6DC /* BG_cave_spike.png in Resources */,
+				7E22751C15EB6AA3009ED6DC /* startbanner_banner.png in Resources */,
+				7E22751D15EB6AA3009ED6DC /* startbanner_pole.png in Resources */,
+				7E22752015EB6ADB009ED6DC /* BG1_bridge_edge.png in Resources */,
+				7E22752115EB6ADB009ED6DC /* BG1_bridge_section.png in Resources */,
+				7E22752615EB6D8D009ED6DC /* spike_vine_left.png in Resources */,
+				7E22752715EB6D8D009ED6DC /* spike_vine_right.png in Resources */,
+				7E22752815EB6D8D009ED6DC /* spike_vine_section.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 @implementation GameControlImplementation
 
 static BOOL queue_swipe = NO;
+static CGPoint swipe_dir;
 static BOOL queue_jump = NO;
 static int jump_hold_timer = 0;
 
@@ -26,17 +27,31 @@ static CGPoint prev;
     queue_jump = YES;
 }
 
+static float avg_x;
+static float avg_y;
+
 +(void)touch_move:(CGPoint)pt {
     touch_move_counter++;
     touch_dist_sum += [Common distanceBetween:prev and:pt];
     
+    avg_x += pt.x-prev.x;
+    avg_y -= pt.y-prev.y;
+    
     if(touch_move_counter == 5) {
         float avg = touch_dist_sum/touch_move_counter;
         if (avg > 10) {
-            queue_swipe = YES;
+            Vec3D* v = [Vec3D init_x:avg_x/touch_move_counter y:avg_y/touch_move_counter z:0];
+            [v normalize];
+            if (ABS([v get_angle_in_rad]) < M_PI*(3.0/4.0)) {
+                queue_swipe = YES;
+                swipe_dir = ccp(ABS(v.x),v.y);
+            }
+            [v dealloc];
         }
         touch_move_counter = 0;
         touch_dist_sum = 0;
+        avg_x = 0;
+        avg_y=0;
     }
     
     prev = pt;
@@ -59,7 +74,7 @@ static CGPoint prev;
     
     if (queue_swipe == YES && player.current_island == NULL && [player get_current_params].cur_dash_count > 0) {
         [[player get_current_params] decr_dash_count];
-        [player add_effect:[DashEffect init_from:[player get_default_params]]];
+        [player add_effect:[DashEffect init_from:[player get_default_params] vx:swipe_dir.x vy:swipe_dir.y]];
     }
     queue_swipe = NO;
     

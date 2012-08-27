@@ -10,22 +10,6 @@
 @synthesize load_game_end_menu;
 @synthesize game_render_state;
 
-/**
- TODO --
- -Level editor:
-    add island fill
-    add breakable wall
- -Game fixes:
-    breakable walls
-    new spikes, new cave grounddetails
-    
-    hot tomale item pickup
-    implement manual zoom
-    start/end area new graphics
-    sun in background
- **/
-
-
 +(CCScene *) scene_with:(NSString *) map_file_name {
     [Resource init_bg1_textures];
 
@@ -193,9 +177,9 @@
 }
 
 -(void)update {
-    //[self print_bonestatus];
     if (current_mode == GameEngineLayerMode_PAUSED) {
         return;
+        
     } else if (current_mode == GameEngineLayerMode_GAMEPLAY || current_mode == GameEngineLayerMode_OBJECTANIM) {
         [GamePhysicsImplementation player_move:player with_islands:islands];
         [GameControlImplementation control_update_player:player islands:islands objects:game_objects];
@@ -209,18 +193,29 @@
         [GameRenderImplementation update_render_on:self player:player islands:islands objects:game_objects state:game_render_state];
         [Common run_callback:bg_update];
         [Common run_callback:ui_update];
+        
     } else if (current_mode == GameEngineLayerMode_ENDOUT) {
         if ([Common hitrect_touch:[player get_hit_rect] b:[self get_viewbox]]) {
             [GamePhysicsImplementation player_move:player with_islands:islands];
             [player update:self];  
+            [self min_update_game_obj];
             [self update_particles];
+            [self push_added_particles];
+            
         } else {
             [Common run_callback:load_game_end_menu];
             current_mode = GameEngineLayerMode_ENDED;
+            
         }
+        
+    } else {
+        [self min_update_game_obj];
+        [self update_particles];
+        [self push_added_particles];
     }
-    
 }
+
+
 
 -(void)update_islands {
     for (Island* i in islands) {
@@ -261,6 +256,12 @@ static NSMutableArray* particles_tba;
                                 y1:-self.position.y-[CCDirector sharedDirector].winSize.height/2
                                wid:[CCDirector sharedDirector].winSize.width*2.5
                                hei:[CCDirector sharedDirector].winSize.height*2.5];
+}
+
+-(void)min_update_game_obj {
+    for(GameObject* i in game_objects) {
+        [i min_update:player g:self];
+    }
 }
 
 -(void)update_game_obj {

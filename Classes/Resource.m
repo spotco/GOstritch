@@ -12,6 +12,11 @@ static NSMutableDictionary* textures = nil;
     [Resource load_tex_from_array:temp];
 }
 
+/*
+ #define TEX_STARTBANNER_POLE @"StartBannerPole"
+ #define TEX_STARTBANNER_BANNER @"StartBannerBanner"
+ */
+
 +(void)init_bg1_textures {
     textures = [NSMutableDictionary dictionary];
     [textures retain];
@@ -23,10 +28,16 @@ static NSMutableDictionary* textures = nil;
                      @"BG1_island_fill.png", TEX_GROUND_TEX_1,
                      @"BG1_top_fill.png", TEX_GROUND_TOP_1,
                      @"BG1_island_top_edge.png", TEX_TOP_EDGE,
+                     @"BG1_bridge_edge.png",TEX_BRIDGE_EDGE,
+                     @"BG1_bridge_section.png",TEX_BRIDGE_SECTION,
                      
                      @"BG_cave_top_fill.png", TEX_CAVE_TOP_TEX,
                      @"BG_cave_top_edge.png", TEX_CAVE_CORNER_TEX,
                      @"BG_cave_wall.png", TEX_CAVEWALL,
+                     @"BG_cave_rock_wall_base.png", TEX_CAVE_ROCKWALL_BASE,
+                     @"BG_cave_rock_wall_section.png", TEX_CAVE_ROCKWALL_SECTION,
+                     @"BG_cave_rock.png", TEX_CAVE_ROCKPARTICLE,
+                     @"BG_cave_spike.png", TEX_CAVE_SPIKE,
                      
                      @"BG1_sky.png", TEX_BG_SKY,
                      @"BG1_layer_1.png", TEX_BG_LAYER_1,
@@ -39,6 +50,11 @@ static NSMutableDictionary* textures = nil;
                      @"bird_ss.png", TEX_BIRD_SS,
                      @"superjump_ss.png", TEX_JUMPPAD,
                      @"speedup_ss.png", TEX_SPEEDUP,
+                     @"startbanner_pole.png",TEX_STARTBANNER_POLE,
+                     @"startbanner_banner.png",TEX_STARTBANNER_BANNER,
+                     @"spike_vine_left.png", TEX_SPIKE_VINE_LEFT,
+                     @"spike_vine_right.png", TEX_SPIKE_VINE_RIGHT,
+                     @"spike_vine_section.png", TEX_SPIKE_VINE_SECTION,
                                           
                      @"BG1_detail_1.png", TEX_GROUND_DETAIL_1,
                      @"BG1_detail_2.png", TEX_GROUND_DETAIL_2,

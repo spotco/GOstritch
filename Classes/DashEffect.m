@@ -4,9 +4,15 @@
 
 @implementation DashEffect
 
-+(DashEffect*)init_from:(PlayerEffectParams*)base {
+@synthesize vx,vy;
+
++(DashEffect*)init_from:(PlayerEffectParams*)base vx:(float)vx vy:(float)vy {
     DashEffect *n = [[DashEffect alloc] init];
     [PlayerEffectParams copy_params_from:base to:n];
+    
+    n.vx = vx;
+    n.vy = vy;
+    
     n.time_left = 20;
     n.cur_airjump_count = 0;
     n.cur_gravity = 0;
@@ -14,11 +20,14 @@
 }
 
 -(void)update:(Player*)p g:(GameEngineLayer *)g{
-    p.vx = MAX(p.vx,12);
+    //p.vx = MAX(p.vx,12);
     
-    if (p.current_island == NULL) {
+    p.vx = self.vx*12;
+    p.vy = self.vy*12;
+    
+    /*if (p.current_island == NULL) {
         p.vy = 0;
-    }
+    }*/
     
     if (arc4random_uniform(5) == 1) {
         JumpPadParticle* pt = [JumpPadParticle init_x:p.position.x y:p.position.y+20 vx:float_random(-10, -5) vy:float_random(-2, 2)];

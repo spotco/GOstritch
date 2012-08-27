@@ -11,11 +11,17 @@
 
 #define TEX_GROUND_TEX_1 @"GroundTexture1"
 #define TEX_GROUND_TOP_1 @"GroundTop1"
+#define TEX_BRIDGE_EDGE @"BridgeEdge"
+#define TEX_BRIDGE_SECTION @"BridgeSection"
 #define TEX_TOP_EDGE @"GroundTopEdge"
 
 #define TEX_CAVE_TOP_TEX @"CaveTopTex"
 #define TEX_CAVE_CORNER_TEX @"CaveCornerTex"
 #define TEX_CAVEWALL @"CaveWall"
+#define TEX_CAVE_ROCKWALL_BASE @"RockWallBase"
+#define TEX_CAVE_ROCKWALL_SECTION @"RockWallSection"
+#define TEX_CAVE_ROCKPARTICLE @"RockParticle"
+#define TEX_CAVE_SPIKE @"CaveSpike"
 
 #define TEX_DOG_RUN_1 @"Dog1RunSSheet"
 #define TEX_DOG_SPLASH @"DogSplash"
@@ -35,6 +41,11 @@
 #define TEX_BIRD_SS @"BirdSS"
 #define TEX_JUMPPAD @"JumpPad"
 #define TEX_SPEEDUP @"SpeedUp"
+#define TEX_STARTBANNER_POLE @"StartBannerPole"
+#define TEX_STARTBANNER_BANNER @"StartBannerBanner"
+#define TEX_SPIKE_VINE_LEFT @"SpikeVineLeft"
+#define TEX_SPIKE_VINE_RIGHT @"SpikeVineRight"
+#define TEX_SPIKE_VINE_SECTION @"SpikeVineSection"
 
 #define TEX_CHECKPOINT_1 @"CheckPointPre"
 #define TEX_CHECKPOINT_2 @"CheckPointPost"

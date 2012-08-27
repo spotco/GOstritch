@@ -203,6 +203,8 @@ static NSDictionary *splash_ss_plist_dict = NULL;
     vx = 0;
     vy = 0;
     rotation_ = 0;
+    floating = NO;
+    dashing = NO;
     [self reset_params];
 }
 
@@ -269,9 +271,9 @@ static GameEngineLayer* game_engine_layer;
     
     player_anim_mode cur_anim_mode = [[self get_current_params] get_anim];
     
-    if (cur_anim_mode == player_anim_mode_DASH) {
-        dashing = YES;
-    } 
+    
+    dashing = cur_anim_mode == player_anim_mode_DASH;
+    
     if (cur_anim_mode == player_anim_mode_RUN) {
         if (current_island == NULL) {
             if (floating) {

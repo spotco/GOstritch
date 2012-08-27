@@ -2,6 +2,6 @@
     "islands": [{"ground": "open", "ndir": "left", "y1": 109, "hei": 50, "x1": 114, "can_fall": true, "x2": 605, "type": "line", "y2": 125}],
     "assert_links": 0,
     "start_y": 181,
-    "objects": [{"x": 450, "y": 150, "height": 250, "label": "0", "type": "islandfill", "width": 226}],
+    "objects": [{"x": 552, "label": "3", "type": "spike", "y": 123}],
     "start_x": 158
 }

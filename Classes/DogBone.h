@@ -5,6 +5,10 @@
 @interface DogBone : GameObject {
     BOOL anim_toggle;
     int bid;
+    
+    float vx,vy;
+    BOOL follow;
+    CGPoint initial_pos;
 }
 
 typedef enum {
