@@ -1,7 +1,12 @@
 {
-    "islands": [{"ground": "open", "ndir": "left", "y1": 109, "hei": 50, "x1": 114, "can_fall": true, "x2": 605, "type": "line", "y2": 125}],
+    "start_y": 151,
     "assert_links": 0,
-    "start_y": 181,
-    "objects": [{"x": 552, "label": "3", "type": "spike", "y": 123}],
-    "start_x": 158
+    "islands": [{"can_fall": true, "x1": 94, "y1": 86, "hei": 50, "x2": 971, "y2": 153, "type": "line", "ndir": "left", "ground": "open"}],
+    "start_x": 118,
+    "objects": [
+        {"x": 364, "y": 66, "x2": 251, "y2": 294, "label": "0", "type": "breakable_wall"},
+        {"x": 527, "y": 79, "x2": 536, "y2": 335, "label": "1", "type": "breakable_wall"},
+        {"x": 757, "y": 93, "x2": 680, "y2": 422, "label": "2", "type": "breakable_wall"},
+        {"x": 919, "y": 125, "x2": 928, "y2": 466, "label": "3", "type": "breakable_wall"}
+    ]
 }

@@ -111,6 +111,9 @@
 		7E8DF40315945E8C00B00340 /* LineIsland.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E8DF40215945E8C00B00340 /* LineIsland.m */; };
 		7E8F90021568556900C2E30F /* BackgroundObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8F90001568556900C2E30F /* BackgroundObject.h */; };
 		7E8F90031568556900C2E30F /* BackgroundObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E8F90011568556900C2E30F /* BackgroundObject.m */; };
+		7E933FED1609A4E3007E494A /* FloatingSweatParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E933FEC1609A4E3007E494A /* FloatingSweatParticle.m */; };
+		7E933FF11609ABD7007E494A /* BreakableWall.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E933FF01609ABD7007E494A /* BreakableWall.m */; };
+		7E933FF4160A511D007E494A /* PolyLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E933FF3160A511D007E494A /* PolyLib.m */; };
 		7E93D6761592B97C00A83E9C /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E93D6751592B97C00A83E9C /* GameObject.m */; };
 		7E961F0715B8FC1B0096F2C8 /* BG1_island_border.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E961F0615B8FC1B0096F2C8 /* BG1_island_border.png */; };
 		7E961F1115B90A540096F2C8 /* UILayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E961F1015B90A540096F2C8 /* UILayer.m */; };
@@ -603,6 +606,12 @@
 		7E8DF40215945E8C00B00340 /* LineIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineIsland.m; sourceTree = "<group>"; };
 		7E8F90001568556900C2E30F /* BackgroundObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundObject.h; sourceTree = "<group>"; };
 		7E8F90011568556900C2E30F /* BackgroundObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundObject.m; sourceTree = "<group>"; };
+		7E933FEB1609A4E3007E494A /* FloatingSweatParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloatingSweatParticle.h; sourceTree = "<group>"; };
+		7E933FEC1609A4E3007E494A /* FloatingSweatParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FloatingSweatParticle.m; sourceTree = "<group>"; };
+		7E933FEF1609ABD7007E494A /* BreakableWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakableWall.h; sourceTree = "<group>"; };
+		7E933FF01609ABD7007E494A /* BreakableWall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakableWall.m; sourceTree = "<group>"; };
+		7E933FF2160A511C007E494A /* PolyLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolyLib.h; sourceTree = "<group>"; };
+		7E933FF3160A511D007E494A /* PolyLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolyLib.m; sourceTree = "<group>"; };
 		7E93D6741592B97C00A83E9C /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
 		7E93D6751592B97C00A83E9C /* GameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameObject.m; sourceTree = "<group>"; };
 		7E961F0615B8FC1B0096F2C8 /* BG1_island_border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_island_border.png; path = Resources/bg/BG1/BG1_island_border.png; sourceTree = SOURCE_ROOT; };
@@ -1225,6 +1234,8 @@
 				7E786E0615E4D334000E1946 /* WaveParticle.m */,
 				7E1456AE15E873F2007CC9E4 /* FireworksParticleA.h */,
 				7E1456AF15E873F2007CC9E4 /* FireworksParticleA.m */,
+				7E933FEB1609A4E3007E494A /* FloatingSweatParticle.h */,
+				7E933FEC1609A4E3007E494A /* FloatingSweatParticle.m */,
 			);
 			name = particle;
 			sourceTree = "<group>";
@@ -1399,6 +1410,8 @@
 				7E1456BA15E8C66A007CC9E4 /* CaveWall.m */,
 				7E22750F15EB443A009ED6DC /* IslandFill.h */,
 				7E22751015EB443A009ED6DC /* IslandFill.m */,
+				7E933FEF1609ABD7007E494A /* BreakableWall.h */,
+				7E933FF01609ABD7007E494A /* BreakableWall.m */,
 			);
 			name = envr_obj;
 			sourceTree = "<group>";
@@ -1424,6 +1437,8 @@
 				49CE63991541F26D00538B33 /* Resource.m */,
 				7ECBC8651597FA5700B2BCFE /* Vec3D.h */,
 				7ECBC8661597FA5700B2BCFE /* Vec3D.m */,
+				7E933FF2160A511C007E494A /* PolyLib.h */,
+				7E933FF3160A511D007E494A /* PolyLib.m */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -2522,6 +2537,9 @@
 				7E1456B815E8C0E0007CC9E4 /* CaveLineIsland.m in Sources */,
 				7E1456BB15E8C66D007CC9E4 /* CaveWall.m in Sources */,
 				7E22751115EB443A009ED6DC /* IslandFill.m in Sources */,
+				7E933FED1609A4E3007E494A /* FloatingSweatParticle.m in Sources */,
+				7E933FF11609ABD7007E494A /* BreakableWall.m in Sources */,
+				7E933FF4160A511D007E494A /* PolyLib.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

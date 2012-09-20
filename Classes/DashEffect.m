@@ -14,20 +14,21 @@
     n.vy = vy;
     
     n.time_left = 20;
-    n.cur_airjump_count = 0;
+    //n.cur_airjump_count = 0;
     n.cur_gravity = 0;
     return n;
 }
 
 -(void)update:(Player*)p g:(GameEngineLayer *)g{
-    //p.vx = MAX(p.vx,12);
-    
-    p.vx = self.vx*12;
-    p.vy = self.vy*12;
-    
-    /*if (p.current_island == NULL) {
-        p.vy = 0;
-    }*/
+    if (p.current_island != NULL) {
+        Vec3D *t = [p.current_island get_tangent_vec];
+        self.vx = t.x;
+        self.vy = t.y;
+        [t dealloc];
+    } else {    
+        p.vx = self.vx*12;
+        p.vy = self.vy*12;
+    }
     
     if (arc4random_uniform(5) == 1) {
         JumpPadParticle* pt = [JumpPadParticle init_x:p.position.x y:p.position.y+20 vx:float_random(-10, -5) vy:float_random(-2, 2)];

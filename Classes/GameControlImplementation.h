@@ -12,6 +12,8 @@
                      islands:(NSMutableArray*)islands 
                      objects:(NSMutableArray*)game_objects;
 
++(void)reset_control_state;
+
 +(void)touch_begin:(CGPoint)pt;
 +(void)touch_move:(CGPoint)pt;
 +(void)touch_end:(CGPoint)pt;

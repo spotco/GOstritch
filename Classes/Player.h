@@ -5,6 +5,7 @@
 #import "Common.h"
 #import "StreamParticle.h"
 #import "RocketParticle.h"
+#import "FloatingSweatParticle.h"
 @class GameEngineLayer;
 
 @class PlayerEffectParams;
@@ -42,6 +43,7 @@ typedef enum {
 -(void)add_effect:(PlayerEffectParams*)effect;
 -(void) reset;
 -(void) reset_params;
+-(void)remove_temp_params;
 -(void) update:(GameEngineLayer*)g;
 
 -(void)cleanup_anims;

@@ -19,6 +19,7 @@
 #import "SpeedUp.h"
 #import "CaveWall.h"
 #import "IslandFill.h"
+#import "BreakableWall.h"
 
 @interface MapLoader : NSObject
 

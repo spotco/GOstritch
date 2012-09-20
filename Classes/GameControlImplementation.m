@@ -37,11 +37,12 @@ static float avg_y;
     avg_x += pt.x-prev.x;
     avg_y -= pt.y-prev.y;
     
-    if(touch_move_counter == 5) {
+    if(touch_move_counter == 3) {
         float avg = touch_dist_sum/touch_move_counter;
-        if (avg > 10) {
+        if (avg > 5) {
             Vec3D* v = [Vec3D init_x:avg_x/touch_move_counter y:avg_y/touch_move_counter z:0];
             [v normalize];
+            
             if (ABS([v get_angle_in_rad]) < M_PI*(3.0/4.0)) {
                 queue_swipe = YES;
                 swipe_dir = ccp(ABS(v.x),v.y);
@@ -78,15 +79,23 @@ static float avg_y;
     }
     queue_swipe = NO;
     
+    
     if (queue_jump == YES) { //initial jump
+        
+        if (player.dashing) {
+            [player remove_temp_params]; //note bug here is dashing then jump into ndir -1 wall, fix by removing dash param
+        }
+        
         if (player.current_island != NULL) {
             [GameControlImplementation player_jump_from_island:player];
             jump_hold_timer = JUMP_HOLD_TIME;
             [[player get_current_params] decr_airjump_count];
+            
         } else if ([player get_current_params].cur_airjump_count > 0) {
             [GameControlImplementation player_double_jump:player];
             jump_hold_timer = JUMP_HOLD_TIME;
             [[player get_current_params] decr_airjump_count];
+            
         }
     }
     queue_jump = NO;
@@ -102,11 +111,13 @@ static float avg_y;
         player.floating = NO;
     } 
     
-    if (is_touch_down) {
+    if (player.current_island != NULL) {
+        touch_timer = 0;
+    } else if (is_touch_down) {
         touch_timer++;
     }
         
-    if (is_touch_down && touch_timer > 25) { //hold to float
+    if (is_touch_down && touch_timer > 25 && player.current_island == NULL) { //hold to float
         player.floating = YES;
     } else {
         player.floating = NO;
@@ -116,6 +127,17 @@ static float avg_y;
 +(void)player_double_jump:(Player*)player {    
     player.vx += player.up_vec.x*JUMP_POWER;
     player.vy = player.up_vec.y*JUMP_POWER;
+}
+
++(void)reset_control_state {
+    queue_swipe = NO;
+    queue_jump = NO;
+    jump_hold_timer = 0;
+    
+    is_touch_down = NO;
+    touch_timer = 0;
+    touch_move_counter = 0;
+    touch_dist_sum = 0;
 }
 
 

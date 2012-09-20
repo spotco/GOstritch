@@ -167,6 +167,13 @@
             float hei = ((NSString*)[j_object  objectForKey:@"height"]).floatValue;
             [map.game_objects addObject:[IslandFill init_x:x y:y width:width height:hei]];
             
+        } else if ([type isEqualToString:@"breakable_wall"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            float x2 = ((NSString*)[j_object  objectForKey:@"x2"]).floatValue;
+            float y2 = ((NSString*)[j_object  objectForKey:@"y2"]).floatValue;
+            [map.game_objects addObject:[BreakableWall init_x:x y:y x2:x2 y2:y2]];
+            
         } else {
             NSLog(@"item read error");
             continue;

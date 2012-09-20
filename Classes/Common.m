@@ -32,10 +32,16 @@
 
 +(CGPoint*)hitrect_get_pts:(HitRect)rect {
     CGPoint *pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+//    pts[0] = ccp(rect.x1,rect.y1);
+//    pts[1] = ccp(rect.x1+(rect.x2-rect.x1),rect.y1);
+//    pts[2] = ccp(rect.x2,rect.y2);
+//    pts[3] = ccp(rect.x1,rect.y1+(rect.y2-rect.y1));
+    
     pts[0] = ccp(rect.x1,rect.y1);
-    pts[1] = ccp(rect.x1+(rect.x2-rect.x1),rect.y1);
+    pts[1] = ccp(rect.x2,rect.y1);
     pts[2] = ccp(rect.x2,rect.y2);
-    pts[3] = ccp(rect.x1,rect.y1+(rect.y2-rect.y1));
+    pts[3] = ccp(rect.x1,rect.y2);
+
     return pts;
     
 }

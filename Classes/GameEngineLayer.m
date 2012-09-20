@@ -162,6 +162,7 @@
     [player reset];
     [game_render_state dealloc];
     game_render_state = [[GameRenderState alloc] init];
+    [GameControlImplementation reset_control_state];
     [GameRenderImplementation update_camera_on:self state:game_render_state];
     for (GameObject* o in game_objects) {
         [o reset];
@@ -379,7 +380,9 @@ static NSMutableArray* particles_tba;
 
 -(void)draw {
     [super draw];
-    return;
+    if (![GameMain GET_DRAW_HITBOX]) {
+        return;
+    }
     
     glColor4ub(255,0,0,100);
     glLineWidth(1.0f);

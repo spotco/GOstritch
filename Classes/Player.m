@@ -203,6 +203,7 @@ static NSDictionary *splash_ss_plist_dict = NULL;
     vx = 0;
     vy = 0;
     rotation_ = 0;
+    last_ndir = 1;
     floating = NO;
     dashing = NO;
     [self reset_params];
@@ -269,6 +270,16 @@ static GameEngineLayer* game_engine_layer;
         }
     }
     
+    if (floating && arc4random()%10 == 0) {
+        float pvx;
+        if (arc4random_uniform(2) == 0) {
+            pvx = float_random(4, 6);
+        } else {
+            pvx = float_random(-4, -6);
+        }
+        [g add_particle:[FloatingSweatParticle init_x:position_.x+6 y:position_.y+29 vx:pvx+vx vy:float_random(3, 6)+vy]];
+    }
+    
     player_anim_mode cur_anim_mode = [[self get_current_params] get_anim];
     
     
@@ -317,6 +328,13 @@ static GameEngineLayer* game_engine_layer;
         }
     }
     refresh_hitrect = YES;
+}
+
+-(void)remove_temp_params {
+    if (temp_params != NULL) {
+        [temp_params dealloc];
+        temp_params = NULL;
+    }
 }
 
 
