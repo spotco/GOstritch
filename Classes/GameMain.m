@@ -9,14 +9,16 @@
 
 
 /**
- TODO --
- -breakable walls
- -spike vine
- -cave spike
- -bridge island
- -implement island filler
+ ASK FOR--
+ -run into wall animation
  
- implement manual zoom
+ TODO --
+ -implement manual zoom
+ -swinging vine
+ -bridge island
+ -implement island filler in level editor
+ -minion robot with beserk
+ -dog redesign upload
  **/
 
 +(void)main {

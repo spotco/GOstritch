@@ -43,8 +43,7 @@
 #define TEX_SPEEDUP @"SpeedUp"
 #define TEX_STARTBANNER_POLE @"StartBannerPole"
 #define TEX_STARTBANNER_BANNER @"StartBannerBanner"
-#define TEX_SPIKE_VINE_LEFT @"SpikeVineLeft"
-#define TEX_SPIKE_VINE_RIGHT @"SpikeVineRight"
+#define TEX_SPIKE_VINE_BOTTOM @"SpikeVineRight"
 #define TEX_SPIKE_VINE_SECTION @"SpikeVineSection"
 
 #define TEX_CHECKPOINT_1 @"CheckPointPre"

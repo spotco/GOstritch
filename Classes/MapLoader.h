@@ -20,6 +20,7 @@
 #import "CaveWall.h"
 #import "IslandFill.h"
 #import "BreakableWall.h"
+#import "SpikeVine.h"
 
 @interface MapLoader : NSObject
 

@@ -12,11 +12,6 @@ static NSMutableDictionary* textures = nil;
     [Resource load_tex_from_array:temp];
 }
 
-/*
- #define TEX_STARTBANNER_POLE @"StartBannerPole"
- #define TEX_STARTBANNER_BANNER @"StartBannerBanner"
- */
-
 +(void)init_bg1_textures {
     textures = [NSMutableDictionary dictionary];
     [textures retain];
@@ -52,8 +47,7 @@ static NSMutableDictionary* textures = nil;
                      @"speedup_ss.png", TEX_SPEEDUP,
                      @"startbanner_pole.png",TEX_STARTBANNER_POLE,
                      @"startbanner_banner.png",TEX_STARTBANNER_BANNER,
-                     @"spike_vine_left.png", TEX_SPIKE_VINE_LEFT,
-                     @"spike_vine_right.png", TEX_SPIKE_VINE_RIGHT,
+                     @"spike_vine_bottom.png", TEX_SPIKE_VINE_BOTTOM,
                      @"spike_vine_section.png", TEX_SPIKE_VINE_SECTION,
                                           
                      @"BG1_detail_1.png", TEX_GROUND_DETAIL_1,

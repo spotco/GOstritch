@@ -1,7 +1,8 @@
 #import "GameRenderImplementation.h"
 
-#define RENDER_FG_ISLAND_ORD 3
-#define RENDER_PLAYER_ORD 2
+#define RENDER_FG_ISLAND_ORD 4
+#define RENDER_BTWN_ISLAND_PLAYER 2
+#define RENDER_PLAYER_ORD 3
 #define RENDER_ISLAND_ORD 1
 #define RENDER_GAMEOBJ_ORD 0
 
@@ -127,6 +128,10 @@ int zct = 0;
 
 +(int)GET_RENDER_GAMEOBJ_ORD {
     return RENDER_GAMEOBJ_ORD;
+}
+
++(int)GET_RENDER_BTWN_PLAYER_ISLAND {
+    return RENDER_BTWN_ISLAND_PLAYER;
 }
 
 @end
