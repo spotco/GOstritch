@@ -21,6 +21,7 @@
 #import "IslandFill.h"
 #import "BreakableWall.h"
 #import "SpikeVine.h"
+#import "CameraArea.h"
 
 @interface MapLoader : NSObject
 

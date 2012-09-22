@@ -17,13 +17,20 @@
 
 -(void)update:(Player*)p g:(GameEngineLayer *)g{
     g.current_mode = GameEngineLayerMode_OBJECTANIM;
+    p.dead = YES;
     p.vx = 0;
     p.vy = 0;
 }
 
 -(void)effect_end:(Player*)p g:(GameEngineLayer*)g {
+    [super effect_end:p g:g];
+    p.dead = NO;
     [g player_reset];
     [p add_effect:[FlashEffect init_from:[p get_current_params] time:35]];
+}
+
+-(void)effect_begin:(Player *)p {
+    p.dead = YES;
 }
 
 -(NSString*)info {

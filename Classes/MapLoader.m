@@ -181,6 +181,20 @@
             float y2 = ((NSString*)[j_object  objectForKey:@"y2"]).floatValue;
             [map.game_objects addObject:[SpikeVine init_x:x y:y x2:x2 y2:y2]];
             
+        } else if ([type isEqualToString:@"camera_area"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            float width = ((NSString*)[j_object  objectForKey:@"width"]).floatValue;
+            float hei = ((NSString*)[j_object  objectForKey:@"height"]).floatValue;
+            
+            NSDictionary* dir_obj = [j_object objectForKey:@"camera"];
+            float cx = ((NSString*)[dir_obj objectForKey:@"x"]).floatValue;
+            float cy = ((NSString*)[dir_obj objectForKey:@"y"]).floatValue;
+            float cz = ((NSString*)[dir_obj objectForKey:@"z"]).floatValue;
+            struct CameraZoom n = {cx,cy,cz};
+            [map.game_objects addObject:[CameraArea init_x:x y:y wid:width hei:hei zoom:n]];
+            
+            
         } else {
             NSLog(@"item read error");
             continue;

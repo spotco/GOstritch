@@ -11,7 +11,6 @@
 #import "GamePhysicsImplementation.h"
 #import "GameRenderImplementation.h"
 #import "GameControlImplementation.h"
-#import "GameRenderState.h"
 
 #import "World1ParticleGenerator.h"
 
@@ -35,11 +34,12 @@ typedef struct level_bone_status {
 	NSMutableArray *islands;
     NSMutableArray *game_objects;
     NSMutableArray *particles;
+    CameraZoom camera_state;
+    CameraZoom tar_camera_state;
     
     NSMutableDictionary *bones;
 
 	Player *player;
-    GameRenderState *game_render_state;
     
     CGPoint map_start_pt;
     CCFollow *follow_action;
@@ -57,13 +57,16 @@ typedef struct level_bone_status {
 @property(readwrite,assign) NSMutableArray *islands, *game_objects;
 @property(readwrite,assign) Player* player;
 @property(readwrite,assign) callback load_game_end_menu;
-@property(readwrite,assign) GameRenderState* game_render_state;
+@property(readwrite,assign) CameraZoom camera_state,tar_camera_state;
 
 +(CCScene *) scene_with:(NSString *)map_file_name;
 -(void)player_reset;
 -(void)add_particle:(Particle*)p;
 -(CGPoint)get_pos;
 -(HitRect)get_viewbox;
+
+-(void)set_camera:(CameraZoom)tar;
+-(void)set_target_camera:(CameraZoom)tar;
 
 -(void)set_checkpoint_to:(CGPoint)pt;
 -(void)set_bid_tohasget:(int)tbid;

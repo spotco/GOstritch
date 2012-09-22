@@ -227,15 +227,15 @@
 
 +(CGPoint)player_approx_position:(GameEngineLayer*)game_engine_layer {
     CGPoint player_scr_pos = [game_engine_layer.player convertToWorldSpace:CGPointZero];
-    player_scr_pos.x -= game_engine_layer.game_render_state.cx;
-    player_scr_pos.y -= game_engine_layer.game_render_state.cy;
+    player_scr_pos.x -= game_engine_layer.camera_state.x;
+    player_scr_pos.y -= game_engine_layer.camera_state.y;
     
     player_scr_pos.x += 15;
     player_scr_pos.y += 0;
     
-    if (game_engine_layer.game_render_state.ez > 50) {
-        float delta = game_engine_layer.game_render_state.ez - 50;
-        float deltamax = 150;
+    if (game_engine_layer.camera_state.z > 50) {
+        float delta = game_engine_layer.camera_state.z - 50;
+        float deltamax = 250;
         player_scr_pos.x += (delta/deltamax)*20;
         player_scr_pos.y += (delta/deltamax)*20;
     }
@@ -250,7 +250,23 @@
         player_scr_pos.y += 10;
     }
     
-    return player_scr_pos;
+    NSLog(@"approx:(%f,%f)",player_scr_pos.x,player_scr_pos.y);
+    
+    CGPoint center = [game_engine_layer convertToWorldSpace:game_engine_layer.player.position];
+    CGPoint offset = ccp(0,0);
+    //[[CCDirector sharedDirector] convertToUI:];
+    NSLog(@"test:(%f,%f)\n",center.x,center.y);
+    
+    return center;
+    
+}
+
+
+-(void)draw {
+    [super draw];
+    glColor4f(1.0, 0, 0, 1.0);
+    ccDrawLine(ccp(0, 160),ccp(480,160));
+    ccDrawLine(ccp(240, 0),ccp(240,320));
 }
 
 @end

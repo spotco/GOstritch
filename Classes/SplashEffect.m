@@ -18,6 +18,16 @@
 -(void)update:(Player*)p g:(GameEngineLayer *)g{
     [super update:p g:g];
     p.rotation = 0;
+    p.dead = YES;
+}
+
+-(void)effect_end:(Player *)p g:(GameEngineLayer *)g {
+    [super effect_end:p g:g];
+    p.dead = NO;
+}
+
+-(void)effect_begin:(Player *)p {
+    p.dead = YES;
 }
 
 -(NSString*)info {

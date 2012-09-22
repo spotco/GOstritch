@@ -48,6 +48,7 @@
     [player reset_params];
     [self setActive:NO];
     [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
+    //player.dead = YES;
 }
 
 -(CCTexture2D*)get_base_tex {

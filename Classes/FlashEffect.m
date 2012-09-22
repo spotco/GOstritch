@@ -22,6 +22,7 @@
 }
 
 -(void)effect_end:(Player *)p g:(GameEngineLayer *)g {
+    [super effect_end:p g:g];
     [p setOpacity:255];
 }
 

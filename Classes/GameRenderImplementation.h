@@ -3,19 +3,21 @@
 #import "Player.h"
 #import "Island.h"
 #import "GameObject.h"
-#import "GameRenderState.h"
 #import "PlayerEffectParams.h"
+@class GameEngineLayer;
+
+typedef struct CameraZoom {
+    float x;
+    float y;
+    float z;
+} CameraZoom;
 
 
 @interface GameRenderImplementation:NSObject
 
-+(void)update_render_on:(CCLayer*)layer 
-                 player:(Player*)player 
-                islands:(NSMutableArray*)islands 
-                objects:(NSMutableArray*)objects
-                state:(GameRenderState*)state;
-
-+(void)update_camera_on:(CCLayer*)layer state:(GameRenderState*)state;
++(void)update_render_on:(GameEngineLayer*)g;
++(void)reset_camera:(CameraZoom*)c;
++(void)update_camera_on:(CCLayer*)layer zoom:(CameraZoom)state;
 
 +(int)GET_RENDER_FG_ISLAND_ORD;
 +(int)GET_RENDER_PLAYER_ORD;

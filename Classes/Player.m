@@ -26,7 +26,7 @@
 @synthesize up_vec;
 @synthesize start_pt;
 @synthesize last_ndir;
-@synthesize floating,dashing;
+@synthesize floating,dashing,dead;
 
 +(Player*)init_at:(CGPoint)pt {
 	Player *new_player = [Player node];
@@ -206,16 +206,17 @@ static NSDictionary *splash_ss_plist_dict = NULL;
     last_ndir = 1;
     floating = NO;
     dashing = NO;
+    dead = NO;
     [self reset_params];
 }
 
 -(void) reset_params {
     if (temp_params != NULL) {
-        [temp_params dealloc];
+        [temp_params f_dealloc];
         temp_params = NULL;
     }
     if (current_params != NULL) {
-        [current_params dealloc];
+        [current_params f_dealloc];
         current_params = NULL;
     }
     current_params = [[PlayerEffectParams alloc] init];
@@ -238,6 +239,7 @@ static NSDictionary *splash_ss_plist_dict = NULL;
         temp_params = NULL;
     }
     temp_params = effect;
+    [temp_params effect_begin:self];
 }
 
 static GameEngineLayer* game_engine_layer;
@@ -330,8 +332,9 @@ static GameEngineLayer* game_engine_layer;
     refresh_hitrect = YES;
 }
 
--(void)remove_temp_params {
+-(void)remove_temp_params:(GameEngineLayer*)g {
     if (temp_params != NULL) {
+        [temp_params effect_end:self g:g];
         [temp_params dealloc];
         temp_params = NULL;
     }

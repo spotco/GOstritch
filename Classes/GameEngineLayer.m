@@ -8,7 +8,7 @@
 @synthesize game_objects,islands;
 @synthesize player;
 @synthesize load_game_end_menu;
-@synthesize game_render_state;
+@synthesize camera_state,tar_camera_state;
 
 +(CCScene *) scene_with:(NSString *) map_file_name {
     [Resource init_bg1_textures];
@@ -37,8 +37,6 @@
 }
 
 -(void)initialize:(NSString*)map_filename {
-    game_render_state = [[GameRenderState alloc] init];
-    
     if (particles_tba == NULL) {
         particles_tba = [[NSMutableArray alloc] init];
     }
@@ -55,12 +53,26 @@
     
     current_mode = GameEngineLayerMode_GAMEPLAY;
     
-    [GameRenderImplementation update_camera_on:self state:game_render_state];
+    [self reset_camera];
     
     follow_action = [CCFollow actionWithTarget:player worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]];
     [self runAction:follow_action];
     
     [self schedule:@selector(update)];
+}
+
+-(void)reset_camera {
+    [GameRenderImplementation reset_camera:&camera_state];
+    [GameRenderImplementation reset_camera:&tar_camera_state];
+    [GameRenderImplementation update_camera_on:self zoom:camera_state];
+}
+
+-(void)set_target_camera:(CameraZoom)tar {
+    tar_camera_state = tar;
+}
+
+-(void)set_camera:(CameraZoom)tar {
+    camera_state = tar;
 }
 
 -(void)init_bones {
@@ -160,10 +172,8 @@
 
 -(void)player_reset {
     [player reset];
-    [game_render_state dealloc];
-    game_render_state = [[GameRenderState alloc] init];
+    [self reset_camera];
     [GameControlImplementation reset_control_state];
-    [GameRenderImplementation update_camera_on:self state:game_render_state];
     for (GameObject* o in game_objects) {
         [o reset];
     }
@@ -183,7 +193,7 @@
         
     } else if (current_mode == GameEngineLayerMode_GAMEPLAY || current_mode == GameEngineLayerMode_OBJECTANIM) {
         [GamePhysicsImplementation player_move:player with_islands:islands];
-        [GameControlImplementation control_update_player:player islands:islands objects:game_objects];
+        [GameControlImplementation control_update_player:self];
         [player update:self];
         
         [self check_game_state];	
@@ -191,7 +201,7 @@
         [self update_particles];
         [self push_added_particles];
         [self update_islands];
-        [GameRenderImplementation update_render_on:self player:player islands:islands objects:game_objects state:game_render_state];
+        [GameRenderImplementation update_render_on:self];
         [Common run_callback:bg_update];
         [Common run_callback:ui_update];
         
@@ -253,10 +263,10 @@ static NSMutableArray* particles_tba;
 }
 
 -(HitRect)get_viewbox {
-    return [Common hitrect_cons_x1:-self.position.x-[CCDirector sharedDirector].winSize.width/2
-                                y1:-self.position.y-[CCDirector sharedDirector].winSize.height/2
-                               wid:[CCDirector sharedDirector].winSize.width*2.5
-                               hei:[CCDirector sharedDirector].winSize.height*2.5];
+    return [Common hitrect_cons_x1:-self.position.x-[CCDirector sharedDirector].winSize.width
+                                y1:-self.position.y-[CCDirector sharedDirector].winSize.height
+                               wid:[CCDirector sharedDirector].winSize.width*4
+                               hei:[CCDirector sharedDirector].winSize.height*4];
 }
 
 -(void)min_update_game_obj {

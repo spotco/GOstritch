@@ -119,7 +119,11 @@
 }
 
 +(BOOL)pt_fuzzy_eq:(CGPoint)a b:(CGPoint)b {
-    return ABS(a.x-b.x) <= 0.1 && ABS(a.y-b.y) <= 0.1;
+    return [Common fuzzyeq_a:a.x b:b.x delta:0.1] && [Common fuzzyeq_a:a.y b:b.y delta:0.1]; //return ABS(a.x-b.x) <= 0.1 && ABS(a.y-b.y) <= 0.1;
+}
+
++(BOOL)fuzzyeq_a:(float)a b:(float)b delta:(float)delta {
+    return ABS(a-b) <= delta;
 }
 
 +(float)deg_to_rad:(float)degrees {

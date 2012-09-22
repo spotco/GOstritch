@@ -1,4 +1,5 @@
 #import "GameControlImplementation.h"
+#import "GameEngineLayer.h"
 
 #define JUMP_HOLD_TIME 15
 #define JUMP_POWER 8.5
@@ -64,10 +65,12 @@ static float avg_y;
 }
 
 
-+(void)control_update_player:(Player*)player 
-                     islands:(NSMutableArray*)islands 
-                     objects:(NSMutableArray*)game_objects {
++(void)control_update_player:(GameEngineLayer*)g {
+    Player* player = g.player;
     
+    if (player.dead){
+        return;
+    }
     
     if (player.current_island != NULL) { //reset jump count on ground
         [[player get_current_params] add_airjump_count];
@@ -83,7 +86,7 @@ static float avg_y;
     if (queue_jump == YES) { //initial jump
         
         if (player.dashing) {
-            [player remove_temp_params]; //note bug here is dashing then jump into ndir -1 wall, fix by removing dash param
+            [player remove_temp_params:g]; //note bug here is dashing then jump into ndir -1 wall, fix by removing dash param
         }
         
         if (player.current_island != NULL) {

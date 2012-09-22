@@ -34,6 +34,7 @@ typedef struct callback {
 +(void)print_line_seg:(line_seg)l msg:(NSString*)msg;
 +(BOOL)point_fuzzy_on_line_seg:(line_seg)seg pt:(CGPoint)pt;
 +(BOOL)pt_fuzzy_eq:(CGPoint)a b:(CGPoint)b;
++(BOOL)fuzzyeq_a:(float)a b:(float)b delta:(float)delta;
 +(BOOL)hitrect_touch:(HitRect)r1 b:(HitRect)r2;
 
 +(HitRect)hitrect_cons_x1:(float)x1 y1:(float)y1 x2:(float)x2 y2:(float)y2;

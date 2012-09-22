@@ -23,6 +23,7 @@
     int last_ndir;
     BOOL floating;
     BOOL dashing;
+    BOOL dead;
     
     id current_anim;
     id _RUN_ANIM_SLOW,_RUN_ANIM_MED,_RUN_ANIM_FAST,_RUN_ANIM_NONE;
@@ -43,7 +44,7 @@ typedef enum {
 -(void)add_effect:(PlayerEffectParams*)effect;
 -(void) reset;
 -(void) reset_params;
--(void)remove_temp_params;
+-(void) remove_temp_params:(GameEngineLayer*)g;
 -(void) update:(GameEngineLayer*)g;
 
 -(void)cleanup_anims;
@@ -58,6 +59,6 @@ typedef enum {
 @property(readwrite,assign) Island* current_island;
 @property(readwrite,assign) Vec3D* up_vec;
 @property(readwrite,assign) CGPoint start_pt;
-@property(readwrite,assign) BOOL floating,dashing;
+@property(readwrite,assign) BOOL floating,dashing,dead;
 
 @end

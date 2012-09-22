@@ -554,7 +554,7 @@ NSString *const circlesFilesName[] = {@"1green_world.png", @"2winter_world.png",
 
 -(void) selectLevel{
     NSLog(@"select level");
-    [[CCDirector sharedDirector] replaceScene: [GameEngineLayer scene_with:@"item_test"]];
+    [[CCDirector sharedDirector] replaceScene: [GameEngineLayer scene_with:@"world1_level1"]];
 }
 
 -(void) finishPage{

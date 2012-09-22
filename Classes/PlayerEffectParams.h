@@ -11,6 +11,9 @@
     BOOL noclip;
     
     int time_left;
+    
+    
+    int TEST1;
 }
 
 @property(readwrite,assign) float cur_gravity,cur_limit_speed,cur_min_speed;
@@ -23,10 +26,13 @@
 -(void)update:(Player*)p g:(GameEngineLayer *)g;
 
 -(void)decrement_timer;
+-(void)effect_begin:(Player*)p;
 -(void)effect_end:(Player*)p g:(GameEngineLayer*)g;
 -(void)add_airjump_count;
 -(void)decr_airjump_count;
 -(void)decr_dash_count;
 -(NSString*)info;
+
+-(void)f_dealloc;
 
 @end
