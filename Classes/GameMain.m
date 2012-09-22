@@ -5,7 +5,7 @@
 
 #define USE_BG NO
 #define ENABLE_BG_PARTICLES YES
-#define DRAW_HITBOX YES
+#define DRAW_HITBOX NO
 
 
 /**
