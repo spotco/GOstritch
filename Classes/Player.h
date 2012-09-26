@@ -6,6 +6,8 @@
 #import "StreamParticle.h"
 #import "RocketParticle.h"
 #import "FloatingSweatParticle.h"
+@class SwingVine;
+
 @class GameEngineLayer;
 
 @class PlayerEffectParams;
@@ -23,6 +25,7 @@
     int last_ndir;
     BOOL floating;
     BOOL dashing;
+    SwingVine* current_swingvine;
     BOOL dead;
     
     id current_anim;
@@ -60,5 +63,6 @@ typedef enum {
 @property(readwrite,assign) Vec3D* up_vec;
 @property(readwrite,assign) CGPoint start_pt;
 @property(readwrite,assign) BOOL floating,dashing,dead;
+@property(readwrite,assign) SwingVine* current_swingvine;
 
 @end

@@ -233,6 +233,11 @@
 		7ED863DF15B806C3005FBDBB /* checkpoint1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863CE15B806C3005FBDBB /* checkpoint1.png */; };
 		7ED863E015B806C3005FBDBB /* checkpoint2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863CF15B806C3005FBDBB /* checkpoint2.png */; };
 		7ED863EA15B81A4A005FBDBB /* BG1_island_top_edge.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863E915B81A4A005FBDBB /* BG1_island_top_edge.png */; };
+		7EDA83C71612DBD70083E9CE /* swingvine_base.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDA83C41612DBD70083E9CE /* swingvine_base.png */; };
+		7EDA83C81612DBD70083E9CE /* swingvine_loose.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDA83C51612DBD70083E9CE /* swingvine_loose.png */; };
+		7EDA83C91612DBD70083E9CE /* swingvine_tight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDA83C61612DBD70083E9CE /* swingvine_tight.png */; };
+		7EDA83CC1612DC850083E9CE /* swingvine_test.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EDA83CB1612DC850083E9CE /* swingvine_test.map */; };
+		7EDA83CF1612DDAE0083E9CE /* SwingVine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDA83CE1612DDAE0083E9CE /* SwingVine.m */; };
 		7EDA90C615BCB5470004CED7 /* CheckPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDA90C515BCB5470004CED7 /* CheckPoint.m */; };
 		7EDA90CA15BCC3D50004CED7 /* BG1_layer_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDA90C915BCC3D50004CED7 /* BG1_layer_1.png */; };
 		7EDA90CD15BCC5990004CED7 /* GameEndArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDA90CC15BCC5990004CED7 /* GameEndArea.m */; };
@@ -748,6 +753,12 @@
 		7ED863CE15B806C3005FBDBB /* checkpoint1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkpoint1.png; sourceTree = "<group>"; };
 		7ED863CF15B806C3005FBDBB /* checkpoint2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkpoint2.png; sourceTree = "<group>"; };
 		7ED863E915B81A4A005FBDBB /* BG1_island_top_edge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_island_top_edge.png; path = Resources/bg/BG1/BG1_island_top_edge.png; sourceTree = SOURCE_ROOT; };
+		7EDA83C41612DBD70083E9CE /* swingvine_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swingvine_base.png; sourceTree = "<group>"; };
+		7EDA83C51612DBD70083E9CE /* swingvine_loose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swingvine_loose.png; sourceTree = "<group>"; };
+		7EDA83C61612DBD70083E9CE /* swingvine_tight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swingvine_tight.png; sourceTree = "<group>"; };
+		7EDA83CB1612DC850083E9CE /* swingvine_test.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = swingvine_test.map; sourceTree = "<group>"; };
+		7EDA83CD1612DDAE0083E9CE /* SwingVine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwingVine.h; sourceTree = "<group>"; };
+		7EDA83CE1612DDAE0083E9CE /* SwingVine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwingVine.m; sourceTree = "<group>"; };
 		7EDA90C415BCB5470004CED7 /* CheckPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckPoint.h; sourceTree = "<group>"; };
 		7EDA90C515BCB5470004CED7 /* CheckPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckPoint.m; sourceTree = "<group>"; };
 		7EDA90C915BCC3D50004CED7 /* BG1_layer_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_layer_1.png; path = Resources/bg/BG1/BG1_layer_1.png; sourceTree = SOURCE_ROOT; };
@@ -1289,6 +1300,7 @@
 				7E3B978B15D7ADBC001859CB /* jumppad_fun.map */,
 				7E1456B415E8BF62007CC9E4 /* cave_test.map */,
 				7E22750D15EB3AB1009ED6DC /* bwall_test.map */,
+				7EDA83CB1612DC850083E9CE /* swingvine_test.map */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -1422,6 +1434,8 @@
 				7E933FF01609ABD7007E494A /* BreakableWall.m */,
 				7E933FF5160AE1F9007E494A /* SpikeVine.h */,
 				7E933FF6160AE1FA007E494A /* SpikeVine.m */,
+				7EDA83CD1612DDAE0083E9CE /* SwingVine.h */,
+				7EDA83CE1612DDAE0083E9CE /* SwingVine.m */,
 			);
 			name = envr_obj;
 			sourceTree = "<group>";
@@ -1692,6 +1706,16 @@
 			path = checkpoint;
 			sourceTree = "<group>";
 		};
+		7EDA83C31612DBD70083E9CE /* swingvine */ = {
+			isa = PBXGroup;
+			children = (
+				7EDA83C41612DBD70083E9CE /* swingvine_base.png */,
+				7EDA83C51612DBD70083E9CE /* swingvine_loose.png */,
+				7EDA83C61612DBD70083E9CE /* swingvine_tight.png */,
+			);
+			path = swingvine;
+			sourceTree = "<group>";
+		};
 		7EDA90C215BCB51A0004CED7 /* checkpoint */ = {
 			isa = PBXGroup;
 			children = (
@@ -1820,6 +1844,7 @@
 		7EF1244F15CA50F900B91A91 /* obstacle */ = {
 			isa = PBXGroup;
 			children = (
+				7EDA83C31612DBD70083E9CE /* swingvine */,
 				7E22752215EB6D8D009ED6DC /* spikevine */,
 				7EF1246115CA513800B91A91 /* mud.png */,
 				7EF1245015CA50F900B91A91 /* bomb.png */,
@@ -2484,6 +2509,10 @@
 				7E22752815EB6D8D009ED6DC /* spike_vine_section.png in Resources */,
 				7E933FFA160AE3B2007E494A /* spike_vine_bottom.png in Resources */,
 				7E933FFB160AE3B2007E494A /* spike_vine_top.png in Resources */,
+				7EDA83C71612DBD70083E9CE /* swingvine_base.png in Resources */,
+				7EDA83C81612DBD70083E9CE /* swingvine_loose.png in Resources */,
+				7EDA83C91612DBD70083E9CE /* swingvine_tight.png in Resources */,
+				7EDA83CC1612DC850083E9CE /* swingvine_test.map in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2552,6 +2581,7 @@
 				7E933FF7160AE1FB007E494A /* SpikeVine.m in Sources */,
 				7E933FFE160AF214007E494A /* BreakableWallRockParticle.m in Sources */,
 				7EFA3D8C160D8CA2002DBC3C /* CameraArea.m in Sources */,
+				7EDA83CF1612DDAE0083E9CE /* SwingVine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

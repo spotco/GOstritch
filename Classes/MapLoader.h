@@ -22,6 +22,7 @@
 #import "BreakableWall.h"
 #import "SpikeVine.h"
 #import "CameraArea.h"
+#import "SwingVine.h"
 
 @interface MapLoader : NSObject
 

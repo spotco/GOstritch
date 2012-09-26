@@ -27,6 +27,7 @@
 @synthesize start_pt;
 @synthesize last_ndir;
 @synthesize floating,dashing,dead;
+@synthesize current_swingvine;
 
 +(Player*)init_at:(CGPoint)pt {
 	Player *new_player = [Player node];
@@ -207,6 +208,7 @@ static NSDictionary *splash_ss_plist_dict = NULL;
     floating = NO;
     dashing = NO;
     dead = NO;
+    current_swingvine = NULL;
     [self reset_params];
 }
 

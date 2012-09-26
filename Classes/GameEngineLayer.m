@@ -390,6 +390,7 @@ static NSMutableArray* particles_tba;
 
 -(void)draw {
     [super draw];
+    
     if (![GameMain GET_DRAW_HITBOX]) {
         return;
     }

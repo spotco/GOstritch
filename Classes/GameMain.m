@@ -5,7 +5,7 @@
 
 #define USE_BG NO
 #define ENABLE_BG_PARTICLES YES
-#define DRAW_HITBOX NO
+#define DRAW_HITBOX YES
 
 
 /**
@@ -20,7 +20,7 @@
 +(void)main {
     [[CCDirector sharedDirector] setDisplayFPS:NO];
     //[[CCDirector sharedDirector] runWithScene:[CoverPage scene]];
-    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"camera_test"]];
+    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"swingvine_test"]];
 }
 
 +(BOOL)GET_USE_BG {

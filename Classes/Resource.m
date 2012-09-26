@@ -49,6 +49,9 @@ static NSMutableDictionary* textures = nil;
                      @"startbanner_banner.png",TEX_STARTBANNER_BANNER,
                      @"spike_vine_bottom.png", TEX_SPIKE_VINE_BOTTOM,
                      @"spike_vine_section.png", TEX_SPIKE_VINE_SECTION,
+                     @"swingvine_base.png", TEX_SWINGVINE_BASE,
+                     @"swingvine_loose.png", TEX_SWINGVINE_LOOSE,
+                     @"swingvine_tight.png", TEX_SWINGVINE_TIGHT,
                                           
                      @"BG1_detail_1.png", TEX_GROUND_DETAIL_1,
                      @"BG1_detail_2.png", TEX_GROUND_DETAIL_2,
@@ -87,7 +90,7 @@ static NSMutableDictionary* textures = nil;
 +(void)load_tex_from_array:(NSArray*)temp {
     ccTexParams texParams = { GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT };
     for(int i = 0; i < [temp count]-1; i+=2) {
-        NSLog(@"LOADING: %@->%@\n",[temp objectAtIndex:i], [temp objectAtIndex:(i+1)]);
+        //NSLog(@"LOADING: %@->%@\n",[temp objectAtIndex:i], [temp objectAtIndex:(i+1)]);
         CCTexture2D* tex = [[CCTextureCache sharedTextureCache] addImage:[temp objectAtIndex:i]];
         [textures setObject:tex forKey:[temp objectAtIndex:(i+1)]];
         [tex setTexParameters: &texParams];

@@ -3,7 +3,7 @@
 @implementation SpikeVine
 
 #define BASE_IMG_WID 34.0
-#define BASE_IMG_HEI 18.0
+#define BASE_IMG_HEI 27.0
 #define CENTER_IMG_WID 56.0
 #define CENTER_IMG_HEI 128.0
 

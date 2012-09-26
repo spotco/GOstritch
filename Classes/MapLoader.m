@@ -194,6 +194,10 @@
             struct CameraZoom n = {cx,cy,cz};
             [map.game_objects addObject:[CameraArea init_x:x y:y wid:width hei:hei zoom:n]];
             
+        } else if ([type isEqualToString:@"swingvine"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            [map.game_objects addObject:[SwingVine init_x:x y:y]];
             
         } else {
             NSLog(@"item read error");

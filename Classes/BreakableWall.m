@@ -3,10 +3,10 @@
 
 @implementation BreakableWall
 
-#define BASE_IMG_WID 76.0
-#define BASE_IMG_HEI 17.0
+#define BASE_IMG_WID 90.0
+#define BASE_IMG_HEI 27.0
 
-#define CENTER_IMG_WID 47.0
+#define CENTER_IMG_WID 36.0
 #define CENTER_IMG_HEI 128.0
 
 +(BreakableWall*)init_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2 {

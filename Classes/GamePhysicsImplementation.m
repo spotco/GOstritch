@@ -9,28 +9,17 @@
 
 
 //Used in freefall
-//#define CENTERING_ROTATION_SPD 0.1;
 #define CENTERING_UP_VEC_SPD 0.07
 #define MAX_LOSS 0.3
 
 @implementation GamePhysicsImplementation
 
-/**
- Calculates player position and moves the player one 'tick' based on current state and islands.
- @requires
- islands is sorted
- @params
- (Player*)player - the target player to move
- (NSMutableArray*)islands - the islands of the player's world
- @modifies
- player.position
- player.rotation
- player.vx/player.vy
- @returns
- YES if player is in contact with the ground
- else NO
- **/
+
 +(void)player_move:(Player*)player with_islands:(NSMutableArray*)islands {
+    if (player.current_swingvine != NULL) {
+        return;
+    }
+    
     if (player.current_island == NULL) {
         player.position = [GamePhysicsImplementation player_free_fall:player islands:islands];
     } else {
@@ -39,20 +28,7 @@
 }
 
 
-
-
-/**
- Player movement calculation when in contact with an island (any ground).
- @params
- (Player*)player - the target player
- (NSMutableArray*)islands - the islands of the player's world
- @modifies
- player.rotation, scale, vx, vy, current_island
- @returns
- A CGPoint of the player's calculated position after this update 'tick'
- **/
 +(CGPoint)player_move_along_island:(Player*)player islands:(NSMutableArray*)islands {
-    //float LIMIT_SPEED = [player get_current_params].cur_limit_speed;
     float MIN_SPEED = [player get_current_params].cur_min_speed;
     
     Island *i = player.current_island;
@@ -133,18 +109,6 @@
     return position_final;
 }
 
-
-/**
- Player movement calculation when in freefall (not in contact with any islands)
- Also applies a gravitation acceleration effect.
- @params
- (Player*)player - the target player
- (NSMutableArray*)islands - the islands of the player's world
- @modifies
- player.rotation, scale, vx, vy, current_island
- @returns
- A CGPoint of the player's calculated position after this update 'tick'
- **/
 +(CGPoint)player_free_fall:(Player*)player islands:(NSMutableArray*)islands {
     float GRAVITY = [player get_current_params].cur_gravity;
     if (player.floating) {
