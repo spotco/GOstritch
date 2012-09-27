@@ -55,6 +55,11 @@
                 currentIsland = [LineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
             } else if ([ground_type isEqualToString:@"cave"]) {
                 currentIsland = [CaveLineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
+            } else if ([ground_type isEqualToString:@"bridge"]) {
+                currentIsland = [BridgeIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
+            } else {
+                NSLog(@"unrecognized ground type!!");
+                continue;
             }
             
 		} else {

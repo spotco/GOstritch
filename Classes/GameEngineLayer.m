@@ -1,6 +1,7 @@
 #import "GameEngineLayer.h"
 #import "BGLayer.h"
 #import "UILayer.h"
+#import "BridgeIsland.h"
 
 @implementation GameEngineLayer
 
@@ -12,7 +13,6 @@
 
 +(CCScene *) scene_with:(NSString *) map_file_name {
     [Resource init_bg1_textures];
-
 	CCScene *scene = [CCScene node];
     
     GameEngineLayer *glayer = [GameEngineLayer init_from_file:map_file_name];
@@ -151,10 +151,12 @@
     }
     
     for (Island* i in islands) {
-        if (i.can_land) {
-            [self addChild:i z:[GameRenderImplementation GET_RENDER_ISLAND_ORD]];
-        } else {
+        if (i.can_land == NO) {
             [self addChild:i z:[GameRenderImplementation GET_RENDER_FG_ISLAND_ORD]];
+        } else if ([i isKindOfClass:[BridgeIsland class]]) {
+            [self addChild:i z:[GameRenderImplementation GET_RENDER_BTWN_PLAYER_ISLAND]];
+        } else {
+            [self addChild:i z:[GameRenderImplementation GET_RENDER_ISLAND_ORD]];
         }
 	}
     

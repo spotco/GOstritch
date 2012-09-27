@@ -4,6 +4,7 @@
 #import "LineIsland.h"
 #import "Island.h"
 #import "CaveLineIsland.h"
+#import "BridgeIsland.h"
 
 #import "DogBone.h"
 #import "GroundDetail.h"

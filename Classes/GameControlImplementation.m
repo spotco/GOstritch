@@ -73,11 +73,16 @@ static float avg_y;
     }
     
     if (player.current_swingvine != NULL && (queue_jump || queue_swipe)) {
+        CGPoint t_vel = [player.current_swingvine get_tangent_vel];
         [player.current_swingvine temp_disable];
         player.current_swingvine = NULL;
         player.up_vec.y = 1;
         player.up_vec.x = 0;
-        //TODO -- ADD SPEED FROM VINE HERE
+        
+        player.vx = t_vel.x;
+        player.vy = t_vel.y;
+        
+        [[player get_current_params] add_airjump_count];
     }
     
     if (player.current_island != NULL) { //reset jump count on ground

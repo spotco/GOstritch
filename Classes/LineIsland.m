@@ -15,6 +15,7 @@
 #define TL_DOWNOFFSET 20
 
 @synthesize tl,bl,tr,br,bl1,bl2,br1,br2;
+@synthesize force_draw_corner;
 
 +(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land {
 	LineIsland *new_island = [LineIsland node];
@@ -76,11 +77,11 @@
     [Common draw_renderobj:main_fill n_vtx:4];
     [Common draw_renderobj:top_fill n_vtx:4];
     
-    if (has_prev == NO) {
+    if (has_prev == NO || force_draw_corner) {
         [Common draw_renderobj:left_line_fill n_vtx:4]; //ccDrawLine(tl, bl1);    
         ccDrawQuadBezier(bl1, bl, bl2, 3);
     }
-    if (next == NULL) {
+    if (next == NULL || force_draw_corner) {
         [Common draw_renderobj:right_line_fill n_vtx:4]; //ccDrawLine(tr, br1);
         ccDrawQuadBezier(br1, br, br2, 3);
     }
@@ -88,14 +89,14 @@
         [Common draw_renderobj:bottom_line_fill n_vtx:4]; //ccDrawLine(bl2, br2);
     }
         
-    if (has_prev == NO) {
+    if (has_prev == NO || force_draw_corner) {
         [Common draw_renderobj:tl_top_corner n_vtx:4];
     }
-    if (next == NULL) {
+    if (next == NULL || force_draw_corner) {
         [Common draw_renderobj:tr_top_corner n_vtx:4];
     }
     
-    if (next != NULL) {
+    if (next != NULL && force_draw_corner == NO) {
         [Common draw_renderobj:corner_fill n_vtx:3];
         
         ccColor4F fc = [self get_corner_fill_color];
@@ -328,14 +329,14 @@
 -(void)init_corner_line_fill {
     if (next == NULL) {
         return;
+    } else if (![next isKindOfClass:[LineIsland class]]){
+        //NSLog(@"next is not lineisland!");
+        force_draw_corner = YES;
+        return;
     }
     
-    //if ([[next class] isKindOfClass:[LineIsland class]]) {
     LineIsland *n = (LineIsland*)next;
     corner_line_fill = [self line_from:br2 to:ccp(n.bl2.x-startX+n.startX,n.bl2.y-startY+n.startY) scale:1];
-    /*} else {
-        NSLog(@"error here!");
-    }*/
 }
 
 -(void)init_left_line_fill {    

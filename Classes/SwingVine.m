@@ -1,6 +1,6 @@
 #import "SwingVine.h"
 
-#define VINE_TIGHT_LENGTH 198.0
+#define VINE_TIGHT_LENGTH 220.0
 
 @implementation SwingVine
 
@@ -14,8 +14,12 @@
 -(void)initialize {
     vine = [CCSprite spriteWithTexture:[Resource get_aa_tex:TEX_SWINGVINE_TIGHT]];
     [self addChild:vine];
+    loosevine = [CCSprite spriteWithTexture:[Resource get_aa_tex:TEX_SWINGVINE_LOOSE]];
+    [self addChild:loosevine];
+    
     [self addChild:[CCSprite spriteWithTexture:[Resource get_tex:TEX_SWINGVINE_BASE]]];
     [vine setAnchorPoint:ccp(vine.anchorPoint.x,1)];
+    [loosevine setAnchorPoint:ccp(loosevine.anchorPoint.x,1)];
     
 }
 
@@ -30,12 +34,19 @@
         vr += 0.1;
     }
     [vine setRotation:vine.rotation+vr];
+    [loosevine setRotation:vine.rotation];
+    
+    
+    [vine setVisible:player.current_swingvine == self];
+    [loosevine setVisible:player.current_swingvine != self];
     
     if (disable_timer >0) {
         disable_timer--;
         [vine setOpacity:150];
+        [loosevine setOpacity:150];
         return GameObjectReturnCode_NONE;
     } else {
+        [loosevine setOpacity:255];
         [vine setOpacity:255];
     }
     
@@ -53,13 +64,18 @@
             player.vy = 0;
             [player remove_temp_params:g];
             
-            vr = -4.3; //~90deg
+            vr = -4; //~90deg
         }
     }
     
-    if (player.current_swingvine == self) {
+    if (player.current_swingvine == self) {        
         if (cur_dist < VINE_TIGHT_LENGTH) {
             cur_dist += (VINE_TIGHT_LENGTH-cur_dist)/20.0;
+        }
+
+        if (ABS(vine.rotation) > 90) {
+            vine.rotation = 90 * [Common sig:vine.rotation];
+            vr = 0;
         }
         
         CGPoint tip = [self get_tip_relative_pos];
@@ -132,6 +148,25 @@
     [super reset];
     [vine setRotation:0];
     vr = 0;
+}
+
+-(CGPoint)get_tangent_vel {
+    //    CGPoint tip_rel = [self get_tip_relative_pos];
+    //    Vec3D *n = [Vec3D init_x:tip_rel.x y:tip_rel.y z:0];
+    //    Vec3D *tangent_vel;
+    //    if (vr > 0) {
+    //        tangent_vel = [n crossWith:[Vec3D Z_VEC]];
+    //    } else {
+    //        tangent_vel = [[Vec3D Z_VEC] crossWith:n];
+    //    }
+    //    [n dealloc];
+    //    [tangent_vel normalize];
+    //    [tangent_vel scale:cur_dist/10];
+    //    CGPoint t_vel = ccp(tangent_vel.x,tangent_vel.y);
+    //    [tangent_vel dealloc];
+    //    t_vel.x = MAX(t_vel.x,0);
+    CGPoint t_vel = ccp(7,7);
+    return t_vel;
 }
 
 -(void)dealloc {
