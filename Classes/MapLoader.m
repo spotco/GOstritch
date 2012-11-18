@@ -26,6 +26,15 @@
     int assert_links = ((NSString*)[j_map_data objectForKey:(@"assert_links")]).intValue;
     map.assert_links = assert_links;
     
+    NSDictionary* connect_pts = [j_map_data objectForKey:(@"connect_pts")];
+    if(connect_pts != NULL) {
+        map.connect_pts_x1 = ((NSString*)[connect_pts objectForKey:@"x1"]).floatValue;
+        map.connect_pts_x2 = ((NSString*)[connect_pts objectForKey:@"x2"]).floatValue;
+        map.connect_pts_y1 = ((NSString*)[connect_pts objectForKey:@"y1"]).floatValue;
+        map.connect_pts_y2 = ((NSString*)[connect_pts objectForKey:@"y2"]).floatValue;
+        NSLog(@"connect pts (%f,%f),(%f,%f)",map.connect_pts_x1,map.connect_pts_y1,map.connect_pts_x2,map.connect_pts_y2);
+    }
+    
 	for(int i = 0; i < islandsCount; i++){
 		NSDictionary *currentIslandDict = (NSDictionary *)[islandArray objectAtIndex:i];
 		CGPoint start = ccp( ((NSString *)[currentIslandDict objectForKey:@"x1"]).floatValue

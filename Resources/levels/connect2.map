@@ -1,0 +1,8 @@
+{
+    "assert_links": 0,
+    "start_x": 84,
+    "islands": [{"ndir": "left", "ground": "open", "can_fall": true, "x1": 50, "y1": 100, "hei": 50, "x2": 500, "type": "line", "y2": 250}],
+    "start_y": 188,
+    "objects": [],
+    "connect_pts":{"x1":50,"y1":100,"x2":500,"y2":250}
+}

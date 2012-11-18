@@ -31,6 +31,7 @@ typedef struct GameMap {
     NSMutableArray *n_islands, *game_objects;
     CGPoint player_start_pt;
     int assert_links;
+    float connect_pts_x1,connect_pts_x2,connect_pts_y1,connect_pts_y2;
 } GameMap;
 
 +(GameMap) load_map: (NSString *)map_file_name oftype:(NSString *) map_file_type;

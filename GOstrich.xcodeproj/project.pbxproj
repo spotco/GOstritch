@@ -98,6 +98,11 @@
 		7E786E0015E4BB61000E1946 /* BoneCollectUIAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E786DFF15E4BB61000E1946 /* BoneCollectUIAnimation.m */; };
 		7E786E0415E4D275000E1946 /* World1ParticleGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E786E0315E4D275000E1946 /* World1ParticleGenerator.m */; };
 		7E786E0715E4D335000E1946 /* WaveParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E786E0615E4D334000E1946 /* WaveParticle.m */; };
+		7E7C5ADB16598C14007C8EB8 /* connect1.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C5ADA16598C14007C8EB8 /* connect1.map */; };
+		7E7C5ADD16598C6F007C8EB8 /* connect2.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C5ADC16598C6F007C8EB8 /* connect2.map */; };
+		7E7C5ADF16598E31007C8EB8 /* connector.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C5ADE16598E31007C8EB8 /* connector.map */; };
+		7E7C5AE216598FE5007C8EB8 /* AutoLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C5AE116598FE5007C8EB8 /* AutoLevel.m */; };
+		7E7C5AE71659A217007C8EB8 /* MapSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C5AE61659A217007C8EB8 /* MapSection.m */; };
 		7E86BA5115B3F9060024003C /* dog1ss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E86BA5015B3F9060024003C /* dog1ss.plist */; };
 		7E878C3615C13F8200837E7B /* coincount.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E878C2E15C13F8200837E7B /* coincount.png */; };
 		7E878C3715C13F8200837E7B /* pauseicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E878C2F15C13F8200837E7B /* pauseicon.png */; };
@@ -592,6 +597,13 @@
 		7E786E0315E4D275000E1946 /* World1ParticleGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = World1ParticleGenerator.m; sourceTree = "<group>"; };
 		7E786E0515E4D334000E1946 /* WaveParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveParticle.h; sourceTree = "<group>"; };
 		7E786E0615E4D334000E1946 /* WaveParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveParticle.m; sourceTree = "<group>"; };
+		7E7C5ADA16598C14007C8EB8 /* connect1.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = connect1.map; sourceTree = "<group>"; };
+		7E7C5ADC16598C6F007C8EB8 /* connect2.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = connect2.map; sourceTree = "<group>"; };
+		7E7C5ADE16598E31007C8EB8 /* connector.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = connector.map; sourceTree = "<group>"; };
+		7E7C5AE016598FE5007C8EB8 /* AutoLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLevel.h; sourceTree = "<group>"; };
+		7E7C5AE116598FE5007C8EB8 /* AutoLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoLevel.m; sourceTree = "<group>"; };
+		7E7C5AE51659A217007C8EB8 /* MapSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapSection.h; sourceTree = "<group>"; };
+		7E7C5AE61659A217007C8EB8 /* MapSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapSection.m; sourceTree = "<group>"; };
 		7E86BA5015B3F9060024003C /* dog1ss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dog1ss.plist; sourceTree = "<group>"; };
 		7E878C2E15C13F8200837E7B /* coincount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coincount.png; sourceTree = "<group>"; };
 		7E878C2F15C13F8200837E7B /* pauseicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseicon.png; sourceTree = "<group>"; };
@@ -1274,6 +1286,7 @@
 		7E3B978515D7ADBB001859CB /* levels */ = {
 			isa = PBXGroup;
 			children = (
+				7E7C5AD816598BE4007C8EB8 /* connect */,
 				7E3B978615D7ADBC001859CB /* test */,
 				7E3B978C15D7ADBC001859CB /* world1 */,
 			);
@@ -1323,6 +1336,16 @@
 				7E786E0315E4D275000E1946 /* World1ParticleGenerator.m */,
 			);
 			name = bgeffects;
+			sourceTree = "<group>";
+		};
+		7E7C5AD816598BE4007C8EB8 /* connect */ = {
+			isa = PBXGroup;
+			children = (
+				7E7C5ADE16598E31007C8EB8 /* connector.map */,
+				7E7C5ADA16598C14007C8EB8 /* connect1.map */,
+				7E7C5ADC16598C6F007C8EB8 /* connect2.map */,
+			);
+			name = connect;
 			sourceTree = "<group>";
 		};
 		7E878C2D15C13F8200837E7B /* ingame_ui */ = {
@@ -1889,6 +1912,10 @@
 			children = (
 				8B4028CE1592CDCF00A2E791 /* MapLoader.h */,
 				8B4028CF1592CDCF00A2E791 /* MapLoader.m */,
+				7E7C5AE016598FE5007C8EB8 /* AutoLevel.h */,
+				7E7C5AE116598FE5007C8EB8 /* AutoLevel.m */,
+				7E7C5AE51659A217007C8EB8 /* MapSection.h */,
+				7E7C5AE61659A217007C8EB8 /* MapSection.m */,
 			);
 			name = map_util;
 			sourceTree = "<group>";
@@ -2492,6 +2519,9 @@
 				7EDA83C91612DBD70083E9CE /* swingvine_tight.png in Resources */,
 				7EDA83CC1612DC850083E9CE /* swingvine_test.map in Resources */,
 				7EE2AEFF161448F60035BA50 /* bridge_test.map in Resources */,
+				7E7C5ADB16598C14007C8EB8 /* connect1.map in Resources */,
+				7E7C5ADD16598C6F007C8EB8 /* connect2.map in Resources */,
+				7E7C5ADF16598E31007C8EB8 /* connector.map in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2562,6 +2592,8 @@
 				7EFA3D8C160D8CA2002DBC3C /* CameraArea.m in Sources */,
 				7EDA83CF1612DDAE0083E9CE /* SwingVine.m in Sources */,
 				7EE2AEFC16143BA60035BA50 /* BridgeIsland.m in Sources */,
+				7E7C5AE216598FE5007C8EB8 /* AutoLevel.m in Sources */,
+				7E7C5AE71659A217007C8EB8 /* MapSection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

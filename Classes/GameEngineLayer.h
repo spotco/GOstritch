@@ -12,6 +12,8 @@
 #import "GameRenderImplementation.h"
 #import "GameControlImplementation.h"
 
+#import "AutoLevel.h"
+
 #import "World1ParticleGenerator.h"
 
 typedef enum {
@@ -55,11 +57,13 @@ typedef struct level_bone_status {
 
 @property(readwrite,assign) GameEngineLayerMode current_mode;
 @property(readwrite,assign) NSMutableArray *islands, *game_objects;
-@property(readwrite,assign) Player* player;
+@property(readwrite,assign) Player *player;
 @property(readwrite,assign) callback load_game_end_menu;
 @property(readwrite,assign) CameraZoom camera_state,tar_camera_state;
+@property(readwrite,assign) CCFollow *follow_action; 
 
 +(CCScene *) scene_with:(NSString *)map_file_name;
++(CCScene*) scene_with_autolevel;
 -(void)player_reset;
 -(void)add_particle:(Particle*)p;
 -(CGPoint)get_pos;

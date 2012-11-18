@@ -10,6 +10,7 @@
 @synthesize player;
 @synthesize load_game_end_menu;
 @synthesize camera_state,tar_camera_state;
+@synthesize follow_action;
 
 +(CCScene *) scene_with:(NSString *) map_file_name {
     [Resource init_bg1_textures];
@@ -27,6 +28,22 @@
     [scene addChild:uilayer];
     
     [uilayer start_initial_anim];
+	return scene;
+}
+
++(CCScene*) scene_with_autolevel {
+    CCScene* scene = [GameEngineLayer scene_with:@"connector"];
+    GameEngineLayer* glayer = [scene.children objectAtIndex:1];
+    
+    GameObject* nobj = [AutoLevel init_with_glayer:glayer];
+    [glayer.game_objects addObject:nobj];
+    [glayer addChild:nobj];
+    
+    [glayer stopAction:glayer.follow_action];
+    glayer.follow_action = [[CCFollow actionWithTarget:glayer.player] retain];
+    [glayer runAction:glayer.follow_action];
+    
+    
 	return scene;
 }
 
