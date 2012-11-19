@@ -1,8 +1,23 @@
 {
-    "assert_links": 0,
-    "start_x": 102,
-    "islands": [{"ndir": "left", "ground": "open", "can_fall": true, "x1": 50, "y1": 100, "hei": 50, "x2": 500, "type": "line", "y2": 100}],
-    "start_y": 158,
-    "objects": [],
-    "connect_pts":{"x1":50,"y1":100,"x2":500,"y2":100}
+    "assert_links": 8,
+    "objects": [
+        {"x": 430, "y": 53, "type": "birdflock", "label": "0"},
+        {"x": 556, "y": 155, "type": "dogbone", "bid": 1, "label": "BID:1"},
+        {"x": 649, "y": 263, "type": "dogbone", "bid": 2, "label": "BID:2"},
+        {"x": 758, "y": 373, "type": "dogbone", "bid": 3, "label": "BID:3"}
+    ],
+    "start_x": 0,
+    "connect_pts": {"x2": 1347, "x1": 40, "y2": 512, "y1": 52},
+    "start_y": 0,
+    "islands": [
+        {"can_fall": true, "ground": "open", "y1": 52, "hei": 50, "x2": 352, "x1": 40, "y2": 50, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 50, "hei": 50, "x2": 491, "x1": 352, "y2": 53, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 53, "hei": 50, "x2": 546, "x1": 491, "y2": 87, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 87, "hei": 50, "x2": 615, "x1": 546, "y2": 169, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 169, "hei": 50, "x2": 687, "x1": 615, "y2": 276, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 276, "hei": 50, "x2": 783, "x1": 687, "y2": 368, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 368, "hei": 50, "x2": 923, "x1": 783, "y2": 445, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 445, "hei": 50, "x2": 1126, "x1": 923, "y2": 497, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 497, "hei": 50, "x2": 1347, "x1": 1126, "y2": 512, "type": "line", "ndir": "left"}
+    ]
 }

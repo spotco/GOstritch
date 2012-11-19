@@ -21,7 +21,7 @@
     float start_x = ((NSString*)[j_map_data objectForKey:(@"start_x")]).floatValue;
 	float start_y = ((NSString*)[j_map_data objectForKey:(@"start_y")]).floatValue;
     map.player_start_pt = ccp(start_x,start_y);
-    NSLog(@"Player starting at (%f,%f)",start_x,start_y);
+    //NSLog(@"Player starting at (%f,%f)",start_x,start_y);
     
     int assert_links = ((NSString*)[j_map_data objectForKey:(@"assert_links")]).intValue;
     map.assert_links = assert_links;
@@ -32,7 +32,7 @@
         map.connect_pts_x2 = ((NSString*)[connect_pts objectForKey:@"x2"]).floatValue;
         map.connect_pts_y1 = ((NSString*)[connect_pts objectForKey:@"y1"]).floatValue;
         map.connect_pts_y2 = ((NSString*)[connect_pts objectForKey:@"y2"]).floatValue;
-        NSLog(@"connect pts (%f,%f),(%f,%f)",map.connect_pts_x1,map.connect_pts_y1,map.connect_pts_x2,map.connect_pts_y2);
+        //NSLog(@"connect pts (%f,%f),(%f,%f)",map.connect_pts_x1,map.connect_pts_y1,map.connect_pts_x2,map.connect_pts_y2);
     }
     
 	for(int i = 0; i < islandsCount; i++){
@@ -219,7 +219,7 @@
         }
     }
 
-    NSLog(@"finish parse");
+    //NSLog(@"finish parse");
     return map;
 }
 

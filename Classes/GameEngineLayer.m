@@ -94,24 +94,39 @@
 
 -(void)init_bones {
     bones = [[[NSMutableDictionary alloc]init]retain]; //bid -> status
-    
     for (GameObject *i in game_objects) {
         if ([i class] == [DogBone class]) {
-            DogBone *c = (DogBone*)i;
-            NSNumber *bid = [NSNumber numberWithInt:c.bid];
-            if ([bones objectForKey:bid]) {
-                NSLog(@"ERROR:duplicate (bone)id");
-            } else {
-                [bones setObject:[NSNumber numberWithInt:Bone_Status_TOGET] forKey:bid];
-            }
+            [self add_bone:(DogBone*)i autoassign:NO];
         }
     }
     NSLog(@"Bones loaded (%i bones total)",[bones count]);
 }
 
+-(void)add_bone:(DogBone*)c autoassign:(BOOL)aa {
+    NSNumber *bid;
+    if (aa == YES) {
+        
+        int max = 0;
+        for (NSNumber* i in bones) {
+            max = MAX(i.intValue,max);
+        }
+        bid = [NSNumber numberWithInt:max+1];
+        c.bid = max+1;
+    } else {
+        bid = [NSNumber numberWithInt:c.bid];
+    }
+    
+    if ([bones objectForKey:bid]) {
+        NSLog(@"ERROR:duplicate (bone)id");
+    } else {
+        [bones setObject:[NSNumber numberWithInt:Bone_Status_TOGET] forKey:bid];
+    }
+}
+
 -(void)set_bid_tohasget:(int)tbid {
     for(NSNumber* bid in [bones allKeys]) {
         if (bid.intValue == tbid) {
+            //NSLog(@"getbid:%i",tbid);
             [bones setObject:[NSNumber numberWithInt:Bone_Status_HASGET] forKey:bid];
             [Common run_callback:bone_collect_ui_animation];
             return;
@@ -295,7 +310,9 @@ static NSMutableArray* particles_tba;
 }
 
 -(void)update_game_obj {
-    for (GameObject* o in game_objects) {
+    for(int i = 0; i < [game_objects count]; i++) {
+    //for (GameObject* o in game_objects) {
+        GameObject *o = [game_objects objectAtIndex:i];
         GameObjectReturnCode c = [o update:player g:self];
         
         if (c == GameObjectReturnCode_ENDGAME) {

@@ -9,6 +9,5 @@
 }
 
 +(AutoLevel*)init_with_glayer:(GameEngineLayer*)glayer;
-+(void)transform_map:(GameMap)map by_x:(float)tx by_y:(float)ty;
 
 @end

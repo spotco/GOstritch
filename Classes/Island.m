@@ -16,6 +16,9 @@ static float NO_VAL = -99999.0;
 +(int) link_islands:(NSMutableArray*)islands {
     int ct = 0;
     for(Island *i in islands) {
+        if (i.next != NULL) {
+            continue;
+        }
         for(Island *j in islands) {
             if ([Common pt_fuzzy_eq:ccp(i.endX,i.endY) b:ccp(j.startX,j.startY)]) {
                 i.next = j;

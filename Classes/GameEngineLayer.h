@@ -73,6 +73,7 @@ typedef struct level_bone_status {
 -(void)set_target_camera:(CameraZoom)tar;
 
 -(void)set_checkpoint_to:(CGPoint)pt;
+-(void)add_bone:(DogBone*)c autoassign:(BOOL)aa;
 -(void)set_bid_tohasget:(int)tbid;
 -(level_bone_status)get_bonestatus;
 

@@ -13,8 +13,6 @@
  -minion robot with beserk
  -dog redesign upload
  
- -implement island filler in level editor
- -implement bridge island in level editor
  -swing vine animations and longer length
  -fish spawn less and fade out if out of range
  **/
