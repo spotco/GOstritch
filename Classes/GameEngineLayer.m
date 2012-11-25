@@ -146,6 +146,15 @@
     }
 }
 
+-(void)cleanup_autolevel {
+    for (int i = 0; i < [game_objects count]; i++) {
+        GameObject* o = [game_objects objectAtIndex:i];
+        if ([o class] == [AutoLevel class]) {
+            [((AutoLevel*)o) cleanup:player.start_pt];
+        }
+    }
+}
+
 -(void)set_bg_update_callback:(NSObject*)tar {
     bg_update.target = tar;
     bg_update.selector = @selector(update);
@@ -236,6 +245,7 @@
         [self push_added_particles];
         [self update_islands];
         [GameRenderImplementation update_render_on:self];
+        [self cleanup_autolevel];
         [Common run_callback:bg_update];
         [Common run_callback:ui_update];
         

@@ -15,11 +15,11 @@
     CGPoint tl,bl,tr,br;
     CGPoint bl1,bl2,br1,br2;
     
-    BOOL force_draw_corner;
+    BOOL force_draw_leftline,force_draw_rightline;
 }
 
 @property(readwrite,assign) CGPoint tl,bl,tr,br,bl1,bl2,br1,br2;
-@property(readwrite,assign) BOOL force_draw_corner;
+@property(readwrite,assign) BOOL force_draw_leftline,force_draw_rightline;
 
 +(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land;
 

@@ -1,0 +1,39 @@
+{
+    "assert_links": 7,
+    "objects": [
+        {"x": 1012, "y": 514, "type": "dogbone", "bid": 3, "label": "BID:3"},
+        {"x": 1536, "y": 726, "type": "dogbone", "bid": 4, "label": "BID:4"},
+        {"x": 1976, "y": 868, "type": "dogbone", "bid": 5, "label": "BID:5"},
+        {"x": 2076, "y": 958, "type": "dogbone", "bid": 6, "label": "BID:6"},
+        {"x": 2194, "y": 912, "type": "dogbone", "bid": 7, "label": "BID:7"},
+        {"x": 948, "y": 450, "width": 206, "camera": {"x": 140, "y": 80, "z": 86}, "height": 294, "label": "CAM(140,80,86)", "type": "camera_area"},
+        {"x": 1498, "y": 698, "width": 154, "camera": {"x": 140, "y": 80, "z": 102}, "height": 296, "label": "CAM(140,80,102)", "type": "camera_area"},
+        {"x": 1948, "y": 770, "width": 258, "camera": {"x": 140, "y": 80, "z": 114}, "height": 274, "label": "CAM(140,80,114)", "type": "camera_area"},
+        {"x": 2398, "y": 698, "width": 400, "camera": {"x": 140, "y": 80, "z": 50}, "height": 648, "label": "CAM(140,80,50)", "type": "camera_area"},
+        {"x": 352, "y": 198, "type": "ground_detail", "img": 4, "label": "(13)gd_img:4"},
+        {"x": 1352, "y": 550, "type": "ground_detail", "img": 2, "label": "(14)gd_img:2"},
+        {"x": 1704, "y": 200, "type": "ground_detail", "img": 6, "label": "(15)gd_img:6"},
+        {"x": 1552, "y": 200, "type": "ground_detail", "img": 1, "label": "(16)gd_img:1"},
+        {"x": 1850, "y": 750, "type": "ground_detail", "img": 2, "label": "(17)gd_img:2"},
+        {"x": 2654, "y": 702, "type": "ground_detail", "img": 6, "label": "(18)gd_img:6"},
+        {"x": 3156, "y": 704, "type": "ground_detail", "img": 6, "label": "(19)gd_img:6"},
+        {"x": 2308, "y": 2, "width": 654, "height": 308, "label": "20", "type": "island_fill"},
+        {"x": 1986, "y": 208, "width": 354, "camera": {"x": 235, "y": 82, "z": 51}, "height": 436, "label": "CAM(235,82,51)", "type": "camera_area"}
+    ],
+    "connect_pts": {"x2": 3406, "x1": 50, "y2": 706, "y1": 196},
+    "start_x": 101,
+    "start_y": 259,
+    "islands": [
+        {"can_fall": true, "ground": "open", "y1": 194, "hei": 400, "x2": 1854, "x1": 800, "y2": 196, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 196, "hei": 400, "x2": 1954, "x1": 1854, "y2": 208, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 208, "hei": 400, "x2": 2026, "x1": 1954, "y2": 248, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 248, "hei": 400, "x2": 2248, "x1": 2026, "y2": 602, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 602, "hei": 400, "x2": 2300, "x1": 2248, "y2": 648, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 648, "hei": 400, "x2": 2400, "x1": 2300, "y2": 702, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 702, "hei": 400, "x2": 3406, "x1": 2400, "y2": 706, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 196, "hei": 400, "x2": 800, "x1": 50, "y2": 194, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 344, "hei": 50, "x2": 1000, "x1": 602, "y2": 348, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 550, "hei": 50, "x2": 1504, "x1": 1150, "y2": 548, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 750, "hei": 50, "x2": 1950, "x1": 1648, "y2": 750, "type": "line", "ndir": "left"}
+    ]
+}

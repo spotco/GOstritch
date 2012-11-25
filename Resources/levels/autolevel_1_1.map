@@ -1,0 +1,54 @@
+{
+    "objects": [
+        {"x": 1400, "y": 77.5, "width": 3300, "height": 293.70000000000005, "label": "0", "type": "water"},
+        {"x": 352.5, "y": 81.3, "width": 748.7, "height": 291.29999999999995, "label": "2", "type": "water"},
+        {"x": 451.3, "y": 448.8, "type": "checkpoint", "label": "5"},
+        {"x": 1247.5, "y": 448.8, "type": "ground_detail", "img": 5, "label": "(6)gd_img:5"},
+        {"x": 1932.5, "y": 452.5, "type": "ground_detail", "img": 2, "label": "(8)gd_img:2"},
+        {"x": 3098.8, "y": 650, "type": "birdflock", "label": "9"},
+        {"x": 4300.1, "y": 848.8, "type": "ground_detail", "img": 6, "label": "(11)gd_img:6"},
+        {"x": 1613.8, "y": 583.8, "type": "dogbone", "bid": 4, "label": "BID:4"},
+        {"x": 1615, "y": 662.5, "type": "dogbone", "bid": 5, "label": "BID:5"},
+        {"x": 2221.3, "y": 653.8, "type": "dogbone", "bid": 6, "label": "BID:6"},
+        {"x": 2220, "y": 733.8, "type": "dogbone", "bid": 7, "label": "BID:7"},
+        {"x": 2801.3, "y": 756.3, "type": "dogbone", "bid": 8, "label": "BID:8"},
+        {"x": 2798.8, "y": 847.5, "type": "dogbone", "bid": 9, "label": "BID:9"},
+        {"x": 3405.1, "y": 806.3, "type": "dogbone", "bid": 10, "label": "BID:10"},
+        {"x": 3401.3, "y": 902.5, "type": "dogbone", "bid": 11, "label": "BID:11"},
+        {"x": 3951.3, "y": 886.3, "type": "dogbone", "bid": 12, "label": "BID:12"},
+        {"x": 3951.3, "y": 980, "type": "dogbone", "bid": 13, "label": "BID:13"},
+        {"x": 4060.1, "y": 457.5, "width": 65, "height": 357.5, "label": "25", "type": "blocker"},
+        {
+            "x": 4250.1,
+            "y": 838.8,
+            "width": 251.19999999999982,
+            "camera": {"x": 140, "y": 80, "z": 50},
+            "height": 455.00000000000006,
+            "label": "CAM(140,80,50)",
+            "type": "camera_area"
+        },
+        {
+            "x": 1833.8,
+            "y": 448.8,
+            "width": 133.70000000000005,
+            "camera": {"x": 140, "y": 80, "z": 77},
+            "height": 438.7,
+            "label": "CAM(140,80,77)",
+            "type": "camera_area"
+        }
+    ],
+    "start_x": 0,
+    "assert_links": 2,
+    "start_y": 0,
+    "connect_pts": {"x2": 4752.6, "x1": 53.8, "y2": 850, "y1": 450},
+    "islands": [
+        {"can_fall": true, "ground": "open", "y1": 447.5, "hei": 500, "x2": 1502.5, "x1": 998.8, "y2": 450, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 450, "hei": 50, "x2": 2145, "x1": 1698.8, "y2": 453.8, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 552.5, "hei": 50, "x2": 2698.8, "x1": 2298.8, "y2": 550, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 651.3, "hei": 50, "x2": 3301.3, "x1": 2897.5, "y2": 651.3, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 751.3, "hei": 50, "x2": 3851.3, "x1": 3501.3, "y2": 752.5, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 848.8, "hei": 400, "x2": 4752.6, "x1": 4051.3, "y2": 850, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "open", "y1": 450, "hei": 500, "x2": 551.3, "x1": 53.8, "y2": 450, "type": "line", "ndir": "left"},
+        {"can_fall": true, "ground": "bridge", "y1": 450, "hei": 50, "x2": 998.8, "x1": 551.3, "y2": 447.5, "type": "line", "ndir": "left"}
+    ]
+}

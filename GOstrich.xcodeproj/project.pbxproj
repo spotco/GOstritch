@@ -53,6 +53,7 @@
 		50F41333106926B2002A0D5E /* ZFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F41310106926B2002A0D5E /* ZFont.m */; };
 		62D3C2F515C6152A00E67ABC /* CoverPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 62D3C2F315C6152A00E67ABC /* CoverPage.h */; };
 		62D3C2F615C6152A00E67ABC /* CoverPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 62D3C2F415C6152A00E67ABC /* CoverPage.m */; };
+		7E06435B165F7F45004040FD /* autolevel_start.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E06435A165F7F45004040FD /* autolevel_start.map */; };
 		7E1456A915E85771007CC9E4 /* DashEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1456A815E85771007CC9E4 /* DashEffect.m */; };
 		7E1456AD15E86898007CC9E4 /* BlockerEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1456AC15E86897007CC9E4 /* BlockerEffect.m */; };
 		7E1456B015E873F2007CC9E4 /* FireworksParticleA.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1456AF15E873F2007CC9E4 /* FireworksParticleA.m */; };
@@ -98,7 +99,7 @@
 		7E786E0015E4BB61000E1946 /* BoneCollectUIAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E786DFF15E4BB61000E1946 /* BoneCollectUIAnimation.m */; };
 		7E786E0415E4D275000E1946 /* World1ParticleGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E786E0315E4D275000E1946 /* World1ParticleGenerator.m */; };
 		7E786E0715E4D335000E1946 /* WaveParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E786E0615E4D334000E1946 /* WaveParticle.m */; };
-		7E7C5ADB16598C14007C8EB8 /* connect1.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C5ADA16598C14007C8EB8 /* connect1.map */; };
+		7E7C5ADB16598C14007C8EB8 /* autolevel_1_1.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C5ADA16598C14007C8EB8 /* autolevel_1_1.map */; };
 		7E7C5ADD16598C6F007C8EB8 /* connect2.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C5ADC16598C6F007C8EB8 /* connect2.map */; };
 		7E7C5ADF16598E31007C8EB8 /* connector.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E7C5ADE16598E31007C8EB8 /* connector.map */; };
 		7E7C5AE216598FE5007C8EB8 /* AutoLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E7C5AE116598FE5007C8EB8 /* AutoLevel.m */; };
@@ -533,6 +534,7 @@
 		50F41310106926B2002A0D5E /* ZFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFont.m; sourceTree = "<group>"; };
 		62D3C2F315C6152A00E67ABC /* CoverPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverPage.h; sourceTree = "<group>"; };
 		62D3C2F415C6152A00E67ABC /* CoverPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverPage.m; sourceTree = "<group>"; };
+		7E06435A165F7F45004040FD /* autolevel_start.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autolevel_start.map; sourceTree = "<group>"; };
 		7E1456A715E85771007CC9E4 /* DashEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashEffect.h; sourceTree = "<group>"; };
 		7E1456A815E85771007CC9E4 /* DashEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashEffect.m; sourceTree = "<group>"; };
 		7E1456AB15E86897007CC9E4 /* BlockerEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockerEffect.h; sourceTree = "<group>"; };
@@ -597,7 +599,7 @@
 		7E786E0315E4D275000E1946 /* World1ParticleGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = World1ParticleGenerator.m; sourceTree = "<group>"; };
 		7E786E0515E4D334000E1946 /* WaveParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveParticle.h; sourceTree = "<group>"; };
 		7E786E0615E4D334000E1946 /* WaveParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveParticle.m; sourceTree = "<group>"; };
-		7E7C5ADA16598C14007C8EB8 /* connect1.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = connect1.map; sourceTree = "<group>"; };
+		7E7C5ADA16598C14007C8EB8 /* autolevel_1_1.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autolevel_1_1.map; sourceTree = "<group>"; };
 		7E7C5ADC16598C6F007C8EB8 /* connect2.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = connect2.map; sourceTree = "<group>"; };
 		7E7C5ADE16598E31007C8EB8 /* connector.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = connector.map; sourceTree = "<group>"; };
 		7E7C5AE016598FE5007C8EB8 /* AutoLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoLevel.h; sourceTree = "<group>"; };
@@ -1342,8 +1344,9 @@
 			isa = PBXGroup;
 			children = (
 				7E7C5ADE16598E31007C8EB8 /* connector.map */,
-				7E7C5ADA16598C14007C8EB8 /* connect1.map */,
+				7E7C5ADA16598C14007C8EB8 /* autolevel_1_1.map */,
 				7E7C5ADC16598C6F007C8EB8 /* connect2.map */,
+				7E06435A165F7F45004040FD /* autolevel_start.map */,
 			);
 			name = connect;
 			sourceTree = "<group>";
@@ -2519,9 +2522,10 @@
 				7EDA83C91612DBD70083E9CE /* swingvine_tight.png in Resources */,
 				7EDA83CC1612DC850083E9CE /* swingvine_test.map in Resources */,
 				7EE2AEFF161448F60035BA50 /* bridge_test.map in Resources */,
-				7E7C5ADB16598C14007C8EB8 /* connect1.map in Resources */,
+				7E7C5ADB16598C14007C8EB8 /* autolevel_1_1.map in Resources */,
 				7E7C5ADD16598C6F007C8EB8 /* connect2.map in Resources */,
 				7E7C5ADF16598E31007C8EB8 /* connector.map in Resources */,
+				7E06435B165F7F45004040FD /* autolevel_start.map in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

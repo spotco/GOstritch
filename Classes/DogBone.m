@@ -56,7 +56,7 @@
     
     float maxdist = 150;
     float dist = [Common distanceBetween:position_ and:player.position];
-    [self setPosition:ccp(position_.x + vx, position_.y+vy)];
+    [super setPosition:ccp(position_.x + vx, position_.y+vy)];
     if (!follow && player.dashing && dist < maxdist) {
         follow = YES;
     }

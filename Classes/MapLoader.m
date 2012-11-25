@@ -174,7 +174,7 @@
             float hei = ((NSString*)[j_object  objectForKey:@"height"]).floatValue;
             [map.game_objects addObject:[CaveWall init_x:x y:y width:width height:hei]];
             
-        } else if ([type isEqualToString:@"islandfill"]) {
+        } else if ([type isEqualToString:@"island_fill"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             float width = ((NSString*)[j_object  objectForKey:@"width"]).floatValue;

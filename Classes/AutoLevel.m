@@ -4,6 +4,14 @@
 
 @implementation AutoLevel
 
++(NSArray*)random_set1 {
+    static NSArray *set1_levels;
+    if (!set1_levels){
+        set1_levels = [[NSArray alloc] initWithObjects:@"autolevel_1_1", nil];
+    }
+    return set1_levels;
+}
+
 +(AutoLevel*)init_with_glayer:(GameEngineLayer*)glayer {
     AutoLevel* a = [AutoLevel node];
     [a initialize:glayer];
@@ -12,8 +20,9 @@
 
 -(void)initialize:(GameEngineLayer*)glayer {
     tglayer = glayer;
+    ct = 0;
     
-    NSArray *to_load = [[NSArray arrayWithObjects: @"connect1", @"connect2", nil] retain];
+    NSArray *to_load = [[NSArray arrayWithObjects: @"connect2", nil] retain];
     map_sections = [[NSMutableArray alloc] init];
     
     for (NSString* i in to_load) {
@@ -69,6 +78,31 @@
     [m release];
 }
 
+-(void)cleanup:(CGPoint)player_startpt {
+    NSMutableArray *toremove = [[NSMutableArray alloc] init];
+    for(MapSection *i in map_sections) {
+        MapSection_Position ip = [i get_position_status:player_startpt];
+        if (ip == MapSection_Position_PAST) {
+            [toremove addObject:i];
+        }
+    }
+    
+    for(MapSection *m in toremove) {
+        for(GameObject *o in m.map.game_objects) {
+            [tglayer removeChild:o cleanup:NO];
+            [tglayer.game_objects removeObject:o];
+        }
+        for(Island *i in m.map.n_islands) {
+            [tglayer removeChild:i cleanup:NO];
+            [tglayer.islands removeObject:i];
+        }
+    }
+    [map_sections removeObjectsInArray:toremove];
+    
+    [toremove removeAllObjects];
+    [toremove dealloc];
+}
+
 -(GameObjectReturnCode)update:(Player *)player g:(GameEngineLayer *)g {
     CGPoint pos = player.position;
     int left = 99;
@@ -80,12 +114,18 @@
     }
     
     if (left <= 1) {
-        MapSection *n = [MapSection init_from_name:@"connect1"];
+        MapSection *n = [MapSection init_from_name:[self get_random_map]];
         [map_sections addObject:n];
         [self load_map_section:n];
+        ct++;
     }
-    
+    //NSLog(@"SECTIONS:%i ISLANDS:%i GAMEOBJS:%i",[map_sections count], [tglayer.islands count], [tglayer.game_objects count]);
     return GameObjectReturnCode_NONE;
+}
+
+-(NSString*)get_random_map {
+    NSArray* tlvls = [AutoLevel random_set1];
+    return [tlvls objectAtIndex:arc4random_uniform([tlvls count])];
 }
 
 -(void)dealloc {

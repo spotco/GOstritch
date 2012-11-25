@@ -117,7 +117,7 @@
 
 -(void)link_finish {
     if (next != NULL && [next isKindOfClass:[LineIsland class]]) {
-        ((LineIsland*)next).force_draw_corner = YES;
+        ((LineIsland*)next).force_draw_leftline = YES;
     }
 }
 
