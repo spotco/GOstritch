@@ -4,11 +4,14 @@
 
 @implementation AutoLevel
 
+static int democt = 0;
+static NSArray* demolevels;
+
 +(NSArray*)random_set1 {
     static NSArray *set1_levels;
     if (!set1_levels){
         set1_levels = [[NSArray alloc] initWithObjects:
-                       @"autolevel_1_1",@"autolevel_1_2",@"autolevel_1_3",@"autolevel_1_4",@"autolevel_1_5",
+            @"autolevel_1_1",@"autolevel_1_2",@"autolevel_1_3",@"autolevel_1_4",@"autolevel_1_5",@"autolevel_1_6",@"autolevel_1_7",@"autolevel_1_8",
         nil];
         //set1_levels = [[NSArray alloc] initWithObjects:@"test", nil];
     }
@@ -26,6 +29,16 @@
     ct = 0;
     
     NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
+    demolevels = [[NSArray arrayWithObjects: 
+                         @"autolevel_1_3",
+                         @"autolevel_1_2",
+                         @"autolevel_1_4",
+                         @"autolevel_1_5",
+                         @"autolevel_1_2",
+                         @"autolevel_1_6",
+                         @"autolevel_1_7",
+                         @"autolevel_1_8",
+                         nil] retain];
     //NSArray *to_load = [[[NSArray alloc] initWithObjects:@"test", nil] retain];
     map_sections = [[NSMutableArray alloc] init];
     
@@ -129,6 +142,10 @@
 }
 
 -(NSString*)get_random_map {
+    if (democt < demolevels.count) {
+        return [demolevels objectAtIndex:democt];
+        democt++;
+    }
     NSArray* tlvls = [AutoLevel random_set1];
     return [tlvls objectAtIndex:arc4random_uniform([tlvls count])];
 }

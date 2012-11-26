@@ -252,6 +252,9 @@
 		7EE1174F16631213004F3C29 /* spike_vine_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EE1174C16631213004F3C29 /* spike_vine_bottom.png */; };
 		7EE1175016631213004F3C29 /* spike_vine_section.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EE1174D16631213004F3C29 /* spike_vine_section.png */; };
 		7EE1175116631213004F3C29 /* spike_vine_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EE1174E16631213004F3C29 /* spike_vine_top.png */; };
+		7EE1175316631627004F3C29 /* autolevel_1_6.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EE1175216631627004F3C29 /* autolevel_1_6.map */; };
+		7EE117551663322D004F3C29 /* autolevel_1_7.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EE117541663322C004F3C29 /* autolevel_1_7.map */; };
+		7EE11757166339DA004F3C29 /* autolevel_1_8.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EE11756166339D9004F3C29 /* autolevel_1_8.map */; };
 		7EE2AEFC16143BA60035BA50 /* BridgeIsland.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2AEFB16143BA60035BA50 /* BridgeIsland.m */; };
 		7EE2AEFF161448F60035BA50 /* bridge_test.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EE2AEFE161448F60035BA50 /* bridge_test.map */; };
 		7EE2B78015B7E0DA00941C3B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EE2B77815B7E0DA00941C3B /* Default.png */; };
@@ -782,6 +785,9 @@
 		7EE1174C16631213004F3C29 /* spike_vine_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spike_vine_bottom.png; sourceTree = "<group>"; };
 		7EE1174D16631213004F3C29 /* spike_vine_section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spike_vine_section.png; sourceTree = "<group>"; };
 		7EE1174E16631213004F3C29 /* spike_vine_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spike_vine_top.png; sourceTree = "<group>"; };
+		7EE1175216631627004F3C29 /* autolevel_1_6.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autolevel_1_6.map; sourceTree = "<group>"; };
+		7EE117541663322C004F3C29 /* autolevel_1_7.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autolevel_1_7.map; sourceTree = "<group>"; };
+		7EE11756166339D9004F3C29 /* autolevel_1_8.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autolevel_1_8.map; sourceTree = "<group>"; };
 		7EE2AEFA16143BA60035BA50 /* BridgeIsland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeIsland.h; sourceTree = "<group>"; };
 		7EE2AEFB16143BA60035BA50 /* BridgeIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgeIsland.m; sourceTree = "<group>"; };
 		7EE2AEFE161448F60035BA50 /* bridge_test.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bridge_test.map; sourceTree = "<group>"; };
@@ -1356,6 +1362,9 @@
 				7EE1174616623AC4004F3C29 /* autolevel_1_3.map */,
 				7EE1174816623CA0004F3C29 /* autolevel_1_4.map */,
 				7EE1174A16630170004F3C29 /* autolevel_1_5.map */,
+				7EE1175216631627004F3C29 /* autolevel_1_6.map */,
+				7EE117541663322C004F3C29 /* autolevel_1_7.map */,
+				7EE11756166339D9004F3C29 /* autolevel_1_8.map */,
 			);
 			name = connect;
 			sourceTree = "<group>";
@@ -2538,6 +2547,9 @@
 				7EE1174F16631213004F3C29 /* spike_vine_bottom.png in Resources */,
 				7EE1175016631213004F3C29 /* spike_vine_section.png in Resources */,
 				7EE1175116631213004F3C29 /* spike_vine_top.png in Resources */,
+				7EE1175316631627004F3C29 /* autolevel_1_6.map in Resources */,
+				7EE117551663322D004F3C29 /* autolevel_1_7.map in Resources */,
+				7EE11757166339DA004F3C29 /* autolevel_1_8.map in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

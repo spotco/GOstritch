@@ -77,7 +77,7 @@
 }
 
 -(int)get_render_ord {
-    return [GameRenderImplementation GET_RENDER_ISLAND_ORD];
+    return [GameRenderImplementation GET_RENDER_FG_ISLAND_ORD];
 }
 
 -(HitRect)get_hit_rect {
