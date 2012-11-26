@@ -170,13 +170,24 @@
 }
 
 -(HitRect) get_world_bounds {
-    float max_x = 0;
-    float max_y = 0;
+    float min_x = 5000;
+    float min_y = 5000;
+    float max_x = -5000;
+    float max_y = -5000;
     for (Island* i in islands) {
-        max_x = MAX(max_x, i.endX);
-        max_y = MAX(max_y, i.endY);
+        max_x = MAX(MAX(max_x, i.endX),i.startX);
+        max_y = MAX(MAX(max_y, i.endY),i.startY);
+        min_x = MIN(MIN(min_x, i.endX),i.startX);
+        min_y = MIN(MIN(min_y, i.endY),i.startY);
     }
-    return [Common hitrect_cons_x1:-100 y1:0 wid:max_x+600 hei:max_y+600];
+    for(GameObject* o in game_objects) {
+        max_x =MAX(max_x, o.position.x);
+        max_y = MAX(max_y, o.position.y);
+        min_x = MIN(min_x, o.position.x);
+        min_y =MIN(min_y, o.position.y);
+    }
+    HitRect r = [Common hitrect_cons_x1:min_x y1:min_y-200 x2:max_x+1000 y2:max_y+2000];
+    return r;
 }
 
 
@@ -321,7 +332,6 @@ static NSMutableArray* particles_tba;
 
 -(void)update_game_obj {
     for(int i = 0; i < [game_objects count]; i++) {
-    //for (GameObject* o in game_objects) {
         GameObject *o = [game_objects objectAtIndex:i];
         GameObjectReturnCode c = [o update:player g:self];
         
@@ -372,6 +382,7 @@ static NSMutableArray* particles_tba;
 
 -(void)check_game_state {
     if (![Common hitrect_touch:[self get_world_bounds] b:[player get_hit_rect]]) {
+        //NSLog(@"fall out, player:%@ worldrect:%@",NSStringFromCGPoint(player.position),NSStringFromCGRect([Common hitrect_to_cgrect:[self get_world_bounds]]));
         [self player_reset];
 	}
 }

@@ -10,7 +10,7 @@
 #define MVR_ROUNDED_CORNER_SCALE 8
 #define NORMAL_ROUNDED_CORNER_SCALE 20
 #define BORDER_LINE_WIDTH 5
-#define CORNER_TOP_FILL_SCALE 0.65
+#define CORNER_TOP_FILL_SCALE 26
 #define CORNER_CURVATURE 7.5
 #define TL_DOWNOFFSET 20
 
@@ -64,6 +64,8 @@
     t_min = 0;
     t_max = sqrtf(powf(endX - startX, 2) + powf(endY - startY, 2));
     do_draw = YES;
+    force_draw_leftline = NO;
+    force_draw_rightline = NO;
 }
 
 -(void) draw {
@@ -96,15 +98,15 @@
         [Common draw_renderobj:tr_top_corner n_vtx:4];
     }
     
-    if (next != NULL && (!force_draw_leftline&&!force_draw_rightline)) {
+    if (next != NULL && !(force_draw_leftline||force_draw_rightline)) {
         [Common draw_renderobj:corner_fill n_vtx:3];
         
         ccColor4F fc = [self get_corner_fill_color];
         glColor4f(fc.r, fc.g, fc.b, 1.0);
-        
         ccDrawSolidPoly(toppts, 3, YES);
         [Common draw_renderobj:corner_line_fill n_vtx:4];
-    }
+        /*NSLog(@"%@ , %@ , %@",NSStringFromCGPoint(ccp(toppts[0].x,toppts[0].y)),NSStringFromCGPoint(ccp(toppts[1].x,toppts[1].y)),NSStringFromCGPoint(ccp(toppts[2].x,toppts[2].y)));*/
+    } 
     
 }
 
@@ -130,7 +132,8 @@
     [v scale:ndir];
 }
 
--(void)init_tex {	
+-(void)init_tex {
+    //init islandfill
     main_fill = [Common init_render_obj:[self get_tex_fill] npts:4];
 	
 	CGPoint* tri_pts = main_fill.tri_pts;
@@ -195,6 +198,8 @@
 }
 
 -(void)init_top {
+    //set top green bar
+    //also initially sets toppts
     top_fill = [Common init_render_obj:[self get_tex_top] npts:4];
     
 	CGPoint* tri_pts = top_fill.tri_pts;
@@ -327,6 +332,7 @@
 }
 
 -(void)init_corner_line_fill {
+    //if next is island, set force_draw_rightline
     if (next == NULL) {
         return;
     } else if (![next isKindOfClass:[LineIsland class]]){
@@ -347,7 +353,6 @@
 }
 
 -(void)link_finish {
-    
     if (next != NULL) {
         [self init_corner_tex];
         [self init_corner_top];
@@ -356,6 +361,7 @@
 }
 
 -(void)init_corner_top {
+    //called from link_finish, position greenwedge
     Vec3D *v3t2 = [Vec3D init_x:(next.endX - next.startX) y:(next.endY - next.startY) z:0];
     Vec3D *vZ = [Vec3D Z_VEC];
     Vec3D *v3t1 = [v3t2 crossWith:vZ];
@@ -370,18 +376,19 @@
 
     float corner_top_scale = CORNER_TOP_FILL_SCALE;
     
+    /*cur 0  next
+          1 2
+     */
+    //toppts[0,1] already set, set[2] and scale
     Vec3D *reduce_left = [Vec3D init_x:toppts[1].x-toppts[0].x y:toppts[1].y-toppts[0].y z:0];
-    float leftlen = [reduce_left length];
     [reduce_left normalize];
-    leftlen = leftlen * corner_top_scale;
-    toppts[1] = ccp( toppts[0].x + reduce_left.x * leftlen, toppts[0].y + reduce_left.y * leftlen);
-    
+    [reduce_left scale:corner_top_scale];
+    toppts[1] = ccp( toppts[0].x + reduce_left.x, toppts[0].y + reduce_left.y);
     
     Vec3D *reduce_right = [Vec3D init_x:toppts[2].x-toppts[0].x y:toppts[2].y-toppts[0].y z:0];
-    float rightlen = [reduce_right length];
     [reduce_right normalize];
-    rightlen = rightlen * corner_top_scale;
-    toppts[2] = ccp( toppts[0].x + reduce_right.x * rightlen, toppts[0].y + reduce_right.y * rightlen);
+    [reduce_right scale:corner_top_scale];
+    toppts[2] = ccp( toppts[0].x + reduce_right.x, toppts[0].y + reduce_right.y);
     
     
     [v3t2 dealloc];
@@ -414,7 +421,7 @@
     [v3t2 dealloc];
     [v3t1 dealloc];
 
-    [Common tex_map_to_tri_loc:corner_fill len:3]; 
+    [Common tex_map_to_tri_loc:corner_fill len:3];
 }
 
 -(void)cleanup_anims {    

@@ -7,7 +7,10 @@
 +(NSArray*)random_set1 {
     static NSArray *set1_levels;
     if (!set1_levels){
-        set1_levels = [[NSArray alloc] initWithObjects:@"autolevel_1_1", nil];
+        set1_levels = [[NSArray alloc] initWithObjects:
+                       @"autolevel_1_1",@"autolevel_1_2",@"autolevel_1_3",@"autolevel_1_4",@"autolevel_1_5",
+        nil];
+        //set1_levels = [[NSArray alloc] initWithObjects:@"test", nil];
     }
     return set1_levels;
 }
@@ -22,7 +25,8 @@
     tglayer = glayer;
     ct = 0;
     
-    NSArray *to_load = [[NSArray arrayWithObjects: @"connect2", nil] retain];
+    NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
+    //NSArray *to_load = [[[NSArray alloc] initWithObjects:@"test", nil] retain];
     map_sections = [[NSMutableArray alloc] init];
     
     for (NSString* i in to_load) {
@@ -40,6 +44,7 @@
 -(void)load_map_section:(MapSection*)m {
     [m offset_x:cur_x y:cur_y];
     [tglayer.islands addObjectsFromArray:m.map.n_islands];
+    
     [Island link_islands:tglayer.islands];
     
     for (Island* i in m.map.n_islands) {

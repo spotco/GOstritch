@@ -20,7 +20,7 @@
 +(void)main {
     [[CCDirector sharedDirector] setDisplayFPS:NO];
     //[[CCDirector sharedDirector] runWithScene:[CoverPage scene]];
-    //[[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"bridge_test"]];
+    //[[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"autolevel_1_2"]];
     [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with_autolevel]];
 }
 

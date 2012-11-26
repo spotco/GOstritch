@@ -36,8 +36,16 @@
         player_small_rect.y2-=phei*0.25;
         
         SATPoly r_playerhit = [PolyLib hitrect_to_poly:player_small_rect];
+        for(int i = 0; i < r_hitbox.length; i++) {
+            r_hitbox.pts[i].x += position_.x;
+            r_hitbox.pts[i].y += position_.y;
+        }
         if ([PolyLib poly_intersect_SAT:r_hitbox b:r_playerhit]) {
             [self hit:player g:g];
+        }
+        for(int i = 0; i < r_hitbox.length; i++) {
+            r_hitbox.pts[i].x -= position_.x;
+            r_hitbox.pts[i].y -= position_.y;
         }
     }
     
@@ -49,6 +57,7 @@
     [self setActive:NO];
     [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
     //player.dead = YES;
+    
 }
 
 -(CCTexture2D*)get_base_tex {
@@ -134,10 +143,10 @@
     center.tex_pts[3] = ccp(s.width/bwid,  (len/s.height) * s.height/bhei);
     
     
-    r_hitbox = [PolyLib cons_SATPoly_quad:ccp(center.tri_pts[0].x+position_.x, center.tri_pts[0].y+position_.y)
-                                        b:ccp(center.tri_pts[1].x+position_.x, center.tri_pts[1].y+position_.y)
-                                        c:ccp(center.tri_pts[3].x+position_.x, center.tri_pts[3].y+position_.y)
-                                        d:ccp(center.tri_pts[2].x+position_.x, center.tri_pts[2].y+position_.y)];
+    r_hitbox = [PolyLib cons_SATPoly_quad:ccp(center.tri_pts[0].x, center.tri_pts[0].y)
+                                        b:ccp(center.tri_pts[1].x, center.tri_pts[1].y)
+                                        c:ccp(center.tri_pts[3].x, center.tri_pts[3].y)
+                                        d:ccp(center.tri_pts[2].x, center.tri_pts[2].y)];
     
     [normal dealloc];
     [r_dirv dealloc];

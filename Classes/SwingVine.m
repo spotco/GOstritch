@@ -28,6 +28,7 @@
 }
 
 -(GameObjectReturnCode)update:(Player *)player g:(GameEngineLayer *)g {
+    //fix satpoly hitbox for moving position, see spikevine update
     if (vine.rotation > 0) {
         vr -= 0.1;
     } else {
