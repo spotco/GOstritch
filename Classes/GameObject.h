@@ -23,6 +23,8 @@ typedef enum {
 -(int)get_render_ord;
 -(void)reset;
 
+-(void)check_should_render:(GameEngineLayer *)g;
+
 -(Island*)get_connecting_island:(NSMutableArray*)islands;
 
 @end

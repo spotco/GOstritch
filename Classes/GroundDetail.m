@@ -1,4 +1,5 @@
 #import "GroundDetail.h"
+#import "GameEngineLayer.h"
 
 @implementation GroundDetail
 
@@ -27,6 +28,14 @@
     d.img.position = ccp(0,[d.img boundingBoxInPixels].size.height / 2.0);
     [d addChild:d.img];
     return d;
+}
+
+-(void)check_should_render:(GameEngineLayer *)g {
+    if ([Common hitrect_touch:[g get_viewbox] b:[self get_hit_rect]]) {
+        do_render = YES;
+    } else {
+        do_render = NO;
+    }
 }
 
 @end

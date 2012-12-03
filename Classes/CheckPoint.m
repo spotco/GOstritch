@@ -47,7 +47,7 @@ float texwid,texhei;
 
 -(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g{
     [super update:player g:g];
-    if (self.active && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]] && ![self is_activated]) {
+    if (self.active && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         self.active = NO;
         inactive_img.visible = NO;
         active_img.visible = YES;
@@ -62,8 +62,12 @@ float texwid,texhei;
     return GameObjectReturnCode_NONE;
 }
 
--(BOOL)is_activated {
-    return active_img.visible;
+-(void)check_should_render:(GameEngineLayer *)g {
+    if ([Common hitrect_touch:[g get_viewbox] b:[self get_hit_rect]]) {
+        do_render = YES;
+    } else {
+        do_render = NO;
+    }
 }
 
 

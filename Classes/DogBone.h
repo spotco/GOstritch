@@ -6,9 +6,13 @@
     BOOL anim_toggle;
     int bid;
     
+    BOOL refresh_cached_hitbox;
+    HitRect cached_hitbox;
+    
     float vx,vy;
     BOOL follow;
     CGPoint initial_pos;
+    
 }
 
 typedef enum {

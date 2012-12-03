@@ -154,6 +154,15 @@
     }
 }
 
++(gl_render_obj)init_render_obj:(CCTexture2D*)tex npts:(int)npts {
+    struct gl_render_obj n;
+    n.texture = tex;
+    n.tri_pts = calloc(npts, sizeof(CGPoint));
+    n.tex_pts = calloc(npts, sizeof(CGPoint));
+    n.isalloc = 1;
+    return n;
+}
+
 +(void)draw_renderobj:(gl_render_obj)obj n_vtx:(int)n_vtx {
     glBindTexture(GL_TEXTURE_2D, obj.texture.name);
 	glVertexPointer(2, GL_FLOAT, 0, obj.tri_pts); 
@@ -167,15 +176,6 @@
     for (int i = 0; i < len; i++) {
         o.tex_pts[i] = ccp(o.tri_pts[i].x/o.texture.pixelsWide, o.tri_pts[i].y/o.texture.pixelsHigh);
     }
-}
-
-+(gl_render_obj)init_render_obj:(CCTexture2D*)tex npts:(int)npts {
-    struct gl_render_obj n;
-    n.texture = tex;
-    n.tri_pts = calloc(npts, sizeof(CGPoint));
-    n.tex_pts = calloc(npts, sizeof(CGPoint));
-    n.isalloc = 1;
-    return n;
 }
 
 +(CGRect)ssrect_from_dict:(NSDictionary*)dict tar:(NSString*)tar {    

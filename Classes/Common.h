@@ -15,6 +15,7 @@ typedef struct gl_render_obj {
 	CGPoint *tri_pts;
 	CGPoint *tex_pts;
     int isalloc;
+    
 } gl_render_obj;
 
 typedef struct line_seg {

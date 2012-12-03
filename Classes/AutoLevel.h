@@ -6,6 +6,7 @@
     GameEngineLayer* tglayer;
     float cur_x,cur_y;
     NSMutableArray* map_sections;
+    NSMutableArray* stored;
     int ct;
 }
 

@@ -15,6 +15,9 @@
     CGPoint tl,bl,tr,br;
     CGPoint bl1,bl2,br1,br2;
     
+    HitRect cache_hitrect;
+    BOOL has_gen_hitrect;
+    
     BOOL force_draw_leftline,force_draw_rightline;
 }
 

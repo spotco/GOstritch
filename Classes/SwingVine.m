@@ -110,7 +110,8 @@
     CGPoint base = p.position;
     Vec3D* up;
     if (p.current_island != NULL) {
-        up = [p.current_island get_normal_vec];
+        Vec3D* nvec = [p.current_island get_normal_vecC];
+        up = [Vec3D init_x:nvec.x y:nvec.y z:nvec.z];
     } else {
         up = [Vec3D init_x:0 y:1 z:0];
     }

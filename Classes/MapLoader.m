@@ -2,14 +2,33 @@
 
 @implementation MapLoader
 
-+(GameMap) load_map:(NSString *)map_file_name oftype:(NSString *) map_file_type{
+#define DOTMAP @"map"
+
+static NSMutableDictionary* cached_json;
+
++(void) precache_map:(NSString *)map_file_name {
+    if (cached_json == NULL) {
+        cached_json = [[NSMutableDictionary alloc] init];
+    }
     
-    NSString *islandFilePath = [[NSBundle mainBundle] pathForResource:map_file_name ofType:map_file_type];
+    NSString *islandFilePath = [[NSBundle mainBundle] pathForResource:map_file_name ofType:DOTMAP];
 	NSString *islandInputStr = [[NSString alloc] initWithContentsOfFile : islandFilePath encoding:NSUTF8StringEncoding error:NULL];
 	NSData *islandData  =  [islandInputStr dataUsingEncoding : NSUTF8StringEncoding];
     [islandInputStr dealloc];
     
     NSDictionary *j_map_data = [[CJSONDeserializer deserializer] deserializeAsDictionary:islandData error:NULL];
+    [cached_json setValue:j_map_data forKey:map_file_name];
+}
+
++(NSDictionary*)get_jsondict:(NSString *)map_file_name {
+    if (![cached_json objectForKey:map_file_name]) {
+        [MapLoader precache_map:map_file_name];
+    }
+    return [cached_json objectForKey:map_file_name];
+}
+
++(GameMap) load_map:(NSString *)map_file_name {
+    NSDictionary *j_map_data = [MapLoader get_jsondict:map_file_name];
     
     NSArray *islandArray = [j_map_data objectForKey:(@"islands")];
 	int islandsCount = [islandArray count];

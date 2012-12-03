@@ -4,14 +4,12 @@
 
 @implementation AutoLevel
 
-/*static int democt = 0;
-static NSArray* demolevels;*/
-
 +(NSArray*)random_set1 {
     static NSArray *set1_levels;
     if (!set1_levels){
         set1_levels = [[NSArray alloc] initWithObjects:
             @"autolevel_1_1",@"autolevel_1_2",@"autolevel_1_3",@"autolevel_1_4",@"autolevel_1_5",@"autolevel_1_6",@"autolevel_1_7",@"autolevel_1_8",
+            //@"autolevel_1_3",
         nil];
         //set1_levels = [[NSArray alloc] initWithObjects:@"test", nil];
     }
@@ -29,19 +27,8 @@ static NSArray* demolevels;*/
     ct = 0;
     
     NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
-    /*demolevels = [[NSArray arrayWithObjects: 
-                         @"autolevel_1_3",
-                         @"autolevel_1_1",
-                         @"autolevel_1_2",
-                         @"autolevel_1_4",
-                         @"autolevel_1_5",
-                         @"autolevel_1_6",
-                         @"autolevel_1_2",
-                         @"autolevel_1_7",
-                         @"autolevel_1_8",
-                         nil] retain];*/
-    //NSArray *to_load = [[[NSArray alloc] initWithObjects:@"test", nil] retain];
     map_sections = [[NSMutableArray alloc] init];
+    stored = [[NSMutableArray alloc] init];
     
     for (NSString* i in to_load) {
         [map_sections addObject:[MapSection init_from_name:i]];
@@ -52,6 +39,10 @@ static NSArray* demolevels;*/
     
     for (MapSection *m in map_sections) {
         [self load_map_section:m];
+    }
+    
+    for (NSString* i in [AutoLevel random_set1]) {
+        [MapLoader precache_map:i];
     }
 }
 
@@ -121,17 +112,40 @@ static NSArray* demolevels;*/
     }
     [map_sections removeObjectsInArray:toremove];
     
+    for(MapSection *m in stored) {
+        [m release];
+    }
+    [stored removeAllObjects];
+    
     [toremove removeAllObjects];
     [toremove dealloc];
 }
 
 -(GameObjectReturnCode)update:(Player *)player g:(GameEngineLayer *)g {
     CGPoint pos = player.position;
+    NSMutableArray *tostore = [[NSMutableArray alloc] init];
     int left = 99;
     for (MapSection *i in map_sections) {
         MapSection_Position ip = [i get_position_status:pos];
         if (ip == MapSection_Position_CURRENT) {
             left = [map_sections count]-1-[map_sections indexOfObject:i];
+        } else if (ip == MapSection_Position_PAST) {
+            [tostore addObject:i];
+        }
+    }
+    
+    if ([tostore count] > 0) {
+        [map_sections removeObjectsInArray:tostore];
+        for (MapSection *i in tostore) {
+            [stored addObject:i];
+            for (GameObject *o in i.map.game_objects) {
+                [g removeChild:o cleanup:NO];
+                [g.game_objects removeObject:o];
+            }
+            for (Island *o in i.map.n_islands) {
+                [g removeChild:o cleanup:NO];
+                [g.islands removeObject:o];
+            }
         }
     }
     
@@ -141,16 +155,33 @@ static NSArray* demolevels;*/
         [self load_map_section:n];
         ct++;
     }
+    
+    [tostore removeAllObjects];
+    [tostore dealloc];
     //NSLog(@"SECTIONS:%i ISLANDS:%i GAMEOBJS:%i",[map_sections count], [tglayer.islands count], [tglayer.game_objects count]);
     return GameObjectReturnCode_NONE;
 }
 
+-(void)reset {
+    for (int i = stored.count-1; i>=0; i--) {
+        MapSection *t = [stored objectAtIndex:i];
+        [stored removeObjectAtIndex:i];
+        [map_sections insertObject:t atIndex:0];
+        
+        for (GameObject *o in t.map.game_objects) {
+            [tglayer addChild:o];
+            [tglayer.game_objects addObject:o];
+        }
+        for (Island *o in t.map.n_islands) {
+            [tglayer addChild:o];
+            [tglayer.islands addObject:o];
+        }
+        
+    }
+    [super reset];
+}
+
 -(NSString*)get_random_map {
-    /*if (democt < demolevels.count) {
-        NSString* tret = [demolevels objectAtIndex:democt];
-        democt++;
-        return tret;
-    }*/
     NSArray* tlvls = [AutoLevel random_set1];
     return [tlvls objectAtIndex:arc4random_uniform([tlvls count])];
 }
@@ -159,6 +190,11 @@ static NSArray* demolevels;*/
     for (MapSection *m in map_sections) {
         [m release];
     }
+    for (MapSection *m in stored) {
+        [m release];
+    }
+    [stored removeAllObjects];
+    [stored release];
     [map_sections removeAllObjects];
     [map_sections release];
     [super dealloc];

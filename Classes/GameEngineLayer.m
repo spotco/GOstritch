@@ -57,7 +57,7 @@
     if (particles_tba == NULL) {
         particles_tba = [[NSMutableArray alloc] init];
     }
-    
+    refresh_viewbox_cache = YES;
     CGPoint player_start_pt = [self loadMap:map_filename];
     [self update_islands];
     [self init_bones];
@@ -129,6 +129,7 @@
             //NSLog(@"getbid:%i",tbid);
             [bones setObject:[NSNumber numberWithInt:Bone_Status_HASGET] forKey:bid];
             [Common run_callback:bone_collect_ui_animation];
+            refresh_bone_cache = YES;
             return;
         }
     }
@@ -144,6 +145,7 @@
             [bones setObject:[NSNumber numberWithInt:Bone_Status_SAVEDGET] forKey:bid];
         }
     }
+    [self cleanup_autolevel];
 }
 
 -(void)cleanup_autolevel {
@@ -169,30 +171,39 @@
     bone_collect_ui_animation.selector = @selector(start_bone_collect_anim);
 }
 
+-(void)addChild:(CCNode *)node z:(NSInteger)z {
+    refresh_worldbounds_cache = YES;
+    [super addChild:node z:z];
+}
+
 -(HitRect) get_world_bounds {
-    float min_x = 5000;
-    float min_y = 5000;
-    float max_x = -5000;
-    float max_y = -5000;
-    for (Island* i in islands) {
-        max_x = MAX(MAX(max_x, i.endX),i.startX);
-        max_y = MAX(MAX(max_y, i.endY),i.startY);
-        min_x = MIN(MIN(min_x, i.endX),i.startX);
-        min_y = MIN(MIN(min_y, i.endY),i.startY);
+    if (refresh_worldbounds_cache) {
+        refresh_worldbounds_cache = NO;
+        float min_x = 5000;
+        float min_y = 5000;
+        float max_x = -5000;
+        float max_y = -5000;
+        for (Island* i in islands) {
+            max_x = MAX(MAX(max_x, i.endX),i.startX);
+            max_y = MAX(MAX(max_y, i.endY),i.startY);
+            min_x = MIN(MIN(min_x, i.endX),i.startX);
+            min_y = MIN(MIN(min_y, i.endY),i.startY);
+        }
+        for(GameObject* o in game_objects) {
+            max_x =MAX(max_x, o.position.x);
+            max_y = MAX(max_y, o.position.y);
+            min_x = MIN(min_x, o.position.x);
+            min_y =MIN(min_y, o.position.y);
+        }
+        HitRect r = [Common hitrect_cons_x1:min_x y1:min_y-200 x2:max_x+1000 y2:max_y+2000];
+        cached_worldsbounds = r;
     }
-    for(GameObject* o in game_objects) {
-        max_x =MAX(max_x, o.position.x);
-        max_y = MAX(max_y, o.position.y);
-        min_x = MIN(min_x, o.position.x);
-        min_y =MIN(min_y, o.position.y);
-    }
-    HitRect r = [Common hitrect_cons_x1:min_x y1:min_y-200 x2:max_x+1000 y2:max_y+2000];
-    return r;
+    return cached_worldsbounds;
 }
 
 
 -(CGPoint) loadMap:(NSString*)filename {
-	GameMap map = [MapLoader load_map:filename oftype:@"map"];
+	GameMap map = [MapLoader load_map:filename];
     
     islands = map.n_islands;
     int ct = [Island link_islands:islands];
@@ -225,12 +236,13 @@
 }
 
 -(void)player_reset {
+    for (int i = 0; i < game_objects.count; i++) {
+        GameObject *o = [game_objects objectAtIndex:i];
+        [o reset];
+    }
     [player reset];
     [self reset_camera];
     [GameControlImplementation reset_control_state];
-    for (GameObject* o in game_objects) {
-        [o reset];
-    }
     current_mode = GameEngineLayerMode_GAMEPLAY;
     
     for(NSNumber* bid in [bones allKeys]) {
@@ -239,13 +251,23 @@
             [bones setObject:[NSNumber numberWithInt:Bone_Status_TOGET] forKey:bid];
         }
     }
+    refresh_bone_cache = YES;
 }
 
+//static int ctrs = 0;
+
 -(void)update {
+    /*ctrs++;
+    if (ctrs>50) {
+        ctrs=0;
+        NSLog(@"islands:%i objects:%i",[islands count],[game_objects count]);
+    }*/
+    
     if (current_mode == GameEngineLayerMode_PAUSED) {
         return;
         
     } else if (current_mode == GameEngineLayerMode_GAMEPLAY || current_mode == GameEngineLayerMode_OBJECTANIM) {
+        refresh_viewbox_cache = YES;
         [GamePhysicsImplementation player_move:player with_islands:islands];
         [GameControlImplementation control_update_player:self];
         [player update:self];
@@ -256,7 +278,7 @@
         [self push_added_particles];
         [self update_islands];
         [GameRenderImplementation update_render_on:self];
-        [self cleanup_autolevel];
+        //[self cleanup_autolevel];
         [Common run_callback:bg_update];
         [Common run_callback:ui_update];
         
@@ -318,10 +340,14 @@ static NSMutableArray* particles_tba;
 }
 
 -(HitRect)get_viewbox {
-    return [Common hitrect_cons_x1:-self.position.x-[CCDirector sharedDirector].winSize.width
-                                y1:-self.position.y-[CCDirector sharedDirector].winSize.height
-                               wid:[CCDirector sharedDirector].winSize.width*4
-                               hei:[CCDirector sharedDirector].winSize.height*4];
+    if (refresh_viewbox_cache) {
+        refresh_viewbox_cache = NO;
+        cached_viewbox = [Common hitrect_cons_x1:-self.position.x-[CCDirector sharedDirector].winSize.width
+                                              y1:-self.position.y-[CCDirector sharedDirector].winSize.height
+                                             wid:[CCDirector sharedDirector].winSize.width*3
+                                             hei:[CCDirector sharedDirector].winSize.height*3];
+    }
+    return cached_viewbox;
 }
 
 -(void)min_update_game_obj {
@@ -411,21 +437,25 @@ static NSMutableArray* particles_tba;
 
 
 -(level_bone_status)get_bonestatus {
-    struct level_bone_status n;
-    n.togets = n.savedgets = n.hasgets = n.alreadygets = 0;
-    for (NSNumber* bid in bones) {
-        NSNumber* status = [bones objectForKey:bid];
-        if (status.intValue == Bone_Status_TOGET) {
-            n.togets++;
-        } else if (status.intValue == Bone_Status_SAVEDGET) {
-            n.savedgets++;
-        } else if (status.intValue == Bone_Status_HASGET) {
-            n.hasgets++;
-        } else if (status.intValue == Bone_Status_ALREADYGET) {
-            n.alreadygets++;
+    if (refresh_bone_cache == YES) {
+        refresh_bone_cache = NO;
+        struct level_bone_status n;
+        n.togets = n.savedgets = n.hasgets = n.alreadygets = 0;
+        for (NSNumber* bid in bones) {
+            NSNumber* status = [bones objectForKey:bid];
+            if (status.intValue == Bone_Status_TOGET) {
+                n.togets++;
+            } else if (status.intValue == Bone_Status_SAVEDGET) {
+                n.savedgets++;
+            } else if (status.intValue == Bone_Status_HASGET) {
+                n.hasgets++;
+            } else if (status.intValue == Bone_Status_ALREADYGET) {
+                n.alreadygets++;
+            }
         }
+        cached_status = n;
     }
-    return n;
+    return cached_status;
 }
 
 +(void)print_bonestatus:(level_bone_status)b {

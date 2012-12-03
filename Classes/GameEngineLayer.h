@@ -52,6 +52,16 @@ typedef struct level_bone_status {
     callback ui_update;
     callback load_game_end_menu;
     callback bone_collect_ui_animation;
+    
+    
+    BOOL refresh_bone_cache;
+    level_bone_status cached_status;
+    
+    BOOL refresh_viewbox_cache;
+    HitRect cached_viewbox;
+    
+    BOOL refresh_worldbounds_cache;
+    HitRect cached_worldsbounds;
 }
 
 

@@ -23,20 +23,31 @@
     [self setPosition:start];
     initial_pos = start;
     follow = NO;
+    refresh_cached_hitbox = YES;
 }
 
 -(void)setPosition:(CGPoint)position {
     initial_pos = position;
     [super setPosition:position];
+    refresh_cached_hitbox = YES;
 }
 
 -(HitRect)get_hit_rect {
-    return [Common hitrect_cons_x1:[self position].x-10 y1:[self position].y-10 wid:20 hei:20];
+    if (refresh_cached_hitbox) {
+        refresh_cached_hitbox = NO;
+        cached_hitbox = [Common hitrect_cons_x1:[self position].x-10 y1:[self position].y-10 wid:20 hei:20];
+    }
+    return cached_hitbox;
 }
 
 -(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g{
     [super update:player g:g];
     if (!active) {
+        return GameObjectReturnCode_NONE;
+    }
+    
+    float dist = [Common distanceBetween:position_ and:player.position];
+    if (dist > 100) {
         return GameObjectReturnCode_NONE;
     }
     
@@ -55,13 +66,13 @@
     [self setRotation:rot];
     
     float maxdist = 150;
-    float dist = [Common distanceBetween:position_ and:player.position];
     [super setPosition:ccp(position_.x + vx, position_.y+vy)];
     if (!follow && player.dashing && dist < maxdist) {
         follow = YES;
     }
     
     if (follow) {
+        refresh_cached_hitbox = YES;
         Vec3D* vel = [Vec3D init_x:player.position.x-position_.x y:player.position.y-position_.y z:0];
         [vel normalize];
         [vel scale:sqrtf(powf(player.vx, 2) + powf(player.vy, 2))*1.2];
@@ -83,11 +94,7 @@
 }
 
 -(void)set_active:(BOOL)t_active {
-    if (t_active) {
-        visible_ = YES;
-    } else {
-        visible_ = NO;
-    }
+    [self setVisible:t_active];
     active = t_active;
 }
 

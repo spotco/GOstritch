@@ -100,21 +100,23 @@
     
     
     //CCLabelBMFont *label = [CCLabelBMFont labelWithString:@"test" fntFile:@"markerfelt32.fnt"]; TODO -- DO BITMAP FONT
-    CCLabelTTF *label = [CCLabelTTF labelWithString:@"0" 
+    count_disp = [CCLabelTTF labelWithString:@"0" 
                                            fontName:@"Marker Felt" 
                                            fontSize:25];
-    label.color = ccc3(255,0,0);
-    count_disp = [CCMenuItemLabel itemWithLabel:label
+    count_disp.color = ccc3(255,0,0);
+    
+    
+    CCMenuItemLabel *cd_holder = [CCMenuItemLabel itemWithLabel:count_disp
                                          target:NULL 
                                        selector:NULL];
     
-    count_disp.anchorPoint = ccp(0,0);
-    count_disp.position = ccp(0 + 37,[[UIScreen mainScreen] bounds].size.width - count_disp.boundingBox.size.height-10);
+    cd_holder.anchorPoint = ccp(0,0);
+    cd_holder.position = ccp(0 + 37,[[UIScreen mainScreen] bounds].size.width - count_disp.boundingBox.size.height-10);
     
     
     
     
-    ingame_ui = [CCMenu menuWithItems:ingamepause,count_disp_bg,count_disp, nil];
+    ingame_ui = [CCMenu menuWithItems:ingamepause,count_disp_bg,cd_holder, nil];
     ingame_ui.anchorPoint = ccp(0,0);
     ingame_ui.position = ccp(0,0);
     [self addChild:ingame_ui];
@@ -171,8 +173,10 @@
 
 -(void)update {
     level_bone_status b = [game_engine_layer get_bonestatus];
-    [count_disp setString:[NSString stringWithFormat:@"%i",b.hasgets+b.savedgets]];
-    
+    NSString* tmp = [NSString stringWithFormat:@"%i",b.hasgets+b.savedgets];
+    if (![[count_disp string] isEqualToString:tmp]) {
+        [count_disp setString:tmp];
+    }
     NSMutableArray *toremove = [NSMutableArray array];
     for (UIIngameAnimation *i in ingame_ui_anims) {
         [i update];
@@ -233,10 +237,12 @@
     center.y += scrn.y/1.3;
     
     if (game_engine_layer.player.current_island != NULL) {
-        Vec3D *normal = [game_engine_layer.player.current_island get_normal_vec];
+        Vec3D* nvec = [game_engine_layer.player.current_island get_normal_vecC];
+        Vec3D* normal = [Vec3D init_x:nvec.x y:nvec.y z:nvec.z];
         [normal scale:10];
         center.x += normal.x;
         center.y += normal.y;
+        [normal dealloc];
     } else {
         center.x += 10;
         center.y += 10;

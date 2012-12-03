@@ -12,7 +12,7 @@
 }
 
 -(void)initialize:(NSString*)name {
-    map = [MapLoader load_map:name oftype:DOTMAP];
+    map = [MapLoader load_map:name];
     [MapSection transform_map:map by_x:-map.connect_pts_x1 by_y:-map.connect_pts_y1];
     offset_x = 0;
     offset_y = 0;
@@ -55,7 +55,7 @@
 }
 
 -(void)dealloc {
-    NSLog(@"dealloc mapsection");
+    //NSLog(@"dealloc mapsection");
     [map.game_objects removeAllObjects];
     [map.n_islands removeAllObjects];
     [map.game_objects release];

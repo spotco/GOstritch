@@ -34,6 +34,7 @@ typedef struct GameMap {
     float connect_pts_x1,connect_pts_x2,connect_pts_y1,connect_pts_y2;
 } GameMap;
 
-+(GameMap) load_map: (NSString *)map_file_name oftype:(NSString *) map_file_type;
++(GameMap) load_map:(NSString *)map_file_name;
++(void) precache_map:(NSString *)map_file_name;
 
 @end

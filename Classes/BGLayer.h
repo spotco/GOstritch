@@ -9,6 +9,9 @@
 @interface BGLayer : CCLayer {
 	NSMutableArray *bg_elements;
     GameEngineLayer* game_engine_layer;
+    CCSprite *bgsky,*bghills,*bgclouds,*bgtrees,*bgclosehills;
+    
+    float lastx,lasty, curx,cury;
 }
 
 +(BGLayer*)init_with_gamelayer:(GameEngineLayer*)g;

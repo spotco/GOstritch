@@ -5,6 +5,7 @@
 
 @implementation BGLayer
 
+
 +(BGLayer*)init_with_gamelayer:(GameEngineLayer*)g {
     BGLayer *l = [BGLayer node];
     [l set_gameengine:g];
@@ -13,7 +14,7 @@
 
 -(id) init{
 	if( (self = [super init])) {
-		bg_elements = [BGLayer loadBg];
+		bg_elements = [self loadBg];
 		for (CCSprite* i in bg_elements) {
 			[self addChild:i];
 		}
@@ -26,7 +27,7 @@
 }
 
 
-+(NSMutableArray*) loadBg {
+-(NSMutableArray*) loadBg {
 	NSMutableArray *a = [[NSMutableArray alloc] init];
     
     if ([GameMain GET_USE_BG]) {
@@ -41,24 +42,35 @@
         [a addObject:bgtrees];
         [a addObject:bgclosehills];
     }
-    ct = 255;
     
     return a;
 }
 
-static int ct = 0;
-static CCSprite* bgsky;
-static CCSprite* bghills;
-static CCSprite* bgclouds;
-static CCSprite* bgtrees;
-static CCSprite* bgclosehills;
+static int ctrs = 0;
+
+#define SCROLL_LIMIT 3000.0
 
 -(void)update {
     float posx = [game_engine_layer get_pos].x;
     float posy = [game_engine_layer get_pos].y;
     
+    float dx = posx - lastx;
+    float dy = posy - lasty;
+    
+    curx += dx;
+    cury = MAX(0,MIN(3000,cury+dy));
+    
+    lastx = posx;
+    lasty = posy;
+    
+    /*ctrs++;
+    if (ctrs>50) {
+        ctrs=0;
+        NSLog(@"posy:%f cury:%f",posy,cury);
+    }*/
+    
 	for (BackgroundObject* s in bg_elements) {
-        [s update_posx:posx posy:posy];
+        [s update_posx:curx posy:cury];
 	}
     
     //TODO -- day/night effect

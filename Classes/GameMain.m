@@ -19,7 +19,6 @@
 
 +(void)main {
     [[CCDirector sharedDirector] setDisplayFPS:YES];
-    NSLog(@"v:%i",1);
     //[[CCDirector sharedDirector] runWithScene:[CoverPage scene]];
     //[[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"autolevel_1_2"]];
     [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with_autolevel]];

@@ -35,23 +35,33 @@
 -(void)update:(GameEngineLayer *)g {
     if ([Common hitrect_touch:[g get_viewbox] b:[self get_hitrect]]) {
         do_draw = YES;
+        if (!self.visible) {
+            [self setVisible:YES];
+        }
     } else {
         do_draw = NO;
+        if (self.visible) {
+            [self setVisible:NO];
+        }
     }
 }
 
 -(HitRect)get_hitrect {
-    int x_max = main_fill.tri_pts[0].x+position_.x;
-    int x_min = main_fill.tri_pts[0].x+position_.x;
-    int y_max = main_fill.tri_pts[0].y+position_.y;
-    int y_min = main_fill.tri_pts[0].y+position_.y;
-    for (int i = 0; i < 4; i++) {
-        x_max = MAX(main_fill.tri_pts[i].x+position_.x,x_max);
-        x_min = MIN(main_fill.tri_pts[i].x+position_.x,x_min);
-        y_max = MAX(main_fill.tri_pts[i].y+position_.y,y_max);
-        y_min = MIN(main_fill.tri_pts[i].y+position_.y,y_min);
+    if (has_gen_hitrect == NO) {
+        has_gen_hitrect = YES;
+        int x_max = main_fill.tri_pts[0].x+position_.x;
+        int x_min = main_fill.tri_pts[0].x+position_.x;
+        int y_max = main_fill.tri_pts[0].y+position_.y;
+        int y_min = main_fill.tri_pts[0].y+position_.y;
+        for (int i = 0; i < 4; i++) {
+            x_max = MAX(main_fill.tri_pts[i].x+position_.x,x_max);
+            x_min = MIN(main_fill.tri_pts[i].x+position_.x,x_min);
+            y_max = MAX(main_fill.tri_pts[i].y+position_.y,y_max);
+            y_min = MIN(main_fill.tri_pts[i].y+position_.y,y_min);
+        }
+        cache_hitrect = [Common hitrect_cons_x1:x_min y1:y_min x2:x_max y2:y_max];
     }
-    return [Common hitrect_cons_x1:x_min y1:y_min x2:x_max y2:y_max];
+    return cache_hitrect;
 }
 
 -(void)set_pt1:(CGPoint)start pt2:(CGPoint)end {
@@ -67,6 +77,7 @@
     do_draw = YES;
     force_draw_leftline = NO;
     force_draw_rightline = NO;
+    has_gen_hitrect = NO;
 }
 
 -(void) draw {

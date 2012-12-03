@@ -11,6 +11,8 @@
     Island* next;
     
     float fill_hei;
+    
+    Vec3D *cached_vec;
 }
 
 
@@ -23,7 +25,7 @@
 -(void)update:(GameEngineLayer*)g;
 
 -(void)link_finish;
--(Vec3D*)get_normal_vec;
+-(Vec3D*)get_normal_vecC;
 -(line_seg)get_line_seg;
 -(float)get_t_given_position:(CGPoint)position;
 -(CGPoint)get_position_given_t:(float)t;
