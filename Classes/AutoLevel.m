@@ -4,8 +4,8 @@
 
 @implementation AutoLevel
 
-static int democt = 0;
-static NSArray* demolevels;
+/*static int democt = 0;
+static NSArray* demolevels;*/
 
 +(NSArray*)random_set1 {
     static NSArray *set1_levels;
@@ -29,16 +29,17 @@ static NSArray* demolevels;
     ct = 0;
     
     NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
-    demolevels = [[NSArray arrayWithObjects: 
+    /*demolevels = [[NSArray arrayWithObjects: 
                          @"autolevel_1_3",
+                         @"autolevel_1_1",
                          @"autolevel_1_2",
                          @"autolevel_1_4",
                          @"autolevel_1_5",
-                         @"autolevel_1_2",
                          @"autolevel_1_6",
+                         @"autolevel_1_2",
                          @"autolevel_1_7",
                          @"autolevel_1_8",
-                         nil] retain];
+                         nil] retain];*/
     //NSArray *to_load = [[[NSArray alloc] initWithObjects:@"test", nil] retain];
     map_sections = [[NSMutableArray alloc] init];
     
@@ -107,13 +108,16 @@ static NSArray* demolevels;
     
     for(MapSection *m in toremove) {
         for(GameObject *o in m.map.game_objects) {
-            [tglayer removeChild:o cleanup:NO];
             [tglayer.game_objects removeObject:o];
+            [tglayer removeChild:o cleanup:YES];
+            
         }
         for(Island *i in m.map.n_islands) {
-            [tglayer removeChild:i cleanup:NO];
             [tglayer.islands removeObject:i];
+            [tglayer removeChild:i cleanup:YES];
+            
         }
+        [m release];
     }
     [map_sections removeObjectsInArray:toremove];
     
@@ -142,15 +146,19 @@ static NSArray* demolevels;
 }
 
 -(NSString*)get_random_map {
-    if (democt < demolevels.count) {
-        return [demolevels objectAtIndex:democt];
+    /*if (democt < demolevels.count) {
+        NSString* tret = [demolevels objectAtIndex:democt];
         democt++;
-    }
+        return tret;
+    }*/
     NSArray* tlvls = [AutoLevel random_set1];
     return [tlvls objectAtIndex:arc4random_uniform([tlvls count])];
 }
 
 -(void)dealloc {
+    for (MapSection *m in map_sections) {
+        [m release];
+    }
     [map_sections removeAllObjects];
     [map_sections release];
     [super dealloc];

@@ -28,6 +28,7 @@
     new_island.can_land = can_land;
 	[new_island init_tex];
 	[new_island init_top];
+    
 	return new_island;
 }
 
@@ -424,7 +425,12 @@
     [Common tex_map_to_tri_loc:corner_fill len:3];
 }
 
--(void)cleanup_anims {    
+-(void)dealloc {    
+    [self cleanup_anims];
+    [super dealloc];
+}
+
+-(void)cleanup_anims {
     [self cleanup_renderobj:main_fill];
     [self cleanup_renderobj:top_fill];
     [self cleanup_renderobj:bottom_line_fill];
@@ -442,8 +448,10 @@
     if(g.isalloc == 1) {
         free(g.tex_pts);
         free(g.tri_pts);
+        g.isalloc = 0;
     }
 }
+
 
 
 @end

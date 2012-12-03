@@ -3,7 +3,7 @@
 
 @implementation GameMain
 
-#define USE_BG NO
+#define USE_BG YES
 #define ENABLE_BG_PARTICLES YES
 #define DRAW_HITBOX NO
 
@@ -18,7 +18,8 @@
  **/
 
 +(void)main {
-    [[CCDirector sharedDirector] setDisplayFPS:NO];
+    [[CCDirector sharedDirector] setDisplayFPS:YES];
+    NSLog(@"v:%i",1);
     //[[CCDirector sharedDirector] runWithScene:[CoverPage scene]];
     //[[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"autolevel_1_2"]];
     [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with_autolevel]];

@@ -55,6 +55,7 @@
 }
 
 -(void)dealloc {
+    NSLog(@"dealloc mapsection");
     [map.game_objects removeAllObjects];
     [map.n_islands removeAllObjects];
     [map.game_objects release];

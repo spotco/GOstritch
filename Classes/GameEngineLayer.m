@@ -395,9 +395,6 @@ static NSMutableArray* particles_tba;
     [self unschedule:@selector(update)];
     [player cleanup_anims];
     [self removeAllChildrenWithCleanup:YES];
-    for (Island *i in islands) {
-        [i cleanup_anims];
-    }
     [islands removeAllObjects];
     [game_objects removeAllObjects];
     [particles removeAllObjects];

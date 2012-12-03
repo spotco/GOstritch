@@ -99,4 +99,9 @@
     vy = 0;
 }
 
+-(void)dealloc {
+    [self removeAllChildrenWithCleanup:YES];
+    [super dealloc];
+}
+
 @end
