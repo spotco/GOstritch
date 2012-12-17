@@ -62,6 +62,11 @@ static NSMutableDictionary* textures = nil;
                      @"BG1_detail_7.png", TEX_GROUND_DETAIL_7,                     
                      
                      @"dog1ss.png", TEX_DOG_RUN_1,
+                     @"dog2ss.png", TEX_DOG_RUN_2,
+                     @"dog3ss.png", TEX_DOG_RUN_3,
+                     @"dog4ss.png", TEX_DOG_RUN_4,
+                     @"dog5ss.png", TEX_DOG_RUN_5,
+                     @"dog6ss.png", TEX_DOG_RUN_6,
                      @"splash_ss.png", TEX_DOG_SPLASH,
                      
                      @"goldenbone.png", TEX_GOLDEN_BONE,

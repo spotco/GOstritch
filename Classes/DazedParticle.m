@@ -16,7 +16,7 @@
 
 -(DazedParticle*)initialize_x:(float)x y:(float)y t:(float)t time:(int)time{
     [self setPosition:ccp(x,y)];
-    [self setScale:0.3];
+    [self setScale:0.6];
     [self setColor:ccc3(255, 255, 0)];
     cx = x;
     cy = y;

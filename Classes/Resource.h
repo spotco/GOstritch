@@ -24,6 +24,12 @@
 #define TEX_CAVE_SPIKE @"CaveSpike"
 
 #define TEX_DOG_RUN_1 @"Dog1RunSSheet"
+#define TEX_DOG_RUN_2 @"Dog2RunSSheet"
+#define TEX_DOG_RUN_3 @"Dog3RunSSheet"
+#define TEX_DOG_RUN_4 @"Dog4RunSSheet"
+#define TEX_DOG_RUN_5 @"Dog5RunSSheet"
+#define TEX_DOG_RUN_6 @"Dog6RunSSheet"
+
 #define TEX_DOG_SPLASH @"DogSplash"
 
 #define TEX_ISLAND_BORDER @"IslandBorder"

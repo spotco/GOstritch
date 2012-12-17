@@ -75,7 +75,7 @@
 
 -(id)init_hit_anim_speed {
     float speed = 0.06;
-    CCTexture2D *texture = [Resource get_tex:TEX_DOG_RUN_1];
+    CCTexture2D *texture = [self get_ss];
     NSMutableArray *animFrames = [NSMutableArray array];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_1"]]];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_2"]]];
@@ -84,7 +84,7 @@
 }
 
 -(id)init_rolldash_anim:(float)speed {
-	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
+	CCTexture2D *texture = [self get_ss];
 	NSMutableArray *animFrames = [NSMutableArray array];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"roll_0"]]];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"roll_1"]]];
@@ -94,7 +94,7 @@
 }
 
 -(id)init_run_anim_speed:(float)speed {
-	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
+	CCTexture2D *texture = [self get_ss];
 	NSMutableArray *animFrames = [NSMutableArray array];
     
     for(int i = 0; i < 5; i++) {
@@ -112,14 +112,14 @@
 }
 
 -(id)init_none_anim {
-	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
+	CCTexture2D *texture = [self get_ss];
 	NSMutableArray *animFrames = [NSMutableArray array];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_3"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_0"]]];
     return [[Common make_anim_frames:animFrames speed:1] retain];
 }
 
 -(id)init_rocket_anim_speed:(float)speed {
-	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
+	CCTexture2D *texture = [self get_ss];
 	NSMutableArray *animFrames = [NSMutableArray array];
     
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rocket_0"]]];
@@ -129,7 +129,7 @@
 }
 
 -(id)init_cape_anim_speed:(float)speed {
-	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
+	CCTexture2D *texture = [self get_ss];
 	NSMutableArray *animFrames = [NSMutableArray array];
     
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"cape_0"]]];
@@ -141,7 +141,7 @@
 }
 
 -(id)init_splash_anim_speed:(float)speed {
-    CCTexture2D *tex = [Resource get_tex:TEX_DOG_SPLASH];
+    CCTexture2D *tex = [self get_ss];
     NSMutableArray *animFrames = [NSMutableArray array];
     
     [animFrames addObject:[CCSpriteFrame frameWithTexture:tex rect:[Player splash_ss_plist_dict:@"splash1"]]];
@@ -152,6 +152,10 @@
     id anim = [CCAnimate actionWithAnimation:[CCAnimation animationWithFrames:animFrames delay:speed] restoreOriginalFrame:NO];
     [anim retain];
     return anim;
+}
+
+-(CCTexture2D*)get_ss {
+    return [Resource get_tex:TEX_DOG_RUN_1];
 }
 
 #define SPLASH_SS_FILENAME @"splash_ss"
@@ -276,7 +280,7 @@ static GameEngineLayer* game_engine_layer;
         }
     }
     
-    if (floating && !dead && arc4random()%10 == 0) {
+    if (floating && !dead) {
         if (particlectr >= 10) {
             particlectr = 0;
             float pvx;
