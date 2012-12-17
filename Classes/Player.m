@@ -66,30 +66,30 @@
     _RUN_ANIM_NONE = [self init_none_anim];
     _ROCKET_ANIM = [self init_rocket_anim_speed:0.1];
     _CAPE_ANIM = [self init_cape_anim_speed:0.1];
-    _HIT_ANIM = [self init_hit_anim_speed:0.1];
+    _HIT_ANIM = [self init_hit_anim_speed];
     _SPLASH_ANIM = [self init_splash_anim_speed:0.1];
     _DASH_ANIM = [self init_rolldash_anim:0.05];
     
     [self start_anim:_RUN_ANIM_NONE];
 }
 
--(id)init_hit_anim_speed:(float)speed {
+-(id)init_hit_anim_speed {
+    float speed = 0.06;
     CCTexture2D *texture = [Resource get_tex:TEX_DOG_RUN_1];
     NSMutableArray *animFrames = [NSMutableArray array];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_0"]]];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_1"]]];
-    
-    return [[Common make_anim_frames:animFrames speed:speed] retain];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_2"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_3"]]];
+    return [[CCAnimate actionWithAnimation:[CCAnimation animationWithFrames:animFrames delay:speed] restoreOriginalFrame:NO] retain];
 }
 
 -(id)init_rolldash_anim:(float)speed {
 	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
 	NSMutableArray *animFrames = [NSMutableArray array];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rolldash_0"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rolldash_1"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rolldash_2"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rolldash_3"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rolldash_4"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"roll_0"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"roll_1"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"roll_2"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"roll_3"]]];
     return [[Common make_anim_frames:animFrames speed:speed] retain];
 }
 
@@ -114,7 +114,7 @@
 -(id)init_none_anim {
 	CCTexture2D *texture = [Resource get_aa_tex:TEX_DOG_RUN_1];
 	NSMutableArray *animFrames = [NSMutableArray array];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_0"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_3"]]];
     return [[Common make_anim_frames:animFrames speed:1] retain];
 }
 
@@ -124,7 +124,7 @@
     
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rocket_0"]]];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rocket_1"]]];
-	
+	[animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rocket_2"]]];
     return [[Common make_anim_frames:animFrames speed:speed] retain];
 }
 
@@ -134,6 +134,8 @@
     
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"cape_0"]]];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"cape_1"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"cape_2"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"cape_3"]]];
 	
     return [[Common make_anim_frames:animFrames speed:speed] retain];
 }
@@ -274,14 +276,19 @@ static GameEngineLayer* game_engine_layer;
         }
     }
     
-    if (floating && arc4random()%10 == 0) {
-        float pvx;
-        if (arc4random_uniform(2) == 0) {
-            pvx = float_random(4, 6);
+    if (floating && !dead && arc4random()%10 == 0) {
+        if (particlectr >= 10) {
+            particlectr = 0;
+            float pvx;
+            if (arc4random_uniform(2) == 0) {
+                pvx = float_random(4, 6);
+            } else {
+                pvx = float_random(-4, -6);
+            }
+            [g add_particle:[FloatingSweatParticle init_x:position_.x+6 y:position_.y+29 vx:pvx+vx vy:float_random(3, 6)+vy]];
         } else {
-            pvx = float_random(-4, -6);
+            particlectr++;
         }
-        [g add_particle:[FloatingSweatParticle init_x:position_.x+6 y:position_.y+29 vx:pvx+vx vy:float_random(3, 6)+vy]];
     }
     
     player_anim_mode cur_anim_mode = [[self get_current_params] get_anim];
@@ -308,6 +315,31 @@ static GameEngineLayer* game_engine_layer;
         }
     } else if (cur_anim_mode == player_anim_mode_DASH) {
         [self start_anim:_DASH_ANIM];
+        
+        if (particlectr >= 5) {
+            particlectr = 0;
+            Vec3D *dv = [Vec3D init_x:vx y:vy z:0];
+            Vec3D *normal = [[Vec3D Z_VEC] crossWith:dv];
+            [normal normalize];
+            [dv normalize];
+
+            [normal scale:35];
+            float x = position_.x+normal.x;
+            float y = position_.y+normal.y;
+            
+            [normal normalize];
+            [normal scale:float_random(-4, 4)];
+            [dv scale:float_random(-8, -10)];
+            
+            JumpPadParticle* pt = [JumpPadParticle init_x:x y:y vx:dv.x+normal.x vy:dv.y+normal.y];
+            [g add_particle:pt];
+            
+            [dv dealloc];
+            [normal dealloc];
+        } else {
+            particlectr++;
+        }
+        
     } else if (cur_anim_mode == player_anim_mode_CAPE) {
         [self start_anim:_CAPE_ANIM];
     } else if (cur_anim_mode == player_anim_mode_ROCKET) {

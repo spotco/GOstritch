@@ -1,5 +1,6 @@
 #import "Spike.h"
 #import "Island.h"
+#import "GameEngineLayer.h"
 
 @implementation Spike
 
@@ -40,7 +41,7 @@
         [player reset_params];
         [self setActive:NO];
         [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
-        //player.dead = YES;
+        [DazedParticle init_effect:g x:player.position.x y:player.position.y+60 time:40];
     }
     
     return GameObjectReturnCode_NONE;

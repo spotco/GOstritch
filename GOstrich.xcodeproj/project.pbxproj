@@ -219,6 +219,8 @@
 		7EA586D015C6840C00D83473 /* READY.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA586CE15C6840C00D83473 /* READY.png */; };
 		7EA586D315C6855800D83473 /* pause_menu_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA586D115C6855700D83473 /* pause_menu_back.png */; };
 		7EA586D415C6855800D83473 /* pause_menu_return.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA586D215C6855700D83473 /* pause_menu_return.png */; };
+		7EB7698E167EF0A6003AFCF5 /* shittytest.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EB7698D167EF0A6003AFCF5 /* shittytest.map */; };
+		7EB76992167EFF91003AFCF5 /* DazedParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB76991167EFF91003AFCF5 /* DazedParticle.m */; };
 		7EC6CB6E15D362E50068F574 /* Blocker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC6CB6D15D362E50068F574 /* Blocker.m */; };
 		7EC6CB7215D36CBE0068F574 /* SpeedUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC6CB7115D36CBE0068F574 /* SpeedUp.m */; };
 		7EC9034315BF9DA200407FF4 /* dog1ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC9034215BF9DA200407FF4 /* dog1ss.png */; };
@@ -741,6 +743,9 @@
 		7EA586CE15C6840C00D83473 /* READY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = READY.png; sourceTree = "<group>"; };
 		7EA586D115C6855700D83473 /* pause_menu_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_menu_back.png; sourceTree = "<group>"; };
 		7EA586D215C6855700D83473 /* pause_menu_return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_menu_return.png; sourceTree = "<group>"; };
+		7EB7698D167EF0A6003AFCF5 /* shittytest.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shittytest.map; sourceTree = "<group>"; };
+		7EB76990167EFF91003AFCF5 /* DazedParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DazedParticle.h; sourceTree = "<group>"; };
+		7EB76991167EFF91003AFCF5 /* DazedParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DazedParticle.m; sourceTree = "<group>"; };
 		7EC6CB6C15D362E50068F574 /* Blocker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Blocker.h; sourceTree = "<group>"; };
 		7EC6CB6D15D362E50068F574 /* Blocker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Blocker.m; sourceTree = "<group>"; };
 		7EC6CB7015D36CBE0068F574 /* SpeedUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeedUp.h; sourceTree = "<group>"; };
@@ -1272,6 +1277,8 @@
 				7E933FEC1609A4E3007E494A /* FloatingSweatParticle.m */,
 				7E933FFC160AF212007E494A /* BreakableWallRockParticle.h */,
 				7E933FFD160AF212007E494A /* BreakableWallRockParticle.m */,
+				7EB76990167EFF91003AFCF5 /* DazedParticle.h */,
+				7EB76991167EFF91003AFCF5 /* DazedParticle.m */,
 			);
 			name = particle;
 			sourceTree = "<group>";
@@ -1320,6 +1327,7 @@
 				7E22750D15EB3AB1009ED6DC /* bwall_test.map */,
 				7EDA83CB1612DC850083E9CE /* swingvine_test.map */,
 				7EE2AEFE161448F60035BA50 /* bridge_test.map */,
+				7EB7698D167EF0A6003AFCF5 /* shittytest.map */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -2550,6 +2558,7 @@
 				7EE1175316631627004F3C29 /* autolevel_1_6.map in Resources */,
 				7EE117551663322D004F3C29 /* autolevel_1_7.map in Resources */,
 				7EE11757166339DA004F3C29 /* autolevel_1_8.map in Resources */,
+				7EB7698E167EF0A6003AFCF5 /* shittytest.map in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2622,6 +2631,7 @@
 				7EE2AEFC16143BA60035BA50 /* BridgeIsland.m in Sources */,
 				7E7C5AE216598FE5007C8EB8 /* AutoLevel.m in Sources */,
 				7E7C5AE71659A217007C8EB8 /* MapSection.m in Sources */,
+				7EB76992167EFF91003AFCF5 /* DazedParticle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

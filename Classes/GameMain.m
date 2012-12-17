@@ -3,25 +3,24 @@
 
 @implementation GameMain
 
-#define USE_BG YES
+#define USE_BG NO
 #define ENABLE_BG_PARTICLES YES
 #define DRAW_HITBOX NO
 
 
 /**
  TODO --
- -minion robot with beserk
- -dog redesign upload
+ -menu work, lives + score
  
- -swing vine animations and longer length
- -fish spawn less and fade out if out of range
+ -minion robot, boss robot
+ -swing vine animations and variable length
  **/
 
 +(void)main {
     [[CCDirector sharedDirector] setDisplayFPS:YES];
     //[[CCDirector sharedDirector] runWithScene:[CoverPage scene]];
-    //[[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"autolevel_1_2"]];
-    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with_autolevel]];
+    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"shittytest"]];
+    //[[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with_autolevel]];
 }
 
 +(BOOL)GET_USE_BG {return USE_BG;}

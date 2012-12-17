@@ -12,7 +12,7 @@
 -(void)initialize_vx:(float)tvx vy:(float)tvy {
     vx = tvx;
     vy = tvy;
-    [self setScale:float_random(0.2, 0.5)];
+    [self setScale:float_random(0.5, 0.9)];
     ct = 20;
     [self setColor:ccc3(255, 255, 255)];
 }

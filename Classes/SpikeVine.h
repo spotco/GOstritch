@@ -1,5 +1,6 @@
 #import "GameObject.h"
 #import "PolyLib.h"
+#import "DazedParticle.h"
 #import "HitEffect.h"
 
 @interface SpikeVine  : GameObject {

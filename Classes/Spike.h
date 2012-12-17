@@ -1,5 +1,6 @@
 #import "GameObject.h"
 #import "HitEffect.h"
+#import "DazedParticle.h"
 
 @interface Spike : GameObject {
     gl_render_obj body;

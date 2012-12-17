@@ -46,7 +46,7 @@
     return a;
 }
 
-static int ctrs = 0;
+//static int ctrs = 0;
 
 #define SCROLL_LIMIT 3000.0
 

@@ -29,11 +29,6 @@
         p.vx = self.vx*12;
         p.vy = self.vy*12;
     }
-    
-    if (arc4random_uniform(5) == 1) {
-        JumpPadParticle* pt = [JumpPadParticle init_x:p.position.x y:p.position.y+20 vx:float_random(-10, -5) vy:float_random(-2, 2)];
-        [g add_particle:pt];
-    }
 }
 
 -(player_anim_mode)get_anim {
