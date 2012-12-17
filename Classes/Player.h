@@ -6,6 +6,7 @@
 #import "StreamParticle.h"
 #import "RocketParticle.h"
 #import "FloatingSweatParticle.h"
+#import "FileCache.h"
 @class SwingVine;
 
 @class GameEngineLayer;
@@ -43,6 +44,8 @@ typedef enum {
     player_anim_mode_SPLASH,
     player_anim_mode_DASH
 } player_anim_mode;
+
++(void)set_character:(NSString*)tar;
 
 +(Player*)init_at:(CGPoint)pt;
 -(void)init_anim;

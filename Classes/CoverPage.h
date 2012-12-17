@@ -1,9 +1,7 @@
-#import <Foundation/Foundation.h>
-
-#import "cocos2d.h"
+#import "MenuCommon.h"
 
 #import "CCSlider.h"
-#import "FileManager.h"
+#import "CharacterSelectPage.h"
 #import "WorldSelectionPage.h"
 
 typedef enum PAGE_MODE{

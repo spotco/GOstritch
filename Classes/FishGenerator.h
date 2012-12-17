@@ -2,6 +2,7 @@
 #import "cocos2d.h"
 #import "Resource.h"
 #import "Common.h"
+#import "FileCache.h"
 
 @interface FishGenerator : CCSprite {
     float bwidth,bheight;

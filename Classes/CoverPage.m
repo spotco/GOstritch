@@ -18,11 +18,8 @@
     CoverPage *coverPage = [CoverPage node];
     
     [coverPage initVars];
- 
     [coverPage init_bg];
-  
     [coverPage init_img];
-    
     [scene addChild:coverPage];
     
     return scene;
@@ -38,17 +35,17 @@
     float hei = [UIScreen mainScreen].bounds.size.width;
     float wid = [UIScreen mainScreen].bounds.size.height;
     
-    CCMenuItem *playbutton = [CoverPage make_button_img:@"Front-Page_PLAY.png"
+    CCMenuItem *playbutton = [MenuCommon make_button_img:@"Front-Page_PLAY.png"
                                                  imgsel:@"Front-Page_PLAY-withLight.png" 
                                          onclick_target:self selector:@selector(playButtonListener)];
     playbutton.position = ccp( wid/2 - playbutton.rect.size.width/2 + PLAYBUTTON_OFFSET_X + 2,-hei/2 + playbutton.rect.size.height/2 + PLAYBUTTON_OFFSET_Y - 25);
     
-    CCMenuItem *settingsbutton = [CoverPage make_button_img:@"Front-Page_option.png"
+    CCMenuItem *settingsbutton = [MenuCommon make_button_img:@"Front-Page_option.png"
                                                  imgsel:@"Front-Page_option-withlight.png" 
                                          onclick_target:self selector:@selector(settingsButtonListener)];
     settingsbutton.position = ccp(-wid/2+settingsbutton.rect.size.width/2,-hei/2 + settingsbutton.rect.size.height/2);
     
-    CCMenuItem *scoresbutton = [CoverPage make_button_img:@"Front-Page_scores.png"
+    CCMenuItem *scoresbutton = [MenuCommon make_button_img:@"Front-Page_scores.png"
                                                      imgsel:@"Front-Page_scores-withlight.png" 
                                              onclick_target:self selector:@selector(scoresButtonListener)];
     scoresbutton.position = ccp(-wid/2+scoresbutton.rect.size.width/2,-hei/2 + scoresbutton.rect.size.height/2 + settingsbutton.rect.size.height );
@@ -60,11 +57,6 @@
     [self addChild:front_menu];
 }
 
--(void)playButtonListener {
-    [[[CCDirector sharedDirector] runningScene] removeAllChildrenWithCleanup:YES];
-    [[CCDirector sharedDirector] replaceScene: [WorldSelectionPage scene]];
-}
-
 -(void) setSettingPage{
     
     if(settingLayer == NULL){
@@ -74,7 +66,7 @@
         
         
         //add return button
-        CCMenuItem *returnButton = [CoverPage make_button_img:@"Option-Page_back.png"
+        CCMenuItem *returnButton = [MenuCommon make_button_img:@"Option-Page_back.png"
                                                        imgsel:@"Option-Page_back_withlight.png" 
                                                onclick_target:self selector:@selector(settingReturn)];
         returnButton.position = ccp(8, 271);
@@ -89,12 +81,12 @@
              
         //add sound button
         
-        soundButtonNormal = [CoverPage make_button_img: @"Option-Page_sound.png" 
+        soundButtonNormal = [MenuCommon make_button_img: @"Option-Page_sound.png" 
                                                 imgsel:@"Option-Page_sound.png"
                                         onclick_target:self 
                                               selector:@selector(soundAction)];
         
-        soundButtonDisabled = [CoverPage make_button_img: @"Option-Page_No-sound.png" 
+        soundButtonDisabled = [MenuCommon make_button_img: @"Option-Page_No-sound.png" 
                                                   imgsel:@"Option-Page_No-sound.png"
                                           onclick_target:self 
                                                 selector:@selector(soundAction)];
@@ -121,14 +113,14 @@
         [settingLayer addChild:soundSlider];
         
         //add music button
-        musicButtonNormal = [CoverPage make_button_img:@"Option-Page_music.png"
+        musicButtonNormal = [MenuCommon make_button_img:@"Option-Page_music.png"
                                                 imgsel:@"Option-Page_music.png" 
                                         onclick_target:self 
                                               selector:@selector(musicAction)];
         musicButtonNormal.position = ccp(50, 65);
         musicButtonNormal.anchorPoint = ccp(0, 0);
         
-        musicButtonDisabled = [CoverPage make_button_img:@"Option-Page_No-music.png"
+        musicButtonDisabled = [MenuCommon make_button_img:@"Option-Page_No-music.png"
                                                   imgsel:@"Option-Page_No-music.png" 
                                           onclick_target:self 
                                                 selector:@selector(musicAction)];
@@ -194,27 +186,18 @@
     [self setSettingPage];
 }
 
-
-
 -(void)scoresButtonListener {
+}
+
+-(void)playButtonListener {
+    [[[CCDirector sharedDirector] runningScene] removeAllChildrenWithCleanup:YES];
+    [[CCDirector sharedDirector] replaceScene: [CharacterSelectPage scene]];
+    //[[CCDirector sharedDirector] replaceScene: [WorldSelectionPage scene]];
 }
 
 -(void)dealloc{
     [self removeAllChildrenWithCleanup:YES];
     [super dealloc];
-}
-
-+(CCMenuItem*)make_button_img:(NSString*)imgfile imgsel:(NSString*)imgselfile onclick_target:(NSObject*)tar selector:(SEL)sel {
-    CCSprite *img = [CCSprite spriteWithFile:imgfile];
-    CCSprite *img_zoom = [CCSprite spriteWithFile:imgselfile];
-    [CoverPage set_zoom_pos_align:img zoomed:img_zoom scale:1.2];
-    return [CCMenuItemImage itemFromNormalSprite:img selectedSprite:img_zoom target:tar selector:sel];
-}
-
-+(void)set_zoom_pos_align:(CCSprite*)normal zoomed:(CCSprite*)zoomed scale:(float)scale {
-    zoomed.scale = scale;
-    zoomed.position = ccp((-[zoomed contentSize].width * zoomed.scale + [zoomed contentSize].width)/2
-                          ,(-[zoomed contentSize].height * zoomed.scale + [zoomed contentSize].height)/2);
 }
 
 

@@ -29,6 +29,12 @@
 @synthesize floating,dashing,dead;
 @synthesize current_swingvine;
 
+static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
+
++(void)set_character:(NSString*)tar {
+    CURRENT_CHARACTER = tar;
+}
+
 +(Player*)init_at:(CGPoint)pt {
 	Player *new_player = [Player node];
     [new_player reset_params];
@@ -141,7 +147,7 @@
 }
 
 -(id)init_splash_anim_speed:(float)speed {
-    CCTexture2D *tex = [self get_ss];
+    CCTexture2D *tex = [Resource get_tex:TEX_DOG_SPLASH];
     NSMutableArray *animFrames = [NSMutableArray array];
     
     [animFrames addObject:[CCSpriteFrame frameWithTexture:tex rect:[Player splash_ss_plist_dict:@"splash1"]]];
@@ -155,26 +161,15 @@
 }
 
 -(CCTexture2D*)get_ss {
-    return [Resource get_tex:TEX_DOG_RUN_1];
+    return [Resource get_tex:CURRENT_CHARACTER];
 }
 
-#define SPLASH_SS_FILENAME @"splash_ss"
-#define DOG_1_SS_FILENAME @"dog1ss"
-static NSDictionary *dog_1_ss_plist_dict = NULL;
-static NSDictionary *splash_ss_plist_dict = NULL;
-
 +(CGRect)splash_ss_plist_dict:(NSString*)tar {
-    if (splash_ss_plist_dict == NULL) {
-        splash_ss_plist_dict =[[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:SPLASH_SS_FILENAME ofType:@"plist"]];
-    }
-    return [Common ssrect_from_dict:splash_ss_plist_dict tar:tar];
+    return [FileCache get_cgrect_from_plist:TEX_DOG_SPLASH idname:tar];
 }
 
 +(CGRect)dog1ss_spritesheet_rect_tar:(NSString*)tar {
-    if (dog_1_ss_plist_dict == NULL) {
-        dog_1_ss_plist_dict =[[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:DOG_1_SS_FILENAME ofType:@"plist"]];
-    }
-    return [Common ssrect_from_dict:dog_1_ss_plist_dict tar:tar];
+    return [FileCache get_cgrect_from_plist:CURRENT_CHARACTER idname:tar];
 }
 
 

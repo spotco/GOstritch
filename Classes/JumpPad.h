@@ -1,5 +1,6 @@
 #import "GameObject.h"
 #import "JumpPadParticle.h"
+#import "FileCache.h"
 
 @interface JumpPad : GameObject {
     id anim;

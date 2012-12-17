@@ -17,9 +17,9 @@
  **/
 
 +(void)main {
-    [[CCDirector sharedDirector] setDisplayFPS:YES];
-    //[[CCDirector sharedDirector] runWithScene:[CoverPage scene]];
-    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"shittytest"]];
+    //[[CCDirector sharedDirector] setDisplayFPS:YES];
+    [[CCDirector sharedDirector] runWithScene:[CoverPage scene]];
+    //[[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"shittytest"]];
     //[[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with_autolevel]];
 }
 

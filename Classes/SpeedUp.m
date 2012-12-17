@@ -85,23 +85,8 @@
 	return m;
 }
 
-
-#define SPEEDUP_SS_FILENAME @"speedup_ss"
-static NSDictionary *speedup_ss_plist_dict;
-
 +(CGRect)spritesheet_rect_tar:(NSString*)tar {
-    NSDictionary *dict;
-    if (speedup_ss_plist_dict == NULL) {
-        NSString* plistPath = [[NSBundle mainBundle] pathForResource:SPEEDUP_SS_FILENAME ofType:@"plist"];
-        speedup_ss_plist_dict = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-    }
-    dict = speedup_ss_plist_dict;
-    
-    NSDictionary *frames_dict = [dict objectForKey:@"frames"];
-    NSDictionary *obj_info = [frames_dict objectForKey:tar];
-    NSString *txt = [obj_info objectForKey:@"textureRect"];
-    CGRect r = CGRectFromString(txt);
-    return r;
+    return [FileCache get_cgrect_from_plist:TEX_SPEEDUP idname:tar];
 }
 
 -(void)set_dir:(Vec3D*)vec {

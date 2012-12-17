@@ -1,11 +1,3 @@
-//
-//  TwinklingStar.h
-//  GOstrich
-//
-//  Created by Pingyang He on 8/12/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 #import "CCSprite.h"
 
 @interface TwinklingStar : CCSprite{

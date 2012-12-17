@@ -46,8 +46,6 @@
     return a;
 }
 
-//static int ctrs = 0;
-
 #define SCROLL_LIMIT 3000.0
 
 -(void)update {
@@ -62,12 +60,6 @@
     
     lastx = posx;
     lasty = posy;
-    
-    /*ctrs++;
-    if (ctrs>50) {
-        ctrs=0;
-        NSLog(@"posy:%f cury:%f",posy,cury);
-    }*/
     
 	for (BackgroundObject* s in bg_elements) {
         [s update_posx:curx posy:cury];

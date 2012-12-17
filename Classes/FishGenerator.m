@@ -112,13 +112,8 @@
     }
 }
 
-#define FISH_SS_FILENAME @"fish_ss"
-static NSDictionary *fish_ss_plist_dict = NULL;
 +(CGRect)fish_ss_spritesheet_rect_tar:(NSString*)tar {
-    if (fish_ss_plist_dict == NULL) {
-        fish_ss_plist_dict = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:FISH_SS_FILENAME ofType:@"plist"]];
-    }
-    return [Common ssrect_from_dict:fish_ss_plist_dict tar:tar];
+    return [FileCache get_cgrect_from_plist:TEX_FISH_SS idname:tar];
 }
 
 -(void)dealloc {

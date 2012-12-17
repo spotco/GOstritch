@@ -159,14 +159,8 @@
     return [[Common make_anim_frames:animFrames speed:speed] retain];
 }
 
-
-#define BIRD_SS_FILENAME @"bird_ss"
-static NSDictionary *bird_ss_plist_dict = NULL;
 +(CGRect)bird_ss_rect_tar:(NSString*)tar {
-    if (bird_ss_plist_dict == NULL) {
-        bird_ss_plist_dict =[[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:BIRD_SS_FILENAME ofType:@"plist"]];
-    }
-    return [Common ssrect_from_dict:bird_ss_plist_dict tar:tar];
+    return [FileCache get_cgrect_from_plist:TEX_BIRD_SS idname:tar];
 }
 
 -(void)dealloc {
