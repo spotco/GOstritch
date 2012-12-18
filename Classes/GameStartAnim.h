@@ -10,6 +10,6 @@
     int ct;
 }
 
-+(GameStartAnim*)init_endcallback:(SEL)sel on_target:(NSObject*)target;
++(GameStartAnim*)init_with_callback:(callback)cb;
 
 @end

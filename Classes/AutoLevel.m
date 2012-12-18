@@ -19,6 +19,7 @@
 +(AutoLevel*)init_with_glayer:(GameEngineLayer*)glayer {
     AutoLevel* a = [AutoLevel node];
     [a initialize:glayer];
+    [GEventDispatcher add_listener:a];
     return a;
 }
 
@@ -121,7 +122,13 @@
     [toremove dealloc];
 }
 
--(GameObjectReturnCode)update:(Player *)player g:(GameEngineLayer *)g {
+-(void)dispatch_event:(GEvent *)e {
+    if (e.type == GEventType_CHECKPOINT) {
+        [self cleanup:tglayer.player.start_pt];
+    }
+}
+
+-(void)update:(Player *)player g:(GameEngineLayer *)g {
     CGPoint pos = player.position;
     NSMutableArray *tostore = [[NSMutableArray alloc] init];
     int left = 99;
@@ -159,7 +166,7 @@
     [tostore removeAllObjects];
     [tostore dealloc];
     //NSLog(@"SECTIONS:%i ISLANDS:%i GAMEOBJS:%i",[map_sections count], [tglayer.islands count], [tglayer.game_objects count]);
-    return GameObjectReturnCode_NONE;
+    return;
 }
 
 -(void)reset {

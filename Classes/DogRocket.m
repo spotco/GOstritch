@@ -15,10 +15,10 @@
 }
 
 //TODO -- launch in direction of slope
--(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g{
+-(void)update:(Player*)player g:(GameEngineLayer *)g{
     [super update:player g:g];
     if (!active) {
-        return GameObjectReturnCode_NONE;
+        return;
     }
     
     float rot = [self rotation];
@@ -44,7 +44,7 @@
         [self set_active:NO];
     }
     
-    return GameObjectReturnCode_NONE;
+    return;
 }
 
 -(HitRect)get_hit_rect {

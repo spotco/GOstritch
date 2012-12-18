@@ -1,19 +1,8 @@
 {
-    "connect_pts": {"y2": 962.5, "x1": 99, "x2": 3002.6, "y1": 146},
-    "start_y": 229,
-    "objects": [
-        {"x": 730, "type": "spike", "y": 218, "label": "0"},
-        {"y2": 482, "x": 832, "type": "breakable_wall", "y": 229, "x2": 812, "label": "1"},
-        {"x": 1312.9, "type": "dogcape", "y": 268.6, "label": "3"},
-        {"x": 1311.5, "type": "dogrocket", "y": 401.4, "label": "4"},
-        {"x": 469, "type": "jumppad", "dir": {"x": -0.44, "y": 0.9}, "y": 186, "label": "0"}
-    ],
-    "start_x": 185,
-    "islands": [
-        {"y2": 234, "ground": "open", "type": "line", "hei": 50, "ndir": "left", "y1": 146, "x1": 99, "can_fall": true, "x2": 884},
-        {"y2": 237, "ground": "open", "type": "line", "hei": 50, "ndir": "left", "y1": 234, "x1": 884, "can_fall": true, "x2": 1445},
-        {"y2": 502.5, "ground": "open", "type": "line", "hei": 50, "ndir": "left", "y1": 240, "x1": 2582.6, "can_fall": true, "x2": 2875.1},
-        {"y2": 962.5, "ground": "open", "type": "line", "hei": 50, "ndir": "left", "y1": 502.5, "x1": 2875.1, "can_fall": true, "x2": 3002.6}
-    ],
-    "assert_links": 2
+    "start_y": 242,
+    "objects": [{"x": 795, "type": "swingvine", "y": 522, "label": "0"}],
+    "connect_pts": {"y2": 218, "x1": 99, "x2": 657, "y1": 164},
+    "start_x": 146,
+    "islands": [{"y2": 218, "ground": "open", "type": "line", "hei": 50, "ndir": "left", "y1": 164, "x1": 99, "can_fall": true, "x2": 657}],
+    "assert_links": 0
 }

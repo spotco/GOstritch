@@ -8,6 +8,7 @@
 +(BoneCollectUIAnimation*)init_start:(CGPoint)start end:(CGPoint)end {
     BoneCollectUIAnimation *b = [BoneCollectUIAnimation node];
     [b initialize_start:start end:end];
+    [GEventDispatcher add_listener:b];
     return b;
 }
 
@@ -38,9 +39,7 @@
 
 - (void)setOpacity:(GLubyte)opacity {
 	[super setOpacity:opacity];
-    
 	for(CCSprite *sprite in [self children]) {
-        
 		sprite.opacity = opacity;
 	}
 }

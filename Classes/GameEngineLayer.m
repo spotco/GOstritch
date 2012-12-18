@@ -8,7 +8,6 @@
 @synthesize current_mode;
 @synthesize game_objects,islands;
 @synthesize player;
-@synthesize load_game_end_menu;
 @synthesize camera_state,tar_camera_state;
 @synthesize follow_action;
 
@@ -19,9 +18,6 @@
     GameEngineLayer *glayer = [GameEngineLayer init_from_file:map_file_name];
 	BGLayer *bglayer = [BGLayer init_with_gamelayer:glayer];
     UILayer* uilayer = [UILayer init_with_gamelayer:glayer];
-    [glayer set_bg_update_callback:bglayer];
-    [glayer set_ui_update_callback:uilayer];
-    
     
     [scene addChild:bglayer];
     [scene addChild:glayer];
@@ -34,15 +30,12 @@
 +(CCScene*) scene_with_autolevel {
     CCScene* scene = [GameEngineLayer scene_with:@"connector"];
     GameEngineLayer* glayer = [scene.children objectAtIndex:1];
-    
     GameObject* nobj = [AutoLevel init_with_glayer:glayer];
     [glayer.game_objects addObject:nobj];
     [glayer addChild:nobj];
-    
     [glayer stopAction:glayer.follow_action];
     glayer.follow_action = [[CCFollow actionWithTarget:glayer.player] retain];
     [glayer runAction:glayer.follow_action];
-    
     
 	return scene;
 }
@@ -57,12 +50,12 @@
     if (particles_tba == NULL) {
         particles_tba = [[NSMutableArray alloc] init];
     }
+    [GEventDispatcher add_listener:self];
     refresh_viewbox_cache = YES;
     CGPoint player_start_pt = [self loadMap:map_filename];
     [self update_islands];
     [self init_bones];
     particles = [[NSMutableArray array] retain];
-    map_start_pt = player_start_pt;
     player = [Player init_at:player_start_pt];
     
     [self addChild:player z:[GameRenderImplementation GET_RENDER_PLAYER_ORD]];
@@ -75,7 +68,55 @@
     follow_action = [CCFollow actionWithTarget:player worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]];
     [self runAction:follow_action];
     
-    [self schedule:@selector(update)];
+    updater = [NSTimer scheduledTimerWithTimeInterval:[GameMain GET_TARGET_FPS] target:self selector:@selector(update) userInfo:nil repeats:YES];
+}
+
+-(void)update {
+    if (current_mode == GameEngineLayerMode_GAMEPLAY) {
+        refresh_viewbox_cache = YES;
+        [GamePhysicsImplementation player_move:player with_islands:islands];
+        [GameControlImplementation control_update_player:self];
+        [player update:self];
+        [self check_game_state];	
+        [self update_game_obj];
+        [self update_particles];
+        [self push_added_particles];
+        [self update_islands];
+        [GameRenderImplementation update_render_on:self];
+        [GEventDispatcher push_event:[GEvent init_type:GEventType_GAME_TICK]];
+        
+    } else if (current_mode == GameEngineLayerMode_UIANIM) {
+        [GEventDispatcher push_event:[GEvent init_type:GEventType_UIANIM_TICK]];
+        
+    }
+    [GEventDispatcher dispatch_events];
+}
+
+-(void)dispatch_event:(GEvent *)e {
+    if (e.type == GEventType_QUIT) {
+        [self exit];
+        
+    } else if (e.type == GEventType_CHECKPOINT) {
+        [self set_checkpoint_to:[(NSValue*)[e.data objectForKey:@"point"] CGPointValue]];
+        
+    } else if (e.type == GEventType_LEVELEND) {
+        [GEventDispatcher push_event:[GEvent init_type:GEventType_LOAD_LEVELEND_MENU]]; //[self stopAction:follow_action];
+        
+    } else if (e.type == GEventType_PAUSE) {
+        current_mode = GameEngineLayerMode_PAUSED;
+        
+    } else if (e.type == GEventType_UNPAUSE) {
+        current_mode = GameEngineLayerMode_GAMEPLAY;
+        
+    }
+}
+
+-(void)exit {
+    [updater invalidate];
+    [GEventDispatcher remove_all_listeners];
+    [Resource dealloc_textures];
+    [[CCDirector sharedDirector] resume];
+    [[CCDirector sharedDirector] replaceScene:[CoverPage scene]];
 }
 
 -(void)reset_camera {
@@ -126,14 +167,12 @@
 -(void)set_bid_tohasget:(int)tbid {
     for(NSNumber* bid in [bones allKeys]) {
         if (bid.intValue == tbid) {
-            //NSLog(@"getbid:%i",tbid);
-            [bones setObject:[NSNumber numberWithInt:Bone_Status_HASGET] forKey:bid];
-            [Common run_callback:bone_collect_ui_animation];
+            [bones setObject:[NSNumber numberWithInt:Bone_Status_HASGET] forKey:bid]; //NSLog(@"getbid:%i",tbid);
+            [GEventDispatcher push_event:[GEvent init_type:GEventType_COLLECT_BONE]];
             refresh_bone_cache = YES;
             return;
         }
     }
-    
     NSLog(@"ERROR: bid_tohasget_set failed, tar:%i",tbid);
 }
 
@@ -145,31 +184,8 @@
             [bones setObject:[NSNumber numberWithInt:Bone_Status_SAVEDGET] forKey:bid];
         }
     }
-    [self cleanup_autolevel];
 }
 
--(void)cleanup_autolevel {
-    for (int i = 0; i < [game_objects count]; i++) {
-        GameObject* o = [game_objects objectAtIndex:i];
-        if ([o class] == [AutoLevel class]) {
-            [((AutoLevel*)o) cleanup:player.start_pt];
-        }
-    }
-}
-
--(void)set_bg_update_callback:(NSObject*)tar {
-    bg_update.target = tar;
-    bg_update.selector = @selector(update);
-    [Common run_callback:bg_update];
-}
-
--(void)set_ui_update_callback:(NSObject*)tar {
-    ui_update.target = tar;
-    ui_update.selector = @selector(update);
-    
-    bone_collect_ui_animation.target = tar;
-    bone_collect_ui_animation.selector = @selector(start_bone_collect_anim);
-}
 
 -(void)addChild:(CCNode *)node z:(NSInteger)z {
     refresh_worldbounds_cache = YES;
@@ -254,57 +270,6 @@
     refresh_bone_cache = YES;
 }
 
-//static int ctrs = 0;
-
--(void)update {
-    /*ctrs++;
-    if (ctrs>50) {
-        ctrs=0;
-        NSLog(@"islands:%i objects:%i",[islands count],[game_objects count]);
-    }*/
-    
-    if (current_mode == GameEngineLayerMode_PAUSED) {
-        return;
-        
-    } else if (current_mode == GameEngineLayerMode_GAMEPLAY || current_mode == GameEngineLayerMode_OBJECTANIM) {
-        refresh_viewbox_cache = YES;
-        [GamePhysicsImplementation player_move:player with_islands:islands];
-        [GameControlImplementation control_update_player:self];
-        [player update:self];
-        
-        [self check_game_state];	
-        [self update_game_obj];
-        [self update_particles];
-        [self push_added_particles];
-        [self update_islands];
-        [GameRenderImplementation update_render_on:self];
-        //[self cleanup_autolevel];
-        [Common run_callback:bg_update];
-        [Common run_callback:ui_update];
-        
-    } else if (current_mode == GameEngineLayerMode_ENDOUT) {
-        if ([Common hitrect_touch:[player get_hit_rect] b:[self get_viewbox]]) {
-            [GamePhysicsImplementation player_move:player with_islands:islands];
-            [player update:self];  
-            [self min_update_game_obj];
-            [self update_particles];
-            [self push_added_particles];
-            
-        } else {
-            [Common run_callback:load_game_end_menu];
-            current_mode = GameEngineLayerMode_ENDED;
-            
-        }
-        
-    } else {
-        [self min_update_game_obj];
-        [self update_particles];
-        [self push_added_particles];
-    }
-}
-
-
-
 -(void)update_islands {
     for (Island* i in islands) {
         [i update:self];
@@ -350,21 +315,10 @@ static NSMutableArray* particles_tba;
     return cached_viewbox;
 }
 
--(void)min_update_game_obj {
-    for(GameObject* i in game_objects) {
-        [i min_update:player g:self];
-    }
-}
-
 -(void)update_game_obj {
     for(int i = 0; i < [game_objects count]; i++) {
         GameObject *o = [game_objects objectAtIndex:i];
-        GameObjectReturnCode c = [o update:player g:self];
-        
-        if (c == GameObjectReturnCode_ENDGAME) {
-            current_mode = GameEngineLayerMode_ENDOUT;
-            [self stopAction:follow_action];
-        }
+        [o update:player g:self];
     }
 }
 
@@ -408,17 +362,11 @@ static NSMutableArray* particles_tba;
 
 -(void)check_game_state {
     if (![Common hitrect_touch:[self get_world_bounds] b:[player get_hit_rect]]) {
-        //NSLog(@"fall out, player:%@ worldrect:%@",NSStringFromCGPoint(player.position),NSStringFromCGRect([Common hitrect_to_cgrect:[self get_world_bounds]]));
         [self player_reset];
 	}
 }
 
--(CGPoint)get_pos {
-    return player.position;
-}
-
 -(void)dealloc {
-    [self unschedule:@selector(update)];
     [player cleanup_anims];
     [self removeAllChildrenWithCleanup:YES];
     [islands removeAllObjects];

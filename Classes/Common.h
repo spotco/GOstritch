@@ -29,6 +29,8 @@ typedef struct callback {
 } callback;
 
 +(void)run_callback:(callback)c;
++(callback)cons_callback:(NSObject*)tar sel:(SEL)sel;
+
 +(CGPoint)line_seg_intersection_a1:(CGPoint)a1 a2:(CGPoint)a2 b1:(CGPoint)b1 b2:(CGPoint)b2;
 +(CGPoint)line_seg_intersection_a:(line_seg)a b:(line_seg)b;
 +(line_seg)cons_line_seg_a:(CGPoint)a b:(CGPoint)b;

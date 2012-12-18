@@ -27,7 +27,7 @@
     disable_timer = 50;
 }
 
--(GameObjectReturnCode)update:(Player *)player g:(GameEngineLayer *)g {
+-(void)update:(Player *)player g:(GameEngineLayer *)g {
     //fix satpoly hitbox for moving position, see spikevine update
     if (vine.rotation > 0) {
         vr -= 0.1;
@@ -45,7 +45,7 @@
         disable_timer--;
         [vine setOpacity:150];
         [loosevine setOpacity:150];
-        return GameObjectReturnCode_NONE;
+        return;
     } else {
         [loosevine setOpacity:255];
         [vine setOpacity:255];
@@ -102,7 +102,7 @@
         vr *= 0.95;
     }
     
-    return GameObjectReturnCode_NONE;
+    return;
 }
 
 -(line_seg)get_player_mid_line_seg:(Player*)p { 

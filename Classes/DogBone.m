@@ -40,15 +40,15 @@
     return cached_hitbox;
 }
 
--(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g{
+-(void)update:(Player*)player g:(GameEngineLayer *)g{
     [super update:player g:g];
     if (!active) {
-        return GameObjectReturnCode_NONE;
+        return;
     }
     
     float dist = [Common distanceBetween:position_ and:player.position];
     if (dist > 100) {
-        return GameObjectReturnCode_NONE;
+        return;
     }
     
     float rot = [self rotation];
@@ -89,8 +89,6 @@
         [g set_bid_tohasget:bid];
         [self set_active:NO];
     }
-    
-    return GameObjectReturnCode_NONE;
 }
 
 -(void)set_active:(BOOL)t_active {

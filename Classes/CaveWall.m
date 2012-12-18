@@ -41,8 +41,8 @@
     return [Common hitrect_cons_x1:position_.x y1:position_.y wid:wid hei:hei];
 }
 
--(GameObjectReturnCode)update:(Player *)player g:(GameEngineLayer *)g {
-    return [super update:player g:g];
+-(void)update:(Player *)player g:(GameEngineLayer *)g {
+    [super update:player g:g];
     
 }
 

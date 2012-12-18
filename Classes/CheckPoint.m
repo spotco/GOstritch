@@ -45,7 +45,7 @@ float texwid,texhei;
     return [Common hitrect_cons_x1:position_.x-texwid/2 y1:position_.y wid:texwid hei:texhei];
 }
 
--(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g{
+-(void)update:(Player*)player g:(GameEngineLayer *)g{
     [super update:player g:g];
     if (self.active && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         self.active = NO;
@@ -53,13 +53,14 @@ float texwid,texhei;
         active_img.visible = YES;
         
         CGPoint center = [self get_center];
-        [g set_checkpoint_to:center];
+        [GEventDispatcher push_event:[[GEvent init_type:GEventType_CHECKPOINT] add_key:@"point" value:[NSValue valueWithCGPoint:center]]];
+        
+        //[g set_checkpoint_to:center];
+        
         for(int i = 0; i < 5; i++) {
             [g add_particle:[FireworksParticleA init_x:center.x y:center.y vx:float_random(-3,3) vy:float_random(9,14) ct:arc4random_uniform(20)+10]];
         }
     }
-    
-    return GameObjectReturnCode_NONE;
 }
 
 -(void)check_should_render:(GameEngineLayer *)g {

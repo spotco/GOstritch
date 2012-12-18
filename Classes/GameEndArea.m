@@ -26,16 +26,15 @@
     return [Common hitrect_cons_x1:position_.x y1:position_.y wid:[img boundingBoxInPixels].size.width hei:1000];
 }
 
--(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g {
+-(void)update:(Player*)player g:(GameEngineLayer *)g {
     [super update:player g:g];
     if (active && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         NSLog(@"Reached end");
         active = NO;
-        //player.start_pt = ccp(0,0);
-        return GameObjectReturnCode_ENDGAME;
+        [GEventDispatcher push_event:[GEvent init_type:GEventType_LEVELEND]];
     }
     
-    return GameObjectReturnCode_NONE;
+    return;
 }
 
 @end

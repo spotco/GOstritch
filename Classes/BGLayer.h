@@ -4,9 +4,10 @@
 #import "CloudGenerator.h"
 #import "GameEngineLayer.h"
 #import "GameMain.h"
+#import "GEventDispatcher.h"
 
 
-@interface BGLayer : CCLayer {
+@interface BGLayer : CCLayer <GEventListener> {
 	NSMutableArray *bg_elements;
     GameEngineLayer* game_engine_layer;
     CCSprite *bgsky,*bghills,*bgclouds,*bgtrees,*bgclosehills;

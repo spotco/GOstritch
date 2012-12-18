@@ -2,7 +2,7 @@
 #import "MapLoader.h"
 #import "MapSection.h"
 
-@interface AutoLevel : GameObject {
+@interface AutoLevel : GameObject <GEventListener> {
     GameEngineLayer* tglayer;
     float cur_x,cur_y;
     NSMutableArray* map_sections;

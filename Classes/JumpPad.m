@@ -22,7 +22,7 @@
     return [Common hitrect_cons_x1:[self position].x-20 y1:[self position].y-20 wid:40 hei:40];
 }
 
--(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g{
+-(void)update:(Player*)player g:(GameEngineLayer *)g{
     [super update:player g:g];
     if (recharge_ct >= 0) {
         recharge_ct--;
@@ -31,7 +31,7 @@
         }
     }
     if(!active) {
-        return GameObjectReturnCode_NONE;
+        return;
     }
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
@@ -51,8 +51,6 @@
                                                  vy:dvy]];
         }
     }
-    
-    return GameObjectReturnCode_NONE;
 }
 
 -(void)boostjump:(Player*)player {

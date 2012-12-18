@@ -8,20 +8,20 @@
     return [World1ParticleGenerator node];
 }
 
--(GameObjectReturnCode)update:(Player *)player g:(GameEngineLayer *)g {
+-(void)update:(Player *)player g:(GameEngineLayer *)g {
     if (![GameMain GET_ENABLE_BG_PARTICLES]) {
-        return GameObjectReturnCode_NONE;
+        return;
     }
     for (GameObject* i in g.game_objects) {
         if ([i class] == [CaveWall class] && [Common hitrect_touch:[i get_hit_rect] b:[player get_hit_rect]]) {
-            return GameObjectReturnCode_NONE;
+            return;
         }
     }
     
     if (arc4random_uniform(25) == 0) {
         [g add_particle:[WaveParticle init_x:player.position.x+500 y:player.position.y+float_random(100, 300) vx:float_random(-2, -5) vtheta:float_random(0.01, 0.075)]];
     }
-    return GameObjectReturnCode_NONE;
+    return;
 }
 
 -(void)min_update:(Player *)player g:(GameEngineLayer *)g {

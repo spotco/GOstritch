@@ -4,18 +4,11 @@
 
 @implementation GameStartAnim
 
-+(GameStartAnim*)init_endcallback:(SEL)sel on_target:(NSObject*)target {
++(GameStartAnim*)init_with_callback:(callback)cb {
     GameStartAnim *n = [GameStartAnim node];
-    
-    struct callback nca;
-    nca.selector = sel;
-    nca.target = target;
-    n.anim_complete = nca;
-    
+    n.anim_complete = cb;
     [n initanim];
-    
-    n.position = ccp([[UIScreen mainScreen] bounds].size.height/2, [[UIScreen mainScreen] bounds].size.width/2);
-    
+    [GEventDispatcher add_listener:n];
     return n;
 }
 
@@ -25,16 +18,15 @@
     
     [self addChild:readyimg];
     [self addChild:goimg];
+    [self setPosition:ccp([[UIScreen mainScreen] bounds].size.height/2, [[UIScreen mainScreen] bounds].size.width/2)];
     
     [readyimg setOpacity:0];
     [goimg setOpacity:0];
     
     ct = ANIM_LENGTH;
-    [self schedule:@selector(update)];
 }
 
 -(void)update {
-    
     ct--;
     if (ct <= 0) {
         [self anim_finished];
@@ -54,13 +46,6 @@
         [readyimg setOpacity:0];
         [goimg setOpacity:(int)o];
     }
-    
-}
-
--(void)anim_finished {
-    [self unschedule:@selector(update)];
-    [self removeAllChildrenWithCleanup:YES];
-    [Common run_callback:anim_complete];
 }
 
 @end

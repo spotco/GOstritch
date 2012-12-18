@@ -8,7 +8,9 @@
 
 +(BGLayer*)init_with_gamelayer:(GameEngineLayer*)g {
     BGLayer *l = [BGLayer node];
+    [GEventDispatcher add_listener:l];
     [l set_gameengine:g];
+    [l update];
     return l;
 }
 
@@ -46,11 +48,17 @@
     return a;
 }
 
+-(void)dispatch_event:(GEvent *)e {
+    if (e.type == GEventType_GAME_TICK) {
+        [self update];
+    }
+}
+
 #define SCROLL_LIMIT 3000.0
 
 -(void)update {
-    float posx = [game_engine_layer get_pos].x;
-    float posy = [game_engine_layer get_pos].y;
+    float posx = game_engine_layer.player.position.x;
+    float posy = game_engine_layer.player.position.y;
     
     float dx = posx - lastx;
     float dy = posy - lasty;

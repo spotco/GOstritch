@@ -7,6 +7,4 @@
 
 @property(readwrite,assign) int ct;
 
--(void)update;
-
 @end

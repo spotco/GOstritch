@@ -4,6 +4,7 @@
 #import "Common.h"
 #import "GameObject.h"
 #import "Particle.h"
+#import "GEventDispatcher.h"
 @class BGLayer;
 @class UILayer;
 #import "Resource.h"
@@ -11,18 +12,13 @@
 #import "GamePhysicsImplementation.h"
 #import "GameRenderImplementation.h"
 #import "GameControlImplementation.h"
-
 #import "AutoLevel.h"
-
 #import "World1ParticleGenerator.h"
 
 typedef enum {
-    GameEngineLayerMode_UIANIM,
     GameEngineLayerMode_GAMEPLAY,
     GameEngineLayerMode_PAUSED,
-    GameEngineLayerMode_ENDOUT,
-    GameEngineLayerMode_ENDED,
-    GameEngineLayerMode_OBJECTANIM
+    GameEngineLayerMode_UIANIM
 } GameEngineLayerMode;
 
 typedef struct level_bone_status {
@@ -32,7 +28,9 @@ typedef struct level_bone_status {
     int alreadygets;
 } level_bone_status;
 
-@interface GameEngineLayer : CCLayer {
+@interface GameEngineLayer : CCLayer <GEventListener> {
+    NSTimer *updater;
+    
 	NSMutableArray *islands;
     NSMutableArray *game_objects;
     NSMutableArray *particles;
@@ -40,26 +38,14 @@ typedef struct level_bone_status {
     CameraZoom tar_camera_state;
     
     NSMutableDictionary *bones;
-
 	Player *player;
-    
-    CGPoint map_start_pt;
     CCFollow *follow_action;
-    
     GameEngineLayerMode current_mode;
-    
-    callback bg_update;
-    callback ui_update;
-    callback load_game_end_menu;
-    callback bone_collect_ui_animation;
-    
     
     BOOL refresh_bone_cache;
     level_bone_status cached_status;
-    
     BOOL refresh_viewbox_cache;
     HitRect cached_viewbox;
-    
     BOOL refresh_worldbounds_cache;
     HitRect cached_worldsbounds;
 }
@@ -68,7 +54,6 @@ typedef struct level_bone_status {
 @property(readwrite,assign) GameEngineLayerMode current_mode;
 @property(readwrite,assign) NSMutableArray *islands, *game_objects;
 @property(readwrite,assign) Player *player;
-@property(readwrite,assign) callback load_game_end_menu;
 @property(readwrite,assign) CameraZoom camera_state,tar_camera_state;
 @property(readwrite,assign) CCFollow *follow_action; 
 
@@ -76,13 +61,11 @@ typedef struct level_bone_status {
 +(CCScene*) scene_with_autolevel;
 -(void)player_reset;
 -(void)add_particle:(Particle*)p;
--(CGPoint)get_pos;
 -(HitRect)get_viewbox;
 
 -(void)set_camera:(CameraZoom)tar;
 -(void)set_target_camera:(CameraZoom)tar;
 
--(void)set_checkpoint_to:(CGPoint)pt;
 -(void)add_bone:(DogBone*)c autoassign:(BOOL)aa;
 -(void)set_bid_tohasget:(int)tbid;
 -(level_bone_status)get_bonestatus;

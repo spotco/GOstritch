@@ -20,10 +20,10 @@
     [self setActive:YES];
 }
 
--(GameObjectReturnCode)update:(Player *)player g:(GameEngineLayer *)g {
+-(void)update:(Player *)player g:(GameEngineLayer *)g {
     [super update:player g:g];
     if(!active) {
-        return GameObjectReturnCode_NONE;
+        return;
     }
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
@@ -49,7 +49,7 @@
         }
     }
     
-    return GameObjectReturnCode_NONE;
+    return;
 }
 
 -(void)hit:(Player *)player g:(GameEngineLayer *)g {

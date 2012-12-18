@@ -245,6 +245,7 @@
 		7ECB83CD15B6590E00F52E55 /* BG1_sky.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ECB83C515B6590E00F52E55 /* BG1_sky.png */; };
 		7ECB83CE15B6590E00F52E55 /* BG1_top_fill.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ECB83C615B6590E00F52E55 /* BG1_top_fill.png */; };
 		7ECBC8671597FA5700B2BCFE /* Vec3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ECBC8661597FA5700B2BCFE /* Vec3D.m */; };
+		7ED4E04216805150005C2EB8 /* GEventDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4E04116805150005C2EB8 /* GEventDispatcher.m */; };
 		7ED863DF15B806C3005FBDBB /* checkpoint1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863CE15B806C3005FBDBB /* checkpoint1.png */; };
 		7ED863E015B806C3005FBDBB /* checkpoint2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863CF15B806C3005FBDBB /* checkpoint2.png */; };
 		7ED863EA15B81A4A005FBDBB /* BG1_island_top_edge.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863E915B81A4A005FBDBB /* BG1_island_top_edge.png */; };
@@ -789,6 +790,8 @@
 		7ECB83C615B6590E00F52E55 /* BG1_top_fill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_top_fill.png; path = Resources/bg/BG1/BG1_top_fill.png; sourceTree = SOURCE_ROOT; };
 		7ECBC8651597FA5700B2BCFE /* Vec3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec3D.h; sourceTree = "<group>"; };
 		7ECBC8661597FA5700B2BCFE /* Vec3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vec3D.m; sourceTree = "<group>"; };
+		7ED4E04016805150005C2EB8 /* GEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GEventDispatcher.h; sourceTree = "<group>"; };
+		7ED4E04116805150005C2EB8 /* GEventDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GEventDispatcher.m; sourceTree = "<group>"; };
 		7ED863CE15B806C3005FBDBB /* checkpoint1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkpoint1.png; sourceTree = "<group>"; };
 		7ED863CF15B806C3005FBDBB /* checkpoint2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkpoint2.png; sourceTree = "<group>"; };
 		7ED863E915B81A4A005FBDBB /* BG1_island_top_edge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_island_top_edge.png; path = Resources/bg/BG1/BG1_island_top_edge.png; sourceTree = SOURCE_ROOT; };
@@ -1168,8 +1171,9 @@
 		494E2594152C22DB004EBE74 /* layers */ = {
 			isa = PBXGroup;
 			children = (
+				7ED4E044168062EE005C2EB8 /* uiingameanim */,
 				7E8F8FFE1568555100C2E30F /* bg_obj */,
-				7EDE471215C51F2800BC1CEB /* UIAnim */,
+				7EDE471215C51F2800BC1CEB /* uianim */,
 				506EDC2F102F528A00A389B3 /* GameEngineLayer.h */,
 				506EDC30102F528A00A389B3 /* GameEngineLayer.m */,
 				4997ED0A153ACFB7000E8E34 /* BGLayer.h */,
@@ -1523,6 +1527,8 @@
 				7E933FF3160A511D007E494A /* PolyLib.m */,
 				7EB769AC167F306A003AFCF5 /* FileCache.h */,
 				7EB769AD167F306A003AFCF5 /* FileCache.m */,
+				7ED4E04016805150005C2EB8 /* GEventDispatcher.h */,
+				7ED4E04116805150005C2EB8 /* GEventDispatcher.m */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -1792,6 +1798,17 @@
 			path = character_selection;
 			sourceTree = "<group>";
 		};
+		7ED4E044168062EE005C2EB8 /* uiingameanim */ = {
+			isa = PBXGroup;
+			children = (
+				7E786DFB15E4BAF6000E1946 /* UIIngameAnimation.h */,
+				7E786DFC15E4BAF6000E1946 /* UIIngameAnimation.m */,
+				7E786DFE15E4BB61000E1946 /* BoneCollectUIAnimation.h */,
+				7E786DFF15E4BB61000E1946 /* BoneCollectUIAnimation.m */,
+			);
+			name = uiingameanim;
+			sourceTree = "<group>";
+		};
 		7ED863C515B806C3005FBDBB /* object */ = {
 			isa = PBXGroup;
 			children = (
@@ -1870,19 +1887,15 @@
 			path = startgame;
 			sourceTree = "<group>";
 		};
-		7EDE471215C51F2800BC1CEB /* UIAnim */ = {
+		7EDE471215C51F2800BC1CEB /* uianim */ = {
 			isa = PBXGroup;
 			children = (
-				7E786DFB15E4BAF6000E1946 /* UIIngameAnimation.h */,
-				7E786DFC15E4BAF6000E1946 /* UIIngameAnimation.m */,
-				7E786DFE15E4BB61000E1946 /* BoneCollectUIAnimation.h */,
-				7E786DFF15E4BB61000E1946 /* BoneCollectUIAnimation.m */,
 				7EDE471315C51F4F00BC1CEB /* GameStartAnim.h */,
 				7EDE471415C51F4F00BC1CEB /* GameStartAnim.m */,
 				7EDE471615C51FEE00BC1CEB /* UIAnim.h */,
 				7EDE471715C51FEE00BC1CEB /* UIAnim.m */,
 			);
-			name = UIAnim;
+			name = uianim;
 			sourceTree = "<group>";
 		};
 		7EE2B78815B7E1D100941C3B /* icon */ = {
@@ -2730,6 +2743,7 @@
 				7EB769AE167F306A003AFCF5 /* FileCache.m in Sources */,
 				7EB769B2167F376F003AFCF5 /* CharacterSelectPage.m in Sources */,
 				7EB769B5167F3910003AFCF5 /* MenuCommon.m in Sources */,
+				7ED4E04216805150005C2EB8 /* GEventDispatcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -36,12 +36,12 @@
     [self addChild:fishes z:-2];
 }
 
--(GameObjectReturnCode)update:(Player *)player g:(GameEngineLayer *)g {
+-(void)update:(Player *)player g:(GameEngineLayer *)g {
     [super update:player g:g];
     [fishes update];
     [self update_body_tex_offset];
     if(!active) {
-        return GameObjectReturnCode_NONE;
+        return;
     }
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
@@ -51,7 +51,7 @@
         //player.dead = YES;
     }
     
-    return GameObjectReturnCode_NONE;
+    return;
 }
 
 -(void)set_active:(BOOL)t_active {

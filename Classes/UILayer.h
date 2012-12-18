@@ -5,8 +5,9 @@
 #import "CoverPage.h"
 #import "UIIngameAnimation.h"
 #import "BoneCollectUIAnimation.h"
+#import "GEventDispatcher.h"
 
-@interface UILayer : CCLayer {
+@interface UILayer : CCLayer <GEventListener> {
     GameEngineLayer* game_engine_layer;
     
     CCLabelTTF *count_disp;
@@ -14,9 +15,6 @@
     
     CCLayer *pauselayer;
     CCLayer *game_end_menu_layer;
-    
-    
-    GameEngineLayerMode prevmode;
     
     UIAnim *curanim;
     NSMutableArray* ingame_ui_anims;

@@ -7,9 +7,8 @@
 @synthesize active,do_render;
 @synthesize img;
 
--(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g {
+-(void)update:(Player*)player g:(GameEngineLayer *)g {
     [self check_should_render:g];
-    return GameObjectReturnCode_NONE;
 }
 
 -(void)check_should_render:(GameEngineLayer *)g {

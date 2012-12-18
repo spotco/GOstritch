@@ -1,6 +1,7 @@
 #import "CCNode.h"
 #import "Player.h"
 #import "GameRenderImplementation.h"
+#import "GEventDispatcher.h"
 @class GameEngineLayer;
 
 @interface GameObject : CCSprite {
@@ -8,15 +9,10 @@
     CCSprite *img;
 }
 
-typedef enum {
-    GameObjectReturnCode_NONE,
-    GameObjectReturnCode_ENDGAME
-} GameObjectReturnCode;
-
 @property(readwrite,assign) BOOL active,do_render;
 @property(readwrite,assign) CCSprite *img;
 
--(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g;
+-(void)update:(Player*)player g:(GameEngineLayer *)g;
 -(void)min_update:(Player*)player g:(GameEngineLayer *)g;
 -(HitRect) get_hit_rect;
 -(void)set_active:(BOOL)t_active;

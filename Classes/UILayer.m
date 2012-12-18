@@ -5,6 +5,7 @@
 
 +(UILayer*)init_with_gamelayer:(GameEngineLayer *)g {
     UILayer* u = [UILayer node];
+    [GEventDispatcher add_listener:u];
     [u set_gameengine:g];
     [u initialize];
     return u;
@@ -17,19 +18,10 @@
     [self init_game_end_menu];
     [self init_ui_ingame_animations];
     self.isTouchEnabled = YES;
-    [self add_gameenginelayer_callbacks];
 }
 
 -(void)init_ui_ingame_animations {
     ingame_ui_anims = [[NSMutableArray array] retain];
-}
-
--(void)add_gameenginelayer_callbacks {
-    struct callback load_game_end_menu;
-    load_game_end_menu.target = self;
-    load_game_end_menu.selector = @selector(load_game_end_menu);
-    
-    game_engine_layer.load_game_end_menu = load_game_end_menu;
 }
 
 -(void)load_game_end_menu {
@@ -70,7 +62,7 @@
     game_engine_layer.current_mode = GameEngineLayerMode_UIANIM;
     
     ingame_ui.visible = NO;
-    curanim = [GameStartAnim init_endcallback:@selector(end_initial_anim) on_target:self];
+    curanim = [GameStartAnim init_with_callback:[Common cons_callback:self sel:@selector(end_initial_anim)]];
     [self addChild:curanim];
 }
      
@@ -171,6 +163,16 @@
     [ingame_ui_anims addObject:b];
 }
 
+-(void)dispatch_event:(GEvent *)e {
+    if (e.type == GEventType_GAME_TICK) {
+        [self update];
+    } else if (e.type == GEventType_LOAD_LEVELEND_MENU) {
+        [self load_game_end_menu];
+    } else if (e.type == GEventType_COLLECT_BONE) {
+        [self start_bone_collect_anim];
+    }
+}
+
 -(void)update {
     level_bone_status b = [game_engine_layer get_bonestatus];
     NSString* tmp = [NSString stringWithFormat:@"%i",b.hasgets+b.savedgets];
@@ -192,17 +194,14 @@
 
 
 -(void)exit_to_menu {
-    [Resource dealloc_textures];
-    [[CCDirector sharedDirector] resume];
-    [[CCDirector sharedDirector] replaceScene:[CoverPage scene]];
+    [GEventDispatcher push_event:[GEvent init_type:GEventType_QUIT]];
 }
 
 
 -(void)pause {
-    if (game_engine_layer.current_mode != GameEngineLayerMode_PAUSED) {
-        prevmode = game_engine_layer.current_mode;
-        game_engine_layer.current_mode = GameEngineLayerMode_PAUSED;
-        
+    [GEventDispatcher push_event:[GEvent init_type:GEventType_PAUSE]];
+    
+    if (pauselayer.parent == NULL) {
         ingame_ui.visible = NO;
         [[CCDirector sharedDirector] pause];
         [[[CCDirector sharedDirector] runningScene] addChild:pauselayer];
@@ -210,9 +209,9 @@
 }
                          
 -(void)unpause {
-    if (game_engine_layer.current_mode == GameEngineLayerMode_PAUSED) {
-        game_engine_layer.current_mode = prevmode;
-        
+    [GEventDispatcher push_event:[GEvent init_type:GEventType_UNPAUSE]];
+    
+    if (pauselayer.parent != NULL) {        
         ingame_ui.visible = YES;
         [[CCDirector sharedDirector] resume];
         [[[CCDirector sharedDirector] runningScene] removeChild:pauselayer cleanup:NO];

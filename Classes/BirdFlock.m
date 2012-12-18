@@ -84,19 +84,19 @@
     return [Common hitrect_cons_x1:[self position].x-200 y1:[self position].y-30 wid:400 hei:200];
 }
 
--(GameObjectReturnCode)update:(Player*)player g:(GameEngineLayer *)g {
+-(void)update:(Player*)player g:(GameEngineLayer *)g {
     for (Bird *i in birds) {
         [i update];
     }
     
     if (!active) {
-        return GameObjectReturnCode_NONE;
+        return;
     }
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         [self activate_birds];
         [self set_active:NO];
     }
-    return GameObjectReturnCode_NONE;
+    return;
 }
 
 -(void)activate_birds {

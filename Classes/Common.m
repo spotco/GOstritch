@@ -13,6 +13,13 @@
     }
 }
 
++(callback)cons_callback:(NSObject*)tar sel:(SEL)sel {
+    struct callback cb;
+    cb.target = tar;
+    cb.selector = sel;
+    return cb;
+}
+
 +(HitRect)hitrect_cons_x1:(float)x1 y1:(float)y1 x2:(float)x2 y2:(float)y2 {
     struct HitRect n;
     n.x1 = x1;
