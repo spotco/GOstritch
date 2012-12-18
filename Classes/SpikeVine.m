@@ -56,7 +56,7 @@
     [player reset_params];
     [self setActive:NO];
     [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
-    [DazedParticle init_effect:g x:player.position.x y:player.position.y+60 time:40];
+    [DazedParticle init_effect:g x:player.position.x y:player.position.y+60*player.last_ndir time:40];
     
     //player.dead = YES;
     
@@ -205,14 +205,6 @@
 -(void)dealloc {
     [super dealloc];
     [dir_vec dealloc];
-    free(top.tex_pts);
-    free(top.tri_pts);
-    
-    free(bottom.tex_pts);
-    free(bottom.tri_pts);
-    
-    free(center.tex_pts);
-    free(center.tri_pts);
 }
 
 @end

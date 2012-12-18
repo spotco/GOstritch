@@ -222,20 +222,12 @@
     
     islands = map.n_islands;
     int ct = [Island link_islands:islands];
-    if (ct == map.assert_links) {
-        //NSLog(@"Successfully linked islands, %i links.",ct);
-    } else {
+    if (ct != map.assert_links) {
         NSLog(@"ERROR: expected %i links, got %i.",map.assert_links,ct);
     }
     
     for (Island* i in islands) {
-        if (i.can_land == NO) {
-            [self addChild:i z:[GameRenderImplementation GET_RENDER_FG_ISLAND_ORD]];
-        } else if ([i isKindOfClass:[BridgeIsland class]]) {
-            [self addChild:i z:[GameRenderImplementation GET_RENDER_BTWN_PLAYER_ISLAND]];
-        } else {
-            [self addChild:i z:[GameRenderImplementation GET_RENDER_ISLAND_ORD]];
-        }
+        [self addChild:i z:[i get_render_ord]];
 	}
     
     game_objects = map.game_objects;
@@ -367,6 +359,7 @@ static NSMutableArray* particles_tba;
 
 -(void)dealloc {
     [self removeAllChildrenWithCleanup:YES];
+    [player dealloc];
     [islands removeAllObjects];
     [game_objects removeAllObjects];
     [particles removeAllObjects];

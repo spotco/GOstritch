@@ -23,7 +23,7 @@
     tex.tri_pts[1] = ccp(0,height);
     tex.tri_pts[0] = ccp(width,height);
     
-    [Common tex_map_to_tri_loc:tex len:4];
+    [Common tex_map_to_tri_loc:&tex len:4];
 }
 
 -(CCTexture2D*)get_tex {
@@ -51,8 +51,6 @@
 }
 
 -(void)dealloc {
-    free(tex.tri_pts);
-    free(tex.tex_pts);
     [super dealloc];
 }
 

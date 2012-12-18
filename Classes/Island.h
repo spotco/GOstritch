@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Common.h"
+
 @class GameEngineLayer;
 
 @interface Island : CCSprite {
@@ -31,6 +32,8 @@
 -(CGPoint)get_position_given_t:(float)t;
 -(Vec3D*)get_tangent_vec;
 -(float)get_height:(float)pos;
+
+-(int)get_render_ord;
 
 -(void)cleanup_anims;
 

@@ -1,5 +1,5 @@
 #import "Island.h"
-
+#import "GameRenderImplementation.h"
 
 @implementation Island
 
@@ -33,6 +33,14 @@ static float NO_VAL = -99999.0;
         [i link_finish];
     }
     return ct;
+}
+
+-(int)get_render_ord {
+    if (can_land == NO) {
+        return [GameRenderImplementation GET_RENDER_FG_ISLAND_ORD];
+    } else {
+        return [GameRenderImplementation GET_RENDER_ISLAND_ORD];
+    }
 }
 
 -(float)get_height:(float)pos {

@@ -164,8 +164,6 @@
 +(gl_render_obj)init_render_obj:(CCTexture2D*)tex npts:(int)npts {
     struct gl_render_obj n;
     n.texture = tex;
-    /*n.tri_pts = calloc(npts, sizeof(CGPoint));
-    n.tex_pts = calloc(npts, sizeof(CGPoint));*/
     n.isalloc = 1;
     return n;
 }
@@ -179,9 +177,9 @@
     if (n_vtx == 4)glDrawArrays(GL_TRIANGLES, 1, 3);
 }
 
-+(void)tex_map_to_tri_loc:(gl_render_obj)o len:(int)len {
++(void)tex_map_to_tri_loc:(gl_render_obj*)o len:(int)len {
     for (int i = 0; i < len; i++) {
-        o.tex_pts[i] = ccp(o.tri_pts[i].x/o.texture.pixelsWide, o.tri_pts[i].y/o.texture.pixelsHigh);
+        o->tex_pts[i] = ccp(o->tri_pts[i].x/o->texture.pixelsWide, o->tri_pts[i].y/o->texture.pixelsHigh);
     }
 }
 

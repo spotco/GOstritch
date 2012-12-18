@@ -148,7 +148,7 @@
     //init islandfill
     main_fill = [Common init_render_obj:[self get_tex_fill] npts:4];
 	
-	CGPoint* tri_pts = main_fill.tri_pts;
+	CGPoint *tri_pts = main_fill.tri_pts;
     
     Vec3D *v3t2 = [Vec3D init_x:(endX - startX) y:(endY - startY) z:0];
     Vec3D *vZ = [Vec3D Z_VEC];
@@ -158,12 +158,13 @@
     
     float taille = fill_hei;
     
+    
     tri_pts[3] = ccp(0,0);
     tri_pts[2] = ccp(endX-startX,endY-startY);
     tri_pts[1] = ccp(0+v3t1.x * taille,0+v3t1.y * taille);
     tri_pts[0] = ccp(endX-startX +v3t1.x * taille ,endY-startY +v3t1.y * taille);
 	
-    [Common tex_map_to_tri_loc:main_fill len:4];
+    [Common tex_map_to_tri_loc:&main_fill len:4];
     [self init_LR_line_with_v3t1:v3t1 v3t2:v3t2];
     
     [v3t2 dealloc];
@@ -433,36 +434,7 @@
     [v3t2 dealloc];
     [v3t1 dealloc];
 
-    [Common tex_map_to_tri_loc:corner_fill len:3];
+    [Common tex_map_to_tri_loc:&corner_fill len:3];
 }
-
--(void)dealloc {    
-    [self cleanup_anims];
-    [super dealloc];
-}
-
--(void)cleanup_anims {
-    [self cleanup_renderobj:main_fill];
-    [self cleanup_renderobj:top_fill];
-    [self cleanup_renderobj:bottom_line_fill];
-    
-    [self cleanup_renderobj:corner_line_fill];
-    [self cleanup_renderobj:corner_fill];
-    [self cleanup_renderobj:tl_top_corner];
-    [self cleanup_renderobj:tr_top_corner];
-    [self cleanup_renderobj:corner_top_fill];
-    [self cleanup_renderobj:left_line_fill];
-    [self cleanup_renderobj:right_line_fill];
-}
-
--(void)cleanup_renderobj:(gl_render_obj)g {
-    if(g.isalloc == 1) {
-        free(g.tex_pts);
-        free(g.tri_pts);
-        g.isalloc = 0;
-    }
-}
-
-
 
 @end

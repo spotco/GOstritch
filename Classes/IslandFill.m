@@ -16,7 +16,7 @@
 }
 
 -(int)get_render_ord {
-    return [GameRenderImplementation GET_RENDER_FG_ISLAND_ORD];
+    return [GameRenderImplementation GET_RENDER_FG_ISLAND_ORD]+1;
 }
 
 @end

@@ -392,7 +392,7 @@ HitRect cached_rect;
     [v normalize];
     [h scale:IMGWID/2 * HITBOX_RESCALE];
     [v scale:IMGHEI * HITBOX_RESCALE];
-    CGPoint *pts = (CGPoint*) malloc(sizeof(CGPoint)*4);
+    CGPoint pts[4];
     pts[0] = ccp(x-h.x , y-h.y);
     pts[1] = ccp(x+h.x , y+h.y);
     pts[2] = ccp(x-h.x+v.x , y-h.y+v.y);
@@ -409,7 +409,6 @@ HitRect cached_rect;
         x2 = MAX(pts[i].x,x2);
         y2 = MAX(pts[i].y,y2);
     }
-    free(pts);
     [v dealloc];
     [h dealloc];
     
@@ -428,15 +427,15 @@ HitRect cached_rect;
 -(void)dealloc {
     [self cleanup_anims];
     [up_vec dealloc];
-    [current_params dealloc];
+    [current_params f_dealloc];
     if (temp_params) {
-        [temp_params dealloc];
+        [temp_params f_dealloc];
     }
     [super dealloc];
 }
 
 -(void)cleanup_anims {
-    [self stopAction:current_anim]; 
+    [player_img stopAction:current_anim]; 
     
     [_RUN_ANIM_FAST dealloc];
     [_RUN_ANIM_MED dealloc];
@@ -449,7 +448,7 @@ HitRect cached_rect;
     [_SPLASH_ANIM dealloc];
     [_DASH_ANIM dealloc];
     
-    [self removeAllChildrenWithCleanup:NO];
+    [self removeAllChildrenWithCleanup:YES];
 }
 
 @end

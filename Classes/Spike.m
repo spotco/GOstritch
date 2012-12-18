@@ -20,7 +20,7 @@
 }
 
 -(int)get_render_ord {
-    return [GameRenderImplementation GET_RENDER_ISLAND_ORD];
+    return [GameRenderImplementation GET_RENDER_BTWN_PLAYER_ISLAND];
 }
 
 -(HitRect)get_hit_rect {
@@ -41,7 +41,7 @@
         [player reset_params];
         [self setActive:NO];
         [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
-        [DazedParticle init_effect:g x:player.position.x y:player.position.y+60 time:40];
+        [DazedParticle init_effect:g x:player.position.x y:player.position.y+60*player.last_ndir time:40];
     }
     
     return;

@@ -79,7 +79,7 @@
     player.up_vec = [[Vec3D Z_VEC] crossWith:tangent_vec];
     [player.up_vec normalize];
     [player.up_vec scale:i.ndir];
-    [tmp release];
+    [tmp dealloc];
     
     float tar_rad = -[tangent_vec get_angle_in_rad];
     float tar_deg = [Common rad_to_deg:tar_rad];
@@ -105,7 +105,7 @@
         }
     }
     
-    [tangent_vec release];
+    [tangent_vec dealloc];
     return position_final;
 }
 

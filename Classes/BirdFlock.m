@@ -165,6 +165,7 @@
 
 -(void)dealloc {
     [birds removeAllObjects];
+    [birds release];
     [self removeAllChildrenWithCleanup:YES];
     [super dealloc];
 }

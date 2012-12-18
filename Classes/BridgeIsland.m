@@ -1,5 +1,6 @@
 #import "BridgeIsland.h"
 #import "LineIsland.h"
+#import "GameRenderImplementation.h"
 
 @implementation BridgeIsland
 
@@ -21,6 +22,10 @@
 	startY = start.y;
 	endX = end.x;
 	endY = end.y;
+}
+
+-(int)get_render_ord {
+    return [GameRenderImplementation GET_RENDER_BTWN_PLAYER_ISLAND];
 }
 
 -(void)calc_init {
@@ -132,11 +137,6 @@
 
 -(void)dealloc {
     [super dealloc];
-    free(left.tex_pts);
-    free(left.tri_pts);
-    free(right.tex_pts);
-    free(center.tex_pts);
-    free(center.tri_pts);
 }
 
 @end

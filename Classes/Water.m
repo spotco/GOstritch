@@ -19,8 +19,6 @@
     bwidth = width;
     bheight = height;
     body = [self init_drawbody_ofwidth:width];
-    
-    body_tex_offset = (CGPoint*) malloc(sizeof(CGPoint)*4);
     offset_ct = 0;
     [self update_body_tex_offset];
     
@@ -112,9 +110,6 @@
 }
 
 -(void)dealloc {
-    free(body.tex_pts);
-    free(body.tri_pts);
-    free(body_tex_offset);
     [self removeAllChildrenWithCleanup:YES];
     [super dealloc];
 }

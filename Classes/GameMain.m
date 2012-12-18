@@ -16,7 +16,6 @@
  -minion robot, boss robot + lab
  -menu work, infinite mode and levels mode
  -forward cache autolevel
- -fix some rendering order problems
  **/
 
 +(void)main {
