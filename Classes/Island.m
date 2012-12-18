@@ -100,4 +100,11 @@ static float NO_VAL = -99999.0;
 -(void)cleanup_anims {
 }
 
+-(void)dealloc {
+    if (cached_vec) {
+        [cached_vec dealloc];
+    }
+    [super dealloc];
+}
+
 @end

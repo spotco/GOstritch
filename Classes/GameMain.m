@@ -11,10 +11,12 @@
 
 /**
  TODO --
- -menu work, lives + score
- 
- -minion robot, boss robot
+ -lives + score
  -swing vine animations and variable length
+ -minion robot, boss robot + lab
+ -menu work, infinite mode and levels mode
+ -forward cache autolevel
+ -fix some rendering order problems
  **/
 
 +(void)main {

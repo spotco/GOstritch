@@ -425,6 +425,16 @@ HitRect cached_rect;
 	}
 }
 
+-(void)dealloc {
+    [self cleanup_anims];
+    [up_vec dealloc];
+    [current_params dealloc];
+    if (temp_params) {
+        [temp_params dealloc];
+    }
+    [super dealloc];
+}
+
 -(void)cleanup_anims {
     [self stopAction:current_anim]; 
     

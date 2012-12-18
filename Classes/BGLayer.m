@@ -73,9 +73,8 @@
         [s update_posx:curx posy:cury];
 	}
     
-    //TODO -- day/night effect
-    /*
-    ct--;
+    
+    /*ct--; //TODO -- day/night effect
     if (ct > 0) {
         [bgsky setColor:ccc3(ct,MAX(ct,20),MAX(ct,50))];
         [bghills setColor:ccc3(MAX(70,ct),MAX(ct,70),MAX(ct,70))];
@@ -84,8 +83,7 @@
         [bgclosehills setColor:ccc3(MAX(150,ct),MAX(ct,150),MAX(ct,150))];
         
         [game_engine_layer setColor:ccc3(MAX(200,ct),MAX(200,ct),MAX(200,ct))];
-    }
-     */
+    }*/
 }
 
 -(void)dealloc {

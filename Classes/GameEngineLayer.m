@@ -139,8 +139,7 @@
         if ([i class] == [DogBone class]) {
             [self add_bone:(DogBone*)i autoassign:NO];
         }
-    }
-    NSLog(@"Bones loaded (%i bones total)",[bones count]);
+    }//NSLog(@"Bones loaded (%i bones total)",[bones count]);
 }
 
 -(void)add_bone:(DogBone*)c autoassign:(BOOL)aa {
@@ -224,7 +223,7 @@
     islands = map.n_islands;
     int ct = [Island link_islands:islands];
     if (ct == map.assert_links) {
-        NSLog(@"Successfully linked islands, %i links.",ct);
+        //NSLog(@"Successfully linked islands, %i links.",ct);
     } else {
         NSLog(@"ERROR: expected %i links, got %i.",map.assert_links,ct);
     }
@@ -367,7 +366,6 @@ static NSMutableArray* particles_tba;
 }
 
 -(void)dealloc {
-    [player cleanup_anims];
     [self removeAllChildrenWithCleanup:YES];
     [islands removeAllObjects];
     [game_objects removeAllObjects];

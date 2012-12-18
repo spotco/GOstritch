@@ -12,8 +12,8 @@ typedef struct HitRect {
 
 typedef struct gl_render_obj {
 	CCTexture2D *texture;
-	CGPoint *tri_pts;
-	CGPoint *tex_pts;
+	CGPoint tri_pts[4];
+	CGPoint tex_pts[4];
     int isalloc;
     
 } gl_render_obj;
