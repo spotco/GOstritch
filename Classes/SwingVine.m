@@ -7,11 +7,11 @@
 +(SwingVine*)init_x:(float)x y:(float)y {
     SwingVine *s = [SwingVine node];
     [s setPosition:ccp(x,y)];
-    [s initialize];
+    [s cons];
     return s;
 }
 
--(void)initialize {
+-(void)cons {
     vine = [CCSprite spriteWithTexture:[Resource get_aa_tex:TEX_SWINGVINE_TIGHT]];
     [self addChild:vine];
     loosevine = [CCSprite spriteWithTexture:[Resource get_aa_tex:TEX_SWINGVINE_LOOSE]];

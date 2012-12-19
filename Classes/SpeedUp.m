@@ -7,7 +7,7 @@
     SpeedUp *s = [SpeedUp node];
     s.position = ccp(x,y);
     //s.anchorPoint = ccp(s.anchorPoint.x,0);
-    [s initialize_anim];
+    [s cons_anim];
     [s set_dir:vec];
     [s setActive:YES];
     
@@ -59,7 +59,7 @@
     return [GameRenderImplementation GET_RENDER_ISLAND_ORD];
 }
 
--(void)initialize_anim {
+-(void)cons_anim {
     anim = [self init_anim_ofspeed:0.2];
     [self runAction:anim];
 }

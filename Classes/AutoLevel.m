@@ -18,12 +18,12 @@
 
 +(AutoLevel*)init_with_glayer:(GameEngineLayer*)glayer {
     AutoLevel* a = [AutoLevel node];
-    [a initialize:glayer];
+    [a cons:glayer];
     [GEventDispatcher add_listener:a];
     return a;
 }
 
--(void)initialize:(GameEngineLayer*)glayer {
+-(void)cons:(GameEngineLayer*)glayer {
     tglayer = glayer;
     ct = 0;
     

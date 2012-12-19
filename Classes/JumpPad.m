@@ -10,7 +10,7 @@
 +(JumpPad*)init_x:(float)x y:(float)y dirvec:(Vec3D *)vec{
     JumpPad *j = [JumpPad node];
     j.position = ccp(x,y);
-    [j initialize_anim];
+    [j cons_anim];
     
     [j set_dir:vec];
     
@@ -82,7 +82,7 @@
     return [GameRenderImplementation GET_RENDER_ISLAND_ORD];
 }
 
--(void)initialize_anim {
+-(void)cons_anim {
     anim = [self init_anim_ofspeed:0.2];
     [self runAction:anim];
 }

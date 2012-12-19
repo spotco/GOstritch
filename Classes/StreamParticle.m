@@ -5,7 +5,7 @@
 
 +(StreamParticle*)init_x:(float)x y:(float)y {
     StreamParticle* p = [StreamParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
-    [p initialize];
+    [p cons];
     p.position = ccp(x,y);
     
     return p;
@@ -14,11 +14,11 @@
 +(StreamParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
     StreamParticle* p = [StreamParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
     p.position = ccp(x,y);
-    [p initialize_vx:vx vy:vy];
+    [p cons_vx:vx vy:vy];
     return p;
 }
 
--(void)initialize_vx:(float)tvx vy:(float)tvy {
+-(void)cons_vx:(float)tvx vy:(float)tvy {
     vx = tvx;
     vy = tvy;
     [self setScale:float_random(0.5, 2)];
@@ -26,7 +26,7 @@
     [self setColor:ccc3(200, 200, 200)];
 }
 
--(void)initialize {
+-(void)cons {
     vx = float_random(-2, -4);
     vy = float_random(0, 2);
     [self setScale:float_random(0.5, 2)];

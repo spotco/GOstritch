@@ -2,7 +2,7 @@
 
 @implementation MainMenuPage
 
--(void)initialize_starting_at:(CGPoint)tstart {
+-(void)cons_starting_at:(CGPoint)tstart {
     [self setPosition:tstart];
     [self setAnchorPoint:ccp(0,0)];
 }

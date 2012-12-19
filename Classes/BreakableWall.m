@@ -11,12 +11,12 @@
 
 +(BreakableWall*)init_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2 {
     BreakableWall *n = [BreakableWall node];
-    [n initialize_x:x y:y x2:x2 y2:y2];
+    [n cons_x:x y:y x2:x2 y2:y2];
     return n;
 }
 
--(void)initialize_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2 {
-    [super initialize_x:x y:y x2:x2 y2:y2];
+-(void)cons_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2 {
+    [super cons_x:x y:y x2:x2 y2:y2];
     broken = NO;
 }
 

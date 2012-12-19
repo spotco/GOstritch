@@ -11,10 +11,10 @@
 +(SubFireworksParticleA*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
     SubFireworksParticleA* p = [SubFireworksParticleA spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
     p.position = ccp(x,y);
-    [p initialize_vx:vx vy:vy];
+    [p cons_vx:vx vy:vy];
     return p;
 }
--(void)initialize_vx:(float)tvx vy:(float)tvy {
+-(void)cons_vx:(float)tvx vy:(float)tvy {
     vx = tvx;
     vy = tvy;
     ct = 15;
@@ -37,11 +37,11 @@
 +(FireworksParticleA*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy ct:(int)ct {
     FireworksParticleA* p = [FireworksParticleA spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
     p.position = ccp(x,y);
-    [p initialize_vx:vx vy:vy ct:ct];
+    [p cons_vx:vx vy:vy ct:ct];
     return p;
 }
 
--(void)initialize_vx:(float)tvx vy:(float)tvy ct:(int)tct{
+-(void)cons_vx:(float)tvx vy:(float)tvy ct:(int)tct{
     vx = tvx;
     vy = tvy;
     ct = tct;

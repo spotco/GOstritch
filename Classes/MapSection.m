@@ -7,11 +7,11 @@
 
 +(MapSection*)init_from_name:(NSString*)name {
     MapSection* m = [[MapSection alloc] init];
-    [m initialize:name];
+    [m cons:name];
     return m;
 }
 
--(void)initialize:(NSString*)name {
+-(void)cons:(NSString*)name {
     map = [MapLoader load_map:name];
     [MapSection transform_map:map by_x:-map.connect_pts_x1 by_y:-map.connect_pts_y1];
     offset_x = 0;

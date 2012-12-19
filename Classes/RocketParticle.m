@@ -5,14 +5,14 @@
 
 +(RocketParticle*)init_x:(float)x y:(float)y {
     RocketParticle* p = [RocketParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
-    [p initialize];
+    [p cons];
     p.position = ccp(x,y);
     
     return p;
 }
 
--(void)initialize {
-    [super initialize];
+-(void)cons {
+    [super cons];
     vx = float_random(-2, -4);
     vy = float_random(-2, 2);
     [self setColor:ccc3(255, 0, 0)];

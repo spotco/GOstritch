@@ -4,6 +4,6 @@
 
 @interface MainMenuPage : CCNode
 
--(void)initialize_starting_at:(CGPoint)tstart;
+-(void)cons_starting_at:(CGPoint)tstart;
 
 @end

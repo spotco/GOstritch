@@ -19,7 +19,7 @@
 -(void)hit:(Player *)player g:(GameEngineLayer *)g;
 -(void)draw_o;
 
--(void)initialize_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2;
--(void)initialize_img;
+-(void)cons_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2;
+-(void)cons_img;
 
 @end

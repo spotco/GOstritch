@@ -40,11 +40,11 @@
 
 +(GameEngineLayer*)init_from_file:(NSString*)file {
     GameEngineLayer *g = [GameEngineLayer node];
-    [g initialize:file];
+    [g cons:file];
     return g;
 }
 
--(void)initialize:(NSString*)map_filename {
+-(void)cons:(NSString*)map_filename {
     if (particles_tba == NULL) {
         particles_tba = [[NSMutableArray alloc] init];
     }

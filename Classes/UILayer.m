@@ -7,12 +7,12 @@
     UILayer* u = [UILayer node];
     [GEventDispatcher add_listener:u];
     [u set_gameengine:g];
-    [u initialize];
+    [u cons];
     return u;
 }
 
 
--(void)initialize {
+-(void)cons {
     [self init_ingame_ui];
     [self init_pause_menu];
     [self init_game_end_menu];

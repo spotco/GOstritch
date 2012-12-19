@@ -7,11 +7,11 @@
 +(BreakableWallRockParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
     BreakableWallRockParticle* p = [BreakableWallRockParticle spriteWithTexture:[Resource get_tex:TEX_CAVE_ROCKPARTICLE]];
     p.position = ccp(x,y);
-    [p initialize_vx:vx vy:vy];
+    [p cons_vx:vx vy:vy];
     return p;
 }
 
--(void)initialize_vx:(float)tvx vy:(float)tvy {
+-(void)cons_vx:(float)tvx vy:(float)tvy {
     vx = tvx;
     vy = tvy;
     [self setScale:float_random(0.5, 1.5)];
@@ -19,7 +19,7 @@
     ct = (int)BreakableWallRockParticle_CT_DEFAULT;
 }
 
--(void)initialize {
+-(void)cons {
     vx = float_random(-2, -4);
     vy = float_random(0, 2);
     [self setScale:float_random(0.5, 2)];

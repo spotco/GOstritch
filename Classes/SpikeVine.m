@@ -9,14 +9,14 @@
 
 +(SpikeVine*)init_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2 {
     SpikeVine *n = [SpikeVine node];
-    [n initialize_x:x y:y x2:x2 y2:y2];
+    [n cons_x:x y:y x2:x2 y2:y2];
     return n;
 }
 
--(void)initialize_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2 {
+-(void)cons_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2 {
     [self setPosition:ccp(x,y)];
     dir_vec = [Vec3D init_x:x2-x y:y2-y z:0];
-    [self initialize_img];
+    [self cons_img];
     [self setActive:YES];
 }
 
@@ -78,7 +78,7 @@
     return CGSizeMake(CENTER_IMG_WID, CENTER_IMG_HEI);
 }
 
--(void)initialize_img {
+-(void)cons_img {
     CCTexture2D* tex = [self get_base_tex];
     CGSize s = [self get_base_size];
     float bwid = [tex pixelsWide]; 

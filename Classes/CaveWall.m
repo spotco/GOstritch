@@ -4,11 +4,11 @@
 
 +(CaveWall*)init_x:(float)x y:(float)y width:(float)width height:(float)height {
     CaveWall* n = [CaveWall node];
-    [n initialize_x:x y:y width:width height:height];
+    [n cons_x:x y:y width:width height:height];
     return n;
 }
 
--(void)initialize_x:(float)x y:(float)y width:(float)width height:(float)height {
+-(void)cons_x:(float)x y:(float)y width:(float)width height:(float)height {
     [self setPosition:ccp(x,y)];
     wid = width;
     hei = height;

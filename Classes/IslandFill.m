@@ -6,7 +6,7 @@
 +(IslandFill*)init_x:(float)x y:(float)y width:(float)width height:(float)height {
     IslandFill* n = [IslandFill node];
     n.active = YES;
-    [n initialize_x:x y:y width:width height:height];
+    [n cons_x:x y:y width:width height:height];
     
     return n;
 }

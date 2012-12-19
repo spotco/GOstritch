@@ -17,9 +17,11 @@ typedef enum {
     @property(readwrite,assign) GEventType type;
     @property(readwrite,assign) NSMutableDictionary* data;
     @property(readwrite,assign) CGPoint pt;
+    @property(readwrite,assign) int i1,i2;
     +(GEvent*)init_type:(GEventType)t;
     -(GEvent*)add_key:(NSString*)k value:(id)v;
     -(GEvent*)add_pt:(CGPoint)tpt;
+-(GEvent*)add_i1:(int)ti1 i2:(int)ti2;
 @end
 
 @protocol GEventListener <NSObject>

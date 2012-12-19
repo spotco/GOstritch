@@ -7,16 +7,30 @@
 #import "PlayAutoPage.h"
 
 @interface MainMenuBGLayer : CCLayer <GEventListener>
-+(MainMenuBGLayer*)initialize;
++(MainMenuBGLayer*)cons;
 @end
+
+@interface MainMenuPageStaticLayer : CCLayer <GEventListener> {
+    NSMutableArray* indicator_pts;
+}
++(MainMenuPageStaticLayer*)cons;
+@end
+
+typedef enum {
+    MainMenuState_TouchDown,
+    MainMenuState_Snapping,
+    MainMenuState_None
+} MainMenuState;
 
 @interface MainMenuLayer : CCLayer {
     MainMenuBGLayer* bg;
     NSMutableArray* menu_pages;
+    int cur_page;
     CameraZoom cpos;
     
-    CGPoint last;
-    CGPoint dp;
+    CGPoint last,dp;
+    
+    MainMenuState cstate;
 }
 
 +(CCScene*)scene;

@@ -7,12 +7,12 @@
 
 +(BoneCollectUIAnimation*)init_start:(CGPoint)start end:(CGPoint)end {
     BoneCollectUIAnimation *b = [BoneCollectUIAnimation node];
-    [b initialize_start:start end:end];
+    [b cons_start:start end:end];
     [GEventDispatcher add_listener:b];
     return b;
 }
 
--(void)initialize_start:(CGPoint)tstart end:(CGPoint)tend {
+-(void)cons_start:(CGPoint)tstart end:(CGPoint)tend {
     [self addChild:[CCSprite spriteWithTexture:[Resource get_aa_tex:TEX_GOLDEN_BONE]]];
     start = tstart;
     end = tend;
