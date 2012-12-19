@@ -5,6 +5,10 @@
 
 @implementation Common
 
++(CGSize)SCREEN {
+    return CGSizeMake([[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
+}
+
 +(void)run_callback:(callback)c {
     if (c.target != NULL) {
         [c.target performSelector:c.selector];

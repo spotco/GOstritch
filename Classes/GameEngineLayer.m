@@ -70,6 +70,7 @@
 }
 
 -(void)update {
+    [GEventDispatcher dispatch_events];
     if (current_mode == GameEngineLayerMode_GAMEPLAY) {
         refresh_viewbox_cache = YES;
         [GamePhysicsImplementation player_move:player with_islands:islands];
@@ -95,7 +96,7 @@
         [self exit];
         
     } else if (e.type == GEventType_CHECKPOINT) {
-        [self set_checkpoint_to:[(NSValue*)[e.data objectForKey:@"point"] CGPointValue]];
+        [self set_checkpoint_to:e.pt];
         
     } else if (e.type == GEventType_LEVELEND) {
         [GEventDispatcher push_event:[GEvent init_type:GEventType_LOAD_LEVELEND_MENU]]; //[self stopAction:follow_action];
@@ -356,18 +357,14 @@ static NSMutableArray* particles_tba;
 
 -(void)dealloc {
     [self removeAllChildrenWithCleanup:YES];
-    [player dealloc];
     [islands removeAllObjects];
     [game_objects removeAllObjects];
     [particles removeAllObjects];
     [bones removeAllObjects];
-    
     [islands release];
     [game_objects release];
     [particles release];
     [bones release];
-    
-    
     [super dealloc];
 }
 

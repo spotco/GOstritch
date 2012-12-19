@@ -426,6 +426,7 @@ HitRect cached_rect;
 
 -(void)dealloc {
     [self cleanup_anims];
+    [self removeAllChildrenWithCleanup:YES];
     [up_vec dealloc];
     [current_params f_dealloc];
     if (temp_params) {

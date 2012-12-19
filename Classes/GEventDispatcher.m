@@ -60,6 +60,7 @@ static NSMutableArray* event_queue;
 @implementation GEvent
     @synthesize type;
     @synthesize data;
+    @synthesize pt;
 
 +(GEvent*)init_type:(GEventType)t {
     GEvent *e = [[GEvent alloc] init];
@@ -72,6 +73,11 @@ static NSMutableArray* event_queue;
         data = [[NSMutableDictionary alloc] init];
     }
     [data setObject:v forKey:k];
+    return self;
+}
+
+-(GEvent*)add_pt:(CGPoint)tpt {
+    pt = tpt;
     return self;
 }
 

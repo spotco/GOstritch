@@ -9,14 +9,17 @@ typedef enum {
     GEventType_UIANIM_TICK,
     GEventType_GAME_TICK,
     GEventType_LOAD_LEVELEND_MENU,
-    GEventType_COLLECT_BONE
+    GEventType_COLLECT_BONE,
+    GEventType_MENU_TICK
 } GEventType;
 
 @interface GEvent : NSObject
     @property(readwrite,assign) GEventType type;
     @property(readwrite,assign) NSMutableDictionary* data;
+    @property(readwrite,assign) CGPoint pt;
     +(GEvent*)init_type:(GEventType)t;
     -(GEvent*)add_key:(NSString*)k value:(id)v;
+    -(GEvent*)add_pt:(CGPoint)tpt;
 @end
 
 @protocol GEventListener <NSObject>

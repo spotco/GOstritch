@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "GameEngineLayer.h"
+#import "MainMenuLayer.h"
 
 @interface GameMain : NSObject
 

@@ -28,6 +28,14 @@ typedef struct callback {
     SEL selector;
 } callback;
 
+typedef struct CameraZoom {
+    float x;
+    float y;
+    float z;
+} CameraZoom;
+
++(CGSize)SCREEN;
+
 +(void)run_callback:(callback)c;
 +(callback)cons_callback:(NSObject*)tar sel:(SEL)sel;
 

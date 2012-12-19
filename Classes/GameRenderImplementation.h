@@ -6,13 +6,6 @@
 #import "PlayerEffectParams.h"
 @class GameEngineLayer;
 
-typedef struct CameraZoom {
-    float x;
-    float y;
-    float z;
-} CameraZoom;
-
-
 @interface GameRenderImplementation:NSObject
 
 +(void)update_render_on:(GameEngineLayer*)g;

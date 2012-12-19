@@ -71,16 +71,32 @@
 
 #define TEX_UI_COINCOUNT @"UICoinCount"
 #define TEX_UI_PAUSEICON @"UIPauseIcon"
-
 #define TEX_UI_PAUSEMENU_RETURN @"PauseMenuReturn"
 #define TEX_UI_PAUSEMENU_PLAY @"PauseMenuPlay"
 #define TEX_UI_PAUSEMENU_BACK @"PauseMenuBack"
-
 #define TEX_UI_STARTGAME_GO @"UIStartGameGo"
 #define TEX_UI_STARTGAME_READY @"UIStartGameReady"
 
+#define TEX_UI_GAMEOVER_TITLE @"UIgameovertitle"
+#define TEX_UI_GAMEOVER_INFO @"UIgameoverinfo"
+#define TEX_UI_GAMEOVER_LOGO @"UIgameoverlogo"
+
 #define TEX_ISLAND_WORLD1_CORNERFILLCOLOR 0.29, 0.69, 0.03
 #define TEX_ISLAND_CAVE_CORNERFILLCOLOR 0.5, 0.5, 0.5
+
+#define TEX_MENU_TEX_SELECTDOT_LARGE @"menuselectdotlarge"
+#define TEX_MENU_TEX_SELECTDOT_SMALL @"menuselectdotsmall"
+#define TEX_MENU_TEX_BACKBUTTON @"menubackbutton"
+#define TEX_MENU_BG @"menubgimg"
+#define TEX_MENU_BUTTON_MENU @"menubuttonmenu"
+#define TEX_MENU_BUTTON_PLAYAGAIN @"menubuttonplayagain"
+#define TEX_MENU_CURRENT_CHARACTER @"menucurrentcharacter"
+#define TEX_MENU_DOG_MODE_TITLE @"menudogmodetitle"
+#define TEX_MENU_GRAY_OVERLAY @"menugrayoverlay"
+#define TEX_MENU_LOGO @"menulogo"
+#define TEX_MENU_PLAYBUTTON @"menuplaybutton"
+#define TEX_MENU_SETTINGS_BUTTON @"menusettingsbutton"
+#define TEX_MENU_STATS_TITLE @"menustatstitle"
 
 
 

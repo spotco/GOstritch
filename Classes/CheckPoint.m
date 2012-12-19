@@ -53,7 +53,7 @@ float texwid,texhei;
         active_img.visible = YES;
         
         CGPoint center = [self get_center];
-        [GEventDispatcher push_event:[[GEvent init_type:GEventType_CHECKPOINT] add_key:@"point" value:[NSValue valueWithCGPoint:center]]];
+        [GEventDispatcher push_event:[[GEvent init_type:GEventType_CHECKPOINT] add_pt:center]];
         
         //[g set_checkpoint_to:center];
         
