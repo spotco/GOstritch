@@ -54,7 +54,6 @@
 }
 
 -(void)nextlevel {
-    [Resource dealloc_textures];
     [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene_with:@"cave_test"]];
 }
 
@@ -181,7 +180,6 @@
     }
     NSMutableArray *toremove = [NSMutableArray array];
     for (UIIngameAnimation *i in ingame_ui_anims) {
-        [i update];
         if (i.ct <= 0) {
             [self removeChild:i cleanup:NO];
             [toremove addObject:i];
@@ -189,6 +187,7 @@
     }
     [ingame_ui_anims removeObjectsInArray:toremove];
     [toremove removeAllObjects];
+    [toremove release];
 }
 
 

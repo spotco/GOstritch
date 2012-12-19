@@ -12,7 +12,7 @@ static NSMutableDictionary* textures = nil;
     [Resource load_tex_from_array:temp];
 }
 
-+(void)init_bg1_textures {
++(void)init_textures {
     textures = [NSMutableDictionary dictionary];
     [textures retain];
     NSArray *temp = [[NSArray alloc] initWithObjects:

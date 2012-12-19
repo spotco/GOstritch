@@ -12,9 +12,7 @@
 @synthesize follow_action;
 
 +(CCScene *) scene_with:(NSString *) map_file_name {
-    [Resource init_bg1_textures];
-	CCScene *scene = [CCScene node];
-    
+    CCScene *scene = [CCScene node];
     GameEngineLayer *glayer = [GameEngineLayer init_from_file:map_file_name];
 	BGLayer *bglayer = [BGLayer init_with_gamelayer:glayer];
     UILayer* uilayer = [UILayer init_with_gamelayer:glayer];
@@ -114,7 +112,6 @@
 -(void)exit {
     [updater invalidate];
     [GEventDispatcher remove_all_listeners];
-    [Resource dealloc_textures];
     [[CCDirector sharedDirector] resume];
     [[CCDirector sharedDirector] replaceScene:[CoverPage scene]];
 }

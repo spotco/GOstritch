@@ -1,11 +1,3 @@
-//
-//  WorldSelectionPage.h
-//  GOstrich
-//
-//  Created by Pingyang He on 8/7/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 #import <stdlib.h>
 
@@ -20,7 +12,6 @@ FOUNDATION_EXPORT NSString *const backgroundsFilesName[];
 FOUNDATION_EXPORT NSString *const circlesFilesName[];
 
 typedef enum WorldSelectionMode{
-    
     NORMAL, 
     SWITCHING_WORLD_RIGHT, 
     SWITCHING_WORLD_LEFT, 

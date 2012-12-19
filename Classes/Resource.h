@@ -2,7 +2,7 @@
 
 @interface Resource : NSObject
 
-+(void)init_bg1_textures;
++(void)init_textures;
 +(CCTexture2D*)get_tex:(NSString*)key;
 +(CCTexture2D*)get_aa_tex:(NSString*)key;
 +(void)dealloc_textures;

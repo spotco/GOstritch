@@ -1,11 +1,3 @@
-//
-//  WorldSelectionPage.m
-//  GOstrich
-//
-//  Created by Pingyang He on 8/7/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 #import "WorldSelectionPage.h"
 
 @implementation WorldSelectionPage
