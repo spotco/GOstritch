@@ -187,7 +187,6 @@
     }
     [ingame_ui_anims removeObjectsInArray:toremove];
     [toremove removeAllObjects];
-    [toremove release];
 }
 
 
