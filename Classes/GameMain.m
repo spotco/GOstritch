@@ -21,9 +21,9 @@
     [Resource init_textures];
     [[CCDirector sharedDirector] setDisplayFPS:NO];
     //[[CCDirector sharedDirector] runWithScene:[CoverPage scene]];
-    //[[CCDirector sharedDirector] runWithScene:[MainMenuLayer scene]];
+    [[CCDirector sharedDirector] runWithScene:[MainMenuLayer scene]];
     //[[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"shittytest"]];
-    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with_autolevel]];
+    //[[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with_autolevel]];
 }
 
 +(BOOL)GET_USE_BG {return USE_BG;}

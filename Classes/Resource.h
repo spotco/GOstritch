@@ -84,7 +84,6 @@
 #define TEX_ISLAND_WORLD1_CORNERFILLCOLOR 0.29, 0.69, 0.03
 #define TEX_ISLAND_CAVE_CORNERFILLCOLOR 0.5, 0.5, 0.5
 
-#define TEX_MENU_TEX_SELECTDOT_LARGE @"menuselectdotlarge"
 #define TEX_MENU_TEX_SELECTDOT_SMALL @"menuselectdotsmall"
 #define TEX_MENU_TEX_BACKBUTTON @"menubackbutton"
 #define TEX_MENU_BG @"menubgimg"

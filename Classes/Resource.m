@@ -89,7 +89,6 @@ static NSMutableDictionary* textures = nil;
                         @"GO.png", TEX_UI_STARTGAME_GO,
                         @"READY.png", TEX_UI_STARTGAME_READY,
 
-                        @"menu_select_dot_large.png",TEX_MENU_TEX_SELECTDOT_LARGE,
                         @"menu_select_dot_small.png",TEX_MENU_TEX_SELECTDOT_SMALL,
                         @"menu_back_button.png",TEX_MENU_TEX_BACKBUTTON,
                         @"menu_bg.png",TEX_MENU_BG,

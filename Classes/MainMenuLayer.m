@@ -18,6 +18,11 @@
 @end
 
 @implementation MainMenuPageStaticLayer
+
+#define IND_HEI 15.0
+#define IND_PAD 20.0
+#define IND_SEL_SCALE 2.0
+
 +(MainMenuPageStaticLayer*)cons {
     MainMenuPageStaticLayer* l = [MainMenuPageStaticLayer node];
     [GEventDispatcher add_listener:l];
@@ -31,17 +36,54 @@
         if (indicator_pts == NULL) {
             [self lazy_cons_totalpages:e.i2];
         }
-        
+        [self set_ind:e.i1];
+    }
+}
+
+-(void)set_ind:(int)tar {
+    for(int i = 0; i < [indicator_pts count]; i++) {
+        CCSprite *ei = [indicator_pts objectAtIndex:i];
+        ei.scale = tar == i ? IND_SEL_SCALE : 1.0;
     }
 }
 
 -(void)lazy_cons_totalpages:(int)t {
     indicator_pts = [[NSMutableArray alloc] init];
-    CCSprite *dot = [CCSprite spriteWithTexture:[Resource get_tex:TEX_MENU_TEX_SELECTDOT_SMALL]];
-    [dot setPosition:ccp(float_random(50,200),float_random(50, 200))];
-    [self addChild:dot];
-    NSLog(@"%i",[[self children] count]);
+    int below,above;
+    float belowx,abovex;
+    if (t%2==0) {
+        below = t/2;
+        above = t/2+1;
+        belowx = [Common SCREEN].width/2+IND_PAD/2;
+        abovex = [Common SCREEN].width/2-IND_PAD/2;
+        
+    } else {
+        [indicator_pts addObject:[self cons_dot:ccp([Common SCREEN].width/2,IND_HEI)]];
+        below = t/2-1;
+        above = t/2+1;
+        belowx = [Common SCREEN].width/2;
+        abovex = [Common SCREEN].width/2;
+    }
     
+    while(below >= 0) {
+        belowx-=IND_PAD;
+        [indicator_pts insertObject:[self cons_dot:ccp(belowx,IND_HEI)] atIndex:0];
+        below--;
+    }
+    
+    while(above < t) {
+        abovex+=IND_PAD;
+        [indicator_pts insertObject:[self cons_dot:ccp(abovex,IND_HEI)] atIndex:[indicator_pts count]];
+        above++;
+    }
+    
+}
+
+-(CCSprite*)cons_dot:(CGPoint)pt {
+    CCSprite *dot = [CCSprite spriteWithTexture:[Resource get_tex:TEX_MENU_TEX_SELECTDOT_SMALL]];
+    [dot setPosition:pt];
+    [self addChild:dot];
+    return dot;
 }
 
 -(void)dealloc {
