@@ -15,7 +15,6 @@
  -lives + score
  -swing vine animations and variable length
  -minion robot, boss robot + lab
- -menu work, infinite mode and levels mode
  -forward cache autolevel
  **/
 

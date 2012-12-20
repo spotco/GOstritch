@@ -1,7 +1,6 @@
 #import "CCNode.h"
 #import "Resource.h"
 #import "Common.h"
-#import "MenuCommon.h"
 #import "GEventDispatcher.h"
 
 @interface MainMenuPageInteractiveItem : CCNode

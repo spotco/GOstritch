@@ -2,7 +2,6 @@
 #import "Resource.h"
 #import "GameEngineLayer.h"
 #import "GameStartAnim.h"
-#import "CoverPage.h"
 #import "UIIngameAnimation.h"
 #import "BoneCollectUIAnimation.h"
 #import "GEventDispatcher.h"

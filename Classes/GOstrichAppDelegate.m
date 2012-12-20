@@ -4,9 +4,7 @@
 
 #import "GOstrichAppDelegate.h"
 #import "GameConfig.h"
-#import "GameEngineLayer.h"
 #import "RootViewController.h"
-#import "CoverPage.h"
 
 @implementation GOstrichAppDelegate
 
