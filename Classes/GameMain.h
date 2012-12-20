@@ -6,6 +6,9 @@
 @interface GameMain : NSObject
 
 +(void)main;
++(void)start_game_autolevel;
++(void)start_menu;
++(void)start_testlevel;
 
 +(BOOL)GET_USE_BG;
 +(BOOL)GET_ENABLE_BG_PARTICLES;

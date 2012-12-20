@@ -96,6 +96,7 @@
 #define TEX_MENU_PLAYBUTTON @"menuplaybutton"
 #define TEX_MENU_SETTINGS_BUTTON @"menusettingsbutton"
 #define TEX_MENU_STATS_TITLE @"menustatstitle"
+#define TEX_MENU_STATS_BUTTON @"menystatsbutton"
 
 
 

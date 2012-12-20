@@ -320,6 +320,7 @@
 		7EF1246915CA584300B91A91 /* SplashEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1246815CA584300B91A91 /* SplashEffect.m */; };
 		7EF1246C15CA612100B91A91 /* FishGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1246B15CA612100B91A91 /* FishGenerator.m */; };
 		7EF1246F15CA7D5100B91A91 /* BirdFlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1246E15CA7D5100B91A91 /* BirdFlock.m */; };
+		7EF34B101682B2D300DDC905 /* menu_stats_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF34B0F1682B2D300DDC905 /* menu_stats_button.png */; };
 		7EF654F115AA62FA0094EA20 /* GamePhysicsImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF654F015AA62FA0094EA20 /* GamePhysicsImplementation.m */; };
 		7EF654F415AA64BE0094EA20 /* GameRenderImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF654F315AA64BE0094EA20 /* GameRenderImplementation.m */; };
 		7EF654F715AA6D5F0094EA20 /* GameControlImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF654F615AA6D5F0094EA20 /* GameControlImplementation.m */; };
@@ -899,6 +900,7 @@
 		7EF1246B15CA612100B91A91 /* FishGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FishGenerator.m; sourceTree = "<group>"; };
 		7EF1246D15CA7D5000B91A91 /* BirdFlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BirdFlock.h; sourceTree = "<group>"; };
 		7EF1246E15CA7D5100B91A91 /* BirdFlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BirdFlock.m; sourceTree = "<group>"; };
+		7EF34B0F1682B2D300DDC905 /* menu_stats_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_stats_button.png; sourceTree = "<group>"; };
 		7EF654EF15AA62FA0094EA20 /* GamePhysicsImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePhysicsImplementation.h; sourceTree = "<group>"; };
 		7EF654F015AA62FA0094EA20 /* GamePhysicsImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamePhysicsImplementation.m; sourceTree = "<group>"; };
 		7EF654F215AA64BE0094EA20 /* GameRenderImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameRenderImplementation.h; sourceTree = "<group>"; };
@@ -1188,6 +1190,7 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				7E8DF4061594601E00B00340 /* util */,
 				7EDB2FA21681A1C2001336F0 /* menu */,
 				7EF654ED15AA62680094EA20 /* menu_old */,
 				7EF654EB15AA62410094EA20 /* game */,
@@ -1900,6 +1903,7 @@
 		7EDB2F801681987A001336F0 /* menu_resc */ = {
 			isa = PBXGroup;
 			children = (
+				7EF34B0F1682B2D300DDC905 /* menu_stats_button.png */,
 				7EDB2F9F16819A22001336F0 /* menu_select_dot_small.png */,
 				7EDB2F811681987A001336F0 /* menu_back_button.png */,
 				7EDB2F821681987A001336F0 /* menu_bg.png */,
@@ -2091,7 +2095,6 @@
 				7E93D6731592B69C00A83E9C /* game_obj */,
 				8B4028CC1592CC6000A2E791 /* map */,
 				7EE784B71593F9EB001704B1 /* islands */,
-				7E8DF4061594601E00B00340 /* util */,
 				494E2594152C22DB004EBE74 /* layers */,
 			);
 			name = game;
@@ -2100,6 +2103,8 @@
 		7EF654ED15AA62680094EA20 /* menu_old */ = {
 			isa = PBXGroup;
 			children = (
+				7EB769B3167F390F003AFCF5 /* MenuCommon.h */,
+				7EB769B4167F3910003AFCF5 /* MenuCommon.m */,
 				7EB769AF167F367B003AFCF5 /* levelselect_old */,
 				7E9D30CA15D8870500AF52AD /* CCSlider.h */,
 				7E9D30CB15D8870500AF52AD /* CCSlider.m */,
@@ -2107,8 +2112,6 @@
 				62D3C2F415C6152A00E67ABC /* CoverPage.m */,
 				7EB769B0167F376F003AFCF5 /* CharacterSelectPage.h */,
 				7EB769B1167F376F003AFCF5 /* CharacterSelectPage.m */,
-				7EB769B3167F390F003AFCF5 /* MenuCommon.h */,
-				7EB769B4167F3910003AFCF5 /* MenuCommon.m */,
 			);
 			name = menu_old;
 			sourceTree = "<group>";
@@ -2774,6 +2777,7 @@
 				7EDB2FAA1681A806001336F0 /* gameover_info.png in Resources */,
 				7EDB2FAB1681A806001336F0 /* gameover_logo.png in Resources */,
 				7EDB2FAC1681A806001336F0 /* gameover_title.png in Resources */,
+				7EF34B101682B2D300DDC905 /* menu_stats_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

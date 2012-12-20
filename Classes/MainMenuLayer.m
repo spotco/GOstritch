@@ -119,7 +119,7 @@
 
 -(id)init {
     self = [super init];
-    
+    [GEventDispatcher add_listener:self];
     menu_pages = [[NSMutableArray alloc] init];
     [self add_pages];
     for(int i = 0; i < [menu_pages count]; i++) {
@@ -129,11 +129,17 @@
     }
     last = ccp(-1,-1);
     cpos.z = 1;
+    [self set_cur:1];
     [self update_camera];
     self.isTouchEnabled = YES;
     
     [self schedule:@selector(update) interval:1.0/60];
     return self;
+}
+
+-(void)set_cur:(int)tar {
+    cur_page = tar;
+    cpos.x = tar*[Common SCREEN].width;
 }
 
 -(void)update {
@@ -160,7 +166,7 @@
 }
 
 -(void)update_state {
-    if ([self is_touch_down]) {
+    if ([self is_touch_down] && !killdrag) {
         cstate = MainMenuState_TouchDown;
     } else if (ABS([self get_snapto]-cpos.x)>10) {
         cstate = MainMenuState_Snapping;
@@ -168,6 +174,29 @@
         cstate = MainMenuState_None;
     }
 }
+
+-(void)dispatch_event:(GEvent *)e {
+    if (e.type == GEventType_MENU_TOUCHUP) {
+        MainMenuPage *tar = [menu_pages objectAtIndex:cur_page];
+        [tar touch_up_at:ccp(e.pt.x-[self get_snapto], e.pt.y)];
+        
+    } else if (e.type == GEventType_MENU_TOUCHDOWN) {
+        MainMenuPage *tar = [menu_pages objectAtIndex:cur_page];
+        [tar touch_down_at:ccp(e.pt.x-[self get_snapto], e.pt.y)];
+        
+    } else if (e.type == GEventType_MENU_TOUCHMOVE) {
+        MainMenuPage *tar = [menu_pages objectAtIndex:cur_page];
+        [tar touch_move_at:ccp(e.pt.x-[self get_snapto], e.pt.y)];
+        
+    } else if (e.type == GEventType_MENU_CANCELDRAG) {
+        killdrag = true;
+        
+    } else if (e.type == GEventType_MENU_PLAY_AUTOLEVEL_MODE) {
+        [self exit];
+        [GameMain start_game_autolevel];
+    }
+}
+
 
 -(float)get_snapto {
     return cur_page*[Common SCREEN].width;
@@ -190,12 +219,15 @@
 -(void) ccTouchesBegan:(NSSet*)pTouches withEvent:(UIEvent*)pEvent {    
     CGPoint touch;for (UITouch *t in pTouches) {touch = [t locationInView:[t view]];}
     last = touch;
+    [GEventDispatcher push_event:[[GEvent init_type:GEventType_MENU_TOUCHDOWN] add_pt:ccp(touch.x+cpos.x, [Common SCREEN].height - touch.y+cpos.y)]];
+    killdrag = false;
 }
 
 -(void)ccTouchesMoved:(NSSet *)pTouches withEvent:(UIEvent *)event {
     CGPoint touch;for (UITouch *t in pTouches) {touch = [t locationInView:[t view]];}
     dp = ccp((last.x-touch.x)*TOUCHSCROLL_SCALE,-(last.y-touch.y)*TOUCHSCROLL_SCALE);
     last = touch;
+    [GEventDispatcher push_event:[[GEvent init_type:GEventType_MENU_TOUCHMOVE] add_pt:ccp(touch.x+cpos.x, [Common SCREEN].height - touch.y+cpos.y)]];
 }
 
 -(void) ccTouchesEnded:(NSSet*)pTouches withEvent:(UIEvent*)event {
@@ -203,6 +235,7 @@
     last = ccp(-1,-1);
     dp = CGPointZero;
     [self calc_new_cur_page];
+    [GEventDispatcher push_event:[[GEvent init_type:GEventType_MENU_TOUCHUP] add_pt:ccp(touch.x+cpos.x, [Common SCREEN].height - touch.y+cpos.y)]];
 }
 
 -(void)calc_new_cur_page {
@@ -226,7 +259,6 @@
 
 -(void)exit {
     [GEventDispatcher remove_all_listeners];
-    NSLog(@"menu exit, should dealloc");
 }
 
 -(void)dealloc {

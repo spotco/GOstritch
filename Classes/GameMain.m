@@ -20,10 +20,32 @@
 +(void)main {
     [Resource init_textures];
     [[CCDirector sharedDirector] setDisplayFPS:NO];
-    //[[CCDirector sharedDirector] runWithScene:[CoverPage scene]];
-    [[CCDirector sharedDirector] runWithScene:[MainMenuLayer scene]];
-    //[[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"shittytest"]];
-    //[[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with_autolevel]];
+    [GameMain start_menu];
+}
+
++(void)start_game_autolevel {
+    if ([[CCDirector sharedDirector] runningScene]) {
+        [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene_with_autolevel]];
+    } else {
+        [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with_autolevel]];
+    }
+    
+}
+
++(void)start_menu {
+    if ([[CCDirector sharedDirector] runningScene]) {
+        [[CCDirector sharedDirector] replaceScene:[MainMenuLayer scene]];
+    } else {
+        [[CCDirector sharedDirector] runWithScene:[MainMenuLayer scene]];
+    }
+}
+
++(void)start_testlevel {
+    if ([[CCDirector sharedDirector] runningScene]) {
+        [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene_with:@"shittytest"]];
+    } else {
+        [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:@"shittytest"]];
+    }
 }
 
 +(BOOL)GET_USE_BG {return USE_BG;}

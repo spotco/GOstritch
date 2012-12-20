@@ -114,7 +114,7 @@
     [updater invalidate];
     [GEventDispatcher remove_all_listeners];
     [[CCDirector sharedDirector] resume];
-    [[CCDirector sharedDirector] replaceScene:[CoverPage scene]];
+    [GameMain start_menu];
 }
 
 -(void)reset_camera {
@@ -356,6 +356,7 @@ static NSMutableArray* particles_tba;
 }
 
 -(void)dealloc {
+    NSLog(@"gameengine dealloc");
     [self removeAllChildrenWithCleanup:YES];
     [islands removeAllObjects];
     [game_objects removeAllObjects];

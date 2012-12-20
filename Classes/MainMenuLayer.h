@@ -3,6 +3,7 @@
 #import "MainMenuPage.h"
 #import "Common.h"
 #import "GEventDispatcher.h"
+#import "GameEngineLayer.h"
 
 #import "PlayAutoPage.h"
 
@@ -22,13 +23,14 @@ typedef enum {
     MainMenuState_None
 } MainMenuState;
 
-@interface MainMenuLayer : CCLayer {
+@interface MainMenuLayer : CCLayer <GEventListener> {
     MainMenuBGLayer* bg;
     NSMutableArray* menu_pages;
     int cur_page;
     CameraZoom cpos;
     
     CGPoint last,dp;
+    BOOL killdrag;
     
     MainMenuState cstate;
 }

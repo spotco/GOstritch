@@ -10,7 +10,13 @@ typedef enum {
     GEventType_GAME_TICK,
     GEventType_LOAD_LEVELEND_MENU,
     GEventType_COLLECT_BONE,
-    GEventType_MENU_TICK
+    
+    GEventType_MENU_TICK,
+    GEventType_MENU_TOUCHDOWN,
+    GEventType_MENU_TOUCHMOVE,
+    GEventType_MENU_TOUCHUP,
+    GEventType_MENU_CANCELDRAG,
+    GEventType_MENU_PLAY_AUTOLEVEL_MODE
 } GEventType;
 
 @interface GEvent : NSObject
