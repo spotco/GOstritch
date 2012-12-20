@@ -1,4 +1,5 @@
 #import "PlayAutoPage.h"
+#import "MainMenuLayer.h"
 
 @implementation PlayAutoPage
 
@@ -31,23 +32,11 @@
 }
 
 -(void)stats {
-    NSLog(@"stats");
+    [GEventDispatcher push_event:[[GEvent init_type:GEventType_MENU_GOTO_PAGE] add_i1:MENU_STATS_PAGE_ID i2:0]];
 }
 
 -(void)settings {
-    NSLog(@"settings");
-}
-
--(void)touch_down_at:(CGPoint)pt {
-    [super touch_down_at:pt];
-}
-
--(void)touch_move_at:(CGPoint)pt {
-    [super touch_move_at:pt];
-}
-
--(void)touch_up_at:(CGPoint)pt {
-    [super touch_up_at:pt];
+    [GEventDispatcher push_event:[[GEvent init_type:GEventType_MENU_GOTO_PAGE] add_i1:MENU_SETTINGS_PAGE_ID i2:0]];
 }
 
 @end

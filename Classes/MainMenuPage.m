@@ -36,14 +36,6 @@
     for (MainMenuPageInteractiveItem *i in interactive_items) {
         [i touch_move_at:pt];
     }
-    
-    /*kill drag if touchover pageitem code
-     for (CCNode* n in self.children) {
-        if (CGRectContainsPoint([n boundingBoxInPixels], pt)) {
-            [GEventDispatcher push_event:[GEvent init_type:GEventType_MENU_CANCELDRAG]];
-            break;
-        }
-    }*/
 }
 
 -(void)touch_up_at:(CGPoint)pt {
@@ -66,14 +58,29 @@
 
 
 @implementation MainMenuPageZoomButton
+@synthesize pressed;
+
+#define DEFAULTZOOM 1.1
 
 +(MainMenuPageZoomButton*)cons_texture:(CCTexture2D *)tex at:(CGPoint)pos fn:(callback)fn {
     return [[MainMenuPageZoomButton node] init_texture:tex at:pos fn:fn];
 }
 
--(MainMenuPageZoomButton*)init_texture:(CCTexture2D *)tex at:(CGPoint)pos fn:(callback)fn {
-    img = [CCSprite spriteWithTexture:tex];
-    zoom = 1.1;
++(MainMenuPageZoomButton*)cons_spr:(CCSprite*)spr at:(CGPoint)pos fn:(callback)fn {
+    return [[MainMenuPageZoomButton node] init_spr:spr at:pos fn:fn];
+}
+
+
+-(void)setScale:(float)scale {
+    [super setScale:scale];
+    for (CCNode* n in children_) {
+        [n setScale:scale];
+    }
+}
+
+-(MainMenuPageZoomButton*)init_spr:(CCSprite*)spr at:(CGPoint)pos fn:(callback)fn {
+    img = spr;
+    zoom = DEFAULTZOOM;
     n_bbox = img.boundingBoxInPixels;
     [self addChild:img];
     cb = fn;
@@ -81,20 +88,24 @@
     return self;
 }
 
+-(MainMenuPageZoomButton*)init_texture:(CCTexture2D *)tex at:(CGPoint)pos fn:(callback)fn {
+    return [self init_spr:[CCSprite spriteWithTexture:tex] at:pos fn:fn];
+}
+
 -(void)touch_down_at:(CGPoint)pt {
     if (CGRectContainsPoint([self get_hitbox], pt)) {
         pressed = YES;
-        [img setScale:zoom];
+        [self setScale:zoom];
     } else {
         pressed = NO;
-        [img setScale:1.0];
+        [self setScale:1.0];
     }
 }
 
 -(void)touch_move_at:(CGPoint)pt {
     if (!CGRectContainsPoint([self get_hitbox], pt)) {
         pressed = NO;
-        [img setScale:1.0];
+        [self setScale:1.0];
     }
 }
 
@@ -103,7 +114,7 @@
         [Common run_callback:cb];
     }
     pressed = NO;
-    [img setScale:1.0];
+    [self setScale:1.0];
 }
 
 -(CGRect)get_hitbox {
@@ -115,7 +126,7 @@
 }
 
 -(CGRect)boundingBoxInPixels {
-    return [self get_hitbox];;
+    return [self get_hitbox];
 }
 
 -(MainMenuPageZoomButton*)set_zoom:(float)tzoom {

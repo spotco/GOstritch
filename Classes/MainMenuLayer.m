@@ -1,100 +1,5 @@
 #import "MainMenuLayer.h"
 
-@implementation MainMenuBGLayer
-+(MainMenuBGLayer*)cons {
-    CCSprite *bg = [CCSprite spriteWithTexture:[Resource get_tex:TEX_MENU_BG]];
-    [bg setAnchorPoint:ccp(0,0)];
-    MainMenuBGLayer* l = [MainMenuBGLayer node];
-    [GEventDispatcher add_listener:l];
-    [l addChild:bg];
-    return l;
-}
-
--(void)dispatch_event:(GEvent *)e {
-    if (e.type == GEventType_MENU_TICK) {
-        [self setPosition:e.pt];
-    }
-}
-@end
-
-@implementation MainMenuPageStaticLayer
-
-#define IND_HEI 15.0
-#define IND_PAD 20.0
-#define IND_SEL_SCALE 2.0
-
-+(MainMenuPageStaticLayer*)cons {
-    MainMenuPageStaticLayer* l = [MainMenuPageStaticLayer node];
-    [GEventDispatcher add_listener:l];
-
-    return l;
-}
-
--(void)dispatch_event:(GEvent *)e {
-    if (e.type == GEventType_MENU_TICK) {
-        
-        if (indicator_pts == NULL) {
-            [self lazy_cons_totalpages:e.i2];
-        }
-        [self set_ind:e.i1];
-    }
-}
-
--(void)set_ind:(int)tar {
-    for(int i = 0; i < [indicator_pts count]; i++) {
-        CCSprite *ei = [indicator_pts objectAtIndex:i];
-        ei.scale = tar == i ? IND_SEL_SCALE : 1.0;
-    }
-}
-
--(void)lazy_cons_totalpages:(int)t {
-    indicator_pts = [[NSMutableArray alloc] init];
-    int below,above;
-    float belowx,abovex;
-    if (t%2==0) {
-        below = t/2;
-        above = t/2+1;
-        belowx = [Common SCREEN].width/2+IND_PAD/2;
-        abovex = [Common SCREEN].width/2-IND_PAD/2;
-        
-    } else {
-        [indicator_pts addObject:[self cons_dot:ccp([Common SCREEN].width/2,IND_HEI)]];
-        below = t/2-1;
-        above = t/2+1;
-        belowx = [Common SCREEN].width/2;
-        abovex = [Common SCREEN].width/2;
-    }
-    
-    while(below >= 0) {
-        belowx-=IND_PAD;
-        [indicator_pts insertObject:[self cons_dot:ccp(belowx,IND_HEI)] atIndex:0];
-        below--;
-    }
-    
-    while(above < t) {
-        abovex+=IND_PAD;
-        [indicator_pts insertObject:[self cons_dot:ccp(abovex,IND_HEI)] atIndex:[indicator_pts count]];
-        above++;
-    }
-    
-}
-
--(CCSprite*)cons_dot:(CGPoint)pt {
-    CCSprite *dot = [CCSprite spriteWithTexture:[Resource get_tex:TEX_MENU_TEX_SELECTDOT_SMALL]];
-    [dot setPosition:pt];
-    [self addChild:dot];
-    return dot;
-}
-
--(void)dealloc {
-    [self removeAllChildrenWithCleanup:NO];
-    [indicator_pts removeAllObjects];
-    [indicator_pts release];
-    [super dealloc];
-}
-@end
-
-
 @implementation MainMenuLayer
 
 #define BGWID 960.0
@@ -112,9 +17,10 @@
 }
 
 -(void)add_pages {
+    [menu_pages addObject:[DogModePage node]];
     [menu_pages addObject:[PlayAutoPage node]];
-    [menu_pages addObject:[PlayAutoPage node]];
-    [menu_pages addObject:[PlayAutoPage node]];
+    [menu_pages addObject:[SettingsPage node]];
+    [menu_pages addObject:[StatsPage node]];
 }
 
 -(id)init {
@@ -129,7 +35,7 @@
     }
     last = ccp(-1,-1);
     cpos.z = 1;
-    [self set_cur:1];
+    [self set_cur:MENU_STARTING_PAGE_ID];
     [self update_camera];
     self.isTouchEnabled = YES;
     
@@ -194,6 +100,9 @@
     } else if (e.type == GEventType_MENU_PLAY_AUTOLEVEL_MODE) {
         [self exit];
         [GameMain start_game_autolevel];
+    
+    } else if (e.type == GEventType_MENU_GOTO_PAGE) {
+        cur_page = e.i1;
     }
 }
 
@@ -219,7 +128,12 @@
 -(void) ccTouchesBegan:(NSSet*)pTouches withEvent:(UIEvent*)pEvent {    
     CGPoint touch;for (UITouch *t in pTouches) {touch = [t locationInView:[t view]];}
     last = touch;
-    [GEventDispatcher push_event:[[GEvent init_type:GEventType_MENU_TOUCHDOWN] add_pt:ccp(touch.x+cpos.x, [Common SCREEN].height - touch.y+cpos.y)]];
+    [GEventDispatcher push_event:
+     [
+      [[GEvent init_type:GEventType_MENU_TOUCHDOWN] 
+        add_pt:ccp(touch.x+cpos.x, [Common SCREEN].height - touch.y+cpos.y)]
+        add_f1:cpos.x f2:cpos.y]
+    ];
     killdrag = false;
 }
 
@@ -227,7 +141,12 @@
     CGPoint touch;for (UITouch *t in pTouches) {touch = [t locationInView:[t view]];}
     dp = ccp((last.x-touch.x)*TOUCHSCROLL_SCALE,-(last.y-touch.y)*TOUCHSCROLL_SCALE);
     last = touch;
-    [GEventDispatcher push_event:[[GEvent init_type:GEventType_MENU_TOUCHMOVE] add_pt:ccp(touch.x+cpos.x, [Common SCREEN].height - touch.y+cpos.y)]];
+    [GEventDispatcher push_event:
+     [
+      [[GEvent init_type:GEventType_MENU_TOUCHMOVE] 
+       add_pt:ccp(touch.x+cpos.x, [Common SCREEN].height - touch.y+cpos.y)]
+       add_f1:cpos.x f2:cpos.y]
+     ];
 }
 
 -(void) ccTouchesEnded:(NSSet*)pTouches withEvent:(UIEvent*)event {
@@ -235,7 +154,12 @@
     last = ccp(-1,-1);
     dp = CGPointZero;
     [self calc_new_cur_page];
-    [GEventDispatcher push_event:[[GEvent init_type:GEventType_MENU_TOUCHUP] add_pt:ccp(touch.x+cpos.x, [Common SCREEN].height - touch.y+cpos.y)]];
+    [GEventDispatcher push_event:
+     [
+      [[GEvent init_type:GEventType_MENU_TOUCHUP] 
+       add_pt:ccp(touch.x+cpos.x, [Common SCREEN].height - touch.y+cpos.y)]
+       add_f1:cpos.x f2:cpos.y]
+     ];
 }
 
 -(void)calc_new_cur_page {

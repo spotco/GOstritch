@@ -46,6 +46,7 @@ typedef enum {
 } player_anim_mode;
 
 +(void)set_character:(NSString*)tar;
++(NSString*)get_character;
 
 +(Player*)init_at:(CGPoint)pt;
 -(void)init_anim;

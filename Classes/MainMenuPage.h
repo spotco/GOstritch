@@ -21,10 +21,12 @@
     CCSprite *img;
     CGRect n_bbox;
     float zoom;
-    bool pressed;
 }
 
+@property(readwrite,assign) BOOL pressed;
+
 +(MainMenuPageZoomButton*)cons_texture:(CCTexture2D*)tex at:(CGPoint)pos fn:(callback)fn;
++(MainMenuPageZoomButton*)cons_spr:(CCSprite*)spr at:(CGPoint)pos fn:(callback)fn;
 -(MainMenuPageZoomButton*)set_zoom:(float)tzoom;
 
 @end

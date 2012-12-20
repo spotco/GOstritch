@@ -97,6 +97,7 @@
 #define TEX_MENU_SETTINGS_BUTTON @"menusettingsbutton"
 #define TEX_MENU_STATS_TITLE @"menustatstitle"
 #define TEX_MENU_STATS_BUTTON @"menystatsbutton"
+#define TEX_MENU_SETTINGS_TITLE @"menusettingstitle"
 
 
 

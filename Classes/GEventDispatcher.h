@@ -16,7 +16,9 @@ typedef enum {
     GEventType_MENU_TOUCHMOVE,
     GEventType_MENU_TOUCHUP,
     GEventType_MENU_CANCELDRAG,
-    GEventType_MENU_PLAY_AUTOLEVEL_MODE
+    GEventType_MENU_PLAY_AUTOLEVEL_MODE,
+    GEventType_MENU_GOTO_PAGE,
+    GEventType_CHANGE_CURRENT_DOG
 } GEventType;
 
 @interface GEvent : NSObject
@@ -24,10 +26,12 @@ typedef enum {
     @property(readwrite,assign) NSMutableDictionary* data;
     @property(readwrite,assign) CGPoint pt;
     @property(readwrite,assign) int i1,i2;
+    @property(readwrite,assign) float f1,f2;
     +(GEvent*)init_type:(GEventType)t;
     -(GEvent*)add_key:(NSString*)k value:(id)v;
     -(GEvent*)add_pt:(CGPoint)tpt;
--(GEvent*)add_i1:(int)ti1 i2:(int)ti2;
+    -(GEvent*)add_i1:(int)ti1 i2:(int)ti2;
+    -(GEvent*)add_f1:(float)tf1 f2:(float)tf2;
 @end
 
 @protocol GEventListener <NSObject>

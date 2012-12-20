@@ -321,6 +321,12 @@
 		7EF1246C15CA612100B91A91 /* FishGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1246B15CA612100B91A91 /* FishGenerator.m */; };
 		7EF1246F15CA7D5100B91A91 /* BirdFlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF1246E15CA7D5100B91A91 /* BirdFlock.m */; };
 		7EF34B101682B2D300DDC905 /* menu_stats_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF34B0F1682B2D300DDC905 /* menu_stats_button.png */; };
+		7EF34B131682BD9600DDC905 /* SettingsPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF34B121682BD9500DDC905 /* SettingsPage.m */; };
+		7EF34B151682BE3B00DDC905 /* menu_settings_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF34B141682BE3B00DDC905 /* menu_settings_title.png */; };
+		7EF34B181682BEF300DDC905 /* StatsPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF34B171682BEF300DDC905 /* StatsPage.m */; };
+		7EF34B1B1682BF5700DDC905 /* DogModePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF34B1A1682BF5700DDC905 /* DogModePage.m */; };
+		7EF34B1E1682C54200DDC905 /* MainMenuPageStaticLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF34B1D1682C54200DDC905 /* MainMenuPageStaticLayer.m */; };
+		7EF34B211682C60C00DDC905 /* MainMenuBGLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF34B201682C60B00DDC905 /* MainMenuBGLayer.m */; };
 		7EF654F115AA62FA0094EA20 /* GamePhysicsImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF654F015AA62FA0094EA20 /* GamePhysicsImplementation.m */; };
 		7EF654F415AA64BE0094EA20 /* GameRenderImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF654F315AA64BE0094EA20 /* GameRenderImplementation.m */; };
 		7EF654F715AA6D5F0094EA20 /* GameControlImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF654F615AA6D5F0094EA20 /* GameControlImplementation.m */; };
@@ -901,6 +907,17 @@
 		7EF1246D15CA7D5000B91A91 /* BirdFlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BirdFlock.h; sourceTree = "<group>"; };
 		7EF1246E15CA7D5100B91A91 /* BirdFlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BirdFlock.m; sourceTree = "<group>"; };
 		7EF34B0F1682B2D300DDC905 /* menu_stats_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_stats_button.png; sourceTree = "<group>"; };
+		7EF34B111682BD9500DDC905 /* SettingsPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsPage.h; sourceTree = "<group>"; };
+		7EF34B121682BD9500DDC905 /* SettingsPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsPage.m; sourceTree = "<group>"; };
+		7EF34B141682BE3B00DDC905 /* menu_settings_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_settings_title.png; sourceTree = "<group>"; };
+		7EF34B161682BEF300DDC905 /* StatsPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsPage.h; sourceTree = "<group>"; };
+		7EF34B171682BEF300DDC905 /* StatsPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsPage.m; sourceTree = "<group>"; };
+		7EF34B191682BF5700DDC905 /* DogModePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DogModePage.h; sourceTree = "<group>"; };
+		7EF34B1A1682BF5700DDC905 /* DogModePage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DogModePage.m; sourceTree = "<group>"; };
+		7EF34B1C1682C54100DDC905 /* MainMenuPageStaticLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuPageStaticLayer.h; sourceTree = "<group>"; };
+		7EF34B1D1682C54200DDC905 /* MainMenuPageStaticLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuPageStaticLayer.m; sourceTree = "<group>"; };
+		7EF34B1F1682C60B00DDC905 /* MainMenuBGLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuBGLayer.h; sourceTree = "<group>"; };
+		7EF34B201682C60B00DDC905 /* MainMenuBGLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuBGLayer.m; sourceTree = "<group>"; };
 		7EF654EF15AA62FA0094EA20 /* GamePhysicsImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamePhysicsImplementation.h; sourceTree = "<group>"; };
 		7EF654F015AA62FA0094EA20 /* GamePhysicsImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GamePhysicsImplementation.m; sourceTree = "<group>"; };
 		7EF654F215AA64BE0094EA20 /* GameRenderImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameRenderImplementation.h; sourceTree = "<group>"; };
@@ -1296,7 +1313,7 @@
 				7E9D323215D8A93F00AF52AD /* menus */,
 				7E3B978515D7ADBB001859CB /* levels */,
 				7E28310515CF4F47002EB07B /* particle */,
-				7E961F0915B908670096F2C8 /* ui */,
+				7E961F0915B908670096F2C8 /* ingame_ui */,
 				7ED863C515B806C3005FBDBB /* object */,
 				7EE2B78815B7E1D100941C3B /* icon */,
 				7E89F2CC159AEC4A00A32F2B /* char */,
@@ -1607,7 +1624,7 @@
 			name = game_obj;
 			sourceTree = "<group>";
 		};
-		7E961F0915B908670096F2C8 /* ui */ = {
+		7E961F0915B908670096F2C8 /* ingame_ui */ = {
 			isa = PBXGroup;
 			children = (
 				7EDB2FA61681A806001336F0 /* gameover */,
@@ -1615,6 +1632,7 @@
 				7E878C2D15C13F8200837E7B /* ingame_ui */,
 				7E878C3015C13F8200837E7B /* pause_menu_icons */,
 			);
+			name = ingame_ui;
 			path = ui;
 			sourceTree = "<group>";
 		};
@@ -1911,6 +1929,7 @@
 				7EDB2F841681987A001336F0 /* menu_button_playagain.png */,
 				7EDB2F851681987A001336F0 /* menu_current_character.png */,
 				7EDB2F861681987A001336F0 /* menu_dog_mode_title.png */,
+				7EF34B141682BE3B00DDC905 /* menu_settings_title.png */,
 				7EDB2F8A1681987A001336F0 /* menu_gray_overlay.png */,
 				7EDB2F8B1681987A001336F0 /* menu_logo.png */,
 				7EDB2F8C1681987A001336F0 /* menu_play_button.png */,
@@ -1923,7 +1942,11 @@
 		7EDB2FA21681A1C2001336F0 /* menu */ = {
 			isa = PBXGroup;
 			children = (
-				7EDB2FAD1681A976001336F0 /* menugroup */,
+				7EDB2FAD1681A976001336F0 /* menupages */,
+				7EF34B1F1682C60B00DDC905 /* MainMenuBGLayer.h */,
+				7EF34B201682C60B00DDC905 /* MainMenuBGLayer.m */,
+				7EF34B1C1682C54100DDC905 /* MainMenuPageStaticLayer.h */,
+				7EF34B1D1682C54200DDC905 /* MainMenuPageStaticLayer.m */,
 				7EDB2FA31681A247001336F0 /* MainMenuLayer.h */,
 				7EDB2FA41681A247001336F0 /* MainMenuLayer.m */,
 			);
@@ -1940,15 +1963,21 @@
 			path = gameover;
 			sourceTree = "<group>";
 		};
-		7EDB2FAD1681A976001336F0 /* menugroup */ = {
+		7EDB2FAD1681A976001336F0 /* menupages */ = {
 			isa = PBXGroup;
 			children = (
 				7EDB2FAE1681A9A3001336F0 /* MainMenuPage.h */,
 				7EDB2FAF1681A9A3001336F0 /* MainMenuPage.m */,
 				7EDB2FB11681AD71001336F0 /* PlayAutoPage.h */,
 				7EDB2FB21681AD71001336F0 /* PlayAutoPage.m */,
+				7EF34B111682BD9500DDC905 /* SettingsPage.h */,
+				7EF34B121682BD9500DDC905 /* SettingsPage.m */,
+				7EF34B161682BEF300DDC905 /* StatsPage.h */,
+				7EF34B171682BEF300DDC905 /* StatsPage.m */,
+				7EF34B191682BF5700DDC905 /* DogModePage.h */,
+				7EF34B1A1682BF5700DDC905 /* DogModePage.m */,
 			);
-			name = menugroup;
+			name = menupages;
 			sourceTree = "<group>";
 		};
 		7EDC29F615AFB750008B0DC3 /* effectparams */ = {
@@ -2778,6 +2807,7 @@
 				7EDB2FAB1681A806001336F0 /* gameover_logo.png in Resources */,
 				7EDB2FAC1681A806001336F0 /* gameover_title.png in Resources */,
 				7EF34B101682B2D300DDC905 /* menu_stats_button.png in Resources */,
+				7EF34B151682BE3B00DDC905 /* menu_settings_title.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2858,6 +2888,11 @@
 				7EDB2FA51681A247001336F0 /* MainMenuLayer.m in Sources */,
 				7EDB2FB01681A9A3001336F0 /* MainMenuPage.m in Sources */,
 				7EDB2FB31681AD72001336F0 /* PlayAutoPage.m in Sources */,
+				7EF34B131682BD9600DDC905 /* SettingsPage.m in Sources */,
+				7EF34B181682BEF300DDC905 /* StatsPage.m in Sources */,
+				7EF34B1B1682BF5700DDC905 /* DogModePage.m in Sources */,
+				7EF34B1E1682C54200DDC905 /* MainMenuPageStaticLayer.m in Sources */,
+				7EF34B211682C60C00DDC905 /* MainMenuBGLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

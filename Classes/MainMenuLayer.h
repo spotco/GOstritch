@@ -5,17 +5,18 @@
 #import "GEventDispatcher.h"
 #import "GameEngineLayer.h"
 
+#import "MainMenuPageStaticLayer.h"
+#import "MainMenuBGLayer.h"
+
+#import "DogModePage.h"
 #import "PlayAutoPage.h"
+#import "SettingsPage.h"
+#import "StatsPage.h"
 
-@interface MainMenuBGLayer : CCLayer <GEventListener>
-+(MainMenuBGLayer*)cons;
-@end
-
-@interface MainMenuPageStaticLayer : CCLayer <GEventListener> {
-    NSMutableArray* indicator_pts;
-}
-+(MainMenuPageStaticLayer*)cons;
-@end
+#define MENU_STARTING_PAGE_ID 1
+#define MENU_DOG_MODE_PAGE_ID 0
+#define MENU_SETTINGS_PAGE_ID 2
+#define MENU_STATS_PAGE_ID 3
 
 typedef enum {
     MainMenuState_TouchDown,

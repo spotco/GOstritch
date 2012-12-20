@@ -2,6 +2,8 @@
 
 @implementation GameMain
 
+
+#define USE_NSTIMER YES;
 #define USE_BG YES
 #define ENABLE_BG_PARTICLES YES
 #define DRAW_HITBOX NO
@@ -52,4 +54,5 @@
 +(BOOL)GET_ENABLE_BG_PARTICLES {return ENABLE_BG_PARTICLES;}
 +(BOOL)GET_DRAW_HITBOX {return DRAW_HITBOX;}
 +(float)GET_TARGET_FPS {return 1.0/TARGET_FPS;}
++(BOOL)GET_USE_NSTIMER {return USE_NSTIMER;};
 @end

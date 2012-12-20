@@ -193,6 +193,7 @@
 
 -(void)exit_to_menu {
     [GEventDispatcher push_event:[GEvent init_type:GEventType_QUIT]];
+    [GEventDispatcher dispatch_events];
 }
 
 

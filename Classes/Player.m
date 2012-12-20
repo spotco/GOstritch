@@ -30,9 +30,11 @@
 @synthesize current_swingvine;
 
 static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
-
 +(void)set_character:(NSString*)tar {
     CURRENT_CHARACTER = tar;
+}
++(NSString*)get_character {
+    return CURRENT_CHARACTER;
 }
 
 +(Player*)init_at:(CGPoint)pt {

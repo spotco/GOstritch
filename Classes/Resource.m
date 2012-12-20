@@ -102,6 +102,7 @@ static NSMutableDictionary* textures = nil;
                         @"menu_settings_button.png",TEX_MENU_SETTINGS_BUTTON,
                         @"menu_stats_title.png",TEX_MENU_STATS_TITLE,
                         @"menu_stats_button.png",TEX_MENU_STATS_BUTTON,
+                        @"menu_settings_title.png",TEX_MENU_SETTINGS_TITLE,
                      
                      nil];
     [Resource load_tex_from_array:temp];

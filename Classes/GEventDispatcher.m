@@ -62,6 +62,7 @@ static NSMutableArray* event_queue;
     @synthesize data;
     @synthesize pt;
     @synthesize i1,i2;
+    @synthesize f1,f2;
 
 +(GEvent*)init_type:(GEventType)t {
     GEvent *e = [[GEvent alloc] init];
@@ -85,6 +86,12 @@ static NSMutableArray* event_queue;
 -(GEvent*)add_i1:(int)ti1 i2:(int)ti2 {
     i1 = ti1;
     i2 = ti2;
+    return self;
+}
+
+-(GEvent*)add_f1:(float)tf1 f2:(float)tf2 {
+    f1 = tf1;
+    f2 = tf2;
     return self;
 }
 

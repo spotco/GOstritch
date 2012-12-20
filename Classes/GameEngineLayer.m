@@ -66,7 +66,11 @@
     follow_action = [CCFollow actionWithTarget:player worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]];
     [self runAction:follow_action];
     
-    updater = [NSTimer scheduledTimerWithTimeInterval:[GameMain GET_TARGET_FPS] target:self selector:@selector(update) userInfo:nil repeats:YES];
+    if ([GameMain GET_USE_NSTIMER]) {
+        updater = [NSTimer scheduledTimerWithTimeInterval:[GameMain GET_TARGET_FPS] target:self selector:@selector(update) userInfo:nil repeats:YES];
+    } else {
+        [self schedule:@selector(update)];
+    }
 }
 
 -(void)update {
@@ -111,7 +115,11 @@
 }
 
 -(void)exit {
-    [updater invalidate];
+    if ([GameMain GET_USE_NSTIMER]) {
+        [updater invalidate];
+    } else {
+        [self unscheduleAllSelectors];
+    }
     [GEventDispatcher remove_all_listeners];
     [[CCDirector sharedDirector] resume];
     [GameMain start_menu];
