@@ -15,8 +15,8 @@
 
 #define MENU_STARTING_PAGE_ID 1
 #define MENU_DOG_MODE_PAGE_ID 0
-#define MENU_SETTINGS_PAGE_ID 2
-#define MENU_STATS_PAGE_ID 3
+#define MENU_SETTINGS_PAGE_ID 3
+#define MENU_STATS_PAGE_ID 2
 
 typedef enum {
     MainMenuState_TouchDown,

@@ -9,6 +9,10 @@
     return CGSizeMake([[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
 }
 
++(CGPoint)screen_pctwid:(float)pctwid pcthei:(float)pcthei {
+    return ccp([Common SCREEN].width*pctwid,[Common SCREEN].height*pcthei);
+}
+
 +(void)run_callback:(callback)c {
     if (c.target != NULL) {
         [c.target performSelector:c.selector];
@@ -206,6 +210,29 @@
     CGFloat dy = point2.y - point1.y;
     return sqrt(dx*dx + dy*dy );
 }
+
++(CCMenuItem*)make_button_tex:(CCTexture2D*)tex seltex:(CCTexture2D*)seltex zscale:(float)zscale callback:(callback)cb pos:(CGPoint)pos {
+    CCSprite *img = [CCSprite spriteWithTexture:tex];
+    CCSprite *img_zoom = [CCSprite spriteWithTexture:seltex];
+    [Common set_zoom_pos_align:img zoomed:img_zoom scale:zscale];
+    CCMenuItem* i = [CCMenuItemImage itemFromNormalSprite:img selectedSprite:img_zoom target:cb.target selector:cb.selector];
+    [i setPosition:pos];
+    return i;
+}
+
++(void)set_zoom_pos_align:(CCSprite*)normal zoomed:(CCSprite*)zoomed scale:(float)scale {
+    zoomed.scale = scale;
+    zoomed.position = ccp((-[zoomed contentSize].width * zoomed.scale + [zoomed contentSize].width)/2
+                          ,(-[zoomed contentSize].height * zoomed.scale + [zoomed contentSize].height)/2);
+}
+
++(CCLabelTTF*)cons_label_pos:(CGPoint)pos color:(ccColor3B)color fontsize:(int)fontsize str:(NSString*)str {
+    CCLabelTTF *l = [CCLabelTTF labelWithString:str fontName:@"Carton Six" fontSize:fontsize];
+    [l setColor:color];
+    [l setPosition:pos];
+    return l;
+}
+
 
 
 

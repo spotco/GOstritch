@@ -13,14 +13,15 @@
     [sc addChild:[MainMenuBGLayer cons]];
     [sc addChild:[MainMenuLayer node]];
     [sc addChild:[MainMenuPageStaticLayer cons]];
+    
     return sc;
 }
 
 -(void)add_pages {
     [menu_pages addObject:[DogModePage node]];
     [menu_pages addObject:[PlayAutoPage node]];
-    [menu_pages addObject:[SettingsPage node]];
     [menu_pages addObject:[StatsPage node]];
+    [menu_pages addObject:[SettingsPage node]];
 }
 
 -(id)init {
@@ -183,6 +184,7 @@
 
 -(void)exit {
     [GEventDispatcher remove_all_listeners];
+    [self unscheduleAllSelectors];
 }
 
 -(void)dealloc {

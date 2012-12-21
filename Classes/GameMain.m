@@ -2,25 +2,31 @@
 
 @implementation GameMain
 
-
-#define USE_NSTIMER YES;
-#define USE_BG YES
+#define USE_NSTIMER NO
+#define USE_BG NO
 #define ENABLE_BG_PARTICLES YES
 #define DRAW_HITBOX NO
 #define TARGET_FPS 60
+#define RESET_STATS NO
+#define DISPLAY_FPS NO
 
 
 /**
  TODO -- 
- -lives + score
  -swing vine animations and variable length
  -minion robot, boss robot + lab
  -forward cache autolevel
+ 
+ -score tracking
+ -fix loadlevel + gameend_ui stuff
  **/
 
 +(void)main {
+    [DataStore init];
     [Resource init_textures];
-    [[CCDirector sharedDirector] setDisplayFPS:NO];
+    if (RESET_STATS) [DataStore reset_all];
+    [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
+    
     [GameMain start_menu];
 }
 
@@ -32,7 +38,6 @@
     }
     
 }
-
 +(void)start_menu {
     if ([[CCDirector sharedDirector] runningScene]) {
         [[CCDirector sharedDirector] replaceScene:[MainMenuLayer scene]];
@@ -40,7 +45,6 @@
         [[CCDirector sharedDirector] runWithScene:[MainMenuLayer scene]];
     }
 }
-
 +(void)start_testlevel {
     if ([[CCDirector sharedDirector] runningScene]) {
         [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene_with:@"shittytest"]];

@@ -10,6 +10,9 @@ typedef enum {
     GEventType_GAME_TICK,
     GEventType_LOAD_LEVELEND_MENU,
     GEventType_COLLECT_BONE,
+    GEventType_PLAYER_DIE,
+    GEventType_GAMEOVER,
+    GEventType_PLAYAGAIN_AUTOLEVEL,
     
     GEventType_MENU_TICK,
     GEventType_MENU_TOUCHDOWN,

@@ -11,66 +11,70 @@
     return u;
 }
 
-
 -(void)cons {
     [self init_ingame_ui];
-    [self init_pause_menu];
+    [self init_pause_ui];
+    [self init_gameover_ui];
     [self init_game_end_menu];
-    [self init_ui_ingame_animations];
+    ingame_ui_anims = [[NSMutableArray array] retain];
     self.isTouchEnabled = YES;
 }
 
--(void)init_ui_ingame_animations {
-    ingame_ui_anims = [[NSMutableArray array] retain];
+-(void)dispatch_event:(GEvent *)e {
+    if (e.type == GEventType_GAME_TICK) {
+        [self update];
+        
+    } else if (e.type == GEventType_LOAD_LEVELEND_MENU) {
+        [self load_game_end_menu];
+        
+    } else if (e.type == GEventType_COLLECT_BONE) {
+        [self start_bone_collect_anim];
+        
+    } else if (e.type == GEventType_GAMEOVER) {
+        [self gameover];
+        
+    }
 }
 
+/* event dispatch handlers */
+
+-(void)update {
+    level_bone_status b = [game_engine_layer get_bonestatus];
+    [self set_label:bones_disp to:[NSString stringWithFormat:@"%i",b.hasgets+b.savedgets]];
+    [self set_label:lives_disp to:[NSString stringWithFormat:@"x %i",[game_engine_layer get_lives]]];
+    [self set_label:time_disp to:[NSString stringWithFormat:@"%@",[self parse_gameengine_time:[game_engine_layer get_time]]]];
+    
+    NSMutableArray *toremove = [NSMutableArray array];
+    for (UIIngameAnimation *i in ingame_ui_anims) {
+        if (i.ct <= 0) {
+            [self removeChild:i cleanup:NO];
+            [toremove addObject:i];
+        }
+    }
+    [ingame_ui_anims removeObjectsInArray:toremove];
+    [toremove removeAllObjects];
+}
+-(void)start_bone_collect_anim {
+    BoneCollectUIAnimation* b = [BoneCollectUIAnimation init_start:[UILayer player_approx_position:game_engine_layer] end:ccp(0,[[UIScreen mainScreen] bounds].size.width)];
+    [self addChild:b];
+    [ingame_ui_anims addObject:b];
+}
+-(void)gameover {
+    [ingame_ui setVisible:NO];
+    [pause_ui setVisible:NO];
+    level_bone_status b = [game_engine_layer get_bonestatus];
+    [self set_label:gameover_bones_disp to:[NSString stringWithFormat:@"Total Bones: %i",b.hasgets+b.savedgets]];
+    [self set_label:gameover_time_disp to:[NSString stringWithFormat:@"Time: %@",[self parse_gameengine_time:[game_engine_layer get_time]]]];
+    [gameover_ui setVisible:YES];
+    
+}
 -(void)load_game_end_menu {
     game_end_menu_layer.isTouchEnabled = NO;
     ingame_ui.visible = NO;
     [[[CCDirector sharedDirector] runningScene] addChild:game_end_menu_layer];
 }
 
--(void)init_game_end_menu {
-    ccColor4B c = {0,0,0,200};
-    CGSize s = [[UIScreen mainScreen] bounds].size;
-    game_end_menu_layer= [CCLayerColor layerWithColor:c width:s.height height:s.width];
-    game_end_menu_layer.anchorPoint = ccp(0,0);
-    [game_end_menu_layer retain];
-    
-    CCSprite *backimg = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEMENU_RETURN]];
-    CCSprite *backimgzoom = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEMENU_RETURN]];
-    [UILayer set_zoom_pos_align:backimg zoomed:backimgzoom scale:1.4];
-    
-    CCMenuItemImage *back = [CCMenuItemImage itemFromNormalSprite:backimg 
-                                                   selectedSprite:backimgzoom
-                                                           target:self 
-                                                         selector:@selector(nextlevel)];
-    back.position = ccp(s.height/2,s.width/2);
-    
-    CCMenu* gameendmenu = [CCMenu menuWithItems:back, nil];
-    gameendmenu.position = ccp(0,0);
-    
-    [game_end_menu_layer addChild:gameendmenu];
-}
-
--(void)nextlevel {
-    [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene_with:@"cave_test"]];
-}
-
--(void)start_initial_anim {
-    game_engine_layer.current_mode = GameEngineLayerMode_UIANIM;
-    
-    ingame_ui.visible = NO;
-    curanim = [GameStartAnim init_with_callback:[Common cons_callback:self sel:@selector(end_initial_anim)]];
-    [self addChild:curanim];
-}
-     
- -(void)end_initial_anim {
-     game_engine_layer.current_mode = GameEngineLayerMode_GAMEPLAY;
-     ingame_ui.visible = YES;
-     [self removeChild:curanim cleanup:YES];
- }
-
+/* UI initialzers */
 
 -(void)init_ingame_ui {
     CCSprite *pauseicon = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEICON]];
@@ -81,45 +85,42 @@
                                                           selectedSprite:pauseiconzoom
                                                                   target:self 
                                                                 selector:@selector(pause)];
-    ingamepause.position = ccp([[UIScreen mainScreen] bounds].size.height - pauseicon.boundingBox.size.width +20, 
-                               [[UIScreen mainScreen] bounds].size.width - pauseicon.boundingBox.size.height +20);
+    ingamepause.position = ccp([Common SCREEN].width - pauseicon.boundingBox.size.width +20, 
+                               [Common SCREEN].height - pauseicon.boundingBox.size.height +20);
     
-    CCMenuItemImage *count_disp_bg = [CCMenuItemSprite itemFromNormalSprite:[CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_COINCOUNT]]
-                                                             selectedSprite:[CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_COINCOUNT]]];
-    count_disp_bg.anchorPoint = ccp(0,0);
-    count_disp_bg.position = ccp(0,[[UIScreen mainScreen] bounds].size.width - count_disp_bg.boundingBox.size.height);
+    CCMenuItem *bone_disp_icon = [self cons_menuitem_tex:[Resource get_tex:TEX_UI_BONE_ICON] pos:ccp([Common SCREEN].width*0.03,[Common SCREEN].height*0.96)];
+    CCMenuItem *lives_disp_icon = [self cons_menuitem_tex:[Resource get_tex:TEX_UI_LIVES_ICON] pos:ccp([Common SCREEN].width*0.035,[Common SCREEN].height*0.90)];
+    CCMenuItem *time_icon = [self cons_menuitem_tex:[Resource get_tex:TEX_UI_TIME_ICON] pos:ccp([Common SCREEN].width*0.03,[Common SCREEN].height*0.83)];
     
+    ccColor3B red = ccc3(255,0,0);
+    int fntsz = 15;
+    bones_disp = [self cons_label_pos:ccp([Common SCREEN].width*0.03+18,[Common SCREEN].height*0.96) color:red fontsize:fntsz];
+    [bones_disp setString:@"0"];
     
-    //CCLabelBMFont *label = [CCLabelBMFont labelWithString:@"test" fntFile:@"markerfelt32.fnt"]; TODO -- DO BITMAP FONT
-    count_disp = [CCLabelTTF labelWithString:@"0" 
-                                           fontName:@"Marker Felt" 
-                                           fontSize:25];
-    count_disp.color = ccc3(255,0,0);
+    lives_disp = [self cons_label_pos:ccp([Common SCREEN].width*0.03+18,[Common SCREEN].height*0.9) color:red fontsize:fntsz];
+    [lives_disp setString:@"x 0"];
     
+    time_disp = [self cons_label_pos:ccp([Common SCREEN].width*0.03+18,[Common SCREEN].height*0.83) color:red fontsize:fntsz];
+    [time_disp setString:@"0:00"];
     
-    CCMenuItemLabel *cd_holder = [CCMenuItemLabel itemWithLabel:count_disp
-                                         target:NULL 
-                                       selector:NULL];
-    
-    cd_holder.anchorPoint = ccp(0,0);
-    cd_holder.position = ccp(0 + 37,[[UIScreen mainScreen] bounds].size.width - count_disp.boundingBox.size.height-10);
-    
-    
-    
-    
-    ingame_ui = [CCMenu menuWithItems:ingamepause,count_disp_bg,cd_holder, nil];
+    ingame_ui = [CCMenu menuWithItems:
+                 ingamepause,
+                 bone_disp_icon,
+                 lives_disp_icon,
+                 time_icon,
+                 [self label_cons_menuitem:bones_disp leftalign:YES],
+                 [self label_cons_menuitem:lives_disp leftalign:YES],
+                 [self label_cons_menuitem:time_disp leftalign:YES],
+                 nil];
     ingame_ui.anchorPoint = ccp(0,0);
     ingame_ui.position = ccp(0,0);
     [self addChild:ingame_ui];
-    
 }
-
--(void)init_pause_menu {
+-(void)init_pause_ui {
     ccColor4B c = {0,0,0,200};
     CGSize s = [[UIScreen mainScreen] bounds].size;
-    pauselayer= [CCLayerColor layerWithColor:c width:s.height height:s.width];
-    pauselayer.anchorPoint = ccp(0,0);
-    [pauselayer retain];
+    pause_ui= [CCLayerColor layerWithColor:c width:s.height height:s.width];
+    pause_ui.anchorPoint = ccp(0,0);
     
     CCSprite *playimg = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEMENU_PLAY]];
     CCSprite *playimgzoom = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEMENU_PLAY]];
@@ -143,90 +144,127 @@
     CCMenu* pausemenu = [CCMenu menuWithItems:play,back, nil];
     pausemenu.position = ccp(0,0);
     
-    [pauselayer addChild:pausemenu];
+    [pause_ui addChild:pausemenu];
+    pause_ui.visible = NO;
+    [self addChild:pause_ui];
+}
+-(void)init_gameover_ui {
+    ccColor4B c = {0,0,0,200};
+    CGSize s = [[UIScreen mainScreen] bounds].size;
+    gameover_ui= [CCLayerColor layerWithColor:c width:s.height height:s.width];
+    gameover_ui.anchorPoint = ccp(0,0);
+    
+    CCSprite *title = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_GAMEOVER_TITLE]];
+    [title setPosition:ccp([Common SCREEN].width*0.40,[Common SCREEN].height*0.85)];
+    [gameover_ui addChild:title];
+    
+    CCSprite *logo = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_GAMEOVER_LOGO]];
+    [logo setPosition:ccp([Common SCREEN].width*0.80,[Common SCREEN].height*0.85)];
+    [gameover_ui addChild:logo];
+    
+    CCMenuItem *back_to_menu = [Common make_button_tex:[Resource get_tex:TEX_MENU_BUTTON_MENU]
+                                                seltex:[Resource get_tex:TEX_MENU_BUTTON_MENU]
+                                                zscale:1.2 
+                                              callback:[Common cons_callback:self sel:@selector(exit_to_menu)]
+                                                   pos:[Common screen_pctwid:0.25 pcthei:0.2]];
+    
+    CCMenuItem *play_again = [Common make_button_tex:[Resource get_tex:TEX_MENU_BUTTON_PLAYAGAIN]
+                                              seltex:[Resource get_tex:TEX_MENU_BUTTON_PLAYAGAIN]
+                                              zscale:1.2 
+                                            callback:[Common cons_callback:self sel:@selector(play_again)]
+                                                 pos:[Common screen_pctwid:0.75 pcthei:0.2]];
+    
+    ccColor3B white= ccc3(255, 255, 255);
+    int fntsz = 25;
+    gameover_bones_disp = [self cons_label_pos:[Common screen_pctwid:0.5 pcthei:0.6] color:white fontsize:fntsz];
+    [gameover_bones_disp setString:@"Total Bones : 0"];
+    
+    gameover_time_disp = [self cons_label_pos:[Common screen_pctwid:0.5 pcthei:0.5] color:white fontsize:fntsz];
+    [gameover_time_disp setString:@"Time : 0:00"];
+    
+    
+    CCMenu* gameover_menu = [CCMenu menuWithItems:
+                             back_to_menu,
+                             play_again,
+                             [self label_cons_menuitem:gameover_bones_disp leftalign:NO],
+                             [self label_cons_menuitem:gameover_time_disp leftalign:NO],
+                             nil];
+    [gameover_ui addChild:gameover_menu];
+    gameover_menu.position = ccp(0,0);
+    
+    [gameover_ui setVisible:NO];
+    [self addChild:gameover_ui];
+}
+-(void)init_game_end_menu {
+    //TODO -- FIXME
+    ccColor4B c = {0,0,0,200};
+    CGSize s = [[UIScreen mainScreen] bounds].size;
+    game_end_menu_layer= [CCLayerColor layerWithColor:c width:s.height height:s.width];
+    game_end_menu_layer.anchorPoint = ccp(0,0);
+    [game_end_menu_layer retain];
+    
+    CCSprite *backimg = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEMENU_RETURN]];
+    CCSprite *backimgzoom = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEMENU_RETURN]];
+    [UILayer set_zoom_pos_align:backimg zoomed:backimgzoom scale:1.4];
+    
+    CCMenuItemImage *back = [CCMenuItemImage itemFromNormalSprite:backimg 
+                                                   selectedSprite:backimgzoom
+                                                           target:self 
+                                                         selector:@selector(nextlevel)];
+    back.position = ccp(s.height/2,s.width/2);
+    
+    CCMenu* gameendmenu = [CCMenu menuWithItems:back, nil];
+    gameendmenu.position = ccp(0,0);
+    
+    [game_end_menu_layer addChild:gameendmenu];
 }
 
-+(void)set_zoom_pos_align:(CCSprite*)normal zoomed:(CCSprite*)zoomed scale:(float)scale {
-    zoomed.scale = scale;
-    zoomed.position = ccp((-[zoomed contentSize].width * zoomed.scale + [zoomed contentSize].width)/2
-                         ,(-[zoomed contentSize].height * zoomed.scale + [zoomed contentSize].height)/2);
-}
-
--(void)set_gameengine:(GameEngineLayer*)ref {
-    game_engine_layer = ref;
-}
-
--(void)start_bone_collect_anim {
-    BoneCollectUIAnimation* b = [BoneCollectUIAnimation init_start:[UILayer player_approx_position:game_engine_layer] end:ccp(0,[[UIScreen mainScreen] bounds].size.width)];
-    [self addChild:b];
-    [ingame_ui_anims addObject:b];
-}
-
--(void)dispatch_event:(GEvent *)e {
-    if (e.type == GEventType_GAME_TICK) {
-        [self update];
-    } else if (e.type == GEventType_LOAD_LEVELEND_MENU) {
-        [self load_game_end_menu];
-    } else if (e.type == GEventType_COLLECT_BONE) {
-        [self start_bone_collect_anim];
-    }
-}
-
--(void)update {
-    level_bone_status b = [game_engine_layer get_bonestatus];
-    NSString* tmp = [NSString stringWithFormat:@"%i",b.hasgets+b.savedgets];
-    if (![[count_disp string] isEqualToString:tmp]) {
-        [count_disp setString:tmp];
-    }
-    NSMutableArray *toremove = [NSMutableArray array];
-    for (UIIngameAnimation *i in ingame_ui_anims) {
-        if (i.ct <= 0) {
-            [self removeChild:i cleanup:NO];
-            [toremove addObject:i];
-        }
-    }
-    [ingame_ui_anims removeObjectsInArray:toremove];
-    [toremove removeAllObjects];
-}
-
-
-
--(void)exit_to_menu {
-    [GEventDispatcher push_event:[GEvent init_type:GEventType_QUIT]];
-    [GEventDispatcher dispatch_events];
-}
-
+/* button callbacks */
 
 -(void)pause {
     [GEventDispatcher push_event:[GEvent init_type:GEventType_PAUSE]];
     
-    if (pauselayer.parent == NULL) {
-        ingame_ui.visible = NO;
-        [[CCDirector sharedDirector] pause];
-        [[[CCDirector sharedDirector] runningScene] addChild:pauselayer];
-    }
+    ingame_ui.visible = NO;
+    pause_ui.visible = YES;
+    [[CCDirector sharedDirector] pause];
 }
-                         
 -(void)unpause {
     [GEventDispatcher push_event:[GEvent init_type:GEventType_UNPAUSE]];
     
-    if (pauselayer.parent != NULL) {        
-        ingame_ui.visible = YES;
-        [[CCDirector sharedDirector] resume];
-        [[[CCDirector sharedDirector] runningScene] removeChild:pauselayer cleanup:NO];
-    }
- }
-
--(void)dealloc {
-    [ingame_ui_anims removeAllObjects];
-    [ingame_ui_anims release];
-    [pauselayer release];
-    [game_end_menu_layer removeAllChildrenWithCleanup:YES];
-    [game_end_menu_layer release];
-    [self removeAllChildrenWithCleanup:YES];
-    [super dealloc];
+    ingame_ui.visible = YES;
+    pause_ui.visible = NO;
+    [[CCDirector sharedDirector] resume];
+}
+-(void)exit_to_menu {
+    [GEventDispatcher push_event:[GEvent init_type:GEventType_QUIT]];
+    [GEventDispatcher dispatch_events];
+}
+-(void)play_again {
+    [GEventDispatcher push_event:[GEvent init_type:GEventType_PLAYAGAIN_AUTOLEVEL]];
+}
+-(void)nextlevel {
+    //TODO -- FIXME
+    [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene_with:@"cave_test"]];
 }
 
+/* UI helpers */
+
++(void)set_zoom_pos_align:(CCSprite*)normal zoomed:(CCSprite*)zoomed scale:(float)scale {
+    zoomed.scale = scale;
+    zoomed.position = ccp((-[zoomed contentSize].width * zoomed.scale + [zoomed contentSize].width)/2
+                          ,(-[zoomed contentSize].height * zoomed.scale + [zoomed contentSize].height)/2);
+}
+-(void)set_gameengine:(GameEngineLayer*)ref {
+    game_engine_layer = ref;
+}
+-(NSString*)parse_gameengine_time:(int)t {
+    return [NSString stringWithFormat:@"%i:%i%i",t/3600,(t/600)%10,(t/60)%10];
+}
+-(void)set_label:(CCLabelTTF*)l to:(NSString*)s {
+    if (![[l string] isEqualToString:s]) {
+        [l setString:s];
+    }
+}
 +(CGPoint)player_approx_position:(GameEngineLayer*)game_engine_layer {
     CGPoint center = [game_engine_layer convertToWorldSpace:game_engine_layer.player.position];
     CGPoint scrn = ccp(-game_engine_layer.camera_state.x,-game_engine_layer.camera_state.y);
@@ -250,12 +288,48 @@
     
 }
 
+/* CCMenu shortcut methods */
 
--(void)draw {
-    [super draw];
-//    glColor4f(1.0, 0, 0, 1.0);
-//    ccDrawLine(ccp(0, 160),ccp(480,160));
-//    ccDrawLine(ccp(240, 0),ccp(240,320));
+-(CCLabelTTF*)cons_label_pos:(CGPoint)pos color:(ccColor3B)color fontsize:(int)fontsize{
+    CCLabelTTF *l = [CCLabelTTF labelWithString:@"" fontName:@"Carton Six" fontSize:fontsize];
+    [l setColor:color];
+    [l setPosition:pos];
+    return l;
 }
+-(CCMenuItemLabel*)label_cons_menuitem:(CCLabelTTF*)l leftalign:(BOOL)leftalign {
+    CCMenuItemLabel *m = [CCMenuItemLabel itemWithLabel:l];
+    if (leftalign) [m setAnchorPoint:ccp(0,m.anchorPoint.y)];
+    return m;
+}
+-(CCMenuItem*)cons_menuitem_tex:(CCTexture2D*)tex pos:(CGPoint)pos {
+    CCMenuItem* i = [CCMenuItemSprite itemFromNormalSprite:[CCSprite spriteWithTexture:tex] selectedSprite:[CCSprite spriteWithTexture:tex]];
+    [i setPosition:pos];
+    return i;
+}
+
+/* initial anim handlers */
+
+-(void)start_initial_anim {
+    game_engine_layer.current_mode = GameEngineLayerMode_UIANIM;
+    ingame_ui.visible = NO;
+    curanim = [GameStartAnim init_with_callback:[Common cons_callback:self sel:@selector(end_initial_anim)]];
+    [self addChild:curanim];
+}
+-(void)end_initial_anim {
+    game_engine_layer.current_mode = GameEngineLayerMode_GAMEPLAY;
+    ingame_ui.visible = YES;
+    [self removeChild:curanim cleanup:YES];
+}
+
+-(void)dealloc {
+    [ingame_ui_anims removeAllObjects];
+    [ingame_ui_anims release];
+    [game_end_menu_layer removeAllChildrenWithCleanup:YES];
+    [pause_ui removeAllChildrenWithCleanup:YES];
+    [gameover_ui removeAllChildrenWithCleanup:YES];
+    [self removeAllChildrenWithCleanup:YES];
+    [super dealloc];
+}
+
 
 @end

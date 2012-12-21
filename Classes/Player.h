@@ -34,6 +34,8 @@
     id current_anim;
     id _RUN_ANIM_SLOW,_RUN_ANIM_MED,_RUN_ANIM_FAST,_RUN_ANIM_NONE;
     id _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM,_SPLASH_ANIM, _DASH_ANIM;
+    
+    GameEngineLayer* game_engine_layer;
 }
 
 typedef enum {

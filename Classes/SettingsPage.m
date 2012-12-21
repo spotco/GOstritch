@@ -4,9 +4,11 @@
 
 -(void)cons_starting_at:(CGPoint)tstart {
     [super cons_starting_at:tstart];
-    CCSprite *logo = [CCSprite spriteWithTexture:[Resource get_tex:TEX_MENU_SETTINGS_TITLE]];
-    [logo setPosition:ccp([Common SCREEN].width/2,[Common SCREEN].height*0.85)];
-    [self addChild:logo];
+    
+    [self addChild:[Common cons_label_pos:[Common screen_pctwid:0.5 pcthei:0.85] 
+                                    color:ccc3(0, 0, 0) 
+                                 fontsize:50 
+                                      str:@"Settings"]];
 }
 
 @end

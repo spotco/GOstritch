@@ -9,11 +9,13 @@
 @interface UILayer : CCLayer <GEventListener> {
     GameEngineLayer* game_engine_layer;
     
-    CCLabelTTF *count_disp;
-    CCMenu *ingame_ui;
+    CCNode *ingame_ui,*pause_ui,*gameover_ui;
+    CCLabelTTF *lives_disp, *bones_disp, *time_disp;
     
-    CCLayer *pauselayer;
-    CCLayer *game_end_menu_layer;
+    CCLabelTTF *gameover_bones_disp, *gameover_time_disp;
+    
+    
+    CCLayer *game_end_menu_layer; //todo, change to ui too
     
     UIAnim *curanim;
     NSMutableArray* ingame_ui_anims;

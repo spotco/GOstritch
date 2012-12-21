@@ -50,5 +50,9 @@
 	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 	</array>
+    <key>UIAppFonts</key>
+    <array>
+        <string>Carton_Six.ttf</string>
+    </array>
 </dict>
 </plist>

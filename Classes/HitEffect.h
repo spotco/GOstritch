@@ -1,4 +1,6 @@
 #import "PlayerEffectParams.h"
+#import "GEventDispatcher.h"
+
 @class FlashEffect;
 
 @interface HitEffect : PlayerEffectParams

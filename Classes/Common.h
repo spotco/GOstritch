@@ -35,6 +35,7 @@ typedef struct CameraZoom {
 } CameraZoom;
 
 +(CGSize)SCREEN;
++(CGPoint)screen_pctwid:(float)pctwid pcthei:(float)pcthei;
 
 +(void)run_callback:(callback)c;
 +(callback)cons_callback:(NSObject*)tar sel:(SEL)sel;
@@ -66,5 +67,8 @@ typedef struct CameraZoom {
 +(CGRect)ssrect_from_dict:(NSDictionary*)dict tar:(NSString*)tar;
 +(id)make_anim_frames:(NSMutableArray*)animFrames speed:(float)speed;
 +(CGFloat) distanceBetween: (CGPoint)point1 and: (CGPoint)point2;
+
++(CCMenuItem*)make_button_tex:(CCTexture2D*)tex seltex:(CCTexture2D*)seltex zscale:(float)zscale callback:(callback)cb pos:(CGPoint)pos;
++(CCLabelTTF*)cons_label_pos:(CGPoint)pos color:(ccColor3B)color fontsize:(int)fontsize str:(NSString*)str;
 
 @end

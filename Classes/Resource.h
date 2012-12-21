@@ -70,6 +70,10 @@
 #define TEX_GREY_PARTICLE @"GreyParticle"
 
 #define TEX_UI_COINCOUNT @"UICoinCount"
+#define TEX_UI_BONE_ICON @"UIBoneIcon"
+#define TEX_UI_LIVES_ICON @"UILivesIcon"
+#define TEX_UI_TIME_ICON @"UITimeIcon"
+
 #define TEX_UI_PAUSEICON @"UIPauseIcon"
 #define TEX_UI_PAUSEMENU_RETURN @"PauseMenuReturn"
 #define TEX_UI_PAUSEMENU_PLAY @"PauseMenuPlay"

@@ -78,6 +78,11 @@ static NSMutableDictionary* textures = nil;
 
                      
                         @"coincount.png", TEX_UI_COINCOUNT,
+                        @"ingame_ui_bone_icon.png",TEX_UI_BONE_ICON,
+                        @"ingame_ui_lives_icon.png",TEX_UI_LIVES_ICON,
+                        @"ingame_ui_time_icon.png",TEX_UI_TIME_ICON,
+                     
+                     
                         @"pauseicon.png", TEX_UI_PAUSEICON,
                         @"pause_menu_back.png", TEX_UI_PAUSEMENU_BACK,
                         @"pause_menu_play.png", TEX_UI_PAUSEMENU_PLAY,

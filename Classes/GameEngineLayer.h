@@ -1,4 +1,5 @@
 #import "cocos2d.h"
+#import "DataStore.h"
 #import "Island.h"
 #import "Player.h"
 #import "Common.h"
@@ -18,7 +19,8 @@
 typedef enum {
     GameEngineLayerMode_GAMEPLAY,
     GameEngineLayerMode_PAUSED,
-    GameEngineLayerMode_UIANIM
+    GameEngineLayerMode_UIANIM,
+    GameEngineLayerMode_GAMEOVER
 } GameEngineLayerMode;
 
 typedef struct level_bone_status {
@@ -36,6 +38,9 @@ typedef struct level_bone_status {
     NSMutableArray *particles;
     CameraZoom camera_state;
     CameraZoom tar_camera_state;
+    
+    int lives;
+    int time;
     
     NSMutableDictionary *bones;
 	Player *player;
@@ -59,7 +64,6 @@ typedef struct level_bone_status {
 
 +(CCScene *) scene_with:(NSString *)map_file_name;
 +(CCScene*) scene_with_autolevel;
--(void)player_reset;
 -(void)add_particle:(Particle*)p;
 -(HitRect)get_viewbox;
 
@@ -69,6 +73,9 @@ typedef struct level_bone_status {
 -(void)add_bone:(DogBone*)c autoassign:(BOOL)aa;
 -(void)set_bid_tohasget:(int)tbid;
 -(level_bone_status)get_bonestatus;
+
+-(int)get_lives;
+-(int)get_time;
 
 -(void)setColor:(ccColor3B)color;
 

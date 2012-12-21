@@ -56,10 +56,7 @@
     [player reset_params];
     [self setActive:NO];
     [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
-    [DazedParticle init_effect:g x:player.position.x y:player.position.y+60*player.last_ndir time:40];
-    
-    //player.dead = YES;
-    
+    [DazedParticle init_effect:g x:player.position.x y:player.position.y+60*(player.current_island != NULL?player.last_ndir:1) time:40];
 }
 
 -(CCTexture2D*)get_base_tex {
