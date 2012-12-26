@@ -143,6 +143,7 @@ static float avg_y;
 +(void)player_double_jump:(Player*)player {    
     player.vx += player.up_vec.x*JUMP_POWER;
     player.vy = player.up_vec.y*JUMP_POWER;
+    player.current_swingvine = NULL;
 }
 
 +(void)reset_control_state {
@@ -185,6 +186,7 @@ static float avg_y;
     player.vx = combined.x;
     player.vy = combined.y;
     player.current_island = NULL;
+    player.current_swingvine = NULL;
     
     [calc_up dealloc];
     [up dealloc];

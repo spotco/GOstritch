@@ -1,25 +1,47 @@
 #import "SwingVine.h"
 
-#define VINE_TIGHT_LENGTH 220.0
+@interface VineBody : CCSprite {
+    
+}
++(VineBody*)cons_tex:(CCTexture2D*)tex len:(float)len;
+@end
+
+@implementation VineBody
++(VineBody*)cons_tex:(CCTexture2D *)tex len:(float)len {
+    ccTexParams par = {GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
+    [tex setTexParameters:&par];
+    VineBody* v = [VineBody spriteWithTexture:tex];
+    [v init_len:len];
+    return v;
+}
+
+-(void)init_len:(float)len {
+    [self setTextureRect:CGRectMake(0, 0, [self.texture contentSizeInPixels].width, len)];
+}
+@end
+
 
 @implementation SwingVine
 
-+(SwingVine*)init_x:(float)x y:(float)y {
++(SwingVine*)init_x:(float)x y:(float)y len:(float)len{
     SwingVine *s = [SwingVine node];
     [s setPosition:ccp(x,y)];
-    [s cons];
+    [s cons_len:len];
     return s;
 }
 
--(void)cons {
-    vine = [CCSprite spriteWithTexture:[Resource get_aa_tex:TEX_SWINGVINE_TIGHT]];
+-(void)cons_len:(float)len {
+    length = len;
+    vine = [VineBody cons_tex:[Resource get_tex:TEX_SWINGVINE_TEX] len:len];
     [self addChild:vine];
-    loosevine = [CCSprite spriteWithTexture:[Resource get_aa_tex:TEX_SWINGVINE_LOOSE]];
-    [self addChild:loosevine];
-    
     [self addChild:[CCSprite spriteWithTexture:[Resource get_tex:TEX_SWINGVINE_BASE]]];
     [vine setAnchorPoint:ccp(vine.anchorPoint.x,1)];
-    [loosevine setAnchorPoint:ccp(loosevine.anchorPoint.x,1)];
+    
+    headcov = [CCSprite spriteWithTexture:[Resource get_tex:[Player get_character]] 
+                           rect:[FileCache get_cgrect_from_plist:[Player get_character] idname:@"swing_head"]];
+    [headcov setAnchorPoint:ccp(0.5-0.05,0+0.05)];
+    [headcov setVisible:NO];
+    [self addChild:headcov];
     
 }
 
@@ -29,25 +51,20 @@
 
 -(void)update:(Player *)player g:(GameEngineLayer *)g {
     //fix satpoly hitbox for moving position, see spikevine update
+    
     if (vine.rotation > 0) {
         vr -= 0.1;
     } else {
         vr += 0.1;
     }
     [vine setRotation:vine.rotation+vr];
-    [loosevine setRotation:vine.rotation];
-    
-    
-    [vine setVisible:player.current_swingvine == self];
-    [loosevine setVisible:player.current_swingvine != self];
     
     if (disable_timer >0) {
         disable_timer--;
         [vine setOpacity:150];
-        [loosevine setOpacity:150];
+        [headcov setVisible:NO];
         return;
     } else {
-        [loosevine setOpacity:255];
         [vine setOpacity:255];
     }
     
@@ -56,6 +73,8 @@
         line_seg selfseg = [self get_hit_line_seg];
         CGPoint ins = [Common line_seg_intersection_a:playerseg b:selfseg];
         if (ins.x != [Island NO_VALUE] && ins.y != [Island NO_VALUE]) {
+            ins_offset = ccp(ins.x-player.position.x,ins.y-player.position.y);
+            
             ins.x -= position_.x;
             ins.y -= position_.y;
             
@@ -65,13 +84,13 @@
             player.vy = 0;
             [player remove_temp_params:g];
             
-            vr = -4; //~90deg
+            vr = -3.5; //~90deg
         }
     }
     
     if (player.current_swingvine == self) {        
-        if (cur_dist < VINE_TIGHT_LENGTH) {
-            cur_dist += (VINE_TIGHT_LENGTH-cur_dist)/20.0;
+        if (cur_dist < length) {
+            cur_dist += (length-cur_dist)/20.0;
         }
 
         if (ABS(vine.rotation) > 90) {
@@ -82,8 +101,14 @@
         CGPoint tip = [self get_tip_relative_pos];
         Vec3D *dirvec = [Vec3D init_x:tip.x y:tip.y z:0];
         [dirvec normalize];
+        Vec3D *offset_v = [dirvec crossWith:[Vec3D Z_VEC]];
         [dirvec scale:cur_dist];
-        [player setPosition:ccp(position_.x+dirvec.x,position_.y+dirvec.y)];
+        [offset_v normalize];
+        [offset_v scale:15];
+        
+        [player setPosition:ccp(position_.x+dirvec.x+offset_v.x-ins_offset.x,position_.y+dirvec.y+offset_v.y-ins_offset.y)];
+        ins_offset.x *= 0.9;
+        ins_offset.y *= 0.9;
         
         [dirvec scale:-1];
         [dirvec normalize];
@@ -93,12 +118,22 @@
         Vec3D *tangent_vec = [dirvec crossWith:[Vec3D Z_VEC]];
         float tar_rad = -[tangent_vec get_angle_in_rad];
         float tar_deg = [Common rad_to_deg:tar_rad];
-        [player setRotation:tar_deg];
         
+        if (player.current_anim == player._SWING_ANIM) {
+            [player setRotation:tar_deg];
+            [headcov setVisible:YES];
+            [headcov setPosition:ccp(player.position.x-position_.x,player.position.y-position_.y)];
+            [headcov setRotation:player.rotation];
+        } else {
+            [headcov setVisible:NO];
+        }
+        
+        [offset_v dealloc];
         [dirvec dealloc];
         [tangent_vec dealloc];
         
     } else {
+        [headcov setVisible:NO];
         vr *= 0.95;
     }
     
@@ -130,7 +165,7 @@
 -(CGPoint)get_tip_relative_pos {
     float calc_a = vine.rotation - 90;
     float calc_rad = [Common deg_to_rad:calc_a];
-    return ccp(-VINE_TIGHT_LENGTH*cosf(calc_rad),VINE_TIGHT_LENGTH*sinf(calc_rad));
+    return ccp(-length*cosf(calc_rad),length*sinf(calc_rad));
 }
 
 -(line_seg)get_hit_line_seg {
@@ -140,10 +175,11 @@
 
 -(int)get_render_ord {
     return [GameRenderImplementation GET_RENDER_FG_ISLAND_ORD];
+    //return [GameRenderImplementation GET_RENDER_BTWN_PLAYER_ISLAND];
 }
 
 -(HitRect)get_hit_rect {
-    return [Common hitrect_cons_x1:position_.x-VINE_TIGHT_LENGTH y1:position_.y-VINE_TIGHT_LENGTH wid:VINE_TIGHT_LENGTH*2 hei:VINE_TIGHT_LENGTH*2];
+    return [Common hitrect_cons_x1:position_.x-length y1:position_.y-length wid:length*2 hei:length*2];
 }
 
 -(void)reset {
@@ -153,22 +189,15 @@
 }
 
 -(CGPoint)get_tangent_vel {
-    //    CGPoint tip_rel = [self get_tip_relative_pos];
-    //    Vec3D *n = [Vec3D init_x:tip_rel.x y:tip_rel.y z:0];
-    //    Vec3D *tangent_vel;
-    //    if (vr > 0) {
-    //        tangent_vel = [n crossWith:[Vec3D Z_VEC]];
-    //    } else {
-    //        tangent_vel = [[Vec3D Z_VEC] crossWith:n];
-    //    }
-    //    [n dealloc];
-    //    [tangent_vel normalize];
-    //    [tangent_vel scale:cur_dist/10];
-    //    CGPoint t_vel = ccp(tangent_vel.x,tangent_vel.y);
-    //    [tangent_vel dealloc];
-    //    t_vel.x = MAX(t_vel.x,0);
-    CGPoint t_vel = ccp(7,7);
+    CGPoint t_vel = ccp(10,10);
     return t_vel;
+}
+
+-(void)draw {
+    [super draw];
+    /*glColor4ub(0,255,0,100);
+    ccDrawLine(ccp(0,0), [self get_tip_relative_pos]);
+     */
 }
 
 -(void)dealloc {

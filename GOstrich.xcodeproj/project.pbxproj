@@ -91,6 +91,7 @@
 		7E5EB93215B2C3BB000877A7 /* DogRocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5EB93115B2C3BB000877A7 /* DogRocket.m */; };
 		7E5EB93515B2C809000877A7 /* DogCapeEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5EB93415B2C809000877A7 /* DogCapeEffect.m */; };
 		7E5EB93815B2CF48000877A7 /* DogRocketEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5EB93715B2CF48000877A7 /* DogRocketEffect.m */; };
+		7E60D100168A8AA600E84683 /* swingvine_tex_loose.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E60D0FF168A8AA600E84683 /* swingvine_tex_loose.png */; };
 		7E6A873715C246B90022291A /* FlashEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6A873615C246B90022291A /* FlashEffect.m */; };
 		7E786DFD15E4BAF6000E1946 /* UIIngameAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E786DFC15E4BAF6000E1946 /* UIIngameAnimation.m */; };
 		7E786E0015E4BB61000E1946 /* BoneCollectUIAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E786DFF15E4BB61000E1946 /* BoneCollectUIAnimation.m */; };
@@ -159,8 +160,6 @@
 		7ED863E015B806C3005FBDBB /* checkpoint2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863CF15B806C3005FBDBB /* checkpoint2.png */; };
 		7ED863EA15B81A4A005FBDBB /* BG1_island_top_edge.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863E915B81A4A005FBDBB /* BG1_island_top_edge.png */; };
 		7EDA83C71612DBD70083E9CE /* swingvine_base.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDA83C41612DBD70083E9CE /* swingvine_base.png */; };
-		7EDA83C81612DBD70083E9CE /* swingvine_loose.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDA83C51612DBD70083E9CE /* swingvine_loose.png */; };
-		7EDA83C91612DBD70083E9CE /* swingvine_tight.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDA83C61612DBD70083E9CE /* swingvine_tight.png */; };
 		7EDA83CC1612DC850083E9CE /* swingvine_test.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EDA83CB1612DC850083E9CE /* swingvine_test.map */; };
 		7EDA83CF1612DDAE0083E9CE /* SwingVine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDA83CE1612DDAE0083E9CE /* SwingVine.m */; };
 		7EDA90C615BCB5470004CED7 /* CheckPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDA90C515BCB5470004CED7 /* CheckPoint.m */; };
@@ -548,6 +547,7 @@
 		7E5EB93415B2C809000877A7 /* DogCapeEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DogCapeEffect.m; sourceTree = "<group>"; };
 		7E5EB93615B2CF48000877A7 /* DogRocketEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DogRocketEffect.h; sourceTree = "<group>"; };
 		7E5EB93715B2CF48000877A7 /* DogRocketEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DogRocketEffect.m; sourceTree = "<group>"; };
+		7E60D0FF168A8AA600E84683 /* swingvine_tex_loose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swingvine_tex_loose.png; sourceTree = "<group>"; };
 		7E6A873515C246B90022291A /* FlashEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashEffect.h; sourceTree = "<group>"; };
 		7E6A873615C246B90022291A /* FlashEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashEffect.m; sourceTree = "<group>"; };
 		7E786DFB15E4BAF6000E1946 /* UIIngameAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIIngameAnimation.h; sourceTree = "<group>"; };
@@ -642,8 +642,6 @@
 		7ED863CF15B806C3005FBDBB /* checkpoint2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkpoint2.png; sourceTree = "<group>"; };
 		7ED863E915B81A4A005FBDBB /* BG1_island_top_edge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_island_top_edge.png; path = Resources/bg/BG1/BG1_island_top_edge.png; sourceTree = SOURCE_ROOT; };
 		7EDA83C41612DBD70083E9CE /* swingvine_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swingvine_base.png; sourceTree = "<group>"; };
-		7EDA83C51612DBD70083E9CE /* swingvine_loose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swingvine_loose.png; sourceTree = "<group>"; };
-		7EDA83C61612DBD70083E9CE /* swingvine_tight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swingvine_tight.png; sourceTree = "<group>"; };
 		7EDA83CB1612DC850083E9CE /* swingvine_test.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = swingvine_test.map; sourceTree = "<group>"; };
 		7EDA83CD1612DDAE0083E9CE /* SwingVine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwingVine.h; sourceTree = "<group>"; };
 		7EDA83CE1612DDAE0083E9CE /* SwingVine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwingVine.m; sourceTree = "<group>"; };
@@ -1551,9 +1549,8 @@
 		7EDA83C31612DBD70083E9CE /* swingvine */ = {
 			isa = PBXGroup;
 			children = (
+				7E60D0FF168A8AA600E84683 /* swingvine_tex_loose.png */,
 				7EDA83C41612DBD70083E9CE /* swingvine_base.png */,
-				7EDA83C51612DBD70083E9CE /* swingvine_loose.png */,
-				7EDA83C61612DBD70083E9CE /* swingvine_tight.png */,
 			);
 			path = swingvine;
 			sourceTree = "<group>";
@@ -2325,8 +2322,6 @@
 				7E22752015EB6ADB009ED6DC /* BG1_bridge_edge.png in Resources */,
 				7E22752115EB6ADB009ED6DC /* BG1_bridge_section.png in Resources */,
 				7EDA83C71612DBD70083E9CE /* swingvine_base.png in Resources */,
-				7EDA83C81612DBD70083E9CE /* swingvine_loose.png in Resources */,
-				7EDA83C91612DBD70083E9CE /* swingvine_tight.png in Resources */,
 				7EDA83CC1612DC850083E9CE /* swingvine_test.map in Resources */,
 				7EE2AEFF161448F60035BA50 /* bridge_test.map in Resources */,
 				7E7C5ADB16598C14007C8EB8 /* autolevel_1_1.map in Resources */,
@@ -2373,6 +2368,7 @@
 				7EE3488916842D6500A35C21 /* ingame_ui_bone_icon.png in Resources */,
 				7EE3488A16842D6500A35C21 /* ingame_ui_lives_icon.png in Resources */,
 				7EE3488B16842D6500A35C21 /* ingame_ui_time_icon.png in Resources */,
+				7E60D100168A8AA600E84683 /* swingvine_tex_loose.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

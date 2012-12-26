@@ -6,8 +6,6 @@
 
 @implementation GameEngineLayer
 
-#define STARTING_LIVES 0
-
 @synthesize current_mode;
 @synthesize game_objects,islands;
 @synthesize player;
@@ -16,9 +14,9 @@
 
 /* static initializers */
 
-+(CCScene *) scene_with:(NSString *) map_file_name {
++(CCScene *) scene_with:(NSString *)map_file_name lives:(int)lives {
     CCScene *scene = [CCScene node];
-    GameEngineLayer *glayer = [GameEngineLayer init_from_file:map_file_name];
+    GameEngineLayer *glayer = [GameEngineLayer layer_from_file:map_file_name lives:lives];
 	BGLayer *bglayer = [BGLayer init_with_gamelayer:glayer];
     UILayer* uilayer = [UILayer init_with_gamelayer:glayer];
     
@@ -29,8 +27,8 @@
     [uilayer start_initial_anim];
 	return scene;
 }
-+(CCScene*) scene_with_autolevel {
-    CCScene* scene = [GameEngineLayer scene_with:@"connector"];
++(CCScene*) scene_with_autolevel_lives:(int)lives {
+    CCScene* scene = [GameEngineLayer scene_with:@"connector" lives:lives];
     GameEngineLayer* glayer = [scene.children objectAtIndex:1];
     GameObject* nobj = [AutoLevel init_with_glayer:glayer];
     [glayer.game_objects addObject:nobj];
@@ -42,13 +40,13 @@
 	return scene;
 }
 
-+(GameEngineLayer*)init_from_file:(NSString*)file {
++(GameEngineLayer*)layer_from_file:(NSString*)file lives:(int)lives {
     GameEngineLayer *g = [GameEngineLayer node];
-    [g cons:file];
+    [g cons:file lives:lives];
     return g;
 }
 
--(void)cons:(NSString*)map_filename {
+-(void)cons:(NSString*)map_filename lives:(int)starting_lives {
     if (particles_tba == NULL) {
         particles_tba = [[NSMutableArray alloc] init];
     }
@@ -67,7 +65,7 @@
     
     [self reset_camera];
     
-    lives = STARTING_LIVES;
+    lives = starting_lives;
     
     follow_action = [CCFollow actionWithTarget:player worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]];
     [self runAction:follow_action];
@@ -125,7 +123,7 @@
 
 -(void)check_falloff {
     if (![Common hitrect_touch:[self get_world_bounds] b:[player get_hit_rect]]) {
-        [self player_reset];
+        [GEventDispatcher push_unique_event:[GEvent init_type:GEventType_PLAYER_DIE]];
 	}
 }
 
@@ -174,8 +172,8 @@
         current_mode = GameEngineLayerMode_GAMEPLAY;
         
     } else if (e.type == GEventType_PLAYER_DIE) {
-        lives--;
-        if (lives < 0) {
+        lives = lives == GAMEENGINE_INF_LIVES ? lives : lives-1;
+        if (lives != GAMEENGINE_INF_LIVES && lives < 0) {
             [self game_over];
         } else {
             [self player_reset];

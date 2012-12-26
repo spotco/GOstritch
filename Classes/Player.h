@@ -31,10 +31,6 @@
     
     int particlectr;
     
-    id current_anim;
-    id _RUN_ANIM_SLOW,_RUN_ANIM_MED,_RUN_ANIM_FAST,_RUN_ANIM_NONE;
-    id _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM,_SPLASH_ANIM, _DASH_ANIM;
-    
     GameEngineLayer* game_engine_layer;
 }
 
@@ -53,10 +49,10 @@ typedef enum {
 +(Player*)init_at:(CGPoint)pt;
 -(void)init_anim;
 -(void)add_effect:(PlayerEffectParams*)effect;
--(void) reset;
--(void) reset_params;
--(void) remove_temp_params:(GameEngineLayer*)g;
--(void) update:(GameEngineLayer*)g;
+-(void)reset;
+-(void)reset_params;
+-(void)remove_temp_params:(GameEngineLayer*)g;
+-(void)update:(GameEngineLayer*)g;
 
 -(void)cleanup_anims;
 
@@ -72,5 +68,9 @@ typedef enum {
 @property(readwrite,assign) CGPoint start_pt;
 @property(readwrite,assign) BOOL floating,dashing,dead;
 @property(readwrite,assign) SwingVine* current_swingvine;
+
+@property(readwrite,assign) id current_anim;
+@property(readwrite,assign) id _RUN_ANIM_SLOW,_RUN_ANIM_MED,_RUN_ANIM_FAST,_RUN_ANIM_NONE;
+@property(readwrite,assign) id _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM,_SPLASH_ANIM, _DASH_ANIM, _SWING_ANIM;
 
 @end

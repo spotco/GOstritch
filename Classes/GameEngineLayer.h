@@ -16,6 +16,8 @@
 #import "AutoLevel.h"
 #import "World1ParticleGenerator.h"
 
+#define GAMEENGINE_INF_LIVES -99
+
 typedef enum {
     GameEngineLayerMode_GAMEPLAY,
     GameEngineLayerMode_PAUSED,
@@ -62,8 +64,8 @@ typedef struct level_bone_status {
 @property(readwrite,assign) CameraZoom camera_state,tar_camera_state;
 @property(readwrite,assign) CCFollow *follow_action; 
 
-+(CCScene *) scene_with:(NSString *)map_file_name;
-+(CCScene*) scene_with_autolevel;
++(CCScene *) scene_with:(NSString *)map_file_name lives:(int)lives;
++(CCScene*) scene_with_autolevel_lives:(int)lives;
 -(void)add_particle:(Particle*)p;
 -(HitRect)get_viewbox;
 

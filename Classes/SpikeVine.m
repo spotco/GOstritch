@@ -158,8 +158,8 @@
 
 -(void)draw {
     [super draw];
-//    glColor4ub(0,255,0,100);
-//    ccDrawLine(ccp(0,0), ccp(dir_vec.x,dir_vec.y));
+    //glColor4ub(0,255,0,100);
+    //ccDrawLine(ccp(0,0), ccp(dir_vec.x,dir_vec.y));
     [self draw_o];
 }
 

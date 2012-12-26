@@ -2,15 +2,20 @@
 
 @interface SwingVine : GameObject {
     CCSprite* vine;
-    CCSprite* loosevine;
+    CCSprite* headcov;
+    
+    CGPoint ins_offset;
+    
     float vr;
+    
+    float length;
     
     float cur_dist;
     
     int disable_timer;
 }
 
-+(SwingVine*)init_x:(float)x y:(float)y;
++(SwingVine*)init_x:(float)x y:(float)y len:(float)len;
 -(void)temp_disable;
 -(CGPoint)get_tangent_vel;
 

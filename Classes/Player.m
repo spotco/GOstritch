@@ -29,6 +29,10 @@
 @synthesize floating,dashing,dead;
 @synthesize current_swingvine;
 
+@synthesize current_anim;
+@synthesize _RUN_ANIM_SLOW,_RUN_ANIM_MED,_RUN_ANIM_FAST,_RUN_ANIM_NONE;
+@synthesize _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM,_SPLASH_ANIM, _DASH_ANIM, _SWING_ANIM;
+
 /* static set player character */
 
 static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
@@ -70,6 +74,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
     _HIT_ANIM = [self init_hit_anim_speed];
     _SPLASH_ANIM = [self init_splash_anim_speed:0.1];
     _DASH_ANIM = [self init_rolldash_anim:0.05];
+    _SWING_ANIM = [self init_swing_anim];
     
     [self start_anim:_RUN_ANIM_NONE];
 }
@@ -86,18 +91,20 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
 
 -(void) update:(GameEngineLayer*)g {
     game_engine_layer = g;
+    
     float vel = sqrtf(powf(vx,2)+powf(vy,2));
     
-    if (current_island == NULL) {
+    if (current_island == NULL && current_swingvine == NULL) {
         Vec3D *dv = [Vec3D init_x:vx y:vy z:0];
         [dv normalize];
         
         float rot = -[Common rad_to_deg:[dv get_angle_in_rad]];
         float sig = [Common sig:rot];
         rot = sig*sqrtf(ABS(rot));
-        rotation_ = rot;
+        [self setRotation:rot];
+       
         [dv dealloc];
-    } else {
+    } else if (current_island != NULL) {
         if (vel > TRAIL_MIN) {
             float ch = (vel-TRAIL_MIN)/(TRAIL_MAX - TRAIL_MIN)*100;
             if (arc4random_uniform(100) < ch) {
@@ -132,7 +139,17 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
     
     dashing = cur_anim_mode == player_anim_mode_DASH;
     
-    if (cur_anim_mode == player_anim_mode_RUN) {
+    if (current_swingvine != NULL) {
+        //smoothing anim for swingvine attach, see swingvine update (does not force rotation until curanim is _SWING_ANIM
+        if (![Common fuzzyeq_a:rotation_ b:-90 delta:1]) { 
+            float dir = [Common shortest_dist_from_cur:rotation_ to:-90]*0.3;
+            self.rotation += dir;
+        } else {
+            [self start_anim:_SWING_ANIM];
+        }
+        
+        
+    } else if (cur_anim_mode == player_anim_mode_RUN) {
         if (current_island == NULL) {
             if (floating) {
                 [self start_anim:_RUN_ANIM_FAST];
@@ -312,6 +329,14 @@ HitRect cached_rect;
 
 /* animation cfgs */
 
+-(id)init_swing_anim {
+    float speed = 50;
+    CCTexture2D *texture = [self get_ss];
+    NSMutableArray *animFrames = [NSMutableArray array];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"swing_0"]]];
+    return [[Common make_anim_frames:animFrames speed:speed] retain];
+
+}
 -(id)init_hit_anim_speed {
     float speed = 0.06;
     CCTexture2D *texture = [self get_ss];
@@ -434,6 +459,7 @@ HitRect cached_rect;
     [_HIT_ANIM dealloc];
     [_SPLASH_ANIM dealloc];
     [_DASH_ANIM dealloc];
+    [_SWING_ANIM dealloc];
     
     [self removeAllChildrenWithCleanup:YES];
 }

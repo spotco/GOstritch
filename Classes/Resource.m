@@ -45,9 +45,9 @@ static NSMutableDictionary* textures = nil;
                         @"startbanner_banner.png",TEX_STARTBANNER_BANNER,
                         @"spike_vine_bottom.png", TEX_SPIKE_VINE_BOTTOM,
                         @"spike_vine_section.png", TEX_SPIKE_VINE_SECTION,
+                     
                         @"swingvine_base.png", TEX_SWINGVINE_BASE,
-                        @"swingvine_loose.png", TEX_SWINGVINE_LOOSE,
-                        @"swingvine_tight.png", TEX_SWINGVINE_TIGHT,
+                        @"swingvine_tex_loose.png", TEX_SWINGVINE_TEX,
                                       
                         @"BG1_detail_1.png", TEX_GROUND_DETAIL_1,
                         @"BG1_detail_2.png", TEX_GROUND_DETAIL_2,

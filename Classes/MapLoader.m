@@ -230,7 +230,10 @@ static NSMutableDictionary* cached_json;
         } else if ([type isEqualToString:@"swingvine"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
-            [map.game_objects addObject:[SwingVine init_x:x y:y]];
+            float x2 = ((NSString*)[j_object  objectForKey:@"x2"]).floatValue;
+            float y2 = ((NSString*)[j_object  objectForKey:@"y2"]).floatValue;
+            float len = sqrtf(powf(x2-x, 2)+powf(y2-y, 2));
+            [map.game_objects addObject:[SwingVine init_x:x y:y len:len]];
             
         } else {
             NSLog(@"item read error");

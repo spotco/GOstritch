@@ -25,7 +25,7 @@
 -(void)effect_end:(Player*)p g:(GameEngineLayer*)g {
     [super effect_end:p g:g];
     p.dead = NO;
-    [GEventDispatcher push_event:[GEvent init_type:GEventType_PLAYER_DIE]];
+    [GEventDispatcher push_unique_event:[GEvent init_type:GEventType_PLAYER_DIE]];
 }
 
 -(void)effect_begin:(Player *)p {

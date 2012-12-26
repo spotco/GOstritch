@@ -52,8 +52,7 @@
 #define TEX_SPIKE_VINE_SECTION @"SpikeVineSection"
 
 #define TEX_SWINGVINE_BASE @"SwingVineBase"
-#define TEX_SWINGVINE_TIGHT @"SwingVineTight"
-#define TEX_SWINGVINE_LOOSE @"SwingVineLoose"
+#define TEX_SWINGVINE_TEX @"SwingVineTex"
 
 #define TEX_CHECKPOINT_1 @"CheckPointPre"
 #define TEX_CHECKPOINT_2 @"CheckPointPost"

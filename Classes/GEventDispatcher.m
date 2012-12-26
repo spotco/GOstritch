@@ -15,23 +15,30 @@ static NSMutableArray* event_queue;
 }
 
 +(void)add_listener:(id<GEventListener>)tar {
-    [GEventDispatcher lazy_alloc];
     [listeners addObject:tar];
 }
 
 +(void)remove_all_listeners {
-    [GEventDispatcher lazy_alloc];
     [listeners removeAllObjects];
 }
 
 +(void)remove_listener:(id<GEventListener>)tar {
-    [GEventDispatcher lazy_alloc];
     [listeners removeObject:tar];
 }
 
 +(void)push_event:(GEvent*)e {
-    [GEventDispatcher lazy_alloc];
     [event_queue addObject:e];
+}
+
++(void)push_unique_event:(GEvent*)e {
+    for (GEvent* i in event_queue) {
+        if (e.type == i.type) {
+            NSLog(@"ununq in push_unique_event encountered");
+            [e release];
+            return;
+        }
+    }
+    [GEventDispatcher push_event:e];
 }
 
 +(void)dispatch_events {
