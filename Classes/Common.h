@@ -4,7 +4,22 @@
 
 #define float_random(smallNumber, bigNumber) ((((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * (bigNumber - smallNumber)) + smallNumber)
 
-@interface Common : NSObject 
+@class PlayerEffectParams;
+@class Island;
+@class SwingVine;
+@protocol PhysicsObject <NSObject>
+    @property(readwrite,assign) float vx,vy,scaleX,scaleY,rotation;
+    @property(readwrite,assign) int last_ndir, movedir;
+    @property(readwrite,assign) Island* current_island;
+    @property(readwrite,assign) Vec3D* up_vec;
+    @property(readwrite,assign) BOOL floating;
+    @property(readwrite,assign) CGPoint position;
+    @property(readwrite,assign) SwingVine* current_swingvine;
+    -(PlayerEffectParams*)get_current_params;
+@end
+
+
+@interface Common : NSObject
 
 typedef struct HitRect {
     float x1,y1,x2,y2;
@@ -39,7 +54,7 @@ typedef struct CameraZoom {
 
 +(void)run_callback:(callback)c;
 +(callback)cons_callback:(NSObject*)tar sel:(SEL)sel;
-
++(void)print_hitrect:(HitRect)l msg:(NSString*)msg;
 +(CGPoint)line_seg_intersection_a1:(CGPoint)a1 a2:(CGPoint)a2 b1:(CGPoint)b1 b2:(CGPoint)b2;
 +(CGPoint)line_seg_intersection_a:(line_seg)a b:(line_seg)b;
 +(line_seg)cons_line_seg_a:(CGPoint)a b:(CGPoint)b;

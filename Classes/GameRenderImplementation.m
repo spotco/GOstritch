@@ -96,8 +96,8 @@
 }
 
 +(void)update_camera_on:(CCLayer*)layer zoom:(CameraZoom)state {    
-    [layer.camera setCenterX:state.x centerY:state.y centerZ:0];
-    [layer.camera setEyeX:state.x  eyeY:state.y eyeZ:state.z];
+    [layer.camera setCenterX:state.x+50 centerY:state.y centerZ:0];
+    [layer.camera setEyeX:state.x+50  eyeY:state.y eyeZ:state.z+60];
 }
 
 +(int)GET_RENDER_FG_ISLAND_ORD { return RENDER_FG_ISLAND_ORD; }

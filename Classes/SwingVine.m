@@ -107,8 +107,8 @@
         [offset_v scale:15];
         
         [player setPosition:ccp(position_.x+dirvec.x+offset_v.x-ins_offset.x,position_.y+dirvec.y+offset_v.y-ins_offset.y)];
-        ins_offset.x *= 0.9;
-        ins_offset.y *= 0.9;
+        ins_offset.x *= 0.5;
+        ins_offset.y *= 0.5;
         
         [dirvec scale:-1];
         [dirvec normalize];

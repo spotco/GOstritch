@@ -7,13 +7,14 @@
 #import "RocketParticle.h"
 #import "FloatingSweatParticle.h"
 #import "FileCache.h"
+
 @class SwingVine;
 
 @class GameEngineLayer;
 
 @class PlayerEffectParams;
 
-@interface Player : CCSprite {
+@interface Player : CCSprite <PhysicsObject> {
 	float vx,vy;
 	CCSprite* player_img;
     Island* current_island;

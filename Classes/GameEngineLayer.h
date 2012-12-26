@@ -67,7 +67,9 @@ typedef struct level_bone_status {
 +(CCScene *) scene_with:(NSString *)map_file_name lives:(int)lives;
 +(CCScene*) scene_with_autolevel_lives:(int)lives;
 -(void)add_particle:(Particle*)p;
+
 -(HitRect)get_viewbox;
+-(HitRect) get_world_bounds;
 
 -(void)set_camera:(CameraZoom)tar;
 -(void)set_target_camera:(CameraZoom)tar;

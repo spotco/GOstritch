@@ -18,7 +18,7 @@
 
 
 @property(readwrite,assign) float startX, startY, endX, endY, fill_hei, ndir, t_min, t_max;
-@property(readwrite,assign) Island* next;
+@property(readwrite,assign) Island *next, *prev;
 @property(readwrite,assign) BOOL can_land,has_prev;
 
 +(float) NO_VALUE;

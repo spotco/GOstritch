@@ -53,7 +53,7 @@
     [GEventDispatcher add_listener:self];
     refresh_viewbox_cache = YES;
     CGPoint player_start_pt = [self loadMap:map_filename];
-    [self update_islands];
+    
     [self init_bones];
     particles = [[NSMutableArray array] retain];
     player = [Player init_at:player_start_pt];
@@ -69,6 +69,13 @@
     
     follow_action = [CCFollow actionWithTarget:player worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]];
     [self runAction:follow_action];
+    
+    for (Island *i in islands) {
+        [i update:self];
+    }
+    for (GameObject *o in game_objects) {
+        [o check_should_render:self];
+    }
     
     if ([GameMain GET_USE_NSTIMER]) {
         updater = [NSTimer scheduledTimerWithTimeInterval:[GameMain GET_TARGET_FPS] target:self selector:@selector(update) userInfo:nil repeats:YES];
@@ -351,10 +358,11 @@
 -(HitRect)get_viewbox {
     if (refresh_viewbox_cache) {
         refresh_viewbox_cache = NO;
-        cached_viewbox = [Common hitrect_cons_x1:-self.position.x-[CCDirector sharedDirector].winSize.width
-                                              y1:-self.position.y-[CCDirector sharedDirector].winSize.height
-                                             wid:[CCDirector sharedDirector].winSize.width*3
-                                             hei:[CCDirector sharedDirector].winSize.height*3];
+        //TODO -- make this scale with camera zoom
+        cached_viewbox = [Common hitrect_cons_x1:-self.position.x-[Common SCREEN].width
+                                              y1:-self.position.y-[Common SCREEN].height
+                                             wid:[Common SCREEN].width*4
+                                             hei:[Common SCREEN].height*4];
     }
     return cached_viewbox;
 }

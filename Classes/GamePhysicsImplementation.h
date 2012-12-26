@@ -7,6 +7,6 @@
 
 @interface GamePhysicsImplementation:NSObject
 
-+(void)player_move:(Player*)player with_islands:(NSMutableArray*)islands;
++(void)player_move:(id<PhysicsObject>)player with_islands:(NSMutableArray*)islands;
 
 @end

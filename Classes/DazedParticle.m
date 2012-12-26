@@ -3,18 +3,22 @@
 
 @implementation DazedParticle
 
-+(DazedParticle*)init_x:(float)x y:(float)y theta:(float)theta time:(int)time {
-    return [[DazedParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]] initialize_x:x y:y t:theta time:time];
++(DazedParticle*)init_x:(float)x y:(float)y theta:(float)theta time:(int)time tracking:(id<PhysicsObject>)t {
+    return [[DazedParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]] initialize_x:x y:y t:theta time:time tracking:t];
 }
 
-+(void)init_effect:(GameEngineLayer*)g x:(float)x y:(float)y time:(int)time {
-    [g add_particle:[DazedParticle init_x:x y:y theta:0 time:time]];
-    [g add_particle:[DazedParticle init_x:x y:y theta:M_PI/2 time:time]];
-    [g add_particle:[DazedParticle init_x:x y:y theta:M_PI time:time]];
-    [g add_particle:[DazedParticle init_x:x y:y theta:M_PI*(1.5) time:time]];
++(void)init_effect:(GameEngineLayer *)g tar:(id<PhysicsObject>)tar time:(int)time {
+    float x = tar.position.x;
+    float y = tar.position.y+60*(tar.current_island != NULL?tar.last_ndir:1);
+    
+    [g add_particle:[DazedParticle init_x:x y:y theta:0 time:time tracking:tar]];
+    [g add_particle:[DazedParticle init_x:x y:y theta:M_PI/2 time:time tracking:tar]];
+    [g add_particle:[DazedParticle init_x:x y:y theta:M_PI time:time tracking:tar]];
+    [g add_particle:[DazedParticle init_x:x y:y theta:M_PI*1.5 time:time tracking:tar]];
+    
 }
 
--(DazedParticle*)initialize_x:(float)x y:(float)y t:(float)t time:(int)time{
+-(DazedParticle*)initialize_x:(float)x y:(float)y t:(float)t time:(int)time tracking:(id<PhysicsObject>)tracking {
     [self setPosition:ccp(x,y)];
     [self setScale:0.6];
     [self setColor:ccc3(255, 255, 0)];
@@ -22,6 +26,7 @@
     cy = y;
     ct = time;
     theta = t;
+    tar = tracking;
     return self;
 }
 
@@ -34,6 +39,10 @@
     theta+=speed;
     [self setPosition:ccp(cos(theta)*scalex+cx,sin(theta)*scaley+cy)];
     
+    if (tar) {
+        cx = tar.position.x;
+        cy = tar.position.y+60*(tar.current_island != NULL?tar.last_ndir:1);
+    }
     
 }
 

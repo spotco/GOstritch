@@ -25,7 +25,7 @@
 @synthesize current_island;
 @synthesize up_vec;
 @synthesize start_pt;
-@synthesize last_ndir;
+@synthesize last_ndir,movedir;
 @synthesize floating,dashing,dead;
 @synthesize current_swingvine;
 
@@ -49,6 +49,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
 	CCSprite *player_img = [CCSprite node];
     new_player.player_img = player_img;
     new_player.last_ndir = 1;
+    new_player.movedir = 1;
     new_player.current_island = NULL;
 	player_img.anchorPoint = ccp(0,0);
 	player_img.position = ccp(IMG_OFFSET_X,IMG_OFFSET_Y);
@@ -160,7 +161,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
         } else {
             if (vel > 10) {
                 [self start_anim:_RUN_ANIM_FAST];
-            } else if (vel > 6.9) {
+            } else if (vel > 5) {
                 [self start_anim:_RUN_ANIM_MED];
             } else {
                 [self start_anim:_RUN_ANIM_SLOW];

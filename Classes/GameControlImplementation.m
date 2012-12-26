@@ -68,6 +68,12 @@ static float avg_y;
 +(void)control_update_player:(GameEngineLayer*)g {
     Player* player = g.player;
     
+    if ([GameMain GET_HOLD_TO_STOP] && is_touch_down) {
+        player.vx = 0;
+        player.vy = 0;
+        return;
+    }
+    
     if (player.dead){
         return;
     }

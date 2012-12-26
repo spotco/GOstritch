@@ -129,6 +129,10 @@
     }
 }
 
++(void)print_hitrect:(HitRect)l msg:(NSString*)msg {
+    NSLog(@"%@ line segment (%f,%f) to (%f,%f)",msg,l.x1,l.y1,l.x2,l.y2);
+}
+
 +(void)print_line_seg:(line_seg)l msg:(NSString*)msg {
     NSLog(@"%@ line segment (%f,%f) to (%f,%f)",msg,l.a.x,l.a.y,l.b.x,l.b.y);
 }

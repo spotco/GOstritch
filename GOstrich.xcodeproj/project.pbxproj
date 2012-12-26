@@ -99,6 +99,10 @@
 		7E60D10B168ABE3D00E84683 /* rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E60D106168ABE3D00E84683 /* rocket.png */; };
 		7E60D10F168ABF3D00E84683 /* MinionRobot.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E60D10D168ABF3D00E84683 /* MinionRobot.h */; };
 		7E60D110168ABF3D00E84683 /* MinionRobot.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E60D10E168ABF3D00E84683 /* MinionRobot.m */; };
+		7E60D113168AC77700E84683 /* PhysicsEnabledObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E60D111168AC77700E84683 /* PhysicsEnabledObject.h */; };
+		7E60D114168AC77700E84683 /* PhysicsEnabledObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E60D112168AC77700E84683 /* PhysicsEnabledObject.m */; };
+		7E60D117168AFD1500E84683 /* BrokenMachineParticle.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E60D115168AFD1500E84683 /* BrokenMachineParticle.h */; };
+		7E60D118168AFD1500E84683 /* BrokenMachineParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E60D116168AFD1500E84683 /* BrokenMachineParticle.m */; };
 		7E6A873715C246B90022291A /* FlashEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6A873615C246B90022291A /* FlashEffect.m */; };
 		7E786DFD15E4BAF6000E1946 /* UIIngameAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E786DFC15E4BAF6000E1946 /* UIIngameAnimation.m */; };
 		7E786E0015E4BB61000E1946 /* BoneCollectUIAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E786DFF15E4BB61000E1946 /* BoneCollectUIAnimation.m */; };
@@ -562,6 +566,10 @@
 		7E60D106168ABE3D00E84683 /* rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocket.png; sourceTree = "<group>"; };
 		7E60D10D168ABF3D00E84683 /* MinionRobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinionRobot.h; sourceTree = "<group>"; };
 		7E60D10E168ABF3D00E84683 /* MinionRobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinionRobot.m; sourceTree = "<group>"; };
+		7E60D111168AC77700E84683 /* PhysicsEnabledObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsEnabledObject.h; sourceTree = "<group>"; };
+		7E60D112168AC77700E84683 /* PhysicsEnabledObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsEnabledObject.m; sourceTree = "<group>"; };
+		7E60D115168AFD1500E84683 /* BrokenMachineParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrokenMachineParticle.h; sourceTree = "<group>"; };
+		7E60D116168AFD1500E84683 /* BrokenMachineParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrokenMachineParticle.m; sourceTree = "<group>"; };
 		7E6A873515C246B90022291A /* FlashEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashEffect.h; sourceTree = "<group>"; };
 		7E6A873615C246B90022291A /* FlashEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashEffect.m; sourceTree = "<group>"; };
 		7E786DFB15E4BAF6000E1946 /* UIIngameAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIIngameAnimation.h; sourceTree = "<group>"; };
@@ -1191,6 +1199,8 @@
 				7E933FFD160AF212007E494A /* BreakableWallRockParticle.m */,
 				7EB76990167EFF91003AFCF5 /* DazedParticle.h */,
 				7EB76991167EFF91003AFCF5 /* DazedParticle.m */,
+				7E60D115168AFD1500E84683 /* BrokenMachineParticle.h */,
+				7E60D116168AFD1500E84683 /* BrokenMachineParticle.m */,
 			);
 			name = particle;
 			sourceTree = "<group>";
@@ -1281,6 +1291,8 @@
 			children = (
 				7E60D10D168ABF3D00E84683 /* MinionRobot.h */,
 				7E60D10E168ABF3D00E84683 /* MinionRobot.m */,
+				7E60D111168AC77700E84683 /* PhysicsEnabledObject.h */,
+				7E60D112168AC77700E84683 /* PhysicsEnabledObject.m */,
 			);
 			name = enemy;
 			sourceTree = "<group>";
@@ -2206,6 +2218,8 @@
 			files = (
 				7EE348931684651400A35C21 /* DataStore.h in Headers */,
 				7E60D10F168ABF3D00E84683 /* MinionRobot.h in Headers */,
+				7E60D113168AC77700E84683 /* PhysicsEnabledObject.h in Headers */,
+				7E60D117168AFD1500E84683 /* BrokenMachineParticle.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2497,6 +2511,8 @@
 				7EF34B211682C60C00DDC905 /* MainMenuBGLayer.m in Sources */,
 				7EE348941684651400A35C21 /* DataStore.m in Sources */,
 				7E60D110168ABF3D00E84683 /* MinionRobot.m in Sources */,
+				7E60D114168AC77700E84683 /* PhysicsEnabledObject.m in Sources */,
+				7E60D118168AFD1500E84683 /* BrokenMachineParticle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

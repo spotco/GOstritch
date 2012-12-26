@@ -19,12 +19,13 @@
 -(void)update:(Player*)p g:(GameEngineLayer *)g{
     p.dead = YES;
     p.vx = 0;
-    p.vy = 0;
+    if (p.current_island != NULL) {
+        p.vy = 0;
+    }
 }
 
 -(void)effect_end:(Player*)p g:(GameEngineLayer*)g {
     [super effect_end:p g:g];
-    p.dead = NO;
     [GEventDispatcher push_unique_event:[GEvent init_type:GEventType_PLAYER_DIE]];
 }
 

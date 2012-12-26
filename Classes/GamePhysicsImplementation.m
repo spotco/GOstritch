@@ -6,8 +6,6 @@
 #define FRICTION 0.96
 #define TO_GROUND_ROTATION_SPEED 0.3
 
-
-
 //Used in freefall
 #define CENTERING_UP_VEC_SPD 0.07
 #define MAX_LOSS 0.3
@@ -15,7 +13,7 @@
 @implementation GamePhysicsImplementation
 
 
-+(void)player_move:(Player*)player with_islands:(NSMutableArray*)islands {
++(void)player_move:(id<PhysicsObject>)player with_islands:(NSMutableArray*)islands {
     if (player.current_swingvine != NULL) {
         return;
     }
@@ -28,7 +26,7 @@
 }
 
 
-+(CGPoint)player_move_along_island:(Player*)player islands:(NSMutableArray*)islands {
++(CGPoint)player_move_along_island:(id<PhysicsObject>)player islands:(NSMutableArray*)islands {
     float MIN_SPEED = [player get_current_params].cur_min_speed;
     
     Island *i = player.current_island;
@@ -71,10 +69,6 @@
         player.vy += acc;
     }
     
-    float t = [i get_t_given_position:player.position];
-    float t_final = t+mov_speed;
-    CGPoint position_final = [i get_position_given_t:t_final];
-    
     Vec3D *tmp = player.up_vec;
     player.up_vec = [[Vec3D Z_VEC] crossWith:tangent_vec];
     [player.up_vec normalize];
@@ -86,30 +80,72 @@
     float dir = [Common shortest_dist_from_cur:player.rotation to:tar_deg];
     player.rotation += dir*TO_GROUND_ROTATION_SPEED;
     
+    CGPoint position_final;
     
-    if (position_final.x == [Island NO_VALUE] || position_final.y == [Island NO_VALUE]) {
-        if (i.next != NULL) {
-            float t_sum = mov_speed;
-            t_sum -= [i get_t_given_position:ccp(i.endX,i.endY)] - t;
-            player.current_island = i.next;
-            if ([player.current_island get_position_given_t:t_sum].x != [Island NO_VALUE] && [player.current_island get_position_given_t:t_sum].y != [Island NO_VALUE]) {
-                position_final = [player.current_island get_position_given_t:t_sum];
+    if (player.movedir > 0) {
+        float t = [i get_t_given_position:player.position];
+        float t_final = t+mov_speed;
+        position_final = [i get_position_given_t:t_final];
+        
+        if (position_final.x == [Island NO_VALUE] || position_final.y == [Island NO_VALUE]) {
+            if (i.next != NULL) {
+                float t_sum = mov_speed;
+                t_sum -= [i get_t_given_position:ccp(i.endX,i.endY)] - t;
+                player.current_island = i.next;
+                if ([player.current_island get_position_given_t:t_sum].x != [Island NO_VALUE] && [player.current_island get_position_given_t:t_sum].y != [Island NO_VALUE]) {
+                    position_final = [player.current_island get_position_given_t:t_sum];
+                } else {
+                    position_final = ccp(player.current_island.endX,player.current_island.endY);
+                }
+                
             } else {
-                position_final = ccp(player.current_island.endX,player.current_island.endY);
+                position_final = ccp(player.position.x + tangent_vec.x*mov_speed, player.position.y + tangent_vec.y*mov_speed);
+                player.current_island = NULL;
+                player.vx = tangent_vec.x * mov_speed;
+                player.vy = tangent_vec.y * mov_speed;
             }
-        } else {
-            position_final = ccp(player.position.x + tangent_vec.x*mov_speed, player.position.y + tangent_vec.y*mov_speed);
-            player.current_island = NULL;
-            player.vx = tangent_vec.x * mov_speed;
-            player.vy = tangent_vec.y * mov_speed;
         }
+        
+    } else {
+        float t = [i get_t_given_position:player.position];
+        float t_final = t+mov_speed*player.movedir;
+        if (t_final >= 0) {
+            position_final = [i get_position_given_t:t_final];
+            
+        } else {
+            float remainder_t = ABS(t_final);
+            while (remainder_t > 0) {
+                i = i.prev;
+                if (i != NULL) {
+                    if (remainder_t < i.t_max) {
+                        player.current_island = i;
+                        position_final = [i get_position_given_t:i.t_max - remainder_t];
+                        break;
+                        
+                    } else {
+                        remainder_t -= i.t_max;
+                        
+                    }
+                    
+                } else {
+                    player.current_island = NULL;
+                    position_final = ccp(player.position.x + tangent_vec.x*mov_speed*player.movedir, player.position.y + tangent_vec.y*mov_speed*player.movedir);
+                    player.vx = tangent_vec.x * mov_speed * player.movedir;
+                    player.vy = tangent_vec.y * mov_speed * player.movedir;
+                    break;
+                    
+                }
+            }
+            
+        }
+        
     }
     
     [tangent_vec dealloc];
     return position_final;
 }
 
-+(CGPoint)player_free_fall:(Player*)player islands:(NSMutableArray*)islands {
++(CGPoint)player_free_fall:(id<PhysicsObject>)player islands:(NSMutableArray*)islands {
     float GRAVITY = [player get_current_params].cur_gravity;
     if (player.floating) {
         GRAVITY = GRAVITY * 0.55;
