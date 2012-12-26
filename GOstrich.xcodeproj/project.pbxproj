@@ -92,6 +92,13 @@
 		7E5EB93515B2C809000877A7 /* DogCapeEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5EB93415B2C809000877A7 /* DogCapeEffect.m */; };
 		7E5EB93815B2CF48000877A7 /* DogRocketEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5EB93715B2CF48000877A7 /* DogRocketEffect.m */; };
 		7E60D100168A8AA600E84683 /* swingvine_tex_loose.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E60D0FF168A8AA600E84683 /* swingvine_tex_loose.png */; };
+		7E60D107168ABE3D00E84683 /* launcher_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E60D102168ABE3D00E84683 /* launcher_default.plist */; };
+		7E60D108168ABE3D00E84683 /* launcher_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E60D103168ABE3D00E84683 /* launcher_default.png */; };
+		7E60D109168ABE3D00E84683 /* robot_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E60D104168ABE3D00E84683 /* robot_default.plist */; };
+		7E60D10A168ABE3D00E84683 /* robot_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E60D105168ABE3D00E84683 /* robot_default.png */; };
+		7E60D10B168ABE3D00E84683 /* rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E60D106168ABE3D00E84683 /* rocket.png */; };
+		7E60D10F168ABF3D00E84683 /* MinionRobot.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E60D10D168ABF3D00E84683 /* MinionRobot.h */; };
+		7E60D110168ABF3D00E84683 /* MinionRobot.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E60D10E168ABF3D00E84683 /* MinionRobot.m */; };
 		7E6A873715C246B90022291A /* FlashEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E6A873615C246B90022291A /* FlashEffect.m */; };
 		7E786DFD15E4BAF6000E1946 /* UIIngameAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E786DFC15E4BAF6000E1946 /* UIIngameAnimation.m */; };
 		7E786E0015E4BB61000E1946 /* BoneCollectUIAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E786DFF15E4BB61000E1946 /* BoneCollectUIAnimation.m */; };
@@ -548,6 +555,13 @@
 		7E5EB93615B2CF48000877A7 /* DogRocketEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DogRocketEffect.h; sourceTree = "<group>"; };
 		7E5EB93715B2CF48000877A7 /* DogRocketEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DogRocketEffect.m; sourceTree = "<group>"; };
 		7E60D0FF168A8AA600E84683 /* swingvine_tex_loose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swingvine_tex_loose.png; sourceTree = "<group>"; };
+		7E60D102168ABE3D00E84683 /* launcher_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = launcher_default.plist; sourceTree = "<group>"; };
+		7E60D103168ABE3D00E84683 /* launcher_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launcher_default.png; sourceTree = "<group>"; };
+		7E60D104168ABE3D00E84683 /* robot_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = robot_default.plist; sourceTree = "<group>"; };
+		7E60D105168ABE3D00E84683 /* robot_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = robot_default.png; sourceTree = "<group>"; };
+		7E60D106168ABE3D00E84683 /* rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocket.png; sourceTree = "<group>"; };
+		7E60D10D168ABF3D00E84683 /* MinionRobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinionRobot.h; sourceTree = "<group>"; };
+		7E60D10E168ABF3D00E84683 /* MinionRobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinionRobot.m; sourceTree = "<group>"; };
 		7E6A873515C246B90022291A /* FlashEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashEffect.h; sourceTree = "<group>"; };
 		7E6A873615C246B90022291A /* FlashEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashEffect.m; sourceTree = "<group>"; };
 		7E786DFB15E4BAF6000E1946 /* UIIngameAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIIngameAnimation.h; sourceTree = "<group>"; };
@@ -1250,6 +1264,27 @@
 			name = powerups;
 			sourceTree = "<group>";
 		};
+		7E60D101168ABE3D00E84683 /* enemy */ = {
+			isa = PBXGroup;
+			children = (
+				7E60D102168ABE3D00E84683 /* launcher_default.plist */,
+				7E60D103168ABE3D00E84683 /* launcher_default.png */,
+				7E60D104168ABE3D00E84683 /* robot_default.plist */,
+				7E60D105168ABE3D00E84683 /* robot_default.png */,
+				7E60D106168ABE3D00E84683 /* rocket.png */,
+			);
+			path = enemy;
+			sourceTree = "<group>";
+		};
+		7E60D10C168ABF2300E84683 /* enemy */ = {
+			isa = PBXGroup;
+			children = (
+				7E60D10D168ABF3D00E84683 /* MinionRobot.h */,
+				7E60D10E168ABF3D00E84683 /* MinionRobot.m */,
+			);
+			name = enemy;
+			sourceTree = "<group>";
+		};
 		7E786E0115E4D24D000E1946 /* bgeffects */ = {
 			isa = PBXGroup;
 			children = (
@@ -1437,6 +1472,7 @@
 		7E93D6731592B69C00A83E9C /* game_obj */ = {
 			isa = PBXGroup;
 			children = (
+				7E60D10C168ABF2300E84683 /* enemy */,
 				7E786E0115E4D24D000E1946 /* bgeffects */,
 				7E8C080A15C3EBD300FE9341 /* envr_obj */,
 				7EDA90C215BCB51A0004CED7 /* checkpoint */,
@@ -1524,6 +1560,7 @@
 		7ED863C515B806C3005FBDBB /* object */ = {
 			isa = PBXGroup;
 			children = (
+				7E60D101168ABE3D00E84683 /* enemy */,
 				7EF1245815CA511700B91A91 /* powerup */,
 				7EF1244F15CA50F900B91A91 /* obstacle */,
 				7EF1244615CA50C700B91A91 /* boost */,
@@ -2168,6 +2205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EE348931684651400A35C21 /* DataStore.h in Headers */,
+				7E60D10F168ABF3D00E84683 /* MinionRobot.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2369,6 +2407,11 @@
 				7EE3488A16842D6500A35C21 /* ingame_ui_lives_icon.png in Resources */,
 				7EE3488B16842D6500A35C21 /* ingame_ui_time_icon.png in Resources */,
 				7E60D100168A8AA600E84683 /* swingvine_tex_loose.png in Resources */,
+				7E60D107168ABE3D00E84683 /* launcher_default.plist in Resources */,
+				7E60D108168ABE3D00E84683 /* launcher_default.png in Resources */,
+				7E60D109168ABE3D00E84683 /* robot_default.plist in Resources */,
+				7E60D10A168ABE3D00E84683 /* robot_default.png in Resources */,
+				7E60D10B168ABE3D00E84683 /* rocket.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2453,6 +2496,7 @@
 				7EF34B1E1682C54200DDC905 /* MainMenuPageStaticLayer.m in Sources */,
 				7EF34B211682C60C00DDC905 /* MainMenuBGLayer.m in Sources */,
 				7EE348941684651400A35C21 /* DataStore.m in Sources */,
+				7E60D110168ABF3D00E84683 /* MinionRobot.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

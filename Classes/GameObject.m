@@ -32,10 +32,6 @@
     [super draw];
 }
 
--(void)min_update:(Player*)player g:(GameEngineLayer *)g {
-    [self check_should_render:g];
-}
-
 -(HitRect)get_hit_rect {
     return [Common hitrect_cons_x1:0 y1:0 x2:0 y2:0];
 }

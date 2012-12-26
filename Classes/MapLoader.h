@@ -24,6 +24,7 @@
 #import "SpikeVine.h"
 #import "CameraArea.h"
 #import "SwingVine.h"
+#import "MinionRobot.h"
 
 @interface MapLoader : NSObject
 

@@ -51,6 +51,10 @@
 #define TEX_SPIKE_VINE_BOTTOM @"SpikeVineRight"
 #define TEX_SPIKE_VINE_SECTION @"SpikeVineSection"
 
+#define TEX_ENEMY_ROBOT @"robot_default"
+#define TEX_ENEMY_LAUNCHER @"launcher_default"
+#define TEX_ENEMY_ROCKET @"rocket"
+
 #define TEX_SWINGVINE_BASE @"SwingVineBase"
 #define TEX_SWINGVINE_TEX @"SwingVineTex"
 

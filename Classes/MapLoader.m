@@ -235,6 +235,11 @@ static NSMutableDictionary* cached_json;
             float len = sqrtf(powf(x2-x, 2)+powf(y2-y, 2));
             [map.game_objects addObject:[SwingVine init_x:x y:y len:len]];
             
+        } else if ([type isEqualToString:@"robotminion"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            [map.game_objects addObject:[MinionRobot cons_x:x y:y]];
+            
         } else {
             NSLog(@"item read error");
             continue;

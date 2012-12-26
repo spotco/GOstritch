@@ -13,7 +13,6 @@
 @property(readwrite,assign) CCSprite *img;
 
 -(void)update:(Player*)player g:(GameEngineLayer *)g;
--(void)min_update:(Player*)player g:(GameEngineLayer *)g;
 -(HitRect) get_hit_rect;
 -(void)set_active:(BOOL)t_active;
 -(int)get_render_ord;

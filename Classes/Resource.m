@@ -48,6 +48,10 @@ static NSMutableDictionary* textures = nil;
                      
                         @"swingvine_base.png", TEX_SWINGVINE_BASE,
                         @"swingvine_tex_loose.png", TEX_SWINGVINE_TEX,
+                     
+                        @"robot_default.png",TEX_ENEMY_ROBOT,
+                        @"launcher_default.png",TEX_ENEMY_LAUNCHER,
+                        @"rocket.png",TEX_ENEMY_ROCKET,
                                       
                         @"BG1_detail_1.png", TEX_GROUND_DETAIL_1,
                         @"BG1_detail_2.png", TEX_GROUND_DETAIL_2,
@@ -118,6 +122,7 @@ static NSMutableDictionary* textures = nil;
     ccTexParams texParams = { GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT };
     for(int i = 0; i < [temp count]-1; i+=2) {
         CCTexture2D* tex = [[CCTextureCache sharedTextureCache] addImage:[temp objectAtIndex:i]];
+        
         [textures setObject:tex forKey:[temp objectAtIndex:(i+1)]];
         [tex setTexParameters: &texParams];
     }

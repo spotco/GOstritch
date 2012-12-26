@@ -1,15 +1,16 @@
 {
-    "start_y": 371.12222222222226,
-    "assert_links": 0,
     "objects": [
-        {"x": 760, "y": 494.4, "type": "swingvine", "label": "0"},
-        {"x": 1200, "y": 580.4, "type": "swingvine", "label": "0"},
-        {"x": 1700, "y": 640.4, "type": "swingvine", "label": "0"}
+        {"x": 651, "type": "swingvine", "x2": 651, "y": 501, "label": "2", "y2": 148},
+        {"x": 1201, "type": "robotminion", "label": "3", "y": 168},
+        {"x": 946, "type": "swingvine", "x2": 962, "y": 602, "label": "4", "y2": 182},
+        {"x": 1347, "type": "swingvine", "x2": 1348, "y": 701, "label": "5", "y2": 206}
     ],
+    "start_x": 99,
     "islands": [
-    {"can_fall": true, "x1": 103.4, "y1": 302.2, "hei": 50, "x2": 646.7, "y2": 360.9, "type": "line", "ndir": "left", "ground": "bridge"},
-    {"can_fall": true, "x1": 1503.4, "y1": 302.2, "hei": 50, "x2": 2000.7, "y2": 360.9, "type": "line", "ndir": "left", "ground": "bridge"}
-    
+        {"y1": 99, "type": "line", "can_fall": true, "x2": 559, "ground": "open", "y2": 144, "x1": 51, "hei": 50, "ndir": "left"},
+        {"y1": 150, "type": "line", "can_fall": true, "x2": 1350, "ground": "open", "y2": 151, "x1": 751, "hei": 50, "ndir": "left"}
     ],
-    "start_x": 171.1
+    "start_y": 151,
+    "connect_pts": {"y1": 99, "y2": 151, "x1": 51, "x2": 1350},
+    "assert_links": 0
 }

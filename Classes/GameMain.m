@@ -4,7 +4,7 @@
 
 #define USE_BG NO
 #define ENABLE_BG_PARTICLES YES
-#define DRAW_HITBOX NO
+#define DRAW_HITBOX YES
 #define TARGET_FPS 60
 #define RESET_STATS NO
 #define DISPLAY_FPS NO
