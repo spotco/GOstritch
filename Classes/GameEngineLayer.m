@@ -394,8 +394,8 @@
     if (refresh_viewbox_cache) {
         refresh_viewbox_cache = NO;
         //TODO -- make this scale with camera zoom
-        cached_viewbox = [Common hitrect_cons_x1:-self.position.x-[Common SCREEN].width
-                                              y1:-self.position.y-[Common SCREEN].height
+        cached_viewbox = [Common hitrect_cons_x1:-self.position.x-[Common SCREEN].width*0
+                                              y1:-self.position.y-[Common SCREEN].height*0
                                              wid:[Common SCREEN].width*2
                                              hei:[Common SCREEN].height*2];
     }

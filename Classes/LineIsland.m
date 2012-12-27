@@ -44,9 +44,6 @@
     [BatchDraw add:o at_render_ord:[self get_render_ord]];
      */
     
-    [BatchDraw add:[Common transform_obj:top_fill by:self.position] key:TEX_GROUND_TEX_1 at_render_ord:[self get_render_ord]];
-    [BatchDraw add:[Common transform_obj:main_fill by:self.position] key:TEX_GROUND_TOP_1 at_render_ord:[self get_render_ord]];
-    
     
     if ([Common hitrect_touch:[g get_viewbox] b:[self get_hitrect]]) {
         do_draw = YES;
@@ -58,6 +55,11 @@
         if (self.visible) {
             [self setVisible:NO];
         }
+    }
+    
+    if (do_draw) {
+        [BatchDraw add:[Common transform_obj:top_fill by:self.position] key:TEX_GROUND_TEX_1 at_render_ord:[self get_render_ord]];
+        [BatchDraw add:[Common transform_obj:main_fill by:self.position] key:TEX_GROUND_TOP_1 at_render_ord:[self get_render_ord]];
     }
 }
 
