@@ -7,7 +7,7 @@
 #define DRAW_HITBOX NO
 #define TARGET_FPS 60
 #define RESET_STATS NO
-#define DISPLAY_FPS NO
+#define DISPLAY_FPS YES
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
 #define STARTING_LIVES 2
@@ -44,8 +44,8 @@
     }*/
     
     
-    [GameMain start_testlevel];
-    //[GameMain start_game_autolevel];
+    //[GameMain start_testlevel];
+    [GameMain start_game_autolevel];
     //[GameMain start_menu];
 }
 

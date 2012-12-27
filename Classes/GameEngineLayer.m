@@ -396,8 +396,8 @@
         //TODO -- make this scale with camera zoom
         cached_viewbox = [Common hitrect_cons_x1:-self.position.x-[Common SCREEN].width
                                               y1:-self.position.y-[Common SCREEN].height
-                                             wid:[Common SCREEN].width*4
-                                             hei:[Common SCREEN].height*4];
+                                             wid:[Common SCREEN].width*2
+                                             hei:[Common SCREEN].height*2];
     }
     return cached_viewbox;
 }

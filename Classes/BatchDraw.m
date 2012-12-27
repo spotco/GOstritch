@@ -103,8 +103,8 @@ static NSMutableDictionary* jobs;
     }
 }
 
-+(void)add:(gl_render_obj)gl at_render_ord:(int)ord {
-    NSString* key = [[NSString stringWithFormat:@"id:%i z:%i",gl.texture.name,ord] retain];
++(void)add:(gl_render_obj)gl key:(NSString *)key at_render_ord:(int)ord {
+    //NSString* key = [[NSString stringWithFormat:@"id:%i z:%i",gl.texture.name,ord] retain];
     
     if (![jobs objectForKey:key]) {
         [jobs setObject:[BatchJob cons_tex:gl.texture.name ord:ord] forKey:key];

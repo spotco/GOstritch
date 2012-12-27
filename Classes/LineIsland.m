@@ -43,7 +43,9 @@
     //[LineIsland batch_push:o];
     [BatchDraw add:o at_render_ord:[self get_render_ord]];
      */
-    [BatchDraw add:[Common transform_obj:main_fill by:self.position] at_render_ord:[self get_render_ord]];
+    
+    [BatchDraw add:[Common transform_obj:top_fill by:self.position] key:TEX_GROUND_TEX_1 at_render_ord:[self get_render_ord]];
+    [BatchDraw add:[Common transform_obj:main_fill by:self.position] key:TEX_GROUND_TOP_1 at_render_ord:[self get_render_ord]];
     
     
     if ([Common hitrect_touch:[g get_viewbox] b:[self get_hitrect]]) {
@@ -130,7 +132,7 @@ static int batch_ct;
     //glLineWidth(5.0f);
     
     //[Common draw_renderobj:main_fill n_vtx:4];
-    [Common draw_renderobj:top_fill n_vtx:4];
+    //[Common draw_renderobj:top_fill n_vtx:4];
     
     if (has_prev == NO || force_draw_leftline) {
         [Common draw_renderobj:left_line_fill n_vtx:4]; //ccDrawLine(tl, bl1);    
