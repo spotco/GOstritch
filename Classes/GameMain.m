@@ -2,7 +2,7 @@
 
 @implementation GameMain
 
-#define USE_BG NO
+#define USE_BG YES
 #define ENABLE_BG_PARTICLES YES
 #define DRAW_HITBOX NO
 #define TARGET_FPS 60
@@ -11,10 +11,11 @@
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
 #define STARTING_LIVES 2
-#define TESTLEVEL @"swingvine_test"
+#define TESTLEVEL @"shittytest"
 
 /**
  TODO -- 
+ -optimize uilayer nsstring
  -boss robot + lab
  -fix: forward cache autolevel away a certain distance
  
@@ -27,8 +28,21 @@
     [GEventDispatcher lazy_alloc];
     [DataStore init];
     [Resource init_textures];
+    
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
+    
+    /*int *a = calloc(5, sizeof(int));
+    a[0] = 1;
+    a[1] = 2;
+    int *b = calloc(5, sizeof(int));
+    
+    memcpy(b, a, sizeof(int)*5);
+    
+    for (int i = 0; i < 6; i++) {
+        NSLog(@"%i",b[i]);
+    }*/
+    
     
     [GameMain start_testlevel];
     //[GameMain start_game_autolevel];

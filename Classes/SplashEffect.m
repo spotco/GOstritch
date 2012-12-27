@@ -19,6 +19,7 @@
     [super update:p g:g];
     p.rotation = 0;
     p.dead = YES;
+    p.vy = 0;
 }
 
 -(void)effect_end:(Player *)p g:(GameEngineLayer *)g {

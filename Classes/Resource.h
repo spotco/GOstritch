@@ -11,6 +11,7 @@
 
 #define TEX_GROUND_TEX_1 @"GroundTexture1"
 #define TEX_GROUND_TOP_1 @"GroundTop1"
+#define TEX_GROUND_CORNER_TEX_1 @"ground_1_corner"
 #define TEX_BRIDGE_EDGE @"BridgeEdge"
 #define TEX_BRIDGE_SECTION @"BridgeSection"
 #define TEX_TOP_EDGE @"GroundTopEdge"
@@ -51,6 +52,7 @@
 #define TEX_SPIKE_VINE_BOTTOM @"SpikeVineRight"
 #define TEX_SPIKE_VINE_SECTION @"SpikeVineSection"
 
+
 #define TEX_ENEMY_ROBOT @"robot_default"
 #define TEX_ENEMY_LAUNCHER @"launcher_default"
 #define TEX_ENEMY_ROCKET @"rocket"
@@ -87,9 +89,6 @@
 #define TEX_UI_GAMEOVER_TITLE @"UIgameovertitle"
 #define TEX_UI_GAMEOVER_INFO @"UIgameoverinfo"
 #define TEX_UI_GAMEOVER_LOGO @"UIgameoverlogo"
-
-#define TEX_ISLAND_WORLD1_CORNERFILLCOLOR 0.29, 0.69, 0.03
-#define TEX_ISLAND_CAVE_CORNERFILLCOLOR 0.5, 0.5, 0.5
 
 #define TEX_MENU_TEX_SELECTDOT_SMALL @"menuselectdotsmall"
 #define TEX_MENU_TEX_BACKBUTTON @"menubackbutton"

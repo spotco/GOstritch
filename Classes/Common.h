@@ -76,6 +76,7 @@ typedef struct CameraZoom {
 +(float)sig:(float)n;
 
 +(void)draw_renderobj:(gl_render_obj)obj n_vtx:(int)n_vtx;
++(gl_render_obj)transform_obj:(gl_render_obj)o by:(CGPoint)position ;
 +(void)tex_map_to_tri_loc:(gl_render_obj*)o len:(int)len;
 +(gl_render_obj)init_render_obj:(CCTexture2D*)tex npts:(int)npts;
 

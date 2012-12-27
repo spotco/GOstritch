@@ -4,6 +4,18 @@
 #import "BridgeIsland.h"
 #import "FlashEffect.h"
 
+/*
+//TRMV
+@interface BatchDrawer : CCSprite
+@end
+@implementation BatchDrawer
+-(void)draw {
+    [super draw];
+    [LineIsland batch_draw];
+}
+@end
+*/
+ 
 @implementation GameEngineLayer
 
 @synthesize current_mode;
@@ -50,6 +62,16 @@
     if (particles_tba == NULL) {
         particles_tba = [[NSMutableArray alloc] init];
     }
+    
+    /*
+    //TRMV
+    batch_drawer = [BatchDrawer node];
+    */
+    [BatchDraw cons];
+    batch_draw = [BatchDraw node];
+    [self addChild:batch_draw];
+    
+    [GameControlImplementation reset_control_state];
     [GEventDispatcher add_listener:self];
     refresh_viewbox_cache = YES;
     CGPoint player_start_pt = [self loadMap:map_filename];
@@ -82,6 +104,8 @@
     } else {
         [self schedule:@selector(update)];
     }
+    self.isAccelerometerEnabled = YES;
+    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:1/60];
 }
 
 -(CGPoint)loadMap:(NSString*)filename {
@@ -137,6 +161,8 @@
 -(void)update {
     [GEventDispatcher dispatch_events];
     if (current_mode == GameEngineLayerMode_GAMEPLAY) {
+        
+        
         time++;
         refresh_viewbox_cache = YES;
         [GamePhysicsImplementation player_move:player with_islands:islands];
@@ -146,7 +172,16 @@
         [self update_game_obj];
         [self update_particles];
         [self push_added_particles];
+        
+        
+        /*
+        //TRMV
+        [LineIsland batch_clear]
+        */
+         
+        [BatchDraw clear];
         [self update_islands];
+        
         [GameRenderImplementation update_render_on:self];
         [GEventDispatcher push_event:[GEvent init_type:GEventType_GAME_TICK]];
         

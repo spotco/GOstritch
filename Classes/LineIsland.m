@@ -33,6 +33,19 @@
 }
 
 -(void)update:(GameEngineLayer *)g {
+    /*
+    //TRMV
+    gl_render_obj o = main_fill;
+    o.tri_pts[0] = CGPointAdd(self.position, o.tri_pts[0]);
+    o.tri_pts[1] = CGPointAdd(self.position, o.tri_pts[1]);
+    o.tri_pts[2] = CGPointAdd(self.position, o.tri_pts[2]);
+    o.tri_pts[3] = CGPointAdd(self.position, o.tri_pts[3]);
+    //[LineIsland batch_push:o];
+    [BatchDraw add:o at_render_ord:[self get_render_ord]];
+     */
+    [BatchDraw add:[Common transform_obj:main_fill by:self.position] at_render_ord:[self get_render_ord]];
+    
+    
     if ([Common hitrect_touch:[g get_viewbox] b:[self get_hitrect]]) {
         do_draw = YES;
         if (!self.visible) {
@@ -80,15 +93,43 @@
     has_gen_hitrect = NO;
 }
 
+static CGPoint batch1_vtx[2000];
+static CGPoint batch1_tex[2000];
+static ccColor4B batch1_clr[2000];
+static int batch_ct;
+
++(void)batch_push:(gl_render_obj)g {
+    for(int i = 0; i < 6; i++) {
+        int t = i%3 + i/3;
+        batch1_vtx[batch_ct+i] = g.tri_pts[t];
+        batch1_tex[batch_ct+i] = g.tex_pts[t];
+        batch1_clr[batch_ct+i] = ccc4(255, 255, 255, 255);
+    }
+    batch_ct+=6;
+}
+
++(void)batch_clear {
+    batch_ct = 0;
+}
+
++(void)batch_draw {
+    glBindTexture(GL_TEXTURE_2D, [Resource get_tex:TEX_GROUND_TEX_1].name);
+    
+	glVertexPointer(2, GL_FLOAT, 0, &batch1_vtx); 
+	glTexCoordPointer(2, GL_FLOAT, 0, &batch1_tex);
+    glColorPointer(4, GL_UNSIGNED_BYTE, 0, &batch1_clr);
+    glDrawArrays(GL_TRIANGLES, 0, batch_ct);
+}
+
 -(void) draw {
     if (!do_draw) {
         return;
     }
 	[super draw];
-    glColor4ub(109,110,112,255);
-    glLineWidth(5.0f);
+    //glColor4ub(109,110,112,255);
+    //glLineWidth(5.0f);
     
-    [Common draw_renderobj:main_fill n_vtx:4];
+    //[Common draw_renderobj:main_fill n_vtx:4];
     [Common draw_renderobj:top_fill n_vtx:4];
     
     if (has_prev == NO || force_draw_leftline) {
@@ -112,12 +153,8 @@
     
     if (next != NULL && !(force_draw_leftline||force_draw_rightline)) {
         [Common draw_renderobj:corner_fill n_vtx:3];
-        
-        ccColor4F fc = [self get_corner_fill_color];
-        glColor4f(fc.r, fc.g, fc.b, 1.0);
-        ccDrawSolidPoly(toppts, 3, YES);
+        [Common draw_renderobj:toppts_fill n_vtx:3];
         [Common draw_renderobj:corner_line_fill n_vtx:4];
-        /*NSLog(@"%@ , %@ , %@",NSStringFromCGPoint(ccp(toppts[0].x,toppts[0].y)),NSStringFromCGPoint(ccp(toppts[1].x,toppts[1].y)),NSStringFromCGPoint(ccp(toppts[2].x,toppts[2].y)));*/
     } 
     
 }
@@ -134,8 +171,8 @@
 -(CCTexture2D*)get_tex_top {
     return [Resource get_tex:TEX_GROUND_TOP_1];
 }
--(ccColor4F)get_corner_fill_color {
-    return ccc4f(TEX_ISLAND_WORLD1_CORNERFILLCOLOR, 1.0);
+-(CCTexture2D*)get_corner_fill_color {
+    return [Resource get_tex:TEX_GROUND_CORNER_TEX_1];
 }
 
 
@@ -403,6 +440,13 @@
     [reduce_right scale:corner_top_scale];
     toppts[2] = ccp( toppts[0].x + reduce_right.x, toppts[0].y + reduce_right.y);
     
+    toppts_fill = [Common init_render_obj:[self get_corner_fill_color] npts:3];
+    toppts_fill.tri_pts[0] = toppts[0];
+    toppts_fill.tri_pts[1] = toppts[1];
+    toppts_fill.tri_pts[2] = toppts[2];
+    toppts_fill.tex_pts[0] = ccp(0,0);
+    toppts_fill.tex_pts[1] = ccp(1,0);
+    toppts_fill.tex_pts[2] = ccp(1,1);
     
     [v3t2 dealloc];
     [v3t1 dealloc];

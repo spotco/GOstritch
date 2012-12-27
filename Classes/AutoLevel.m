@@ -8,8 +8,8 @@
     static NSArray *set1_levels;
     if (!set1_levels){
         set1_levels = [[NSArray alloc] initWithObjects:
-            @"autolevel_1_1",@"autolevel_1_2",@"autolevel_1_3",@"autolevel_1_4",@"autolevel_1_5",@"autolevel_1_6",@"autolevel_1_7",@"autolevel_1_8",
-            //@"autolevel_1_3",
+            //@"autolevel_1_1",@"autolevel_1_2",@"autolevel_1_3",@"autolevel_1_4",@"autolevel_1_5",@"autolevel_1_6",@"autolevel_1_7",@"autolevel_1_8",
+            @"autolevel_1_2",
         nil];
         //set1_levels = [[NSArray alloc] initWithObjects:@"test", nil];
     }

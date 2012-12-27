@@ -15,6 +15,7 @@
 #import "GameControlImplementation.h"
 #import "AutoLevel.h"
 #import "World1ParticleGenerator.h"
+#import "BatchDraw.h"
 
 #define GAMEENGINE_INF_LIVES -99
 
@@ -40,6 +41,7 @@ typedef struct level_bone_status {
     NSMutableArray *particles;
     CameraZoom camera_state;
     CameraZoom tar_camera_state;
+    BatchDraw *batch_draw;
     
     int lives;
     int time;

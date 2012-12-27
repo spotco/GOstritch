@@ -23,8 +23,8 @@
 -(CCTexture2D*)get_tex_top {
     return [Resource get_tex:TEX_CAVE_TOP_TEX];
 }
--(ccColor4F)get_corner_fill_color {
-    return ccc4f(TEX_ISLAND_CAVE_CORNERFILLCOLOR, 1.0);
+-(CCTexture2D*)get_corner_fill_color {
+    return [Resource get_tex:TEX_GROUND_CORNER_TEX_1];
 }
 
 

@@ -18,6 +18,7 @@ static NSMutableDictionary* textures = nil;
     NSArray *temp = [[NSArray alloc] initWithObjects:
                         @"BG1_island_fill.png", TEX_GROUND_TEX_1,
                         @"BG1_top_fill.png", TEX_GROUND_TOP_1,
+                        @"BG1_island_corner.png", TEX_GROUND_CORNER_TEX_1,
                         @"BG1_island_top_edge.png", TEX_TOP_EDGE,
                         @"BG1_bridge_edge.png",TEX_BRIDGE_EDGE,
                         @"BG1_bridge_section.png",TEX_BRIDGE_SECTION,

@@ -185,8 +185,11 @@
 	glVertexPointer(2, GL_FLOAT, 0, obj.tri_pts); 
 	glTexCoordPointer(2, GL_FLOAT, 0, obj.tex_pts);
     
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-    if (n_vtx == 4)glDrawArrays(GL_TRIANGLES, 1, 3);
+    if (n_vtx == 4) {
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    } else {
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+    }
 }
 
 +(void)tex_map_to_tri_loc:(gl_render_obj*)o len:(int)len {
@@ -236,6 +239,20 @@
     [l setPosition:pos];
     return l;
 }
+
+CGPoint CGPointAdd(CGPoint p1, CGPoint p2){
+    return CGPointMake(p1.x + p2.x, p1.y + p2.y);
+}
+
++(gl_render_obj)transform_obj:(gl_render_obj)o by:(CGPoint)position {
+    o.tri_pts[0] = CGPointAdd(position, o.tri_pts[0]);
+    o.tri_pts[1] = CGPointAdd(position, o.tri_pts[1]);
+    o.tri_pts[2] = CGPointAdd(position, o.tri_pts[2]);
+    o.tri_pts[3] = CGPointAdd(position, o.tri_pts[3]);
+    return o;
+}
+
+
 
 
 
