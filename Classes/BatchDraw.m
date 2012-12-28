@@ -1,20 +1,22 @@
 #import "BatchDraw.h"
 
 @interface BatchJob : NSObject {
-    GLuint tex;
     CGPoint *pvtx,*ptex;
     ccColor4B *pclr;
-    int batch_ct,ord,cursize;
+    int batch_ct,cursize;
 }
 +(BatchJob*)cons_tex:(GLuint)tex;
 -(void)add_obj:(gl_render_obj)gl;
 -(void)clear;
 -(void)draw;
+@property(readwrite,assign) GLuint tex;
+@property(readwrite,assign) int dord;
 @end
 
 @implementation BatchJob
 #define WHITE ccc4(255, 255, 255, 255)
-
+@synthesize dord;
+@synthesize tex;
 +(BatchJob*)cons_tex:(GLuint)tex {
     BatchJob *b = [[BatchJob alloc] init];
     [b cons_tex:tex];
@@ -94,48 +96,39 @@
 
 @implementation BatchDraw
 
-#define KEY_TEX @"tex"
-#define KEY_ZIND @"zind"
-#define KEY_DORD @"dord"
-static NSMutableDictionary* jobs;
 static NSMutableDictionary* z_bucket;
 
 +(void)init {
-    if (!jobs) {
-        jobs = [[NSMutableDictionary alloc] init];
+    if (!z_bucket) {
         z_bucket = [[NSMutableDictionary alloc] init];
     }
 }
 
-+(void)add:(gl_render_obj)gl key:(NSString *)tex z_ord:(int)zord draw_ord:(int)dord {
-    NSDictionary *tkey = [NSDictionary dictionaryWithObjectsAndKeys:
-                          tex,KEY_TEX,
-                          [NSNumber numberWithInt:zord],KEY_ZIND,
-                          [NSNumber numberWithInt:dord],KEY_DORD, 
-    nil];
-    
-    if (![jobs objectForKey:tkey]) {
-        [jobs setObject:[BatchJob cons_tex:gl.texture.name] forKey:tkey];
++(void)add:(gl_render_obj)gl key:(GLuint)tex z_ord:(int)zord draw_ord:(int)dord {
+    NSNumber *zord_key = [NSNumber numberWithInt:zord];
+    if (![z_bucket objectForKey:zord_key]) {
+        [z_bucket setObject:[NSMutableArray array] forKey:zord_key];
     }
-    BatchJob *b = [jobs objectForKey:tkey];
-    [b add_obj:gl];
+    NSMutableArray *zord_list = [z_bucket objectForKey:zord_key];
+    for (BatchJob *b in zord_list) {
+        if (b.tex == tex && b.dord == dord) {
+            [b add_obj:gl];
+            return;
+        }
+    }
+    BatchJob *nb = [BatchJob cons_tex:tex];
+    nb.dord = dord;
+    [nb add_obj:gl];
+    [zord_list addObject:nb];
+    return;
 }
 
-+(void)sort_jobs {
-    [z_bucket removeAllObjects];
-    for (NSDictionary* key in jobs) {
-        if (![z_bucket objectForKey:[key objectForKey:KEY_ZIND]]) {
-            [z_bucket setObject:[NSMutableArray array] forKey:[key objectForKey:KEY_ZIND]];
-        }
-        NSMutableArray *b = [z_bucket objectForKey:[key objectForKey:KEY_ZIND]];
-        [b addObject:key];
-    }
-    
++(void)sort_jobs {    
     for(NSNumber* key in z_bucket) { //sort everything in every bucket by draword
         NSMutableArray* a = [z_bucket objectForKey:key];
-        [a sortUsingComparator:^NSComparisonResult(NSDictionary* a, NSDictionary* b) {
-            NSNumber *v_a = [a objectForKey:KEY_DORD];
-            NSNumber *v_b = [b objectForKey:KEY_DORD];
+        [a sortUsingComparator:^NSComparisonResult(BatchJob *a, BatchJob *b) {
+            NSNumber *v_a = [NSNumber numberWithInt:a.dord];
+            NSNumber *v_b = [NSNumber numberWithInt:b.dord];
             return [v_a compare:v_b];
         }];
     }
@@ -143,19 +136,20 @@ static NSMutableDictionary* z_bucket;
 
 -(void)draw {
     [super draw];
-    NSArray* jobkeys = [z_bucket objectForKey:[NSNumber numberWithInt:zOrder_]];
-    if (jobkeys) {
-        for (NSDictionary *key in jobkeys) {
-            BatchJob *b = [jobs objectForKey:key];
-            [b draw];
+    NSArray* jobs = [z_bucket objectForKey:[NSNumber numberWithInt:zOrder_]];
+    if (jobs) {
+        for (BatchJob *job in jobs) {
+            [job draw];
         }
     }
 }
 
 +(void)clear {
-    for (NSDictionary* key in jobs) {
-        BatchJob *b = [jobs objectForKey:key];
-        [b clear];
+    for (NSNumber *key in z_bucket) {
+        NSMutableArray *jobs = [z_bucket objectForKey:key];
+        for (BatchJob* job in jobs) {
+            [job clear];
+        }
     }
 }
 

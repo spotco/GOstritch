@@ -1,11 +1,11 @@
 {
-    "assert_links": 1,
     "objects": [],
-    "start_x": 194,
+    "start_x": 0,
+    "connect_pts": {"y1": 192, "y2": 403, "x1": 213, "x2": 984},
+    "start_y": 0,
     "islands": [
-        {"y1": 251, "type": "line", "can_fall": true, "x2": 378, "ground": "open", "y2": 271, "x1": 138, "hei": 50, "ndir": "left"},
-        {"y1": 271, "type": "line", "can_fall": false, "x2": 565, "ground": "open", "y2": 383, "x1": 378, "hei": 50, "ndir": "left"}
+        {"y1": 192, "type": "line", "can_fall": true, "x2": 530, "ground": "open", "y2": 403, "x1": 213, "hei": 50, "ndir": "left"},
+        {"y1": 403, "type": "line", "can_fall": true, "x2": 984, "ground": "open", "y2": 403, "x1": 530, "hei": 50, "ndir": "left"}
     ],
-    "start_y": 309,
-    "connect_pts": {"y1": 251, "y2": 383, "x1": 138, "x2": 565}
+    "assert_links": 1
 }

@@ -4,6 +4,7 @@
 
 #define float_random(smallNumber, bigNumber) ((((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * (bigNumber - smallNumber)) + smallNumber)
 #define arrlen(x)  (sizeof(x) / sizeof(x[0]))
+    
 
 @class PlayerEffectParams;
 @class Island;
@@ -50,6 +51,7 @@ typedef struct CameraZoom {
     float z;
 } CameraZoom;
 
+NSString* strf (char* format, ... );
 +(CGSize)SCREEN;
 +(CGPoint)screen_pctwid:(float)pctwid pcthei:(float)pcthei;
 

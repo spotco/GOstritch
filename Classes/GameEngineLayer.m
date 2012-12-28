@@ -161,12 +161,9 @@
 	}
 }
 
-static int ct;
-
 -(void)update {
     [GEventDispatcher dispatch_events];
     if (current_mode == GameEngineLayerMode_GAMEPLAY) {
-        
         
         time++;
         refresh_viewbox_cache = YES;
@@ -177,15 +174,10 @@ static int ct;
         [self update_game_obj];
         [self update_particles];
         [self push_added_particles];
-        
-        if (ct >= 0) {         
-            [BatchDraw clear];
-            [self update_islands];
-            [BatchDraw sort_jobs];
-            ct = 20;
-        } else {
-            ct--;
-        }
+              
+        [BatchDraw clear];
+        [self update_islands];
+        [BatchDraw sort_jobs];
         
         [GameRenderImplementation update_render_on:self];
         [GEventDispatcher push_event:[GEvent init_type:GEventType_GAME_TICK]];

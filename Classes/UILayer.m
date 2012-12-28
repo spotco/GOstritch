@@ -40,12 +40,13 @@
 
 -(void)update {
     level_bone_status b = [game_engine_layer get_bonestatus];
-    [self set_label:bones_disp to:[NSString stringWithFormat:@"%i",b.hasgets+b.savedgets]];
-    [self set_label:lives_disp to:[NSString stringWithFormat:@"\u00B7 %@",
-                                   [game_engine_layer get_lives] == GAMEENGINE_INF_LIVES ?
-                                   @"\u221E":
-                                   [NSString stringWithFormat:@"%i",[game_engine_layer get_lives]]
-                                   ]];
+    [self set_label:bones_disp to:
+     /*[NSString stringWithFormat:@"%i",b.hasgets+b.savedgets]*/
+     strf("%i",b.hasgets+b.savedgets)
+     ];
+    [self set_label:lives_disp to:
+     strf("\u00B7 %s",[game_engine_layer get_lives] == GAMEENGINE_INF_LIVES ? "\u221E":strf("%i",[game_engine_layer get_lives]).UTF8String)
+     ];
     [self set_label:time_disp to:[NSString stringWithFormat:@"%@",[self parse_gameengine_time:[game_engine_layer get_time]]]];
     
     NSMutableArray *toremove = [NSMutableArray array];
@@ -264,7 +265,7 @@
 }
 -(NSString*)parse_gameengine_time:(int)t {
     t*=20;
-    return [NSString stringWithFormat:@"%i:%i%i",t/60000,(t/10000)%6,(t/1000)%10];
+    return strf("%i:%i%i",t/60000,(t/10000)%6,(t/1000)%10);
 }
 -(void)set_label:(CCLabelTTF*)l to:(NSString*)s {
     if (![[l string] isEqualToString:s]) {

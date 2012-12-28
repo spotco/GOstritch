@@ -5,6 +5,15 @@
 
 @implementation Common
 
+NSString* strf (char* format, ... ) {
+    char outp[255];
+    va_list a_list;
+    va_start( a_list, format );
+    vsprintf(outp, format, a_list);
+    va_end(a_list);
+    return [NSString stringWithUTF8String:outp];
+}
+
 +(CGSize)SCREEN {
     return CGSizeMake([[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
 }

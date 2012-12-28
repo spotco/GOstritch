@@ -35,12 +35,11 @@
 -(void)calc_init;
 -(void)init_tex;
 -(void)init_top;
-
--(NSString*)get_tex_fill;
--(NSString*)get_tex_corner;
--(NSString*)get_tex_border;
--(NSString*)get_tex_top;
--(NSString*)get_corner_fill_color;
+-(CCTexture2D*)get_tex_fill;
+-(CCTexture2D*)get_tex_corner;
+-(CCTexture2D*)get_tex_border;
+-(CCTexture2D*)get_tex_top;
+-(CCTexture2D*)get_corner_fill_color;
 
 
 

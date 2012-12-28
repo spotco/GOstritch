@@ -46,30 +46,31 @@
     }
         
     if (do_draw) {
-        [BatchDraw add:main_fill key:[self get_tex_fill] z_ord:[self get_render_ord] draw_ord:0];
-        [BatchDraw add:top_fill key:[self get_tex_top] z_ord:[self get_render_ord] draw_ord:2];
+        [BatchDraw add:top_fill key:top_fill.texture.name z_ord:[self get_render_ord] draw_ord:2];
+        [BatchDraw add:main_fill key:main_fill.texture.name z_ord:[self get_render_ord] draw_ord:0];
+        
         
         if (self.prev == NULL || force_draw_leftline) {
-            [BatchDraw add:left_line_fill key:[self get_tex_border] z_ord:[self get_render_ord] draw_ord:3];
+            [BatchDraw add:left_line_fill key:left_line_fill.texture.name z_ord:[self get_render_ord] draw_ord:3];
         }
         if (self.next == NULL || force_draw_rightline) {
-            [BatchDraw add:right_line_fill key:[self get_tex_border] z_ord:[self get_render_ord] draw_ord:4];
+            [BatchDraw add:right_line_fill key:right_line_fill.texture.name z_ord:[self get_render_ord] draw_ord:4];
         }
         if (bottom_line_fill.isalloc == 1) {
-            [BatchDraw add:bottom_line_fill key:[self get_tex_border] z_ord:[self get_render_ord] draw_ord:5];
+            [BatchDraw add:bottom_line_fill key:bottom_line_fill.texture.name z_ord:[self get_render_ord] draw_ord:5];
         }
         
         if (self.prev == NULL || force_draw_leftline) {
-             [BatchDraw add:tl_top_corner key:[self get_tex_corner] z_ord:[self get_render_ord] draw_ord:6];
+             [BatchDraw add:tl_top_corner key:tl_top_corner.texture.name z_ord:[self get_render_ord] draw_ord:6];
         }
         if (self.next == NULL || force_draw_rightline) {
-            [BatchDraw add:tr_top_corner key:[self get_tex_corner] z_ord:[self get_render_ord] draw_ord:7];
+            [BatchDraw add:tr_top_corner key:tr_top_corner.texture.name z_ord:[self get_render_ord] draw_ord:7];
         }
         
         if (self.next != NULL && !(force_draw_leftline||force_draw_rightline)) {
-            [BatchDraw add:corner_fill key:[self get_tex_fill] z_ord:[self get_render_ord] draw_ord:8];
-            [BatchDraw add:toppts_fill key:[self get_corner_fill_color] z_ord:[self get_render_ord] draw_ord:9];
-            [BatchDraw add:corner_line_fill key:[self get_tex_border] z_ord:[self get_render_ord] draw_ord:10];
+            [BatchDraw add:corner_fill key:corner_fill.texture.name z_ord:[self get_render_ord] draw_ord:8];
+            [BatchDraw add:toppts_fill key:toppts_fill.texture.name z_ord:[self get_render_ord] draw_ord:9];
+            [BatchDraw add:corner_line_fill key:corner_line_fill.texture.name z_ord:[self get_render_ord] draw_ord:10];
         } 
         
     }
@@ -111,20 +112,20 @@
 	[super draw];    
 }
 
--(NSString*)get_tex_fill {
-    return TEX_GROUND_TEX_1;
+-(CCTexture2D*)get_tex_fill {
+    return [Resource get_tex:TEX_GROUND_TEX_1];
 }
--(NSString*)get_tex_corner {
-    return TEX_TOP_EDGE;
+-(CCTexture2D*)get_tex_corner {
+    return [Resource get_tex:TEX_TOP_EDGE];
 }
--(NSString*)get_tex_border {
-    return TEX_ISLAND_BORDER;
+-(CCTexture2D*)get_tex_border {
+    return [Resource get_tex:TEX_ISLAND_BORDER];
 }
--(NSString*)get_tex_top {
-    return TEX_GROUND_TOP_1;
+-(CCTexture2D*)get_tex_top {
+    return [Resource get_tex:TEX_GROUND_TOP_1];
 }
--(NSString*)get_corner_fill_color {
-    return TEX_GROUND_CORNER_TEX_1;
+-(CCTexture2D*)get_corner_fill_color {
+    return [Resource get_tex:TEX_GROUND_CORNER_TEX_1];
 }
 
 -(void)scale_ndir:(Vec3D*)v {
@@ -133,7 +134,7 @@
 
 -(void)init_tex {
     //init islandfill
-    main_fill = [Common init_render_obj:[Resource get_tex:[self get_tex_fill]] npts:4];
+    main_fill = [Common init_render_obj:[self get_tex_fill] npts:4];
 	
 	CGPoint *tri_pts = main_fill.tri_pts;
     
@@ -180,7 +181,7 @@
 -(void)init_top {
     //set top green bar
     //also initially sets toppts
-    top_fill = [Common init_render_obj:[Resource get_tex:[self get_tex_top]] npts:4];
+    top_fill = [Common init_render_obj:[self get_tex_top] npts:4];
     
 	CGPoint* tri_pts = top_fill.tri_pts;
 	CGPoint* tex_pts = top_fill.tex_pts;
@@ -235,7 +236,7 @@
     bot = [mvr transform_pt:bot];
     [mvr dealloc];
     
-    gl_render_obj o = [Common init_render_obj:[Resource get_tex:[self get_tex_corner]] npts:4];
+    gl_render_obj o = [Common init_render_obj:[self get_tex_corner] npts:4];
 	
 	CGPoint* tri_pts = o.tri_pts;
     
@@ -272,7 +273,7 @@
 
 -(gl_render_obj)line_from:(CGPoint)a to:(CGPoint)b scale:(float)scale {
     struct gl_render_obj n;
-    n = [Common init_render_obj:[Resource get_tex:[self get_tex_border]] npts:4];
+    n = [Common init_render_obj:[self get_tex_border] npts:4];
     n.isalloc = 1;
     CGPoint* tri_pts = n.tri_pts;
 	CGPoint* tex_pts = n.tex_pts;
@@ -332,23 +333,30 @@
 
 -(void)link_finish {
     if (self.next != NULL) {
-        if (corner_fill.isalloc == 0) [self init_corner_tex];
-        if (toppts_fill.isalloc == 0) [self init_corner_top];
-        if (corner_line_fill.isalloc == 0) [self init_corner_line_fill];
+        if (corner_fill.isalloc == 0) {
+            [self init_corner_tex];
+            corner_fill = [Common transform_obj:corner_fill by:position_];
+        }
+        if (toppts_fill.isalloc == 0) {
+            [self init_corner_top];
+            toppts_fill = [Common transform_obj:toppts_fill by:position_];
+        }
+        if (corner_line_fill.isalloc == 0) {
+            [self init_corner_line_fill];
+            corner_line_fill = [Common transform_obj:corner_line_fill by:position_];
+        }
     }
     
     if (!has_transformed_renderpts) {
         has_transformed_renderpts = YES;
         main_fill = [Common transform_obj:main_fill by:position_];
         top_fill = [Common transform_obj:top_fill by:position_];
-        corner_fill = [Common transform_obj:corner_fill by:position_];
         tl_top_corner = [Common transform_obj:tl_top_corner by:position_];
         tr_top_corner = [Common transform_obj:tr_top_corner by:position_];
         bottom_line_fill = [Common transform_obj:bottom_line_fill by:position_];
-        corner_line_fill = [Common transform_obj:corner_line_fill by:position_];
         left_line_fill = [Common transform_obj:left_line_fill by:position_];
         right_line_fill = [Common transform_obj:right_line_fill by:position_];
-        toppts_fill = [Common transform_obj:toppts_fill by:position_];
+        
     }
     
 }
@@ -383,7 +391,7 @@
     [reduce_right scale:corner_top_scale];
     toppts_fill.tri_pts[2] = ccp( toppts_fill.tri_pts[0].x + reduce_right.x, toppts_fill.tri_pts[0].y + reduce_right.y);
     
-    toppts_fill.texture = [Resource get_tex:[self get_corner_fill_color]];
+    toppts_fill.texture = [self get_corner_fill_color];
     toppts_fill.pts = 3;
     toppts_fill.isalloc = 1;
     toppts_fill.tex_pts[0] = ccp(0,0);
@@ -397,7 +405,7 @@
 }
 
 -(void)init_corner_tex {
-    corner_fill = [Common init_render_obj:[Resource get_tex:[self get_tex_fill]] npts:3];
+    corner_fill = [Common init_render_obj:[self get_tex_fill] npts:3];
     
     CGPoint* tri_pts = corner_fill.tri_pts;
     

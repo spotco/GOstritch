@@ -15,7 +15,6 @@
 
 /**
  TODO -- 
- -optimize uilayer nsstring
  -hiteffect fall into water
  -boneanim-pause/endgame menu zord
  -shadow under dog
@@ -36,9 +35,10 @@
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
     
-    [GameMain start_testlevel];
-    //[GameMain start_game_autolevel];
+    //[GameMain start_testlevel];
+    [GameMain start_game_autolevel];
     //[GameMain start_menu];
+    //f_sprintf("%i lel %i\n",5,6);
 }
 
 +(void)start_game_autolevel {

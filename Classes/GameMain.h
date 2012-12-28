@@ -4,6 +4,7 @@
 #import "GameEngineLayer.h"
 #import "MainMenuLayer.h"
 #import "DataStore.h"
+#import "Common.h"
 
 @interface GameMain : NSObject
 
