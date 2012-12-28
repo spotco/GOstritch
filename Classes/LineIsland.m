@@ -19,7 +19,7 @@
 +(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land {
 	LineIsland *new_island = [LineIsland node];
     new_island.fill_hei = height;
-    new_island.ndir = ndir;
+    new_island.self.ndir = ndir;
 	[new_island set_pt1:start pt2:end];
 	[new_island calc_init];
 	new_island.anchorPoint = ccp(0,0);
@@ -46,33 +46,34 @@
     }
         
     if (do_draw) {
-        [BatchDraw add:main_fill key:[self get_tex_fill] at_render_ord:[self get_render_ord]];
-        [BatchDraw add:top_fill key:[self get_tex_top] at_render_ord:[self get_render_ord]];
+        [BatchDraw add:main_fill key:[self get_tex_fill] z_ord:[self get_render_ord] draw_ord:0];
+        [BatchDraw add:top_fill key:[self get_tex_top] z_ord:[self get_render_ord] draw_ord:2];
         
-        if (has_prev == NO || force_draw_leftline) {
-            [BatchDraw add:left_line_fill key:[self get_tex_border] at_render_ord:[self get_render_ord]];
+        if (self.prev == NULL || force_draw_leftline) {
+            [BatchDraw add:left_line_fill key:[self get_tex_border] z_ord:[self get_render_ord] draw_ord:3];
         }
-        if (next == NULL || force_draw_rightline) {
-            [BatchDraw add:right_line_fill key:[self get_tex_border] at_render_ord:[self get_render_ord]];
+        if (self.next == NULL || force_draw_rightline) {
+            [BatchDraw add:right_line_fill key:[self get_tex_border] z_ord:[self get_render_ord] draw_ord:4];
         }
         if (bottom_line_fill.isalloc == 1) {
-            [BatchDraw add:bottom_line_fill key:[self get_tex_border] at_render_ord:[self get_render_ord]];
+            [BatchDraw add:bottom_line_fill key:[self get_tex_border] z_ord:[self get_render_ord] draw_ord:5];
         }
         
-        if (has_prev == NO || force_draw_leftline) {
-             [BatchDraw add:tl_top_corner key:[self get_tex_corner] at_render_ord:[self get_render_ord]];
+        if (self.prev == NULL || force_draw_leftline) {
+             [BatchDraw add:tl_top_corner key:[self get_tex_corner] z_ord:[self get_render_ord] draw_ord:6];
         }
-        if (next == NULL || force_draw_rightline) {
-            [BatchDraw add:tr_top_corner key:[self get_tex_corner] at_render_ord:[self get_render_ord]];
+        if (self.next == NULL || force_draw_rightline) {
+            [BatchDraw add:tr_top_corner key:[self get_tex_corner] z_ord:[self get_render_ord] draw_ord:7];
         }
         
-        if (next != NULL && !(force_draw_leftline||force_draw_rightline)) {
-            [BatchDraw add:corner_fill key:[self get_tex_fill] at_render_ord:[self get_render_ord]];
-            [BatchDraw add:toppts_fill key:[self get_corner_fill_color] at_render_ord:[self get_render_ord]];
-            [BatchDraw add:corner_line_fill key:[self get_tex_border] at_render_ord:[self get_render_ord]];
+        if (self.next != NULL && !(force_draw_leftline||force_draw_rightline)) {
+            [BatchDraw add:corner_fill key:[self get_tex_fill] z_ord:[self get_render_ord] draw_ord:8];
+            [BatchDraw add:toppts_fill key:[self get_corner_fill_color] z_ord:[self get_render_ord] draw_ord:9];
+            [BatchDraw add:corner_line_fill key:[self get_tex_border] z_ord:[self get_render_ord] draw_ord:10];
         } 
         
     }
+    
 }
 
 -(HitRect)get_hitrect {
@@ -93,16 +94,9 @@
     return cache_hitrect;
 }
 
--(void)set_pt1:(CGPoint)start pt2:(CGPoint)end {
-	startX = start.x;
-	startY = start.y;
-	endX = end.x;
-	endY = end.y;
-}
-
 -(void)calc_init {
-    t_min = 0;
-    t_max = sqrtf(powf(endX - startX, 2) + powf(endY - startY, 2));
+    self.t_min = 0;
+    self.t_max = sqrtf(powf(self.endX - self.startX, 2) + powf(self.endY - self.startY, 2));
     do_draw = YES;
     force_draw_leftline = NO;
     force_draw_rightline = NO;
@@ -110,6 +104,7 @@
 }
 
 -(void) draw {
+    return;
     if (!do_draw) {
         return;
     }
@@ -133,7 +128,7 @@
 }
 
 -(void)scale_ndir:(Vec3D*)v {
-    [v scale:ndir];
+    [v scale:self.ndir];
 }
 
 -(void)init_tex {
@@ -142,7 +137,7 @@
 	
 	CGPoint *tri_pts = main_fill.tri_pts;
     
-    Vec3D *v3t2 = [Vec3D init_x:(endX - startX) y:(endY - startY) z:0];
+    Vec3D *v3t2 = [Vec3D init_x:(self.endX - self.startX) y:(self.endY - self.startY) z:0];
     Vec3D *vZ = [Vec3D Z_VEC];
     Vec3D *v3t1 = [v3t2 crossWith:vZ];
     [v3t1 normalize];
@@ -152,9 +147,9 @@
     
     
     tri_pts[3] = ccp(0,0);
-    tri_pts[2] = ccp(endX-startX,endY-startY);
+    tri_pts[2] = ccp(self.endX-self.startX,self.endY-self.startY);
     tri_pts[1] = ccp(0+v3t1.x * taille,0+v3t1.y * taille);
-    tri_pts[0] = ccp(endX-startX +v3t1.x * taille ,endY-startY +v3t1.y * taille);
+    tri_pts[0] = ccp(self.endX-self.startX +v3t1.x * taille ,self.endY-self.startY +v3t1.y * taille);
 	
     [Common tex_map_to_tri_loc:&main_fill len:4];
     [self init_LR_line_with_v3t1:v3t1 v3t2:v3t2];
@@ -191,10 +186,10 @@
 	CGPoint* tex_pts = top_fill.tex_pts;
 	CCTexture2D* texture = top_fill.texture;
 	
-	float dist = sqrt(pow(endX-startX, 2)+pow(endY-startY, 2));
+	float dist = sqrt(pow(self.endX-self.startX, 2)+pow(self.endY-self.startY, 2));
     
     
-    Vec3D *v3t2 = [Vec3D init_x:(endX - startX) y:(endY - startY) z:0];
+    Vec3D *v3t2 = [Vec3D init_x:(self.endX - self.startX) y:(self.endY - self.startY) z:0];
     Vec3D *vZ = [Vec3D Z_VEC];
     
     Vec3D *v3t1 = [v3t2 crossWith:vZ];
@@ -207,9 +202,9 @@
     float d_o_x = offset * v3t1.x;
     float d_o_y = offset * v3t1.y;
     
-    tri_pts[2] = ccp(endX-startX + d_o_x              ,endY-startY + d_o_y);
+    tri_pts[2] = ccp(self.endX-self.startX + d_o_x              ,self.endY-self.startY + d_o_y);
     tri_pts[3] = ccp(d_o_x                            , d_o_y);
-    tri_pts[0] = ccp(endX-startX+v3t1.x*hei  + d_o_x  ,endY-startY+v3t1.y*hei + d_o_y);
+    tri_pts[0] = ccp(self.endX-self.startX+v3t1.x*hei  + d_o_x  ,self.endY-self.startY+v3t1.y*hei + d_o_y);
     tri_pts[1] = ccp(v3t1.x*hei + d_o_x               ,v3t1.y*hei + d_o_y);
     
     tex_pts[0] = ccp(dist/texture.pixelsWide,0);
@@ -217,7 +212,7 @@
     tex_pts[2] = ccp(dist/texture.pixelsWide,1);
     tex_pts[3] = ccp(0,1);
     
-    toppts_fill.tri_pts[0] = ccp(endX-startX,endY-startY);
+    toppts_fill.tri_pts[0] = ccp(self.endX-self.startX,self.endY-self.startY);
     toppts_fill.tri_pts[1] = ccp(tri_pts[2].x,tri_pts[2].y);
     
     [v3t2 negate];
@@ -285,7 +280,7 @@
     Vec3D *v = [Vec3D init_x:b.x-a.x y:b.y-a.y z:0];
     Vec3D *dirv;
     
-    if (ndir == -1) {
+    if (self.ndir == -1) {
         dirv = [[Vec3D Z_VEC] crossWith:v];
     } else {
         dirv = [v crossWith:[Vec3D Z_VEC]];
@@ -316,15 +311,15 @@
 
 -(void)init_corner_line_fill {
     //if next is island, set force_draw_rightline
-    if (next == NULL) {
+    if (self.next == NULL) {
         return;
-    } else if (![next isKindOfClass:[LineIsland class]]){
+    } else if (![self.next isKindOfClass:[LineIsland class]]){
         force_draw_rightline = YES;
         return;
     }
     
-    LineIsland *n = (LineIsland*)next;
-    corner_line_fill = [self line_from:br to:ccp(n.bl.x-startX+n.startX,n.bl.y-startY+n.startY) scale:1];
+    LineIsland *n = (LineIsland*)self.next;
+    corner_line_fill = [self line_from:br to:ccp(n.bl.x-self.startX+n.self.startX,n.bl.y-self.startY+n.self.startY) scale:1];
 }
 
 -(void)init_left_line_fill {    
@@ -336,7 +331,7 @@
 }
 
 -(void)link_finish {
-    if (next != NULL) {
+    if (self.next != NULL) {
         if (corner_fill.isalloc == 0) [self init_corner_tex];
         if (toppts_fill.isalloc == 0) [self init_corner_top];
         if (corner_line_fill.isalloc == 0) [self init_corner_line_fill];
@@ -360,7 +355,7 @@
 
 -(void)init_corner_top {
     //called from link_finish, position greenwedge
-    Vec3D *v3t2 = [Vec3D init_x:(next.endX - next.startX) y:(next.endY - next.startY) z:0];
+    Vec3D *v3t2 = [Vec3D init_x:(self.next.endX - self.next.startX) y:(self.next.endY - self.next.startY) z:0];
     Vec3D *vZ = [Vec3D Z_VEC];
     Vec3D *v3t1 = [v3t2 crossWith:vZ];
     [v3t1 normalize];
@@ -370,7 +365,7 @@
     float offset = OFFSET;
     float d_o_x = offset * v3t1.x;
     float d_o_y = offset * v3t1.y;
-    toppts_fill.tri_pts[2] = ccp( d_o_x+next.startX-startX ,d_o_y+next.startY-startY );
+    toppts_fill.tri_pts[2] = ccp( d_o_x+self.next.startX-self.startX ,d_o_y+self.next.startY-self.startY );
 
     float corner_top_scale = CORNER_TOP_FILL_SCALE;
     
@@ -406,22 +401,22 @@
     
     CGPoint* tri_pts = corner_fill.tri_pts;
     
-    Vec3D *v3t2 = [Vec3D init_x:(endX - startX) y:(endY - startY) z:0];
+    Vec3D *v3t2 = [Vec3D init_x:(self.endX - self.startX) y:(self.endY - self.startY) z:0];
     Vec3D *vZ = [Vec3D Z_VEC];
     Vec3D *v3t1 = [v3t2 crossWith:vZ];
     [v3t1 normalize];
     [self scale_ndir:v3t1];
     
-    tri_pts[0] = ccp(endX-startX,endY-startY);
-    tri_pts[1] = ccp(endX+v3t1.x*fill_hei-startX,endY+v3t1.y*fill_hei-startY);
+    tri_pts[0] = ccp(self.endX-self.startX,self.endY-self.startY);
+    tri_pts[1] = ccp(self.endX+v3t1.x*fill_hei-self.startX,self.endY+v3t1.y*fill_hei-self.startY);
     [v3t2 dealloc];
     [v3t1 dealloc];
     
-    v3t2 = [Vec3D init_x:(next.endX - next.startX) y:(next.endY - next.startY) z:0];
+    v3t2 = [Vec3D init_x:(self.next.endX - self.next.startX) y:(self.next.endY - self.next.startY) z:0];
     v3t1 = [v3t2 crossWith:vZ];
     [v3t1 normalize];
     [self scale_ndir:v3t1];
-    tri_pts[2] = ccp(next.startX+v3t1.x*next.fill_hei-startX, next.startY+v3t1.y*next.fill_hei-startY);
+    tri_pts[2] = ccp(self.next.startX+v3t1.x*self.next.fill_hei-self.startX, self.next.startY+v3t1.y*self.next.fill_hei-self.startY);
     [v3t2 dealloc];
     [v3t1 dealloc];
 

@@ -105,6 +105,13 @@ static float NO_VAL = -99999.0;
     }
 }
 
+-(void)set_pt1:(CGPoint)start pt2:(CGPoint)end {
+	startX = start.x;
+	startY = start.y;
+	endX = end.x;
+	endY = end.y;
+}
+
 -(void)cleanup_anims {
 }
 

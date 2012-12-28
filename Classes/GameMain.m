@@ -19,7 +19,7 @@
  -hiteffect fall into water
  -boneanim-pause/endgame menu zord
  -shadow under dog
- -fix memory warning
+ -recharge speeup
  
  -boss robot + lab
  -fix: forward cache autolevel away a certain distance
@@ -31,6 +31,7 @@
     [GEventDispatcher lazy_alloc];
     [DataStore init];
     [Resource init_textures];
+    [BatchDraw init];
     
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];

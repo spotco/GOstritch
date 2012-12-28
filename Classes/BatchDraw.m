@@ -6,25 +6,23 @@
     ccColor4B *pclr;
     int batch_ct,ord,cursize;
 }
-+(BatchJob*)cons_tex:(GLuint)tex ord:(int)ord;
++(BatchJob*)cons_tex:(GLuint)tex;
 -(void)add_obj:(gl_render_obj)gl;
 -(void)clear;
 -(void)draw;
 @end
 
 @implementation BatchJob
-
 #define WHITE ccc4(255, 255, 255, 255)
 
-+(BatchJob*)cons_tex:(GLuint)tex ord:(int)ord {
++(BatchJob*)cons_tex:(GLuint)tex {
     BatchJob *b = [[BatchJob alloc] init];
-    [b cons_tex:tex ord:ord];
+    [b cons_tex:tex];
     return b;
 }
 
--(void)cons_tex:(GLuint)ttex ord:(int)tord {
+-(void)cons_tex:(GLuint)ttex{
     tex = ttex;
-    ord = tord;
     cursize = 36;
     [self alloc_arrs:cursize];
 
@@ -94,42 +92,68 @@
 @end
 
 
-
 @implementation BatchDraw
 
+#define KEY_TEX @"tex"
+#define KEY_ZIND @"zind"
+#define KEY_DORD @"dord"
 static NSMutableDictionary* jobs;
+static NSMutableDictionary* z_bucket;
 
-+(void)cons {
++(void)init {
     if (!jobs) {
         jobs = [[NSMutableDictionary alloc] init];
+        z_bucket = [[NSMutableDictionary alloc] init];
     }
 }
 
-+(void)add:(gl_render_obj)gl key:(NSString *)key at_render_ord:(int)ord {
-    //NSString* key = [[NSString stringWithFormat:@"id:%i z:%i",gl.texture.name,ord] retain];
++(void)add:(gl_render_obj)gl key:(NSString *)tex z_ord:(int)zord draw_ord:(int)dord {
+    NSDictionary *tkey = [NSDictionary dictionaryWithObjectsAndKeys:
+                          tex,KEY_TEX,
+                          [NSNumber numberWithInt:zord],KEY_ZIND,
+                          [NSNumber numberWithInt:dord],KEY_DORD, 
+    nil];
     
-    if (![jobs objectForKey:key]) {
-        [jobs setObject:[BatchJob cons_tex:gl.texture.name ord:ord] forKey:key];
+    if (![jobs objectForKey:tkey]) {
+        [jobs setObject:[BatchJob cons_tex:gl.texture.name] forKey:tkey];
     }
-    BatchJob *b = [jobs objectForKey:key];
+    BatchJob *b = [jobs objectForKey:tkey];
     [b add_obj:gl];
-    [key release];
 }
 
-+(void)draw_jobs {
-    for (NSString *key in jobs) {
-        BatchJob *b = [jobs objectForKey:key];
-        [b draw];
++(void)sort_jobs {
+    [z_bucket removeAllObjects];
+    for (NSDictionary* key in jobs) {
+        if (![z_bucket objectForKey:[key objectForKey:KEY_ZIND]]) {
+            [z_bucket setObject:[NSMutableArray array] forKey:[key objectForKey:KEY_ZIND]];
+        }
+        NSMutableArray *b = [z_bucket objectForKey:[key objectForKey:KEY_ZIND]];
+        [b addObject:key];
+    }
+    
+    for(NSNumber* key in z_bucket) { //sort everything in every bucket by draword
+        NSMutableArray* a = [z_bucket objectForKey:key];
+        [a sortUsingComparator:^NSComparisonResult(NSDictionary* a, NSDictionary* b) {
+            NSNumber *v_a = [a objectForKey:KEY_DORD];
+            NSNumber *v_b = [b objectForKey:KEY_DORD];
+            return [v_a compare:v_b];
+        }];
     }
 }
 
 -(void)draw {
     [super draw];
-    [BatchDraw draw_jobs];
+    NSArray* jobkeys = [z_bucket objectForKey:[NSNumber numberWithInt:zOrder_]];
+    if (jobkeys) {
+        for (NSDictionary *key in jobkeys) {
+            BatchJob *b = [jobs objectForKey:key];
+            [b draw];
+        }
+    }
 }
 
 +(void)clear {
-    for (NSString *key in jobs) {
+    for (NSDictionary* key in jobs) {
         BatchJob *b = [jobs objectForKey:key];
         [b clear];
     }

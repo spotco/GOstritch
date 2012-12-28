@@ -17,20 +17,13 @@
 	return new_island;
 }
 
--(void)set_pt1:(CGPoint)start pt2:(CGPoint)end {
-	startX = start.x;
-	startY = start.y;
-	endX = end.x;
-	endY = end.y;
-}
-
 -(int)get_render_ord {
     return [GameRenderImplementation GET_RENDER_BTWN_PLAYER_ISLAND];
 }
 
 -(void)calc_init {
-    t_min = 0;
-    t_max = sqrtf(powf(endX - startX, 2) + powf(endY - startY, 2));
+    self.self.t_min = 0;
+    self.t_max = sqrtf(powf(self.endX - self.startX, 2) + powf(self.endY - self.startY, 2));
 }
 
 -(void)init_tex {
@@ -40,7 +33,7 @@
     float BCENTER_WID = 32;
     float BCENTER_HEI = 39*2;
     
-    CGPoint p2off = ccp(endX-startX,endY-startY);
+    CGPoint p2off = ccp(self.endX-self.startX,self.endY-self.startY);
     Vec3D *linedir = [Vec3D init_x:p2off.x y:p2off.y z:0];
     [linedir normalize];
     
@@ -121,8 +114,8 @@
 }
 
 -(void)link_finish {
-    if (next != NULL && [next isKindOfClass:[LineIsland class]]) {
-        ((LineIsland*)next).force_draw_leftline = YES;
+    if (self.next != NULL && [self.next isKindOfClass:[LineIsland class]]) {
+        ((LineIsland*)self.next).force_draw_leftline = YES;
     }
 }
 
@@ -132,7 +125,7 @@
     [Common draw_renderobj:right n_vtx:4];
     [Common draw_renderobj:center n_vtx:4];
 //    glColor4f(1.0, 0, 0, 1.0);
-//    ccDrawLine(ccp(0,0), ccp(endX-startX,endY-startY));
+//    ccDrawLine(ccp(0,0), ccp(self.endX-self.startX,endY-startY));
 }
 
 -(void)dealloc {

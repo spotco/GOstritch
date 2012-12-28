@@ -36,20 +36,12 @@ typedef struct level_bone_status {
 @interface GameEngineLayer : CCLayer <GEventListener> {
     NSTimer *updater;
     
-	NSMutableArray *islands;
-    NSMutableArray *game_objects;
     NSMutableArray *particles;
-    CameraZoom camera_state;
-    CameraZoom tar_camera_state;
-    BatchDraw *batch_draw;
     
     int lives;
     int time;
     
     NSMutableDictionary *bones;
-	Player *player;
-    CCFollow *follow_action;
-    GameEngineLayerMode current_mode;
     
     BOOL refresh_bone_cache;
     level_bone_status cached_status;

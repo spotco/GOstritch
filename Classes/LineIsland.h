@@ -32,8 +32,6 @@
 
 +(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land;
 
-
--(void)set_pt1:(CGPoint)start pt2:(CGPoint)end;
 -(void)calc_init;
 -(void)init_tex;
 -(void)init_top;

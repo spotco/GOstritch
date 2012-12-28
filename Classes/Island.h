@@ -25,6 +25,7 @@
 -(CGPoint)get_position_given_t:(float)t;
 -(Vec3D*)get_tangent_vec;
 -(float)get_height:(float)pos;
+-(void)set_pt1:(CGPoint)start pt2:(CGPoint)end;
 
 -(int)get_render_ord;
 

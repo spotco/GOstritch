@@ -3,6 +3,7 @@
 #import "Vec3D.h"
 
 #define float_random(smallNumber, bigNumber) ((((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * (bigNumber - smallNumber)) + smallNumber)
+#define arrlen(x)  (sizeof(x) / sizeof(x[0]))
 
 @class PlayerEffectParams;
 @class Island;

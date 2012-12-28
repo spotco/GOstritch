@@ -10,6 +10,9 @@ static NSMutableDictionary* cached_json;
     if (cached_json == NULL) {
         cached_json = [[NSMutableDictionary alloc] init];
     }
+    if ([cached_json objectForKey:map_file_name]) {
+        return;
+    }
     
     NSString *islandFilePath = [[NSBundle mainBundle] pathForResource:map_file_name ofType:DOTMAP];
 	NSString *islandInputStr = [[NSString alloc] initWithContentsOfFile : islandFilePath encoding:NSUTF8StringEncoding error:NULL];

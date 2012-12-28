@@ -93,6 +93,10 @@
     cur_disp_char = [[Player get_character] retain];
     animp = [MenuDogIcon node];
     [animp setScale:1.0];
+    
+    [animp stopAction:cur_char_anim];
+    [cur_char_anim release];
+    
     cur_char_anim = [self init_run_anim:[Player get_character]];
     [animp runAction:cur_char_anim];
     [ccbtn addChild:animp];
@@ -157,6 +161,8 @@
 
 -(void)dealloc {
     [self removeAllChildrenWithCleanup:NO];
+    [animp stopAction:cur_char_anim];
+    [cur_char_anim release];
     [indicator_pts removeAllObjects];
     [indicator_pts release];
     [interactive_items removeAllObjects];

@@ -334,6 +334,7 @@
     [pause_ui removeAllChildrenWithCleanup:YES];
     [gameover_ui removeAllChildrenWithCleanup:YES];
     [self removeAllChildrenWithCleanup:YES];
+    [game_end_menu_layer release];
     [super dealloc];
 }
 

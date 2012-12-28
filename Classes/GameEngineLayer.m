@@ -63,14 +63,6 @@
         particles_tba = [[NSMutableArray alloc] init];
     }
     
-    /*
-    //TRMV
-    batch_drawer = [BatchDrawer node];
-    */
-    [BatchDraw cons];
-    batch_draw = [BatchDraw node];
-    [self addChild:batch_draw];
-    
     [GameControlImplementation reset_control_state];
     [GEventDispatcher add_listener:self];
     refresh_viewbox_cache = YES;
@@ -83,6 +75,17 @@
     [self addChild:player z:[GameRenderImplementation GET_RENDER_PLAYER_ORD]];
     self.isTouchEnabled = YES;
     
+    
+    int draw_ctx_z[] =  {
+        [GameRenderImplementation GET_RENDER_BTWN_PLAYER_ISLAND],
+        [GameRenderImplementation GET_RENDER_FG_ISLAND_ORD],
+        [GameRenderImplementation GET_RENDER_GAMEOBJ_ORD],
+        [GameRenderImplementation GET_RENDER_ISLAND_ORD]
+    };
+    for (int i = 0; i < arrlen(draw_ctx_z); i++) {
+        [self addChild:[BatchDraw node] z:draw_ctx_z[i]];
+    }
+     
     current_mode = GameEngineLayerMode_GAMEPLAY;
     
     [self reset_camera];
@@ -158,6 +161,8 @@
 	}
 }
 
+static int ct;
+
 -(void)update {
     [GEventDispatcher dispatch_events];
     if (current_mode == GameEngineLayerMode_GAMEPLAY) {
@@ -173,14 +178,14 @@
         [self update_particles];
         [self push_added_particles];
         
-        
-        /*
-        //TRMV
-        [LineIsland batch_clear]
-        */
-         
-        [BatchDraw clear];
-        [self update_islands];
+        if (ct >= 0) {         
+            [BatchDraw clear];
+            [self update_islands];
+            [BatchDraw sort_jobs];
+            ct = 20;
+        } else {
+            ct--;
+        }
         
         [GameRenderImplementation update_render_on:self];
         [GEventDispatcher push_event:[GEvent init_type:GEventType_GAME_TICK]];
@@ -245,6 +250,7 @@
         [self unscheduleAllSelectors];
     }
     [self set_records];
+    [self stopAction:follow_action];
     [GEventDispatcher remove_all_listeners];
     [[CCDirector sharedDirector] resume];
 }
@@ -266,7 +272,7 @@
 /* bone system */
 
 -(void)init_bones {
-    bones = [[[NSMutableDictionary alloc]init]retain]; //bid -> status
+    bones = [[NSMutableDictionary alloc]init]; //bid -> status
     for (GameObject *i in game_objects) {
         if ([i class] == [DogBone class]) {
             [self add_bone:(DogBone*)i autoassign:NO];
@@ -394,10 +400,10 @@
     if (refresh_viewbox_cache) {
         refresh_viewbox_cache = NO;
         //TODO -- make this scale with camera zoom
-        cached_viewbox = [Common hitrect_cons_x1:-self.position.x-[Common SCREEN].width*0
-                                              y1:-self.position.y-[Common SCREEN].height*0
-                                             wid:[Common SCREEN].width*2
-                                             hei:[Common SCREEN].height*2];
+        cached_viewbox = [Common hitrect_cons_x1:-self.position.x-[Common SCREEN].width*1
+                                              y1:-self.position.y-[Common SCREEN].height*1
+                                             wid:[Common SCREEN].width*3
+                                             hei:[Common SCREEN].height*3];
     }
     return cached_viewbox;
 }
@@ -514,6 +520,7 @@ static NSMutableArray* particles_tba;
     [islands release];
     [game_objects release];
     [particles release];
+    [bones removeAllObjects];
     [bones release];
     [super dealloc];
 }
