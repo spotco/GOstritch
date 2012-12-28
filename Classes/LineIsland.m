@@ -173,10 +173,8 @@
     tl = main_fill.tri_pts[3];
     tr = main_fill.tri_pts[2];
     
-    float L = TL_DOWNOFFSET;
-    [v3t1 negate];
     [v3t1 normalize];
-    [v3t1 scale:L];
+    [v3t1 scale:TL_DOWNOFFSET];
     tl = ccp(tl.x + v3t1.x, tl.y + v3t1.y);
     tr = ccp(tr.x + v3t1.x, tr.y + v3t1.y);
     
@@ -219,8 +217,8 @@
     tex_pts[2] = ccp(dist/texture.pixelsWide,1);
     tex_pts[3] = ccp(0,1);
     
-    toppts[0] = ccp(endX-startX,endY-startY);
-    toppts[1] = ccp(tri_pts[2].x,tri_pts[2].y);
+    toppts_fill.tri_pts[0] = ccp(endX-startX,endY-startY);
+    toppts_fill.tri_pts[1] = ccp(tri_pts[2].x,tri_pts[2].y);
     
     [v3t2 negate];
     [v3t2 normalize];
@@ -349,7 +347,6 @@
         main_fill = [Common transform_obj:main_fill by:position_];
         top_fill = [Common transform_obj:top_fill by:position_];
         corner_fill = [Common transform_obj:corner_fill by:position_];
-        corner_top_fill = [Common transform_obj:corner_top_fill by:position_];
         tl_top_corner = [Common transform_obj:tl_top_corner by:position_];
         tr_top_corner = [Common transform_obj:tr_top_corner by:position_];
         bottom_line_fill = [Common transform_obj:bottom_line_fill by:position_];
@@ -373,7 +370,7 @@
     float offset = OFFSET;
     float d_o_x = offset * v3t1.x;
     float d_o_y = offset * v3t1.y;
-    toppts[2] = ccp( d_o_x+next.startX-startX ,d_o_y+next.startY-startY );
+    toppts_fill.tri_pts[2] = ccp( d_o_x+next.startX-startX ,d_o_y+next.startY-startY );
 
     float corner_top_scale = CORNER_TOP_FILL_SCALE;
     
@@ -381,20 +378,19 @@
           1 2
      */
     //toppts[0,1] already set, set[2] and scale
-    Vec3D *reduce_left = [Vec3D init_x:toppts[1].x-toppts[0].x y:toppts[1].y-toppts[0].y z:0];
+    Vec3D *reduce_left = [Vec3D init_x:toppts_fill.tri_pts[1].x-toppts_fill.tri_pts[0].x y:toppts_fill.tri_pts[1].y-toppts_fill.tri_pts[0].y z:0];
     [reduce_left normalize];
     [reduce_left scale:corner_top_scale];
-    toppts[1] = ccp( toppts[0].x + reduce_left.x, toppts[0].y + reduce_left.y);
+    toppts_fill.tri_pts[1] = ccp( toppts_fill.tri_pts[0].x + reduce_left.x, toppts_fill.tri_pts[0].y + reduce_left.y);
     
-    Vec3D *reduce_right = [Vec3D init_x:toppts[2].x-toppts[0].x y:toppts[2].y-toppts[0].y z:0];
+    Vec3D *reduce_right = [Vec3D init_x:toppts_fill.tri_pts[2].x-toppts_fill.tri_pts[0].x y:toppts_fill.tri_pts[2].y-toppts_fill.tri_pts[0].y z:0];
     [reduce_right normalize];
     [reduce_right scale:corner_top_scale];
-    toppts[2] = ccp( toppts[0].x + reduce_right.x, toppts[0].y + reduce_right.y);
+    toppts_fill.tri_pts[2] = ccp( toppts_fill.tri_pts[0].x + reduce_right.x, toppts_fill.tri_pts[0].y + reduce_right.y);
     
-    toppts_fill = [Common init_render_obj:[Resource get_tex:[self get_corner_fill_color]] npts:3];
-    toppts_fill.tri_pts[0] = toppts[0];
-    toppts_fill.tri_pts[1] = toppts[1];
-    toppts_fill.tri_pts[2] = toppts[2];
+    toppts_fill.texture = [Resource get_tex:[self get_corner_fill_color]];
+    toppts_fill.pts = 3;
+    toppts_fill.isalloc = 1;
     toppts_fill.tex_pts[0] = ccp(0,0);
     toppts_fill.tex_pts[1] = ccp(1,0);
     toppts_fill.tex_pts[2] = ccp(1,1);

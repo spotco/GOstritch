@@ -11,7 +11,7 @@ static float NO_VAL = -99999.0;
 
 @synthesize startX, startY, endX, endY, fill_hei, ndir, t_min, t_max;
 @synthesize next,prev;
-@synthesize can_land,has_prev;
+@synthesize can_land;
 
 +(int) link_islands:(NSMutableArray*)islands {
     int ct = 0;
@@ -24,7 +24,6 @@ static float NO_VAL = -99999.0;
             if ([Common pt_fuzzy_eq:ccp(i.endX,i.endY) b:ccp(j.startX,j.startY)]) {
                 i.next = j;
                 j.prev = i;
-                j.has_prev = YES;
                 ct++;
                 break;
             }

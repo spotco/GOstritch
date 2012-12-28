@@ -17,14 +17,14 @@
 	return new_island;
 }
 
--(CCTexture2D*)get_tex_corner {
-    return [Resource get_tex:TEX_CAVE_CORNER_TEX];
+-(NSString*)get_tex_corner {
+    return TEX_CAVE_CORNER_TEX;
 }
--(CCTexture2D*)get_tex_top {
-    return [Resource get_tex:TEX_CAVE_TOP_TEX];
+-(NSString*)get_tex_top {
+    return TEX_CAVE_TOP_TEX;
 }
--(CCTexture2D*)get_corner_fill_color {
-    return [Resource get_tex:TEX_GROUND_CORNER_TEX_1];
+-(NSString*)get_corner_fill_color {
+    return TEX_GROUND_CORNER_TEX_1;
 }
 
 

@@ -5,21 +5,14 @@
 @class GameEngineLayer;
 
 @interface Island : CCSprite {
-	float startX, startY, endX, endY, ndir;
-    float t_min,t_max;
-    
-    BOOL can_land,has_prev;
-    Island* next;
-    
     float fill_hei;
-    
     Vec3D *cached_vec;
 }
 
 
 @property(readwrite,assign) float startX, startY, endX, endY, fill_hei, ndir, t_min, t_max;
 @property(readwrite,assign) Island *next, *prev;
-@property(readwrite,assign) BOOL can_land,has_prev;
+@property(readwrite,assign) BOOL can_land;
 
 +(float) NO_VALUE;
 +(int)link_islands:(NSMutableArray*)islands;

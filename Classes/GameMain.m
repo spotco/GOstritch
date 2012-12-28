@@ -35,8 +35,8 @@
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
     
-    //[GameMain start_testlevel];
-    [GameMain start_game_autolevel];
+    [GameMain start_testlevel];
+    //[GameMain start_game_autolevel];
     //[GameMain start_menu];
 }
 

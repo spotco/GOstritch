@@ -7,19 +7,24 @@
 
 @interface LineIsland : Island {
     BOOL do_draw;
-	gl_render_obj main_fill,top_fill,corner_fill,corner_top_fill;
-    gl_render_obj tl_top_corner,tr_top_corner;
-    gl_render_obj bottom_line_fill,corner_line_fill,left_line_fill,right_line_fill,toppts_fill; //toppts fill is triangle wedge between
-    CGPoint toppts[3];
     
-    CGPoint tl,bl,tr,br;
+	gl_render_obj main_fill, //main body texture fill
+                  top_fill, //top grass decoration fill
+                  corner_fill; //wedge main body texture between cur and next (optional)
+    
+    gl_render_obj tl_top_corner, //left top decoration rounded edge (optional)
+                  tr_top_corner; //right top decoration rounded edge (optional)
+    
+    gl_render_obj bottom_line_fill, //bottom border line
+                  corner_line_fill, //border line between cur and next (optional)
+                  left_line_fill, //left border line (optional)
+                  right_line_fill, //right border line (optional)
+                  toppts_fill; //corner wedge decoration between cur and next (optional)
     
     HitRect cache_hitrect;
+    
     BOOL has_gen_hitrect;
-    
     BOOL has_transformed_renderpts;
-    
-    BOOL force_draw_leftline,force_draw_rightline;
 }
 
 @property(readwrite,assign) CGPoint tl,bl,tr,br;
