@@ -505,6 +505,7 @@ static NSMutableArray* particles_tba;
 
 -(void)dealloc {
     NSLog(@"gameengine dealloc");
+    [BatchDraw clear];
     [self removeAllChildrenWithCleanup:YES];
     [islands removeAllObjects];
     [game_objects removeAllObjects];

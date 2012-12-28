@@ -54,13 +54,7 @@
     [Island link_islands:tglayer.islands];
     
     for (Island* i in m.map.n_islands) {
-        if (i.can_land == NO) {
-            [tglayer addChild:i z:[GameRenderImplementation GET_RENDER_FG_ISLAND_ORD]];
-        } else if ([i isKindOfClass:[BridgeIsland class]]) {
-            [tglayer addChild:i z:[GameRenderImplementation GET_RENDER_BTWN_PLAYER_ISLAND]];
-        } else {
-            [tglayer addChild:i z:[GameRenderImplementation GET_RENDER_ISLAND_ORD]];
-        }
+        [tglayer addChild:i z:[i get_render_ord]];
     }
     
     [tglayer.game_objects addObjectsFromArray:m.map.game_objects];

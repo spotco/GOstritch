@@ -2,7 +2,7 @@
 
 @implementation GameMain
 
-#define USE_BG YES
+#define USE_BG NO
 #define ENABLE_BG_PARTICLES YES
 #define DRAW_HITBOX NO
 #define TARGET_FPS 60
@@ -16,10 +16,13 @@
 /**
  TODO -- 
  -optimize uilayer nsstring
+ -hiteffect fall into water
+ -boneanim-pause/endgame menu zord
+ -shadow under dog
+ -fix memory warning
+ 
  -boss robot + lab
  -fix: forward cache autolevel away a certain distance
- 
- -fix: tap when snapto reverts
  
  -fix loadlevel + gameend_ui stuff
  **/
@@ -31,18 +34,6 @@
     
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
-    
-    /*int *a = calloc(5, sizeof(int));
-    a[0] = 1;
-    a[1] = 2;
-    int *b = calloc(5, sizeof(int));
-    
-    memcpy(b, a, sizeof(int)*5);
-    
-    for (int i = 0; i < 6; i++) {
-        NSLog(@"%i",b[i]);
-    }*/
-    
     
     //[GameMain start_testlevel];
     [GameMain start_game_autolevel];

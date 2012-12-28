@@ -29,7 +29,7 @@ typedef struct gl_render_obj {
 	CCTexture2D *texture;
 	CGPoint tri_pts[4];
 	CGPoint tex_pts[4];
-    int isalloc;
+    int isalloc,pts;
     
 } gl_render_obj;
 

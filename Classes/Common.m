@@ -177,6 +177,7 @@
     struct gl_render_obj n;
     n.texture = tex;
     n.isalloc = 1;
+    n.pts = npts;
     return n;
 }
 

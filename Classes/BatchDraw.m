@@ -58,17 +58,19 @@
 }
 
 -(void)add_obj:(gl_render_obj)gl {
-    while (cursize < batch_ct+6) {
+    int lim = gl.pts==4?6:3;
+    
+    while (cursize < batch_ct+lim) {
         [self incr_arrs_to:cursize*cursize];
     }
     
-    for(int i = 0; i < 6; i++) {
+    for(int i = 0; i < lim; i++) {
         int t = i%3 + i/3;
         pvtx[batch_ct+i] = gl.tri_pts[t];
         ptex[batch_ct+i] = gl.tex_pts[t];
         pclr[batch_ct+i] = WHITE;
     }
-    batch_ct+=6;
+    batch_ct+=lim;
 }
 
 -(void)clear {

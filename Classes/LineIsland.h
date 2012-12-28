@@ -13,15 +13,16 @@
     CGPoint toppts[3];
     
     CGPoint tl,bl,tr,br;
-    CGPoint bl1,bl2,br1,br2;
     
     HitRect cache_hitrect;
     BOOL has_gen_hitrect;
     
+    BOOL has_transformed_renderpts;
+    
     BOOL force_draw_leftline,force_draw_rightline;
 }
 
-@property(readwrite,assign) CGPoint tl,bl,tr,br,bl1,bl2,br1,br2;
+@property(readwrite,assign) CGPoint tl,bl,tr,br;
 @property(readwrite,assign) BOOL force_draw_leftline,force_draw_rightline;
 
 +(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land;
@@ -32,11 +33,11 @@
 -(void)init_tex;
 -(void)init_top;
 
--(CCTexture2D*)get_tex_fill;
--(CCTexture2D*)get_tex_corner;
--(CCTexture2D*)get_tex_border;
--(CCTexture2D*)get_tex_top;
--(CCTexture2D*)get_corner_fill_color;
+-(NSString*)get_tex_fill;
+-(NSString*)get_tex_corner;
+-(NSString*)get_tex_border;
+-(NSString*)get_tex_top;
+-(NSString*)get_corner_fill_color;
 
 
 

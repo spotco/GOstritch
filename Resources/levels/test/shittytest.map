@@ -1,17 +1,11 @@
 {
-    "objects": [],
-    "start_x": 218,
+    "assert_links": 1,
+    "start_x": 190,
     "islands": [
-        {"y1": 358, "type": "line", "can_fall": true, "x2": 367, "ground": "open", "y2": 388, "x1": 123, "hei": 50, "ndir": "left"},
-        {"y1": 388, "type": "line", "can_fall": true, "x2": 508, "ground": "open", "y2": 479, "x1": 367, "hei": 50, "ndir": "left"},
-        {"y1": 479, "type": "line", "can_fall": true, "x2": 658, "ground": "open", "y2": 516, "x1": 508, "hei": 50, "ndir": "left"},
-        {"y1": 516, "type": "line", "can_fall": true, "x2": 862, "ground": "open", "y2": 515, "x1": 658, "hei": 50, "ndir": "left"},
-        {"y1": 515, "type": "line", "can_fall": true, "x2": 972, "ground": "open", "y2": 540, "x1": 862, "hei": 50, "ndir": "left"},
-        {"y1": 540, "type": "line", "can_fall": true, "x2": 1097, "ground": "open", "y2": 594, "x1": 972, "hei": 50, "ndir": "left"},
-        {"y1": 594, "type": "line", "can_fall": true, "x2": 1183, "ground": "open", "y2": 594, "x1": 1097, "hei": 50, "ndir": "left"},
-        {"y1": 594, "type": "line", "can_fall": true, "x2": 1482, "ground": "open", "y2": 560, "x1": 1183, "hei": 50, "ndir": "left"}
+        {"x2": 523, "type": "line", "can_fall": true, "hei": 50, "y2": 290, "x1": 154, "y1": 264, "ground": "open", "ndir": "left"},
+        {"x2": 670, "type": "line", "can_fall": true, "hei": 50, "y2": 533, "x1": 523, "y1": 290, "ground": "open", "ndir": "left"}
     ],
-    "start_y": 454,
-    "connect_pts": {"y1": 358, "y2": 560, "x1": 123, "x2": 1482},
-    "assert_links": 7
+    "connect_pts": {"x2": 670, "y1": 264, "y2": 533, "x1": 154},
+    "start_y": 339,
+    "objects": []
 }
