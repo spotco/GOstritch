@@ -2,7 +2,7 @@
 
 @implementation GameMain
 
-#define USE_BG YES
+#define USE_BG NO
 #define ENABLE_BG_PARTICLES YES
 #define DRAW_HITBOX NO
 #define TARGET_FPS 60
@@ -11,14 +11,11 @@
 #define DEBUG_UI YES
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
-#define STARTING_LIVES 2
+#define STARTING_LIVES 5
 #define TESTLEVEL @"shittytest"
 
 /**
  TODO -- 
- -tweak bone uianim position
- 
- -shadow under dog
  -fix: forward cache autolevel away a certain distance
  -boss robot + lab
 
@@ -33,8 +30,8 @@
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
     
-    [GameMain start_testlevel];
-    //[GameMain start_game_autolevel];
+    //[GameMain start_testlevel];
+    [GameMain start_game_autolevel];
     //[GameMain start_menu];
 }
 

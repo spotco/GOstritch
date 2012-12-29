@@ -1,0 +1,8 @@
+{
+    "objects": [{"x": 764, "type": "spikevine", "x2": 251, "y": 332, "label": "0", "y2": 334}],
+    "start_x": 0,
+    "assert_links": 0,
+    "connect_pts": {"y1": 141, "y2": 149, "x1": 71, "x2": 913},
+    "start_y": 0,
+    "islands": [{"y1": 141, "type": "line", "can_fall": true, "x2": 913, "ground": "open", "y2": 149, "x1": 71, "hei": 50, "ndir": "left"}]
+}

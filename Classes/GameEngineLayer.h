@@ -2,6 +2,7 @@
 #import "DataStore.h"
 #import "Island.h"
 #import "Player.h"
+#import "DogShadow.h"
 #import "Common.h"
 #import "GameObject.h"
 #import "Particle.h"

@@ -202,6 +202,10 @@
 		7EDE471515C51F4F00BC1CEB /* GameStartAnim.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDE471415C51F4F00BC1CEB /* GameStartAnim.m */; };
 		7EDE471815C51FEE00BC1CEB /* UIAnim.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDE471715C51FEE00BC1CEB /* UIAnim.m */; };
 		7EDFC78D15C22D3F00DCB32C /* HitEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EDFC78C15C22D3F00DCB32C /* HitEffect.m */; };
+		7EE0AF08168EEF5D0090B546 /* dog_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EE0AF07168EEF5D0090B546 /* dog_shadow.png */; };
+		7EE0AF0C168EEFEA0090B546 /* DogShadow.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE0AF0A168EEFE80090B546 /* DogShadow.h */; };
+		7EE0AF0D168EEFEA0090B546 /* DogShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE0AF0B168EEFE90090B546 /* DogShadow.m */; };
+		7EE0AF0F168F011E0090B546 /* shittytest2.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EE0AF0E168F011D0090B546 /* shittytest2.map */; };
 		7EE1174716623AC4004F3C29 /* autolevel_1_3.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EE1174616623AC4004F3C29 /* autolevel_1_3.map */; };
 		7EE1174916623CA0004F3C29 /* autolevel_1_4.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EE1174816623CA0004F3C29 /* autolevel_1_4.map */; };
 		7EE1174B16630170004F3C29 /* autolevel_1_5.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EE1174A16630170004F3C29 /* autolevel_1_5.map */; };
@@ -709,6 +713,10 @@
 		7EDE471715C51FEE00BC1CEB /* UIAnim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAnim.m; sourceTree = "<group>"; };
 		7EDFC78B15C22D3F00DCB32C /* HitEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HitEffect.h; sourceTree = "<group>"; };
 		7EDFC78C15C22D3F00DCB32C /* HitEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HitEffect.m; sourceTree = "<group>"; };
+		7EE0AF07168EEF5D0090B546 /* dog_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dog_shadow.png; sourceTree = "<group>"; };
+		7EE0AF0A168EEFE80090B546 /* DogShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DogShadow.h; sourceTree = "<group>"; };
+		7EE0AF0B168EEFE90090B546 /* DogShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DogShadow.m; sourceTree = "<group>"; };
+		7EE0AF0E168F011D0090B546 /* shittytest2.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shittytest2.map; sourceTree = "<group>"; };
 		7EE1174616623AC4004F3C29 /* autolevel_1_3.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autolevel_1_3.map; sourceTree = "<group>"; };
 		7EE1174816623CA0004F3C29 /* autolevel_1_4.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autolevel_1_4.map; sourceTree = "<group>"; };
 		7EE1174A16630170004F3C29 /* autolevel_1_5.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autolevel_1_5.map; sourceTree = "<group>"; };
@@ -1256,6 +1264,7 @@
 				7EDA83CB1612DC850083E9CE /* swingvine_test.map */,
 				7EE2AEFE161448F60035BA50 /* bridge_test.map */,
 				7EB7698D167EF0A6003AFCF5 /* shittytest.map */,
+				7EE0AF0E168F011D0090B546 /* shittytest2.map */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -1506,6 +1515,8 @@
 				7EC6CB6D15D362E50068F574 /* Blocker.m */,
 				7EFA3D8A160D8CA2002DBC3C /* CameraArea.h */,
 				7EFA3D8B160D8CA2002DBC3C /* CameraArea.m */,
+				7EE0AF0A168EEFE80090B546 /* DogShadow.h */,
+				7EE0AF0B168EEFE90090B546 /* DogShadow.m */,
 			);
 			name = game_obj;
 			sourceTree = "<group>";
@@ -1772,6 +1783,7 @@
 		7EF1243C15CA506A00B91A91 /* effects */ = {
 			isa = PBXGroup;
 			children = (
+				7EE0AF07168EEF5D0090B546 /* dog_shadow.png */,
 				7EF1246315CA52AA00B91A91 /* splash_ss.plist */,
 				7EF1246415CA52AA00B91A91 /* splash_ss.png */,
 			);
@@ -2230,6 +2242,7 @@
 				7E60D113168AC77700E84683 /* PhysicsEnabledObject.h in Headers */,
 				7E60D117168AFD1500E84683 /* BrokenMachineParticle.h in Headers */,
 				7ECE6051168C6B61001C2016 /* BatchDraw.h in Headers */,
+				7EE0AF0C168EEFEA0090B546 /* DogShadow.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2437,6 +2450,8 @@
 				7E60D10A168ABE3D00E84683 /* robot_default.png in Resources */,
 				7E60D10B168ABE3D00E84683 /* rocket.png in Resources */,
 				7ECE604E168C4D13001C2016 /* BG1_island_corner.png in Resources */,
+				7EE0AF08168EEF5D0090B546 /* dog_shadow.png in Resources */,
+				7EE0AF0F168F011E0090B546 /* shittytest2.map in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2525,6 +2540,7 @@
 				7E60D114168AC77700E84683 /* PhysicsEnabledObject.m in Sources */,
 				7E60D118168AFD1500E84683 /* BrokenMachineParticle.m in Sources */,
 				7ECE6052168C6B61001C2016 /* BatchDraw.m in Sources */,
+				7EE0AF0D168EEFEA0090B546 /* DogShadow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

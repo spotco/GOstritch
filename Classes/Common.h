@@ -51,6 +51,10 @@ typedef struct CameraZoom {
     float z;
 } CameraZoom;
 
+typedef struct CGRange {
+    float min,max;
+} CGRange;
+
 NSString* strf (char* format, ... );
 +(CGSize)SCREEN;
 +(CGPoint)screen_pctwid:(float)pctwid pcthei:(float)pcthei;

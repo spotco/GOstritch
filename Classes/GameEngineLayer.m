@@ -59,8 +59,13 @@
     [self init_bones];
     particles = [[NSMutableArray array] retain];
     player = [Player init_at:player_start_pt];
-    
     [self addChild:player z:[GameRenderImplementation GET_RENDER_PLAYER_ORD]];
+    
+    DogShadow *d = [DogShadow cons];
+    [self.game_objects addObject:d];
+    [self addChild:d z:[d get_render_ord]];
+    
+    
     self.isTouchEnabled = YES;
     
     
@@ -237,6 +242,7 @@
     [self stopAction:follow_action];
     [GEventDispatcher remove_all_listeners];
     [[CCDirector sharedDirector] resume];
+    [BatchDraw clear];
 }
 
 /* camera interface */
@@ -483,7 +489,6 @@ static NSMutableArray* particles_tba;
  }
 
 -(void)dealloc {
-    [BatchDraw clear];
     [self removeAllChildrenWithCleanup:YES];
     [islands removeAllObjects];
     [game_objects removeAllObjects];

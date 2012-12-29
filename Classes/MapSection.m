@@ -20,8 +20,9 @@
 }
 
 -(MapSection_Position)get_position_status:(CGPoint)p {
-    float min = offset_x;
-    float max = offset_x + (map.connect_pts_x2 - map.connect_pts_x1);
+    CGRange range = [self get_range];
+    float min = range.min;
+    float max = range.max;
     
     if (p.x >= min && p.x <= max) {
         return MapSection_Position_CURRENT;
@@ -33,6 +34,13 @@
         NSLog(@"mapsection code error");
         return MapSection_Position_CURRENT;
     }
+}
+
+-(CGRange)get_range {
+    struct CGRange r;
+    r.min = offset_x;
+    r.max = offset_x + (map.connect_pts_x2 - map.connect_pts_x1);
+    return r;
 }
 
 -(void)offset_x:(float)x y:(float)y {

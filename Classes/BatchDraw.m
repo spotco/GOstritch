@@ -101,7 +101,7 @@ static NSMutableArray* z_bucket;
 +(void)init {
     if (!z_bucket) {
         z_bucket = [[NSMutableArray alloc] init];
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 8; i++) {
             [z_bucket addObject:[NSMutableArray array]];
         }
     }

@@ -10,7 +10,7 @@
         set1_levels = [[NSArray alloc] initWithObjects:
             @"autolevel_1_1",@"autolevel_1_2",@"autolevel_1_3",@"autolevel_1_4",@"autolevel_1_5",@"autolevel_1_6",@"autolevel_1_7",@"autolevel_1_8",
         nil];
-        //set1_levels = [[NSArray alloc] initWithObjects:@"test", nil];
+        set1_levels = [[NSArray alloc] initWithObjects:@"shittytest2", nil];
     }
     return set1_levels;
 }
@@ -26,7 +26,8 @@
     tglayer = glayer;
     ct = 0;
     
-    NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
+    //NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
+    NSArray *to_load = [[NSArray arrayWithObjects: @"shittytest", nil] retain];
     map_sections = [[NSMutableArray alloc] init];
     stored = [[NSMutableArray alloc] init];
     

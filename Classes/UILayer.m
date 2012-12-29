@@ -273,12 +273,12 @@
         [l setString:s];
     }
 }
-+(CGPoint)player_approx_position:(GameEngineLayer*)game_engine_layer {
++(CGPoint)player_approx_position:(GameEngineLayer*)game_engine_layer { //magic numbers deal w/ it
     CGPoint center = [game_engine_layer convertToWorldSpace:game_engine_layer.player.position];
     CGPoint scrn = ccp(-game_engine_layer.camera_state.x,-game_engine_layer.camera_state.y);
     
-    center.x += scrn.x/1.3;
-    center.y += scrn.y/1.3;
+    center.x += scrn.x/1;
+    center.y += scrn.y/1;
     
     if (game_engine_layer.player.current_island != NULL) {
         Vec3D* nvec = [game_engine_layer.player.current_island get_normal_vecC];
