@@ -2,7 +2,7 @@
 
 @implementation GameMain
 
-#define USE_BG NO
+#define USE_BG YES
 #define ENABLE_BG_PARTICLES YES
 #define DRAW_HITBOX NO
 #define TARGET_FPS 60
@@ -16,9 +16,8 @@
 
 /**
  TODO -- 
- -fix: forward cache autolevel away a certain distance
  -boss robot + lab
-
+ -player run in animation
  **/
 
 +(void)main {

@@ -5,6 +5,7 @@
 @implementation AutoLevel
 
 #define REMOVEBUFFER 400
+#define ADDBUFFER 600
 
 +(NSArray*)random_set1 {
     static NSArray *set1_levels;
@@ -12,7 +13,7 @@
         set1_levels = [[NSArray alloc] initWithObjects:
             @"autolevel_1_1",@"autolevel_1_2",@"autolevel_1_3",@"autolevel_1_4",@"autolevel_1_5",@"autolevel_1_6",@"autolevel_1_7",@"autolevel_1_8",
         nil];
-        set1_levels = [[NSArray alloc] initWithObjects:@"shittytest2", nil];
+        //set1_levels = [[NSArray alloc] initWithObjects:@"autolevel_1_2", nil];
     }
     return set1_levels;
 }
@@ -25,36 +26,50 @@
 }
 
 -(void)cons:(GameEngineLayer*)glayer {
-    tglayer = glayer;
-    ct = 0;
-    
-    //NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
-    NSArray *to_load = [[NSArray arrayWithObjects: @"shittytest", nil] retain];
-    map_sections = [[NSMutableArray alloc] init];
-    stored = [[NSMutableArray alloc] init];
-    
-    for (NSString* i in to_load) {
-        [map_sections addObject:[MapSection init_from_name:i]];
-    }
-    [to_load release];
-    cur_x = ((MapSection*)[map_sections objectAtIndex:0]).map.connect_pts_x1;
-    cur_y = ((MapSection*)[map_sections objectAtIndex:0]).map.connect_pts_y1;
-    
-    for (MapSection *m in map_sections) {
-        [self load_map_section:m];
-    }
-    
     for (NSString* i in [AutoLevel random_set1]) {
         [MapLoader precache_map:i];
     }
+    tglayer = glayer;
+    
+    NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
+    //NSArray *to_load = [[NSArray arrayWithObjects: @"shittytest", nil] retain];
+    map_sections = [[NSMutableArray alloc] init];
+    stored = [[NSMutableArray alloc] init];
+    queued_sections = [[NSMutableArray alloc] init];
+    
+    for (NSString* i in to_load) {
+        [self load_into_queue:i];
+    }
+    [to_load release];
 }
 
--(void)load_map_section:(MapSection*)m {
+-(void)load_into_queue:(NSString*)key { //load map into queue
+    MapSection *m = [MapSection init_from_name:key];
+    if (!has_pos_initial) {
+        cur_x = m.map.connect_pts_x1;
+        cur_y = m.map.connect_pts_y1;
+        has_pos_initial = YES;
+    }
+    
+    
     [m offset_x:cur_x y:cur_y];
+    cur_x = (m.map.connect_pts_x2 - m.map.connect_pts_x1)+cur_x;
+    cur_y = (m.map.connect_pts_y2 - m.map.connect_pts_y1)+cur_y;
+    [queued_sections addObject:m];
+}
+
+-(void)shift_queue_into_current { //move top map in queue to current
+    MapSection *m = [queued_sections objectAtIndex:0];
+    [queued_sections removeObjectAtIndex:0];
+    
+    if ([queued_sections count] == 0) {
+        [self load_into_queue:[self get_random_map]];
+    }
+    
+    [map_sections addObject:m];
+    
     [tglayer.islands addObjectsFromArray:m.map.n_islands];
-    
     [Island link_islands:tglayer.islands];
-    
     for (Island* i in m.map.n_islands) {
         [tglayer addChild:i z:[i get_render_ord]];
     }
@@ -67,62 +82,48 @@
         }
     }
     
-    cur_x = (m.map.connect_pts_x2 - m.map.connect_pts_x1)+cur_x;
-    cur_y = (m.map.connect_pts_y2 - m.map.connect_pts_y1)+cur_y;
+    
+    
 }
 
--(void)remove_map_section:(MapSection*)m {
-    [map_sections removeObject:m];
+-(void)remove_map_section_from_current:(MapSection*)m {
     [tglayer.islands removeObjectsInArray:m.map.n_islands];
+    
     for (Island* i in m.map.n_islands) {
-        if (tglayer.player.current_island == i) { 
-            NSLog(@"REMOVING CURRENT PLAYER ISLAND, VERY BAD!!");
-            tglayer.player.current_island = NULL;
+        if (tglayer.player.current_island == i) tglayer.player.current_island = NULL;
+        [tglayer removeChild:i cleanup:NO];
+        if (i.prev != NULL) {
+            i.prev = NULL;
         }
-        [tglayer removeChild:i cleanup:YES];
-    }
-    [tglayer.game_objects removeObjectsInArray:m.map.game_objects];
-    for(GameObject* o in m.map.game_objects) {
-        [tglayer removeChild:o cleanup:YES];
-        if (tglayer.player.current_swingvine == o) {
-            NSLog(@"REMOVING CURRENT PLAYER SWINGVINE");
-            tglayer.player.current_swingvine = NULL;
-        }
-    }
-    [m release];
-}
-
--(void)cleanup_start:(CGPoint)player_startpt player:(CGPoint)cur {
-    NSMutableArray *toremove = [[NSMutableArray alloc] init];
-    for(MapSection *i in map_sections) {
-        MapSection_Position ip = [i get_position_status:player_startpt];
-        if (ip == MapSection_Position_PAST) {
-            [toremove addObject:i];
+        if (i.next != NULL) {
+            i.next = NULL;
         }
     }
     
-    for(MapSection *m in toremove) {
-        for(GameObject *o in m.map.game_objects) {
-            [tglayer.game_objects removeObject:o];
-            [tglayer removeChild:o cleanup:YES];
-            
-        }
-        for(Island *i in m.map.n_islands) {
-            [tglayer.islands removeObject:i];
-            [tglayer removeChild:i cleanup:YES];
-            
-        }
-        [m release];
+    [tglayer.game_objects removeObjectsInArray:m.map.game_objects];
+    
+    for(GameObject* o in m.map.game_objects) {
+        [tglayer removeChild:o cleanup:NO];
+        if (tglayer.player.current_swingvine == o) tglayer.player.current_swingvine = NULL;
     }
-    [map_sections removeObjectsInArray:toremove];
+    
+    [map_sections removeObject:m];
+}
+
+-(void)cleanup_start:(CGPoint)player_startpt player:(CGPoint)cur {
+    for(int j = map_sections.count-1; j >= 0; j--) {
+        MapSection *i = [map_sections objectAtIndex:j];
+        MapSection_Position ip = [i get_position_status:player_startpt];
+        if (ip == MapSection_Position_PAST) {
+            [self remove_map_section_from_current:i];
+            [i release];
+        }
+    }
     
     for(MapSection *m in stored) {
         [m release];
     }
     [stored removeAllObjects];
-    
-    [toremove removeAllObjects];
-    [toremove dealloc];
 }
 
 -(void)dispatch_event:(GEvent *)e {
@@ -134,61 +135,62 @@
 -(void)update:(Player *)player g:(GameEngineLayer *)g {
     CGPoint pos = player.position;
     NSMutableArray *tostore = [[NSMutableArray alloc] init];
-    int left = 99;
-    for (MapSection *i in map_sections) {
+    MapSection *current;
+    int ct_ahead = 0;
+    
+    for (MapSection *i in map_sections) { //get past ones
         CGRange range = [i get_range];
         MapSection_Position ip = [i get_position_status:pos];
-        if (ip == MapSection_Position_CURRENT) {
-            left = [map_sections count]-1-[map_sections indexOfObject:i];
-        } else if (ip == MapSection_Position_PAST && range.max+REMOVEBUFFER < player.position.x) {
+        if (ip == MapSection_Position_PAST && range.max+REMOVEBUFFER < player.position.x) {
             [tostore addObject:i];
+        } else if (ip == MapSection_Position_CURRENT) {
+            current = i;
+        } else if (ip == MapSection_Position_AHEAD) {
+            ct_ahead++;
         }
     }
     
-    if ([tostore count] > 0) {
-        [map_sections removeObjectsInArray:tostore];
+    if ([tostore count] > 0) { //move past ones to stored
         for (MapSection *i in tostore) {
             [stored addObject:i];
-            for (GameObject *o in i.map.game_objects) {
-                [g removeChild:o cleanup:NO];
-                [g.game_objects removeObject:o];
-            }
-            for (Island *o in i.map.n_islands) {
-                [g removeChild:o cleanup:NO];
-                [g.islands removeObject:o];
-            }
+            [self remove_map_section_from_current:i];
         }
     }
     
-    if (left <= 1) {
-        MapSection *n = [MapSection init_from_name:[self get_random_map]];
-        [map_sections addObject:n];
-        [self load_map_section:n];
-        ct++;
+    if ( ([map_sections count] == 0) || 
+         (ct_ahead == 0 && [current get_range].max-ADDBUFFER < player.position.x) ) {
+        [self shift_queue_into_current];
     }
     
+    //NSLog(@"sto:%i cur:%i que:%i",[stored count],[map_sections count],[queued_sections count]);
     [tostore removeAllObjects];
     [tostore dealloc];
-    //NSLog(@"SECTIONS:%i ISLANDS:%i GAMEOBJS:%i",[map_sections count], [tglayer.islands count], [tglayer.game_objects count]);
     return;
 }
 
--(void)reset {
-    for (int i = stored.count-1; i>=0; i--) {
-        MapSection *t = [stored objectAtIndex:i];
-        [stored removeObjectAtIndex:i];
-        [map_sections insertObject:t atIndex:0];
-        
-        for (GameObject *o in t.map.game_objects) {
-            [tglayer addChild:o];
-            [tglayer.game_objects addObject:o];
-        }
-        for (Island *o in t.map.n_islands) {
-            [tglayer addChild:o];
-            [tglayer.islands addObject:o];
-        }
+-(void)reset_map:(MapSection*)m {
+    for (GameObject *o in m.map.game_objects) {
+        [o reset];
+    }
+}
+
+-(void)reset { //move all in stored to current (TODO: some in queue)
+    for (int i = map_sections.count-1; i>=0; i--) {
+        MapSection *t = [map_sections objectAtIndex:i];
+        [self reset_map:t];
+        [queued_sections insertObject:t atIndex:0];
+        [self remove_map_section_from_current:t];
         
     }
+    for (int i = stored.count-1; i>=0; i--) {
+        MapSection *t = [stored objectAtIndex:i];
+        [self reset_map:t];
+        [queued_sections insertObject:t atIndex:0];
+        [stored removeObjectAtIndex:i];
+        
+    }
+    [self shift_queue_into_current];
+    
     [super reset];
 }
 
@@ -204,6 +206,11 @@
     for (MapSection *m in stored) {
         [m release];
     }
+    for (MapSection *m in queued_sections) {
+        [m release];
+    }
+    [queued_sections removeAllObjects];
+    [queued_sections release];
     [stored removeAllObjects];
     [stored release];
     [map_sections removeAllObjects];
