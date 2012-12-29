@@ -188,7 +188,6 @@
 }
 
 -(void)dealloc {
-    NSLog(@"menu dealloc");
     [self removeAllChildrenWithCleanup:NO];
     [menu_pages removeAllObjects];
     [menu_pages release];

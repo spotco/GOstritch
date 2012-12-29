@@ -46,7 +46,13 @@
         [player reset_params];
         [self setActive:NO];
         [player add_effect:[SplashEffect init_from:[player get_default_params] time:40]];
-        //player.dead = YES;
+        
+    } else if ([player get_current_params].noclip &&
+               [player get_current_params].noclip < 2 &&
+               [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect_ignore_noclip]]) {
+        [self setActive:NO];
+        [player add_effect_suppress_current_end_effect:[SplashEffect init_from:[player get_default_params] time:40]];
+        
     }
     
     return;

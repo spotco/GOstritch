@@ -7,7 +7,7 @@
     SplashEffect *e = [[SplashEffect alloc] init];
     [PlayerEffectParams copy_params_from:base to:e];
     e.time_left = time;
-    e.noclip = YES;
+    e.noclip = 2;
     return e;
 }
 

@@ -96,20 +96,24 @@
 
 @implementation BatchDraw
 
-static NSMutableDictionary* z_bucket;
+static NSMutableArray* z_bucket;
 
 +(void)init {
     if (!z_bucket) {
-        z_bucket = [[NSMutableDictionary alloc] init];
+        z_bucket = [[NSMutableArray alloc] init];
+        for(int i = 0; i < 5; i++) {
+            [z_bucket addObject:[NSMutableArray array]];
+        }
     }
 }
 
 +(void)add:(gl_render_obj)gl key:(GLuint)tex z_ord:(int)zord draw_ord:(int)dord {
-    NSNumber *zord_key = [NSNumber numberWithInt:zord];
-    if (![z_bucket objectForKey:zord_key]) {
-        [z_bucket setObject:[NSMutableArray array] forKey:zord_key];
+    if (![z_bucket objectAtIndex:zord]) {
+        [z_bucket replaceObjectAtIndex:zord withObject:[NSMutableArray array]];
     }
-    NSMutableArray *zord_list = [z_bucket objectForKey:zord_key];
+    
+    NSMutableArray *zord_list = [z_bucket objectAtIndex:zord];
+    
     for (BatchJob *b in zord_list) {
         if (b.tex == tex && b.dord == dord) {
             [b add_obj:gl];
@@ -124,8 +128,7 @@ static NSMutableDictionary* z_bucket;
 }
 
 +(void)sort_jobs {    
-    for(NSNumber* key in z_bucket) { //sort everything in every bucket by draword
-        NSMutableArray* a = [z_bucket objectForKey:key];
+    for(NSMutableArray *a in z_bucket) {
         [a sortUsingComparator:^NSComparisonResult(BatchJob *a, BatchJob *b) {
             NSNumber *v_a = [NSNumber numberWithInt:a.dord];
             NSNumber *v_b = [NSNumber numberWithInt:b.dord];
@@ -136,7 +139,7 @@ static NSMutableDictionary* z_bucket;
 
 -(void)draw {
     [super draw];
-    NSArray* jobs = [z_bucket objectForKey:[NSNumber numberWithInt:zOrder_]];
+    NSArray* jobs = [z_bucket objectAtIndex:zOrder_];
     if (jobs) {
         for (BatchJob *job in jobs) {
             [job draw];
@@ -145,8 +148,7 @@ static NSMutableDictionary* z_bucket;
 }
 
 +(void)clear {
-    for (NSNumber *key in z_bucket) {
-        NSMutableArray *jobs = [z_bucket objectForKey:key];
+    for(NSMutableArray *jobs in z_bucket) {
         for (BatchJob* job in jobs) {
             [job clear];
         }

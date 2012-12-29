@@ -20,34 +20,37 @@
 
 -(void)update:(Player*)player g:(GameEngineLayer *)g{
     [super update:player g:g];
-    if(!active) {
-        return;
+    
+    if (recharge_ct > 0) {
+        recharge_ct--;
+        if (self.opacity != 170)[self setOpacity:170];
+    } else {
+        if (self.opacity != 255)[self setOpacity:255];
     }
     
-    if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {            
+    if(!active)return;
+    
+    if (recharge_ct == 0 && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {            
         [self particle_effect:g];
-                    player.vx += normal_vec.x*6;
-            player.vy += normal_vec.y*6;
-        
+        player.vx += normal_vec.x*6;
+        player.vy += normal_vec.y*6;
         
         PlayerEffectParams *e = [PlayerEffectParams init_copy:player.get_default_params];
-         e.time_left = 100;
-         e.cur_min_speed = 15;
-         [player add_effect:e];
+        e.time_left = 100;
+        e.cur_min_speed = 15;
+        [player add_effect:e];
         
-        [self set_active:NO];
+        recharge_ct = 50;
     }
-    
-    return;
 }
 
 -(void)particle_effect:(GameEngineLayer*)g {
     for(int i = 0; i < 6; i++) {
         float spd = float_random(4, 10);
-    [g add_particle:[JumpPadParticle init_x:position_.x 
-                                          y:position_.y
-                                         vx:-normal_vec.x*spd+float_random(-5, 5)
-                                         vy:-normal_vec.y*spd+float_random(-5, 5)]];
+        [g add_particle:[JumpPadParticle init_x:position_.x 
+                                              y:position_.y
+                                             vx:-normal_vec.x*spd+float_random(-5, 5)
+                                             vy:-normal_vec.y*spd+float_random(-10, 10)]];
     }
 }
 

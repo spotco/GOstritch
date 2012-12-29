@@ -248,11 +248,11 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
 }
 -(void) reset_params {
     if (temp_params != NULL) {
-        [temp_params f_dealloc];
+        [temp_params dealloc];
         temp_params = NULL;
     }
     if (current_params != NULL) {
-        [current_params f_dealloc];
+        [current_params dealloc];
         current_params = NULL;
     }
     current_params = [[PlayerEffectParams alloc] init];
@@ -267,8 +267,6 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
     if (temp_params != NULL) {
         if (game_engine_layer != NULL) {
             [temp_params effect_end:self g:game_engine_layer];
-        } else {
-            NSLog(@"ERROR: add effect before player has reference to gameengine, check add_effect method of player");
         }
         [temp_params dealloc];
         temp_params = NULL;
@@ -276,6 +274,17 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
     temp_params = effect;
     [temp_params effect_begin:self];
 }
+
+-(void)add_effect_suppress_current_end_effect:(PlayerEffectParams *)effect {
+    if (temp_params != NULL) {
+        //NSLog(@"ignore dealloc error message");
+        [temp_params dealloc];
+        temp_params = NULL;
+    }
+    temp_params = effect;
+    [temp_params effect_begin:self];
+}
+
 -(void)remove_temp_params:(GameEngineLayer*)g {
     if (temp_params != NULL) {
         [temp_params effect_end:self g:g];
@@ -284,7 +293,14 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
     }
 }
 
-
+-(HitRect) get_hit_rect_ignore_noclip {
+    PlayerEffectParams *cur = [self get_current_params];
+    int cur_nc = cur.noclip;
+    cur.noclip = 0;
+    HitRect gets = [self get_hit_rect];
+    cur.noclip = cur_nc;
+    return gets;
+}
 
 BOOL refresh_hitrect = YES;
 HitRect cached_rect;
@@ -441,9 +457,9 @@ HitRect cached_rect;
     [self cleanup_anims];
     [self removeAllChildrenWithCleanup:YES];
     [up_vec dealloc];
-    [current_params f_dealloc];
+    [current_params dealloc];
     if (temp_params) {
-        [temp_params f_dealloc];
+        [temp_params dealloc];
     }
     [super dealloc];
 }

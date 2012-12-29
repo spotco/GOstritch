@@ -3,6 +3,7 @@
 
 @interface SpeedUp : GameObject {
     id anim;
+    int recharge_ct;
     Vec3D* normal_vec;
 }
 

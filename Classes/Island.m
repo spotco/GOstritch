@@ -54,7 +54,7 @@ static float NO_VAL = -99999.0;
 -(void)link_finish {
 }
 
--(void)update:(GameEngineLayer *)g {
+-(void)check_should_render:(GameEngineLayer *)g {
     
 }
 

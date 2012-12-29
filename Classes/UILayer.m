@@ -40,14 +40,14 @@
 
 -(void)update {
     level_bone_status b = [game_engine_layer get_bonestatus];
-    [self set_label:bones_disp to:
-     /*[NSString stringWithFormat:@"%i",b.hasgets+b.savedgets]*/
-     strf("%i",b.hasgets+b.savedgets)
-     ];
-    [self set_label:lives_disp to:
-     strf("\u00B7 %s",[game_engine_layer get_lives] == GAMEENGINE_INF_LIVES ? "\u221E":strf("%i",[game_engine_layer get_lives]).UTF8String)
-     ];
-    [self set_label:time_disp to:[NSString stringWithFormat:@"%@",[self parse_gameengine_time:[game_engine_layer get_time]]]];
+    [self set_label:bones_disp to:strf("%i",b.hasgets+b.savedgets)];
+    [self set_label:lives_disp to:strf("\u00B7 %s",[game_engine_layer get_lives] == GAMEENGINE_INF_LIVES ? "\u221E":strf("%i",[game_engine_layer get_lives]).UTF8String)];
+    [self set_label:time_disp to:[self parse_gameengine_time:[game_engine_layer get_time]]];
+    
+    if ([GameMain GET_DEBUG_UI]) {
+        [self set_label:DEBUG_ctdisp to:strf("isl:%i objs:%i",[game_engine_layer.islands count],[game_engine_layer.game_objects count])];
+    }
+    
     
     NSMutableArray *toremove = [NSMutableArray array];
     for (UIIngameAnimation *i in ingame_ui_anims) {
@@ -100,13 +100,8 @@
     ccColor3B red = ccc3(255,0,0);
     int fntsz = 15;
     bones_disp = [self cons_label_pos:ccp([Common SCREEN].width*0.03+18,[Common SCREEN].height*0.96) color:red fontsize:fntsz];
-    [bones_disp setString:@"0"];
-    
     lives_disp = [self cons_label_pos:ccp([Common SCREEN].width*0.03+18,[Common SCREEN].height*0.9) color:red fontsize:fntsz];
-    [lives_disp setString:@"x 0"];
-    
     time_disp = [self cons_label_pos:ccp([Common SCREEN].width*0.03+18,[Common SCREEN].height*0.83) color:red fontsize:fntsz];
-    [time_disp setString:@"0:00"];
     
     ingame_ui = [CCMenu menuWithItems:
                  ingamepause,
@@ -117,6 +112,12 @@
                  [self label_cons_menuitem:lives_disp leftalign:YES],
                  [self label_cons_menuitem:time_disp leftalign:YES],
                  nil];
+    
+    if ([GameMain GET_DEBUG_UI]) {
+        DEBUG_ctdisp = [self cons_label_pos:ccp([Common SCREEN].width*0.02,[Common SCREEN].height*0.73) color:red fontsize:fntsz];
+        [ingame_ui addChild:[self label_cons_menuitem:DEBUG_ctdisp leftalign:YES]];
+    }
+    
     ingame_ui.anchorPoint = ccp(0,0);
     ingame_ui.position = ccp(0,0);
     [self addChild:ingame_ui];
@@ -151,7 +152,7 @@
     
     [pause_ui addChild:pausemenu];
     pause_ui.visible = NO;
-    [self addChild:pause_ui];
+    [self addChild:pause_ui z:1];
 }
 -(void)init_gameover_ui {
     ccColor4B c = {0,0,0,200};
@@ -198,7 +199,7 @@
     gameover_menu.position = ccp(0,0);
     
     [gameover_ui setVisible:NO];
-    [self addChild:gameover_ui];
+    [self addChild:gameover_ui z:1];
 }
 -(void)init_game_end_menu {
     //TODO -- FIXME
@@ -301,6 +302,7 @@
     CCLabelTTF *l = [CCLabelTTF labelWithString:@"" fontName:@"Carton Six" fontSize:fontsize];
     [l setColor:color];
     [l setPosition:pos];
+    [l setString:@"*"];
     return l;
 }
 -(CCMenuItemLabel*)label_cons_menuitem:(CCLabelTTF*)l leftalign:(BOOL)leftalign {

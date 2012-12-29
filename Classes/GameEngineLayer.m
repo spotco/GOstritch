@@ -3,18 +3,6 @@
 #import "UILayer.h"
 #import "BridgeIsland.h"
 #import "FlashEffect.h"
-
-/*
-//TRMV
-@interface BatchDrawer : CCSprite
-@end
-@implementation BatchDrawer
--(void)draw {
-    [super draw];
-    [LineIsland batch_draw];
-}
-@end
-*/
  
 @implementation GameEngineLayer
 
@@ -48,7 +36,7 @@
     [glayer stopAction:glayer.follow_action];
     glayer.follow_action = [[CCFollow actionWithTarget:glayer.player] retain];
     [glayer runAction:glayer.follow_action];
-    
+    [glayer update_render];
 	return scene;
 }
 
@@ -95,20 +83,24 @@
     follow_action = [CCFollow actionWithTarget:player worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]];
     [self runAction:follow_action];
     
-    for (Island *i in islands) {
-        [i update:self];
-    }
-    for (GameObject *o in game_objects) {
-        [o check_should_render:self];
-    }
+    [self update_render];
     
     if ([GameMain GET_USE_NSTIMER]) {
         updater = [NSTimer scheduledTimerWithTimeInterval:[GameMain GET_TARGET_FPS] target:self selector:@selector(update) userInfo:nil repeats:YES];
     } else {
         [self schedule:@selector(update)];
     }
-    self.isAccelerometerEnabled = YES;
-    [[UIAccelerometer sharedAccelerometer] setUpdateInterval:1/60];
+}
+
+-(void)update_render {
+    [BatchDraw clear];
+    for (GameObject *o in game_objects) {
+        [o check_should_render:self];
+    }
+    for (Island *i in islands) {
+        [i check_should_render:self];
+    }
+    [BatchDraw sort_jobs];
 }
 
 -(CGPoint)loadMap:(NSString*)filename {
@@ -164,21 +156,21 @@
 -(void)update {
     [GEventDispatcher dispatch_events];
     if (current_mode == GameEngineLayerMode_GAMEPLAY) {
-        
         time++;
         refresh_viewbox_cache = YES;
         [GamePhysicsImplementation player_move:player with_islands:islands];
         [GameControlImplementation control_update_player:self];
         [player update:self];
         [self check_falloff];	
-        [self update_game_obj];
+        
+        for(int i = 0; i < [game_objects count]; i++) {
+            GameObject *o = [game_objects objectAtIndex:i];
+            [o update:player g:self];
+        }
+        
         [self update_particles];
         [self push_added_particles];
-              
-        [BatchDraw clear];
-        [self update_islands];
-        [BatchDraw sort_jobs];
-        
+        [self update_render];
         [GameRenderImplementation update_render_on:self];
         [GEventDispatcher push_event:[GEvent init_type:GEventType_GAME_TICK]];
         
@@ -316,17 +308,6 @@
 -(void)addChild:(CCNode *)node z:(NSInteger)z {
     refresh_worldbounds_cache = YES;
     [super addChild:node z:z];
-}
--(void)update_islands {
-    for (Island* i in islands) {
-        [i update:self];
-    }
-}
--(void)update_game_obj {
-    for(int i = 0; i < [game_objects count]; i++) {
-        GameObject *o = [game_objects objectAtIndex:i];
-        [o update:player g:self];
-    }
 }
 -(level_bone_status)get_bonestatus {
     if (refresh_bone_cache == YES) {
@@ -502,7 +483,6 @@ static NSMutableArray* particles_tba;
  }
 
 -(void)dealloc {
-    NSLog(@"gameengine dealloc");
     [BatchDraw clear];
     [self removeAllChildrenWithCleanup:YES];
     [islands removeAllObjects];

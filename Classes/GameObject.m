@@ -7,9 +7,7 @@
 @synthesize active,do_render;
 @synthesize img;
 
--(void)update:(Player*)player g:(GameEngineLayer *)g {
-    [self check_should_render:g];
-}
+-(void)update:(Player*)player g:(GameEngineLayer *)g {}
 
 -(void)check_should_render:(GameEngineLayer *)g {
     if ([Common hitrect_touch:[g get_viewbox] b:[self get_hit_rect]]) {

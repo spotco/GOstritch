@@ -3,7 +3,8 @@
 
 @implementation PlayerEffectParams
 
-@synthesize cur_min_speed,cur_gravity,cur_limit_speed,cur_airjump_count,time_left,cur_dash_count,noclip;
+@synthesize cur_min_speed,cur_gravity,cur_limit_speed,cur_airjump_count,time_left,cur_dash_count;
+@synthesize noclip;
 
 
 +(PlayerEffectParams*)init_copy:(PlayerEffectParams*)p {
@@ -61,18 +62,20 @@
     [p get_default_params].cur_dash_count = cur_dash_count;
     [p get_default_params].cur_airjump_count = cur_airjump_count;
     
-    TEST1 = 2;
+    //TEST1 = 2;
 }
 
+/*
 -(void)f_dealloc {
     TEST1 = 2;
     [self dealloc];
 }
+*/
 
 -(void)dealloc {
-    if (TEST1 != 2) {
+    /*if (TEST1 != 2) {
         NSLog(@"ERROR:effectparam dealloc before effect_end method called on a %@",[self info]);
-    }
+    }*/
     [super dealloc];
 }
 

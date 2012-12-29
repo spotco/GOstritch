@@ -7,18 +7,22 @@
     float cur_gravity;
     float cur_limit_speed;
     float cur_min_speed;
-    int   cur_airjump_count, cur_dash_count;
-    BOOL noclip;
+    int cur_airjump_count, cur_dash_count;
+    int noclip;
     
     int time_left;
     
     
-    int TEST1;
+    //int TEST1;
 }
 
+/*
+ @cur_gravity:
+ @noclip: 0 for normal, 0 < for noclip mode (some gameobjs will check noclip number for ragdoll priority, ex spike then fall into water)
+ */
 @property(readwrite,assign) float cur_gravity,cur_limit_speed,cur_min_speed;
 @property(readwrite,assign) int time_left,cur_airjump_count,cur_dash_count;
-@property(readwrite,assign) BOOL noclip;
+@property(readwrite,assign) int noclip;
 
 +(PlayerEffectParams*)init_copy:(PlayerEffectParams*)p;
 +(void)copy_params_from:(PlayerEffectParams*)a to:(PlayerEffectParams*)b;
@@ -33,6 +37,6 @@
 -(void)decr_dash_count;
 -(NSString*)info;
 
--(void)f_dealloc;
+//-(void)f_dealloc;
 
 @end

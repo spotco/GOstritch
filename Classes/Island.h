@@ -16,7 +16,7 @@
 
 +(float) NO_VALUE;
 +(int)link_islands:(NSMutableArray*)islands;
--(void)update:(GameEngineLayer*)g;
+-(void)check_should_render:(GameEngineLayer*)g;
 
 -(void)link_finish;
 -(Vec3D*)get_normal_vecC;

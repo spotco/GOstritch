@@ -31,7 +31,7 @@
 	return new_island;
 }
 
--(void)update:(GameEngineLayer *)g {    
+-(void)check_should_render:(GameEngineLayer *)g {    
     
     if ([Common hitrect_touch:[g get_viewbox] b:[self get_hitrect]]) {
         do_draw = YES;

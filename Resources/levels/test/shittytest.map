@@ -1,11 +1,15 @@
 {
-    "objects": [],
-    "start_x": 0,
-    "connect_pts": {"y1": 192, "y2": 403, "x1": 213, "x2": 984},
-    "start_y": 0,
+    "objects": [{"dir": {"x": 1, "y": 0.02}, "x": 558, "type": "speedup", "label": "2", "y": 164}, {"x": 856, "type": "spike", "label": "3", "y": 628}],
+    "start_x": 160,
     "islands": [
-        {"y1": 192, "type": "line", "can_fall": true, "x2": 530, "ground": "open", "y2": 403, "x1": 213, "hei": 50, "ndir": "left"},
-        {"y1": 403, "type": "line", "can_fall": true, "x2": 984, "ground": "open", "y2": 403, "x1": 530, "hei": 50, "ndir": "left"}
+        {"y1": 115, "type": "line", "can_fall": true, "x2": 716, "ground": "open", "y2": 125, "x1": 76, "hei": 50, "ndir": "left"},
+        {"y1": 125, "type": "line", "can_fall": true, "x2": 767, "ground": "open", "y2": 155, "x1": 716, "hei": 50, "ndir": "left"},
+        {"y1": 155, "type": "line", "can_fall": true, "x2": 802, "ground": "open", "y2": 220, "x1": 767, "hei": 50, "ndir": "left"},
+        {"y1": 220, "type": "line", "can_fall": true, "x2": 830, "ground": "open", "y2": 609, "x1": 802, "hei": 50, "ndir": "left"},
+        {"y1": 609, "type": "line", "can_fall": true, "x2": 886, "ground": "open", "y2": 655, "x1": 830, "hei": 50, "ndir": "left"},
+        {"y1": 655, "type": "line", "can_fall": true, "x2": 972, "ground": "open", "y2": 664, "x1": 886, "hei": 50, "ndir": "left"}
     ],
-    "assert_links": 1
+    "assert_links": 5,
+    "connect_pts": {"y1": 115, "y2": 664, "x1": 76, "x2": 972},
+    "start_y": 166
 }
