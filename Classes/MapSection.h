@@ -16,6 +16,7 @@ typedef enum {
 @property(readwrite,assign) GameMap map;
 +(MapSection*)init_from_name:(NSString*)name;
 -(MapSection_Position)get_position_status:(CGPoint)p;
+-(CGRange)get_range;
 -(void)offset_x:(float)x y:(float)y;
--(int)get_debugid;
+//-(int)get_debugid;
 @end

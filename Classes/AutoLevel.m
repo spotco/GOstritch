@@ -4,6 +4,8 @@
 
 @implementation AutoLevel
 
+#define REMOVEBUFFER 400
+
 +(NSArray*)random_set1 {
     static NSArray *set1_levels;
     if (!set1_levels){
@@ -73,17 +75,24 @@
     [map_sections removeObject:m];
     [tglayer.islands removeObjectsInArray:m.map.n_islands];
     for (Island* i in m.map.n_islands) {
-        if (tglayer.player.current_island == i) { NSLog(@"REMOVING CURRENT PLAYER ISLAND, VERY BAD!!"); }
+        if (tglayer.player.current_island == i) { 
+            NSLog(@"REMOVING CURRENT PLAYER ISLAND, VERY BAD!!");
+            tglayer.player.current_island = NULL;
+        }
         [tglayer removeChild:i cleanup:YES];
     }
     [tglayer.game_objects removeObjectsInArray:m.map.game_objects];
     for(GameObject* o in m.map.game_objects) {
         [tglayer removeChild:o cleanup:YES];
+        if (tglayer.player.current_swingvine == o) {
+            NSLog(@"REMOVING CURRENT PLAYER SWINGVINE");
+            tglayer.player.current_swingvine = NULL;
+        }
     }
     [m release];
 }
 
--(void)cleanup:(CGPoint)player_startpt {
+-(void)cleanup_start:(CGPoint)player_startpt player:(CGPoint)cur {
     NSMutableArray *toremove = [[NSMutableArray alloc] init];
     for(MapSection *i in map_sections) {
         MapSection_Position ip = [i get_position_status:player_startpt];
@@ -118,7 +127,7 @@
 
 -(void)dispatch_event:(GEvent *)e {
     if (e.type == GEventType_CHECKPOINT) {
-        [self cleanup:tglayer.player.start_pt];
+        [self cleanup_start:tglayer.player.start_pt player:tglayer.player.position];
     }
 }
 
@@ -127,10 +136,11 @@
     NSMutableArray *tostore = [[NSMutableArray alloc] init];
     int left = 99;
     for (MapSection *i in map_sections) {
+        CGRange range = [i get_range];
         MapSection_Position ip = [i get_position_status:pos];
         if (ip == MapSection_Position_CURRENT) {
             left = [map_sections count]-1-[map_sections indexOfObject:i];
-        } else if (ip == MapSection_Position_PAST) {
+        } else if (ip == MapSection_Position_PAST && range.max+REMOVEBUFFER < player.position.x) {
             [tostore addObject:i];
         }
     }
