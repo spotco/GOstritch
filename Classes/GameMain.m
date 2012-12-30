@@ -11,13 +11,15 @@
 #define DEBUG_UI YES
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
-#define STARTING_LIVES 5
+#define STARTING_LIVES 0
 #define TESTLEVEL @"shittytest"
 
 /**
  TODO -- 
  -boss robot + lab
  -player run in animation
+ -different dogs differnt special powers
+    ideas: higher jump, more float power, longer dash, faster, auto item magnet
  **/
 
 +(void)main {
@@ -30,8 +32,8 @@
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
     
     //[GameMain start_testlevel];
-    [GameMain start_game_autolevel];
-    //[GameMain start_menu];
+    //[GameMain start_game_autolevel];
+    [GameMain start_menu];
 }
 
 +(void)start_game_autolevel {

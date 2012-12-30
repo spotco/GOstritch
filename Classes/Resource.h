@@ -30,6 +30,7 @@
 #define TEX_DOG_RUN_4 @"dog4ss"
 #define TEX_DOG_RUN_5 @"dog5ss"
 #define TEX_DOG_RUN_6 @"dog6ss"
+#define TEX_DOG_RUN_7 @"dog7ss"
 #define TEX_DOG_SPLASH @"splash_ss"
 #define TEX_DOG_SHADOW @"dogshadow"
 

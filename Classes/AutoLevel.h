@@ -15,4 +15,6 @@
 
 +(AutoLevel*)init_with_glayer:(GameEngineLayer*)glayer;
 
+-(NSString*)get_debug_msg;
+
 @end

@@ -20,7 +20,7 @@
     UIAnim *curanim;
     NSMutableArray* ingame_ui_anims;
     
-    CCLabelTTF *DEBUG_ctdisp;
+    CCLabelTTF *DEBUG_ctdisp,*DEBUG_autolvldisp;
 }
 
 +(UILayer*)init_with_gamelayer:(GameEngineLayer*)g;

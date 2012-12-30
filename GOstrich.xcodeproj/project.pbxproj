@@ -131,6 +131,8 @@
 		7E93D6761592B97C00A83E9C /* GameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E93D6751592B97C00A83E9C /* GameObject.m */; };
 		7E961F0715B8FC1B0096F2C8 /* BG1_island_border.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E961F0615B8FC1B0096F2C8 /* BG1_island_border.png */; };
 		7E961F1115B90A540096F2C8 /* UILayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E961F1015B90A540096F2C8 /* UILayer.m */; };
+		7EA46778169045E4006A8D4C /* dog7ss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EA46776169045E4006A8D4C /* dog7ss.plist */; };
+		7EA46779169045E4006A8D4C /* dog7ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA46777169045E4006A8D4C /* dog7ss.png */; };
 		7EA586A715C67CBD00D83473 /* GameMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA586A615C67CBD00D83473 /* GameMain.m */; };
 		7EA586BE15C682E200D83473 /* pause_menu_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA586BD15C682E200D83473 /* pause_menu_play.png */; };
 		7EA586C815C683ED00D83473 /* music_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EA586C215C683EB00D83473 /* music_off.png */; };
@@ -624,6 +626,8 @@
 		7E961F0615B8FC1B0096F2C8 /* BG1_island_border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_island_border.png; path = Resources/bg/BG1/BG1_island_border.png; sourceTree = SOURCE_ROOT; };
 		7E961F0F15B90A540096F2C8 /* UILayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILayer.h; sourceTree = "<group>"; };
 		7E961F1015B90A540096F2C8 /* UILayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILayer.m; sourceTree = "<group>"; };
+		7EA46776169045E4006A8D4C /* dog7ss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dog7ss.plist; sourceTree = "<group>"; };
+		7EA46777169045E4006A8D4C /* dog7ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dog7ss.png; sourceTree = "<group>"; };
 		7EA586A515C67CBD00D83473 /* GameMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameMain.h; sourceTree = "<group>"; };
 		7EA586A615C67CBD00D83473 /* GameMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameMain.m; sourceTree = "<group>"; };
 		7EA586BD15C682E200D83473 /* pause_menu_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_menu_play.png; sourceTree = "<group>"; };
@@ -1404,6 +1408,7 @@
 		7E89F2CC159AEC4A00A32F2B /* char */ = {
 			isa = PBXGroup;
 			children = (
+				7EA46775169045E4006A8D4C /* char7 */,
 				7EB769A7167F2B39003AFCF5 /* char6 */,
 				7EB769A2167F24FB003AFCF5 /* char5 */,
 				7EB7699D167F2099003AFCF5 /* char4 */,
@@ -1531,6 +1536,15 @@
 			);
 			name = ingame_ui;
 			path = ui;
+			sourceTree = "<group>";
+		};
+		7EA46775169045E4006A8D4C /* char7 */ = {
+			isa = PBXGroup;
+			children = (
+				7EA46776169045E4006A8D4C /* dog7ss.plist */,
+				7EA46777169045E4006A8D4C /* dog7ss.png */,
+			);
+			path = char7;
 			sourceTree = "<group>";
 		};
 		7EB76993167F0C5F003AFCF5 /* char2 */ = {
@@ -2452,6 +2466,8 @@
 				7ECE604E168C4D13001C2016 /* BG1_island_corner.png in Resources */,
 				7EE0AF08168EEF5D0090B546 /* dog_shadow.png in Resources */,
 				7EE0AF0F168F011E0090B546 /* shittytest2.map in Resources */,
+				7EA46778169045E4006A8D4C /* dog7ss.plist in Resources */,
+				7EA46779169045E4006A8D4C /* dog7ss.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

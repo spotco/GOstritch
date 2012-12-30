@@ -217,6 +217,9 @@
     [map_sections release];
     [super dealloc];
 }
+-(NSString*)get_debug_msg {
+    return strf("STO:%i CUR:%i QUE:%i",[stored count],[map_sections count],[queued_sections count]);
+}
 @end
 
 

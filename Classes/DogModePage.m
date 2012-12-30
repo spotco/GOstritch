@@ -23,6 +23,7 @@
     [self temp_make_dog_tex:TEX_DOG_RUN_4 pos:ccp(200,200) sel:@selector(dog4)];
     [self temp_make_dog_tex:TEX_DOG_RUN_5 pos:ccp(320,100) sel:@selector(dog5)];
     [self temp_make_dog_tex:TEX_DOG_RUN_6 pos:ccp(380,185) sel:@selector(dog6)];
+    [self temp_make_dog_tex:TEX_DOG_RUN_7 pos:ccp(150,70) sel:@selector(dog7)];
 }
 
 -(void)temp_make_dog_tex:(NSString*)tex pos:(CGPoint)pos sel:(SEL)sel {
@@ -43,6 +44,7 @@
 -(void)dog4 {[Player set_character:TEX_DOG_RUN_4];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
 -(void)dog5 {[Player set_character:TEX_DOG_RUN_5];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
 -(void)dog6 {[Player set_character:TEX_DOG_RUN_6];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
+-(void)dog7 {[Player set_character:TEX_DOG_RUN_7];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
 
 -(CCAction*)init_run_anim:(NSString*)tar {
 	CCTexture2D *texture = [Resource get_tex:tar];

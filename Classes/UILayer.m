@@ -1,5 +1,6 @@
 #import "UILayer.h"
 #import "Player.h"
+#import "AutoLevel.h"
 
 @implementation UILayer
 
@@ -46,6 +47,12 @@
     
     if ([GameMain GET_DEBUG_UI]) {
         [self set_label:DEBUG_ctdisp to:strf("isl:%i objs:%i",[game_engine_layer.islands count],[game_engine_layer.game_objects count])];
+        for (GameObject* o in game_engine_layer.game_objects) {
+            if ([o class] == [AutoLevel class]) {
+                [self set_label:DEBUG_autolvldisp to:[((AutoLevel*)o) get_debug_msg]];
+                break;
+            }
+        }
     }
     
     
@@ -114,8 +121,10 @@
                  nil];
     
     if ([GameMain GET_DEBUG_UI]) {
-        DEBUG_ctdisp = [self cons_label_pos:ccp([Common SCREEN].width*0.02,[Common SCREEN].height*0.73) color:red fontsize:fntsz];
+        DEBUG_ctdisp = [self cons_label_pos:ccp([Common SCREEN].width*0.02,[Common SCREEN].height*0.77) color:red fontsize:fntsz];
         [ingame_ui addChild:[self label_cons_menuitem:DEBUG_ctdisp leftalign:YES]];
+        DEBUG_autolvldisp = [self cons_label_pos:ccp([Common SCREEN].width*0.02,[Common SCREEN].height*0.71) color:red fontsize:fntsz];
+        [ingame_ui addChild:[self label_cons_menuitem:DEBUG_autolvldisp leftalign:YES]];
     }
     
     ingame_ui.anchorPoint = ccp(0,0);
