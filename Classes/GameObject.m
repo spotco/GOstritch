@@ -1,6 +1,7 @@
 
 #import "GameObject.h"
 #import "GameEngineLayer.h"
+#import "LauncherRobot.h"
 
 @implementation GameObject
 

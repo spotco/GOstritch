@@ -243,6 +243,11 @@ static NSMutableDictionary* cached_json;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             [map.game_objects addObject:[MinionRobot cons_x:x y:y]];
             
+        } else if ([type isEqualToString:@"launcherrobot"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            [map.game_objects addObject:[LauncherRobot cons_x:x y:y]];
+            
         } else {
             NSLog(@"item read error");
             continue;

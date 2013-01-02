@@ -8,16 +8,18 @@
 #define TARGET_FPS 60
 #define RESET_STATS NO
 #define DISPLAY_FPS NO
-#define DEBUG_UI YES
+#define DEBUG_UI NO
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
-#define STARTING_LIVES 0
+#define STARTING_LIVES 1
 #define TESTLEVEL @"shittytest"
 
 /**
  TODO -- 
  -boss robot + lab
  -player run in animation
+ -UI alert for rockets
+ -ask for: scrap particle
  -different dogs differnt special powers
     ideas: higher jump, more float power, longer dash, faster, auto item magnet
  **/
@@ -31,25 +33,24 @@
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
     
-    //[GameMain start_testlevel];
+    [GameMain start_testlevel];
     //[GameMain start_game_autolevel];
-    [GameMain start_menu];
+    //[GameMain start_menu];
 }
 
 +(void)start_game_autolevel {
-    [[CCDirector sharedDirector] runningScene] ? 
-    [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene_with_autolevel_lives:STARTING_LIVES]] :
-    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with_autolevel_lives:STARTING_LIVES]];
+    [GameMain run_scene:[GameEngineLayer scene_with_autolevel_lives:STARTING_LIVES]];
 }
 +(void)start_menu {
-    [[CCDirector sharedDirector] runningScene]?
-    [[CCDirector sharedDirector] replaceScene:[MainMenuLayer scene]]:
-    [[CCDirector sharedDirector] runWithScene:[MainMenuLayer scene]];
+    [GameMain run_scene:[MainMenuLayer scene]];
 }
 +(void)start_testlevel {
+    [GameMain run_scene:[GameEngineLayer scene_with:TESTLEVEL lives:GAMEENGINE_INF_LIVES]];
+}
++(void)run_scene:(CCScene*)s {
     [[CCDirector sharedDirector] runningScene]?
-    [[CCDirector sharedDirector] replaceScene:[GameEngineLayer scene_with:TESTLEVEL lives:GAMEENGINE_INF_LIVES]]:
-    [[CCDirector sharedDirector] runWithScene:[GameEngineLayer scene_with:TESTLEVEL lives:GAMEENGINE_INF_LIVES]];
+    [[CCDirector sharedDirector] replaceScene:s]:
+    [[CCDirector sharedDirector] runWithScene:s];
 }
 
 +(BOOL)GET_USE_BG {return USE_BG;}

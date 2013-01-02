@@ -33,7 +33,6 @@ static NSMutableArray* event_queue;
 +(void)push_unique_event:(GEvent*)e {
     for (GEvent* i in event_queue) {
         if (e.type == i.type) {
-            NSLog(@"ununq in push_unique_event encountered");
             [e release];
             return;
         }

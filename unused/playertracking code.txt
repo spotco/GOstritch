@@ -1,0 +1,30 @@
+/**
+ -(void)update:(Player *)player g:(GameEngineLayer *)g {
+ [super update:player g:g];
+ float tara = [self get_tar_angle_deg_self:position_ tar:player.position];
+ 
+ if (ABS(tara) > 90) {
+ //abs(tara)>90:        else:
+ //BACK-->FRONT         FRONT<---BACK 
+ 
+ tara+=180;
+ [body setScaleX:-1];
+ } else {
+ [body setScaleX:1];
+ }
+ 
+ float rotd = [Common shortest_dist_from_cur:rotation_ to:tara];
+ float sigrotd = [Common sig:rotd];
+ [self setRotation:rotation_+(sigrotd*(ABS(rotd)/TRACK_SPD))];
+ 
+ }
+ 
+ -(float)get_tar_angle_deg_self:(CGPoint)s tar:(CGPoint)t {
+ //calc coord:       cocos2d coord:
+ //+                    +
+ //---0              0---
+ //-                    -
+ float ccwt = [Common rad_to_deg:atan2f(t.y-s.y, t.x-s.x)];
+ return ccwt > 0 ? 180-ccwt : -(180-ABS(ccwt));
+ }
+ **/

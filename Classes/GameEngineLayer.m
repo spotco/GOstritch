@@ -30,13 +30,16 @@
 +(CCScene*) scene_with_autolevel_lives:(int)lives {
     CCScene* scene = [GameEngineLayer scene_with:@"connector" lives:lives];
     GameEngineLayer* glayer = [scene.children objectAtIndex:1];
-    GameObject* nobj = [AutoLevel init_with_glayer:glayer];
+    AutoLevel* nobj = [AutoLevel init_with_glayer:glayer];
     [glayer.game_objects addObject:nobj];
     [glayer addChild:nobj];
     [glayer stopAction:glayer.follow_action];
     glayer.follow_action = [[CCFollow actionWithTarget:glayer.player] retain];
     [glayer runAction:glayer.follow_action];
+    
+    [nobj update:glayer.player g:glayer]; //have first section preloaded
     [glayer update_render];
+    
 	return scene;
 }
 
@@ -168,7 +171,7 @@
         [player update:self];
         [self check_falloff];	
         
-        for(int i = 0; i < [game_objects count]; i++) {
+        for(int i = [game_objects count]-1; i>=0 ; i--) {
             GameObject *o = [game_objects objectAtIndex:i];
             [o update:player g:self];
         }
@@ -209,7 +212,7 @@
         
     } else if (e.type == GEventType_PLAYER_DIE) {
         lives = lives == GAMEENGINE_INF_LIVES ? lives : lives-1;
-        if (lives != GAMEENGINE_INF_LIVES && lives < 0) {
+        if (lives != GAMEENGINE_INF_LIVES && lives < 1) {
             [self game_over];
         } else {
             [self player_reset];
@@ -224,6 +227,15 @@
     int tb = b.hasgets+b.savedgets;
     [DataStore set_key:STO_totalbones_INT int_value:[DataStore get_int_for_key:STO_totalbones_INT]+tb];
     [DataStore set_key:STO_maxbones_INT int_value:MAX([DataStore get_int_for_key:STO_maxbones_INT],tb)];
+}
+
+-(void)add_gameobject:(GameObject*)o {
+    [game_objects addObject:o];
+    [self addChild:o z:[o get_render_ord]];
+}
+-(void)remove_gameobject:(GameObject *)o {
+    [game_objects removeObject:o];
+    [self removeChild:o cleanup:NO];
 }
 
 /* event dispatch handlers */

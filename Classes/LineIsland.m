@@ -13,6 +13,8 @@
 #define CORNER_TOP_FILL_SCALE 26
 #define TL_DOWNOFFSET 20
 
+#define BOTTOM_BORDER_IGNORE_HEI 200
+
 @synthesize tl,bl,tr,br;
 @synthesize force_draw_leftline,force_draw_rightline;
 
@@ -49,28 +51,29 @@
         [BatchDraw add:top_fill key:top_fill.texture.name z_ord:[self get_render_ord] draw_ord:2];
         [BatchDraw add:main_fill key:main_fill.texture.name z_ord:[self get_render_ord] draw_ord:0];
         
-        
-        if (self.prev == NULL || force_draw_leftline) {
+        if (self.prev == NULL || force_draw_leftline)
             [BatchDraw add:left_line_fill key:left_line_fill.texture.name z_ord:[self get_render_ord] draw_ord:3];
-        }
-        if (self.next == NULL || force_draw_rightline) {
-            [BatchDraw add:right_line_fill key:right_line_fill.texture.name z_ord:[self get_render_ord] draw_ord:4];
-        }
-        if (bottom_line_fill.isalloc == 1) {
-            [BatchDraw add:bottom_line_fill key:bottom_line_fill.texture.name z_ord:[self get_render_ord] draw_ord:5];
-        }
         
-        if (self.prev == NULL || force_draw_leftline) {
+        if (self.next == NULL || force_draw_rightline) 
+            [BatchDraw add:right_line_fill key:right_line_fill.texture.name z_ord:[self get_render_ord] draw_ord:4];
+        
+        if (bottom_line_fill.isalloc == 1 && fill_hei <= BOTTOM_BORDER_IGNORE_HEI) 
+            [BatchDraw add:bottom_line_fill key:bottom_line_fill.texture.name z_ord:[self get_render_ord] draw_ord:5];
+        
+        
+        if (self.prev == NULL || force_draw_leftline) 
              [BatchDraw add:tl_top_corner key:tl_top_corner.texture.name z_ord:[self get_render_ord] draw_ord:6];
-        }
-        if (self.next == NULL || force_draw_rightline) {
+        
+        if (self.next == NULL || force_draw_rightline)
             [BatchDraw add:tr_top_corner key:tr_top_corner.texture.name z_ord:[self get_render_ord] draw_ord:7];
-        }
+        
         
         if (self.next != NULL && !(force_draw_leftline||force_draw_rightline)) {
             [BatchDraw add:corner_fill key:corner_fill.texture.name z_ord:[self get_render_ord] draw_ord:8];
             [BatchDraw add:toppts_fill key:toppts_fill.texture.name z_ord:[self get_render_ord] draw_ord:9];
-            [BatchDraw add:corner_line_fill key:corner_line_fill.texture.name z_ord:[self get_render_ord] draw_ord:10];
+            
+            if (fill_hei <= BOTTOM_BORDER_IGNORE_HEI) 
+                [BatchDraw add:corner_line_fill key:corner_line_fill.texture.name z_ord:[self get_render_ord] draw_ord:10];
         } 
         
     }

@@ -25,7 +25,7 @@
 #import "CameraArea.h"
 #import "SwingVine.h"
 #import "MinionRobot.h"
-#import "PhysicsEnabledObject.h"
+#import "LauncherRobot.h"
 
 @interface MapLoader : NSObject
 

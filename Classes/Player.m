@@ -429,7 +429,7 @@ HitRect cached_rect;
     return anim;
 }
 -(CCTexture2D*)get_ss {
-    return [Resource get_tex:CURRENT_CHARACTER];
+    return [Resource get_aa_tex:CURRENT_CHARACTER];
 }
 +(CGRect)splash_ss_plist_dict:(NSString*)tar {
     return [FileCache get_cgrect_from_plist:TEX_DOG_SPLASH idname:tar];

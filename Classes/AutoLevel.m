@@ -93,9 +93,11 @@
         if (tglayer.player.current_island == i) tglayer.player.current_island = NULL;
         [tglayer removeChild:i cleanup:NO];
         if (i.prev != NULL) {
+            i.prev.next = NULL;
             i.prev = NULL;
         }
         if (i.next != NULL) {
+            i.next.prev = NULL;
             i.next = NULL;
         }
     }

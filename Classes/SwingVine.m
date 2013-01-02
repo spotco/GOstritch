@@ -36,7 +36,7 @@
     [self addChild:vine];
     [self addChild:[CCSprite spriteWithTexture:[Resource get_tex:TEX_SWINGVINE_BASE]]];
     [vine setAnchorPoint:ccp(vine.anchorPoint.x,1)];
-    
+    active = YES;
     headcov = [CCSprite spriteWithTexture:[Resource get_tex:[Player get_character]] 
                            rect:[FileCache get_cgrect_from_plist:[Player get_character] idname:@"swing_head"]];
     [headcov setAnchorPoint:ccp(0.5-0.05,0+0.05)];

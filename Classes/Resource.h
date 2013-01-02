@@ -16,6 +16,15 @@
 #define TEX_BRIDGE_SECTION @"BridgeSection"
 #define TEX_TOP_EDGE @"GroundTopEdge"
 
+#define TEX_LAB_ALARM @"labalarm"
+#define TEX_LAB_BG @"labbg"
+#define TEX_LAB_GROUND_1 @"labground1"
+#define TEX_LAB_GROUND_2 @"labground2"
+#define TEX_LAB_GROUND_TOP @"labgroundtop"
+#define TEX_LAB_GROUND_TOP_EDGE @"labgroundtopedge"
+#define TEX_LAB_PIPE_1 @"labpipe1"
+#define TEX_LAB_PIPE_2 @"labpipe2"
+
 #define TEX_CAVE_TOP_TEX @"CaveTopTex"
 #define TEX_CAVE_CORNER_TEX @"CaveCornerTex"
 #define TEX_CAVEWALL @"CaveWall"
@@ -41,6 +50,7 @@
 #define TEX_BG_LAYER_2 @"BgLayer2"
 #define TEX_BG_LAYER_3 @"BgLayer3"
 #define TEX_GOLDEN_BONE @"GoldenBone"
+#define TEX_STARCOIN @"StarCoin"
 #define TEX_DOG_CAPE @"DogCape"
 #define TEX_DOG_ROCKET @"DogRocket"
 #define TEX_SPIKE @"Spike"
@@ -58,6 +68,7 @@
 #define TEX_ENEMY_ROBOT @"robot_default"
 #define TEX_ENEMY_LAUNCHER @"launcher_default"
 #define TEX_ENEMY_ROCKET @"rocket"
+#define TEX_ENEMY_COPTER @"copter_default"
 
 #define TEX_SWINGVINE_BASE @"SwingVineBase"
 #define TEX_SWINGVINE_TEX @"SwingVineTex"

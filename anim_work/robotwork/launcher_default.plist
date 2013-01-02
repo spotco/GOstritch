@@ -22,7 +22,29 @@
 			<key>spriteTrimmed</key>
 			<false/>
 			<key>textureRect</key>
+			<string>{{147, 0}, {145, 106}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>launcher_angry</key>
+		<dict>
+			<key>aliases</key>
+			<array>
+			
+			</array>
+			<key>spriteColorRect</key>
 			<string>{{0, 0}, {145, 106}}</string>
+			<key>spriteOffset</key>
+			<string>{0, 0}</string>
+			<key>spriteSize</key>
+			<string>{145, 106}</string>
+			<key>spriteSourceSize</key>
+			<string>{145, 106}</string>
+			<key>spriteTrimmed</key>
+			<false/>
+			<key>textureRect</key>
+			<string>{{294, 0}, {145, 106}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -44,7 +66,7 @@
 			<key>spriteTrimmed</key>
 			<false/>
 			<key>textureRect</key>
-			<string>{{147, 0}, {145, 106}}</string>
+			<string>{{0, 0}, {145, 106}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
