@@ -112,6 +112,10 @@ static float NO_VAL = -99999.0;
 	endY = end.y;
 }
 
+-(HitRect)get_hitrect {
+    return [Common hitrect_cons_x1:0 y1:0 wid:0 hei:0];
+}
+
 -(void)cleanup_anims {
 }
 

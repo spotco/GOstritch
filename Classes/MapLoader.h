@@ -5,6 +5,7 @@
 #import "Island.h"
 #import "CaveLineIsland.h"
 #import "BridgeIsland.h"
+#import "LabLineIsland.h"
 
 #import "DogBone.h"
 #import "GroundDetail.h"
@@ -26,6 +27,7 @@
 #import "SwingVine.h"
 #import "MinionRobot.h"
 #import "LauncherRobot.h"
+#import "LabWall.h"
 
 @interface MapLoader : NSObject
 

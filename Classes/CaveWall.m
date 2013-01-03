@@ -23,7 +23,11 @@
     tex.tri_pts[1] = ccp(0,height);
     tex.tri_pts[0] = ccp(width,height);
     
-    [Common tex_map_to_tri_loc:&tex len:4];
+    //[Common tex_map_to_tri_loc:&tex len:4];
+    for (int i = 0; i < 4; i++) {
+        tex.tex_pts[i] = ccp((tex.tri_pts[i].x+position_.x)/tex.texture.pixelsWide, 
+                             (tex.tri_pts[i].y+position_.y)/tex.texture.pixelsHigh);
+    }
 }
 
 -(CCTexture2D*)get_tex {
@@ -44,6 +48,10 @@
 -(void)update:(Player *)player g:(GameEngineLayer *)g {
     [super update:player g:g];
     
+}
+
+-(void)set_active:(BOOL)t_active {
+    active = t_active;
 }
 
 -(int)get_render_ord {

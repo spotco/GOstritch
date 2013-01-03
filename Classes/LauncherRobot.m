@@ -12,13 +12,12 @@
 #define RECOIL_DIST 40
 #define RELOAD 200
 
-#define PARTICLE_FREQ 10
 #define REMOVE_BEHIND_BUFFER 500
 
 #define ROCKETSPEED 4
 
-+(LauncherRobot*)cons_x:(float)x y:(float)y {
-    return [[LauncherRobot node] cons_x:x y:y];
++(LauncherRobot*)cons_x:(float)x y:(float)y dir:(Vec3D*)dir {
+    return [[LauncherRobot node] cons_x:x y:y dir:dir];
 }
 
 +(void)explosion:(GameEngineLayer*)g at:(CGPoint)pt {
@@ -32,10 +31,23 @@
 }
 
 //launcher_dead
--(id)cons_x:(float)x y:(float)y {
+-(id)cons_x:(float)x y:(float)y dir:(Vec3D*)tdir {
     [self setPosition:ccp(x,y)];
     body = [CCSprite spriteWithTexture:[Resource get_tex:TEX_ENEMY_LAUNCHER] 
                                   rect:[FileCache get_cgrect_from_plist:TEX_ENEMY_LAUNCHER idname:@"launcher"]];
+    dir = [Vec3D init_x:tdir.x y:tdir.y z:0];
+    
+    float tara = [self get_tar_angle_deg_self:position_ tar:ccp(position_.x+dir.x,position_.y+dir.y)];
+    if (ABS(tara) > 90) {
+        tara+=180;
+        [body setScaleX:-1];
+    } else {
+        [body setScaleX:1];
+    }
+    starting_rot = tara;
+    [self setRotation:tara];
+    
+    
     [self addChild:body];
     starting_pos = ccp(x,y);
     active = YES;
@@ -76,7 +88,12 @@
         
         CGPoint noz = [self get_nozzle];
         [LauncherRobot explosion:g at:noz];
-        LauncherRocket *r = [LauncherRocket cons_at:noz vel:ccp(-ROCKETSPEED,0)];
+        
+        Vec3D *rv = [Vec3D init_x:dir.x y:dir.y z:0];
+        [rv scale:ROCKETSPEED];
+        LauncherRocket *r = [LauncherRocket cons_at:noz vel:ccp(rv.x,rv.y)];
+        [rv dealloc];
+        
         [g add_gameobject:r];
         recoilanim_timer = RECOIL_TIME;
     }
@@ -99,11 +116,20 @@
     
 }
 
+-(float)get_tar_angle_deg_self:(CGPoint)s tar:(CGPoint)t {
+    //calc coord:       cocos2d coord:
+    //+                    +
+    //---0              0---
+    //-                    -
+    float ccwt = [Common rad_to_deg:atan2f(t.y-s.y, t.x-s.x)];
+    return ccwt > 0 ? 180-ccwt : -(180-ABS(ccwt));
+}
+
 -(CGPoint)get_nozzle {
     CGPoint pos = position_;
-    Vec3D *v = [Vec3D init_x:110 y:0 z:0];
-    body.scale == 1 ? [v scale:-1] : 0;
-    pos.x += v.x;
+    Vec3D *v = [Vec3D init_x:dir.x y:dir.y z:0];
+    [v scale:110];
+    pos = [v transform_pt:pos];
     [v dealloc];
     return pos;
 }
@@ -111,8 +137,8 @@
 -(void)reset {
     [super reset];
     ct = 0;
-    [self setRotation:0];
     busted = NO;
+    [self setRotation:starting_rot];
     self.current_island = NULL;
     [self set_anim:ANIM_NORMAL];
 }
@@ -132,54 +158,10 @@
 
 -(void)set_active:(BOOL)t_active {active = t_active;}
 -(HitRect)get_hit_rect {return [Common hitrect_cons_x1:position_.x-50 y1:position_.y-20 wid:100 hei:40];}
+-(void)dealloc {
+    [dir dealloc];
+    [super dealloc];
+}
 
 @end
 
-
-@implementation LauncherRocket
-
-
-+(LauncherRocket*)cons_at:(CGPoint)pt vel:(CGPoint)vel {
-    return [[LauncherRocket spriteWithTexture:[Resource get_tex:TEX_ENEMY_ROCKET]] cons_at:pt vel:vel];
-}
-
--(id)cons_at:(CGPoint)pt vel:(CGPoint)vel {
-    [self setPosition:pt];
-    v = vel;
-    active = YES;
-    return self;
-}
-
--(void)update:(Player *)player g:(GameEngineLayer *)g {
-    [super update:player g:g];
-    [self setPosition:ccp(position_.x+v.x,position_.y+v.y)];
-    
-    ct++;
-    ct%PARTICLE_FREQ==0?[g add_particle:[RocketLaunchParticle init_x:position_.x y:position_.y vx:-v.x vy:-v.y]]:0;
-    
-    if (position_.x + REMOVE_BEHIND_BUFFER < player.position.x) {
-        kill = YES;
-    }
-    
-    if (kill || ![Common hitrect_touch:[self get_hit_rect] b:[g get_world_bounds]]) {
-        [g remove_gameobject:self];
-        
-    } else if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
-        
-        if (player.dashing) {
-            
-        } else if (!player.dead) {
-            [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
-            [DazedParticle init_effect:g tar:player time:40];
-        }
-        [LauncherRobot explosion:g at:position_];
-        [g remove_gameobject:self];
-        
-    }
-}
--(int)get_render_ord{ return [GameRenderImplementation GET_RENDER_BTWN_PLAYER_ISLAND];}
--(void)reset{[super reset];kill = YES;}
--(void)set_active:(BOOL)t_active {active = t_active;}
--(HitRect)get_hit_rect {return [Common hitrect_cons_x1:position_.x-30 y1:position_.y-25 wid:60 hei:50];}
-
-@end

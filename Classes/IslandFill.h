@@ -1,7 +1,9 @@
 #import "GameObject.h"
 #import "CaveWall.h"
 
-@interface IslandFill : CaveWall
+@interface IslandFill : CaveWall {
+    BOOL has_lazy_setrenderord;
+}
 
 +(IslandFill*)init_x:(float)x y:(float)y width:(float)width height:(float)height;
 

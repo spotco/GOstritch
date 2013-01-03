@@ -88,6 +88,8 @@ static NSMutableDictionary* cached_json;
                 currentIsland = [CaveLineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
             } else if ([ground_type isEqualToString:@"bridge"]) {
                 currentIsland = [BridgeIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
+            } else if ([ground_type isEqualToString:@"lab"]) {
+                currentIsland = [LabLineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
             } else {
                 NSLog(@"unrecognized ground type!!");
                 continue;
@@ -246,7 +248,20 @@ static NSMutableDictionary* cached_json;
         } else if ([type isEqualToString:@"launcherrobot"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
-            [map.game_objects addObject:[LauncherRobot cons_x:x y:y]];
+            NSDictionary* dir_obj = [j_object objectForKey:@"dir"];
+            float dir_x = ((NSString*)[dir_obj objectForKey:@"x"]).floatValue;
+            float dir_y = ((NSString*)[dir_obj objectForKey:@"y"]).floatValue;
+            Vec3D* dir_vec = [Vec3D init_x:dir_x y:dir_y z:0];
+            
+            [map.game_objects addObject:[LauncherRobot cons_x:x y:y dir:dir_vec]];
+            [dir_vec dealloc];
+            
+        } else if ([type isEqualToString:@"labwall"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            float width = ((NSString*)[j_object  objectForKey:@"width"]).floatValue;
+            float hei = ((NSString*)[j_object  objectForKey:@"height"]).floatValue;
+            [map.game_objects addObject:[LabWall init_x:x y:y width:width height:hei]];
             
         } else {
             NSLog(@"item read error");

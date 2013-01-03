@@ -1,8 +1,24 @@
 {
-    "objects": [{"x": 764, "type": "spikevine", "x2": 251, "y": 332, "label": "0", "y2": 334}],
-    "start_x": 0,
-    "assert_links": 0,
-    "connect_pts": {"y1": 141, "y2": 149, "x1": 71, "x2": 913},
+    "assert_links": 14,
     "start_y": 0,
-    "islands": [{"y1": 141, "type": "line", "can_fall": true, "x2": 913, "ground": "open", "y2": 149, "x1": 71, "hei": 50, "ndir": "left"}]
+    "objects": [{"height": 886, "x": 244, "type": "labwall", "y": 92, "label": "0", "width": 1302}],
+    "islands": [
+        {"y2": 216, "x1": 292, "type": "line", "can_fall": true, "x2": 398, "ndir": "left", "ground": "lab", "y1": 188, "hei": 150},
+        {"y2": 260, "x1": 398, "type": "line", "can_fall": true, "x2": 448, "ndir": "left", "ground": "lab", "y1": 216, "hei": 150},
+        {"y2": 334, "x1": 448, "type": "line", "can_fall": true, "x2": 502, "ndir": "left", "ground": "lab", "y1": 260, "hei": 150},
+        {"y2": 426, "x1": 502, "type": "line", "can_fall": true, "x2": 538, "ndir": "left", "ground": "lab", "y1": 334, "hei": 150},
+        {"y2": 486, "x1": 538, "type": "line", "can_fall": true, "x2": 604, "ndir": "left", "ground": "lab", "y1": 426, "hei": 150},
+        {"y2": 546, "x1": 604, "type": "line", "can_fall": true, "x2": 698, "ndir": "left", "ground": "lab", "y1": 486, "hei": 150},
+        {"y2": 546, "x1": 698, "type": "line", "can_fall": true, "x2": 802, "ndir": "left", "ground": "lab", "y1": 546, "hei": 150},
+        {"y2": 522, "x1": 802, "type": "line", "can_fall": true, "x2": 886, "ndir": "left", "ground": "lab", "y1": 546, "hei": 150},
+        {"y2": 464, "x1": 886, "type": "line", "can_fall": true, "x2": 926, "ndir": "left", "ground": "lab", "y1": 522, "hei": 150},
+        {"y2": 380, "x1": 926, "type": "line", "can_fall": true, "x2": 954, "ndir": "left", "ground": "lab", "y1": 464, "hei": 150},
+        {"y2": 288, "x1": 954, "type": "line", "can_fall": true, "x2": 1024, "ndir": "left", "ground": "lab", "y1": 380, "hei": 150},
+        {"y2": 232, "x1": 1024, "type": "line", "can_fall": true, "x2": 1102, "ndir": "left", "ground": "lab", "y1": 288, "hei": 150},
+        {"y2": 208, "x1": 1102, "type": "line", "can_fall": true, "x2": 1240, "ndir": "left", "ground": "lab", "y1": 232, "hei": 150},
+        {"y2": 200, "x1": 1240, "type": "line", "can_fall": true, "x2": 1368, "ndir": "left", "ground": "lab", "y1": 208, "hei": 150},
+        {"y2": 206, "x1": 1368, "type": "line", "can_fall": true, "x2": 1422, "ndir": "left", "ground": "lab", "y1": 200, "hei": 150}
+    ],
+    "start_x": 0,
+    "connect_pts": {"y2": 206, "x1": 292, "y1": 188, "x2": 1422}
 }

@@ -73,6 +73,13 @@
 		7E28310A15CF4FA7002EB07B /* StreamParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28310915CF4FA7002EB07B /* StreamParticle.m */; };
 		7E28310D15CF5D90002EB07B /* RocketParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28310C15CF5D90002EB07B /* RocketParticle.m */; };
 		7E28311015CF66F7002EB07B /* JumpPadParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E28310F15CF66F6002EB07B /* JumpPadParticle.m */; };
+		7E3552D71695A6BE0099FADA /* robotstest.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E3552D61695A6BE0099FADA /* robotstest.map */; };
+		7E3552DB1695A8210099FADA /* LauncherRocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E3552D91695A8210099FADA /* LauncherRocket.h */; };
+		7E3552DC1695A8210099FADA /* LauncherRocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3552DA1695A8210099FADA /* LauncherRocket.m */; };
+		7E3552E01695AF330099FADA /* LabWall.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E3552DE1695AF330099FADA /* LabWall.h */; };
+		7E3552E11695AF330099FADA /* LabWall.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3552DF1695AF330099FADA /* LabWall.m */; };
+		7E3552E41695B1970099FADA /* LabLineIsland.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E3552E21695B1960099FADA /* LabLineIsland.h */; };
+		7E3552E51695B1970099FADA /* LabLineIsland.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3552E31695B1960099FADA /* LabLineIsland.m */; };
 		7E3B977915D7A6A4001859CB /* BG_cave_top_edge.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E3B977615D7A6A4001859CB /* BG_cave_top_edge.png */; };
 		7E3B977A15D7A6A4001859CB /* BG_cave_top_fill.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E3B977715D7A6A4001859CB /* BG_cave_top_fill.png */; };
 		7E3B977B15D7A6A4001859CB /* BG_cave_wall.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E3B977815D7A6A4001859CB /* BG_cave_wall.png */; };
@@ -558,6 +565,13 @@
 		7E28310C15CF5D90002EB07B /* RocketParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RocketParticle.m; sourceTree = "<group>"; };
 		7E28310E15CF66F6002EB07B /* JumpPadParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpPadParticle.h; sourceTree = "<group>"; };
 		7E28310F15CF66F6002EB07B /* JumpPadParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JumpPadParticle.m; sourceTree = "<group>"; };
+		7E3552D61695A6BE0099FADA /* robotstest.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = robotstest.map; sourceTree = "<group>"; };
+		7E3552D91695A8210099FADA /* LauncherRocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherRocket.h; sourceTree = "<group>"; };
+		7E3552DA1695A8210099FADA /* LauncherRocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherRocket.m; sourceTree = "<group>"; };
+		7E3552DE1695AF330099FADA /* LabWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabWall.h; sourceTree = "<group>"; };
+		7E3552DF1695AF330099FADA /* LabWall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabWall.m; sourceTree = "<group>"; };
+		7E3552E21695B1960099FADA /* LabLineIsland.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabLineIsland.h; sourceTree = "<group>"; };
+		7E3552E31695B1960099FADA /* LabLineIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabLineIsland.m; sourceTree = "<group>"; };
 		7E3B977615D7A6A4001859CB /* BG_cave_top_edge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BG_cave_top_edge.png; sourceTree = "<group>"; };
 		7E3B977715D7A6A4001859CB /* BG_cave_top_fill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BG_cave_top_fill.png; sourceTree = "<group>"; };
 		7E3B977815D7A6A4001859CB /* BG_cave_wall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BG_cave_wall.png; sourceTree = "<group>"; };
@@ -1257,6 +1271,19 @@
 			path = particle;
 			sourceTree = "<group>";
 		};
+		7E3552DD1695AC930099FADA /* bgfiller */ = {
+			isa = PBXGroup;
+			children = (
+				7E1456B915E8C669007CC9E4 /* CaveWall.h */,
+				7E1456BA15E8C66A007CC9E4 /* CaveWall.m */,
+				7E22750F15EB443A009ED6DC /* IslandFill.h */,
+				7E22751015EB443A009ED6DC /* IslandFill.m */,
+				7E3552DE1695AF330099FADA /* LabWall.h */,
+				7E3552DF1695AF330099FADA /* LabWall.m */,
+			);
+			name = bgfiller;
+			sourceTree = "<group>";
+		};
 		7E3B977515D7A6A4001859CB /* BG_cave */ = {
 			isa = PBXGroup;
 			children = (
@@ -1295,6 +1322,7 @@
 				7EE2AEFE161448F60035BA50 /* bridge_test.map */,
 				7EB7698D167EF0A6003AFCF5 /* shittytest.map */,
 				7EE0AF0E168F011D0090B546 /* shittytest2.map */,
+				7E3552D61695A6BE0099FADA /* robotstest.map */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -1342,6 +1370,8 @@
 				7E60D112168AC77700E84683 /* PhysicsEnabledObject.m */,
 				7EC2302616941D4600C68AC9 /* LauncherRobot.h */,
 				7EC2302716941D4600C68AC9 /* LauncherRobot.m */,
+				7E3552D91695A8210099FADA /* LauncherRocket.h */,
+				7E3552DA1695A8210099FADA /* LauncherRocket.m */,
 			);
 			name = enemy;
 			sourceTree = "<group>";
@@ -1475,10 +1505,6 @@
 				7E8C080715C3CAF600FE9341 /* Water.m */,
 				7EF1246A15CA612100B91A91 /* FishGenerator.h */,
 				7EF1246B15CA612100B91A91 /* FishGenerator.m */,
-				7E1456B915E8C669007CC9E4 /* CaveWall.h */,
-				7E1456BA15E8C66A007CC9E4 /* CaveWall.m */,
-				7E22750F15EB443A009ED6DC /* IslandFill.h */,
-				7E22751015EB443A009ED6DC /* IslandFill.m */,
 				7E933FEF1609ABD7007E494A /* BreakableWall.h */,
 				7E933FF01609ABD7007E494A /* BreakableWall.m */,
 				7E933FF5160AE1F9007E494A /* SpikeVine.h */,
@@ -1538,6 +1564,7 @@
 		7E93D6731592B69C00A83E9C /* game_obj */ = {
 			isa = PBXGroup;
 			children = (
+				7E3552DD1695AC930099FADA /* bgfiller */,
 				7E60D10C168ABF2300E84683 /* enemy */,
 				7E786E0115E4D24D000E1946 /* bgeffects */,
 				7E8C080A15C3EBD300FE9341 /* envr_obj */,
@@ -1827,6 +1854,8 @@
 				7E1456B715E8C0E0007CC9E4 /* CaveLineIsland.m */,
 				7EE2AEFA16143BA60035BA50 /* BridgeIsland.h */,
 				7EE2AEFB16143BA60035BA50 /* BridgeIsland.m */,
+				7E3552E21695B1960099FADA /* LabLineIsland.h */,
+				7E3552E31695B1960099FADA /* LabLineIsland.m */,
 			);
 			name = islands;
 			sourceTree = "<group>";
@@ -2305,6 +2334,9 @@
 				7ECE6051168C6B61001C2016 /* BatchDraw.h in Headers */,
 				7EE0AF0C168EEFEA0090B546 /* DogShadow.h in Headers */,
 				7EC2302816941D4600C68AC9 /* LauncherRobot.h in Headers */,
+				7E3552DB1695A8210099FADA /* LauncherRocket.h in Headers */,
+				7E3552E01695AF330099FADA /* LabWall.h in Headers */,
+				7E3552E41695B1970099FADA /* LabLineIsland.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2527,6 +2559,7 @@
 				7EC2302116940A1200C68AC9 /* star_coin.png in Resources */,
 				7EC2302416940AB100C68AC9 /* copter_default.plist in Resources */,
 				7EC2302516940AB100C68AC9 /* copter_default.png in Resources */,
+				7E3552D71695A6BE0099FADA /* robotstest.map in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2617,6 +2650,9 @@
 				7ECE6052168C6B61001C2016 /* BatchDraw.m in Sources */,
 				7EE0AF0D168EEFEA0090B546 /* DogShadow.m in Sources */,
 				7EC2302916941D4600C68AC9 /* LauncherRobot.m in Sources */,
+				7E3552DC1695A8210099FADA /* LauncherRocket.m in Sources */,
+				7E3552E11695AF330099FADA /* LabWall.m in Sources */,
+				7E3552E51695B1970099FADA /* LabLineIsland.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,7 +2,7 @@
 
 @implementation GameMain
 
-#define USE_BG YES
+#define USE_BG NO
 #define ENABLE_BG_PARTICLES YES
 #define DRAW_HITBOX NO
 #define TARGET_FPS 60
@@ -12,7 +12,7 @@
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
 #define STARTING_LIVES 1
-#define TESTLEVEL @"shittytest"
+#define TESTLEVEL @"shittytest2"
 
 /**
  TODO -- 

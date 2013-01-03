@@ -1,37 +1,16 @@
 {
+    "start_y": 225,
     "objects": [
-        {"x": 4233.4, "type": "launcherrobot", "label": "3", "y": 288.3},
-        {"x": 4341.8, "type": "launcherrobot", "label": "6", "y": 348.3},
-        {"x": 4461.8, "type": "launcherrobot", "label": "7", "y": 423.3},
-        {"x": 2055, "type": "robotminion", "label": "8", "y": 270},
-        {"x": 2685, "type": "robotminion", "label": "9", "y": 276.6},
-        {"x": 3500.1, "type": "robotminion", "label": "10", "y": 293.3},
-        {"x": 2345, "type": "spikevine", "y": 390, "x2": 2343.4, "label": "11", "y2": 690},
-        {"x": 3155, "type": "spikevine", "y": 398.3, "x2": 3156.7, "label": "12", "y2": 688.3},
-        {"x": 3933.4, "type": "spikevine", "y": 385, "x2": 3928.4, "label": "13", "y2": 688.3},
-        {"x": 603.4, "type": "swingvine", "y": 1005, "x2": 601.7, "label": "16", "y2": 763.3}
+        {"label": "3", "x": 760, "type": "launcherrobot", "y": 245, "dir": {"x": -0.64, "y": 0.77}},
+        {"label": "4", "x": 763, "type": "launcherrobot", "y": 216, "dir": {"x": -0.92, "y": 0.4}},
+        {"label": "5", "x": 767, "type": "launcherrobot", "y": 187, "dir": {"x": -1, "y": -0.01}},
+        {"height": 417, "x": 123, "type": "labwall", "y": 91, "label": "6", "width": 630}
     ],
-    "assert_links": 16,
     "islands": [
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 1012, "can_fall": true, "x2": 1324, "y1": 110, "y2": 136, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 1324, "can_fall": true, "x2": 1583, "y1": 136, "y2": 209, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 1583, "can_fall": true, "x2": 1767, "y1": 209, "y2": 220, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 1767, "can_fall": true, "x2": 3350.1, "y1": 220, "y2": 227.5, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 3350.1, "can_fall": true, "x2": 4510, "y1": 227.5, "y2": 241.1, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 58.4, "can_fall": true, "x2": 193.4, "y1": 760, "y2": 786.7, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 193.4, "can_fall": true, "x2": 371.7, "y1": 786.7, "y2": 766.7, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 371.7, "can_fall": true, "x2": 521.7, "y1": 766.7, "y2": 718.3, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 521.7, "can_fall": true, "x2": 600, "y1": 718.3, "y2": 681.7, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 600, "can_fall": true, "x2": 650, "y1": 681.7, "y2": 558.3, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 650, "can_fall": true, "x2": 585, "y1": 558.3, "y2": 435, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 585, "can_fall": true, "x2": 425, "y1": 435, "y2": 375, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 425, "can_fall": true, "x2": 330, "y1": 375, "y2": 281.6, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 330, "can_fall": true, "x2": 331.7, "y1": 281.6, "y2": 166.6, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 331.7, "can_fall": true, "x2": 470, "y1": 166.6, "y2": 98.3, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 470, "can_fall": true, "x2": 760, "y1": 98.3, "y2": 68.3, "ground": "open"},
-        {"hei": 50, "ndir": "left", "type": "line", "x1": 760, "can_fall": true, "x2": 1012, "y1": 68.3, "y2": 110, "ground": "open"}
+        {"y2": 160, "x1": 116, "type": "line", "can_fall": true, "x2": 487, "ndir": "left", "ground": "open", "y1": 149, "hei": 50},
+        {"y2": 163, "x1": 487, "type": "line", "can_fall": true, "x2": 779, "ndir": "left", "ground": "open", "y1": 160, "hei": 50}
     ],
-    "connect_pts": {"y1": 760, "y2": 241.1, "x1": 58.4, "x2": 4510},
-    "start_y": 845.0333333333335,
-    "start_x": 130
+    "assert_links": 1,
+    "start_x": 218,
+    "connect_pts": {"y2": 163, "x1": 116, "y1": 149, "x2": 779}
 }
