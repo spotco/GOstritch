@@ -130,7 +130,7 @@ static NSMutableDictionary* cached_json;
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             int type = ((NSString*)[j_object  objectForKey:@"img"]).intValue;
-            [map.game_objects addObject:[GroundDetail init_x:x y:y type:type]];
+            [map.game_objects addObject:[GroundDetail init_x:x y:y type:type islands:map.n_islands]];
             
         } else if ([type isEqualToString:@"checkpoint"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
@@ -262,6 +262,11 @@ static NSMutableDictionary* cached_json;
             float width = ((NSString*)[j_object  objectForKey:@"width"]).floatValue;
             float hei = ((NSString*)[j_object  objectForKey:@"height"]).floatValue;
             [map.game_objects addObject:[LabWall init_x:x y:y width:width height:hei]];
+            
+        } else if ([type isEqualToString:@"copter"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            [map.game_objects addObject:[CopterRobot cons_x:x y:y]];
             
         } else {
             NSLog(@"item read error");

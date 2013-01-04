@@ -31,6 +31,7 @@ static NSMutableDictionary* textures = nil;
                         @"lab_ground_top_edge.png",TEX_LAB_GROUND_TOP_EDGE,
                         @"lab_pipe_1.png",TEX_LAB_PIPE_1,
                         @"lab_pipe_2.png",TEX_LAB_PIPE_2,
+                        @"lab_island_corner.png",TEX_LAB_GROUND_CORNER,
 
                         @"BG_cave_top_fill.png", TEX_CAVE_TOP_TEX,
                         @"BG_cave_top_edge.png", TEX_CAVE_CORNER_TEX,
@@ -70,7 +71,10 @@ static NSMutableDictionary* textures = nil;
                         @"BG1_detail_4.png", TEX_GROUND_DETAIL_4,
                         @"BG1_detail_5.png", TEX_GROUND_DETAIL_5,
                         @"BG1_detail_6.png", TEX_GROUND_DETAIL_6,
-                        @"BG1_detail_7.png", TEX_GROUND_DETAIL_7,                     
+                        
+                        @"lab_pipe_1.png", TEX_GROUND_DETAIL_7,
+                        @"lab_pipe_2.png", TEX_GROUND_DETAIL_8,
+                        @"lab_alarm.png", TEX_GROUND_DETAIL_9,      
 
                         @"dog1ss.png", TEX_DOG_RUN_1,
                         @"dog2ss.png", TEX_DOG_RUN_2,
@@ -153,6 +157,8 @@ static NSMutableDictionary* textures = nil;
 +(CCTexture2D*)get_aa_tex:(NSString*)key {
     CCTexture2D* tex = [Resource get_tex:key];
     [tex setAntiAliasTexParameters];
+    ccTexParams texParams = { GL_NEAREST, GL_NEAREST, GL_REPEAT, GL_REPEAT };
+    [tex setTexParameters:&texParams];
     return tex;
 }
 

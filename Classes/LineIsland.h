@@ -35,11 +35,13 @@
 -(void)calc_init;
 -(void)init_tex;
 -(void)init_top;
+
 -(CCTexture2D*)get_tex_fill;
 -(CCTexture2D*)get_tex_corner;
 -(CCTexture2D*)get_tex_border;
 -(CCTexture2D*)get_tex_top;
 -(CCTexture2D*)get_corner_fill_color;
+-(float)get_corner_top_fill_scale;
 
 
 

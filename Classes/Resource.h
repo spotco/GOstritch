@@ -22,6 +22,7 @@
 #define TEX_LAB_GROUND_2 @"labground2"
 #define TEX_LAB_GROUND_TOP @"labgroundtop"
 #define TEX_LAB_GROUND_TOP_EDGE @"labgroundtopedge"
+#define TEX_LAB_GROUND_CORNER @"labgroundcorner"
 #define TEX_LAB_PIPE_1 @"labpipe1"
 #define TEX_LAB_PIPE_2 @"labpipe2"
 
@@ -84,6 +85,8 @@
 #define TEX_GROUND_DETAIL_5 @"GroundDetail5"
 #define TEX_GROUND_DETAIL_6 @"GroundDetail6"
 #define TEX_GROUND_DETAIL_7 @"GroundDetail7"
+#define TEX_GROUND_DETAIL_8 @"GroundDetail8"
+#define TEX_GROUND_DETAIL_9 @"GroundDetail9"
 
 #define TEX_GREY_PARTICLE @"GreyParticle"
 

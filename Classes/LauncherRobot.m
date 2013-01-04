@@ -78,7 +78,10 @@
     if (recoilanim_timer > 0) {
         recoilanim_timer--;
         float pct = (recoilanim_timer)/RECOIL_TIME;
-        [self setPosition:ccp(pct*(RECOIL_DIST)+starting_pos.x,starting_pos.y)];
+        [self setPosition:ccp(
+            pct*(RECOIL_DIST)*(-dir.x)+starting_pos.x,
+            pct*(RECOIL_DIST)*(-dir.y)+starting_pos.y)
+         ];
     } else {
         [self setPosition:starting_pos];
     }
@@ -107,10 +110,10 @@
                 [g add_particle:[BrokenMachineParticle init_x:position_.x y:position_.y vx:float_random(-5, 5) vy:float_random(-3, 10)]];
             }
             
-        } else if (!player.dead) {
+        }/* else if (!player.dead) {
             [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
             [DazedParticle init_effect:g tar:player time:40];
-        }
+        }*/
         
     }
     

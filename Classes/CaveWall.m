@@ -1,4 +1,5 @@
 #import "CaveWall.h"
+#import "GameEngineLayer.h"
 
 @implementation CaveWall
 
@@ -14,7 +15,7 @@
     hei = height;
     
     tex = [Common init_render_obj:[self get_tex] npts:4];
-    
+    active = YES;
     /*10
       32*/
     
@@ -43,11 +44,6 @@
 
 -(HitRect)get_hit_rect {
     return [Common hitrect_cons_x1:position_.x y1:position_.y wid:wid hei:hei];
-}
-
--(void)update:(Player *)player g:(GameEngineLayer *)g {
-    [super update:player g:g];
-    
 }
 
 -(void)set_active:(BOOL)t_active {

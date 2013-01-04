@@ -28,6 +28,7 @@
 #import "MinionRobot.h"
 #import "LauncherRobot.h"
 #import "LabWall.h"
+#import "CopterRobot.h"
 
 @interface MapLoader : NSObject
 

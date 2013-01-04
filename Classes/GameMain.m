@@ -4,15 +4,15 @@
 
 #define USE_BG NO
 #define ENABLE_BG_PARTICLES YES
-#define DRAW_HITBOX NO
+#define DRAW_HITBOX YES
 #define TARGET_FPS 60
 #define RESET_STATS NO
 #define DISPLAY_FPS NO
 #define DEBUG_UI NO
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
-#define STARTING_LIVES 1
-#define TESTLEVEL @"shittytest2"
+#define STARTING_LIVES 20
+#define TESTLEVEL @"shittytest"
 
 /**
  TODO -- 
@@ -33,8 +33,8 @@
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
     
-    [GameMain start_testlevel];
-    //[GameMain start_game_autolevel];
+    //[GameMain start_testlevel];
+    [GameMain start_game_autolevel];
     //[GameMain start_menu];
 }
 

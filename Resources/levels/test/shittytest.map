@@ -1,16 +1,14 @@
 {
-    "start_y": 225,
-    "objects": [
-        {"label": "3", "x": 760, "type": "launcherrobot", "y": 245, "dir": {"x": -0.64, "y": 0.77}},
-        {"label": "4", "x": 763, "type": "launcherrobot", "y": 216, "dir": {"x": -0.92, "y": 0.4}},
-        {"label": "5", "x": 767, "type": "launcherrobot", "y": 187, "dir": {"x": -1, "y": -0.01}},
-        {"height": 417, "x": 123, "type": "labwall", "y": 91, "label": "6", "width": 630}
-    ],
+    "connect_pts": {"y2": 240, "x1": 149, "y1": 169, "x2": 2283},
+    "objects": [{"label": "0", "x": 607, "type": "copter", "y": 361}],
     "islands": [
-        {"y2": 160, "x1": 116, "type": "line", "can_fall": true, "x2": 487, "ndir": "left", "ground": "open", "y1": 149, "hei": 50},
-        {"y2": 163, "x1": 487, "type": "line", "can_fall": true, "x2": 779, "ndir": "left", "ground": "open", "y1": 160, "hei": 50}
+        {"y2": 181, "x1": 149, "type": "line", "can_fall": true, "x2": 508, "ndir": "left", "ground": "open", "y1": 169, "hei": 50},
+        {"y2": 190, "x1": 508, "type": "line", "can_fall": true, "x2": 847, "ndir": "left", "ground": "open", "y1": 181, "hei": 50},
+        {"y2": 193, "x1": 847, "type": "line", "can_fall": true, "x2": 1420, "ndir": "left", "ground": "open", "y1": 190, "hei": 50},
+        {"y2": 239, "x1": 1420, "type": "line", "can_fall": true, "x2": 1880, "ndir": "left", "ground": "open", "y1": 193, "hei": 50},
+        {"y2": 240, "x1": 1880, "type": "line", "can_fall": true, "x2": 2283, "ndir": "left", "ground": "open", "y1": 239, "hei": 50}
     ],
-    "assert_links": 1,
-    "start_x": 218,
-    "connect_pts": {"y2": 163, "x1": 116, "y1": 149, "x2": 779}
+    "start_y": 226,
+    "assert_links": 4,
+    "start_x": 230
 }

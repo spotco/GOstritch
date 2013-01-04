@@ -16,6 +16,10 @@
 	return new_island;
 }
 
+-(CCTexture2D*)get_corner_fill_color {
+    return [Resource get_tex:TEX_LAB_GROUND_CORNER];
+}
+
 -(CCTexture2D*)get_tex_corner {
     return [Resource get_tex:TEX_LAB_GROUND_TOP_EDGE];
 }
@@ -23,8 +27,12 @@
     return [Resource get_tex:TEX_LAB_GROUND_TOP];
 }
 -(CCTexture2D*)get_tex_fill {
-    return [Resource get_tex:TEX_LAB_GROUND_1];
-    //return [Resource get_tex:TEX_LAB_GROUND_2];
+    if (fill_hei <= 150) {
+        return [Resource get_tex:TEX_LAB_GROUND_2];
+    } else {
+        return [Resource get_tex:TEX_LAB_GROUND_2];
+    }
+    
 }
 
 @end

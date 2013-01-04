@@ -10,7 +10,6 @@
 #define MVR_ROUNDED_CORNER_SCALE 8
 #define NORMAL_ROUNDED_CORNER_SCALE 20
 #define BORDER_LINE_WIDTH 5
-#define CORNER_TOP_FILL_SCALE 26
 #define TL_DOWNOFFSET 20
 
 #define BOTTOM_BORDER_IGNORE_HEI 200
@@ -131,6 +130,10 @@
     return [Resource get_tex:TEX_GROUND_CORNER_TEX_1];
 }
 
+-(float)get_corner_top_fill_scale {
+    return 26.0;
+}
+
 -(void)scale_ndir:(Vec3D*)v {
     [v scale:self.ndir];
 }
@@ -155,7 +158,18 @@
     tri_pts[1] = ccp(0+v3t1.x * taille,0+v3t1.y * taille);
     tri_pts[0] = ccp(self.endX-self.startX +v3t1.x * taille ,self.endY-self.startY +v3t1.y * taille);
 	
-    [Common tex_map_to_tri_loc:&main_fill len:4];
+    //[Common tex_map_to_tri_loc:&main_fill len:4];
+    /*NSLog(@"pre:%@,%@,%@,%@",NSStringFromCGPoint(main_fill.tex_pts[0]),
+                             NSStringFromCGPoint(main_fill.tex_pts[1]),
+                             NSStringFromCGPoint(main_fill.tex_pts[2]),
+                             NSStringFromCGPoint(main_fill.tex_pts[3]));
+    */
+    for (int i = 0; i < 4; i++) {
+        main_fill.tex_pts[i] = ccp(( main_fill.tri_pts[i].x+self.startX)/main_fill.texture.pixelsWide, 
+                                   ( main_fill.tri_pts[i].y+self.startY)/main_fill.texture.pixelsHigh);
+    }
+    
+    
     [self init_LR_line_with_v3t1:v3t1 v3t2:v3t2];
     
     [v3t2 dealloc];
@@ -378,7 +392,7 @@
     float d_o_y = offset * v3t1.y;
     toppts_fill.tri_pts[2] = ccp( d_o_x+self.next.startX-self.startX ,d_o_y+self.next.startY-self.startY );
 
-    float corner_top_scale = CORNER_TOP_FILL_SCALE;
+    float corner_top_scale = [self get_corner_top_fill_scale];
     
     /*cur 0  next
           1 2
@@ -431,7 +445,11 @@
     [v3t2 dealloc];
     [v3t1 dealloc];
 
-    [Common tex_map_to_tri_loc:&corner_fill len:3];
+    for (int i = 0; i < 4; i++) {
+        corner_fill.tex_pts[i] = ccp(( corner_fill.tri_pts[i].x+self.startX)/ corner_fill.texture.pixelsWide, 
+                                    ( corner_fill.tri_pts[i].y+self.startY)/   corner_fill.texture.pixelsHigh);
+    }
+    //[Common tex_map_to_tri_loc:&corner_fill len:3];
 }
 
 @end

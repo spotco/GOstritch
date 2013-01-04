@@ -20,6 +20,7 @@ typedef struct shadowinfo {
 
 -(void)check_should_render:(GameEngineLayer *)g {
     do_render = YES;
+    [self setVisible:YES];
 }
 
 -(int)get_render_ord {

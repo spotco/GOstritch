@@ -70,6 +70,7 @@ NSString* strf (char* format, ... );
 +(BOOL)pt_fuzzy_eq:(CGPoint)a b:(CGPoint)b;
 +(BOOL)fuzzyeq_a:(float)a b:(float)b delta:(float)delta;
 +(BOOL)hitrect_touch:(HitRect)r1 b:(HitRect)r2;
++(NSString*)hitrect_to_string:(HitRect)r;
 
 +(HitRect)hitrect_cons_x1:(float)x1 y1:(float)y1 x2:(float)x2 y2:(float)y2;
 +(HitRect)hitrect_cons_x1:(float)x1 y1:(float)y1 wid:(float)wid hei:(float)hei;

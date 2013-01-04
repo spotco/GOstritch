@@ -11,16 +11,12 @@
 -(void)update:(Player*)player g:(GameEngineLayer *)g {}
 
 -(void)check_should_render:(GameEngineLayer *)g {
-    if ([Common hitrect_touch:[g get_viewbox] b:[self get_hit_rect]]) {
+    if (self.active && [Common hitrect_touch:[g get_viewbox] b:[self get_hit_rect]]) {
         do_render = YES;
-        if (!self.visible && self.active) {
-            [self setVisible:YES];
-        }
+        [self setVisible:YES];
     } else {
         do_render = NO;
-        if (self.visible) {
-            [self setVisible:NO];
-        }
+        [self setVisible:NO];
     }
 }
 
@@ -36,7 +32,7 @@
 }
 
 -(void)set_active:(BOOL)t_active {
-    return;
+    active = t_active;
 }
 
 -(int)get_render_ord {
