@@ -86,8 +86,8 @@ NSString* strf (char* format, ... ) {
 	double X; double Y;
 	double  distAB, theCos, theSin, newX, ABpos ;
 	
-	if ((Ax==Bx && Ay==By) || (Cx==Dx && Cy==Dy)) return null_point; //  Fail if either line segment is zero-length.
-	if ((Ax==Cx && Ay==Cy) || (Bx==Cx && By==Cy) ||  (Ax==Dx && Ay==Dy) || (Bx==Dx && By==Dy)) return null_point; //  Fail if the segments share an end-point.
+	//if ((Ax==Bx && Ay==By) || (Cx==Dx && Cy==Dy)) return null_point; //  Fail if either line segment is zero-length.
+	//if ((Ax==Cx && Ay==Cy) || (Bx==Cx && By==Cy) ||  (Ax==Dx && Ay==Dy) || (Bx==Dx && By==Dy)) return null_point; //  Fail if the segments share an end-point.
 	
 	Bx-=Ax; By-=Ay;//Translate the system so that point A is on the origin.
 	Cx-=Ax; Cy-=Ay;
@@ -106,12 +106,19 @@ NSString* strf (char* format, ... ) {
 	
 	ABpos=Dx+(Cx-Dx)*Dy/(Dy-Cy);//Discover the position of the intersection point along line A-B.
 	
-	if (ABpos<0. || ABpos>distAB) return null_point;//  Fail if segment C-D crosses line A-B outside of segment A-B.
-	
+    
+	if (ABpos<0. || /*ABpos>distAB*/ fm_a_gt_b(ABpos, distAB, 0.001)) {
+        return null_point;//  Fail if segment C-D crosses line A-B outside of segment A-B.
+	}
+        
 	X=Ax+ABpos*theCos;//Apply the discovered position to line A-B in the original coordinate system.
 	Y=Ay+ABpos*theSin;
 	
 	return ccp(X,Y);//  Success.
+}
+
+bool fm_a_gt_b(double a,double b,double delta) {
+    return a-b > delta;
 }
 
 +(CGPoint)line_seg_intersection_a:(line_seg)a b:(line_seg)b {
@@ -264,9 +271,6 @@ CGPoint CGPointAdd(CGPoint p1, CGPoint p2){
     o.tri_pts[3] = CGPointAdd(position, o.tri_pts[3]);
     return o;
 }
-
-
-
 
 
 

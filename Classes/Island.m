@@ -126,4 +126,8 @@ static float NO_VAL = -99999.0;
     [super dealloc];
 }
 
+- (NSString *)description {
+    return strf("[LineIsland(%f,%f)->(%f,%f)]",startX,startY,endX,endY);
+}
+
 @end

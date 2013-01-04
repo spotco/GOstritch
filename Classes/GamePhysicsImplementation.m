@@ -190,21 +190,31 @@
     [player_mov_vec dealloc];
     
     if (contact_island != NULL) {
-        player.current_island = contact_island;
-        player.position = contact_intersection;
+        //player_post = contact_intersection; //jerky perfect intersection
         
-        Vec3D *a = [Vec3D init_x:player_mov.b.x - player_mov.a.x y:player_mov.b.y - player_mov.a.y z:0];
-        Vec3D *b = [Vec3D init_x:contact_segment.b.x - contact_segment.a.x y:contact_segment.b.y - contact_segment.a.y z:0];
-        float theta = [Vec3D rad_angle_between_a:a and_b:b];
-        if (theta < M_PI) {
-            player.vx *= MAX((M_PI - theta)/(M_PI),MAX_LOSS);
-            player.vy *= MAX((M_PI - theta)/(M_PI),MAX_LOSS);
-        } else {
-            player.vx *= MAX_LOSS;
-            player.vy *= MAX_LOSS;
+        while(contact_island != NULL && [contact_island get_height:player_post.x] == [Island NO_VALUE]) {
+            contact_island = contact_island.next;
         }
-        [a dealloc];
-        [b dealloc];
+        
+        player.current_island = contact_island;
+        if (contact_island) {
+            player_post = ccp(player_post.x,[contact_island get_height:player_post.x]);
+             
+            Vec3D *a = [Vec3D init_x:player_mov.b.x - player_mov.a.x y:player_mov.b.y - player_mov.a.y z:0];
+            Vec3D *b = [Vec3D init_x:contact_segment.b.x - contact_segment.a.x y:contact_segment.b.y - contact_segment.a.y z:0];
+            float theta = [Vec3D rad_angle_between_a:a and_b:b];
+            if (theta < M_PI) {
+                player.vx *= MAX((M_PI - theta)/(M_PI),MAX_LOSS);
+                player.vy *= MAX((M_PI - theta)/(M_PI),MAX_LOSS);
+            } else {
+                player.vx *= MAX_LOSS;
+                player.vy *= MAX_LOSS;
+            }
+            [a dealloc];
+            [b dealloc];
+        } else {
+            NSLog(@"that's a new one");
+        }
         
     } else {
         float grav_const = GRAVITY;

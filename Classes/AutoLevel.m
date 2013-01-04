@@ -157,8 +157,15 @@
     }
     [stored removeAllObjects];
 }
-
 -(void)update:(Player *)player g:(GameEngineLayer *)g {
+    
+    if (cur_mode == AutoLevelMode_BOSS1) {
+        if (player.position.y < 400.0 && player.position.x > 3000.0) {
+            NSLog(@"abouttoupdate tick player pos(%f,%f) vel:(%f,%f) curi:%@",player.position.x,player.position.y,player.vx,player.vy,player.current_island);
+            NSLog(@"HAPPENING!!(%f,%f) curisl:%@",player.position.x,player.position.y,player.current_island);
+        }
+    }
+    
     CGPoint pos = player.position;
     NSMutableArray *tostore = [[NSMutableArray alloc] init];
     MapSection *current;

@@ -162,14 +162,16 @@
 }
 
 -(void)update {
+    
     [GEventDispatcher dispatch_events];
     if (current_mode == GameEngineLayerMode_GAMEPLAY) {
         time++;
         refresh_viewbox_cache = YES;
-        [GamePhysicsImplementation player_move:player with_islands:islands];
         [GameControlImplementation control_update_player:self];
+        [GamePhysicsImplementation player_move:player with_islands:islands];
+        
         [player update:self];
-        [self check_falloff];	
+        [self check_falloff];
         
         for(int i = [game_objects count]-1; i>=0 ; i--) {
             GameObject *o = [game_objects objectAtIndex:i];
