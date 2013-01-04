@@ -1,14 +1,15 @@
 {
-    "connect_pts": {"y2": 240, "x1": 149, "y1": 169, "x2": 2283},
-    "objects": [{"label": "0", "x": 607, "type": "copter", "y": 361}],
-    "islands": [
-        {"y2": 181, "x1": 149, "type": "line", "can_fall": true, "x2": 508, "ndir": "left", "ground": "open", "y1": 169, "hei": 50},
-        {"y2": 190, "x1": 508, "type": "line", "can_fall": true, "x2": 847, "ndir": "left", "ground": "open", "y1": 181, "hei": 50},
-        {"y2": 193, "x1": 847, "type": "line", "can_fall": true, "x2": 1420, "ndir": "left", "ground": "open", "y1": 190, "hei": 50},
-        {"y2": 239, "x1": 1420, "type": "line", "can_fall": true, "x2": 1880, "ndir": "left", "ground": "open", "y1": 193, "hei": 50},
-        {"y2": 240, "x1": 1880, "type": "line", "can_fall": true, "x2": 2283, "ndir": "left", "ground": "open", "y1": 239, "hei": 50}
+    "start_y": 240,
+    "connect_pts": {"y2": 304, "x1": 109, "y1": 214, "x2": 968},
+    "objects": [
+        {"height": 199, "x": 492, "type": "water", "y": 40, "label": "0", "width": 372},
+        {"label": "2", "x": 872, "type": "birdflock", "y": 291},
+        {"label": "5", "x": 458, "type": "jumppad", "y": 246, "dir": {"x": -0.15, "y": 0.99}}
     ],
-    "start_y": 226,
-    "assert_links": 4,
-    "start_x": 230
+    "islands": [
+        {"y2": 254, "x1": 109, "type": "line", "can_fall": true, "x2": 537, "ndir": "left", "ground": "open", "y1": 214, "hei": 50},
+        {"y2": 304, "x1": 778, "type": "line", "can_fall": true, "x2": 968, "ndir": "left", "ground": "open", "y1": 278, "hei": 50}
+    ],
+    "start_x": 191,
+    "assert_links": 0
 }

@@ -24,8 +24,4 @@
     return;
 }
 
--(void)min_update:(Player *)player g:(GameEngineLayer *)g {
-    [self update:player g:g];
-}
-
 @end

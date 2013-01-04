@@ -33,19 +33,24 @@
 
 -(void)update:(Player*)player g:(GameEngineLayer *)g {
     [super update:player g:g];
-    if(!active) {
+    if(activated) {
         return;
     }
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         [player reset_params];
-        [self setActive:NO];
+        activated = YES;
         [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
         [DazedParticle init_effect:g tar:player time:40];
         //[DazedParticle init_effect:g x:player.position.x y:player.position.y+60*(player.current_island != NULL?player.last_ndir:1) time:40];
     }
     
     return;
+}
+
+-(void)reset {
+    [super reset];
+    activated = NO;
 }
 
 -(void)attach_toisland:(NSMutableArray*)islands {

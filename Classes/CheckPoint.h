@@ -3,6 +3,7 @@
 
 @interface CheckPoint : GameObject {
     CCSprite *inactive_img,*active_img;
+    BOOL activated;
 }
 
 +(CheckPoint*)init_x:(float)x y:(float)y;

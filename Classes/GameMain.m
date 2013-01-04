@@ -12,7 +12,7 @@
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
 #define STARTING_LIVES 20
-#define TESTLEVEL @"shittytest"
+#define TESTLEVEL @"robotstest"
 
 /**
  TODO -- 
@@ -33,8 +33,8 @@
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
     
-    //[GameMain start_testlevel];
-    [GameMain start_game_autolevel];
+    [GameMain start_testlevel];
+    //[GameMain start_game_autolevel];
     //[GameMain start_menu];
 }
 

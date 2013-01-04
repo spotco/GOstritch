@@ -7,6 +7,8 @@
     Vec3D *dir_vec;
     gl_render_obj top,bottom,center;
     SATPoly r_hitbox;
+    
+    BOOL activated;
 }
 
 +(SpikeVine*)init_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2;

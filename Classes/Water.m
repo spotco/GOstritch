@@ -23,6 +23,7 @@
     [self update_body_tex_offset];
     
     active = YES;
+    activated = NO;
     
     CCSprite *fillsprite = [CCSprite node];
     fillsprite.anchorPoint = ccp(0,0);
@@ -38,19 +39,19 @@
     [super update:player g:g];
     [fishes update];
     [self update_body_tex_offset];
-    if(!active) {
+    if(activated) {
         return;
     }
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         [player reset_params];
-        [self setActive:NO];
+        activated = YES;
         [player add_effect:[SplashEffect init_from:[player get_default_params] time:40]];
         
     } else if ([player get_current_params].noclip &&
                [player get_current_params].noclip < 2 &&
                [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect_ignore_noclip]]) {
-        [self setActive:NO];
+        activated = YES;
         [player add_effect_suppress_current_end_effect:[SplashEffect init_from:[player get_default_params] time:40]];
         
     }
@@ -58,8 +59,9 @@
     return;
 }
 
--(void)set_active:(BOOL)t_active {
-    active = t_active;
+-(void)reset {
+    [super reset];
+    activated = NO;
 }
 
 -(HitRect)get_hit_rect {

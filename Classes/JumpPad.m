@@ -24,18 +24,20 @@
 
 -(void)update:(Player*)player g:(GameEngineLayer *)g{
     [super update:player g:g];
-    if (recharge_ct >= 0) {
+    if (recharge_ct > 0) {
         recharge_ct--;
         if (recharge_ct == 0) {
-            [self set_active:YES];
+            [self setOpacity:255];
+            activated = NO;
         }
     }
-    if(!active) {
+    if(activated) {
         return;
     }
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
-        [self set_active:NO];
+        activated = YES;
+        [self setOpacity:150];
         recharge_ct = RECHARGE_TIME;
         [self boostjump:player];
         
@@ -51,6 +53,11 @@
                                                  vy:dvy]];
         }
     }
+}
+
+-(void)reset {
+    [super reset];
+    activated = NO;
 }
 
 -(void)boostjump:(Player*)player {
@@ -79,7 +86,7 @@
 }
 
 -(int)get_render_ord {
-    return [GameRenderImplementation GET_RENDER_ISLAND_ORD];
+    return [GameRenderImplementation GET_RENDER_BTWN_PLAYER_ISLAND];
 }
 
 -(void)cons_anim {
@@ -121,15 +128,6 @@
     [tangent dealloc];
 }
 
--(void)set_active:(BOOL)t_active {
-    if (t_active) {
-        [self setOpacity:255];
-    } else {
-        [self setOpacity:0];
-    }
-    active = t_active;
-}
-
 - (void)setOpacity:(GLubyte)opacity {
 	[super setOpacity:opacity];
 	for(CCSprite *sprite in [self children]) {
@@ -143,26 +141,5 @@
     [anim release];
     [super dealloc];
 }
-
-/*-(void)attach_toisland:(NSMutableArray*)islands {
- Island *i = [self get_connecting_island:islands];
- 
- if (i != NULL) {
- Vec3D *tangent_vec = [i get_tangent_vec];
- [tangent_vec scale:[i ndir]];
- float tar_rad = -[tangent_vec get_angle_in_rad];
- float tar_deg = [Common rad_to_deg:tar_rad];
- rotation_ = tar_deg;
- 
- normal_vec = [[Vec3D Z_VEC] crossWith:tangent_vec];
- [normal_vec normalize];
- [normal_vec retain];
- 
- [tangent_vec dealloc];
- } else {
- normal_vec = [Vec3D init_x:0 y:1 z:0];
- [normal_vec retain];
- }
- }*/
 
 @end

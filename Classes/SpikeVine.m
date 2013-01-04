@@ -22,7 +22,7 @@
 
 -(void)update:(Player *)player g:(GameEngineLayer *)g {
     [super update:player g:g];
-    if(!active) {
+    if(activated) {
         return;
     }
     
@@ -54,10 +54,15 @@
 
 -(void)hit:(Player *)player g:(GameEngineLayer *)g {
     [player reset_params];
-    [self setActive:NO];
+    activated = YES;
     [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
     //[DazedParticle init_effect:g x:player.position.x y:player.position.y+60*(player.current_island != NULL?player.last_ndir:1) time:40];
     [DazedParticle init_effect:g tar:player time:40];
+}
+
+-(void)reset {
+    [super reset];
+    activated = NO;
 }
 
 -(CCTexture2D*)get_base_tex {
@@ -151,11 +156,6 @@
     [normal dealloc];
     [r_dirv dealloc];
 }
-
--(void)set_active:(BOOL)t_active {
-    active = t_active;
-}
-
 
 -(void)draw {
     [super draw];

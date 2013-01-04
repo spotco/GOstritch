@@ -89,12 +89,12 @@
         [i update];
     }
     
-    if (!active) {
+    if (activated) {
         return;
     }
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         [self activate_birds];
-        [self set_active:NO];
+        activated = YES;
     }
     return;
 }
@@ -134,6 +134,7 @@
 
 -(void)reset {
     [super reset];
+    activated = NO;
     for (Bird *i in birds) {
         [i reset];
         [i setVisible:YES];

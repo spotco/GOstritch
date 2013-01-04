@@ -22,7 +22,7 @@
 
 -(void)hit:(Player *)player g:(GameEngineLayer *)g {
     if (player.dashing) {
-        [self setActive:NO];
+        activated = YES;
         broken = YES;
         
         float len = [dir_vec length];

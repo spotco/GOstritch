@@ -6,6 +6,7 @@
     id anim;
     Vec3D* normal_vec;
     int recharge_ct;
+    BOOL activated;
 }
 
 +(JumpPad*)init_x:(float)x y:(float)y dirvec:(Vec3D*)vec;

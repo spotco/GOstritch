@@ -28,8 +28,6 @@
         if (self.opacity != 255)[self setOpacity:255];
     }
     
-    if(!active)return;
-    
     if (recharge_ct == 0 && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {            
         [self particle_effect:g];
         player.vx += normal_vec.x*6;
