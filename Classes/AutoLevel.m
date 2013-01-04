@@ -40,6 +40,7 @@
     map_sections = [[NSMutableArray alloc] init];
     stored = [[NSMutableArray alloc] init];
     queued_sections = [[NSMutableArray alloc] init];
+    
     cur_mode = AutoLevelMode_Normal;
     
     for (NSString* i in to_load) {

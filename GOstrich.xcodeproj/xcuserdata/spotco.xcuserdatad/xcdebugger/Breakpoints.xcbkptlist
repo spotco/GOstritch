@@ -21,12 +21,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/GamePhysicsImplementation.m"
-         timestampString = "378991930.495911"
+         timestampString = "379031642.741116"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "216"
-         endingLineNumber = "216"
-         landmarkName = "+player_free_fall:islands:"
+         startingLineNumber = "98"
+         endingLineNumber = "98"
+         landmarkName = "+player_move_along_island:islands:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

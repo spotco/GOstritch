@@ -86,9 +86,8 @@ NSString* strf (char* format, ... ) {
 	double X; double Y;
 	double  distAB, theCos, theSin, newX, ABpos ;
 	
-	//if ((Ax==Bx && Ay==By) || (Cx==Dx && Cy==Dy)) return null_point; //  Fail if either line segment is zero-length.
-	//if ((Ax==Cx && Ay==Cy) || (Bx==Cx && By==Cy) ||  (Ax==Dx && Ay==Dy) || (Bx==Dx && By==Dy)) return null_point; //  Fail if the segments share an end-point.
-	
+	if ((Ax==Bx && Ay==By) || (Cx==Dx && Cy==Dy)) return null_point; //  Fail if either line segment is zero-length.
+    
 	Bx-=Ax; By-=Ay;//Translate the system so that point A is on the origin.
 	Cx-=Ax; Cy-=Ay;
 	Dx-=Ax; Dy-=Ay;
@@ -97,12 +96,13 @@ NSString* strf (char* format, ... ) {
 	
 	theCos=Bx/distAB;//Rotate the system so that point B is on the positive X axis.
 	theSin=By/distAB;
+    
 	newX=Cx*theCos+Cy*theSin;
 	Cy  =Cy*theCos-Cx*theSin; Cx=newX;
 	newX=Dx*theCos+Dy*theSin;
 	Dy  =Dy*theCos-Dx*theSin; Dx=newX;
 	
-	if ((Cy<0. && Dy<0.) || (Cy>=0. && Dy>=0.)) return null_point;//  Fail if segment C-D doesn't cross line A-B.
+	if ((Cy<0. && Dy<0.) || (Cy>=0. && Dy>=0.)) return null_point;//C-D must be origin crossing line
 	
 	ABpos=Dx+(Cx-Dx)*Dy/(Dy-Cy);//Discover the position of the intersection point along line A-B.
 	
@@ -114,8 +114,16 @@ NSString* strf (char* format, ... ) {
 	X=Ax+ABpos*theCos;//Apply the discovered position to line A-B in the original coordinate system.
 	Y=Ay+ABpos*theSin;
 	
-	return ccp(X,Y);//  Success.
+	return ccp(X,Y);
 }
+/*
+ line_seg player_mov = [Common cons_line_seg_a:ccp(0,0) b:ccp(0,1)];
+ line_seg a1 = [Common cons_line_seg_a:ccp(-1,0) b:ccp(0,0)];
+ line_seg a2 = [Common cons_line_seg_a:ccp(1,0) b:ccp(0,0)];
+ CGPoint i1 = [Common line_seg_intersection_a:player_mov b:a1];
+ CGPoint i2 = [Common line_seg_intersection_a:player_mov b:a2];
+ NSLog(@"a1:(%f,%f) a2:(%f,%f)",i1.x,i1.y,i2.x,i2.y);
+ */
 
 bool fm_a_gt_b(double a,double b,double delta) {
     return a-b > delta;
@@ -138,6 +146,9 @@ bool fm_a_gt_b(double a,double b,double delta) {
     Vec3D *ab_c_ac = [b_m_a crossWith:c_m_a];
     
     float val = [ab_c_ac length] / [b_m_a length];
+    [b_m_a dealloc];
+    [c_m_a dealloc];
+    [ab_c_ac dealloc];
     if (val <= 0.1) {
         return YES;
     } else {

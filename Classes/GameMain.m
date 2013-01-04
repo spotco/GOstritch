@@ -16,7 +16,7 @@
 
 /**
  TODO -- 
- todo:remove boss robot from map section when activated
+ todo:boss and boss section starter
  
  -boss robot + lab
  -player run in animation
@@ -38,17 +38,6 @@
     //[GameMain start_testlevel];
     [GameMain start_game_autolevel];
     //[GameMain start_menu];
-    
-    /*
-    line_seg player_mov = [Common cons_line_seg_a:ccp(33624,412.0) b:ccp(33630,400)];
-    
-    line_seg a1 = [Common cons_line_seg_a:ccp(32692,400) b:ccp(33892,400)];
-    line_seg a2 = [Common cons_line_seg_a:ccp(0,0) b:ccp(1,0)];
-    
-    CGPoint i1 = [Common line_seg_intersection_a:player_mov b:a1];
-    CGPoint i2 = [Common line_seg_intersection_a:player_mov b:a2];
-    NSLog(@"a1:(%f,%f) a2:(%f,%f)",i1.x,i1.y,i2.x,i2.y);
-     */
 }
 
 +(void)start_game_autolevel {
