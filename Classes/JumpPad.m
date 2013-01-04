@@ -128,13 +128,6 @@
     [tangent dealloc];
 }
 
-- (void)setOpacity:(GLubyte)opacity {
-	[super setOpacity:opacity];
-	for(CCSprite *sprite in [self children]) {
-		sprite.opacity = opacity;
-	}
-}
-
 -(void)dealloc {
     [normal_vec dealloc];
     [self stopAllActions];

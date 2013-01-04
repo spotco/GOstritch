@@ -13,9 +13,13 @@
         set1_levels = [[NSArray alloc] initWithObjects:
             @"autolevel_1_1",@"autolevel_1_2",@"autolevel_1_3",@"autolevel_1_4",@"autolevel_1_5",@"autolevel_1_6",@"autolevel_1_7",@"autolevel_1_8",
         nil];
-        //set1_levels = [[NSArray alloc] initWithObjects:@"autolevel_1_2", nil];
+        set1_levels = [[NSArray alloc] initWithObjects:@"shittytest", nil];
     }
     return set1_levels;
+}
+
++(NSArray*)boss1_set {
+    return [NSArray arrayWithObjects:@"boss1_area", nil];
 }
 
 +(AutoLevel*)init_with_glayer:(GameEngineLayer*)glayer {
@@ -31,16 +35,43 @@
     }
     tglayer = glayer;
     
-    NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
-    //NSArray *to_load = [[NSArray arrayWithObjects: @"shittytest", nil] retain];
+    //NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
+    NSArray *to_load = [[NSArray arrayWithObjects: @"boss1_area", nil] retain];
     map_sections = [[NSMutableArray alloc] init];
     stored = [[NSMutableArray alloc] init];
     queued_sections = [[NSMutableArray alloc] init];
+    cur_mode = AutoLevelMode_Normal;
     
     for (NSString* i in to_load) {
         [self load_into_queue:i];
     }
     [to_load release];
+}
+
+-(void)dispatch_event:(GEvent *)e {
+    if (e.type == GEventType_CHECKPOINT) {
+        [self cleanup_start:tglayer.player.start_pt player:tglayer.player.position];
+        
+    } else if (e.type == GEventType_BOSS1_ACTIVATE) {
+        cur_mode = AutoLevelMode_BOSS1;
+        [self remove_all_ahead_but_current:e.pt];
+        [self shift_queue_into_current];
+        NSLog(@"entering boss1 area...");
+        
+    }
+}
+
+-(void)remove_all_ahead_but_current:(CGPoint)pos {
+    [queued_sections removeAllObjects];
+    for (int i = map_sections.count-1; i >= 0; i--) {
+        if (map_sections.count-1 < i) continue;
+        MapSection *m = [map_sections objectAtIndex:i];
+        MapSection_Position p = [m get_position_status:pos];
+        if (p != MapSection_Position_CURRENT) {
+            [self remove_map_section_from_current:m];
+        }
+    }
+    
 }
 
 -(void)load_into_queue:(NSString*)key { //load map into queue
@@ -59,12 +90,11 @@
 }
 
 -(void)shift_queue_into_current { //move top map in queue to current
-    MapSection *m = [queued_sections objectAtIndex:0];
-    [queued_sections removeObjectAtIndex:0];
-    
     if ([queued_sections count] == 0) {
         [self load_into_queue:[self get_random_map]];
     }
+    MapSection *m = [queued_sections objectAtIndex:0];
+    [queued_sections removeObjectAtIndex:0];
     
     [map_sections addObject:m];
     
@@ -126,12 +156,6 @@
         [m release];
     }
     [stored removeAllObjects];
-}
-
--(void)dispatch_event:(GEvent *)e {
-    if (e.type == GEventType_CHECKPOINT) {
-        [self cleanup_start:tglayer.player.start_pt player:tglayer.player.position];
-    }
 }
 
 -(void)update:(Player *)player g:(GameEngineLayer *)g {
@@ -197,7 +221,12 @@
 }
 
 -(NSString*)get_random_map {
-    NSArray* tlvls = [AutoLevel random_set1];
+    NSArray* tlvls;
+    if (cur_mode == AutoLevelMode_Normal) {
+        tlvls = [AutoLevel random_set1];
+    } else {
+        tlvls = [AutoLevel boss1_set];
+    }
     return [tlvls objectAtIndex:arc4random_uniform([tlvls count])];
 }
 

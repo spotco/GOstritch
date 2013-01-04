@@ -99,28 +99,6 @@
     [tangent dealloc];
 }
 
-/*-(void)attach_toisland:(NSMutableArray*)islands {
-    Island *i = [self get_connecting_island:islands];
-    
-    if (i != NULL) {
-        Vec3D *tangent_vec = [i get_tangent_vec];
-        [tangent_vec scale:[i ndir]];
-        float tar_rad = -[tangent_vec get_angle_in_rad];
-        float tar_deg = [Common rad_to_deg:tar_rad];
-        rotation_ = tar_deg;
-        
-        normal_vec = [[Vec3D Z_VEC] crossWith:tangent_vec];
-        [normal_vec normalize];
-        [normal_vec retain];
-        
-        [tangent_vec dealloc];
-    } else {
-        //NSLog(@"attach fail");
-        normal_vec = [Vec3D init_x:0 y:1 z:0];
-        [normal_vec retain];
-    }
-}*/
-
 -(void)dealloc {
     [normal_vec dealloc];
     [self stopAllActions];

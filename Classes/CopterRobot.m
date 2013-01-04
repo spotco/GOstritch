@@ -1,4 +1,5 @@
 #import "CopterRobot.h"
+#import "GameEngineLayer.h"
 
 @implementation CopterRobot
 
@@ -13,19 +14,38 @@
     self.active = NO;
     [self init_anims];
     [self setScaleX:-1];
-    [self setOpacity:150];
+    player_pos = CGPointZero;
+    initial_pos = pos;
     return self;
 }
 
 -(void)update:(Player *)player g:(GameEngineLayer *)g {
-    
+    if (!self.active && player.position.x > position_.x) {
+        active = YES;
+        player_pos = player.position;
+        [self set_pos_rel:ccp(-1000,1000)];
+        [GEventDispatcher push_event:[[GEvent init_type:GEventType_BOSS1_ACTIVATE] add_pt:player_pos]];
+        
+    } else if (self.active) {
+        player_pos = player.position;
+        [self set_pos_rel:ccp(100,100)];
+    }
+}
+
+-(void)reset {
+    [super reset];
+    self.active = NO;
+    player_pos = CGPointZero;
+    [self setPosition:initial_pos];
+}
+
+-(void)set_pos_rel:(CGPoint)pos {
+    [self setPosition:ccp(pos.x+player_pos.x,pos.y+player_pos.y)];
 }
 
 -(HitRect)get_hit_rect {
     return [Common hitrect_cons_x1:position_.x-40 y1:position_.y-60 wid:80 hei:80];
 }
-
-
 
 -(void)init_anims {
     body = [CCSprite spriteWithTexture:[Resource get_aa_tex:TEX_ENEMY_COPTER] 

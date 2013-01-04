@@ -14,6 +14,8 @@ typedef enum {
     GEventType_GAMEOVER,
     GEventType_PLAYAGAIN_AUTOLEVEL,
     
+    GEventType_BOSS1_ACTIVATE,
+    
     GEventType_MENU_TICK,
     GEventType_MENU_TOUCHDOWN,
     GEventType_MENU_TOUCHMOVE,

@@ -3,6 +3,7 @@
 
 @interface CopterRobot : GameObject {
     CCSprite *body,*arm,*main_prop,*aux_prop,*main_nut,*aux_nut;
+    CGPoint player_pos,initial_pos;
 }
 
 +(CopterRobot*)cons_x:(float)x y:(float)y;
