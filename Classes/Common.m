@@ -24,6 +24,10 @@ int SIG(float n) {
     }
 }
 
+CGPoint CGPointAdd(CGPoint a,CGPoint b) {
+    return ccp(a.x+b.x,a.y+b.y);
+}
+
 +(CGSize)SCREEN {
     return CGSizeMake([[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
 }
@@ -279,10 +283,6 @@ bool fm_a_gt_b(double a,double b,double delta) {
     [l setColor:color];
     [l setPosition:pos];
     return l;
-}
-
-CGPoint CGPointAdd(CGPoint p1, CGPoint p2){
-    return CGPointMake(p1.x + p2.x, p1.y + p2.y);
 }
 
 +(gl_render_obj)transform_obj:(gl_render_obj)o by:(CGPoint)position {

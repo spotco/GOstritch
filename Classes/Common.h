@@ -60,6 +60,7 @@ typedef struct CGRange {
 
 NSString* strf (char* format, ... );
 int SIG(float n);
+CGPoint CGPointAdd(CGPoint a,CGPoint b);
 
 +(CGSize)SCREEN;
 +(CGPoint)screen_pctwid:(float)pctwid pcthei:(float)pcthei;

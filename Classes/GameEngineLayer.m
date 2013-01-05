@@ -34,7 +34,7 @@
     [glayer.game_objects addObject:nobj];
     [glayer addChild:nobj];
     [glayer stopAction:glayer.follow_action];
-    glayer.follow_action = [[CCFollow actionWithTarget:glayer.player] retain];
+    glayer.follow_action = [CCFollow actionWithTarget:glayer.player];
     [glayer runAction:glayer.follow_action];
     
     [nobj update:glayer.player g:glayer]; //have first section preloaded
@@ -87,7 +87,7 @@
     [self reset_camera];
     
     lives = starting_lives;
-    follow_action = [[CCFollow actionWithTarget:player worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]] retain];
+    follow_action = [CCFollow actionWithTarget:player worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]];
     [self runAction:follow_action];
     
     [self update_render];
@@ -141,7 +141,6 @@
         [o reset];
     }
     [self stopAction:follow_action];
-    [follow_action release];
     follow_action = [CCFollow actionWithTarget:player];
     [self runAction:follow_action];
     
@@ -208,7 +207,7 @@
         [self set_checkpoint_to:e.pt];
         
     } else if (e.type == GEventType_LEVELEND) {
-        [GEventDispatcher push_event:[GEvent init_type:GEventType_LOAD_LEVELEND_MENU]]; //[self stopAction:follow_action];
+        [GEventDispatcher push_event:[GEvent init_type:GEventType_LOAD_LEVELEND_MENU]];
         
     } else if (e.type == GEventType_PAUSE) {
         current_mode = GameEngineLayerMode_PAUSED;
@@ -258,6 +257,8 @@
     }
     [self set_records];
     [self stopAction:follow_action];
+    follow_action = NULL;
+    
     [GEventDispatcher remove_all_listeners];
     [[CCDirector sharedDirector] resume];
     [BatchDraw clear];

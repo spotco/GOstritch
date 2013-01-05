@@ -1,4 +1,5 @@
 #import "GameObject.h"
+#import "LauncherRocket.h"
 
 typedef enum {
     Side_Left,
@@ -8,8 +9,11 @@ typedef enum {
 typedef enum {
     CopterMode_IntroAnim,
     CopterMode_PlayerDeadToRemove,
+    CopterMode_GotHit_FlyOff,
+    CopterMode_Killed_Player,
     CopterMode_RightDash,
-    CopterMode_LeftDash
+    CopterMode_LeftDash,
+    CopterMode_SkyFireLeft
 } CopterMode;
 
 @interface CopterRobot : GameObject {
@@ -21,6 +25,11 @@ typedef enum {
     
     float arm_r;
     BOOL arm_dir;
+    
+    CGPoint vibration;
+    float vibration_theta;
+    
+    CGPoint flyoffdir;
 }
 
 +(CopterRobot*)cons_with_playerpos:(CGPoint)p;

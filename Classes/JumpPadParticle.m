@@ -25,6 +25,13 @@
     p.position = ccp(x,y);
     return p;
 }
+
++(RocketLaunchParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy scale:(float)scale {
+    RocketLaunchParticle *p = [RocketLaunchParticle init_x:x y:y vx:vx vy:vy];
+    [p setScale:scale];
+    return p;
+}
+
 -(void)cons_vx:(float)lvx vy:(float)lvy {
     [super cons_vx:lvx vy:lvy];
     [self setColor:ccc3(200+arc4random_uniform(55), 0+arc4random_uniform(100), 0+arc4random_uniform(100))];

@@ -9,5 +9,6 @@
 @interface RocketLaunchParticle : JumpPadParticle
 
 +(RocketLaunchParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy;
++(RocketLaunchParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy scale:(float)scale;
 
 @end

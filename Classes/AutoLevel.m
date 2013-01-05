@@ -57,7 +57,6 @@
         cur_mode = AutoLevelMode_BOSS1;
         [self remove_all_ahead_but_current:e.pt];
         [self shift_queue_into_current];
-        NSLog(@"entering boss1 area...");
         
     }
 }
@@ -80,10 +79,6 @@
             }
             [self remove_map_section_from_current:m];
         }
-    }
-    if (cur_x != min_cur.x) {
-        NSLog(@"prev remv offs:(%f,%f)",cur_x,cur_y);
-        NSLog(@"post remv offs:(%f,%f)",min_cur.x,min_cur.y);
     }
     cur_x = min_cur.x;
     cur_y = min_cur.y;
@@ -174,14 +169,6 @@
     [stored removeAllObjects];
 }
 -(void)update:(Player *)player g:(GameEngineLayer *)g {
-    
-    if (cur_mode == AutoLevelMode_BOSS1) {
-        if (player.position.y < 400.0 && player.position.x > 3000.0) {
-            NSLog(@"abouttoupdate tick player pos(%f,%f) vel:(%f,%f) curi:%@",player.position.x,player.position.y,player.vx,player.vy,player.current_island);
-            NSLog(@"HAPPENING!!(%f,%f) curisl:%@",player.position.x,player.position.y,player.current_island);
-        }
-    }
-    
     CGPoint pos = player.position;
     NSMutableArray *tostore = [[NSMutableArray alloc] init];
     MapSection *current;

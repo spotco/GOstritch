@@ -1,9 +1,23 @@
 #import "CopterRobot.h"
 #import "GameEngineLayer.h"
+#import "JumpPadParticle.h"
 
 #define ARM_DEFAULT_POSITION ccp(-30,-50)
 
 @implementation CopterRobot
+
+static const float PLAYER_FOLLOW_OFFSET = 30;
+static const float SLOWSPEED = 5;
+static const float FLYOFFSPEED = 12;
+
+static const float VIBRATION_SPEED = 0.1;
+static const float VIBRATION_AMPLITUDE = 10;
+
+static const int DASHWAITDIST = 400;
+static const int DASHSPEED = 7;
+static const int DASHWAITCT = 100;
+
+static const int SKYFIRE_SPEED = 60;
 
 +(CopterRobot*)cons_with_playerpos:(CGPoint)p {
     return [[CopterRobot node] cons_at:p];
@@ -16,6 +30,8 @@
     cur_mode = CopterMode_IntroAnim;
     rel_pos = ccp(800,360);
     [self apply_rel_pos];
+    [self setPosition:actual_pos];
+    
     return self;
 }
 
@@ -23,36 +39,55 @@
     player_pos = player.position;
     [self set_bounds_and_ground:g];
     [self anim_arm];
+    [self anim_vibration];
     
+    if (cur_mode != CopterMode_GotHit_FlyOff && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
+        rel_pos = ccp(actual_pos.x - player.position.x,actual_pos.y-player.position.y);
+        if (player.dashing) {
+            cur_mode = CopterMode_GotHit_FlyOff;
+            float velx = float_random(0, FLYOFFSPEED);
+            float vely = (FLYOFFSPEED-velx)*(int_random(0, 2)?1:-1);
+            flyoffdir = ccp(SIG(actual_pos.x-player.position.x)*velx,vely);
+            
+        } else if (!player.dead) {
+            cur_mode = CopterMode_Killed_Player;
+            [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
+            [DazedParticle init_effect:g tar:player time:40];
+            
+            
+        }
+    }
     
     if (cur_mode == CopterMode_PlayerDeadToRemove) {
         [g remove_gameobject:self];
+        return;
         
     } else if (cur_mode == CopterMode_IntroAnim) {
-        NSLog(@"intro");
         [self intro_anim:g];
         
     } else if (cur_mode == CopterMode_LeftDash) {
-        NSLog(@"leftdash %f",rel_pos.x);
         [self left_dash:g];
         
     } else if (cur_mode == CopterMode_RightDash) {
-        NSLog(@"rightdash %f",rel_pos.x);
         [self right_dash:g];
         
+    } else if (cur_mode == CopterMode_GotHit_FlyOff) {
+        [self got_hit_flyoff:g];
+        
+    } else if (cur_mode == CopterMode_Killed_Player) {
+        [self killed_player:g];
+        
+    } else if (cur_mode == CopterMode_SkyFireLeft) {
+        [self skyfire_left:g];
+        
     }
+    
+    [self setPosition:CGPointAdd(actual_pos, vibration)];
 }
-
-static const float PLAYER_FOLLOW_OFFSET = 30;
-static const float SLOWSPEED = 5;
-
-static const int DASHWAITDIST = 400;
-static const int DASHSPEED = 7;
-static const int DASHWAITCT = 100;
-
 
 
 -(void)get_random_action:(Side)s {
+    
     if (s == Side_Left) {
         int rand = int_random(0, 1);
         if (rand == 0) {
@@ -62,14 +97,48 @@ static const int DASHWAITCT = 100;
             [self apply_rel_pos];
         }
     } else {
-        int rand = int_random(0, 1);
+        int rand = int_random(0, 2);
         if (rand == 0) {
             cur_mode = CopterMode_LeftDash;
             rel_pos = ccp(800,30);
             ct = DASHWAITCT;
             [self apply_rel_pos];
             
+        } else if (rand == 1) {
+            cur_mode = CopterMode_SkyFireLeft;
+            rel_pos = ccp(1500,420);
+            actual_pos = ccp(rel_pos.x+player_pos.x,groundlevel+rel_pos.y);
+            
         }
+    }
+}
+
+-(void)skyfire_left:(GameEngineLayer*)g {
+    [g set_target_camera:[Common cons_normalcoord_camera_zoom_x:94 y:38 z:131]];
+    [self setScaleX:-1];
+    [self setRotation:-45];
+    
+    ct++;
+    if(ct%SKYFIRE_SPEED==0) {
+        CGPoint noz = [self get_nozzle];
+        [LauncherRobot explosion:g at:noz];
+        
+        Vec3D *rv = [Vec3D init_x:-1 y:-1 z:0];
+        [rv normalize];
+        [rv scale:2.5];
+        LauncherRocket *r = [LauncherRocket cons_at:noz vel:ccp(rv.x,rv.y)];
+        [rv dealloc];
+        
+        [g add_gameobject:r];
+    }
+    
+    if (rel_pos.x > -300) {
+        rel_pos.x-=SLOWSPEED;
+        actual_pos = ccp(rel_pos.x+player_pos.x,actual_pos.y);
+        
+    } else {
+        [self setRotation:0];
+        [self get_random_action:Side_Left];
     }
 }
 
@@ -88,8 +157,7 @@ static const int DASHWAITCT = 100;
         rel_pos.x -= DASHSPEED;
     }
     
-    
-    [self setPosition:ccp(rel_pos.x+player_pos.x,position_.y)];
+    actual_pos = ccp(rel_pos.x+player_pos.x,actual_pos.y);
     if (rel_pos.x < -300) {
         [self get_random_action:Side_Left];
     }
@@ -109,7 +177,7 @@ static const int DASHWAITCT = 100;
         rel_pos.x += DASHSPEED;
     }
     
-    [self setPosition:ccp(rel_pos.x+player_pos.x,position_.y)];
+    actual_pos = ccp(rel_pos.x+player_pos.x,actual_pos.y);
     
     if (rel_pos.x > 400) {
         [self get_random_action:Side_Right];
@@ -122,19 +190,57 @@ static const int DASHWAITCT = 100;
     
     if (rel_pos.x > -300) {
         rel_pos.x-=SLOWSPEED;
-        [self setPosition:ccp(rel_pos.x+player_pos.x,position_.y)];
+        actual_pos = ccp(rel_pos.x+player_pos.x,actual_pos.y);
         
     } else {
         [self get_random_action:Side_Left];
     }
 }
 
+-(void)got_hit_flyoff:(GameEngineLayer*)g {
+    [self setRotation:rotation_+25];
+    [self setOpacity:160];
+    rel_pos.x += flyoffdir.x;
+    rel_pos.y += flyoffdir.y;
+    [self apply_rel_pos];
+    ct++;
+    ct%6==0?[g add_particle:[RocketLaunchParticle init_x:position_.x 
+                                                       y:position_.y 
+                                                      vx:-flyoffdir.x + float_random(-4, 4)
+                                                      vy:-flyoffdir.y + float_random(-4, 4)
+                                                   scale:float_random(1, 3)]]:0;
+    
+    if (rel_pos.x > 800 || rel_pos.x < -800 || rel_pos.y < -800 || rel_pos.y > 800) {
+        [self setRotation:0];
+        [self setOpacity:255];
+        ct = 0;
+        [self get_random_action:(rel_pos.x < 0?Side_Left:Side_Right)];
+    }
+}
+
+-(void)killed_player:(GameEngineLayer*)g {}
+
 -(void)track_y {
-    position_.y += SIG(player_pos.y+PLAYER_FOLLOW_OFFSET-position_.y)*MIN(SLOWSPEED,ABS(player_pos.y+PLAYER_FOLLOW_OFFSET-position_.y));
+    actual_pos.y += SIG(player_pos.y+PLAYER_FOLLOW_OFFSET-actual_pos.y)*MIN(SLOWSPEED,ABS(player_pos.y+PLAYER_FOLLOW_OFFSET-actual_pos.y));
 }
 
 -(void)apply_rel_pos {
-    [self setPosition:ccp(rel_pos.x+player_pos.x,rel_pos.y+player_pos.y)];
+    actual_pos = ccp(rel_pos.x+player_pos.x,rel_pos.y+player_pos.y);
+}
+
+-(CGPoint)get_nozzle {
+    Vec3D *dirvec = [Vec3D init_x:1 y:0 z:0];
+    [dirvec scale:100];
+    dirvec.y += 40;
+    
+    [dirvec scale:scaleX_];
+    Vec3D *rdirvec = [dirvec rotate_vec_by_rad:-[Common deg_to_rad:rotation_]];
+    
+    CGPoint n = [rdirvec transform_pt:position_];
+    
+    [rdirvec dealloc];
+    [dirvec dealloc];
+    return n;
 }
 
 -(void)reset {
@@ -142,12 +248,11 @@ static const int DASHWAITCT = 100;
 }
 
 -(HitRect)get_hit_rect {
-    return [Common hitrect_cons_x1:position_.x-40 y1:position_.y-60 wid:80 hei:80];
+    return [Common hitrect_cons_x1:actual_pos.x-40 y1:actual_pos.y-60 wid:80 hei:80];
 }
 
 -(void)set_bounds_and_ground:(GameEngineLayer*)g {
     [g stopAction:g.follow_action];
-    [g.follow_action release];
     HitRect r = [g get_world_bounds];
     float yl_min = g.player.position.y;
     for (Island *i in g.islands) {
@@ -157,7 +262,7 @@ static const int DASHWAITCT = 100;
     }
     r.y1 = yl_min-500;
     r.y2 = yl_min+300;
-    g.follow_action = [[CCFollow actionWithTarget:g.player worldBoundary:[Common hitrect_to_cgrect:r]] retain];
+    g.follow_action = [CCFollow actionWithTarget:g.player worldBoundary:[Common hitrect_to_cgrect:r]];
     [g runAction:g.follow_action];
     
     groundlevel = yl_min;
@@ -172,6 +277,11 @@ static const int DASHWAITCT = 100;
         arm_dir = arm_r>20?!arm_dir:arm_dir;
     }
     [arm setRotation:arm_r];
+}
+
+-(void)anim_vibration {
+    vibration_theta+=VIBRATION_SPEED;
+    vibration.y = VIBRATION_AMPLITUDE*sinf(vibration_theta);
 }
 
 -(void)init_anims {
