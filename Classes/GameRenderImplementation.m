@@ -94,13 +94,14 @@
     }
     
     [layer set_camera:state];
-        
+    
+    //NSLog(@"(%f,%f,%f)",layer.tar_camera_state.x,layer.tar_camera_state.y,layer.tar_camera_state.z);
     [GameRenderImplementation update_camera_on:layer zoom:layer.camera_state];
 }
 
-+(void)update_camera_on:(CCLayer*)layer zoom:(CameraZoom)state {    
-    [layer.camera setCenterX:state.x+50 centerY:state.y centerZ:0];
-    [layer.camera setEyeX:state.x+50  eyeY:state.y eyeZ:state.z+60];
++(void)update_camera_on:(CCLayer*)layer zoom:(CameraZoom)state {  
+    [layer.camera setCenterX:state.x centerY:state.y centerZ:0];
+    [layer.camera setEyeX:state.x  eyeY:state.y eyeZ:state.z];
 }
 
 +(int)GET_RENDER_FG_ISLAND_ORD { return RENDER_FG_ISLAND_ORD; }

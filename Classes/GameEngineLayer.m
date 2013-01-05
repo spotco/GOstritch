@@ -87,8 +87,7 @@
     [self reset_camera];
     
     lives = starting_lives;
-    
-    follow_action = [CCFollow actionWithTarget:player worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]];
+    follow_action = [[CCFollow actionWithTarget:player worldBoundary:[Common hitrect_to_cgrect:[self get_world_bounds]]] retain];
     [self runAction:follow_action];
     
     [self update_render];
@@ -141,6 +140,11 @@
         GameObject *o = [game_objects objectAtIndex:i];
         [o reset];
     }
+    [self stopAction:follow_action];
+    [follow_action release];
+    follow_action = [CCFollow actionWithTarget:player];
+    [self runAction:follow_action];
+    
     [player reset];
     [self reset_camera];
     [GameControlImplementation reset_control_state];

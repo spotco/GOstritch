@@ -195,8 +195,8 @@
 		7ED863E015B806C3005FBDBB /* checkpoint2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863CF15B806C3005FBDBB /* checkpoint2.png */; };
 		7ED863EA15B81A4A005FBDBB /* BG1_island_top_edge.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863E915B81A4A005FBDBB /* BG1_island_top_edge.png */; };
 		7ED9515B16969729005D8792 /* lab_island_corner.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED9515A16969729005D8792 /* lab_island_corner.png */; };
-		7ED951631696B33D005D8792 /* CopterRobot.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED951611696B33C005D8792 /* CopterRobot.h */; };
-		7ED951641696B33D005D8792 /* CopterRobot.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED951621696B33C005D8792 /* CopterRobot.m */; };
+		7ED951631696B33D005D8792 /* Boss1Starter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED951611696B33C005D8792 /* Boss1Starter.h */; };
+		7ED951641696B33D005D8792 /* Boss1Starter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED951621696B33C005D8792 /* Boss1Starter.m */; };
 		7ED951691696D08B005D8792 /* boss1_area.map in Resources */ = {isa = PBXBuildFile; fileRef = 7ED951681696D08B005D8792 /* boss1_area.map */; };
 		7EDA83C71612DBD70083E9CE /* swingvine_base.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDA83C41612DBD70083E9CE /* swingvine_base.png */; };
 		7EDA83CC1612DC850083E9CE /* swingvine_test.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EDA83CB1612DC850083E9CE /* swingvine_test.map */; };
@@ -256,6 +256,8 @@
 		7EE34890168435EC00A35C21 /* Carton_Six.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EE3488D1684339F00A35C21 /* Carton_Six.ttf */; };
 		7EE348931684651400A35C21 /* DataStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE348911684651300A35C21 /* DataStore.h */; };
 		7EE348941684651400A35C21 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE348921684651300A35C21 /* DataStore.m */; };
+		7EE740AD169801D500239CDB /* CopterRobot.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE740AB169801D500239CDB /* CopterRobot.h */; };
+		7EE740AE169801D500239CDB /* CopterRobot.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE740AC169801D500239CDB /* CopterRobot.m */; };
 		7EF1243715CA4FC500B91A91 /* fish_ss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1243515CA4FC500B91A91 /* fish_ss.plist */; };
 		7EF1243815CA4FC500B91A91 /* fish_ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1243615CA4FC500B91A91 /* fish_ss.png */; };
 		7EF1244415CA509800B91A91 /* bird_ss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1244215CA509800B91A91 /* bird_ss.plist */; };
@@ -720,8 +722,8 @@
 		7ED863CF15B806C3005FBDBB /* checkpoint2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkpoint2.png; sourceTree = "<group>"; };
 		7ED863E915B81A4A005FBDBB /* BG1_island_top_edge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_island_top_edge.png; path = Resources/bg/BG1/BG1_island_top_edge.png; sourceTree = SOURCE_ROOT; };
 		7ED9515A16969729005D8792 /* lab_island_corner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lab_island_corner.png; sourceTree = "<group>"; };
-		7ED951611696B33C005D8792 /* CopterRobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopterRobot.h; sourceTree = "<group>"; };
-		7ED951621696B33C005D8792 /* CopterRobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CopterRobot.m; sourceTree = "<group>"; };
+		7ED951611696B33C005D8792 /* Boss1Starter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boss1Starter.h; sourceTree = "<group>"; };
+		7ED951621696B33C005D8792 /* Boss1Starter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Boss1Starter.m; sourceTree = "<group>"; };
 		7ED951681696D08B005D8792 /* boss1_area.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = boss1_area.map; sourceTree = "<group>"; };
 		7EDA83C41612DBD70083E9CE /* swingvine_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swingvine_base.png; sourceTree = "<group>"; };
 		7EDA83CB1612DC850083E9CE /* swingvine_test.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = swingvine_test.map; sourceTree = "<group>"; };
@@ -793,6 +795,8 @@
 		7EE3488D1684339F00A35C21 /* Carton_Six.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Carton_Six.ttf; sourceTree = "<group>"; };
 		7EE348911684651300A35C21 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
 		7EE348921684651300A35C21 /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
+		7EE740AB169801D500239CDB /* CopterRobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopterRobot.h; sourceTree = "<group>"; };
+		7EE740AC169801D500239CDB /* CopterRobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CopterRobot.m; sourceTree = "<group>"; };
 		7EF1243515CA4FC500B91A91 /* fish_ss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fish_ss.plist; sourceTree = "<group>"; };
 		7EF1243615CA4FC500B91A91 /* fish_ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fish_ss.png; sourceTree = "<group>"; };
 		7EF1244215CA509800B91A91 /* bird_ss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bird_ss.plist; sourceTree = "<group>"; };
@@ -1379,8 +1383,10 @@
 				7EC2302716941D4600C68AC9 /* LauncherRobot.m */,
 				7E3552D91695A8210099FADA /* LauncherRocket.h */,
 				7E3552DA1695A8210099FADA /* LauncherRocket.m */,
-				7ED951611696B33C005D8792 /* CopterRobot.h */,
-				7ED951621696B33C005D8792 /* CopterRobot.m */,
+				7ED951611696B33C005D8792 /* Boss1Starter.h */,
+				7ED951621696B33C005D8792 /* Boss1Starter.m */,
+				7EE740AB169801D500239CDB /* CopterRobot.h */,
+				7EE740AC169801D500239CDB /* CopterRobot.m */,
 			);
 			name = enemy;
 			sourceTree = "<group>";
@@ -2354,7 +2360,8 @@
 				7E3552DB1695A8210099FADA /* LauncherRocket.h in Headers */,
 				7E3552E01695AF330099FADA /* LabWall.h in Headers */,
 				7E3552E41695B1970099FADA /* LabLineIsland.h in Headers */,
-				7ED951631696B33D005D8792 /* CopterRobot.h in Headers */,
+				7ED951631696B33D005D8792 /* Boss1Starter.h in Headers */,
+				7EE740AD169801D500239CDB /* CopterRobot.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2672,7 +2679,8 @@
 				7E3552DC1695A8210099FADA /* LauncherRocket.m in Sources */,
 				7E3552E11695AF330099FADA /* LabWall.m in Sources */,
 				7E3552E51695B1970099FADA /* LabLineIsland.m in Sources */,
-				7ED951641696B33D005D8792 /* CopterRobot.m in Sources */,
+				7ED951641696B33D005D8792 /* Boss1Starter.m in Sources */,
+				7EE740AE169801D500239CDB /* CopterRobot.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

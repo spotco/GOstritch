@@ -63,15 +63,30 @@
 }
 
 -(void)remove_all_ahead_but_current:(CGPoint)pos {
+    CGPoint min_cur = ccp(cur_x,cur_y);
+    for (MapSection *m in queued_sections) {
+        if ([m get_offset].x < min_cur.x) {
+            min_cur = [m get_offset];
+        }
+    }
     [queued_sections removeAllObjects];
     for (int i = map_sections.count-1; i >= 0; i--) {
         if (map_sections.count-1 < i) continue;
         MapSection *m = [map_sections objectAtIndex:i];
         MapSection_Position p = [m get_position_status:pos];
         if (p != MapSection_Position_CURRENT) {
+            if (p != MapSection_Position_PAST && [m get_offset].x < min_cur.x) {
+                min_cur = [m get_offset];
+            }
             [self remove_map_section_from_current:m];
         }
     }
+    if (cur_x != min_cur.x) {
+        NSLog(@"prev remv offs:(%f,%f)",cur_x,cur_y);
+        NSLog(@"post remv offs:(%f,%f)",min_cur.x,min_cur.y);
+    }
+    cur_x = min_cur.x;
+    cur_y = min_cur.y;
     
 }
 

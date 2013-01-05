@@ -14,6 +14,16 @@ NSString* strf (char* format, ... ) {
     return [NSString stringWithUTF8String:outp];
 }
 
+int SIG(float n) {
+    if (n > 0) {
+        return 1;
+    } else if (n < 0) {
+        return -1;
+    } else {
+        return 0;
+    }
+}
+
 +(CGSize)SCREEN {
     return CGSizeMake([[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
 }
@@ -281,6 +291,29 @@ CGPoint CGPointAdd(CGPoint p1, CGPoint p2){
     o.tri_pts[2] = CGPointAdd(position, o.tri_pts[2]);
     o.tri_pts[3] = CGPointAdd(position, o.tri_pts[3]);
     return o;
+}
+
++(CameraZoom)cons_normalcoord_camera_zoom_x:(float)x y:(float)y z:(float)z {
+    struct CameraZoom c = {x,y,z};
+    [Common normal_to_gl_coord:&c];
+    return c;
+}
+
++(void)normal_to_gl_coord:(CameraZoom*)glzd {
+    //data:(280,230,50),(360,270,130),(600,410,400)
+    float gwid = 0.907*(glzd->z)+237.819;
+    float ghei = 0.515*(glzd->z)+203.696;
+    gwid*=2;
+    ghei*=2;
+    
+    float escrwid = 480.0;
+    float escrhei = 320.0;
+    
+    float outx = (escrwid/2 - glzd->x)*(ghei/escrhei);
+    float outy = (escrhei/2 - glzd->y)*(ghei/escrhei);
+    
+    glzd->x = outx;
+    glzd->y = outy;
 }
 
 

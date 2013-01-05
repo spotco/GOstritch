@@ -4,6 +4,9 @@
 
 #define float_random(smallNumber, bigNumber) ((((float) (arc4random() % ((unsigned)RAND_MAX + 1)) / RAND_MAX) * (bigNumber - smallNumber)) + smallNumber)
 #define arrlen(x)  (sizeof(x) / sizeof(x[0]))
+
+//inclusive s, not l
+#define int_random(s,l) arc4random()%l+s
     
 
 @class PlayerEffectParams;
@@ -56,6 +59,8 @@ typedef struct CGRange {
 } CGRange;
 
 NSString* strf (char* format, ... );
+int SIG(float n);
+
 +(CGSize)SCREEN;
 +(CGPoint)screen_pctwid:(float)pctwid pcthei:(float)pcthei;
 
@@ -94,5 +99,7 @@ NSString* strf (char* format, ... );
 
 +(CCMenuItem*)make_button_tex:(CCTexture2D*)tex seltex:(CCTexture2D*)seltex zscale:(float)zscale callback:(callback)cb pos:(CGPoint)pos;
 +(CCLabelTTF*)cons_label_pos:(CGPoint)pos color:(ccColor3B)color fontsize:(int)fontsize str:(NSString*)str;
+
++(CameraZoom)cons_normalcoord_camera_zoom_x:(float)x y:(float)y z:(float)z;
 
 @end

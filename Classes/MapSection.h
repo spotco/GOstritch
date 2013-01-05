@@ -18,5 +18,6 @@ typedef enum {
 -(MapSection_Position)get_position_status:(CGPoint)p;
 -(CGRange)get_range;
 -(void)offset_x:(float)x y:(float)y;
+-(CGPoint)get_offset;
 //-(int)get_debugid;
 @end

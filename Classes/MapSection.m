@@ -36,6 +36,10 @@
     }
 }
 
+-(CGPoint)get_offset {
+    return ccp(offset_x,offset_y);
+}
+
 -(CGRange)get_range {
     struct CGRange r;
     r.min = offset_x;

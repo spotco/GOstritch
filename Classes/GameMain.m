@@ -4,7 +4,7 @@
 
 #define USE_BG NO
 #define ENABLE_BG_PARTICLES YES
-#define DRAW_HITBOX YES
+#define DRAW_HITBOX NO
 #define TARGET_FPS 60
 #define RESET_STATS NO
 #define DISPLAY_FPS NO
@@ -12,11 +12,12 @@
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
 #define STARTING_LIVES 20
-#define TESTLEVEL @"shittytest"
+#define TESTLEVEL @"robotstest"
 
 /**
  TODO -- 
  todo:boss and boss section starter
+ todo:reset curX,curY when clearallbutcurrent
  
  -boss robot + lab
  -player run in animation
@@ -38,6 +39,7 @@
     //[GameMain start_testlevel];
     [GameMain start_game_autolevel];
     //[GameMain start_menu];
+    
 }
 
 +(void)start_game_autolevel {

@@ -10,16 +10,8 @@
     return a;
 }
 
-+(void)normal_to_gl_coord:(CameraZoom*)glzd {
-    float scrwid = [[UIScreen mainScreen] bounds].size.height;
-    float scrhei = [[UIScreen mainScreen] bounds].size.width;
-    
-    glzd->x = scrwid/2 - glzd->x;
-    glzd->y = scrhei/2 - glzd->y;
-}
-
 -(void)set_tar:(CameraZoom)c {
-    [CameraArea normal_to_gl_coord:&c]; //NSLog(@"(%f,%f,%f)",c.x,c.y,c.z);
+    //NSLog(@"(%f,%f,%f)",c.x,c.y,c.z);
     tar = c;
 }
 

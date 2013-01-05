@@ -229,7 +229,7 @@ static NSMutableDictionary* cached_json;
             float cx = ((NSString*)[dir_obj objectForKey:@"x"]).floatValue;
             float cy = ((NSString*)[dir_obj objectForKey:@"y"]).floatValue;
             float cz = ((NSString*)[dir_obj objectForKey:@"z"]).floatValue;
-            struct CameraZoom n = {cx,cy,cz};
+            struct CameraZoom n = [Common cons_normalcoord_camera_zoom_x:cx y:cy z:cz];
             [map.game_objects addObject:[CameraArea init_x:x y:y wid:width hei:hei zoom:n]];
             
         } else if ([type isEqualToString:@"swingvine"]) {
@@ -266,7 +266,7 @@ static NSMutableDictionary* cached_json;
         } else if ([type isEqualToString:@"copter"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
-            [map.game_objects addObject:[CopterRobot cons_x:x y:y]];
+            [map.game_objects addObject:[Boss1Starter cons_x:x y:y]];
             
         } else {
             NSLog(@"item read error");
