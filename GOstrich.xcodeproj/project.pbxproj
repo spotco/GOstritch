@@ -51,6 +51,8 @@
 		50F4132F106926B2002A0D5E /* FontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F4130C106926B2002A0D5E /* FontManager.m */; };
 		50F41332106926B2002A0D5E /* ZFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 50F4130F106926B2002A0D5E /* ZFont.h */; };
 		50F41333106926B2002A0D5E /* ZFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F41310106926B2002A0D5E /* ZFont.m */; };
+		7E04262E16990C8400CD9CCD /* ExplosionParticle.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E04262C16990C8400CD9CCD /* ExplosionParticle.h */; };
+		7E04262F16990C8400CD9CCD /* ExplosionParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E04262D16990C8400CD9CCD /* ExplosionParticle.m */; };
 		7E06435B165F7F45004040FD /* autolevel_start.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E06435A165F7F45004040FD /* autolevel_start.map */; };
 		7E1456A915E85771007CC9E4 /* DashEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1456A815E85771007CC9E4 /* DashEffect.m */; };
 		7E1456AD15E86898007CC9E4 /* BlockerEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1456AC15E86897007CC9E4 /* BlockerEffect.m */; };
@@ -195,8 +197,8 @@
 		7ED863E015B806C3005FBDBB /* checkpoint2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863CF15B806C3005FBDBB /* checkpoint2.png */; };
 		7ED863EA15B81A4A005FBDBB /* BG1_island_top_edge.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED863E915B81A4A005FBDBB /* BG1_island_top_edge.png */; };
 		7ED9515B16969729005D8792 /* lab_island_corner.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED9515A16969729005D8792 /* lab_island_corner.png */; };
-		7ED951631696B33D005D8792 /* Boss1Starter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED951611696B33C005D8792 /* Boss1Starter.h */; };
-		7ED951641696B33D005D8792 /* Boss1Starter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED951621696B33C005D8792 /* Boss1Starter.m */; };
+		7ED951631696B33D005D8792 /* CopterRobotLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED951611696B33C005D8792 /* CopterRobotLoader.h */; };
+		7ED951641696B33D005D8792 /* CopterRobotLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED951621696B33C005D8792 /* CopterRobotLoader.m */; };
 		7ED951691696D08B005D8792 /* boss1_area.map in Resources */ = {isa = PBXBuildFile; fileRef = 7ED951681696D08B005D8792 /* boss1_area.map */; };
 		7EDA83C71612DBD70083E9CE /* swingvine_base.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDA83C41612DBD70083E9CE /* swingvine_base.png */; };
 		7EDA83CC1612DC850083E9CE /* swingvine_test.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EDA83CB1612DC850083E9CE /* swingvine_test.map */; };
@@ -230,7 +232,7 @@
 		7EE0AF08168EEF5D0090B546 /* dog_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EE0AF07168EEF5D0090B546 /* dog_shadow.png */; };
 		7EE0AF0C168EEFEA0090B546 /* DogShadow.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE0AF0A168EEFE80090B546 /* DogShadow.h */; };
 		7EE0AF0D168EEFEA0090B546 /* DogShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE0AF0B168EEFE90090B546 /* DogShadow.m */; };
-		7EE0AF0F168F011E0090B546 /* shittytest2.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EE0AF0E168F011D0090B546 /* shittytest2.map */; };
+		7EE0AF0F168F011E0090B546 /* bossloadertest.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EE0AF0E168F011D0090B546 /* bossloadertest.map */; };
 		7EE1174716623AC4004F3C29 /* autolevel_1_3.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EE1174616623AC4004F3C29 /* autolevel_1_3.map */; };
 		7EE1174916623CA0004F3C29 /* autolevel_1_4.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EE1174816623CA0004F3C29 /* autolevel_1_4.map */; };
 		7EE1174B16630170004F3C29 /* autolevel_1_5.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EE1174A16630170004F3C29 /* autolevel_1_5.map */; };
@@ -538,6 +540,8 @@
 		50F4130C106926B2002A0D5E /* FontManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontManager.m; sourceTree = "<group>"; };
 		50F4130F106926B2002A0D5E /* ZFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFont.h; sourceTree = "<group>"; };
 		50F41310106926B2002A0D5E /* ZFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFont.m; sourceTree = "<group>"; };
+		7E04262C16990C8400CD9CCD /* ExplosionParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExplosionParticle.h; sourceTree = "<group>"; };
+		7E04262D16990C8400CD9CCD /* ExplosionParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExplosionParticle.m; sourceTree = "<group>"; };
 		7E06435A165F7F45004040FD /* autolevel_start.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autolevel_start.map; sourceTree = "<group>"; };
 		7E1456A715E85771007CC9E4 /* DashEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashEffect.h; sourceTree = "<group>"; };
 		7E1456A815E85771007CC9E4 /* DashEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashEffect.m; sourceTree = "<group>"; };
@@ -722,8 +726,8 @@
 		7ED863CF15B806C3005FBDBB /* checkpoint2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkpoint2.png; sourceTree = "<group>"; };
 		7ED863E915B81A4A005FBDBB /* BG1_island_top_edge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG1_island_top_edge.png; path = Resources/bg/BG1/BG1_island_top_edge.png; sourceTree = SOURCE_ROOT; };
 		7ED9515A16969729005D8792 /* lab_island_corner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lab_island_corner.png; sourceTree = "<group>"; };
-		7ED951611696B33C005D8792 /* Boss1Starter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boss1Starter.h; sourceTree = "<group>"; };
-		7ED951621696B33C005D8792 /* Boss1Starter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Boss1Starter.m; sourceTree = "<group>"; };
+		7ED951611696B33C005D8792 /* CopterRobotLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopterRobotLoader.h; sourceTree = "<group>"; };
+		7ED951621696B33C005D8792 /* CopterRobotLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CopterRobotLoader.m; sourceTree = "<group>"; };
 		7ED951681696D08B005D8792 /* boss1_area.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = boss1_area.map; sourceTree = "<group>"; };
 		7EDA83C41612DBD70083E9CE /* swingvine_base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swingvine_base.png; sourceTree = "<group>"; };
 		7EDA83CB1612DC850083E9CE /* swingvine_test.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = swingvine_test.map; sourceTree = "<group>"; };
@@ -768,7 +772,7 @@
 		7EE0AF07168EEF5D0090B546 /* dog_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dog_shadow.png; sourceTree = "<group>"; };
 		7EE0AF0A168EEFE80090B546 /* DogShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DogShadow.h; sourceTree = "<group>"; };
 		7EE0AF0B168EEFE90090B546 /* DogShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DogShadow.m; sourceTree = "<group>"; };
-		7EE0AF0E168F011D0090B546 /* shittytest2.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = shittytest2.map; sourceTree = "<group>"; };
+		7EE0AF0E168F011D0090B546 /* bossloadertest.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bossloadertest.map; sourceTree = "<group>"; };
 		7EE1174616623AC4004F3C29 /* autolevel_1_3.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autolevel_1_3.map; sourceTree = "<group>"; };
 		7EE1174816623CA0004F3C29 /* autolevel_1_4.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autolevel_1_4.map; sourceTree = "<group>"; };
 		7EE1174A16630170004F3C29 /* autolevel_1_5.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = autolevel_1_5.map; sourceTree = "<group>"; };
@@ -1269,6 +1273,8 @@
 				7EB76991167EFF91003AFCF5 /* DazedParticle.m */,
 				7E60D115168AFD1500E84683 /* BrokenMachineParticle.h */,
 				7E60D116168AFD1500E84683 /* BrokenMachineParticle.m */,
+				7E04262C16990C8400CD9CCD /* ExplosionParticle.h */,
+				7E04262D16990C8400CD9CCD /* ExplosionParticle.m */,
 			);
 			name = particle;
 			sourceTree = "<group>";
@@ -1332,7 +1338,7 @@
 				7EDA83CB1612DC850083E9CE /* swingvine_test.map */,
 				7EE2AEFE161448F60035BA50 /* bridge_test.map */,
 				7EB7698D167EF0A6003AFCF5 /* shittytest.map */,
-				7EE0AF0E168F011D0090B546 /* shittytest2.map */,
+				7EE0AF0E168F011D0090B546 /* bossloadertest.map */,
 				7E3552D61695A6BE0099FADA /* robotstest.map */,
 			);
 			path = test;
@@ -1383,8 +1389,8 @@
 				7EC2302716941D4600C68AC9 /* LauncherRobot.m */,
 				7E3552D91695A8210099FADA /* LauncherRocket.h */,
 				7E3552DA1695A8210099FADA /* LauncherRocket.m */,
-				7ED951611696B33C005D8792 /* Boss1Starter.h */,
-				7ED951621696B33C005D8792 /* Boss1Starter.m */,
+				7ED951611696B33C005D8792 /* CopterRobotLoader.h */,
+				7ED951621696B33C005D8792 /* CopterRobotLoader.m */,
 				7EE740AB169801D500239CDB /* CopterRobot.h */,
 				7EE740AC169801D500239CDB /* CopterRobot.m */,
 			);
@@ -2360,8 +2366,9 @@
 				7E3552DB1695A8210099FADA /* LauncherRocket.h in Headers */,
 				7E3552E01695AF330099FADA /* LabWall.h in Headers */,
 				7E3552E41695B1970099FADA /* LabLineIsland.h in Headers */,
-				7ED951631696B33D005D8792 /* Boss1Starter.h in Headers */,
+				7ED951631696B33D005D8792 /* CopterRobotLoader.h in Headers */,
 				7EE740AD169801D500239CDB /* CopterRobot.h in Headers */,
+				7E04262E16990C8400CD9CCD /* ExplosionParticle.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2569,7 +2576,7 @@
 				7E60D10B168ABE3D00E84683 /* rocket.png in Resources */,
 				7ECE604E168C4D13001C2016 /* BG1_island_corner.png in Resources */,
 				7EE0AF08168EEF5D0090B546 /* dog_shadow.png in Resources */,
-				7EE0AF0F168F011E0090B546 /* shittytest2.map in Resources */,
+				7EE0AF0F168F011E0090B546 /* bossloadertest.map in Resources */,
 				7EA46778169045E4006A8D4C /* dog7ss.plist in Resources */,
 				7EA46779169045E4006A8D4C /* dog7ss.png in Resources */,
 				7EC23017169409EF00C68AC9 /* lab_alarm.png in Resources */,
@@ -2679,8 +2686,9 @@
 				7E3552DC1695A8210099FADA /* LauncherRocket.m in Sources */,
 				7E3552E11695AF330099FADA /* LabWall.m in Sources */,
 				7E3552E51695B1970099FADA /* LabLineIsland.m in Sources */,
-				7ED951641696B33D005D8792 /* Boss1Starter.m in Sources */,
+				7ED951641696B33D005D8792 /* CopterRobotLoader.m in Sources */,
 				7EE740AE169801D500239CDB /* CopterRobot.m in Sources */,
+				7E04262F16990C8400CD9CCD /* ExplosionParticle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,7 +6,7 @@
 
 @implementation CopterRobot
 
-static const float PLAYER_FOLLOW_OFFSET = 30;
+static const float PLAYER_FOLLOW_OFFSET = 50;
 static const float SLOWSPEED = 5;
 static const float FLYOFFSPEED = 12;
 
@@ -19,12 +19,27 @@ static const int DASHWAITCT = 100;
 
 static const int SKYFIRE_SPEED = 60;
 
+static const int RAPIDFIRE_RELOAD_SPEED = 85;
+static const int RAPIDFIRE_CT = 560;
+static const int RAPIDFIRE_ROCKETSPEED = 5;
+
+static const int TRACKINGFIRE_CT = 500;
+static const int TRACKINGFIRE_DIST = 500;
+static const int TRACKINGFIRE_RELOAD = 60;
+static const int TRACKINGFIRE_ROCKETSPEED = 8;
+
+static const float RECOIL_DIST = 40;
+static const float RECOIL_CT = 10;
+
+static const int DEFAULT_HP = 2;
+
 +(CopterRobot*)cons_with_playerpos:(CGPoint)p {
     return [[CopterRobot node] cons_at:p];
 }
 
 -(CopterRobot*)cons_at:(CGPoint)p {
     [self init_anims];
+    hp = DEFAULT_HP;
     active = YES;
     player_pos = p;
     cur_mode = CopterMode_IntroAnim;
@@ -35,19 +50,36 @@ static const int SKYFIRE_SPEED = 60;
     return self;
 }
 
+-(BOOL)can_hit {
+    return (cur_mode != CopterMode_GotHit_FlyOff) && (cur_mode != Coptermode_DeathExplode) && (cur_mode != CopterMode_ToRemove);
+}
+
 -(void)update:(Player *)player g:(GameEngineLayer *)g {
     player_pos = player.position;
-    [self set_bounds_and_ground:g];
+    if (cur_mode != CopterMode_ToRemove) {
+        [self set_bounds_and_ground:g];
+        [GEventDispatcher push_event:[[GEvent init_type:GEventType_BOSS1_TICK] add_i1:hp i2:DEFAULT_HP]];
+    }
+    
     [self anim_arm];
     [self anim_vibration];
+    [self anim_recoil];
     
-    if (cur_mode != CopterMode_GotHit_FlyOff && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
+    if ([self can_hit] && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         rel_pos = ccp(actual_pos.x - player.position.x,actual_pos.y-player.position.y);
         if (player.dashing) {
-            cur_mode = CopterMode_GotHit_FlyOff;
-            float velx = float_random(0, FLYOFFSPEED);
-            float vely = (FLYOFFSPEED-velx)*(int_random(0, 2)?1:-1);
-            flyoffdir = ccp(SIG(actual_pos.x-player.position.x)*velx,vely);
+            hp--;
+            if (hp <= 0) {
+                cur_mode = Coptermode_DeathExplode;
+                rel_pos = ccp(actual_pos.x-g.player.position.x,actual_pos.y-g.player.position.y);
+                ct = 130;
+                
+            } else {
+                cur_mode = CopterMode_GotHit_FlyOff;
+                float velx = float_random(0, FLYOFFSPEED);
+                float vely = (FLYOFFSPEED-velx)*(int_random(0, 2)?1:-1);
+                flyoffdir = ccp(SIG(actual_pos.x-player.position.x)*velx,vely);
+            }
             
         } else if (!player.dead) {
             cur_mode = CopterMode_Killed_Player;
@@ -58,7 +90,7 @@ static const int SKYFIRE_SPEED = 60;
         }
     }
     
-    if (cur_mode == CopterMode_PlayerDeadToRemove) {
+    if (cur_mode == CopterMode_ToRemove) {
         [g remove_gameobject:self];
         return;
         
@@ -80,36 +112,149 @@ static const int SKYFIRE_SPEED = 60;
     } else if (cur_mode == CopterMode_SkyFireLeft) {
         [self skyfire_left:g];
         
+    } else if (cur_mode == CopterMode_RapidFireRight) {
+        [self rapidfire_right:g];
+        
+    } else if (cur_mode == CopterMode_TrackingFireLeft) {
+        [self trackingfire_left:g];
+        
+    } else if (cur_mode == Coptermode_DeathExplode) {
+        [self death_explode:g];
+        
     }
     
-    [self setPosition:CGPointAdd(actual_pos, vibration)];
+    [self setPosition:ccp(actual_pos.x+vibration.x+recoil.x,actual_pos.y+vibration.y+recoil.y)];
 }
 
 
 -(void)get_random_action:(Side)s {
-    
     if (s == Side_Left) {
-        int rand = int_random(0, 1);
-        if (rand == 0) {
+        lct = (lct+1)%2;
+        if (lct == 0) {
             cur_mode = CopterMode_RightDash;
             rel_pos = ccp(-600,30);
             ct = DASHWAITCT;
             [self apply_rel_pos];
-        }
+            
+        } else if (lct == 1) {
+            cur_mode = CopterMode_RapidFireRight;
+            rel_pos = ccp(-600,0);
+            actual_pos = ccp(rel_pos.x+player_pos.x,groundlevel + 75);
+            ct = RAPIDFIRE_CT;
+            
+        } else { NSLog(@"ERRORinG_rand_act"); }
+        
     } else {
-        int rand = int_random(0, 2);
-        if (rand == 0) {
+        rct = (rct+1)%3;
+        if (rct == 0) {
             cur_mode = CopterMode_LeftDash;
             rel_pos = ccp(800,30);
             ct = DASHWAITCT;
             [self apply_rel_pos];
             
-        } else if (rand == 1) {
+        } else if (rct == 1) {
             cur_mode = CopterMode_SkyFireLeft;
             rel_pos = ccp(1500,420);
             actual_pos = ccp(rel_pos.x+player_pos.x,groundlevel+rel_pos.y);
             
+        } else if (rct == 2) {
+            cur_mode = CopterMode_TrackingFireLeft;
+            rel_pos = ccp(800,30);
+            [self apply_rel_pos];
+            ct = TRACKINGFIRE_CT;
+            
+        } else { NSLog(@"ERRORinG_rand_act"); }
+    }
+}
+
+-(void)death_explode:(GameEngineLayer*)g {
+    [g set_target_camera:[Common cons_normalcoord_camera_zoom_x:140 y:80 z:131]];
+    [self setOpacity:160];
+    [self setRotation:rotation_+20];
+    
+    actual_pos = ccp(rel_pos.x+player_pos.x,actual_pos.y);
+    
+    (ct%15==0&&ct>20)?[g add_particle:[RelativePositionExplosionParticle init_x:position_.x+float_random(-60, 60) 
+                                                                     y:position_.y+float_random(-60, 60) 
+                                                                player:g.player.position]] : 0;
+    
+    ct%5==0?[g add_particle:[RocketLaunchParticle init_x:position_.x 
+                                                      y:position_.y 
+                                                     vx:float_random(-7, 7) 
+                                                     vy:float_random(-7, 7)]]:0;
+    
+    ct--;
+    if (ct <= 0) {
+        cur_mode = CopterMode_ToRemove;
+        for(float i = 0; i < 10; i++) {
+            [g add_particle:[BrokenMachineParticle init_x:position_.x y:position_.y vx:float_random(-5, 10) vy:float_random(-10, 10)]];
         }
+        [GEventDispatcher push_event:[[GEvent init_type:GEventType_BOSS1_DEFEATED] add_pt:g.player.position]];
+    }
+}
+
+-(void)trackingfire_left:(GameEngineLayer*)g {
+    [g set_target_camera:[Common cons_normalcoord_camera_zoom_x:90 y:80 z:131]];
+    [self setScaleX:-1];
+    if (rel_pos.x > TRACKINGFIRE_DIST) {
+        rel_pos.x -= (DASHSPEED+2);
+        [self track_y];
+        
+    } else if (ct > 0) {
+        ct--;
+        [self track_y];
+        
+        if(ct%TRACKINGFIRE_RELOAD==0 && ct > TRACKINGFIRE_RELOAD) {
+            CGPoint noz = [self get_nozzle];
+            [LauncherRobot explosion:g at:noz];
+            
+            Vec3D *rv = [Vec3D init_x:-1 y:0 z:0];
+            [rv normalize];
+            [rv scale:TRACKINGFIRE_ROCKETSPEED];
+            LauncherRocket *r = [[RelativePositionLauncherRocket cons_at:noz player:g.player.position vel:ccp(rv.x,rv.y)] set_remlimit:1300];
+            [rv dealloc];
+            
+            [g add_gameobject:r];
+            [self apply_recoil];
+        }
+        
+    } else {
+        rel_pos.x -= DASHSPEED;
+    }
+    
+    actual_pos = ccp(rel_pos.x+player_pos.x,actual_pos.y);
+    if (rel_pos.x < -300) {
+        [self get_random_action:Side_Left];
+    }
+}
+
+-(void)rapidfire_right:(GameEngineLayer*)g {
+    [g set_target_camera:[Common cons_normalcoord_camera_zoom_x:320 y:80 z:131]];
+    [self setScaleX:1];
+    if (rel_pos.x < -DASHWAITDIST) {
+        rel_pos.x += DASHSPEED;
+    } else if (ct > 0) {
+        ct--;
+        if(ct%RAPIDFIRE_RELOAD_SPEED==0 && ct > RAPIDFIRE_RELOAD_SPEED) {
+            CGPoint noz = [self get_nozzle];
+            [LauncherRobot explosion:g at:noz];
+            
+            Vec3D *rv = [Vec3D init_x:1 y:0 z:0];
+            [rv normalize];
+            [rv scale:RAPIDFIRE_ROCKETSPEED];
+            LauncherRocket *r = [[RelativePositionLauncherRocket cons_at:noz player:g.player.position vel:ccp(rv.x,rv.y)] set_remlimit:1300];
+            [rv dealloc];
+            
+            [g add_gameobject:r];
+            [self apply_recoil];
+        }
+    } else {
+        rel_pos.x += DASHSPEED;
+    }
+    
+    actual_pos = ccp(rel_pos.x+player_pos.x,actual_pos.y);
+    if (rel_pos.x > 400) {
+        [self get_random_action:Side_Right];
     }
 }
 
@@ -130,6 +275,7 @@ static const int SKYFIRE_SPEED = 60;
         [rv dealloc];
         
         [g add_gameobject:r];
+        [self apply_recoil];
     }
     
     if (rel_pos.x > -300) {
@@ -225,13 +371,17 @@ static const int SKYFIRE_SPEED = 60;
 }
 
 -(void)apply_rel_pos {
-    actual_pos = ccp(rel_pos.x+player_pos.x,rel_pos.y+player_pos.y);
+    actual_pos = CGPointAdd(rel_pos, player_pos);
 }
 
 -(CGPoint)get_nozzle {
     Vec3D *dirvec = [Vec3D init_x:1 y:0 z:0];
     [dirvec scale:100];
-    dirvec.y += 40;
+    if (scaleX_ < 0) {
+        dirvec.y += 40;
+    } else {
+        dirvec.y -=40;
+    }
     
     [dirvec scale:scaleX_];
     Vec3D *rdirvec = [dirvec rotate_vec_by_rad:-[Common deg_to_rad:rotation_]];
@@ -243,8 +393,30 @@ static const int SKYFIRE_SPEED = 60;
     return n;
 }
 
+-(void)apply_recoil {
+    CGPoint noz = [self get_nozzle];
+    Vec3D *recoil_dir = [Vec3D init_x:noz.x-position_.x y:noz.y-position_.y z:0];
+    [recoil_dir normalize];
+    [recoil_dir scale:-RECOIL_DIST];
+    recoil_tar = ccp(recoil_dir.x,recoil_dir.y);
+    recoil_ct = RECOIL_CT;
+    [recoil_dir dealloc];
+}
+
+-(void)anim_recoil {
+    if (recoil_ct > 0) {
+        recoil_ct--;
+        float pct = recoil_ct/RECOIL_CT;
+        recoil = ccp(pct*(recoil_tar.x),pct*(recoil_tar.y));
+        
+    } else {
+        recoil_tar = CGPointZero;
+        recoil = CGPointZero;
+    }
+}
+
 -(void)reset {
-    cur_mode = CopterMode_PlayerDeadToRemove;
+    cur_mode = CopterMode_ToRemove;
 }
 
 -(HitRect)get_hit_rect {

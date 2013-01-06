@@ -34,6 +34,15 @@
     } else if (e.type == GEventType_GAMEOVER) {
         [self gameover];
         
+    } else if (e.type == GEventType_BOSS1_ACTIVATE) {
+        //NSLog(@"make boss1 ui");
+        
+    } else if (e.type == GEventType_BOSS1_TICK) {
+        //NSLog(@"boss1 hp:(%i/%i)",e.i1,e.i2);
+        
+    } else if (e.type == GEventType_BOSS1_DEFEATED) {
+        //NSLog(@"boss1 defeated, remove boss1 ui");
+        
     }
 }
 

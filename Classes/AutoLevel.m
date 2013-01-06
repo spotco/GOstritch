@@ -10,10 +10,10 @@
 +(NSArray*)random_set1 {
     static NSArray *set1_levels;
     if (!set1_levels){
-        set1_levels = [[NSArray alloc] initWithObjects:
+        /*set1_levels = [[NSArray alloc] initWithObjects:
             @"autolevel_1_1",@"autolevel_1_2",@"autolevel_1_3",@"autolevel_1_4",@"autolevel_1_5",@"autolevel_1_6",@"autolevel_1_7",@"autolevel_1_8",
-        nil];
-        set1_levels = [[NSArray alloc] initWithObjects:@"shittytest", nil];
+        nil];*/
+        set1_levels = [[NSArray alloc] initWithObjects:@"bossloadertest",@"autolevel_1_2", nil];
     }
     return set1_levels;
 }
@@ -35,8 +35,7 @@
     }
     tglayer = glayer;
     
-    //NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
-    NSArray *to_load = [[NSArray arrayWithObjects: @"boss1_area", nil] retain];
+    NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
     map_sections = [[NSMutableArray alloc] init];
     stored = [[NSMutableArray alloc] init];
     queued_sections = [[NSMutableArray alloc] init];
@@ -57,6 +56,14 @@
         cur_mode = AutoLevelMode_BOSS1;
         [self remove_all_ahead_but_current:e.pt];
         [self shift_queue_into_current];
+        
+    } else if (e.type == GEventType_BOSS1_DEFEATED) {
+        cur_mode = AutoLevelMode_Normal;
+        [GEventDispatcher push_event:[[GEvent init_type:GEventType_CHECKPOINT] add_pt:e.pt]];
+        [self remove_all_ahead_but_current:e.pt];
+        [tglayer stopAction:tglayer.follow_action];
+        tglayer.follow_action = [CCFollow actionWithTarget:tglayer.player];
+        [tglayer runAction:tglayer.follow_action];
         
     }
 }

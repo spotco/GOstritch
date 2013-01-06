@@ -266,7 +266,7 @@ static NSMutableDictionary* cached_json;
         } else if ([type isEqualToString:@"copter"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
-            [map.game_objects addObject:[Boss1Starter cons_x:x y:y]];
+            [map.game_objects addObject:[CopterRobotLoader cons_x:x y:y]];
             
         } else {
             NSLog(@"item read error");

@@ -1,13 +1,13 @@
-#import "Boss1Starter.h"
+#import "CopterRobotLoader.h"
 #import "GameEngineLayer.h"
 
-@implementation Boss1Starter
+@implementation CopterRobotLoader
 
-+(Boss1Starter*)cons_x:(float)x y:(float)y {
-    return [[Boss1Starter node] init_at:ccp(x,y)];
++(CopterRobotLoader*)cons_x:(float)x y:(float)y {
+    return [[CopterRobotLoader node] init_at:ccp(x,y)];
 }
 
--(Boss1Starter*)init_at:(CGPoint)pos {
+-(CopterRobotLoader*)init_at:(CGPoint)pos {
     [self setPosition:pos];
     self.active = NO;
     return self;
