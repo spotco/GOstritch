@@ -309,7 +309,7 @@ bool fm_a_gt_b(double a,double b,double delta) {
     float escrwid = 480.0;
     float escrhei = 320.0;
     
-    float outx = (escrwid/2 - glzd->x)*(ghei/escrhei);
+    float outx = (escrwid/2 - glzd->x)*(gwid/escrwid);
     float outy = (escrhei/2 - glzd->y)*(ghei/escrhei);
     
     glzd->x = outx;

@@ -24,6 +24,7 @@ typedef enum {
     GEventType_MENU_TOUCHUP,
     GEventType_MENU_CANCELDRAG,
     GEventType_MENU_PLAY_AUTOLEVEL_MODE,
+    GEventType_MENU_PLAY_TESTLEVEL_MODE,
     GEventType_MENU_GOTO_PAGE,
     GEventType_CHANGE_CURRENT_DOG
 } GEventType;

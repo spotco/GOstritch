@@ -35,13 +35,13 @@
         [self gameover];
         
     } else if (e.type == GEventType_BOSS1_ACTIVATE) {
-        //NSLog(@"make boss1 ui");
+        //TODO - UI
         
     } else if (e.type == GEventType_BOSS1_TICK) {
-        //NSLog(@"boss1 hp:(%i/%i)",e.i1,e.i2);
+        //TODO - UI
         
     } else if (e.type == GEventType_BOSS1_DEFEATED) {
-        //NSLog(@"boss1 defeated, remove boss1 ui");
+        //TODO - UI
         
     }
 }
@@ -55,7 +55,7 @@
     [self set_label:time_disp to:[self parse_gameengine_time:[game_engine_layer get_time]]];
     
     if ([GameMain GET_DEBUG_UI]) {
-        [self set_label:DEBUG_ctdisp to:strf("isl:%i objs:%i",[game_engine_layer.islands count],[game_engine_layer.game_objects count])];
+        [self set_label:DEBUG_ctdisp to:strf("isl:%i objs:%i partc:%i",[game_engine_layer.islands count],[game_engine_layer.game_objects count],[game_engine_layer get_num_particles])];
         for (GameObject* o in game_engine_layer.game_objects) {
             if ([o class] == [AutoLevel class]) {
                 [self set_label:DEBUG_autolvldisp to:[((AutoLevel*)o) get_debug_msg]];
@@ -291,27 +291,13 @@
         [l setString:s];
     }
 }
-+(CGPoint)player_approx_position:(GameEngineLayer*)game_engine_layer { //magic numbers deal w/ it
-    CGPoint center = [game_engine_layer convertToWorldSpace:game_engine_layer.player.position];
-    CGPoint scrn = ccp(-game_engine_layer.camera_state.x,-game_engine_layer.camera_state.y);
-    
-    center.x += scrn.x/1;
-    center.y += scrn.y/1;
-    
-    if (game_engine_layer.player.current_island != NULL) {
-        Vec3D* nvec = [game_engine_layer.player.current_island get_normal_vecC];
-        Vec3D* normal = [Vec3D init_x:nvec.x y:nvec.y z:nvec.z];
-        [normal scale:10];
-        center.x += normal.x;
-        center.y += normal.y;
-        [normal dealloc];
-    } else {
-        center.x += 10;
-        center.y += 10;
-    }
-    
-    return center;
-    
++(CGPoint)player_approx_position:(GameEngineLayer*)game_engine_layer { //inverse of [Common normal_to_gl_coord]
+    float outx = game_engine_layer.camera_state.x;
+    float outy = game_engine_layer.camera_state.y;
+    float outz = game_engine_layer.camera_state.z;
+    float playerscrx = (480/2.0)-outx/( (2*(0.907*outz + 237.819)) / (480.0) );
+    float playerscry = (320/2.0)-outy/( (2*(0.515*outz + 203.696)) / (320.0) );
+    return ccp(playerscrx,playerscry);
 }
 
 /* CCMenu shortcut methods */

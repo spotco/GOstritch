@@ -17,7 +17,7 @@
 
 @interface MainMenuPageZoomButton : MainMenuPageInteractiveItem {
     callback cb;
-    CCSprite *img;
+    CCNode *img;
     CGRect n_bbox;
     float zoom;
 }
@@ -25,7 +25,7 @@
 @property(readwrite,assign) BOOL pressed;
 
 +(MainMenuPageZoomButton*)cons_texture:(CCTexture2D*)tex at:(CGPoint)pos fn:(callback)fn;
-+(MainMenuPageZoomButton*)cons_spr:(CCSprite*)spr at:(CGPoint)pos fn:(callback)fn;
++(MainMenuPageZoomButton*)cons_spr:(CCNode*)spr at:(CGPoint)pos fn:(callback)fn;
 -(MainMenuPageZoomButton*)set_zoom:(float)tzoom;
 
 @end

@@ -48,7 +48,7 @@
 
 #define INIT_X 140
 #define INIT_Y 80
-#define INIT_Z 50
+#define INIT_Z 80
 +(void)reset_camera:(CameraZoom*)c {
     c->x = INIT_X;
     c->y = INIT_Y;

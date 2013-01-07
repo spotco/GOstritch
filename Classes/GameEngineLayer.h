@@ -77,6 +77,7 @@ typedef struct level_bone_status {
 
 -(int)get_lives;
 -(int)get_time;
+-(int)get_num_particles;
 
 -(void)setColor:(ccColor3B)color;
 

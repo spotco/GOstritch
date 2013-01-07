@@ -7,15 +7,28 @@
 #define REMOVEBUFFER 400
 #define ADDBUFFER 600
 
+static int DEBUG_MODE = 0;
+
++(void)SET_DEBUG_MODE:(int)t {
+    DEBUG_MODE = t;
+}
+
 +(NSArray*)random_set1 {
     static NSArray *set1_levels;
     if (!set1_levels){
-        /*set1_levels = [[NSArray alloc] initWithObjects:
+        set1_levels = [[NSArray alloc] initWithObjects:
             @"autolevel_1_1",@"autolevel_1_2",@"autolevel_1_3",@"autolevel_1_4",@"autolevel_1_5",@"autolevel_1_6",@"autolevel_1_7",@"autolevel_1_8",
-        nil];*/
-        set1_levels = [[NSArray alloc] initWithObjects:@"bossloadertest",@"autolevel_1_2", nil];
+        nil];
     }
     return set1_levels;
+}
+
++(NSArray*)random_boss1test_levels {
+    static NSArray *boss1test_levels;
+    if (!boss1test_levels) {
+        boss1test_levels = [[NSArray alloc] initWithObjects:@"bossloadertest",@"autolevel_1_2", nil];
+    }
+    return boss1test_levels;
 }
 
 +(NSArray*)boss1_set {
@@ -240,7 +253,11 @@
 -(NSString*)get_random_map {
     NSArray* tlvls;
     if (cur_mode == AutoLevelMode_Normal) {
-        tlvls = [AutoLevel random_set1];
+        if (DEBUG_MODE == 1) {
+            tlvls = [AutoLevel random_boss1test_levels];
+        } else {
+            tlvls = [AutoLevel random_set1];
+        }
     } else {
         tlvls = [AutoLevel boss1_set];
     }

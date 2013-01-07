@@ -20,6 +20,7 @@
 -(void)add_pages {
     [menu_pages addObject:[DogModePage node]];
     [menu_pages addObject:[PlayAutoPage node]];
+    [menu_pages addObject:[DebugMenuPage node]];
     [menu_pages addObject:[StatsPage node]];
     [menu_pages addObject:[SettingsPage node]];
 }
@@ -101,6 +102,17 @@
     } else if (e.type == GEventType_MENU_PLAY_AUTOLEVEL_MODE) {
         [self exit];
         [GameMain start_game_autolevel];
+        
+    } else if (e.type == GEventType_MENU_PLAY_TESTLEVEL_MODE) {
+        [self exit];
+        if (e.i1 == 1) {
+            [GameMain start_testlevel];
+        } else if (e.i1 == 0) {
+            [GameMain start_game_bosstestlevel];
+        } else if (e.i2 == 2) {
+            [GameMain start_swingtestlevel];
+        }
+        
     
     } else if (e.type == GEventType_MENU_GOTO_PAGE) {
         cur_page = e.i1;

@@ -2,26 +2,27 @@
 
 @implementation GameMain
 
-#define USE_BG NO
+#define USE_BG YES
 #define ENABLE_BG_PARTICLES YES
 #define DRAW_HITBOX NO
 #define TARGET_FPS 60
 #define RESET_STATS NO
 #define DISPLAY_FPS NO
-#define DEBUG_UI YES
+#define DEBUG_UI NO
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
-#define STARTING_LIVES 20
+#define STARTING_LIVES 5
 #define TESTLEVEL @"robotstest"
 
 /**
  TODO -- 
- todo:boss and boss section starter
- todo:reset curX,curY when clearallbutcurrent
+ -link_islands removes any previously placed link-edges
+ -hit rocket with roll displaces instead of explode
+ -ui for boss (events are linked in)
+ -more moves for boss + fix propeller anim
  
- -boss robot + lab
  -player run in animation
- -UI alert for rockets
+ -UI alert area for rockets/danger
  -ask for: scrap particle
  -different dogs differnt special powers
     ideas: higher jump, more float power, longer dash, faster, auto item magnet
@@ -37,19 +38,27 @@
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
     
     //[GameMain start_testlevel];
-    [GameMain start_game_autolevel];
-    //[GameMain start_menu];
+    //[GameMain start_game_autolevel];
+    [GameMain start_menu];
     
 }
 
 +(void)start_game_autolevel {
+    [AutoLevel SET_DEBUG_MODE:0];
     [GameMain run_scene:[GameEngineLayer scene_with_autolevel_lives:STARTING_LIVES]];
 }
 +(void)start_menu {
     [GameMain run_scene:[MainMenuLayer scene]];
 }
++(void)start_game_bosstestlevel {
+    [AutoLevel SET_DEBUG_MODE:1];
+    [GameMain run_scene:[GameEngineLayer scene_with_autolevel_lives:STARTING_LIVES]];
+}
 +(void)start_testlevel {
     [GameMain run_scene:[GameEngineLayer scene_with:TESTLEVEL lives:GAMEENGINE_INF_LIVES]];
+}
++(void)start_swingtestlevel {
+    [GameMain run_scene:[GameEngineLayer scene_with:@"swingvine_test" lives:GAMEENGINE_INF_LIVES]];
 }
 +(void)run_scene:(CCScene*)s {
     [[CCDirector sharedDirector] runningScene]?

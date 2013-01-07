@@ -31,7 +31,7 @@ static const int TRACKINGFIRE_ROCKETSPEED = 8;
 static const float RECOIL_DIST = 40;
 static const float RECOIL_CT = 10;
 
-static const int DEFAULT_HP = 2;
+static const int DEFAULT_HP = 4;
 
 +(CopterRobot*)cons_with_playerpos:(CGPoint)p {
     return [[CopterRobot node] cons_at:p];
@@ -467,7 +467,7 @@ static const int DEFAULT_HP = 2;
     [self addChild:aux_prop];
     
     main_prop = [CCSprite node];
-    [main_prop runAction:[self init_anim:[NSArray arrayWithObjects:@"main_prop_0",@"main_prop_1",nil] speed:0.05]];
+    [main_prop runAction:[self init_anim:[NSArray arrayWithObjects:@"main_prop_0",@"main_prop_1",@"main_prop_2",@"main_prop_3",@"main_prop_4",nil] speed:0.05]];
     [main_prop setPosition:ccp(-5,75)];
     [self addChild:main_prop];
     

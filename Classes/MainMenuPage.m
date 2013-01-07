@@ -66,7 +66,7 @@
     return [[MainMenuPageZoomButton node] init_texture:tex at:pos fn:fn];
 }
 
-+(MainMenuPageZoomButton*)cons_spr:(CCSprite*)spr at:(CGPoint)pos fn:(callback)fn {
++(MainMenuPageZoomButton*)cons_spr:(CCNode*)spr at:(CGPoint)pos fn:(callback)fn {
     return [[MainMenuPageZoomButton node] init_spr:spr at:pos fn:fn];
 }
 
@@ -78,7 +78,7 @@
     }
 }
 
--(MainMenuPageZoomButton*)init_spr:(CCSprite*)spr at:(CGPoint)pos fn:(callback)fn {
+-(MainMenuPageZoomButton*)init_spr:(CCNode*)spr at:(CGPoint)pos fn:(callback)fn {
     img = spr;
     zoom = DEFAULTZOOM;
     n_bbox = img.boundingBoxInPixels;

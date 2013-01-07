@@ -417,6 +417,9 @@ static NSMutableArray* particles_tba;
     
 
 }
+-(int)get_num_particles {
+    return [particles count];
+}
 -(void)push_added_particles {
     for (Particle *p in particles_tba) {
         [particles addObject:p];
