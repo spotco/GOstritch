@@ -2,7 +2,7 @@
 
 @implementation GameMain
 
-#define USE_BG YES
+#define USE_BG NO
 #define ENABLE_BG_PARTICLES YES
 #define DRAW_HITBOX NO
 #define TARGET_FPS 60
@@ -20,6 +20,8 @@
  -hit rocket with roll displaces instead of explode
  -ui for boss (events are linked in)
  -more moves for boss + fix propeller anim
+ -enemies smaller, labwall fix
+ -shadows, bobbing on rocket
  
  -player run in animation
  -UI alert area for rockets/danger

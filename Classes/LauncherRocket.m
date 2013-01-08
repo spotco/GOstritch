@@ -8,6 +8,8 @@
 #define PARTICLE_FREQ 10
 #define REMOVE_BEHIND_BUFFER 500
 
+#define DEFAULT_SCALE 0.75
+
 
 +(LauncherRocket*)cons_at:(CGPoint)pt vel:(CGPoint)vel {
     return [[LauncherRocket spriteWithTexture:[Resource get_tex:TEX_ENEMY_ROCKET]] cons_at:pt vel:vel];
@@ -19,7 +21,7 @@
     active = YES;
     remlimit = -1;
     [self setRotation:[self get_tar_angle_deg_self:pt tar:ccp(pt.x+vel.x,pt.y+vel.y)]];
-    
+    [self setScale:DEFAULT_SCALE];
     return self;
 }
 
@@ -93,7 +95,7 @@
     rel_pos = ccp(pt.x-player.x,0);
     v = vel;
     [self update_position];
-    
+    [self setScale:DEFAULT_SCALE];
     
     active = YES;
     [self setRotation:[self get_tar_angle_deg_self:pt tar:ccp(pt.x+vel.x,pt.y+vel.y)]];

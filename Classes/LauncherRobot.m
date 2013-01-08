@@ -16,6 +16,8 @@
 
 #define ROCKETSPEED 4
 
+#define DEFAULT_SCALE 0.75
+
 +(LauncherRobot*)cons_x:(float)x y:(float)y dir:(Vec3D*)dir {
     return [[LauncherRobot node] cons_x:x y:y dir:dir];
 }
@@ -40,13 +42,14 @@
     float tara = [self get_tar_angle_deg_self:position_ tar:ccp(position_.x+dir.x,position_.y+dir.y)];
     if (ABS(tara) > 90) {
         tara+=180;
-        [body setScaleX:-1];
+        [body setScaleX:-DEFAULT_SCALE];
     } else {
-        [body setScaleX:1];
+        [body setScaleX:DEFAULT_SCALE];
     }
+    [body setScaleY:DEFAULT_SCALE];
     starting_rot = tara;
     [self setRotation:tara];
-    
+    [self setScale:0.75];
     
     [self addChild:body];
     starting_pos = ccp(x,y);

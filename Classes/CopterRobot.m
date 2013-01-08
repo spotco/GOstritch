@@ -2,7 +2,7 @@
 #import "GameEngineLayer.h"
 #import "JumpPadParticle.h"
 
-#define ARM_DEFAULT_POSITION ccp(-30,-50)
+#define ARM_DEFAULT_POSITION ccp(-35,-55)
 
 @implementation CopterRobot
 
@@ -32,6 +32,8 @@ static const float RECOIL_DIST = 40;
 static const float RECOIL_CT = 10;
 
 static const int DEFAULT_HP = 4;
+
+#define DEFAULT_SCALE 1.2
 
 +(CopterRobot*)cons_with_playerpos:(CGPoint)p {
     return [[CopterRobot node] cons_at:p];
@@ -196,6 +198,7 @@ static const int DEFAULT_HP = 4;
 -(void)trackingfire_left:(GameEngineLayer*)g {
     [g set_target_camera:[Common cons_normalcoord_camera_zoom_x:90 y:80 z:131]];
     [self setScaleX:-1];
+    
     if (rel_pos.x > TRACKINGFIRE_DIST) {
         rel_pos.x -= (DASHSPEED+2);
         [self track_y];
@@ -231,6 +234,7 @@ static const int DEFAULT_HP = 4;
 -(void)rapidfire_right:(GameEngineLayer*)g {
     [g set_target_camera:[Common cons_normalcoord_camera_zoom_x:320 y:80 z:131]];
     [self setScaleX:1];
+    
     if (rel_pos.x < -DASHWAITDIST) {
         rel_pos.x += DASHSPEED;
     } else if (ct > 0) {
@@ -463,28 +467,35 @@ static const int DEFAULT_HP = 4;
     
     aux_prop = [CCSprite node];
     [aux_prop runAction:[self init_anim:[NSArray arrayWithObjects:@"aux_prop_0",@"aux_prop_1",@"aux_prop_2",nil] speed:0.05]];
-    [aux_prop setPosition:ccp(-80,-10)];
+    [aux_prop setPosition:ccp(-86,-10)];
     [self addChild:aux_prop];
     
     main_prop = [CCSprite node];
     [main_prop runAction:[self init_anim:[NSArray arrayWithObjects:@"main_prop_0",@"main_prop_1",@"main_prop_2",@"main_prop_3",@"main_prop_4",nil] speed:0.05]];
-    [main_prop setPosition:ccp(-5,75)];
+    [main_prop setPosition:ccp(-5,85)];
     [self addChild:main_prop];
     
     main_nut = [CCSprite spriteWithTexture:[Resource get_tex:TEX_ENEMY_COPTER] 
                                       rect:[FileCache get_cgrect_from_plist:TEX_ENEMY_COPTER idname:@"main_bolt"]];
-    [main_nut setPosition:ccp(7,77)];
+    [main_nut setPosition:ccp(7,87)];
     [self addChild:main_nut];
     
     aux_nut = [CCSprite spriteWithTexture:[Resource get_tex:TEX_ENEMY_COPTER] 
                                      rect:[FileCache get_cgrect_from_plist:TEX_ENEMY_COPTER idname:@"aux_bolt"]];
-    [aux_nut setPosition:ccp(-80,-10)];
+    [aux_nut setPosition:ccp(-86,-10)];
     [self addChild:aux_nut];
     
     arm = [CCSprite spriteWithTexture:[Resource get_tex:TEX_ENEMY_COPTER] 
                                  rect:[FileCache get_cgrect_from_plist:TEX_ENEMY_COPTER idname:@"arm"]];
     [arm setPosition:ARM_DEFAULT_POSITION];
     [self addChild:arm];
+    
+    [body setScale:DEFAULT_SCALE];
+    [aux_prop setScale:DEFAULT_SCALE];
+    [main_prop setScale:DEFAULT_SCALE];
+    [arm setScale:DEFAULT_SCALE];
+    [main_nut setScale:DEFAULT_SCALE];
+    [aux_nut setScale:DEFAULT_SCALE];
 }
 
 -(int)get_render_ord {

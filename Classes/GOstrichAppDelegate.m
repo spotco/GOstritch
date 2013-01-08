@@ -88,7 +88,16 @@
 	[viewController setView:glView];
 	
 	// make the View Controller a child of the main window
-	[window addSubview: viewController.view];
+    //REMOVED http://stackoverflow.com/questions/12519917/xcode-4-5-and-ios-6-sdk-orientation
+	//[window addSubview: viewController.view];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0){
+        [window setRootViewController:viewController];
+    }
+    else{
+        [window addSubview:viewController.view];
+    }
+
 	
 	[window makeKeyAndVisible];
 	
@@ -103,6 +112,11 @@
 	
     [GameMain main];
 }
+
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    return UIInterfaceOrientationMaskLandscape;
+}
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
