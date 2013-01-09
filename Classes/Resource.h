@@ -25,6 +25,7 @@
 #define TEX_LAB_GROUND_CORNER @"labgroundcorner"
 #define TEX_LAB_PIPE_1 @"labpipe1"
 #define TEX_LAB_PIPE_2 @"labpipe2"
+#define TEX_LAB_GROUND_TOP_UNDER @"labgroundunder"
 
 #define TEX_CAVE_TOP_TEX @"CaveTopTex"
 #define TEX_CAVE_CORNER_TEX @"CaveCornerTex"
@@ -73,6 +74,9 @@
 
 #define TEX_SWINGVINE_BASE @"SwingVineBase"
 #define TEX_SWINGVINE_TEX @"SwingVineTex"
+
+#define TEX_ELECTRIC_BODY @"electricbody"
+#define TEX_ELECTRIC_BASE @"electricbase"
 
 #define TEX_CHECKPOINT_1 @"CheckPointPre"
 #define TEX_CHECKPOINT_2 @"CheckPointPost"

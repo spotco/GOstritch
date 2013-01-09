@@ -158,22 +158,20 @@
     tri_pts[1] = ccp(0+v3t1.x * taille,0+v3t1.y * taille);
     tri_pts[0] = ccp(self.endX-self.startX +v3t1.x * taille ,self.endY-self.startY +v3t1.y * taille);
 	
-    //[Common tex_map_to_tri_loc:&main_fill len:4];
-    /*NSLog(@"pre:%@,%@,%@,%@",NSStringFromCGPoint(main_fill.tex_pts[0]),
-                             NSStringFromCGPoint(main_fill.tex_pts[1]),
-                             NSStringFromCGPoint(main_fill.tex_pts[2]),
-                             NSStringFromCGPoint(main_fill.tex_pts[3]));
-    */
-    for (int i = 0; i < 4; i++) {
-        main_fill.tex_pts[i] = ccp(( main_fill.tri_pts[i].x+self.startX)/main_fill.texture.pixelsWide, 
-                                   ( main_fill.tri_pts[i].y+self.startY)/main_fill.texture.pixelsHigh);
-    }
+    [self main_fill_tex_map];
     
     
     [self init_LR_line_with_v3t1:v3t1 v3t2:v3t2];
     
     [v3t2 dealloc];
     [v3t1 dealloc];
+}
+
+-(void)main_fill_tex_map {
+    for (int i = 0; i < 4; i++) {
+        main_fill.tex_pts[i] = ccp(( main_fill.tri_pts[i].x+self.startX)/main_fill.texture.pixelsWide,
+                                   ( main_fill.tri_pts[i].y+self.startY)/main_fill.texture.pixelsHigh);
+    }
 }
 
 -(void) init_LR_line_with_v3t1:(Vec3D*)v3t1 v3t2:(Vec3D*)v3t2 {
@@ -219,7 +217,10 @@
     float offset = OFFSET;
     float d_o_x = offset * v3t1.x;
     float d_o_y = offset * v3t1.y;
-    
+    /**
+     10
+     32
+     **/
     tri_pts[2] = ccp(self.endX-self.startX + d_o_x              ,self.endY-self.startY + d_o_y);
     tri_pts[3] = ccp(d_o_x                            , d_o_y);
     tri_pts[0] = ccp(self.endX-self.startX+v3t1.x*hei  + d_o_x  ,self.endY-self.startY+v3t1.y*hei + d_o_y);
@@ -445,11 +446,20 @@
     [v3t2 dealloc];
     [v3t1 dealloc];
 
-    for (int i = 0; i < 4; i++) {
-        corner_fill.tex_pts[i] = ccp(( corner_fill.tri_pts[i].x+self.startX)/ corner_fill.texture.pixelsWide, 
-                                    ( corner_fill.tri_pts[i].y+self.startY)/   corner_fill.texture.pixelsHigh);
-    }
+    [self corner_fill_tex_map];
     //[Common tex_map_to_tri_loc:&corner_fill len:3];
+}
+
+-(void)corner_fill_tex_map {
+    for (int i = 0; i < 4; i++) {
+        corner_fill.tex_pts[i] = ccp(( corner_fill.tri_pts[i].x+self.startX)/ corner_fill.texture.pixelsWide,
+                                     ( corner_fill.tri_pts[i].y+self.startY)/   corner_fill.texture.pixelsHigh);
+    }
+}
+
+
+-(gl_render_obj)get_main_fill {
+    return main_fill;
 }
 
 @end

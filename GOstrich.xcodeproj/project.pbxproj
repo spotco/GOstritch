@@ -167,6 +167,11 @@
 		7EB769AA167F2B39003AFCF5 /* dog6ss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EB769A8167F2B39003AFCF5 /* dog6ss.plist */; };
 		7EB769AB167F2B39003AFCF5 /* dog6ss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EB769A9167F2B39003AFCF5 /* dog6ss.png */; };
 		7EB769AE167F306A003AFCF5 /* FileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB769AD167F306A003AFCF5 /* FileCache.m */; };
+		7EB81032169D35D30096BBC0 /* lab_ground_detail_under.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EB81031169D35D30096BBC0 /* lab_ground_detail_under.png */; };
+		7EB81037169D42860096BBC0 /* electric_body.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EB81035169D42860096BBC0 /* electric_body.png */; };
+		7EB81038169D42860096BBC0 /* electric_post.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EB81036169D42860096BBC0 /* electric_post.png */; };
+		7EB8103B169D42FA0096BBC0 /* ElectricWall.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EB81039169D42FA0096BBC0 /* ElectricWall.h */; };
+		7EB8103C169D42FA0096BBC0 /* ElectricWall.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8103A169D42FA0096BBC0 /* ElectricWall.m */; };
 		7EC23017169409EF00C68AC9 /* lab_alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC2300F169409EF00C68AC9 /* lab_alarm.png */; };
 		7EC23018169409EF00C68AC9 /* lab_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC23010169409EF00C68AC9 /* lab_bg.png */; };
 		7EC23019169409EF00C68AC9 /* lab_ground_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC23011169409EF00C68AC9 /* lab_ground_1.png */; };
@@ -694,6 +699,11 @@
 		7EB769A9167F2B39003AFCF5 /* dog6ss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dog6ss.png; sourceTree = "<group>"; };
 		7EB769AC167F306A003AFCF5 /* FileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCache.h; sourceTree = "<group>"; };
 		7EB769AD167F306A003AFCF5 /* FileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCache.m; sourceTree = "<group>"; };
+		7EB81031169D35D30096BBC0 /* lab_ground_detail_under.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lab_ground_detail_under.png; sourceTree = "<group>"; };
+		7EB81035169D42860096BBC0 /* electric_body.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = electric_body.png; sourceTree = "<group>"; };
+		7EB81036169D42860096BBC0 /* electric_post.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = electric_post.png; sourceTree = "<group>"; };
+		7EB81039169D42FA0096BBC0 /* ElectricWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElectricWall.h; sourceTree = "<group>"; };
+		7EB8103A169D42FA0096BBC0 /* ElectricWall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElectricWall.m; sourceTree = "<group>"; };
 		7EC2300F169409EF00C68AC9 /* lab_alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lab_alarm.png; sourceTree = "<group>"; };
 		7EC23010169409EF00C68AC9 /* lab_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lab_bg.png; sourceTree = "<group>"; };
 		7EC23011169409EF00C68AC9 /* lab_ground_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lab_ground_1.png; sourceTree = "<group>"; };
@@ -1231,13 +1241,13 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7EE2B78815B7E1D100941C3B /* icon */,
 				7EE3488D1684339F00A35C21 /* Carton_Six.ttf */,
 				7EDB2F801681987A001336F0 /* menu_resc */,
 				7E3B978515D7ADBB001859CB /* levels */,
 				7E28310515CF4F47002EB07B /* particle */,
 				7E961F0915B908670096F2C8 /* ingame_ui */,
 				7ED863C515B806C3005FBDBB /* object */,
-				7EE2B78815B7E1D100941C3B /* icon */,
 				7E89F2CC159AEC4A00A32F2B /* char */,
 				7E89F252159ADF2C00A32F2B /* bg */,
 			);
@@ -1535,6 +1545,8 @@
 				7E933FF6160AE1FA007E494A /* SpikeVine.m */,
 				7EDA83CD1612DDAE0083E9CE /* SwingVine.h */,
 				7EDA83CE1612DDAE0083E9CE /* SwingVine.m */,
+				7EB81039169D42FA0096BBC0 /* ElectricWall.h */,
+				7EB8103A169D42FA0096BBC0 /* ElectricWall.m */,
 			);
 			name = envr_obj;
 			sourceTree = "<group>";
@@ -1674,10 +1686,21 @@
 			path = char6;
 			sourceTree = "<group>";
 		};
+		7EB81034169D42860096BBC0 /* electric */ = {
+			isa = PBXGroup;
+			children = (
+				7EB81035169D42860096BBC0 /* electric_body.png */,
+				7EB81036169D42860096BBC0 /* electric_post.png */,
+			);
+			name = electric;
+			path = obstacle/electric;
+			sourceTree = "<group>";
+		};
 		7EC2300E169409EF00C68AC9 /* BG_lab */ = {
 			isa = PBXGroup;
 			children = (
 				7ED9515A16969729005D8792 /* lab_island_corner.png */,
+				7EB81031169D35D30096BBC0 /* lab_ground_detail_under.png */,
 				7EC2300F169409EF00C68AC9 /* lab_alarm.png */,
 				7EC23010169409EF00C68AC9 /* lab_bg.png */,
 				7EC23011169409EF00C68AC9 /* lab_ground_1.png */,
@@ -1704,6 +1727,7 @@
 		7ED863C515B806C3005FBDBB /* object */ = {
 			isa = PBXGroup;
 			children = (
+				7EB81034169D42860096BBC0 /* electric */,
 				7E60D101168ABE3D00E84683 /* enemy */,
 				7EF1245815CA511700B91A91 /* powerup */,
 				7EF1244F15CA50F900B91A91 /* obstacle */,
@@ -2376,6 +2400,7 @@
 				7EE740AD169801D500239CDB /* CopterRobot.h in Headers */,
 				7E04262E16990C8400CD9CCD /* ExplosionParticle.h in Headers */,
 				7EAAA978169AC12700A3DA3B /* DebugMenuPage.h in Headers */,
+				7EB8103B169D42FA0096BBC0 /* ElectricWall.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2600,6 +2625,9 @@
 				7E3552D71695A6BE0099FADA /* robotstest.map in Resources */,
 				7ED9515B16969729005D8792 /* lab_island_corner.png in Resources */,
 				7ED951691696D08B005D8792 /* boss1_area.map in Resources */,
+				7EB81032169D35D30096BBC0 /* lab_ground_detail_under.png in Resources */,
+				7EB81037169D42860096BBC0 /* electric_body.png in Resources */,
+				7EB81038169D42860096BBC0 /* electric_post.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2697,6 +2725,7 @@
 				7EE740AE169801D500239CDB /* CopterRobot.m in Sources */,
 				7E04262F16990C8400CD9CCD /* ExplosionParticle.m in Sources */,
 				7EAAA979169AC12700A3DA3B /* DebugMenuPage.m in Sources */,
+				7EB8103C169D42FA0096BBC0 /* ElectricWall.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

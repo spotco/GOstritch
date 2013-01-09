@@ -43,6 +43,10 @@
 -(CCTexture2D*)get_corner_fill_color;
 -(float)get_corner_top_fill_scale;
 
+-(void)main_fill_tex_map;
+-(void)corner_fill_tex_map;
+
+-(gl_render_obj)get_main_fill;
 
 
 

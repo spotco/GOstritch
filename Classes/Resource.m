@@ -32,6 +32,7 @@ static NSMutableDictionary* textures = nil;
                         @"lab_pipe_1.png",TEX_LAB_PIPE_1,
                         @"lab_pipe_2.png",TEX_LAB_PIPE_2,
                         @"lab_island_corner.png",TEX_LAB_GROUND_CORNER,
+                        @"lab_ground_detail_under.png",TEX_LAB_GROUND_TOP_UNDER,
 
                         @"BG_cave_top_fill.png", TEX_CAVE_TOP_TEX,
                         @"BG_cave_top_edge.png", TEX_CAVE_CORNER_TEX,
@@ -59,6 +60,9 @@ static NSMutableDictionary* textures = nil;
                      
                         @"swingvine_base.png", TEX_SWINGVINE_BASE,
                         @"swingvine_tex_loose.png", TEX_SWINGVINE_TEX,
+                     
+                        @"electric_body.png", TEX_ELECTRIC_BODY,
+                        @"electric_post.png", TEX_ELECTRIC_BASE, 
                      
                         @"robot_default.png",TEX_ENEMY_ROBOT,
                         @"launcher_default.png",TEX_ENEMY_LAUNCHER,

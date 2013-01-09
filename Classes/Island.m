@@ -32,8 +32,13 @@ static float NO_VAL = -99999.0;
     for (Island *i in islands) {
         [i link_finish];
     }
+    for (Island *i in islands) {
+        [i post_link_finish];
+    }
     return ct;
 }
+
+-(void)post_link_finish {}
 
 -(int)get_render_ord {
     if (can_land == NO) {
@@ -51,8 +56,7 @@ static float NO_VAL = -99999.0;
 	}
 }
 
--(void)link_finish {
-}
+-(void)link_finish {}
 
 -(void)check_should_render:(GameEngineLayer *)g {
     

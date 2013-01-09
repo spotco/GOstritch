@@ -27,8 +27,9 @@
     //[Common tex_map_to_tri_loc:&tex len:4];
     for (int i = 0; i < 4; i++) {
         tex.tex_pts[i] = ccp((tex.tri_pts[i].x+position_.x)/tex.texture.pixelsWide, 
-                             (tex.tri_pts[i].y+position_.y)/tex.texture.pixelsHigh);
+                             -(tex.tri_pts[i].y+position_.y)/tex.texture.pixelsHigh);
     }
+    
 }
 
 -(CCTexture2D*)get_tex {

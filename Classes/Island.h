@@ -19,6 +19,8 @@
 -(void)check_should_render:(GameEngineLayer*)g;
 
 -(void)link_finish;
+-(void)post_link_finish;
+
 -(Vec3D*)get_normal_vecC;
 -(line_seg)get_line_seg;
 -(float)get_t_given_position:(CGPoint)position;
