@@ -26,7 +26,7 @@ static int DEBUG_MODE = 0;
 +(NSArray*)random_boss1test_levels {
     static NSArray *boss1test_levels;
     if (!boss1test_levels) {
-        boss1test_levels = [[NSArray alloc] initWithObjects:@"bossloadertest",@"autolevel_1_2", nil];
+        boss1test_levels = [[NSArray alloc] initWithObjects:@"bossloadertest", nil];
     }
     return boss1test_levels;
 }

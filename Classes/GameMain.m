@@ -12,21 +12,18 @@
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
 #define STARTING_LIVES 5
-#define TESTLEVEL @"shittytest"
+#define TESTLEVEL @"labentrancetest"
 
 /**
  TODO -- 
- -add electric,labentrance to leveleditor
- 
- -top: make lab area walk-in, walk out with fading in/out bglayer
+ -add electric,labentrance,labexit to leveleditor
  
  -link_islands removes any previously placed link-edges
  -hit rocket with roll displaces instead of explode
  -ui for boss (events are linked in)
- -more moves for boss + fix propeller anim
- -enemies smaller, labwall fix
+ -more moves for boss
  -shadows, bobbing on rocket
- 
+ -add in that sun
  -player run in animation
  -UI alert area for rockets/danger
  -scrap particle
@@ -43,9 +40,10 @@
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
     
-    [GameMain start_testlevel];
+    //[GameMain start_testlevel];
     //[GameMain start_game_autolevel];
     //[GameMain start_menu];
+    [GameMain start_game_bosstestlevel];
     
 }
 

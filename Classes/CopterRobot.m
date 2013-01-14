@@ -462,7 +462,7 @@ static const int DEFAULT_HP = 4;
 
 -(void)init_anims {
     body = [CCSprite spriteWithTexture:[Resource get_aa_tex:TEX_ENEMY_COPTER] 
-                                  rect:[FileCache get_cgrect_from_plist:TEX_ENEMY_COPTER idname:@"body"]];
+                                  rect:[FileCache get_cgrect_from_plist:TEX_ENEMY_COPTER idname:@"body_broken"]];
     [self addChild:body];
     
     aux_prop = [CCSprite node];
@@ -486,7 +486,7 @@ static const int DEFAULT_HP = 4;
     [self addChild:aux_nut];
     
     arm = [CCSprite spriteWithTexture:[Resource get_tex:TEX_ENEMY_COPTER] 
-                                 rect:[FileCache get_cgrect_from_plist:TEX_ENEMY_COPTER idname:@"arm"]];
+                                 rect:[FileCache get_cgrect_from_plist:TEX_ENEMY_COPTER idname:@"arm_broken"]];
     [arm setPosition:ARM_DEFAULT_POSITION];
     [self addChild:arm];
     

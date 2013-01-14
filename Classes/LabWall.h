@@ -2,6 +2,7 @@
 
 @interface LabWall : CaveWall
 
-+(LabWall*)init_x:(float)x y:(float)y width:(float)width height:(float)height;
+//deprecated, use fadeoutlabwall instead
+//+(LabWall*)init_x:(float)x y:(float)y width:(float)width height:(float)height;
 
 @end

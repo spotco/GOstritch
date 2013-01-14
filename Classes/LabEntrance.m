@@ -1,15 +1,16 @@
 #import "LabEntrance.h"
 #import "GameEngineLayer.h"
 
-static const float ENTR_HEI = 2000;
+static const float ENTR_HEI = 3000;
 
 @implementation LabEntranceFG
 
-+(LabEntranceFG*)cons_pt:(CGPoint)pt {
-    return [[LabEntranceFG node] init_pt:pt];
++(LabEntranceFG*)cons_pt:(CGPoint)pt base:(LabEntrance*)base {
+    return [[LabEntranceFG node] init_pt:pt base:base];
 }
--(id)init_pt:(CGPoint)pt {
+-(id)init_pt:(CGPoint)pt base:(LabEntrance*)tbase {
     [self setPosition:pt];
+    base = tbase;
     front_body = [Common init_render_obj:[Resource get_tex:TEX_LAB_ENTRANCE_FORE] npts:4];
     //23
     //01
@@ -29,7 +30,7 @@ static const float ENTR_HEI = 2000;
     return self;
 }
 -(void)check_should_render:(GameEngineLayer *)g {
-    do_render = YES;
+    do_render = [base get_do_render];
 }
 -(int)get_render_ord {
     return [GameRenderImplementation GET_RENDER_ABOVE_FG_ORD];
@@ -102,8 +103,12 @@ static const float ENTR_HEI = 2000;
     if (afg_area == NULL) [self add_afg_area:g];
     if (!activated && [Common hitrect_touch:[player get_hit_rect] b:[self get_hit_rect]]) {
         activated = YES;
-        [GEventDispatcher push_event:[GEvent init_type:GEventType_ENTER_LABAREA]];
+        [self entrance_event];
     }
+}
+
+-(void)entrance_event {
+    [GEventDispatcher push_event:[GEvent init_type:GEventType_ENTER_LABAREA]];
 }
 
 -(void)reset {
@@ -120,7 +125,7 @@ static const float ENTR_HEI = 2000;
 }
 
 -(void)add_afg_area:(GameEngineLayer*)g {
-    afg_area = [LabEntranceFG cons_pt:ccp(position_.x+50,position_.y-1000)];
+    afg_area = [LabEntranceFG cons_pt:ccp(position_.x+50,position_.y-1000) base:self];
     [g add_gameobject:afg_area];
 }
 

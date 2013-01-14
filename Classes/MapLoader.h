@@ -31,6 +31,7 @@
 #import "CopterRobotLoader.h"
 #import "ElectricWall.h"
 #import "LabEntrance.h"
+#import "LabExit.h"
 
 @interface MapLoader : NSObject
 

@@ -8,9 +8,15 @@
 
 
 @interface BGLayer : CCLayer <GEventListener> {
-	NSMutableArray *bg_elements;
+	NSMutableArray *normal_bg_elements;
+    NSMutableArray *lab_bg_elements;
+    
+    NSMutableArray *all_objsets;
+    
+    int fadectr;
+    NSMutableArray *visible_set;
+    
     GameEngineLayer* game_engine_layer;
-    CCSprite *bgsky,*bghills,*bgclouds,*bgtrees,*bgclosehills;
     
     float lastx,lasty, curx,cury;
 }

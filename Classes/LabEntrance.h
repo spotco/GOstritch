@@ -8,12 +8,15 @@
 }
 
 +(LabEntrance*)cons_pt:(CGPoint)pt;
-
+-(id)init_pt:(CGPoint)pt;
+-(BOOL)get_do_render;
+-(void)entrance_event;
 @end
 
 @interface LabEntranceFG : GameObject {
     gl_render_obj front_body;
+    LabEntrance* base;
     
 }
-+(LabEntranceFG*)cons_pt:(CGPoint)pt;
++(LabEntranceFG*)cons_pt:(CGPoint)pt base:(LabEntrance*)base;
 @end

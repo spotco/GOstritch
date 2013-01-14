@@ -20,6 +20,7 @@
 	BGLayer *bglayer = [BGLayer init_with_gamelayer:glayer];
     UILayer* uilayer = [UILayer init_with_gamelayer:glayer];
     
+    [scene addChild:[CCLayerColor layerWithColor:ccc4(255, 255, 255, 255)]];
     [scene addChild:bglayer];
     [scene addChild:glayer];
     [scene addChild:uilayer];
@@ -29,7 +30,7 @@
 }
 +(CCScene*) scene_with_autolevel_lives:(int)lives {
     CCScene* scene = [GameEngineLayer scene_with:@"connector" lives:lives];
-    GameEngineLayer* glayer = [scene.children objectAtIndex:1];
+    GameEngineLayer* glayer = [scene.children objectAtIndex:2];
     AutoLevel* nobj = [AutoLevel init_with_glayer:glayer];
     [glayer.game_objects addObject:nobj];
     [glayer addChild:nobj];
@@ -220,6 +221,7 @@
         if (lives != GAMEENGINE_INF_LIVES && lives < 1) {
             [self game_over];
         } else {
+            [GEventDispatcher push_event:[GEvent init_type:GEventType_GAME_RESET]];
             [self player_reset];
             [player add_effect:[FlashEffect init_from:[player get_current_params] time:35]];
         }

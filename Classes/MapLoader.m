@@ -280,6 +280,11 @@ static NSMutableDictionary* cached_json;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             [map.game_objects addObject:[LabEntrance cons_pt:ccp(x,y)]];
             
+        } else if ([type isEqualToString:@"labexit"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            [map.game_objects addObject:[LabExit cons_pt:ccp(x,y)]];
+        
         } else {
             NSLog(@"item read error");
             continue;

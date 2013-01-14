@@ -272,6 +272,9 @@
 		7EE34890168435EC00A35C21 /* Carton_Six.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EE3488D1684339F00A35C21 /* Carton_Six.ttf */; };
 		7EE348931684651400A35C21 /* DataStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE348911684651300A35C21 /* DataStore.h */; };
 		7EE348941684651400A35C21 /* DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE348921684651300A35C21 /* DataStore.m */; };
+		7EE537F916A3A438005CF97B /* LabExit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE537F716A3A438005CF97B /* LabExit.h */; };
+		7EE537FA16A3A438005CF97B /* LabExit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE537F816A3A438005CF97B /* LabExit.m */; };
+		7EE537FD16A3B3FC005CF97B /* labentrancetest.map in Resources */ = {isa = PBXBuildFile; fileRef = 7EE537FC16A3B3FC005CF97B /* labentrancetest.map */; };
 		7EE740AD169801D500239CDB /* CopterRobot.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE740AB169801D500239CDB /* CopterRobot.h */; };
 		7EE740AE169801D500239CDB /* CopterRobot.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EE740AC169801D500239CDB /* CopterRobot.m */; };
 		7EF1243715CA4FC500B91A91 /* fish_ss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EF1243515CA4FC500B91A91 /* fish_ss.plist */; };
@@ -827,6 +830,9 @@
 		7EE3488D1684339F00A35C21 /* Carton_Six.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Carton_Six.ttf; sourceTree = "<group>"; };
 		7EE348911684651300A35C21 /* DataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataStore.h; sourceTree = "<group>"; };
 		7EE348921684651300A35C21 /* DataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataStore.m; sourceTree = "<group>"; };
+		7EE537F716A3A438005CF97B /* LabExit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabExit.h; sourceTree = "<group>"; };
+		7EE537F816A3A438005CF97B /* LabExit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabExit.m; sourceTree = "<group>"; };
+		7EE537FC16A3B3FC005CF97B /* labentrancetest.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = labentrancetest.map; sourceTree = "<group>"; };
 		7EE740AB169801D500239CDB /* CopterRobot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CopterRobot.h; sourceTree = "<group>"; };
 		7EE740AC169801D500239CDB /* CopterRobot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CopterRobot.m; sourceTree = "<group>"; };
 		7EF1243515CA4FC500B91A91 /* fish_ss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = fish_ss.plist; sourceTree = "<group>"; };
@@ -1368,6 +1374,7 @@
 				7EB7698D167EF0A6003AFCF5 /* shittytest.map */,
 				7EE0AF0E168F011D0090B546 /* bossloadertest.map */,
 				7E3552D61695A6BE0099FADA /* robotstest.map */,
+				7EE537FC16A3B3FC005CF97B /* labentrancetest.map */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -1757,6 +1764,8 @@
 				7ED5C5BD16A2AF7B0099960B /* LabEntrance.m */,
 				7ED5C5C916A2BA0F0099960B /* FadeOutLabWall.h */,
 				7ED5C5CA16A2BA0F0099960B /* FadeOutLabWall.m */,
+				7EE537F716A3A438005CF97B /* LabExit.h */,
+				7EE537F816A3A438005CF97B /* LabExit.m */,
 			);
 			name = lab;
 			sourceTree = "<group>";
@@ -2440,6 +2449,7 @@
 				7EB8103B169D42FA0096BBC0 /* ElectricWall.h in Headers */,
 				7ED5C5BE16A2AF7B0099960B /* LabEntrance.h in Headers */,
 				7ED5C5CB16A2BA0F0099960B /* FadeOutLabWall.h in Headers */,
+				7EE537F916A3A438005CF97B /* LabExit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2670,6 +2680,7 @@
 				7ED5C5CE16A2C52F0099960B /* lab_wall.png in Resources */,
 				7ED5C5D016A2C9730099960B /* ceil_labentrance.png in Resources */,
 				7ED5C5D216A2C9810099960B /* ceil_repeat_labentrance.png in Resources */,
+				7EE537FD16A3B3FC005CF97B /* labentrancetest.map in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2770,6 +2781,7 @@
 				7EB8103C169D42FA0096BBC0 /* ElectricWall.m in Sources */,
 				7ED5C5BF16A2AF7B0099960B /* LabEntrance.m in Sources */,
 				7ED5C5CC16A2BA0F0099960B /* FadeOutLabWall.m in Sources */,
+				7EE537FA16A3A438005CF97B /* LabExit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

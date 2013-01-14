@@ -38,5 +38,12 @@
          symbolName = "malloc_error_break"
          moduleName = "">
       </SymbolicBreakpoint>
+      <SymbolicBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         symbolName = "-[NSObject doesNotRecognizeSelector:]"
+         moduleName = "">
+      </SymbolicBreakpoint>
    </SymbolicBreakpoints>
 </Bucket>
