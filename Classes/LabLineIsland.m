@@ -100,9 +100,9 @@
 }
 -(CCTexture2D*)get_tex_fill {
     if (fill_hei <= 150) {
-        return [Resource get_tex:TEX_LAB_GROUND_2];
+        return [Resource get_tex:TEX_LAB_GROUND_1];
     } else {
-        return [Resource get_tex:TEX_LAB_GROUND_2];
+        return [Resource get_tex:TEX_LAB_GROUND_1];
     }
     
 }

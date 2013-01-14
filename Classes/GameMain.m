@@ -12,10 +12,14 @@
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
 #define STARTING_LIVES 5
-#define TESTLEVEL @"robotstest"
+#define TESTLEVEL @"shittytest"
 
 /**
  TODO -- 
+ -add electric,labentrance to leveleditor
+ 
+ -top: make lab area walk-in, walk out with fading in/out bglayer
+ 
  -link_islands removes any previously placed link-edges
  -hit rocket with roll displaces instead of explode
  -ui for boss (events are linked in)
@@ -25,7 +29,7 @@
  
  -player run in animation
  -UI alert area for rockets/danger
- -ask for: scrap particle
+ -scrap particle
  -different dogs differnt special powers
     ideas: higher jump, more float power, longer dash, faster, auto item magnet
  **/

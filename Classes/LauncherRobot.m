@@ -49,7 +49,6 @@
     [body setScaleY:DEFAULT_SCALE];
     starting_rot = tara;
     [self setRotation:tara];
-    [self setScale:0.75];
     
     [self addChild:body];
     starting_pos = ccp(x,y);

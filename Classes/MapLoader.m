@@ -261,7 +261,7 @@ static NSMutableDictionary* cached_json;
             float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
             float width = ((NSString*)[j_object  objectForKey:@"width"]).floatValue;
             float hei = ((NSString*)[j_object  objectForKey:@"height"]).floatValue;
-            [map.game_objects addObject:[LabWall init_x:x y:y width:width height:hei]];
+            [map.game_objects addObject:[FadeOutLabWall init_x:x y:y width:width height:hei]];
             
         } else if ([type isEqualToString:@"copter"]) {
             float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
@@ -274,7 +274,12 @@ static NSMutableDictionary* cached_json;
             float x2 = ((NSString*)[j_object  objectForKey:@"x2"]).floatValue;
             float y2 = ((NSString*)[j_object  objectForKey:@"y2"]).floatValue;
             [map.game_objects addObject:[ElectricWall init_x:x y:y x2:x2 y2:y2]];
-        
+            
+        } else if ([type isEqualToString:@"labentrance"]) {
+            float x = ((NSString*)[j_object  objectForKey:@"x"]).floatValue;
+            float y = ((NSString*)[j_object  objectForKey:@"y"]).floatValue;
+            [map.game_objects addObject:[LabEntrance cons_pt:ccp(x,y)]];
+            
         } else {
             NSLog(@"item read error");
             continue;

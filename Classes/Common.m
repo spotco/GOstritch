@@ -225,10 +225,11 @@ bool fm_a_gt_b(double a,double b,double delta) {
     return n;
 }
 
-+(void)draw_renderobj:(gl_render_obj)obj n_vtx:(int)n_vtx {
++(void)draw_renderobj:(gl_render_obj)obj n_vtx:(int)n_vtx {    
     glBindTexture(GL_TEXTURE_2D, obj.texture.name);
 	glVertexPointer(2, GL_FLOAT, 0, obj.tri_pts); 
 	glTexCoordPointer(2, GL_FLOAT, 0, obj.tex_pts);
+    
     
     if (n_vtx == 4) {
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);

@@ -27,9 +27,10 @@
 #import "SwingVine.h"
 #import "MinionRobot.h"
 #import "LauncherRobot.h"
-#import "LabWall.h"
+#import "FadeOutLabWall.h"
 #import "CopterRobotLoader.h"
 #import "ElectricWall.h"
+#import "LabEntrance.h"
 
 @interface MapLoader : NSObject
 
