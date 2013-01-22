@@ -71,6 +71,8 @@ static NSMutableDictionary* textures = nil;
                         @"launcher_default.png",TEX_ENEMY_LAUNCHER,
                         @"rocket.png",TEX_ENEMY_ROCKET,
                         @"copter_default.png",TEX_ENEMY_COPTER,
+                        @"robot_particle.png",TEX_ROBOT_PARTICLE,
+                        @"explosion_default.png",TEX_EXPLOSION,
                                       
                         @"BG1_detail_1.png", TEX_GROUND_DETAIL_1,
                         @"BG1_detail_2.png", TEX_GROUND_DETAIL_2,
@@ -110,7 +112,7 @@ static NSMutableDictionary* textures = nil;
                         @"ingame_ui_bone_icon.png",TEX_UI_BONE_ICON,
                         @"ingame_ui_lives_icon.png",TEX_UI_LIVES_ICON,
                         @"ingame_ui_time_icon.png",TEX_UI_TIME_ICON,
-                     
+                        @"enemy_approach_ui.png",TEX_UI_ENEMY_ALERT,
                      
                         @"pauseicon.png", TEX_UI_PAUSEICON,
                         @"pause_menu_back.png", TEX_UI_PAUSEMENU_BACK,

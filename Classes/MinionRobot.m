@@ -20,7 +20,7 @@
     self = [super init];
     self.scaleX = -DEFAULT_SCALE;
     self.movedir = -1;
-    [self setAnchorPoint:ccp(0.5,0)];
+
     [self setIMGWID:[FileCache get_cgrect_from_plist:TEX_ENEMY_ROBOT idname:@"robot"].size.width];
     [self setIMGHEI:[FileCache get_cgrect_from_plist:TEX_ENEMY_ROBOT idname:@"robot"].size.height];
     return self;
@@ -37,6 +37,11 @@
 }
 
 -(void)update:(Player *)player g:(GameEngineLayer *)g {
+    if (!has_shadow) {
+       [g add_gameobject:[ObjectShadow cons_tar:self]];
+        has_shadow = YES;
+    }
+    
     self.vx = 0;
     [super update:player g:g];
     

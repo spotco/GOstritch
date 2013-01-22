@@ -16,7 +16,8 @@
 }
 
 -(id)cons_at:(CGPoint)pt vel:(CGPoint)vel {
-    [self setPosition:pt];
+    //[self setPosition:pt];
+    actual_pos = pt;
     v = vel;
     active = YES;
     remlimit = -1;
@@ -26,7 +27,9 @@
 }
 
 -(void)update_position {
-    [self setPosition:ccp(position_.x+v.x,position_.y+v.y)];
+    actual_pos.x += v.x;
+    actual_pos.y += v.y;
+    [self setPosition:ccp(actual_pos.x+vibration.x,actual_pos.y+vibration.y)];
 }
 
 -(id)set_remlimit:(int)t {
@@ -34,7 +37,17 @@
     return self;
 }
 
+-(void)update_vibration {
+    vibration_ct+=0.2;
+    vibration.y = 4*sinf(vibration_ct);
+}
+
 -(void)update:(Player *)player g:(GameEngineLayer *)g {
+    if(shadow == NULL) {
+        shadow = [ObjectShadow cons_tar:self];
+        [g add_gameobject:shadow];
+    }
+    [self update_vibration];
     [super update:player g:g];
     [self update_position];
     
@@ -48,22 +61,39 @@
     }
     
     if (kill || ![Common hitrect_touch:[self get_hit_rect] b:[g get_world_bounds]]) {
+        [g remove_gameobject:shadow];
         [g remove_gameobject:self];
         return;
         
-    } else if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
+    } else if (broken_ct > 0) {
+        [self setOpacity:150];
+        [self setRotation:self.rotation+30];
+        broken_ct--;
+        if (broken_ct == 0) {
+            [self remove_from:g];
+            return;
+        }
         
+    } else if (broken_ct == 0 && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         if (player.dashing) {
+            broken_ct = 35;
+            v = ccp(player.vx*1.2,player.vy*1.2);
             
         } else if (!player.dead) {
             [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
             [DazedParticle init_effect:g tar:player time:40];
+            [self remove_from:g];
+            return;
         }
-        [LauncherRobot explosion:g at:position_];
-        [g remove_gameobject:self];
-        return;
+        
         
     }
+}
+
+-(void)remove_from:(GameEngineLayer*)g {
+    [LauncherRobot explosion:g at:position_];
+    [g remove_gameobject:shadow];
+    [g remove_gameobject:self];
 }
 
 -(float)get_tar_angle_deg_self:(CGPoint)s tar:(CGPoint)t {
@@ -108,9 +138,17 @@
     [super update:player g:g];
 }
 
+-(void)update_vibration {
+    vibration_ct+=0.1;
+    vibration.y = sinf(vibration_ct);
+}
+
 -(void)update_position {
     //only for horizontal relative, todo: make general
-    [self setPosition:ccp(rel_pos.x+player_pos.x,position_.y+v.y)];
+    //[self setPosition:ccp(rel_pos.x+player_pos.x,position_.y+v.y)];
+    actual_pos.x = rel_pos.x+player_pos.x;
+    actual_pos.y = position_.y+v.y;
+    [self setPosition:ccp(actual_pos.x+vibration.x,actual_pos.y+vibration.y)];
 }
 
 @end

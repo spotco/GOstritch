@@ -171,6 +171,10 @@
 		7EB81038169D42860096BBC0 /* electric_post.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EB81036169D42860096BBC0 /* electric_post.png */; };
 		7EB8103B169D42FA0096BBC0 /* ElectricWall.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EB81039169D42FA0096BBC0 /* ElectricWall.h */; };
 		7EB8103C169D42FA0096BBC0 /* ElectricWall.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB8103A169D42FA0096BBC0 /* ElectricWall.m */; };
+		7EBD08FC16ADF65800ED148B /* robot_particle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBD08FB16ADF65800ED148B /* robot_particle.png */; };
+		7EBD08FF16ADF67C00ED148B /* enemy_approach_ui.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBD08FE16ADF67C00ED148B /* enemy_approach_ui.png */; };
+		7EBD090216ADFAAA00ED148B /* explosion_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EBD090016ADFAAA00ED148B /* explosion_default.plist */; };
+		7EBD090316ADFAAA00ED148B /* explosion_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBD090116ADFAAA00ED148B /* explosion_default.png */; };
 		7EC23017169409EF00C68AC9 /* lab_alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC2300F169409EF00C68AC9 /* lab_alarm.png */; };
 		7EC23018169409EF00C68AC9 /* lab_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC23010169409EF00C68AC9 /* lab_bg.png */; };
 		7EC2301A169409EF00C68AC9 /* lab_ground_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EC23012169409EF00C68AC9 /* lab_ground_1.png */; };
@@ -713,6 +717,10 @@
 		7EB81036169D42860096BBC0 /* electric_post.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = electric_post.png; sourceTree = "<group>"; };
 		7EB81039169D42FA0096BBC0 /* ElectricWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElectricWall.h; sourceTree = "<group>"; };
 		7EB8103A169D42FA0096BBC0 /* ElectricWall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElectricWall.m; sourceTree = "<group>"; };
+		7EBD08FB16ADF65800ED148B /* robot_particle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = robot_particle.png; sourceTree = "<group>"; };
+		7EBD08FE16ADF67C00ED148B /* enemy_approach_ui.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy_approach_ui.png; sourceTree = "<group>"; };
+		7EBD090016ADFAAA00ED148B /* explosion_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = explosion_default.plist; sourceTree = "<group>"; };
+		7EBD090116ADFAAA00ED148B /* explosion_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion_default.png; sourceTree = "<group>"; };
 		7EC2300F169409EF00C68AC9 /* lab_alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lab_alarm.png; sourceTree = "<group>"; };
 		7EC23010169409EF00C68AC9 /* lab_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lab_bg.png; sourceTree = "<group>"; };
 		7EC23012169409EF00C68AC9 /* lab_ground_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lab_ground_1.png; sourceTree = "<group>"; };
@@ -1266,7 +1274,7 @@
 				7EDB2F801681987A001336F0 /* menu_resc */,
 				7E3B978515D7ADBB001859CB /* levels */,
 				7E28310515CF4F47002EB07B /* particle */,
-				7E961F0915B908670096F2C8 /* ingame_ui */,
+				7E961F0915B908670096F2C8 /* ui */,
 				7ED863C515B806C3005FBDBB /* object */,
 				7E89F2CC159AEC4A00A32F2B /* char */,
 				7E89F252159ADF2C00A32F2B /* bg */,
@@ -1402,6 +1410,9 @@
 		7E60D101168ABE3D00E84683 /* enemy */ = {
 			isa = PBXGroup;
 			children = (
+				7EBD090016ADFAAA00ED148B /* explosion_default.plist */,
+				7EBD090116ADFAAA00ED148B /* explosion_default.png */,
+				7EBD08FB16ADF65800ED148B /* robot_particle.png */,
 				7EC2302216940AB100C68AC9 /* copter_default.plist */,
 				7EC2302316940AB100C68AC9 /* copter_default.png */,
 				7E60D102168ABE3D00E84683 /* launcher_default.plist */,
@@ -1461,6 +1472,7 @@
 		7E878C2D15C13F8200837E7B /* ingame_ui */ = {
 			isa = PBXGroup;
 			children = (
+				7EBD08FE16ADF67C00ED148B /* enemy_approach_ui.png */,
 				7EE3488616842D6500A35C21 /* ingame_ui_bone_icon.png */,
 				7EE3488716842D6500A35C21 /* ingame_ui_lives_icon.png */,
 				7EE3488816842D6500A35C21 /* ingame_ui_time_icon.png */,
@@ -1642,7 +1654,7 @@
 			name = game_obj;
 			sourceTree = "<group>";
 		};
-		7E961F0915B908670096F2C8 /* ingame_ui */ = {
+		7E961F0915B908670096F2C8 /* ui */ = {
 			isa = PBXGroup;
 			children = (
 				7EDB2FA61681A806001336F0 /* gameover */,
@@ -1650,7 +1662,6 @@
 				7E878C2D15C13F8200837E7B /* ingame_ui */,
 				7E878C3015C13F8200837E7B /* pause_menu_icons */,
 			);
-			name = ingame_ui;
 			path = ui;
 			sourceTree = "<group>";
 		};
@@ -2681,6 +2692,10 @@
 				7ED5C5D016A2C9730099960B /* ceil_labentrance.png in Resources */,
 				7ED5C5D216A2C9810099960B /* ceil_repeat_labentrance.png in Resources */,
 				7EE537FD16A3B3FC005CF97B /* labentrancetest.map in Resources */,
+				7EBD08FC16ADF65800ED148B /* robot_particle.png in Resources */,
+				7EBD08FF16ADF67C00ED148B /* enemy_approach_ui.png in Resources */,
+				7EBD090216ADFAAA00ED148B /* explosion_default.plist in Resources */,
+				7EBD090316ADFAAA00ED148B /* explosion_default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

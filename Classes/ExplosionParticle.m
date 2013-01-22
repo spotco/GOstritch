@@ -4,17 +4,26 @@
 @implementation ExplosionParticle
 
 static const float TIME = 30.0;
-static const float MINSCALE = 1;
-static const float MAXSCALE = 10;
+static const float MINSCALE = 0.5;
+static const float MAXSCALE =6;
+
+-(CCAction*)init_anim:(NSArray*)a speed:(float)speed {
+	CCTexture2D *texture = [Resource get_tex:TEX_EXPLOSION];
+	NSMutableArray *animFrames = [NSMutableArray array];
+    for (NSString* k in a) [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[FileCache get_cgrect_from_plist:TEX_EXPLOSION idname:k]]];
+    return  [CCAnimate actionWithAnimation:[CCAnimation animationWithFrames:animFrames delay:speed] restoreOriginalFrame:NO];
+}
 
 +(ExplosionParticle*)init_x:(float)x y:(float)y {
-    return [[ExplosionParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]] cons_x:x y:y];
+    return [[ExplosionParticle node] cons_x:x y:y];
 }
 
 
 -(id)cons_x:(float)x y:(float)y {
+    CCAction* anim = [self init_anim:[NSArray arrayWithObjects:@"explode_0",@"explode_1",@"explode_2",@"", nil] speed:0.1];
+    [self runAction:anim];
+    
     [self setPosition:ccp(x,y)];
-    [self setColor:ccc3(255, 165, 0)];
     ct = TIME;
     [self setScale:MINSCALE];
     
@@ -41,7 +50,7 @@ static const float MAXSCALE = 10;
 @implementation RelativePositionExplosionParticle
 
 +(RelativePositionExplosionParticle*) init_x:(float)x y:(float)y player:(CGPoint)player{
-    return [[RelativePositionExplosionParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]] cons_x:x y:y player:player];
+    return [[RelativePositionExplosionParticle node] cons_x:x y:y player:player];
 }
 
 -(id)cons_x:(float)x y:(float)y player:(CGPoint)player {

@@ -351,18 +351,18 @@
 
 -(void)link_finish {
     if (self.next != NULL) {
-        if (corner_fill.isalloc == 0) {
+        //if (corner_fill.isalloc == 0) {
             [self init_corner_tex];
             corner_fill = [Common transform_obj:corner_fill by:position_];
-        }
-        if (toppts_fill.isalloc == 0) {
+        //}
+        //if (toppts_fill.isalloc == 0) {
             [self init_corner_top];
             toppts_fill = [Common transform_obj:toppts_fill by:position_];
-        }
-        if (corner_line_fill.isalloc == 0) {
+        //}
+        //if (corner_line_fill.isalloc == 0) {
             [self init_corner_line_fill];
             corner_line_fill = [Common transform_obj:corner_line_fill by:position_];
-        }
+        //}
     }
     
     if (!has_transformed_renderpts) {

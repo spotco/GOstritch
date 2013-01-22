@@ -43,7 +43,7 @@
 -(NSMutableArray*) load_lab_bg {
     NSMutableArray *a = [[NSMutableArray alloc] init];
     if ([GameMain GET_USE_BG]) {
-        [a addObject:[BackgroundObject backgroundFromTex:[Resource get_tex:TEX_LAB_BG] scrollspd_x:0.1 scrollspd_y:0]];
+        [a addObject:[BackgroundObject backgroundFromTex:[Resource get_tex:TEX_LAB_BG] scrollspd_x:0.86 scrollspd_y:0]];
     }
     
     return a;

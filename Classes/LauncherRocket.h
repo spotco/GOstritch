@@ -1,9 +1,14 @@
 #import "GameObject.h"
+#import "DogShadow.h"
 
 @interface LauncherRocket : GameObject {
     CGPoint v;
+    CGPoint vibration,actual_pos;
     BOOL kill;
-    int ct,remlimit;
+    int ct,remlimit,broken_ct;
+    float vibration_ct;
+    
+    ObjectShadow *shadow;
 }
 
 +(LauncherRocket*)cons_at:(CGPoint)pt vel:(CGPoint)vel;

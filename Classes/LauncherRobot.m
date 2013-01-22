@@ -57,6 +57,11 @@
 }
 
 -(void)update:(Player *)player g:(GameEngineLayer *)g {
+    if (!has_shadow) {
+        [g add_gameobject:[ObjectShadow cons_tar:self]];
+        has_shadow = YES;
+    }
+    
     if (busted) {
         if (self.current_island == NULL) {
             [GamePhysicsImplementation player_move:self with_islands:g.islands];

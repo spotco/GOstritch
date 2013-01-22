@@ -11,22 +11,19 @@
 #define DEBUG_UI NO
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
-#define STARTING_LIVES 5
-#define TESTLEVEL @"labentrancetest"
+#define STARTING_LIVES 1
+#define TESTLEVEL @"robotstest"
 
 /**
  TODO -- 
- -add electric,labentrance,labexit to leveleditor
+ -add electric,labentrance,labexit,uienemyalert to leveleditor
  
- -link_islands removes any previously placed link-edges
- -hit rocket with roll displaces instead of explode
- -ui for boss (events are linked in)
- -more moves for boss
- -shadows, bobbing on rocket
+ -ui enemy alert
+ -different death anims for electricity
+ -more moves for boss, and damage show
+ 
  -add in that sun
  -player run in animation
- -UI alert area for rockets/danger
- -scrap particle
  -different dogs differnt special powers
     ideas: higher jump, more float power, longer dash, faster, auto item magnet
  **/
@@ -40,10 +37,10 @@
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
     
-    //[GameMain start_testlevel];
+    [GameMain start_testlevel];
     //[GameMain start_game_autolevel];
     //[GameMain start_menu];
-    [GameMain start_game_bosstestlevel];
+    //[GameMain start_game_bosstestlevel];
     
 }
 

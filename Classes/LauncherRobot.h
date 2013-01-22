@@ -10,6 +10,8 @@
     CGPoint starting_pos;
     BOOL busted;
     Vec3D* dir;
+    
+    BOOL has_shadow;
 }
 
 +(LauncherRobot*)cons_x:(float)x y:(float)y dir:(Vec3D*)dir;

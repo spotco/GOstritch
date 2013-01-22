@@ -74,6 +74,8 @@
 #define TEX_ENEMY_LAUNCHER @"launcher_default"
 #define TEX_ENEMY_ROCKET @"rocket"
 #define TEX_ENEMY_COPTER @"copter_default"
+#define TEX_ROBOT_PARTICLE @"robot_particle"
+#define TEX_EXPLOSION @"explosion_default"
 
 #define TEX_SWINGVINE_BASE @"SwingVineBase"
 #define TEX_SWINGVINE_TEX @"SwingVineTex"
@@ -101,6 +103,7 @@
 #define TEX_UI_BONE_ICON @"UIBoneIcon"
 #define TEX_UI_LIVES_ICON @"UILivesIcon"
 #define TEX_UI_TIME_ICON @"UITimeIcon"
+#define TEX_UI_ENEMY_ALERT @"UIEnemyAlert"
 
 #define TEX_UI_PAUSEICON @"UIPauseIcon"
 #define TEX_UI_PAUSEMENU_RETURN @"PauseMenuReturn"
