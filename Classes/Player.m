@@ -31,11 +31,11 @@
 
 @synthesize current_anim;
 @synthesize _RUN_ANIM_SLOW,_RUN_ANIM_MED,_RUN_ANIM_FAST,_RUN_ANIM_NONE;
-@synthesize _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM,_SPLASH_ANIM, _DASH_ANIM, _SWING_ANIM;
+@synthesize _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM,_SPLASH_ANIM, _DASH_ANIM, _SWING_ANIM,_FLASH_ANIM;
 
 /* static set player character */
 
-static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
+static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_6;
 +(void)set_character:(NSString*)tar {
     CURRENT_CHARACTER = tar;
 }
@@ -76,6 +76,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
     _SPLASH_ANIM = [self init_splash_anim_speed:0.1];
     _DASH_ANIM = [self init_rolldash_anim:0.05];
     _SWING_ANIM = [self init_swing_anim];
+    _FLASH_ANIM = [self init_flash_anim_speed:0.1];
     
     [self start_anim:_RUN_ANIM_NONE];
 }
@@ -201,6 +202,8 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
         [g add_particle:[RocketParticle init_x:position_.x-40 y:position_.y+20]];
     } else if (cur_anim_mode == player_anim_mode_HIT) {
         [self start_anim:_HIT_ANIM];
+    } else if (cur_anim_mode == player_anim_mode_FLASH) {
+        [self start_anim:_FLASH_ANIM];
     } else if (cur_anim_mode == player_anim_mode_SPLASH) {
         [self start_anim:_SPLASH_ANIM];
     }
@@ -389,6 +392,13 @@ HitRect cached_rect;
     
 	return [[Common make_anim_frames:animFrames speed:speed] retain];
 }
+-(id)init_flash_anim_speed:(float)speed {
+	CCTexture2D *texture = [self get_ss];
+	NSMutableArray *animFrames = [NSMutableArray array];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_0"]]];
+    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_0_flash"]]];
+    return [[Common make_anim_frames:animFrames speed:speed] retain];
+}
 -(id)init_none_anim {
 	CCTexture2D *texture = [self get_ss];
 	NSMutableArray *animFrames = [NSMutableArray array];
@@ -477,6 +487,7 @@ HitRect cached_rect;
     [_SPLASH_ANIM dealloc];
     [_DASH_ANIM dealloc];
     [_SWING_ANIM dealloc];
+    [_FLASH_ANIM dealloc];
     
     [self removeAllChildrenWithCleanup:YES];
 }

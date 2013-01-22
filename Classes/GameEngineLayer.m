@@ -188,7 +188,6 @@
         [GameRenderImplementation update_render_on:self];
         [GEventDispatcher push_event:[GEvent init_type:GEventType_GAME_TICK]];
         
-        
     } else if (current_mode == GameEngineLayerMode_UIANIM) {
         [GEventDispatcher push_event:[GEvent init_type:GEventType_UIANIM_TICK]];
         

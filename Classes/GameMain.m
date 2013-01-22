@@ -18,14 +18,13 @@
  TODO -- 
  -add electric,labentrance,labexit,uienemyalert to leveleditor
  
- -ui enemy alert
- -different death anims for electricity
  -more moves for boss, and damage show
  
- -add in that sun
+ 
  -player run in animation
  -different dogs differnt special powers
     ideas: higher jump, more float power, longer dash, faster, auto item magnet
+ -add in that sun
  **/
 
 +(void)main {

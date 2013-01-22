@@ -15,6 +15,8 @@ typedef enum {
     GEventType_PLAYAGAIN_AUTOLEVEL,
     GEventType_GAME_RESET,
     
+    GEventType_SHOW_ENEMYAPPROACH_WARNING,
+    
     GEventType_ENTER_LABAREA,
     GEventType_EXIT_TO_DEFAULTAREA,
     

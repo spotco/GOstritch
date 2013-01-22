@@ -19,8 +19,6 @@
         {"label": "20", "x": 3950, "type": "robotminion", "y": 931.4},
         {"label": "21", "x": 4600, "type": "robotminion", "y": 928.6},
         {"label": "22", "x": 5102.9, "type": "robotminion", "y": 927.1},
-        {"y2": 1370, "x": 4250, "type": "electricwall", "y": 1042.9, "label": "24", "x2": 4251.5},
-        {"y2": 1374.3, "x": 4898.6, "type": "electricwall", "y": 1027.1, "label": "25", "x2": 4900},
         {"label": "(29)gd_img:8", "x": 3315.7, "type": "ground_detail", "img": 8, "y": 650},
         {"label": "(30)gd_img:9", "x": 3750, "type": "ground_detail", "img": 9, "y": 854.3},
         {"label": "(31)gd_img:9", "x": 4001.5, "type": "ground_detail", "img": 9, "y": 852.9},
@@ -29,7 +27,13 @@
         {"label": "(34)gd_img:9", "x": 4748.6, "type": "ground_detail", "img": 9, "y": 852.9},
         {"label": "(35)gd_img:9", "x": 5000, "type": "ground_detail", "img": 9, "y": 854.3},
         {"label": "(36)gd_img:9", "x": 5251.5, "type": "ground_detail", "img": 9, "y": 851.4},
-        {"label": "(37)gd_img:9", "x": 5500, "type": "ground_detail", "img": 9, "y": 851.4}
+        {"label": "(37)gd_img:9", "x": 5500, "type": "ground_detail", "img": 9, "y": 851.4},
+        {"height": 196, "x": 972, "type": "enemyalert", "y": 444, "label": "1", "width": 170},
+        {"y2": 1370, "x": 4250, "type": "electricwall", "y": 1042.9, "label": "24", "x2": 4251.5},
+        {"y2": 1374.3, "x": 4898.6, "type": "electricwall", "y": 1027.1, "label": "25", "x2": 4900},
+        {"y2": 603, "x": 449, "type": "electricwall", "y": 352, "label": "2", "x2": 449},
+        {"label": "3", "x": 1180, "type": "labentrance", "y": 440},
+        {"height": 737, "x": 1179, "type": "labwall", "y": 429, "label": "4", "width": 837}
     ],
     "islands": [
         {"y2": 213.8, "x1": 146.3, "type": "line", "can_fall": true, "x2": 481.3, "ndir": "left", "ground": "open", "y1": 213.8, "hei": 500},

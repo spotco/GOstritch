@@ -460,9 +460,15 @@ static const int DEFAULT_HP = 1;
     vibration.y = VIBRATION_AMPLITUDE*sinf(vibration_theta);
 }
 
+#define BODY @"body"
+#define BODY_BROKEN @"body_broken"
+#define ARM @"arm"
+#define ARM_BROKEN @"arm_broken"
+
 -(void)init_anims {
     body = [CCSprite spriteWithTexture:[Resource get_aa_tex:TEX_ENEMY_COPTER] 
-                                  rect:[FileCache get_cgrect_from_plist:TEX_ENEMY_COPTER idname:@"body_broken"]];
+                                  rect:[FileCache get_cgrect_from_plist:TEX_ENEMY_COPTER idname:BODY]];
+    
     [self addChild:body];
     
     aux_prop = [CCSprite node];
@@ -486,7 +492,7 @@ static const int DEFAULT_HP = 1;
     [self addChild:aux_nut];
     
     arm = [CCSprite spriteWithTexture:[Resource get_tex:TEX_ENEMY_COPTER] 
-                                 rect:[FileCache get_cgrect_from_plist:TEX_ENEMY_COPTER idname:@"arm_broken"]];
+                                 rect:[FileCache get_cgrect_from_plist:TEX_ENEMY_COPTER idname:ARM]];
     [arm setPosition:ARM_DEFAULT_POSITION];
     [self addChild:arm];
     

@@ -23,6 +23,12 @@
     }
 }
 
+-(void)hit:(Player *)player g:(GameEngineLayer *)g {
+    [player reset_params];
+    activated = YES;
+    [player add_effect:[FlashHitEffect init_from:[player get_default_params] time:40]];
+}
+
 -(CCTexture2D*)get_base_tex {
     return [Resource get_tex:TEX_ELECTRIC_BASE];
 }

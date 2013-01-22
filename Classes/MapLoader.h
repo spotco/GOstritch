@@ -32,6 +32,7 @@
 #import "ElectricWall.h"
 #import "LabEntrance.h"
 #import "LabExit.h"
+#import "EnemyAlert.h"
 
 @interface MapLoader : NSObject
 

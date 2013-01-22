@@ -1,4 +1,5 @@
 #import "JumpPadParticle.h"
+#import "GameRenderImplementation.h"
 
 @implementation JumpPadParticle
 +(JumpPadParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
@@ -30,6 +31,10 @@
     RocketLaunchParticle *p = [RocketLaunchParticle init_x:x y:y vx:vx vy:vy];
     [p setScale:scale];
     return p;
+}
+
+-(int)get_render_ord {
+    return [GameRenderImplementation GET_RENDER_ABOVE_FG_ORD];
 }
 
 -(void)cons_vx:(float)lvx vy:(float)lvy {

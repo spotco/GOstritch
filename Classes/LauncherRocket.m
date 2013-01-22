@@ -105,7 +105,7 @@
     return ccwt > 0 ? 180-ccwt : -(180-ABS(ccwt));
 }
 
--(int)get_render_ord{ return [GameRenderImplementation GET_RENDER_BTWN_PLAYER_ISLAND];}
+-(int)get_render_ord{ return [GameRenderImplementation GET_RENDER_PLAYER_ON_FG_ORD];}
 -(void)reset{[super reset];kill = YES;}
 -(void)set_active:(BOOL)t_active {active = t_active;}
 -(HitRect)get_hit_rect {return [Common hitrect_cons_x1:position_.x-30 y1:position_.y-25 wid:60 hei:50];}

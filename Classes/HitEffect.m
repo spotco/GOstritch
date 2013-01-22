@@ -3,17 +3,19 @@
 #import "GameEngineLayer.h"
 
 @implementation HitEffect
+@synthesize tmode;
 
 +(HitEffect*)init_from:(PlayerEffectParams*)base time:(int)time {
     HitEffect *e = [[HitEffect alloc] init];
     [PlayerEffectParams copy_params_from:base to:e];
     e.time_left = time;
     e.noclip = 1;
+    e.tmode = player_anim_mode_HIT;
     return e;
 }
 
 -(player_anim_mode)get_anim {
-    return player_anim_mode_HIT;
+    return self.tmode;
 }
 
 -(void)update:(Player*)p g:(GameEngineLayer *)g{
@@ -36,7 +38,23 @@
 -(NSString*)info {
     return [NSString stringWithFormat:@"HitEffect(minspd:%1.1f,timeleft:%i)",cur_min_speed,time_left];
 }
+@end
 
+@implementation FlashHitEffect
 
++(FlashHitEffect*)init_from:(PlayerEffectParams *)base time:(int)time {
+    FlashHitEffect *e = [[FlashHitEffect alloc] init];
+    [PlayerEffectParams copy_params_from:base to:e];
+    e.time_left = time;
+    e.noclip = 1;
+    e.tmode = player_anim_mode_FLASH;
+    return e;
+}
+
+-(void)update:(Player*)p g:(GameEngineLayer *)g{
+    p.dead = YES;
+    p.vx = 0;
+    p.vy = 0;
+}
 
 @end

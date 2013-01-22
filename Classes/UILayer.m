@@ -34,6 +34,9 @@
     } else if (e.type == GEventType_GAMEOVER) {
         [self gameover];
         
+    } else if (e.type == GEventType_SHOW_ENEMYAPPROACH_WARNING) {
+        enemy_alert_ui_ct = 75;
+    
     } else if (e.type == GEventType_BOSS1_ACTIVATE) {
         //TODO - UI
         
@@ -49,6 +52,15 @@
 /* event dispatch handlers */
 
 -(void)update {
+    if (enemy_alert_ui_ct > 0) {
+        enemy_alert_ui_ct--;
+        if (enemy_alert_ui_ct % 10 == 0) {
+            [enemy_alert_ui setVisible:!enemy_alert_ui.visible];
+        }
+    } else {
+        [enemy_alert_ui setVisible:NO];
+    }
+    
     level_bone_status b = [game_engine_layer get_bonestatus];
     [self set_label:bones_disp to:strf("%i",b.hasgets+b.savedgets)];
     [self set_label:lives_disp to:strf("\u00B7 %s",[game_engine_layer get_lives] == GAMEENGINE_INF_LIVES ? "\u221E":strf("%i",[game_engine_layer get_lives]).UTF8String)];
@@ -119,6 +131,9 @@
     lives_disp = [self cons_label_pos:ccp([Common SCREEN].width*0.03+18,[Common SCREEN].height*0.9) color:red fontsize:fntsz];
     time_disp = [self cons_label_pos:ccp([Common SCREEN].width*0.03+18,[Common SCREEN].height*0.83) color:red fontsize:fntsz];
     
+    enemy_alert_ui = [self cons_menuitem_tex:[Resource get_tex:TEX_UI_ENEMY_ALERT] pos:[Common screen_pctwid:0.9 pcthei:0.5]];
+    [enemy_alert_ui setVisible:NO];
+    
     ingame_ui = [CCMenu menuWithItems:
                  ingamepause,
                  bone_disp_icon,
@@ -127,6 +142,7 @@
                  [self label_cons_menuitem:bones_disp leftalign:YES],
                  [self label_cons_menuitem:lives_disp leftalign:YES],
                  [self label_cons_menuitem:time_disp leftalign:YES],
+                 enemy_alert_ui,
                  nil];
     
     if ([GameMain GET_DEBUG_UI]) {
@@ -135,6 +151,8 @@
         DEBUG_autolvldisp = [self cons_label_pos:ccp([Common SCREEN].width*0.02,[Common SCREEN].height*0.71) color:red fontsize:fntsz];
         [ingame_ui addChild:[self label_cons_menuitem:DEBUG_autolvldisp leftalign:YES]];
     }
+    
+    
     
     ingame_ui.anchorPoint = ccp(0,0);
     ingame_ui.position = ccp(0,0);
