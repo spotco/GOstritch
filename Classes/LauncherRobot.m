@@ -108,7 +108,16 @@
         recoilanim_timer = RECOIL_TIME;
     }
     
-    if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
+    if (!player.dead && player.current_island == NULL && player.vy <= 0 && [Common hitrect_touch:[self get_hit_rect] b:[player get_jump_rect]]) {
+        busted = YES;
+        [self set_anim:ANIM_DEAD];
+        int ptcnt = arc4random_uniform(4)+4;
+        for(float i = 0; i < ptcnt; i++) {
+            [g add_particle:[BrokenMachineParticle init_x:position_.x y:position_.y vx:float_random(-5, 5) vy:float_random(-3, 10)]];
+        }
+        player.vy = 8;
+        
+    } else if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         if (player.dashing) {
             busted = YES;
             [self set_anim:ANIM_DEAD];
@@ -168,6 +177,7 @@
 
 -(void)set_active:(BOOL)t_active {active = t_active;}
 -(HitRect)get_hit_rect {return [Common hitrect_cons_x1:position_.x-50 y1:position_.y-20 wid:100 hei:40];}
+//-(HitRect)get_hit_rect { return [Common hitrect_cons_x1:position_.x-50 y1:position_.y-20 wid:100 hei:40];}
 -(void)dealloc {
     [dir dealloc];
     [super dealloc];

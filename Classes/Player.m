@@ -35,7 +35,7 @@
 
 /* static set player character */
 
-static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_6;
+static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
 +(void)set_character:(NSString*)tar {
     CURRENT_CHARACTER = tar;
 }
@@ -303,6 +303,10 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_6;
     HitRect gets = [self get_hit_rect];
     cur.noclip = cur_nc;
     return gets;
+}
+
+-(HitRect)get_jump_rect {
+    return [Common hitrect_cons_x1:position_.x-25 y1:position_.y wid:40 hei:2];
 }
 
 BOOL refresh_hitrect = YES;

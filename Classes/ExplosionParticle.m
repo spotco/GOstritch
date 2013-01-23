@@ -5,7 +5,7 @@
 
 static const float TIME = 30.0;
 static const float MINSCALE = 0.5;
-static const float MAXSCALE =6;
+static const float MAXSCALE = 0.5;
 
 -(CCAction*)init_anim:(NSArray*)a speed:(float)speed {
 	CCTexture2D *texture = [Resource get_tex:TEX_EXPLOSION];
@@ -20,7 +20,7 @@ static const float MAXSCALE =6;
 
 
 -(id)cons_x:(float)x y:(float)y {
-    CCAction* anim = [self init_anim:[NSArray arrayWithObjects:@"explode_0",@"explode_1",@"explode_2",@"", nil] speed:0.1];
+    CCAction* anim = [self init_anim:[NSArray arrayWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7", nil] speed:0.075];
     [self runAction:anim];
     
     [self setPosition:ccp(x,y)];

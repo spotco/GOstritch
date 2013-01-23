@@ -15,9 +15,7 @@
 #define TESTLEVEL @"robotstest"
 
 /**
- TODO -- 
- -add electric,labentrance,labexit,uienemyalert to leveleditor
- 
+ TODO --
  -more moves for boss, and damage show
  
  

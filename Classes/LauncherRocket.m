@@ -74,6 +74,11 @@
             return;
         }
         
+    } else if (broken_ct == 0 && !player.dead && player.current_island == NULL && player.vy <= 0 && [Common hitrect_touch:[self get_hit_rect] b:[player get_jump_rect]]) {
+        broken_ct = 35;
+        v = ccp(player.vx*1.2,player.vy*1.2);
+        player.vy = 6;
+        
     } else if (broken_ct == 0 && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         if (player.dashing) {
             broken_ct = 35;
@@ -91,7 +96,8 @@
 }
 
 -(void)remove_from:(GameEngineLayer*)g {
-    [LauncherRobot explosion:g at:position_];
+    [g add_particle:[ExplosionParticle init_x:position_.x y:position_.y]];
+    //[LauncherRobot explosion:g at:position_];
     [g remove_gameobject:shadow];
     [g remove_gameobject:self];
 }

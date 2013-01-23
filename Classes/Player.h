@@ -60,6 +60,7 @@ typedef enum {
 
 -(HitRect) get_hit_rect;
 -(HitRect) get_hit_rect_ignore_noclip;
+-(HitRect) get_jump_rect;
 -(void)add_effect_suppress_current_end_effect:(PlayerEffectParams *)effect;
 -(PlayerEffectParams*) get_current_params;
 -(PlayerEffectParams*) get_default_params;

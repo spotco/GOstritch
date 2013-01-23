@@ -188,6 +188,8 @@
         [GameRenderImplementation update_render_on:self];
         [GEventDispatcher push_event:[GEvent init_type:GEventType_GAME_TICK]];
         
+        //time%20==0?[self add_particle:[ExplosionParticle init_x:player.position.x y:player.position.y]]:0;
+        
     } else if (current_mode == GameEngineLayerMode_UIANIM) {
         [GEventDispatcher push_event:[GEvent init_type:GEventType_UIANIM_TICK]];
         

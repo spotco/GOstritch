@@ -7,6 +7,7 @@
     BrokenMachineParticle* p = [BrokenMachineParticle spriteWithTexture:[Resource get_tex:TEX_ROBOT_PARTICLE]];
     p.position = ccp(x,y);
     [p cons_vx:vx vy:vy];
+    [p setScale:float_random(0.5, 1)];
     return p;
 }
 

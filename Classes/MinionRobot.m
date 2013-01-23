@@ -20,9 +20,8 @@
     self = [super init];
     self.scaleX = -DEFAULT_SCALE;
     self.movedir = -1;
-
-    [self setIMGWID:[FileCache get_cgrect_from_plist:TEX_ENEMY_ROBOT idname:@"robot"].size.width];
-    [self setIMGHEI:[FileCache get_cgrect_from_plist:TEX_ENEMY_ROBOT idname:@"robot"].size.height];
+    [self setIMGWID:[FileCache get_cgrect_from_plist:TEX_ENEMY_ROBOT idname:@"robot"].size.width*DEFAULT_SCALE];
+    [self setIMGHEI:[FileCache get_cgrect_from_plist:TEX_ENEMY_ROBOT idname:@"robot"].size.height*DEFAULT_SCALE];
     return self;
 }
 
@@ -30,9 +29,10 @@
     MinionRobot *t = [MinionRobot node];
     CCSprite *body = [CCSprite spriteWithTexture:tex rect:rect];
     t.body = body;
-    body.position = ccp(0,t.IMGHEI/2);
+    body.position = ccp(t.IMGWID/2,t.IMGHEI/2);
     [t addChild:body];
     [body setScale:DEFAULT_SCALE];
+    [t setScale:DEFAULT_SCALE];
     return t;
 }
 
@@ -60,7 +60,21 @@
         [self jump_from_island];
     }
     
-    if (player.dashing && [Common hitrect_touch:[self get_hit_rect_rescale:0.8] b:[player get_hit_rect]]) {
+    if (!player.dead && player.current_island == NULL && player.vy <= 0 && [Common hitrect_touch:[self get_full_hit_rect] b:[player get_jump_rect]]) {
+        busted = YES;
+        self.vy = -ABS(self.vy);
+        [self animmode_dead];
+        
+        int ptcnt = arc4random_uniform(4)+4;
+        for(float i = 0; i < ptcnt; i++) {
+            [g add_particle:[BrokenMachineParticle init_x:position_.x
+                                                        y:position_.y
+                                                       vx:float_random(-5, 5)
+                                                       vy:float_random(-3, 10)]];
+        }
+        player.vy = 8;
+    
+    } else if (player.dashing && [Common hitrect_touch:[self get_hit_rect_rescale:0.8] b:[player get_hit_rect]]) {
         busted = YES;
         self.vy = -ABS(self.vy);
         [self animmode_dead];
@@ -92,7 +106,7 @@
 -(void)jump_from_island {
     id<PhysicsObject> player = self;
     Vec3D *up = [Vec3D init_x:0 y:1 z:0];
-    [up scale:float_random(10, 15)];
+    [up scale:float_random(10, 11)];
     
     player.current_island = NULL;
     player.vx = 0;
@@ -103,6 +117,7 @@
     
 }
 
+-(HitRect)get_full_hit_rect { return [Common hitrect_cons_x1:position_.x-20 y1:position_.y wid:50 hei:80];}
 -(void)animmode_normal {[body setTextureRect:[FileCache get_cgrect_from_plist:TEX_ENEMY_ROBOT idname:@"robot"]];}
 -(void)animmode_angry {[body setTextureRect:[FileCache get_cgrect_from_plist:TEX_ENEMY_ROBOT idname:@"robot_angry"]];}
 -(void)animmode_dead {[body setTextureRect:[FileCache get_cgrect_from_plist:TEX_ENEMY_ROBOT idname:@"robot_dead"]];}
