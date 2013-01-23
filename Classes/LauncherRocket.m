@@ -74,15 +74,13 @@
             return;
         }
         
-    } else if (broken_ct == 0 && !player.dead && player.current_island == NULL && player.vy <= 0 && [Common hitrect_touch:[self get_hit_rect] b:[player get_jump_rect]]) {
-        broken_ct = 35;
-        v = ccp(player.vx*1.2,player.vy*1.2);
+    } else if (broken_ct == 0 && !player.dead && !player.dashing && player.current_island == NULL && player.vy <= 0 && [Common hitrect_touch:[self get_hit_rect] b:[player get_jump_rect]]) {
+        [self flyoff:ccp(player.vx,player.vy) norm:6];
         player.vy = 6;
         
     } else if (broken_ct == 0 && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         if (player.dashing) {
-            broken_ct = 35;
-            v = ccp(player.vx*1.2,player.vy*1.2);
+            [self flyoff:ccp(player.vx,player.vy) norm:0];
             
         } else if (!player.dead) {
             [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
@@ -93,6 +91,18 @@
         
         
     }
+}
+
+-(void)flyoff:(CGPoint)pv norm:(int)norm {
+    broken_ct = 35;
+    Vec3D *pvec = [Vec3D init_x:pv.x y:pv.y z:0];
+    if (norm > 0) {
+        [pvec normalize];
+        [pvec scale:norm];
+    }
+    v.x = pvec.x;
+    v.y = pvec.y;
+    [pvec dealloc];
 }
 
 -(void)remove_from:(GameEngineLayer*)g {

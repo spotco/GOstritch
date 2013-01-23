@@ -18,8 +18,8 @@
 
 -(void)update_posx:(float)posx posy:(float)posy {
     CGSize textureSize = [self textureRect].size;
-    [self setTextureRect:CGRectMake(posx*scrollspd_x, 0, [[UIScreen mainScreen] bounds].size.width*2 , textureSize.height)];
-    self.position = ccp(0,MIN(0,-posy*scrollspd_y));
+    [self setTextureRect:CGRectMake(posx*scrollspd_x, MIN(0,-posy*scrollspd_y), [[UIScreen mainScreen] bounds].size.width*2 , textureSize.height)];
+    //self.position = ccp(0,MIN(0,-posy*scrollspd_y));
 }
 
 @end

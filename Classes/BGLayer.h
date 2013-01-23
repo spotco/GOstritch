@@ -1,6 +1,7 @@
 #import "cocos2d.h"
 #import "Resource.h"
 #import "BackgroundObject.h"
+#import "LabBGObject.h"
 #import "CloudGenerator.h"
 #import "GameEngineLayer.h"
 #import "GameMain.h"

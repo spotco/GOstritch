@@ -1,6 +1,6 @@
 {
-    "connect_pts": {"y2": 850, "x1": 146.3, "y1": 213.8, "x2": 5758},
-    "start_y": 252.5214285714286,
+    "start_y": 490,
+    "assert_links": 8,
     "objects": [
         {"label": "(3)gd_img:9", "x": 1316.7, "type": "ground_detail", "img": 9, "y": 459.9},
         {"label": "(4)gd_img:9", "x": 1574, "type": "ground_detail", "img": 9, "y": 600},
@@ -48,6 +48,6 @@
         {"y2": 854, "x1": 3047.6, "type": "line", "can_fall": true, "x2": 3590, "ndir": "left", "ground": "lab", "y1": 451.3, "hei": 500},
         {"y2": 850, "x1": 3590, "type": "line", "can_fall": true, "x2": 5758, "ndir": "left", "ground": "lab", "y1": 854, "hei": 500}
     ],
-    "assert_links": 8,
-    "start_x": 190
+    "connect_pts": {"y2": 850, "x1": 146.3, "y1": 213.8, "x2": 5758},
+    "start_x": 940
 }

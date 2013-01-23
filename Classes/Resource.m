@@ -73,6 +73,7 @@ static NSMutableDictionary* textures = nil;
                         @"copter_default.png",TEX_ENEMY_COPTER,
                         @"robot_particle.png",TEX_ROBOT_PARTICLE,
                         @"explosion_default.png",TEX_EXPLOSION,
+                        @"bomb.png",TEX_ENEMY_BOMB,
                                       
                         @"BG1_detail_1.png", TEX_GROUND_DETAIL_1,
                         @"BG1_detail_2.png", TEX_GROUND_DETAIL_2,

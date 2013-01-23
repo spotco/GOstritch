@@ -76,6 +76,7 @@
 #define TEX_ENEMY_COPTER @"copter_default"
 #define TEX_ROBOT_PARTICLE @"robot_particle"
 #define TEX_EXPLOSION @"explosion_default"
+#define TEX_ENEMY_BOMB @"bomb"
 
 #define TEX_SWINGVINE_BASE @"SwingVineBase"
 #define TEX_SWINGVINE_TEX @"SwingVineTex"

@@ -3,6 +3,7 @@
 #import "UILayer.h"
 #import "BridgeIsland.h"
 #import "FlashEffect.h"
+#import "EnemyBomb.h"
  
 @implementation GameEngineLayer
 
@@ -165,6 +166,8 @@
 	}
 }
 
+int test;
+
 -(void)update {
     
     [GEventDispatcher dispatch_events];
@@ -188,7 +191,9 @@
         [GameRenderImplementation update_render_on:self];
         [GEventDispatcher push_event:[GEvent init_type:GEventType_GAME_TICK]];
         
-        //time%20==0?[self add_particle:[ExplosionParticle init_x:player.position.x y:player.position.y]]:0;
+        
+        test%50==0?[self add_gameobject:[EnemyBomb cons_pt:ccp(320,320) v:ccp(5,10)]]:0;
+        test++;
         
     } else if (current_mode == GameEngineLayerMode_UIANIM) {
         [GEventDispatcher push_event:[GEvent init_type:GEventType_UIANIM_TICK]];

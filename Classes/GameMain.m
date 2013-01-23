@@ -16,7 +16,7 @@
 
 /**
  TODO --
- -more moves for boss, and damage show
+ -more moves for boss (relative bomb), and damage show
  
  
  -player run in animation
