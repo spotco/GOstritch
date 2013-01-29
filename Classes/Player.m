@@ -31,11 +31,11 @@
 
 @synthesize current_anim;
 @synthesize _RUN_ANIM_SLOW,_RUN_ANIM_MED,_RUN_ANIM_FAST,_RUN_ANIM_NONE;
-@synthesize _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM,_SPLASH_ANIM, _DASH_ANIM, _SWING_ANIM,_FLASH_ANIM;
+@synthesize _ROCKET_ANIM,_CAPE_ANIM,_HIT_ANIM,_SPLASH_ANIM, _DASH_ANIM, _SWING_ANIM,_FLASH_ANIM,_FLIP_ANIM;
 
 /* static set player character */
 
-static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
+static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_2;
 +(void)set_character:(NSString*)tar {
     CURRENT_CHARACTER = tar;
 }
@@ -60,25 +60,16 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
     [new_player init_anim];
 	
     new_player.start_pt = pt;
-	new_player.anchorPoint = ccp(0,0);
+	//new_player.anchorPoint = ccp(0.5,0.5);
     new_player.position = new_player.start_pt;
 	return new_player;
 }
 
--(void)init_anim {
-    _RUN_ANIM_SLOW = [self init_run_anim_speed:0.075];
-    _RUN_ANIM_MED = [self init_run_anim_speed:0.06];
-    _RUN_ANIM_FAST = [self init_run_anim_speed:0.05];
-    _RUN_ANIM_NONE = [self init_none_anim];
-    _ROCKET_ANIM = [self init_rocket_anim_speed:0.1];
-    _CAPE_ANIM = [self init_cape_anim_speed:0.1];
-    _HIT_ANIM = [self init_hit_anim_speed];
-    _SPLASH_ANIM = [self init_splash_anim_speed:0.1];
-    _DASH_ANIM = [self init_rolldash_anim:0.05];
-    _SWING_ANIM = [self init_swing_anim];
-    _FLASH_ANIM = [self init_flash_anim_speed:0.1];
-    
-    [self start_anim:_RUN_ANIM_NONE];
+-(id)init {
+    prevndir = 1;
+    cur_scy = 1;
+    inair_ct = 0;
+    return [super init];
 }
 
 -(void)start_anim:(id)anim {
@@ -91,123 +82,174 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
     current_anim = anim;
 }
 
--(void) update:(GameEngineLayer*)g {
+-(void)update:(GameEngineLayer*)g {
     game_engine_layer = g;
     
-    float vel = sqrtf(powf(vx,2)+powf(vy,2));
-    
     if (current_island == NULL && current_swingvine == NULL) {
-        Vec3D *dv = [Vec3D init_x:vx y:vy z:0];
-        [dv normalize];
+        [self mov_center_rotation];
         
-        float rot = -[Common rad_to_deg:[dv get_angle_in_rad]];
-        float sig = [Common sig:rot];
-        rot = sig*sqrtf(ABS(rot));
-        [self setRotation:rot];
-       
-        [dv dealloc];
     } else if (current_island != NULL) {
-        if (vel > TRAIL_MIN) {
-            float ch = (vel-TRAIL_MIN)/(TRAIL_MAX - TRAIL_MIN)*100;
-            if (arc4random_uniform(100) < ch) {
-                Vec3D *dv = [current_island get_tangent_vec];
-                [dv normalize];
-                [dv scale:-2.5];
-                dv.x += float_random(-3, 3);
-                dv.y += float_random(-3, 3);
-                [g add_particle:[StreamParticle init_x:position_.x y:position_.y vx:dv.x vy:dv.y]];
-                [dv dealloc];
-            }
-        }
+        [self add_running_dust_particles:g];
     }
     
     if (floating && !dead) {
-        if (particlectr >= 10) {
-            particlectr = 0;
-            float pvx;
-            if (arc4random_uniform(2) == 0) {
-                pvx = float_random(4, 6);
-            } else {
-                pvx = float_random(-4, -6);
-            }
-            [g add_particle:[FloatingSweatParticle init_x:position_.x+6 y:position_.y+29 vx:pvx+vx vy:float_random(3, 6)+vy]];
-        } else {
-            particlectr++;
-        }
+        [self add_floating_particle:g];
     }
     
     player_anim_mode cur_anim_mode = [[self get_current_params] get_anim];
     
-    
     dashing = cur_anim_mode == player_anim_mode_DASH;
     
     if (current_swingvine != NULL) {
-        //smoothing anim for swingvine attach, see swingvine update (does not force rotation until curanim is _SWING_ANIM
-        if (![Common fuzzyeq_a:rotation_ b:-90 delta:1]) { 
-            float dir = [Common shortest_dist_from_cur:rotation_ to:-90]*0.3;
-            self.rotation += dir;
-        } else {
-            [self start_anim:_SWING_ANIM];
-        }
-        
+        [self swingvine_attach_anim];
         
     } else if (cur_anim_mode == player_anim_mode_RUN) {
-        if (current_island == NULL) {
-            if (floating) {
-                [self start_anim:_RUN_ANIM_FAST];
-            } else {
-                [self start_anim:_RUN_ANIM_NONE];
-            }
-            
-        } else {
-            if (vel > 10) {
-                [self start_anim:_RUN_ANIM_FAST];
-            } else if (vel > 5) {
-                [self start_anim:_RUN_ANIM_MED];
-            } else {
-                [self start_anim:_RUN_ANIM_SLOW];
-            }
-        }
-    } else if (cur_anim_mode == player_anim_mode_DASH) {
-        [self start_anim:_DASH_ANIM];
+        [self runanim_update];
         
-        if (particlectr >= 5) {
-            particlectr = 0;
-            Vec3D *dv = [Vec3D init_x:vx y:vy z:0];
-            Vec3D *normal = [[Vec3D Z_VEC] crossWith:dv];
-            [normal normalize];
-            [dv normalize];
-            
-            [normal scale:35];
-            float x = position_.x+normal.x;
-            float y = position_.y+normal.y;
-            
-            [normal normalize];
-            [normal scale:float_random(-4, 4)];
-            [dv scale:float_random(-8, -10)];
-            
-            JumpPadParticle* pt = [JumpPadParticle init_x:x y:y vx:dv.x+normal.x vy:dv.y+normal.y];
-            [g add_particle:pt];
-            
-            [dv dealloc];
-            [normal dealloc];
-        } else {
-            particlectr++;
-        }
+    } else if (cur_anim_mode == player_anim_mode_DASH) {
+        cur_scy = last_ndir;
+        [self dashanim_update:g];
         
     } else if (cur_anim_mode == player_anim_mode_CAPE) {
         [self start_anim:_CAPE_ANIM];
+        
     } else if (cur_anim_mode == player_anim_mode_ROCKET) {
         [self start_anim:_ROCKET_ANIM];
         [g add_particle:[RocketParticle init_x:position_.x-40 y:position_.y+20]];
+        
     } else if (cur_anim_mode == player_anim_mode_HIT) {
+        cur_scy = last_ndir;
         [self start_anim:_HIT_ANIM];
+        
     } else if (cur_anim_mode == player_anim_mode_FLASH) {
         [self start_anim:_FLASH_ANIM];
+        
     } else if (cur_anim_mode == player_anim_mode_SPLASH) {
+        cur_scy = 1;
         [self start_anim:_SPLASH_ANIM];
+        
     }
+    [self setScaleY:cur_scy];
+    [self update_params:g];
+    refresh_hitrect = YES;
+}
+
+-(void)mov_center_rotation {
+    Vec3D *dv = [Vec3D init_x:vx y:vy z:0];
+    [dv normalize];
     
+    float rot = -[Common rad_to_deg:[dv get_angle_in_rad]];
+    float sig = [Common sig:rot];
+    rot = sig*sqrtf(ABS(rot));
+    [self setRotation:rot];
+    
+    [dv dealloc];
+}
+
+-(void)add_running_dust_particles:(GameEngineLayer*)g {
+    float vel = sqrtf(powf(vx,2)+powf(vy,2));
+    if (vel > TRAIL_MIN) {
+        float ch = (vel-TRAIL_MIN)/(TRAIL_MAX - TRAIL_MIN)*100;
+        if (arc4random_uniform(100) < ch) {
+            Vec3D *dv = [current_island get_tangent_vec];
+            [dv normalize];
+            [dv scale:-2.5];
+            dv.x += float_random(-3, 3);
+            dv.y += float_random(-3, 3);
+            [g add_particle:[StreamParticle init_x:position_.x y:position_.y vx:dv.x vy:dv.y]];
+            [dv dealloc];
+        }
+    }
+}
+
+-(void)add_floating_particle:(GameEngineLayer*)g {
+    if (particlectr >= 10) {
+        particlectr = 0;
+        float pvx;
+        if (arc4random_uniform(2) == 0) {
+            pvx = float_random(4, 6);
+        } else {
+            pvx = float_random(-4, -6);
+        }
+        [g add_particle:[FloatingSweatParticle init_x:position_.x+6 y:position_.y+29 vx:pvx+vx vy:float_random(3, 6)+vy]];
+    } else {
+        particlectr++;
+    }
+}
+
+-(void)swingvine_attach_anim {
+    //smoothing anim for swingvine attach, see swingvine update (does not force rotation until curanim is _SWING_ANIM
+    if (![Common fuzzyeq_a:rotation_ b:-90 delta:1]) {
+        float dir = [Common shortest_dist_from_cur:rotation_ to:-90]*0.3;
+        self.rotation += dir;
+    } else {
+        [self start_anim:_SWING_ANIM];
+    }
+}
+
+-(void)runanim_update {
+    if (self.last_ndir != prevndir && self.last_ndir < 0) {
+        flipctr = 10;
+    }
+    prevndir = self.last_ndir;
+    
+    if (flipctr > 0) {
+        cur_scy = last_ndir;
+        flipctr--;
+        [self start_anim:_FLIP_ANIM];
+        
+    } else if (current_island == NULL) {
+        cur_scy = 1;
+        if (floating) {
+            [self start_anim:_RUN_ANIM_FAST];
+        } else {
+            [self start_anim:_RUN_ANIM_NONE];
+        }
+        
+    } else {
+        last_ndir = current_island.ndir;
+        cur_scy = last_ndir;
+        
+        float vel = sqrtf(powf(vx,2)+powf(vy,2));
+        if (vel > 10) {
+            [self start_anim:_RUN_ANIM_FAST];
+        } else if (vel > 5) {
+            [self start_anim:_RUN_ANIM_MED];
+        } else {
+            [self start_anim:_RUN_ANIM_SLOW];
+        }
+    }
+}
+
+-(void)dashanim_update:(GameEngineLayer*)g {
+    [self start_anim:_DASH_ANIM];
+    
+    if (particlectr >= 5) {
+        particlectr = 0;
+        Vec3D *dv = [Vec3D init_x:vx y:vy z:0];
+        Vec3D *normal = [[Vec3D Z_VEC] crossWith:dv];
+        [normal normalize];
+        [dv normalize];
+        
+        [normal scale:35];
+        float x = position_.x+normal.x;
+        float y = position_.y+normal.y;
+        
+        [normal normalize];
+        [normal scale:float_random(-4, 4)];
+        [dv scale:float_random(-8, -10)];
+        
+        JumpPadParticle* pt = [JumpPadParticle init_x:x y:y vx:dv.x+normal.x vy:dv.y+normal.y];
+        [g add_particle:pt];
+        
+        [dv dealloc];
+        [normal dealloc];
+    } else {
+        particlectr++;
+    }
+}
+
+-(void)update_params:(GameEngineLayer*)g {
     if (temp_params != NULL) {
         [temp_params update:self g:g];
         [temp_params decrement_timer];
@@ -219,7 +261,6 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
             }
         }
     }
-    refresh_hitrect = YES;
 }
 
 /* playerparam system */
@@ -353,103 +394,50 @@ HitRect cached_rect;
 
 /* animation cfgs */
 
--(id)init_swing_anim {
-    float speed = 50;
-    CCTexture2D *texture = [self get_ss];
-    NSMutableArray *animFrames = [NSMutableArray array];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"swing_0"]]];
-    return [[Common make_anim_frames:animFrames speed:speed] retain];
-
-}
--(id)init_hit_anim_speed {
-    float speed = 0.06;
-    CCTexture2D *texture = [self get_ss];
-    NSMutableArray *animFrames = [NSMutableArray array];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_1"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_2"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_3"]]];
-    return [[CCAnimate actionWithAnimation:[CCAnimation animationWithFrames:animFrames delay:speed] restoreOriginalFrame:NO] retain];
-}
--(id)init_rolldash_anim:(float)speed {
-	CCTexture2D *texture = [self get_ss];
-	NSMutableArray *animFrames = [NSMutableArray array];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"roll_0"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"roll_1"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"roll_2"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"roll_3"]]];
-    return [[Common make_anim_frames:animFrames speed:speed] retain];
-}
--(id)init_run_anim_speed:(float)speed {
-	CCTexture2D *texture = [self get_ss];
-	NSMutableArray *animFrames = [NSMutableArray array];
-    
+-(NSArray*)get_run_animstr {
+    NSMutableArray *run = [NSMutableArray array];
     for(int i = 0; i < 5; i++) {
-        [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_0"]]];
-        [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_1"]]];
-        [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_2"]]];
-        [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_3"]]];
+        [run addObject:@"run_0"];[run addObject:@"run_1"];[run addObject:@"run_2"];[run addObject:@"run_3"];
     }
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_blink"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_1"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_2"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_3"]]];
-    
-	return [[Common make_anim_frames:animFrames speed:speed] retain];
+    [run addObject:@"run_blink"];[run addObject:@"run_1"];[run addObject:@"run_2"];[run addObject:@"run_3"];
+    return run;
 }
--(id)init_flash_anim_speed:(float)speed {
-	CCTexture2D *texture = [self get_ss];
-	NSMutableArray *animFrames = [NSMutableArray array];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_0"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"hit_0_flash"]]];
+
+-(void)init_anim {
+	NSArray *run = [self get_run_animstr];
+    _RUN_ANIM_SLOW = [self cons_anim_repeat_texstr:CURRENT_CHARACTER speed:0.075 frames:run];
+    _RUN_ANIM_MED = [self cons_anim_repeat_texstr:CURRENT_CHARACTER speed:0.06 frames:run];
+    _RUN_ANIM_FAST = [self cons_anim_repeat_texstr:CURRENT_CHARACTER speed:0.05 frames:run];
+    _RUN_ANIM_NONE = [self cons_anim_repeat_texstr:CURRENT_CHARACTER speed:0.075 frames:[NSArray arrayWithObjects:@"run_0",nil]];
+    _ROCKET_ANIM = [self cons_anim_repeat_texstr:CURRENT_CHARACTER speed:0.1 frames:[NSArray arrayWithObjects:@"rocket_0",@"rocket_1",@"rocket_2",nil]];
+    _CAPE_ANIM = [self cons_anim_repeat_texstr:CURRENT_CHARACTER speed:0.1 frames:[NSArray arrayWithObjects:@"cape_0",@"cape_1",@"cape_2",@"cape_3",nil]];
+    _HIT_ANIM = [self cons_anim_once_texstr:CURRENT_CHARACTER speed:0.1 frames:[NSArray arrayWithObjects:@"hit_1",@"hit_2",@"hit_3",nil]];
+    _SPLASH_ANIM = [self cons_anim_once_texstr:TEX_DOG_SPLASH speed:0.1 frames:[NSArray arrayWithObjects:@"splash1",@"splash2",@"splash3",@"",nil]];
+    _DASH_ANIM = [self cons_anim_repeat_texstr:CURRENT_CHARACTER speed:0.05 frames:[NSArray arrayWithObjects:@"roll_0",@"roll_1",@"roll_2",@"roll_3",nil]];
+    _SWING_ANIM = [self cons_anim_repeat_texstr:CURRENT_CHARACTER speed:1 frames:[NSArray arrayWithObjects:@"swing_0",nil]];
+    _FLASH_ANIM = [self cons_anim_repeat_texstr:CURRENT_CHARACTER speed:0.1 frames:[NSArray arrayWithObjects:@"hit_0",@"hit_0_flash",nil]];
+    
+    _FLIP_ANIM = [self cons_anim_once_texstr:CURRENT_CHARACTER speed:0.025 frames:[NSArray arrayWithObjects:@"flip_4",@"flip_3",@"flip_2",@"flip_1",@"flip_0",nil]];
+    [self start_anim:_RUN_ANIM_NONE];
+}
+
+-(id)cons_anim_repeat_texstr:(NSString*)texkey speed:(float)speed frames:(NSArray*)a {
+    NSArray *animFrames = [self cons_texstr:texkey framestrs:a];
     return [[Common make_anim_frames:animFrames speed:speed] retain];
 }
--(id)init_none_anim {
-	CCTexture2D *texture = [self get_ss];
-	NSMutableArray *animFrames = [NSMutableArray array];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"run_0"]]];
-    return [[Common make_anim_frames:animFrames speed:1] retain];
-}
--(id)init_rocket_anim_speed:(float)speed {
-	CCTexture2D *texture = [self get_ss];
-	NSMutableArray *animFrames = [NSMutableArray array];
-    
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rocket_0"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rocket_1"]]];
-	[animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"rocket_2"]]];
-    return [[Common make_anim_frames:animFrames speed:speed] retain];
-}
--(id)init_cape_anim_speed:(float)speed {
-	CCTexture2D *texture = [self get_ss];
-	NSMutableArray *animFrames = [NSMutableArray array];
-    
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"cape_0"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"cape_1"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"cape_2"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[Player dog1ss_spritesheet_rect_tar:@"cape_3"]]];
-	
-    return [[Common make_anim_frames:animFrames speed:speed] retain];
-}
--(id)init_splash_anim_speed:(float)speed {
-    CCTexture2D *tex = [Resource get_tex:TEX_DOG_SPLASH];
-    NSMutableArray *animFrames = [NSMutableArray array];
-    
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:tex rect:[Player splash_ss_plist_dict:@"splash1"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:tex rect:[Player splash_ss_plist_dict:@"splash2"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:tex rect:[Player splash_ss_plist_dict:@"splash3"]]];
-    [animFrames addObject:[CCSpriteFrame frameWithTexture:tex rect:CGRectMake(0, 0, 0, 0)]];
-    
+-(id)cons_anim_once_texstr:(NSString*)texkey speed:(float)speed frames:(NSArray*)a {
+    NSArray *animFrames = [self cons_texstr:texkey framestrs:a];
     id anim = [CCAnimate actionWithAnimation:[CCAnimation animationWithFrames:animFrames delay:speed] restoreOriginalFrame:NO];
     [anim retain];
     return anim;
 }
--(CCTexture2D*)get_ss {
-    return [Resource get_aa_tex:CURRENT_CHARACTER];
-}
-+(CGRect)splash_ss_plist_dict:(NSString*)tar {
-    return [FileCache get_cgrect_from_plist:TEX_DOG_SPLASH idname:tar];
-}
-+(CGRect)dog1ss_spritesheet_rect_tar:(NSString*)tar {
-    return [FileCache get_cgrect_from_plist:CURRENT_CHARACTER idname:tar];
+-(NSArray*)cons_texstr:(NSString*)tar framestrs:(NSArray*)a {
+    NSMutableArray* animFrames = [NSMutableArray array];
+    for (NSString* key in a) {
+        [animFrames addObject:[CCSpriteFrame frameWithTexture:[Resource get_tex:tar]
+                                                         rect:[FileCache get_cgrect_from_plist:tar idname:key]]];
+    }
+    return animFrames;
 }
 
 -(void)setColor:(ccColor3B)color {
@@ -484,7 +472,6 @@ HitRect cached_rect;
     [_RUN_ANIM_MED dealloc];
     [_RUN_ANIM_NONE dealloc];
     [_RUN_ANIM_SLOW dealloc];
-    
     [_ROCKET_ANIM dealloc];
     [_CAPE_ANIM dealloc];
     [_HIT_ANIM dealloc];

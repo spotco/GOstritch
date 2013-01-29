@@ -166,7 +166,7 @@
 	}
 }
 
-int test;
+//int test;
 
 -(void)update {
     
@@ -192,8 +192,8 @@ int test;
         [GEventDispatcher push_event:[GEvent init_type:GEventType_GAME_TICK]];
         
         
-        test%50==0?[self add_gameobject:[EnemyBomb cons_pt:ccp(320,320) v:ccp(5,10)]]:0;
-        test++;
+        //test%50==0?[self add_gameobject:[EnemyBomb cons_pt:ccp(320,320) v:ccp(5,10)]]:0;
+        //test++;
         
     } else if (current_mode == GameEngineLayerMode_UIANIM) {
         [GEventDispatcher push_event:[GEvent init_type:GEventType_UIANIM_TICK]];

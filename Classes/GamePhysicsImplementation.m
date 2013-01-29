@@ -32,6 +32,7 @@
     Island *i = player.current_island;
     Vec3D *tangent_vec = [i get_tangent_vec];
     
+    /*
     if (i.ndir < 0) {
         player.scaleY = -1;
         player.last_ndir = -1;
@@ -40,6 +41,9 @@
         player.last_ndir = 1;
     }
     player.scaleX = 1;
+     */
+    
+    player.last_ndir = (i.ndir < 0)?-1:1;
     
     if (tangent_vec.y < 0) {
         float ang = [tangent_vec get_angle_in_rad];
@@ -152,14 +156,17 @@
     if (player.floating) {
         GRAVITY = GRAVITY * 0.55;
     }
-    
+    player.up_vec.x = 0;
+    player.up_vec.y = 1;
+    /*
     if (player.last_ndir == -1 && player.vx < 0) {
         player.scaleX = -1;
     } else if (player.last_ndir == 1) {
         player.scaleX = 1;
     }
     player.scaleY = 1;
-    
+    */
+     
     float cur_ang = [Common rad_to_deg:[player.up_vec get_angle_in_rad]];
     float tar_ang = 90;
     float rot_by = [Common shortest_dist_from_cur:cur_ang to:tar_ang]*CENTERING_UP_VEC_SPD;

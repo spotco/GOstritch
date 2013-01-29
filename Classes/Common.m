@@ -252,7 +252,7 @@ bool fm_a_gt_b(double a,double b,double delta) {
     return r;
 }
 
-+(CCAction*)make_anim_frames:(NSMutableArray*)animFrames speed:(float)speed {
++(CCAction*)make_anim_frames:(NSArray*)animFrames speed:(float)speed {
 	id animate = [CCAnimate actionWithAnimation:[CCAnimation animationWithFrames:animFrames delay:speed] restoreOriginalFrame:YES];
     id m = [CCRepeatForever actionWithAction:animate];
 	return m;

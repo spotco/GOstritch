@@ -3,7 +3,7 @@
 
 @implementation MinionRobot
 
-#define DEFAULT_SCALE 0.75
+#define DEFAULT_SCALE 0.83
 
 @synthesize body;
 

@@ -11,18 +11,21 @@
 #define DEBUG_UI NO
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
-#define STARTING_LIVES 1
-#define TESTLEVEL @"robotstest"
+#define STARTING_LIVES 10
+#define TESTLEVEL @"shittytest"
 
 /**
  TODO --
  -more moves for boss (relative bomb), and damage show
- 
+ -swing fix
+ -revert labwall to manually placed
  
  -player run in animation
+ -sun
  -different dogs differnt special powers
     ideas: higher jump, more float power, longer dash, faster, auto item magnet
  -add in that sun
+ -use jump, use rocket, use magnet,use shield,use invincibility
  **/
 
 +(void)main {

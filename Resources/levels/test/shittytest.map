@@ -1,12 +1,15 @@
 {
-    "start_y": 240,
-    "objects": [{"y2": 436, "x": 1643, "type": "spikevine", "y": 383, "label": "0", "x2": 615}],
-    "connect_pts": {"y2": 200, "x1": 71, "y1": 188, "x2": 1782},
-    "islands": [
-        {"y2": 201, "x1": 71, "type": "line", "can_fall": true, "x2": 813, "ndir": "left", "ground": "open", "y1": 188, "hei": 50},
-        {"y2": 199, "x1": 813, "type": "line", "can_fall": true, "x2": 1611, "ndir": "left", "ground": "open", "y1": 201, "hei": 50},
-        {"y2": 200, "x1": 1611, "type": "line", "can_fall": true, "x2": 1782, "ndir": "left", "ground": "open", "y1": 199, "hei": 50}
+    "start_y": 195,
+    "objects": [
+        {"height": 119, "x": 848, "type": "water", "y": -4, "label": "0", "width": 400},
+        {"label": "2", "x": 791, "type": "spike", "y": 284},
+        {"y2": 545, "x": 1131, "type": "electricwall", "y": 246, "label": "3", "x2": 1035}
     ],
-    "assert_links": 2,
-    "start_x": 137
+    "islands": [
+        {"y2": 151, "x1": 56, "type": "line", "can_fall": true, "x2": 943, "ndir": "left", "ground": "open", "y1": 152, "hei": 50},
+        {"y2": 285, "x1": 221, "type": "line", "can_fall": true, "x2": 940, "ndir": "right", "ground": "open", "y1": 284, "hei": 50}
+    ],
+    "connect_pts": {"y2": 151, "x1": 56, "y1": 152, "x2": 943},
+    "start_x": 117,
+    "assert_links": 0
 }

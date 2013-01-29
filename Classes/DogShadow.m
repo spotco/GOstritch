@@ -19,8 +19,6 @@ typedef struct shadowinfo {
 }
 
 -(void)check_should_render:(GameEngineLayer *)g {
-    do_render = YES;
-    [self setVisible:YES];
 }
 
 -(int)get_render_ord {
@@ -32,12 +30,17 @@ typedef struct shadowinfo {
     [parent_ reorderChild:self z:[self get_render_ord]];
     
     if (player.current_island != NULL) {
-        [self setVisible:YES];
-        [self setPosition:player.position];
-        Vec3D* tv = [player.current_island get_tangent_vec];
-        [self setRotation:-[Common rad_to_deg:[tv get_angle_in_rad]]];
-        [self setScale:1];
-        [tv dealloc];
+        if (player.last_ndir < 0) {
+            [self setVisible:NO];
+            [self setPosition:player.position];
+        } else {
+            [self setVisible:YES];
+            [self setPosition:player.position];
+            Vec3D* tv = [player.current_island get_tangent_vec];
+            [self setRotation:-[Common rad_to_deg:[tv get_angle_in_rad]]];
+            [self setScale:1];
+            [tv dealloc];
+       }
     } else {
         shadowinfo v = [DogShadow calc_g_dist:player islands:g.islands];
         if (v.dist == INFINITY) {

@@ -95,7 +95,7 @@ CGPoint CGPointAdd(CGPoint a,CGPoint b);
 +(gl_render_obj)init_render_obj:(CCTexture2D*)tex npts:(int)npts;
 
 +(CGRect)ssrect_from_dict:(NSDictionary*)dict tar:(NSString*)tar;
-+(id)make_anim_frames:(NSMutableArray*)animFrames speed:(float)speed;
++(id)make_anim_frames:(NSArray*)animFrames speed:(float)speed;
 +(CGFloat) distanceBetween: (CGPoint)point1 and: (CGPoint)point2;
 
 +(CCMenuItem*)make_button_tex:(CCTexture2D*)tex seltex:(CCTexture2D*)seltex zscale:(float)zscale callback:(callback)cb pos:(CGPoint)pos;
