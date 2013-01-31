@@ -207,6 +207,13 @@
 		7ECF823916AFC21B002D2A21 /* LabBGObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ECF823716AFC21B002D2A21 /* LabBGObject.m */; };
 		7ECF823D16AFC80B002D2A21 /* EnemyBomb.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ECF823B16AFC80B002D2A21 /* EnemyBomb.h */; };
 		7ECF823E16AFC80B002D2A21 /* EnemyBomb.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ECF823C16AFC80B002D2A21 /* EnemyBomb.m */; };
+		7ED0B24016B8C17800B2634C /* smokecloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED0B23F16B8C17800B2634C /* smokecloud.png */; };
+		7ED0B24316B8C75400B2634C /* cannonfire_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7ED0B24116B8C75400B2634C /* cannonfire_default.plist */; };
+		7ED0B24416B8C75400B2634C /* cannonfire_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED0B24216B8C75400B2634C /* cannonfire_default.png */; };
+		7ED0B24716B8C79600B2634C /* CannonFireParticle.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED0B24516B8C79600B2634C /* CannonFireParticle.h */; };
+		7ED0B24816B8C79600B2634C /* CannonFireParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED0B24616B8C79600B2634C /* CannonFireParticle.m */; };
+		7ED0B24B16B8D06100B2634C /* cannontrail_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7ED0B24916B8D06100B2634C /* cannontrail_default.plist */; };
+		7ED0B24C16B8D06100B2634C /* cannontrail_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7ED0B24A16B8D06100B2634C /* cannontrail_default.png */; };
 		7ED4E04216805150005C2EB8 /* GEventDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED4E04116805150005C2EB8 /* GEventDispatcher.m */; };
 		7ED5C5BE16A2AF7B0099960B /* LabEntrance.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED5C5BC16A2AF7B0099960B /* LabEntrance.h */; };
 		7ED5C5BF16A2AF7B0099960B /* LabEntrance.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED5C5BD16A2AF7B0099960B /* LabEntrance.m */; };
@@ -761,6 +768,13 @@
 		7ECF823716AFC21B002D2A21 /* LabBGObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabBGObject.m; sourceTree = "<group>"; };
 		7ECF823B16AFC80B002D2A21 /* EnemyBomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyBomb.h; sourceTree = "<group>"; };
 		7ECF823C16AFC80B002D2A21 /* EnemyBomb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyBomb.m; sourceTree = "<group>"; };
+		7ED0B23F16B8C17800B2634C /* smokecloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smokecloud.png; sourceTree = "<group>"; };
+		7ED0B24116B8C75400B2634C /* cannonfire_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cannonfire_default.plist; sourceTree = "<group>"; };
+		7ED0B24216B8C75400B2634C /* cannonfire_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cannonfire_default.png; sourceTree = "<group>"; };
+		7ED0B24516B8C79600B2634C /* CannonFireParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CannonFireParticle.h; sourceTree = "<group>"; };
+		7ED0B24616B8C79600B2634C /* CannonFireParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CannonFireParticle.m; sourceTree = "<group>"; };
+		7ED0B24916B8D06100B2634C /* cannontrail_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cannontrail_default.plist; sourceTree = "<group>"; };
+		7ED0B24A16B8D06100B2634C /* cannontrail_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cannontrail_default.png; sourceTree = "<group>"; };
 		7ED4E04016805150005C2EB8 /* GEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GEventDispatcher.h; sourceTree = "<group>"; };
 		7ED4E04116805150005C2EB8 /* GEventDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GEventDispatcher.m; sourceTree = "<group>"; };
 		7ED5C5BC16A2AF7B0099960B /* LabEntrance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabEntrance.h; sourceTree = "<group>"; };
@@ -1327,6 +1341,8 @@
 				7E60D116168AFD1500E84683 /* BrokenMachineParticle.m */,
 				7E04262C16990C8400CD9CCD /* ExplosionParticle.h */,
 				7E04262D16990C8400CD9CCD /* ExplosionParticle.m */,
+				7ED0B24516B8C79600B2634C /* CannonFireParticle.h */,
+				7ED0B24616B8C79600B2634C /* CannonFireParticle.m */,
 			);
 			name = particle;
 			sourceTree = "<group>";
@@ -1334,6 +1350,11 @@
 		7E28310515CF4F47002EB07B /* particle */ = {
 			isa = PBXGroup;
 			children = (
+				7ED0B24916B8D06100B2634C /* cannontrail_default.plist */,
+				7ED0B24A16B8D06100B2634C /* cannontrail_default.png */,
+				7ED0B24116B8C75400B2634C /* cannonfire_default.plist */,
+				7ED0B24216B8C75400B2634C /* cannonfire_default.png */,
+				7ED0B23F16B8C17800B2634C /* smokecloud.png */,
 				7E1456B215E87EEF007CC9E4 /* grey_particle.png */,
 			);
 			path = particle;
@@ -2479,6 +2500,7 @@
 				7EBD090616AE16A700ED148B /* EnemyAlert.h in Headers */,
 				7ECF823816AFC21B002D2A21 /* LabBGObject.h in Headers */,
 				7ECF823D16AFC80B002D2A21 /* EnemyBomb.h in Headers */,
+				7ED0B24716B8C79600B2634C /* CannonFireParticle.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2713,6 +2735,11 @@
 				7EBD08FF16ADF67C00ED148B /* enemy_approach_ui.png in Resources */,
 				7EBD090216ADFAAA00ED148B /* explosion_default.plist in Resources */,
 				7EBD090316ADFAAA00ED148B /* explosion_default.png in Resources */,
+				7ED0B24016B8C17800B2634C /* smokecloud.png in Resources */,
+				7ED0B24316B8C75400B2634C /* cannonfire_default.plist in Resources */,
+				7ED0B24416B8C75400B2634C /* cannonfire_default.png in Resources */,
+				7ED0B24B16B8D06100B2634C /* cannontrail_default.plist in Resources */,
+				7ED0B24C16B8D06100B2634C /* cannontrail_default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2817,6 +2844,7 @@
 				7EBD090716AE16A700ED148B /* EnemyAlert.m in Sources */,
 				7ECF823916AFC21B002D2A21 /* LabBGObject.m in Sources */,
 				7ECF823E16AFC80B002D2A21 /* EnemyBomb.m in Sources */,
+				7ED0B24816B8C79600B2634C /* CannonFireParticle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

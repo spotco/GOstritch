@@ -17,7 +17,6 @@
 /**
  TODO --
  -more moves for boss (relative bomb), and damage show
- -swing fix
  -revert labwall to manually placed
  
  -player run in animation

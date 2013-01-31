@@ -4,6 +4,7 @@
 @interface LauncherRocket : GameObject {
     CGPoint v;
     CGPoint vibration,actual_pos;
+    CCSprite* trail;
     BOOL kill;
     int ct,remlimit,broken_ct;
     float vibration_ct;

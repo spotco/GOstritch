@@ -107,7 +107,9 @@ static NSMutableDictionary* textures = nil;
                         @"checkpoint2.png",TEX_CHECKPOINT_2,
 
                         @"grey_particle.png",TEX_GREY_PARTICLE,
-
+                        @"smokecloud.png",TEX_SMOKE_PARTICLE,
+                        @"cannonfire_default.png", TEX_CANNONFIRE_PARTICLE,
+                        @"cannontrail_default.png",TEX_CANNONTRAIL,
                      
                         @"coincount.png", TEX_UI_COINCOUNT,
                         @"ingame_ui_bone_icon.png",TEX_UI_BONE_ICON,

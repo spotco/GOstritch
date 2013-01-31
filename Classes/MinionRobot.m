@@ -29,7 +29,7 @@
     MinionRobot *t = [MinionRobot node];
     CCSprite *body = [CCSprite spriteWithTexture:tex rect:rect];
     t.body = body;
-    body.position = ccp(t.IMGWID/2,t.IMGHEI/2);
+    body.position = ccp(0,t.IMGHEI/2);
     [t addChild:body];
     [body setScale:DEFAULT_SCALE];
     [t setScale:DEFAULT_SCALE];

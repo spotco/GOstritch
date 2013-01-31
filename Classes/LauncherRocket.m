@@ -10,9 +10,15 @@
 
 #define DEFAULT_SCALE 0.75
 
+-(CCAction*)init_anim:(NSArray*)a speed:(float)speed {
+	CCTexture2D *texture = [Resource get_tex:TEX_CANNONTRAIL];
+	NSMutableArray *animFrames = [NSMutableArray array];
+    for (NSString* k in a) [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[FileCache get_cgrect_from_plist:TEX_CANNONTRAIL idname:k]]];
+    return  [Common make_anim_frames:animFrames speed:0.1];
+}
 
 +(LauncherRocket*)cons_at:(CGPoint)pt vel:(CGPoint)vel {
-    return [[LauncherRocket spriteWithTexture:[Resource get_tex:TEX_ENEMY_ROCKET]] cons_at:pt vel:vel];
+    return [[LauncherRocket node] cons_at:pt vel:vel];
 }
 
 -(id)cons_at:(CGPoint)pt vel:(CGPoint)vel {
@@ -23,6 +29,16 @@
     remlimit = -1;
     [self setRotation:[self get_tar_angle_deg_self:pt tar:ccp(pt.x+vel.x,pt.y+vel.y)]];
     [self setScale:DEFAULT_SCALE];
+    
+    CCSprite *body = [CCSprite spriteWithTexture:[Resource get_tex:TEX_ENEMY_ROCKET]];
+    [self addChild:body z:2];
+    
+    trail = [CCSprite node];
+    [trail setScale:0.75];
+    [trail setPosition:ccp(70,0)];
+    [trail runAction:[self init_anim:[NSArray arrayWithObjects:@"1",@"2",@"3",@"4", nil] speed:0.1]];
+    [self addChild:trail z:1];
+    
     return self;
 }
 
@@ -51,8 +67,14 @@
     [super update:player g:g];
     [self update_position];
     
+    Vec3D *dv = [Vec3D init_x:v.x y:v.y z:0];
+    [dv normalize];
+    [dv scale:-1];
+    [dv scale:90];
     ct++;
-    ct%PARTICLE_FREQ==0?[g add_particle:[RocketLaunchParticle init_x:position_.x y:position_.y vx:-v.x vy:-v.y]]:0;
+    ct%PARTICLE_FREQ==0?[g add_particle:[RocketLaunchParticle init_x:position_.x+dv.x y:position_.y+dv.y vx:-v.x vy:-v.y]]:0;
+    [dv dealloc];
+    
     
     if (position_.x + REMOVE_BEHIND_BUFFER < player.position.x) {
         kill = YES;
@@ -66,6 +88,7 @@
         return;
         
     } else if (broken_ct > 0) {
+        [trail setVisible:NO];
         [self setOpacity:150];
         [self setRotation:self.rotation+30];
         broken_ct--;

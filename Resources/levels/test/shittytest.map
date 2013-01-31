@@ -1,15 +1,12 @@
 {
-    "start_y": 195,
+    "start_y": 228,
     "objects": [
-        {"height": 119, "x": 848, "type": "water", "y": -4, "label": "0", "width": 400},
-        {"label": "2", "x": 791, "type": "spike", "y": 284},
-        {"y2": 545, "x": 1131, "type": "electricwall", "y": 246, "label": "3", "x2": 1035}
+        {"label": "1", "x": 745, "type": "launcherrobot", "y": 255, "dir": {"x": -1, "y": -0.02}},
+        {"label": "2", "x": 744, "type": "launcherrobot", "y": 352, "dir": {"x": -1, "y": -0.03}},
+        {"label": "3", "x": 747, "type": "launcherrobot", "y": 443, "dir": {"x": -1, "y": -0.04}}
     ],
-    "islands": [
-        {"y2": 151, "x1": 56, "type": "line", "can_fall": true, "x2": 943, "ndir": "left", "ground": "open", "y1": 152, "hei": 50},
-        {"y2": 285, "x1": 221, "type": "line", "can_fall": true, "x2": 940, "ndir": "right", "ground": "open", "y1": 284, "hei": 50}
-    ],
-    "connect_pts": {"y2": 151, "x1": 56, "y1": 152, "x2": 943},
-    "start_x": 117,
+    "islands": [{"y2": 205, "x1": 108, "type": "line", "can_fall": true, "x2": 913, "ndir": "left", "ground": "open", "y1": 182, "hei": 50}],
+    "connect_pts": {"y2": 205, "x1": 108, "y1": 182, "x2": 913},
+    "start_x": 351,
     "assert_links": 0
 }

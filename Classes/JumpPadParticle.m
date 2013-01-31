@@ -13,15 +13,17 @@
     [super cons];
     self.vx = lvx;
     self.vy = lvy;
-    [self setColor:ccc3(150+arc4random_uniform(60), 210+arc4random_uniform(40), 200+arc4random_uniform(50))];
+    [self set_color];
     [self setScale:float_random(0.75, 1.75)];
+}
+-(void)set_color {
+    [self setColor:ccc3(150+arc4random_uniform(60), 210+arc4random_uniform(40), 200+arc4random_uniform(50))];
 }
 @end
 
 @implementation RocketLaunchParticle
-
 +(RocketLaunchParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
-    RocketLaunchParticle *p = [RocketLaunchParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
+    RocketLaunchParticle *p = [RocketLaunchParticle spriteWithTexture:[Resource get_tex:TEX_SMOKE_PARTICLE]];
     [p cons_vx:vx vy:vy];
     p.position = ccp(x,y);
     return p;
@@ -33,13 +35,55 @@
     return p;
 }
 
+-(id)init {
+    [self setRotation:float_random(-180, 180)];
+    [self setScale:0.85];
+    return [super init];
+}
+
+-(int)get_render_ord {
+    return [GameRenderImplementation GET_RENDER_ABOVE_FG_ORD];
+}
+
+-(void)set_color {
+}
+
+-(void)cons_vx:(float)lvx vy:(float)lvy {
+    [super cons_vx:lvx vy:lvy];
+    //[self setColor:ccc3(200+arc4random_uniform(55), 0+arc4random_uniform(100), 0+arc4random_uniform(100))];
+    ct = 30;
+}
+
+-(void)update:(GameEngineLayer *)g {
+    [super update:g];
+    [self setRotation:rotation_+5];
+}
+@end
+
+@implementation RocketExplodeParticle
+
++(RocketExplodeParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
+    RocketExplodeParticle *p = [RocketExplodeParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
+    [p cons_vx:vx vy:vy];
+    p.position = ccp(x,y);
+    return p;
+}
+
++(RocketExplodeParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy scale:(float)scale {
+    RocketExplodeParticle *p = [RocketExplodeParticle init_x:x y:y vx:vx vy:vy];
+    [p setScale:scale];
+    return p;
+}
+
 -(int)get_render_ord {
     return [GameRenderImplementation GET_RENDER_ABOVE_FG_ORD];
 }
 
 -(void)cons_vx:(float)lvx vy:(float)lvy {
     [super cons_vx:lvx vy:lvy];
-    [self setColor:ccc3(200+arc4random_uniform(55), 0+arc4random_uniform(100), 0+arc4random_uniform(100))];
-    ct = 30;
+    [self setColor:ccc3(255, 140, 0)];
+    ct = 20;
+    [self setScale:float_random(0.5, 0.85)];
 }
+
 @end

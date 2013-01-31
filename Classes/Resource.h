@@ -99,6 +99,9 @@
 #define TEX_GROUND_DETAIL_9 @"GroundDetail9"
 
 #define TEX_GREY_PARTICLE @"GreyParticle"
+#define TEX_SMOKE_PARTICLE @"smokeparticle"
+#define TEX_CANNONFIRE_PARTICLE @"cannonfire_default"
+#define TEX_CANNONTRAIL @"cannontrail_default"
 
 #define TEX_UI_COINCOUNT @"UICoinCount"
 #define TEX_UI_BONE_ICON @"UIBoneIcon"

@@ -107,7 +107,11 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_2;
         [self runanim_update];
         
     } else if (cur_anim_mode == player_anim_mode_DASH) {
-        cur_scy = last_ndir;
+        if (current_island != NULL) {
+            cur_scy = last_ndir;
+        } else {
+            cur_scy = 1;
+        }
         [self dashanim_update:g];
         
     } else if (cur_anim_mode == player_anim_mode_CAPE) {
@@ -180,7 +184,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_2;
 -(void)swingvine_attach_anim {
     //smoothing anim for swingvine attach, see swingvine update (does not force rotation until curanim is _SWING_ANIM
     if (![Common fuzzyeq_a:rotation_ b:-90 delta:1]) {
-        float dir = [Common shortest_dist_from_cur:rotation_ to:-90]*0.3;
+        float dir = [Common shortest_dist_from_cur:rotation_ to:-90]*0.8;
         self.rotation += dir;
     } else {
         [self start_anim:_SWING_ANIM];
