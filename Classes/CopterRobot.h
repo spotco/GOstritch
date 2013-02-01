@@ -17,14 +17,19 @@ typedef enum {
     CopterMode_SkyFireLeft,
     CopterMode_RapidFireRight,
     CopterMode_TrackingFireLeft,
-    Coptermode_DeathExplode
+    Coptermode_DeathExplode,
+    Coptermode_BombWaveRight,
+    Coptermode_BombDropRight,
+    Coptermode_BombDropLeft
 } CopterMode;
 
 @interface CopterRobot : GameObject {
     CCSprite *body,*arm,*main_prop,*aux_prop,*main_nut,*aux_nut;
     CGPoint player_pos, rel_pos, actual_pos;
-    int ct;
+    int ct,ct2;
+    BOOL setbroke;
     float groundlevel;
+    float vr;
     CopterMode cur_mode;
     int hp;
     

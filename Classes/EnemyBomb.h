@@ -10,6 +10,6 @@
 }
 
 +(EnemyBomb*)cons_pt:(CGPoint)pt v:(CGPoint)vel;
+-(id)cons_pt:(CGPoint)pt v:(CGPoint)vel;
+-(void)move:(GameEngineLayer*)g;
 @end
-
-//TODO--relativeposition bomb

@@ -1,5 +1,6 @@
 #import "EnemyBomb.h"
 #import "GameEngineLayer.h"
+#import "Player.h" 
 
 @interface BombSparkParticle : Particle {
     CGPoint vel;
@@ -86,13 +87,17 @@
         [g remove_gameobject:self];
         
     } else {
-        [self setPosition:CGPointAdd(position_, v)];
-        v.y-=0.5;
+        [self move:g];
+        v.y-=0.25;
         v.y = MAX(-10,v.y);
         ct%2==0?[g add_particle:[BombSparkParticle cons_pt:[self get_tip] v:ccp(float_random(-5,5),float_random(-5, 5))]]:0;
         [body setRotation:body.rotation+vtheta];
         
     }
+}
+
+-(void)move:(GameEngineLayer*)g {
+    [self setPosition:CGPointAdd(position_, v)];
 }
 
 -(BOOL)has_hit_ground:(GameEngineLayer*)g {

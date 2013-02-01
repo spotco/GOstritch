@@ -49,7 +49,8 @@ static int DEBUG_MODE = 0;
     }
     tglayer = glayer;
     
-    NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
+    //NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
+    NSArray *to_load = [[NSArray arrayWithObjects: @"boss1_area", nil] retain];
     map_sections = [[NSMutableArray alloc] init];
     stored = [[NSMutableArray alloc] init];
     queued_sections = [[NSMutableArray alloc] init];

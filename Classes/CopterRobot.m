@@ -1,6 +1,7 @@
 #import "CopterRobot.h"
 #import "GameEngineLayer.h"
 #import "JumpPadParticle.h"
+#import "EnemyBomb.h"
 
 #define ARM_DEFAULT_POSITION ccp(-35,-55)
 
@@ -28,12 +29,17 @@ static const int TRACKINGFIRE_DIST = 500;
 static const int TRACKINGFIRE_RELOAD = 60;
 static const int TRACKINGFIRE_ROCKETSPEED = 8;
 
-static const float RECOIL_DIST = 40;
+static const float RECOIL_DIST = 25;
 static const float RECOIL_CT = 10;
 
-static const int DEFAULT_HP = 1;
+static const int DEFAULT_HP = 2;
 
 #define DEFAULT_SCALE 1.2
+
+#define BODY @"body"
+#define BODY_BROKEN @"body_broken"
+#define ARM @"arm"
+#define ARM_BROKEN @"arm_broken"
 
 +(CopterRobot*)cons_with_playerpos:(CGPoint)p {
     return [[CopterRobot node] cons_at:p];
@@ -61,6 +67,13 @@ static const int DEFAULT_HP = 1;
     if (cur_mode != CopterMode_ToRemove) {
         [self set_bounds_and_ground:g];
         [GEventDispatcher push_event:[[GEvent init_type:GEventType_BOSS1_TICK] add_i1:hp i2:DEFAULT_HP]];
+    }
+    
+    if (hp <= DEFAULT_HP/2 && !setbroke) {
+        setbroke = YES;
+        [body setTextureRect:[FileCache get_cgrect_from_plist:TEX_ENEMY_COPTER idname:BODY_BROKEN]];
+        [arm setTextureRect:[FileCache get_cgrect_from_plist:TEX_ENEMY_COPTER idname:ARM_BROKEN]];
+        NSLog(@"setbroken");
     }
     
     [self anim_arm];
@@ -123,31 +136,52 @@ static const int DEFAULT_HP = 1;
     } else if (cur_mode == Coptermode_DeathExplode) {
         [self death_explode:g];
         
+    } else if (cur_mode == Coptermode_BombWaveRight) {
+        [self bombwave_right:g];
+        
+    } else if (cur_mode == Coptermode_BombDropRight) {
+        [self bombdrop_right:g];
+        
+    } else if (cur_mode == Coptermode_BombDropLeft) {
+        [self bombdrop_left:g];
+        
     }
     
     [self setPosition:ccp(actual_pos.x+vibration.x+recoil.x,actual_pos.y+vibration.y+recoil.y)];
 }
 
 
--(void)get_random_action:(Side)s {
+-(void)get_random_action:(Side)s {    
     if (s == Side_Left) {
-        lct = (lct+1)%2;
-        if (lct == 0) {
+        lct = (lct+1)%4;
+        if (lct == 1) {
             cur_mode = CopterMode_RightDash;
             rel_pos = ccp(-600,30);
             ct = DASHWAITCT;
             [self apply_rel_pos];
             
-        } else if (lct == 1) {
+        } else if (lct == 2) {
             cur_mode = CopterMode_RapidFireRight;
             rel_pos = ccp(-600,0);
             actual_pos = ccp(rel_pos.x+player_pos.x,groundlevel + 75);
             ct = RAPIDFIRE_CT;
             
+        } else if (lct == 0) {
+            cur_mode = Coptermode_BombWaveRight;
+            actual_pos = ccp(player_pos.x-550,groundlevel + 300);
+            rel_pos = ccp(actual_pos.x-player_pos.x,actual_pos.y-player_pos.y);
+            ct = 500;
+            vr = 1;
+            
+        } else if (lct == 3){
+            cur_mode = Coptermode_BombDropRight;
+            actual_pos = ccp(player_pos.x-750,groundlevel + 400);
+            rel_pos = ccp(actual_pos.x-player_pos.x,actual_pos.y-player_pos.y);
+            
         } else { NSLog(@"ERRORinG_rand_act"); }
         
     } else {
-        rct = (rct+1)%3;
+        rct = (rct+1)%4;
         if (rct == 0) {
             cur_mode = CopterMode_LeftDash;
             rel_pos = ccp(800,30);
@@ -165,8 +199,88 @@ static const int DEFAULT_HP = 1;
             [self apply_rel_pos];
             ct = TRACKINGFIRE_CT;
             
+        } else if (rct == 3) {
+            cur_mode = Coptermode_BombDropLeft;
+            actual_pos = ccp(player_pos.x+750,groundlevel + 400);
+            rel_pos = ccp(actual_pos.x-player_pos.x,actual_pos.y-player_pos.y);
+            
         } else { NSLog(@"ERRORinG_rand_act"); }
     }
+}
+
+-(void)bombdrop_left:(GameEngineLayer*)g {
+    [g set_target_camera:[Common cons_normalcoord_camera_zoom_x:90 y:60 z:131]];
+    [self setScaleX:-1];
+    ct++;
+    if (rel_pos.x > -300) {
+        rel_pos.x -= 2.5;
+        actual_pos = ccp(rel_pos.x+player_pos.x,actual_pos.y);
+        if (ct%40==0) {
+            CGPoint noz = [self get_nozzle];
+            [g add_gameobject:[EnemyBomb cons_pt:noz v:ccp(float_random(1,5),float_random(-4,4))]];
+            [self apply_recoil];
+            [LauncherRobot explosion:g at:noz];
+        }
+        
+        
+    } else {
+        [self get_random_action:Side_Left];
+    }
+}
+
+-(void)bombdrop_right:(GameEngineLayer*)g {
+    [g set_target_camera:[Common cons_normalcoord_camera_zoom_x:280 y:60 z:131]];
+    [self setScaleX:1];
+    ct++;
+    if (rel_pos.x < 500) {
+        rel_pos.x += 2.5;
+        actual_pos = ccp(rel_pos.x+player_pos.x,actual_pos.y);
+        if (ct%40==0) {
+            CGPoint noz = [self get_nozzle];
+            [g add_gameobject:[EnemyBomb cons_pt:noz v:ccp(float_random(5,7),float_random(0,4))]];
+            [self apply_recoil];
+            [LauncherRobot explosion:g at:noz];
+        }
+        
+        
+    } else {
+        [self get_random_action:Side_Right];
+    }
+}
+
+-(void)bombwave_right:(GameEngineLayer*)g {
+    [g set_target_camera:[Common cons_normalcoord_camera_zoom_x:320 y:80 z:131]];
+    [self setScaleX:1];
+    
+    if (rel_pos.x < -400) {
+        rel_pos.x += 5;
+        [self setRotation:-45];
+    } else if (ct > 0) {
+        ct--;
+        ct2++;
+        if (ct%50==0) {
+            vr *= -1;
+            
+        }
+        int firespeed = 40+50*(ct/500.0);
+        [self setRotation:rotation_+vr];
+        if (ct2 > firespeed) {
+            CGPoint noz = [self get_nozzle];
+            [g add_gameobject:[EnemyBomb cons_pt:noz v:ccp(float_random(7,18),float_random(2,9))]];
+            [self apply_recoil];
+            [LauncherRobot explosion:g at:noz];
+            ct2 = 0;
+        }
+        
+    } else {
+        [self setRotation:rotation_*0.9];
+        rel_pos.x+=DASHSPEED;
+        if (rel_pos.x > 500) {
+            [self get_random_action:Side_Right];
+        }
+    }
+    
+    actual_pos = ccp(rel_pos.x+player_pos.x,actual_pos.y);
 }
 
 -(void)death_explode:(GameEngineLayer*)g {
@@ -459,11 +573,6 @@ static const int DEFAULT_HP = 1;
     vibration_theta+=VIBRATION_SPEED;
     vibration.y = VIBRATION_AMPLITUDE*sinf(vibration_theta);
 }
-
-#define BODY @"body"
-#define BODY_BROKEN @"body_broken"
-#define ARM @"arm"
-#define ARM_BROKEN @"arm_broken"
 
 -(void)init_anims {
     body = [CCSprite spriteWithTexture:[Resource get_aa_tex:TEX_ENEMY_COPTER] 

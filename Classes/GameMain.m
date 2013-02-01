@@ -16,7 +16,8 @@
 
 /**
  TODO --
- -more moves for boss (relative bomb), and damage show
+ -sound
+ -rocket trail on relativerocket
  -revert labwall to manually placed
  
  -player run in animation
@@ -36,10 +37,10 @@
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
     
-    [GameMain start_testlevel];
+    //[GameMain start_testlevel];
     //[GameMain start_game_autolevel];
     //[GameMain start_menu];
-    //[GameMain start_game_bosstestlevel];
+    [GameMain start_game_bosstestlevel];
     
 }
 
