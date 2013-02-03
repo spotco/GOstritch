@@ -7,6 +7,20 @@ static const float FADE_SPD = 0.15;
 static NSString* fade_target;
 static BOOL initial_play = NO;
 
+static BOOL play_bgm = YES;
+static BOOL play_sfx = YES;
+
++(void)set_play_bgm:(BOOL)t {
+    play_bgm = t;
+    if (!play_bgm) {
+        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    }
+}
+
++(void)set_play_sfx:(BOOL)t {
+    play_sfx = t;
+}
+
 +(void)init {
     NSArray *bgm = [NSArray arrayWithObjects:
         BGMUSIC_GAMELOOP1,
@@ -42,7 +56,11 @@ static BOOL initial_play = NO;
     [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(update) userInfo:nil repeats:YES];
 }
 
-+(void)play:(NSString *)tar {    
++(void)play:(NSString *)tar {
+    if (!play_bgm){
+        return;
+    }
+    
     if (!initial_play) {
         [[SimpleAudioEngine sharedEngine] playBackgroundMusic:tar loop:YES];
         initial_play = YES;
@@ -54,6 +72,9 @@ static BOOL initial_play = NO;
 }
 
 +(void)playsfx:(NSString*)tar {
+    if (!play_sfx) {
+        return;
+    }
     [[SimpleAudioEngine sharedEngine] playEffect:tar];
 }
 

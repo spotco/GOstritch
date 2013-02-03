@@ -12,12 +12,12 @@
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
 #define STARTING_LIVES 10
+#define PLAY_SFX YES
+#define PLAY_BGM YES
 #define TESTLEVEL @"robotstest"
 
 /**
  TODO --
- -dog flipback
- 
  -player run in animation
  -sun
  -different dogs differnt special powers
@@ -32,6 +32,8 @@
     [GEventDispatcher lazy_alloc];
     [DataStore init];
     [AudioManager init];
+    [AudioManager set_play_bgm:PLAY_BGM];
+    [AudioManager set_play_sfx:PLAY_SFX];
     [Resource init_textures];
     [BatchDraw init];
     

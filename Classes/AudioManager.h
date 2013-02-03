@@ -27,4 +27,7 @@
 +(void)play:(NSString*)tar;
 +(void)playsfx:(NSString*)tar;
 
++(void)set_play_bgm:(BOOL)t;
++(void)set_play_sfx:(BOOL)t;
+
 @end

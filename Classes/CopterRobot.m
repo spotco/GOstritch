@@ -32,7 +32,7 @@ static const int TRACKINGFIRE_ROCKETSPEED = 8;
 static const float RECOIL_DIST = 25;
 static const float RECOIL_CT = 10;
 
-static const int DEFAULT_HP = 2;
+static const int DEFAULT_HP = 4;
 
 #define DEFAULT_SCALE 1.2
 
@@ -94,6 +94,7 @@ static const int DEFAULT_HP = 2;
                 float velx = float_random(0, FLYOFFSPEED);
                 float vely = (FLYOFFSPEED-velx)*(int_random(0, 2)?1:-1);
                 flyoffdir = ccp(SIG(actual_pos.x-player.position.x)*velx,vely);
+                [AudioManager playsfx:SFX_ROCKBREAK];
                 [AudioManager playsfx:SFX_ROCKET_SPIN];
                 
             }
@@ -292,9 +293,12 @@ static const int DEFAULT_HP = 2;
     
     actual_pos = ccp(rel_pos.x+player_pos.x,actual_pos.y);
     
-    (ct%15==0&&ct>20)?[g add_particle:[RelativePositionExplosionParticle init_x:position_.x+float_random(-60, 60) 
-                                                                     y:position_.y+float_random(-60, 60) 
-                                                                player:g.player.position]] : 0;
+    if (ct%15==0&&ct>20) {
+        [g add_particle:[RelativePositionExplosionParticle init_x:position_.x+float_random(-60, 60)
+                                                                y:position_.y+float_random(-60, 60)
+                                                           player:g.player.position]];
+        [AudioManager playsfx:SFX_EXPLOSION];
+    }
     
     ct%5==0?[g add_particle:[RocketLaunchParticle init_x:position_.x 
                                                       y:position_.y 

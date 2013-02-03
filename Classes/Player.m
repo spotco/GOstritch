@@ -191,7 +191,9 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
 }
 
 -(void)runanim_update {
-    if (self.last_ndir != prevndir && self.last_ndir < 0) {
+    if (self.last_ndir != prevndir && self.last_ndir < 0) { //if land on reverse, start flip
+        flipctr = 10;
+    } else if (flipctr <= 0 && self.current_island == NULL && cur_scy < 0) {//if jump from reverse, startflip
         flipctr = 10;
     }
     prevndir = self.last_ndir;
@@ -200,6 +202,10 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
         cur_scy = last_ndir;
         flipctr--;
         [self start_anim:_FLIP_ANIM];
+        
+        if (flipctr == 0 && self.current_island == NULL && cur_scy < 0) { //finish jump from reverse flip
+            cur_scy = 1;
+        }
         
     } else if (current_island == NULL) {
         cur_scy = 1;
@@ -324,7 +330,6 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
 
 -(void)add_effect_suppress_current_end_effect:(PlayerEffectParams *)effect {
     if (temp_params != NULL) {
-        //NSLog(@"ignore dealloc error message");
         [temp_params dealloc];
         temp_params = NULL;
     }
