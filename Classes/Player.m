@@ -121,8 +121,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
         [self start_anim:_ROCKET_ANIM];
         [g add_particle:[RocketParticle init_x:position_.x-40 y:position_.y+20]];
         
-    } else if (cur_anim_mode == player_anim_mode_HIT) {
-        cur_scy = last_ndir;
+    } else if (cur_anim_mode == player_anim_mode_HIT) { 
         [self start_anim:_HIT_ANIM];
         
     } else if (cur_anim_mode == player_anim_mode_FLASH) {

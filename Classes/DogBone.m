@@ -86,6 +86,7 @@
     
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
+        [AudioManager playsfx:SFX_BONE];
         [g set_bid_tohasget:bid];
         [self set_active:NO];
     }

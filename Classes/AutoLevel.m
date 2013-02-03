@@ -17,8 +17,8 @@ static int DEBUG_MODE = 0;
     static NSArray *set1_levels;
     if (!set1_levels){
         set1_levels = [[NSArray alloc] initWithObjects:
-            //@"autolevel_1_1",@"autolevel_1_2",@"autolevel_1_3",@"autolevel_1_4",@"autolevel_1_5",@"autolevel_1_6",@"autolevel_1_7",@"autolevel_1_8",
-            @"autolevel_1_5",@"autolevel_1_6",@"autolevel_1_8",
+            @"autolevel_1_1",@"autolevel_1_2",@"autolevel_1_3",@"autolevel_1_4",@"autolevel_1_5",@"autolevel_1_6",@"autolevel_1_7",@"autolevel_1_8",
+            //@"autolevel_1_5",@"autolevel_1_6",@"autolevel_1_8",
         nil];
     }
     return set1_levels;
@@ -49,8 +49,8 @@ static int DEBUG_MODE = 0;
     }
     tglayer = glayer;
     
-    //NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
-    NSArray *to_load = [[NSArray arrayWithObjects: @"boss1_area", nil] retain];
+    NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
+    //NSArray *to_load = [[NSArray arrayWithObjects: @"boss1_area", nil] retain];
     map_sections = [[NSMutableArray alloc] init];
     stored = [[NSMutableArray alloc] init];
     queued_sections = [[NSMutableArray alloc] init];

@@ -67,6 +67,8 @@
         [body setRotation:body.rotation+25];
         if (ct > 20) {
             [g add_particle:[ExplosionParticle init_x:position_.x y:position_.y]];
+            
+            [AudioManager playsfx:SFX_EXPLOSION];
             [g remove_gameobject:self];
         }
         
@@ -79,11 +81,14 @@
         } else {
             [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
             [g add_particle:[ExplosionParticle init_x:position_.x y:position_.y]];
+            
+            [AudioManager playsfx:SFX_EXPLOSION];
             [g remove_gameobject:self];
         }
         
     } else if ([self has_hit_ground:g]) {
         [g add_particle:[ExplosionParticle init_x:position_.x y:position_.y]];
+        [AudioManager playsfx:SFX_EXPLOSION];
         [g remove_gameobject:self];
         
     } else {

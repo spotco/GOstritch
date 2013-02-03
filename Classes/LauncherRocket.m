@@ -100,10 +100,12 @@
     } else if (broken_ct == 0 && !player.dead && !player.dashing && player.current_island == NULL && player.vy <= 0 && [Common hitrect_touch:[self get_hit_rect] b:[player get_jump_rect]]) {
         [self flyoff:ccp(player.vx,player.vy) norm:6];
         player.vy = 6;
+        [AudioManager playsfx:SFX_BOP];
         
     } else if (broken_ct == 0 && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         if (player.dashing) {
             [self flyoff:ccp(player.vx,player.vy) norm:0];
+            [AudioManager playsfx:SFX_ROCKBREAK];
             
         } else if (!player.dead) {
             [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
@@ -129,6 +131,7 @@
 }
 
 -(void)remove_from:(GameEngineLayer*)g {
+    [AudioManager playsfx:SFX_EXPLOSION];
     [g add_particle:[ExplosionParticle init_x:position_.x y:position_.y]];
     //[LauncherRobot explosion:g at:position_];
     [g remove_gameobject:shadow];
@@ -155,7 +158,7 @@
 @implementation RelativePositionLauncherRocket
 
 +(RelativePositionLauncherRocket*)cons_at:(CGPoint)pt player:(CGPoint)player vel:(CGPoint)vel {
-    return [[RelativePositionLauncherRocket spriteWithTexture:[Resource get_tex:TEX_ENEMY_ROCKET]] cons_at:pt player:player vel:vel];
+    return [[RelativePositionLauncherRocket node] cons_at:pt player:player vel:vel];
 }
 
 -(id)cons_at:(CGPoint)pt player:(CGPoint)player vel:(CGPoint)vel {
@@ -165,6 +168,15 @@
     v = vel;
     [self update_position];
     [self setScale:DEFAULT_SCALE];
+    
+    CCSprite *body = [CCSprite spriteWithTexture:[Resource get_tex:TEX_ENEMY_ROCKET]];
+    [self addChild:body z:2];
+    
+    trail = [CCSprite node];
+    [trail setScale:0.75];
+    [trail setPosition:ccp(70,0)];
+    [trail runAction:[self init_anim:[NSArray arrayWithObjects:@"1",@"2",@"3",@"4", nil] speed:0.1]];
+    [self addChild:trail z:1];
     
     active = YES;
     [self setRotation:[self get_tar_angle_deg_self:pt tar:ccp(pt.x+vel.x,pt.y+vel.y)]];

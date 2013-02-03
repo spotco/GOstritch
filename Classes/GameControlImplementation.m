@@ -96,8 +96,7 @@ static float avg_y;
     }
     
     if (queue_swipe == YES && player.current_island == NULL && [player get_current_params].cur_dash_count > 0) {
-        [[player get_current_params] decr_dash_count];
-        [player add_effect:[DashEffect init_from:[player get_default_params] vx:swipe_dir.x vy:swipe_dir.y]];
+        [GameControlImplementation player_dash:player];
     }
     queue_swipe = NO;
     
@@ -146,7 +145,15 @@ static float avg_y;
     }
 }
 
-+(void)player_double_jump:(Player*)player {    
++(void)player_dash:(Player*)player {
+    [AudioManager playsfx:SFX_SPIN];
+    [[player get_current_params] decr_dash_count];
+    [player add_effect:[DashEffect init_from:[player get_default_params] vx:swipe_dir.x vy:swipe_dir.y]];
+}
+
++(void)player_double_jump:(Player*)player {
+    [AudioManager playsfx:SFX_JUMP];
+    
     player.vx += player.up_vec.x*JUMP_POWER;
     player.vy = player.up_vec.y*JUMP_POWER;
     player.current_swingvine = NULL;
@@ -166,6 +173,8 @@ static float avg_y;
 
 
 +(void)player_jump_from_island:(Player*)player {
+    [AudioManager playsfx:SFX_JUMP];
+    
     float mov_speed = sqrtf(powf(player.vx, 2) + powf(player.vy, 2));
     
     Vec3D *tangent = [player.current_island get_tangent_vec];

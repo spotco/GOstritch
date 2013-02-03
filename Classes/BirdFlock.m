@@ -1,4 +1,5 @@
 #import "BirdFlock.h"
+#import "AudioManager.h" 
 
 @interface Bird: CCSprite {
     float vx,vy;
@@ -100,6 +101,7 @@
 }
 
 -(void)activate_birds {
+    [AudioManager playsfx:SFX_BIRD_FLY];
     for (Bird *i in birds) {
         i.flying = YES;
         i.fly_ct = 400;

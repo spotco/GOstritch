@@ -94,13 +94,15 @@ static const int DEFAULT_HP = 2;
                 float velx = float_random(0, FLYOFFSPEED);
                 float vely = (FLYOFFSPEED-velx)*(int_random(0, 2)?1:-1);
                 flyoffdir = ccp(SIG(actual_pos.x-player.position.x)*velx,vely);
+                [AudioManager playsfx:SFX_ROCKET_SPIN];
+                
             }
             
         } else if (!player.dead) {
             cur_mode = CopterMode_Killed_Player;
             [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
             [DazedParticle init_effect:g tar:player time:40];
-            
+            [AudioManager playsfx:SFX_HIT];
             
         }
     }

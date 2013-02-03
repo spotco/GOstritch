@@ -57,6 +57,7 @@ float texwid,texhei;
         for(int i = 0; i < 5; i++) {
             [g add_particle:[FireworksParticleA init_x:center.x y:center.y vx:float_random(-3,3) vy:float_random(9,14) ct:arc4random_uniform(20)+10]];
         }
+        [AudioManager playsfx:SFX_CHECKPOINT];
     }
 }
 

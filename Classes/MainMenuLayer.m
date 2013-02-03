@@ -27,6 +27,9 @@
 
 -(id)init {
     self = [super init];
+    
+    [AudioManager play:BGMUSIC_MENU1];
+    
     [GEventDispatcher add_listener:self];
     menu_pages = [[NSMutableArray alloc] init];
     [self add_pages];

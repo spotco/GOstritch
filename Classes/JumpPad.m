@@ -52,6 +52,7 @@
                                                  vx:dvx
                                                  vy:dvy]];
         }
+        [AudioManager playsfx:SFX_JUMPPAD];
     }
 }
 

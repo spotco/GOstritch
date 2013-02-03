@@ -1,4 +1,5 @@
 #import "DogModePage.h"
+#import "AudioManager.h" 
 
 @implementation DogModePage
 
@@ -36,15 +37,16 @@
     
     [dogsimgs addObject:s];
     [anims addObject:anim];
+    
 }
 
--(void)dog1 {[Player set_character:TEX_DOG_RUN_1];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
--(void)dog2 {[Player set_character:TEX_DOG_RUN_2];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
--(void)dog3 {[Player set_character:TEX_DOG_RUN_3];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
--(void)dog4 {[Player set_character:TEX_DOG_RUN_4];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
--(void)dog5 {[Player set_character:TEX_DOG_RUN_5];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
--(void)dog6 {[Player set_character:TEX_DOG_RUN_6];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
--(void)dog7 {[Player set_character:TEX_DOG_RUN_7];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
+-(void)dog1 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_1];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
+-(void)dog2 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_2];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
+-(void)dog3 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_3];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
+-(void)dog4 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_4];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
+-(void)dog5 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_5];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
+-(void)dog6 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_6];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
+-(void)dog7 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_7];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
 
 -(CCAction*)init_run_anim:(NSString*)tar {
 	CCTexture2D *texture = [Resource get_tex:tar];

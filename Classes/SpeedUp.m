@@ -39,6 +39,7 @@
         [player add_effect:e];
         
         recharge_ct = 50;
+        [AudioManager playsfx:SFX_SPEEDUP];
     }
 }
 

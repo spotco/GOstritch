@@ -32,6 +32,7 @@
                                                            vx:float_random(-5, 5) 
                                                            vy:float_random(-5, 5)]];
         }
+        [AudioManager playsfx:SFX_ROCKBREAK];
         
     } else {
         [super hit:player g:g];

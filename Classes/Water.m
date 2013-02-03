@@ -1,4 +1,5 @@
 #import "Water.h"
+#import "AudioManager.h" 
 
 #define ANIM_SPEED 0.0025
 #define OFFSET_V 10
@@ -47,6 +48,7 @@
         [player reset_params];
         activated = YES;
         [player add_effect:[SplashEffect init_from:[player get_default_params] time:40]];
+        [AudioManager playsfx:SFX_SPLASH];
         
     } else if ([player get_current_params].noclip &&
                [player get_current_params].noclip < 2 &&

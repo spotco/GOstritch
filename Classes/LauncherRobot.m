@@ -118,6 +118,7 @@
             [g add_particle:[BrokenMachineParticle init_x:position_.x y:position_.y vx:float_random(-5, 5) vy:float_random(-3, 10)]];
         }
         player.vy = 8;
+        [AudioManager playsfx:SFX_BOP];
         
     } else if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         if (player.dashing) {
@@ -127,6 +128,7 @@
             for(float i = 0; i < ptcnt; i++) {
                 [g add_particle:[BrokenMachineParticle init_x:position_.x y:position_.y vx:float_random(-5, 5) vy:float_random(-3, 10)]];
             }
+            [AudioManager playsfx:SFX_ROCKBREAK];
             
         }/* else if (!player.dead) {
             [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];

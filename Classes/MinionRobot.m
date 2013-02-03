@@ -73,6 +73,7 @@
                                                        vy:float_random(-3, 10)]];
         }
         player.vy = 8;
+        [AudioManager playsfx:SFX_BOP];
     
     } else if (player.dashing && [Common hitrect_touch:[self get_hit_rect_rescale:0.8] b:[player get_hit_rect]]) {
         busted = YES;
@@ -86,10 +87,12 @@
                                                            vx:float_random(-5, 5) 
                                                            vy:float_random(-3, 10)]];
         }
+        [AudioManager playsfx:SFX_ROCKBREAK];
         
     } else if (!player.dead && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
         [DazedParticle init_effect:g tar:player time:40];
+        [AudioManager playsfx:SFX_HIT];
 
     }
 }

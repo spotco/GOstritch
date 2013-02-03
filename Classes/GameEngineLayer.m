@@ -56,6 +56,7 @@
     if (particles_tba == NULL) {
         particles_tba = [[NSMutableArray alloc] init];
     }
+    [AudioManager play:BGMUSIC_GAMELOOP1];
     
     [GameControlImplementation reset_control_state];
     [GEventDispatcher add_listener:self];

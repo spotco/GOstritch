@@ -12,13 +12,11 @@
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
 #define STARTING_LIVES 10
-#define TESTLEVEL @"shittytest"
+#define TESTLEVEL @"robotstest"
 
 /**
  TODO --
- -sound
- -rocket trail on relativerocket
- -revert labwall to manually placed
+ -dog flipback
  
  -player run in animation
  -sun
@@ -26,11 +24,14 @@
     ideas: higher jump, more float power, longer dash, faster, auto item magnet
  -add in that sun
  -use jump, use rocket, use magnet,use shield,use invincibility
+ -boss sfx
+  -revert labwall to manually placed
  **/
 
 +(void)main {
     [GEventDispatcher lazy_alloc];
     [DataStore init];
+    [AudioManager init];
     [Resource init_textures];
     [BatchDraw init];
     
@@ -39,8 +40,8 @@
     
     //[GameMain start_testlevel];
     //[GameMain start_game_autolevel];
-    //[GameMain start_menu];
-    [GameMain start_game_bosstestlevel];
+    [GameMain start_menu];
+    //[GameMain start_game_bosstestlevel];
     
 }
 

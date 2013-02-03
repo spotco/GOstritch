@@ -1,4 +1,5 @@
 #import "SwingVine.h"
+#import "AudioManager.h" 
 
 @interface VineBody : CCSprite {
     
@@ -85,7 +86,9 @@
             [player remove_temp_params:g];
             
             vr = -3.5; //~90deg
+            [AudioManager playsfx:SFX_SWING];
         }
+        
     }
     
     if (player.current_swingvine == self) {        
