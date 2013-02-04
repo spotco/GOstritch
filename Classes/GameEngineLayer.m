@@ -194,15 +194,6 @@ int test;
         [GameRenderImplementation update_render_on:self];
         [GEventDispatcher push_event:[GEvent init_type:GEventType_GAME_TICK]];
         
-        /*
-        if (test%50==0 && player.position.x > 0) {
-            [self add_gameobject:[EnemyBomb cons_pt:ccp(player.position.x+500,player.position.y+200)
-                                                                  v:ccp(-5,4)]];
-        }
-        test++;*/
-        //test%50==0?[self add_particle:[CannonFireParticle init_x:player.position.x y:player.position.y+100]]:0;
-        //test++;
-        
     } else if (current_mode == GameEngineLayerMode_UIANIM) {
         [GEventDispatcher push_event:[GEvent init_type:GEventType_UIANIM_TICK]];
         

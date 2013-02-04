@@ -12,20 +12,18 @@
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
 #define STARTING_LIVES 10
-#define PLAY_SFX YES
-#define PLAY_BGM YES
+#define PLAY_SFX NO
+#define PLAY_BGM NO
 #define TESTLEVEL @"robotstest"
 
 /**
  TODO --
- -player run in animation
- -sun
+ -player run in animation from menu
+ -sun + day/night
  -different dogs differnt special powers
     ideas: higher jump, more float power, longer dash, faster, auto item magnet
- -add in that sun
- -use jump, use rocket, use magnet,use shield,use invincibility
- -boss sfx
-  -revert labwall to manually placed
+ -item quickslot
+ -boss1 sfx, breakage particles
  **/
 
 +(void)main {
@@ -40,9 +38,9 @@
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
     
-    //[GameMain start_testlevel];
+    [GameMain start_testlevel];
     //[GameMain start_game_autolevel];
-    [GameMain start_menu];
+    //[GameMain start_menu];
     //[GameMain start_game_bosstestlevel];
     
 }

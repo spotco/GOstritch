@@ -37,15 +37,6 @@
     } else if (e.type == GEventType_SHOW_ENEMYAPPROACH_WARNING) {
         enemy_alert_ui_ct = 75;
     
-    } else if (e.type == GEventType_BOSS1_ACTIVATE) {
-        //TODO - UI
-        
-    } else if (e.type == GEventType_BOSS1_TICK) {
-        //TODO - UI
-        
-    } else if (e.type == GEventType_BOSS1_DEFEATED) {
-        //TODO - UI
-        
     }
 }
 
@@ -121,15 +112,15 @@
     ingamepause.position = ccp([Common SCREEN].width - pauseicon.boundingBox.size.width +20, 
                                [Common SCREEN].height - pauseicon.boundingBox.size.height +20);
     
-    CCMenuItem *bone_disp_icon = [self cons_menuitem_tex:[Resource get_tex:TEX_UI_BONE_ICON] pos:ccp([Common SCREEN].width*0.03,[Common SCREEN].height*0.96)];
-    CCMenuItem *lives_disp_icon = [self cons_menuitem_tex:[Resource get_tex:TEX_UI_LIVES_ICON] pos:ccp([Common SCREEN].width*0.035,[Common SCREEN].height*0.90)];
-    CCMenuItem *time_icon = [self cons_menuitem_tex:[Resource get_tex:TEX_UI_TIME_ICON] pos:ccp([Common SCREEN].width*0.03,[Common SCREEN].height*0.83)];
+    CCMenuItem *bone_disp_icon = [self cons_menuitem_tex:[Resource get_tex:TEX_UI_BONE_ICON] pos:ccp([Common SCREEN].width*0.06,[Common SCREEN].height*0.96)];
+    CCMenuItem *lives_disp_icon = [self cons_menuitem_tex:[Resource get_tex:TEX_UI_LIVES_ICON] pos:ccp([Common SCREEN].width*0.06,[Common SCREEN].height*0.88)];
+    CCMenuItem *time_icon = [self cons_menuitem_tex:[Resource get_tex:TEX_UI_TIME_ICON] pos:ccp([Common SCREEN].width*0.06,[Common SCREEN].height*0.80)];
     
     ccColor3B red = ccc3(255,0,0);
     int fntsz = 15;
-    bones_disp = [self cons_label_pos:ccp([Common SCREEN].width*0.03+18,[Common SCREEN].height*0.96) color:red fontsize:fntsz];
-    lives_disp = [self cons_label_pos:ccp([Common SCREEN].width*0.03+18,[Common SCREEN].height*0.9) color:red fontsize:fntsz];
-    time_disp = [self cons_label_pos:ccp([Common SCREEN].width*0.03+18,[Common SCREEN].height*0.83) color:red fontsize:fntsz];
+    bones_disp = [self cons_label_pos:ccp([Common SCREEN].width*0.03+20,[Common SCREEN].height*0.95) color:red fontsize:fntsz];
+    lives_disp = [self cons_label_pos:ccp([Common SCREEN].width*0.03+16,[Common SCREEN].height*0.8725) color:red fontsize:fntsz];
+    time_disp = [self cons_label_pos:ccp([Common SCREEN].width*0.03+13,[Common SCREEN].height*0.795) color:red fontsize:fntsz];
     
     enemy_alert_ui = [self cons_menuitem_tex:[Resource get_tex:TEX_UI_ENEMY_ALERT] pos:[Common screen_pctwid:0.9 pcthei:0.5]];
     [enemy_alert_ui setVisible:NO];
