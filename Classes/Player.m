@@ -111,6 +111,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
             cur_scy = last_ndir;
         } else {
             cur_scy = 1;
+            self.last_ndir = 1;
         }
         [self dashanim_update:g];
         

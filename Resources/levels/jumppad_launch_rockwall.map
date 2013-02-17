@@ -1,5 +1,5 @@
 {
-    "connect_pts": {"y2": 1546.7, "x1": 251.5, "y1": 947.1, "x2": 12270.2},
+    "connect_pts": {"y2": 1481.6, "x1": 251.5, "y1": 947.1, "x2": 12276.9},
     "start_y": 1013.3333333333335,
     "objects": [
         {"label": "1", "x": 1300, "type": "jumppad", "y": 960, "dir": {"x": 0.64, "y": 0.77}},
@@ -46,7 +46,7 @@
         {"height": 523.3333333333335, "x": 3768.4, "type": "water", "y": 375, "label": "66", "width": 2936.7000000000003},
         {"height": 81.63333333333344, "x": 6345.1, "type": "blocker", "y": 896.7, "label": "67", "width": 103.39999999999964},
         {"height": 471.6833333333335, "x": 8103.5, "type": "water", "y": 823.3, "label": "69", "width": 3153.3999999999996},
-        {"height": 198.38333333333355, "x": 11030.2, "type": "blocker", "y": 1303.3, "label": "70", "width": 186.6999999999989},
+        {"height": 198.38333333333355, "x": 11036.9, "type": "blocker", "y": 1260, "label": "70", "width": 186.6999999999989},
         {"label": "BID:5", "x": 2918.4, "type": "dogbone", "bid": 5, "y": 1285},
         {"label": "BID:6", "x": 2911.8, "type": "dogbone", "bid": 6, "y": 1195},
         {"label": "BID:7", "x": 4943.4, "type": "dogbone", "bid": 7, "y": 1386.7},
@@ -63,7 +63,8 @@
         {"label": "BID:16", "x": 9266.8, "type": "dogbone", "bid": 16, "y": 1868.3},
         {"label": "BID:17", "x": 10745.2, "type": "dogbone", "bid": 17, "y": 1796.7},
         {"label": "BID:18", "x": 10741.9, "type": "dogbone", "bid": 18, "y": 1698.3},
-        {"label": "87", "x": 5446.8, "type": "birdflock", "y": 1060}
+        {"label": "87", "x": 5446.8, "type": "birdflock", "y": 1060},
+        {"label": "88", "x": 700, "type": "checkpoint", "y": 950}
     ],
     "islands": [
         {"y2": 947.1, "x1": 251.5, "type": "line", "can_fall": true, "x2": 1372.9, "ndir": "left", "ground": "open", "y1": 947.1, "hei": 500},
@@ -86,7 +87,7 @@
         {"y2": 1496.6, "x1": 9555.2, "type": "line", "can_fall": true, "x2": 10073.5, "ndir": "left", "ground": "open", "y1": 1495, "hei": 100},
         {"y2": 1596.7, "x1": 10273.5, "type": "line", "can_fall": true, "x2": 10646.9, "ndir": "left", "ground": "open", "y1": 1596.7, "hei": 100},
         {"y2": 1500, "x1": 10751.9, "type": "line", "can_fall": true, "x2": 10901.9, "ndir": "left", "ground": "open", "y1": 1498.3, "hei": 100},
-        {"y2": 1546.7, "x1": 11025.2, "type": "line", "can_fall": true, "x2": 12270.2, "ndir": "left", "ground": "open", "y1": 1548.3, "hei": 500}
+        {"y2": 1481.6, "x1": 11018.5, "type": "line", "can_fall": true, "x2": 12276.9, "ndir": "left", "ground": "open", "y1": 1480, "hei": 500}
     ],
     "assert_links": 5,
     "start_x": 420

@@ -14,10 +14,12 @@
 #define STARTING_LIVES 10
 #define PLAY_SFX NO
 #define PLAY_BGM NO
-#define TESTLEVEL @"robotstest"
+#define TESTLEVEL @"jumppad_easyfiller2"
 
 /**
  TODO --
+ -nozzle fire, boss explode particles
+ 
  -player run in animation from menu
  -sun + day/night
  -different dogs differnt special powers

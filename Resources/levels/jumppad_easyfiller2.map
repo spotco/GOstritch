@@ -1,0 +1,14 @@
+{
+    "assert_links": 4,
+    "objects": [{"type": "checkpoint", "x": 450, "label": "0", "y": 999}, {"type": "jumppad", "x": 1162.5, "label": "2", "dir": {"x": -0.56, "y": 0.83}, "y": 1318.7}],
+    "start_x": 335,
+    "islands": [
+        {"type": "line", "y2": 1000, "x1": 52, "can_fall": true, "x2": 797.5, "ground": "open", "ndir": "left", "y1": 998, "hei": 500},
+        {"type": "line", "y2": 1012.5, "x1": 797.5, "can_fall": true, "x2": 926.3, "ground": "open", "ndir": "left", "y1": 1000, "hei": 500},
+        {"type": "line", "y2": 1048.7, "x1": 926.3, "can_fall": true, "x2": 993.8, "ground": "open", "ndir": "left", "y1": 1012.5, "hei": 500},
+        {"type": "line", "y2": 1188.7, "x1": 993.8, "can_fall": true, "x2": 1098.8, "ground": "open", "ndir": "left", "y1": 1048.7, "hei": 500},
+        {"type": "line", "y2": 1768.7, "x1": 1098.8, "can_fall": true, "x2": 1460, "ground": "open", "ndir": "left", "y1": 1188.7, "hei": 500}
+    ],
+    "connect_pts": {"y2": 1768.7, "x1": 52, "y1": 998, "x2": 1460},
+    "start_y": 1023.9999999999997
+}

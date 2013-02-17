@@ -63,17 +63,20 @@
 
 -(void)boostjump:(Player*)player {
     Vec3D *jnormal = [Vec3D init_x:normal_vec.x y:normal_vec.y z:0];
+    [[player get_current_params] add_airjump_count];
     
+    /*
     float ang = [jnormal get_angle_in_rad];
     if (ABS(ang) > M_PI * (3/4)) {
         player.last_ndir = -1;
-    }
+    }*/
     
     [jnormal normalize];
     [jnormal scale:2];
     
     player.current_island = NULL;
     player.position = [jnormal transform_pt:player.position];
+    
     
     [jnormal normalize];
     [jnormal scale:JUMP_POWER];
