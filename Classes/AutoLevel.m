@@ -13,27 +13,64 @@ static int DEBUG_MODE = 0;
     DEBUG_MODE = t;
 }
 
+static NSArray* levelset_classic;
+static NSArray* levelset_filler;
+static NSArray* levelset_jumppad;
+
+static NSArray* levelset_boss1area;
+static NSArray* levelset_autostart;
+
+static NSArray* bossloadertest;
+
+#define AUTOLEVEL_STARTLVL @"autolevel_start"
+
++(void)init_levels {
+    levelset_classic = [[NSArray alloc] initWithObjects:
+        @"classic_bridgenbwall",
+        @"classic_cavewbwall",
+        @"classic_huegcave",
+        @"classic_trickytreas",
+    nil];
+    
+    levelset_filler = [[NSArray alloc] initWithObjects:
+        @"filler_curvedesc",
+        @"filler_islandjump",
+        @"filler_rollinghills",
+        @"filler_sanicloop",
+    nil];
+    
+    levelset_jumppad = [[NSArray alloc] initWithObjects:
+        @"jumppad_bigjump",
+        @"jumppad_bouncyroom",
+        @"jumppad_crazyloop",
+        @"jumppad_hiddenislands",
+        @"jumppad_jumpgap",
+        @"jumppad_jumpislands",
+        @"jumppad_launch",
+        @"jumppad_lotsobwalls",
+        @"jumppad_spikeceil",
+     nil];
+    
+    levelset_autostart = [[NSArray alloc] initWithObjects:AUTOLEVEL_STARTLVL, nil];
+    
+    bossloadertest = [[NSArray alloc] initWithObjects:@"bossloadertest", nil];
+    levelset_boss1area = [[NSArray alloc] initWithObjects:@"boss1_area", nil];
+}
+
 +(NSArray*)random_set1 {
-    static NSArray *set1_levels;
-    if (!set1_levels){
-        set1_levels = [[NSArray alloc] initWithObjects:
-            @"autolevel_1_1",@"autolevel_1_2",@"autolevel_1_3",@"autolevel_1_4",@"autolevel_1_5",@"autolevel_1_6",@"autolevel_1_7",@"autolevel_1_8",
-            //@"autolevel_1_5",@"autolevel_1_6",@"autolevel_1_8",
-        nil];
-    }
-    return set1_levels;
+    NSMutableArray *a = [NSMutableArray array];
+    [a addObjectsFromArray:levelset_classic];
+    [a addObjectsFromArray:levelset_filler];
+    [a addObjectsFromArray:levelset_jumppad];
+    return a;
 }
 
 +(NSArray*)random_boss1test_levels {
-    static NSArray *boss1test_levels;
-    if (!boss1test_levels) {
-        boss1test_levels = [[NSArray alloc] initWithObjects:@"bossloadertest", nil];
-    }
-    return boss1test_levels;
+    return bossloadertest;
 }
 
 +(NSArray*)boss1_set {
-    return [NSArray arrayWithObjects:@"boss1_area", nil];
+    return levelset_boss1area;
 }
 
 +(AutoLevel*)init_with_glayer:(GameEngineLayer*)glayer {
@@ -49,8 +86,7 @@ static int DEBUG_MODE = 0;
     }
     tglayer = glayer;
     
-    NSArray *to_load = [[NSArray arrayWithObjects: @"autolevel_start", nil] retain];
-    //NSArray *to_load = [[NSArray arrayWithObjects: @"boss1_area", nil] retain];
+    NSArray *to_load = levelset_autostart;
     map_sections = [[NSMutableArray alloc] init];
     stored = [[NSMutableArray alloc] init];
     queued_sections = [[NSMutableArray alloc] init];
@@ -60,7 +96,6 @@ static int DEBUG_MODE = 0;
     for (NSString* i in to_load) {
         [self load_into_queue:i];
     }
-    [to_load release];
 }
 
 -(void)dispatch_event:(GEvent *)e {
@@ -263,7 +298,9 @@ static int DEBUG_MODE = 0;
     } else {
         tlvls = [AutoLevel boss1_set];
     }
-    return [tlvls objectAtIndex:arc4random_uniform([tlvls count])];
+    NSString* ch = [tlvls objectAtIndex:arc4random_uniform([tlvls count])];
+    NSLog(@"lvl:%@",ch);
+    return ch;
 }
 
 -(void)dealloc {

@@ -21,6 +21,8 @@ typedef enum {
 }
 
 +(AutoLevel*)init_with_glayer:(GameEngineLayer*)glayer;
++(void)init_levels;
+
 +(void)SET_DEBUG_MODE:(int)t;
 -(NSString*)get_debug_msg;
 

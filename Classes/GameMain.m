@@ -14,7 +14,7 @@
 #define STARTING_LIVES 10
 #define PLAY_SFX NO
 #define PLAY_BGM NO
-#define TESTLEVEL @"jumppad_easyfiller2"
+#define TESTLEVEL @"filler_curvedesc"
 
 /**
  TODO --
@@ -31,6 +31,7 @@
 +(void)main {
     [GEventDispatcher lazy_alloc];
     [DataStore init];
+    [AutoLevel init_levels];
     [AudioManager init];
     [AudioManager set_play_bgm:PLAY_BGM];
     [AudioManager set_play_sfx:PLAY_SFX];
@@ -40,8 +41,8 @@
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
     
-    [GameMain start_testlevel];
-    //[GameMain start_game_autolevel];
+    //[GameMain start_testlevel];
+    [GameMain start_game_autolevel];
     //[GameMain start_menu];
     //[GameMain start_game_bosstestlevel];
     

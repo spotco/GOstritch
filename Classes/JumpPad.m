@@ -39,7 +39,7 @@
         activated = YES;
         [self setOpacity:150];
         recharge_ct = RECHARGE_TIME;
-        [self boostjump:player];
+        [self boostjump:player g:g];
         
         for(int i = 0; i < 8; i++) {
             float r = ((float)i);
@@ -61,8 +61,9 @@
     activated = NO;
 }
 
--(void)boostjump:(Player*)player {
+-(void)boostjump:(Player*)player g:(GameEngineLayer*)g {
     Vec3D *jnormal = [Vec3D init_x:normal_vec.x y:normal_vec.y z:0];
+    [player remove_temp_params:g];
     [[player get_current_params] add_airjump_count];
     
     /*
