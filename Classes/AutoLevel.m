@@ -16,6 +16,7 @@ static int DEBUG_MODE = 0;
 static NSArray* levelset_classic;
 static NSArray* levelset_filler;
 static NSArray* levelset_jumppad;
+static NSArray* levelset_swingvine;
 
 static NSArray* levelset_boss1area;
 static NSArray* levelset_autostart;
@@ -51,6 +52,11 @@ static NSArray* bossloadertest;
         @"jumppad_spikeceil",
      nil];
     
+    levelset_swingvine = [[NSArray alloc] initWithObjects:
+        @"swingvine_swingintro",
+        @"swingvine_dodgespike",
+    nil];
+    
     levelset_autostart = [[NSArray alloc] initWithObjects:AUTOLEVEL_STARTLVL, nil];
     
     bossloadertest = [[NSArray alloc] initWithObjects:@"bossloadertest", nil];
@@ -59,9 +65,10 @@ static NSArray* bossloadertest;
 
 +(NSArray*)random_set1 {
     NSMutableArray *a = [NSMutableArray array];
-    [a addObjectsFromArray:levelset_classic];
-    [a addObjectsFromArray:levelset_filler];
-    [a addObjectsFromArray:levelset_jumppad];
+    //[a addObjectsFromArray:levelset_classic];
+    //[a addObjectsFromArray:levelset_filler];
+    //[a addObjectsFromArray:levelset_jumppad];
+    [a addObjectsFromArray:levelset_swingvine];
     return a;
 }
 
@@ -287,6 +294,8 @@ static NSArray* bossloadertest;
     [super reset];
 }
 
+static NSString* lastlvlloaded;
+
 -(NSString*)get_random_map {
     NSArray* tlvls;
     if (cur_mode == AutoLevelMode_Normal) {
@@ -299,6 +308,7 @@ static NSArray* bossloadertest;
         tlvls = [AutoLevel boss1_set];
     }
     NSString* ch = [tlvls objectAtIndex:arc4random_uniform([tlvls count])];
+    lastlvlloaded = ch;
     NSLog(@"lvl:%@",ch);
     return ch;
 }
@@ -322,7 +332,8 @@ static NSArray* bossloadertest;
     [super dealloc];
 }
 -(NSString*)get_debug_msg {
-    return strf("STO:%i CUR:%i QUE:%i",[stored count],[map_sections count],[queued_sections count]);
+    return lastlvlloaded;
+    //return strf("STO:%i CUR:%i QUE:%i",[stored count],[map_sections count],[queued_sections count]);
 }
 @end
 

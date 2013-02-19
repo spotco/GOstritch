@@ -35,7 +35,11 @@
         [AudioManager playsfx:SFX_ROCKBREAK];
         
     } else {
-        [super hit:player g:g];
+        [player reset_params];
+        activated = YES;
+        [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
+        [DazedParticle init_effect:g tar:player time:40];
+        [AudioManager playsfx:SFX_HIT];
     }
 }
 

@@ -61,6 +61,9 @@
 		7E1456B515E8BF63007CC9E4 /* cave_test.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E1456B415E8BF62007CC9E4 /* cave_test.map */; };
 		7E1456B815E8C0E0007CC9E4 /* CaveLineIsland.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1456B715E8C0E0007CC9E4 /* CaveLineIsland.m */; };
 		7E1456BB15E8C66D007CC9E4 /* CaveWall.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1456BA15E8C66A007CC9E4 /* CaveWall.m */; };
+		7E1BC58716D2F3F5008EBA09 /* swingvine_swingintro.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E1BC58616D2F3F5008EBA09 /* swingvine_swingintro.map */; };
+		7E1BC58916D2FD68008EBA09 /* swingvine_dodgespike.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E1BC58816D2FD68008EBA09 /* swingvine_dodgespike.map */; };
+		7E1BC58B16D309B8008EBA09 /* swingvine_filler.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E1BC58A16D309B8008EBA09 /* swingvine_filler.map */; };
 		7E22750E15EB3AB1009ED6DC /* bwall_test.map in Resources */ = {isa = PBXBuildFile; fileRef = 7E22750D15EB3AB1009ED6DC /* bwall_test.map */; };
 		7E22751115EB443A009ED6DC /* IslandFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E22751015EB443A009ED6DC /* IslandFill.m */; };
 		7E22751615EB6A53009ED6DC /* BG_cave_rock_wall_base.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E22751215EB6A52009ED6DC /* BG_cave_rock_wall_base.png */; };
@@ -616,6 +619,9 @@
 		7E1456B715E8C0E0007CC9E4 /* CaveLineIsland.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaveLineIsland.m; sourceTree = "<group>"; };
 		7E1456B915E8C669007CC9E4 /* CaveWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaveWall.h; sourceTree = "<group>"; };
 		7E1456BA15E8C66A007CC9E4 /* CaveWall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaveWall.m; sourceTree = "<group>"; };
+		7E1BC58616D2F3F5008EBA09 /* swingvine_swingintro.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = swingvine_swingintro.map; sourceTree = "<group>"; };
+		7E1BC58816D2FD68008EBA09 /* swingvine_dodgespike.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = swingvine_dodgespike.map; sourceTree = "<group>"; };
+		7E1BC58A16D309B8008EBA09 /* swingvine_filler.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = swingvine_filler.map; sourceTree = "<group>"; };
 		7E22750D15EB3AB1009ED6DC /* bwall_test.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bwall_test.map; sourceTree = "<group>"; };
 		7E22750F15EB443A009ED6DC /* IslandFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IslandFill.h; sourceTree = "<group>"; };
 		7E22751015EB443A009ED6DC /* IslandFill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IslandFill.m; sourceTree = "<group>"; };
@@ -1364,6 +1370,23 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		7E1BC58316D2F33A008EBA09 /* swingvine_group */ = {
+			isa = PBXGroup;
+			children = (
+				7E1BC58616D2F3F5008EBA09 /* swingvine_swingintro.map */,
+				7E1BC58816D2FD68008EBA09 /* swingvine_dodgespike.map */,
+				7E1BC58A16D309B8008EBA09 /* swingvine_filler.map */,
+			);
+			name = swingvine_group;
+			sourceTree = "<group>";
+		};
+		7E1BC58516D2F354008EBA09 /* lab_group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = lab_group;
+			sourceTree = "<group>";
+		};
 		7E22752215EB6D8D009ED6DC /* spikevine */ = {
 			isa = PBXGroup;
 			children = (
@@ -1580,6 +1603,8 @@
 		7E7C5AD816598BE4007C8EB8 /* connect */ = {
 			isa = PBXGroup;
 			children = (
+				7E1BC58516D2F354008EBA09 /* lab_group */,
+				7E1BC58316D2F33A008EBA09 /* swingvine_group */,
 				7EF1BFEE16D1F5750024A77A /* classic_group */,
 				7EF1BFED16D1F56D0024A77A /* filler_group */,
 				7EF1BFEC16D1F5630024A77A /* jumppad_group */,
@@ -2891,6 +2916,9 @@
 				7EF1C00E16D1F5F20024A77A /* classic_cavewbwall.map in Resources */,
 				7EF1C00F16D1F5F20024A77A /* classic_huegcave.map in Resources */,
 				7EF1C01016D1F5F20024A77A /* classic_trickytreas.map in Resources */,
+				7E1BC58716D2F3F5008EBA09 /* swingvine_swingintro.map in Resources */,
+				7E1BC58916D2FD68008EBA09 /* swingvine_dodgespike.map in Resources */,
+				7E1BC58B16D309B8008EBA09 /* swingvine_filler.map in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -137,9 +137,9 @@
                  nil];
     
     if ([GameMain GET_DEBUG_UI]) {
-        DEBUG_ctdisp = [self cons_label_pos:ccp([Common SCREEN].width*0.02,[Common SCREEN].height*0.77) color:red fontsize:fntsz];
+        DEBUG_ctdisp = [self cons_label_pos:ccp([Common SCREEN].width*0.02,[Common SCREEN].height*0.71) color:red fontsize:fntsz];
         [ingame_ui addChild:[self label_cons_menuitem:DEBUG_ctdisp leftalign:YES]];
-        DEBUG_autolvldisp = [self cons_label_pos:ccp([Common SCREEN].width*0.02,[Common SCREEN].height*0.71) color:red fontsize:fntsz];
+        DEBUG_autolvldisp = [self cons_label_pos:ccp([Common SCREEN].width*0.02,[Common SCREEN].height*0.65) color:red fontsize:fntsz];
         [ingame_ui addChild:[self label_cons_menuitem:DEBUG_autolvldisp leftalign:YES]];
     }
     

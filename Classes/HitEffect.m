@@ -4,6 +4,7 @@
 
 @implementation HitEffect
 @synthesize tmode;
+@synthesize nograv;
 
 +(HitEffect*)init_from:(PlayerEffectParams*)base time:(int)time {
     HitEffect *e = [[HitEffect alloc] init];
@@ -14,6 +15,12 @@
     return e;
 }
 
++(HitEffect*)init_from:(PlayerEffectParams*)base time:(int)time nograv:(BOOL)nograv {
+    HitEffect* h = [HitEffect init_from:base time:time];
+    h.nograv = nograv;
+    return h;
+}
+
 -(player_anim_mode)get_anim {
     return self.tmode;
 }
@@ -21,7 +28,7 @@
 -(void)update:(Player*)p g:(GameEngineLayer *)g{
     p.dead = YES;
     p.vx = 0;
-    if (p.current_island != NULL) {
+    if (nograv || p.current_island != NULL) {
         p.vy = 0;
     }
 }

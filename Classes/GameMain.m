@@ -8,16 +8,17 @@
 #define TARGET_FPS 60
 #define RESET_STATS NO
 #define DISPLAY_FPS NO
-#define DEBUG_UI NO
+#define DEBUG_UI YES
 #define USE_NSTIMER NO
 #define HOLD_TO_STOP NO
 #define STARTING_LIVES 10
-#define PLAY_SFX NO
+#define PLAY_SFX YES
 #define PLAY_BGM NO
-#define TESTLEVEL @"filler_curvedesc"
+#define TESTLEVEL @"swingvine_swingintro"
 
 /**
  TODO --
+ -swing hit vine, fall off
  -nozzle fire, boss explode particles
  
  -player run in animation from menu
@@ -42,8 +43,8 @@
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
     
     //[GameMain start_testlevel];
-    [GameMain start_game_autolevel];
-    //[GameMain start_menu];
+    //[GameMain start_game_autolevel];
+    [GameMain start_menu];
     //[GameMain start_game_bosstestlevel];
     
 }
