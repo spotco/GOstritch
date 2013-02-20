@@ -14,7 +14,7 @@
 #define STARTING_LIVES 99
 #define PLAY_SFX NO
 #define PLAY_BGM NO
-#define TESTLEVEL @"swingvine_filler"
+#define TESTLEVEL @"swingvine_bounswindodg"
 
 /**
  TODO --
@@ -27,6 +27,12 @@
     ideas: higher jump, more float power, longer dash, faster, auto item magnet
  -item quickslot
  -boss1 sfx, breakage particles
+ **/
+
+/**
+ Challenges:
+ -beat classic_trickytreas with 28 or more bones
+ -beat swingvine_bounswindodg in 0:20 or less
  **/
 
 +(void)main {

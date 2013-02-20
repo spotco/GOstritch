@@ -56,6 +56,7 @@ static NSArray* bossloadertest;
         @"swingvine_swingintro",
         @"swingvine_dodgespike",
         @"swingvine_swingbreak",
+        @"swingvine_bounswindodg",
     nil];
     
     levelset_autostart = [[NSArray alloc] initWithObjects:AUTOLEVEL_STARTLVL, nil];
