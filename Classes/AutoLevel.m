@@ -55,6 +55,7 @@ static NSArray* bossloadertest;
     levelset_swingvine = [[NSArray alloc] initWithObjects:
         @"swingvine_swingintro",
         @"swingvine_dodgespike",
+        @"swingvine_swingbreak",
     nil];
     
     levelset_autostart = [[NSArray alloc] initWithObjects:AUTOLEVEL_STARTLVL, nil];
@@ -65,9 +66,9 @@ static NSArray* bossloadertest;
 
 +(NSArray*)random_set1 {
     NSMutableArray *a = [NSMutableArray array];
-    //[a addObjectsFromArray:levelset_classic];
-    //[a addObjectsFromArray:levelset_filler];
-    //[a addObjectsFromArray:levelset_jumppad];
+    [a addObjectsFromArray:levelset_classic];
+    [a addObjectsFromArray:levelset_filler];
+    [a addObjectsFromArray:levelset_jumppad];
     [a addObjectsFromArray:levelset_swingvine];
     return a;
 }

@@ -36,6 +36,7 @@
         
     } else {
         [player reset_params];
+        player.current_swingvine = NULL;
         activated = YES;
         [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
         [DazedParticle init_effect:g tar:player time:40];

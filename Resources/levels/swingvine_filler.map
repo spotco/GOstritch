@@ -1,8 +1,0 @@
-{
-    "islands": [{"type": "line", "y2": 313, "x1": 124, "can_fall": true, "x2": 769, "ground": "open", "ndir": "left", "y1": 273, "hei": 50}],
-    "connect_pts": {"y2": 313, "x1": 124, "y1": 273, "x2": 769},
-    "objects": [{"x": 553, "y2": 601, "y": 308, "x2": 520, "type": "breakable_wall", "label": "0"}],
-    "start_x": 232,
-    "assert_links": 0,
-    "start_y": 313
-}

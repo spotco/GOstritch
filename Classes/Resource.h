@@ -69,7 +69,6 @@
 #define TEX_SPIKE_VINE_BOTTOM @"SpikeVineRight"
 #define TEX_SPIKE_VINE_SECTION @"SpikeVineSection"
 
-
 #define TEX_ENEMY_ROBOT @"robot_default"
 #define TEX_ENEMY_LAUNCHER @"launcher_default"
 #define TEX_ENEMY_ROCKET @"rocket"
@@ -103,7 +102,6 @@
 #define TEX_CANNONFIRE_PARTICLE @"cannonfire_default"
 #define TEX_CANNONTRAIL @"cannontrail_default"
 
-#define TEX_UI_COINCOUNT @"UICoinCount"
 #define TEX_UI_BONE_ICON @"UIBoneIcon"
 #define TEX_UI_LIVES_ICON @"UILivesIcon"
 #define TEX_UI_TIME_ICON @"UITimeIcon"

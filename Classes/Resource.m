@@ -111,7 +111,6 @@ static NSMutableDictionary* textures = nil;
                         @"cannonfire_default.png", TEX_CANNONFIRE_PARTICLE,
                         @"cannontrail_default.png",TEX_CANNONTRAIL,
                      
-                        @"coincount.png", TEX_UI_COINCOUNT,
                         @"ingame_ui_bone_icon.png",TEX_UI_BONE_ICON,
                         @"ingame_ui_lives_icon.png",TEX_UI_LIVES_ICON,
                         @"ingame_ui_time_icon.png",TEX_UI_TIME_ICON,
