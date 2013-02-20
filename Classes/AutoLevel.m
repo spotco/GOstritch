@@ -38,6 +38,7 @@ static NSArray* bossloadertest;
         @"filler_islandjump",
         @"filler_rollinghills",
         @"filler_sanicloop",
+        @"filler_someswings",
     nil];
     
     levelset_jumppad = [[NSArray alloc] initWithObjects:

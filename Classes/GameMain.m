@@ -14,7 +14,7 @@
 #define STARTING_LIVES 99
 #define PLAY_SFX NO
 #define PLAY_BGM NO
-#define TESTLEVEL @"swingvine_bounswindodg"
+#define TESTLEVEL @"filler_someswings"
 
 /**
  TODO --
@@ -48,9 +48,9 @@
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];
     
-    [GameMain start_testlevel];
+    //[GameMain start_testlevel];
     //[GameMain start_game_autolevel];
-    //[GameMain start_menu];
+    [GameMain start_menu];
     //[GameMain start_game_bosstestlevel];
     
 }
