@@ -6,7 +6,7 @@
     int batch_ct,cursize;
 }
 +(BatchJob*)cons_tex:(GLuint)tex;
--(void)add_obj:(gl_render_obj)gl;
+-(void)add_obj:(GLRenderObject*)gl;
 -(void)clear;
 -(void)draw;
 @property(readwrite,assign) GLuint tex;
@@ -57,7 +57,7 @@
     free(o_pclr);
 }
 
--(void)add_obj:(gl_render_obj)gl {
+-(void)add_obj:(GLRenderObject*)gl {
     int lim = gl.pts==4?6:3;
     
     while (cursize < batch_ct+lim) {
@@ -107,7 +107,7 @@ static NSMutableArray* z_bucket;
     }
 }
 
-+(void)add:(gl_render_obj)gl key:(GLuint)tex z_ord:(int)zord draw_ord:(int)dord {
++(void)add:(GLRenderObject*)gl key:(GLuint)tex z_ord:(int)zord draw_ord:(int)dord {
     if (![z_bucket objectAtIndex:zord]) {
         [z_bucket replaceObjectAtIndex:zord withObject:[NSMutableArray array]];
     }

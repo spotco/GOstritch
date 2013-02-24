@@ -197,6 +197,7 @@
     //set top green bar
     //also initially sets toppts
     top_fill = [Common init_render_obj:[self get_tex_top] npts:4];
+    toppts_fill = [Common init_render_obj:[self get_corner_fill_color] npts:3];
     
 	CGPoint* tri_pts = top_fill.tri_pts;
 	CGPoint* tex_pts = top_fill.tex_pts;
@@ -246,7 +247,7 @@
     [v3t2 dealloc];
 }
 
--(gl_render_obj)init_TRorTL_top:(CGPoint)top bot:(CGPoint)bot vec:(Vec3D*)vec {
+-(GLRenderObject*)init_TRorTL_top:(CGPoint)top bot:(CGPoint)bot vec:(Vec3D*)vec {
     Vec3D *mvr = [Vec3D init_x:-vec.x y:-vec.y z:0];
     [mvr scale:MVR_ROUNDED_CORNER_SCALE];
     
@@ -254,7 +255,7 @@
     bot = [mvr transform_pt:bot];
     [mvr dealloc];
     
-    gl_render_obj o = [Common init_render_obj:[self get_tex_corner] npts:4];
+    GLRenderObject* o = [Common init_render_obj:[self get_tex_corner] npts:4];
 	
 	CGPoint* tri_pts = o.tri_pts;
     
@@ -289,9 +290,8 @@
     tex_pts[0] = ccp(0,1);
 }
 
--(gl_render_obj)line_from:(CGPoint)a to:(CGPoint)b scale:(float)scale {
-    struct gl_render_obj n;
-    n = [Common init_render_obj:[self get_tex_border] npts:4];
+-(GLRenderObject*)line_from:(CGPoint)a to:(CGPoint)b scale:(float)scale {
+    GLRenderObject* n = [Common init_render_obj:[self get_tex_border] npts:4];
     n.isalloc = 1;
     CGPoint* tri_pts = n.tri_pts;
 	CGPoint* tex_pts = n.tex_pts;
@@ -409,9 +409,6 @@
     [reduce_right scale:corner_top_scale];
     toppts_fill.tri_pts[2] = ccp( toppts_fill.tri_pts[0].x + reduce_right.x, toppts_fill.tri_pts[0].y + reduce_right.y);
     
-    toppts_fill.texture = [self get_corner_fill_color];
-    toppts_fill.pts = 3;
-    toppts_fill.isalloc = 1;
     toppts_fill.tex_pts[0] = ccp(0,0);
     toppts_fill.tex_pts[1] = ccp(1,0);
     toppts_fill.tex_pts[2] = ccp(1,1);
@@ -458,7 +455,7 @@
 }
 
 
--(gl_render_obj)get_main_fill {
+-(GLRenderObject*)get_main_fill {
     return main_fill;
 }
 

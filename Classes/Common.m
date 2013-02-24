@@ -228,15 +228,15 @@ bool fm_a_gt_b(double a,double b,double delta) {
     }
 }
 
-+(gl_render_obj)init_render_obj:(CCTexture2D*)tex npts:(int)npts {
-    struct gl_render_obj n;
++(GLRenderObject*)init_render_obj:(CCTexture2D*)tex npts:(int)npts {
+    GLRenderObject *n = [[GLRenderObject alloc] init];
     n.texture = tex;
     n.isalloc = 1;
     n.pts = npts;
     return n;
 }
 
-+(void)draw_renderobj:(gl_render_obj)obj n_vtx:(int)n_vtx {    
++(void)draw_renderobj:(GLRenderObject*)obj n_vtx:(int)n_vtx {    
     glBindTexture(GL_TEXTURE_2D, obj.texture.name);
 	glVertexPointer(2, GL_FLOAT, 0, obj.tri_pts); 
 	glTexCoordPointer(2, GL_FLOAT, 0, obj.tex_pts);
@@ -249,9 +249,9 @@ bool fm_a_gt_b(double a,double b,double delta) {
     }
 }
 
-+(void)tex_map_to_tri_loc:(gl_render_obj*)o len:(int)len {
++(void)tex_map_to_tri_loc:(GLRenderObject*)o len:(int)len {
     for (int i = 0; i < len; i++) {
-        o->tex_pts[i] = ccp(o->tri_pts[i].x/o->texture.pixelsWide, o->tri_pts[i].y/o->texture.pixelsHigh);
+        o.tex_pts[i] = ccp(o.tri_pts[i].x/o.texture.pixelsWide, o.tri_pts[i].y/o.texture.pixelsHigh);
     }
 }
 
@@ -297,7 +297,7 @@ bool fm_a_gt_b(double a,double b,double delta) {
     return l;
 }
 
-+(gl_render_obj)transform_obj:(gl_render_obj)o by:(CGPoint)position {
++(GLRenderObject*)transform_obj:(GLRenderObject*)o by:(CGPoint)position {
     o.tri_pts[0] = CGPointAdd(position, o.tri_pts[0]);
     o.tri_pts[1] = CGPointAdd(position, o.tri_pts[1]);
     o.tri_pts[2] = CGPointAdd(position, o.tri_pts[2]);

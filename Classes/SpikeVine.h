@@ -5,7 +5,7 @@
 
 @interface SpikeVine  : GameObject {
     Vec3D *dir_vec;
-    gl_render_obj top,bottom,center;
+    GLRenderObject *top,*bottom,*center;
     SATPoly r_hitbox;
     
     BOOL activated;

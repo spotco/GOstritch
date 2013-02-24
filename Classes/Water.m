@@ -83,8 +83,8 @@
 
 /*0 1
   2 3*/
--(gl_render_obj)init_drawbody_ofwidth:(float)width {
-    gl_render_obj o = [Common init_render_obj:[Resource get_tex:TEX_WATER] npts:4];
+-(GLRenderObject*)init_drawbody_ofwidth:(float)width {
+    GLRenderObject* o = [Common init_render_obj:[Resource get_tex:TEX_WATER] npts:4];
     
     int twid = o.texture.pixelsWide;
     int thei = o.texture.pixelsHigh;
@@ -110,7 +110,7 @@
     }
 }
 
--(void)draw_renderobj:(gl_render_obj)obj n_vtx:(int)n_vtx {
+-(void)draw_renderobj:(GLRenderObject*)obj n_vtx:(int)n_vtx {
     glBindTexture(GL_TEXTURE_2D, obj.texture.name);
 	glVertexPointer(2, GL_FLOAT, 0, obj.tri_pts); 
 	glTexCoordPointer(2, GL_FLOAT, 0, body_tex_offset);

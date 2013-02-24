@@ -45,13 +45,6 @@ typedef struct HitRect {
     float x1,y1,x2,y2;
 } HitRect;
 
-typedef struct gl_render_obj {
-	CCTexture2D *texture;
-	CGPoint tri_pts[4];
-	CGPoint tex_pts[4];
-    int isalloc,pts;
-} gl_render_obj;
-
 typedef struct line_seg {
     CGPoint a;
     CGPoint b;
@@ -98,10 +91,10 @@ CGPoint CGPointAdd(CGPoint a,CGPoint b);
 +(float)rad_to_deg:(float)rad;
 +(float)sig:(float)n;
 
-+(void)draw_renderobj:(gl_render_obj)obj n_vtx:(int)n_vtx;
-+(gl_render_obj)transform_obj:(gl_render_obj)o by:(CGPoint)position ;
-+(void)tex_map_to_tri_loc:(gl_render_obj*)o len:(int)len;
-+(gl_render_obj)init_render_obj:(CCTexture2D*)tex npts:(int)npts;
++(void)draw_renderobj:(GLRenderObject*)obj n_vtx:(int)n_vtx;
++(GLRenderObject*)transform_obj:(GLRenderObject*)o by:(CGPoint)position ;
++(void)tex_map_to_tri_loc:(GLRenderObject*)o len:(int)len;
++(GLRenderObject*)init_render_obj:(CCTexture2D*)tex npts:(int)npts;
 
 +(CGRect)ssrect_from_dict:(NSDictionary*)dict tar:(NSString*)tar;
 +(id)make_anim_frames:(NSArray*)animFrames speed:(float)speed;

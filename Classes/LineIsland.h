@@ -8,18 +8,18 @@
 @interface LineIsland : Island {
     BOOL do_draw;
     
-	gl_render_obj main_fill, //main body texture fill
-                  top_fill, //top grass decoration fill
-                  corner_fill; //wedge main body texture between cur and next (optional)
+	GLRenderObject *main_fill, //main body texture fill
+                  *top_fill, //top grass decoration fill
+                  *corner_fill; //wedge main body texture between cur and next (optional)
     
-    gl_render_obj tl_top_corner, //left top decoration rounded edge (optional)
-                  tr_top_corner; //right top decoration rounded edge (optional)
+    GLRenderObject *tl_top_corner, //left top decoration rounded edge (optional)
+                  *tr_top_corner; //right top decoration rounded edge (optional)
     
-    gl_render_obj bottom_line_fill, //bottom border line
-                  corner_line_fill, //border line between cur and next (optional)
-                  left_line_fill, //left border line (optional)
-                  right_line_fill, //right border line (optional)
-                  toppts_fill; //corner wedge decoration between cur and next (optional)
+    GLRenderObject *bottom_line_fill, //bottom border line
+                  *corner_line_fill, //border line between cur and next (optional)
+                  *left_line_fill, //left border line (optional)
+                  *right_line_fill, //right border line (optional)
+                  *toppts_fill; //corner wedge decoration between cur and next (optional)
     
     HitRect cache_hitrect;
     
@@ -46,7 +46,7 @@
 -(void)main_fill_tex_map;
 -(void)corner_fill_tex_map;
 
--(gl_render_obj)get_main_fill;
+-(GLRenderObject*)get_main_fill;
 
 
 

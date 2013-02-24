@@ -4,7 +4,7 @@
 #import "FishGenerator.h"
 
 @interface Water : GameObject {
-    gl_render_obj body;
+    GLRenderObject* body;
     
     CGPoint body_tex_offset[4];
     float bwidth,bheight,offset_ct;

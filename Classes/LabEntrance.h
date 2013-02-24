@@ -3,7 +3,7 @@
 
 @interface LabEntrance : GameObject {
     GameObject *afg_area;
-    gl_render_obj back_body,ceil_edge,ceil_body;
+    GLRenderObject *back_body,*ceil_edge,*ceil_body;
     BOOL activated;
 }
 
@@ -14,7 +14,7 @@
 @end
 
 @interface LabEntranceFG : GameObject {
-    gl_render_obj front_body;
+    GLRenderObject *front_body;
     LabEntrance* base;
     
 }

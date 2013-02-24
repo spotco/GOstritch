@@ -2,7 +2,7 @@
 #import "GameObject.h"
 
 @interface CaveWall : GameObject {
-    gl_render_obj tex;
+    GLRenderObject* tex;
     float wid,hei;
 }
 

@@ -26,25 +26,25 @@
 }
 
 -(void)corner_fill_tex_map {
-    gl_render_obj* o = &corner_fill;
+    GLRenderObject* o = corner_fill;
     for (int i = 0; i < 3; i++) {
-        o->tex_pts[i] = ccp(((o->tri_pts[i].x)/o->texture.pixelsWide),
-                            ((o->tri_pts[i].y)/o->texture.pixelsHigh+OVERALL_OFFSET_Y));
+        o.tex_pts[i] = ccp(((o.tri_pts[i].x)/o.texture.pixelsWide),
+                            ((o.tri_pts[i].y)/o.texture.pixelsHigh+OVERALL_OFFSET_Y));
     }
 }
 
 -(void)main_fill_tex_map_offset:(CGPoint)offset {
     
-    gl_render_obj* o = &main_fill;
+    GLRenderObject* o = main_fill;
     for (int i = 0; i < 4; i++) {
-        o->tex_pts[i] = ccp((o->tri_pts[i].x+offset.x)/o->texture.pixelsWide, (o->tri_pts[i].y+offset.y)/o->texture.pixelsHigh+OVERALL_OFFSET_Y);
+        o.tex_pts[i] = ccp((o.tri_pts[i].x+offset.x)/o.texture.pixelsWide, (o.tri_pts[i].y+offset.y)/o.texture.pixelsHigh+OVERALL_OFFSET_Y);
     }
 }
 
 -(void)corner_fill_set_tex:(LineIsland*)next {
-    gl_render_obj* o = &corner_fill;
+    GLRenderObject* o = corner_fill;
     
-    if (o->isalloc == 0) {
+    if (o.isalloc == 0) {
         return;
     }
     
