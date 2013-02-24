@@ -10,6 +10,6 @@
     int ct;
 }
 
-+(GameStartAnim*)init_with_callback:(callback)cb;
++(GameStartAnim*)init_with_callback:(CallBack*)cb;
 
 @end

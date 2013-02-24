@@ -4,7 +4,7 @@
 
 @implementation GameStartAnim
 
-+(GameStartAnim*)init_with_callback:(callback)cb {
++(GameStartAnim*)init_with_callback:(CallBack*)cb {
     GameStartAnim *n = [GameStartAnim node];
     n.anim_complete = cb;
     [n initanim];

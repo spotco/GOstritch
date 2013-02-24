@@ -2,6 +2,17 @@
 #import "Common.h"
 #import "Island.h"
 
+@implementation CallBack
+    @synthesize selector;
+    @synthesize target;
+@end
+
+@implementation GLRenderObject
+    @synthesize isalloc,pts;
+    @synthesize texture;
+    -(CGPoint*)tex_pts {return tex_pts;}
+    -(CGPoint*)tri_pts {return tri_pts;}
+@end
 
 @implementation Common
 
@@ -36,7 +47,7 @@ CGPoint CGPointAdd(CGPoint a,CGPoint b) {
     return ccp([Common SCREEN].width*pctwid,[Common SCREEN].height*pcthei);
 }
 
-+(void)run_callback:(callback)c {
++(void)run_callback:(CallBack*)c {
     if (c.target != NULL) {
         [c.target performSelector:c.selector];
     } else {
@@ -44,8 +55,8 @@ CGPoint CGPointAdd(CGPoint a,CGPoint b) {
     }
 }
 
-+(callback)cons_callback:(NSObject*)tar sel:(SEL)sel {
-    struct callback cb;
++(CallBack*)cons_callback:(NSObject*)tar sel:(SEL)sel {
+    CallBack* cb = [[CallBack alloc] init];
     cb.target = tar;
     cb.selector = sel;
     return cb;
@@ -264,7 +275,7 @@ bool fm_a_gt_b(double a,double b,double delta) {
     return sqrt(dx*dx + dy*dy );
 }
 
-+(CCMenuItem*)make_button_tex:(CCTexture2D*)tex seltex:(CCTexture2D*)seltex zscale:(float)zscale callback:(callback)cb pos:(CGPoint)pos {
++(CCMenuItem*)make_button_tex:(CCTexture2D*)tex seltex:(CCTexture2D*)seltex zscale:(float)zscale callback:(CallBack*)cb pos:(CGPoint)pos {
     CCSprite *img = [CCSprite spriteWithTexture:tex];
     CCSprite *img_zoom = [CCSprite spriteWithTexture:seltex];
     [Common set_zoom_pos_align:img zoomed:img_zoom scale:zscale];

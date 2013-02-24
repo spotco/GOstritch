@@ -2,11 +2,9 @@
 #import "Common.h"
 #import "GEventDispatcher.h"
 
-@interface UIAnim : CCSprite <GEventListener> {
-    callback anim_complete;
-}
+@interface UIAnim : CCSprite <GEventListener>
 
-@property(readwrite,assign) callback anim_complete;
+@property(readwrite,assign) CallBack* anim_complete;
 
 -(void)update;
 -(void)anim_finished;

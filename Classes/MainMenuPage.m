@@ -62,11 +62,11 @@
 
 #define DEFAULTZOOM 1.1
 
-+(MainMenuPageZoomButton*)cons_texture:(CCTexture2D *)tex at:(CGPoint)pos fn:(callback)fn {
++(MainMenuPageZoomButton*)cons_texture:(CCTexture2D *)tex at:(CGPoint)pos fn:(CallBack*)fn {
     return [[MainMenuPageZoomButton node] init_texture:tex at:pos fn:fn];
 }
 
-+(MainMenuPageZoomButton*)cons_spr:(CCNode*)spr at:(CGPoint)pos fn:(callback)fn {
++(MainMenuPageZoomButton*)cons_spr:(CCNode*)spr at:(CGPoint)pos fn:(CallBack*)fn {
     return [[MainMenuPageZoomButton node] init_spr:spr at:pos fn:fn];
 }
 
@@ -78,7 +78,7 @@
     }
 }
 
--(MainMenuPageZoomButton*)init_spr:(CCNode*)spr at:(CGPoint)pos fn:(callback)fn {
+-(MainMenuPageZoomButton*)init_spr:(CCNode*)spr at:(CGPoint)pos fn:(CallBack*)fn {
     img = spr;
     zoom = DEFAULTZOOM;
     n_bbox = img.boundingBoxInPixels;
@@ -88,7 +88,7 @@
     return self;
 }
 
--(MainMenuPageZoomButton*)init_texture:(CCTexture2D *)tex at:(CGPoint)pos fn:(callback)fn {
+-(MainMenuPageZoomButton*)init_texture:(CCTexture2D *)tex at:(CGPoint)pos fn:(CallBack*)fn {
     return [self init_spr:[CCSprite spriteWithTexture:tex] at:pos fn:fn];
 }
 

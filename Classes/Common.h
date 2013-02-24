@@ -23,6 +23,21 @@
     -(PlayerEffectParams*)get_current_params;
 @end
 
+@interface CallBack : NSObject
+    @property(readwrite,assign) NSObject* target;
+    @property(readwrite,assign) SEL selector;
+@end
+
+@interface GLRenderObject : NSObject {
+	CGPoint tri_pts[4];
+	CGPoint tex_pts[4];
+}
+    @property(readwrite,assign) CCTexture2D* texture;
+    @property(readwrite,assign) int isalloc,pts;
+    -(CGPoint*)tri_pts;
+    -(CGPoint*)tex_pts;
+@end
+
 
 @interface Common : NSObject
 
@@ -35,18 +50,12 @@ typedef struct gl_render_obj {
 	CGPoint tri_pts[4];
 	CGPoint tex_pts[4];
     int isalloc,pts;
-    
 } gl_render_obj;
 
 typedef struct line_seg {
     CGPoint a;
     CGPoint b;
 } line_seg;
-
-typedef struct callback {
-    NSObject* target;
-    SEL selector;
-} callback;
 
 typedef struct CameraZoom {
     float x;
@@ -65,8 +74,8 @@ CGPoint CGPointAdd(CGPoint a,CGPoint b);
 +(CGSize)SCREEN;
 +(CGPoint)screen_pctwid:(float)pctwid pcthei:(float)pcthei;
 
-+(void)run_callback:(callback)c;
-+(callback)cons_callback:(NSObject*)tar sel:(SEL)sel;
++(void)run_callback:(CallBack*)c;
++(CallBack*)cons_callback:(NSObject*)tar sel:(SEL)sel;
 +(void)print_hitrect:(HitRect)l msg:(NSString*)msg;
 +(CGPoint)line_seg_intersection_a1:(CGPoint)a1 a2:(CGPoint)a2 b1:(CGPoint)b1 b2:(CGPoint)b2;
 +(CGPoint)line_seg_intersection_a:(line_seg)a b:(line_seg)b;
@@ -98,7 +107,7 @@ CGPoint CGPointAdd(CGPoint a,CGPoint b);
 +(id)make_anim_frames:(NSArray*)animFrames speed:(float)speed;
 +(CGFloat) distanceBetween: (CGPoint)point1 and: (CGPoint)point2;
 
-+(CCMenuItem*)make_button_tex:(CCTexture2D*)tex seltex:(CCTexture2D*)seltex zscale:(float)zscale callback:(callback)cb pos:(CGPoint)pos;
++(CCMenuItem*)make_button_tex:(CCTexture2D*)tex seltex:(CCTexture2D*)seltex zscale:(float)zscale callback:(CallBack*)cb pos:(CGPoint)pos;
 +(CCLabelTTF*)cons_label_pos:(CGPoint)pos color:(ccColor3B)color fontsize:(int)fontsize str:(NSString*)str;
 
 +(CameraZoom)cons_normalcoord_camera_zoom_x:(float)x y:(float)y z:(float)z;
