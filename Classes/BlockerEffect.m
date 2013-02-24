@@ -2,7 +2,7 @@
 
 @implementation BlockerEffect
 
-+(BlockerEffect*)init_from:(PlayerEffectParams*)base {
++(BlockerEffect*)cons_from:(PlayerEffectParams*)base {
     BlockerEffect *n = [[BlockerEffect alloc] init];
     [PlayerEffectParams copy_params_from:base to:n];
     n.time_left = -1;

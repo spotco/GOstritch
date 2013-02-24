@@ -75,7 +75,7 @@
     if (up_vec) {
         [up_vec dealloc];
     }
-    up_vec = [Vec3D init_x:0 y:1 z:0];
+    up_vec = [Vec3D cons_x:0 y:1 z:0];
     if (params) {
         [params effect_end:NULL g:NULL];
         [params dealloc];
@@ -109,7 +109,7 @@
         return cached_rect;
     }
     
-    Vec3D *v = [Vec3D init_x:up_vec.x y:up_vec.y z:0];
+    Vec3D *v = [Vec3D cons_x:up_vec.x y:up_vec.y z:0];
     Vec3D *h = [v crossWith:[Vec3D Z_VEC]];
     float x = self.position.x;
     float y = self.position.y;

@@ -166,8 +166,8 @@ bool fm_a_gt_b(double a,double b,double delta) {
 }
 
 +(BOOL)point_fuzzy_on_line_seg:(line_seg)seg pt:(CGPoint)pt {
-    Vec3D *b_m_a = [Vec3D init_x:seg.b.x-seg.a.x y:seg.b.y-seg.a.y z:0];
-    Vec3D *c_m_a = [Vec3D init_x:pt.x-seg.a.x y:pt.y-seg.a.y z:0];
+    Vec3D *b_m_a = [Vec3D cons_x:seg.b.x-seg.a.x y:seg.b.y-seg.a.y z:0];
+    Vec3D *c_m_a = [Vec3D cons_x:pt.x-seg.a.x y:pt.y-seg.a.y z:0];
     Vec3D *ab_c_ac = [b_m_a crossWith:c_m_a];
     
     float val = [ab_c_ac length] / [b_m_a length];

@@ -5,7 +5,7 @@
 
 @implementation BoneCollectUIAnimation
 
-+(BoneCollectUIAnimation*)init_start:(CGPoint)start end:(CGPoint)end {
++(BoneCollectUIAnimation*)cons_start:(CGPoint)start end:(CGPoint)end {
     BoneCollectUIAnimation *b = [BoneCollectUIAnimation node];
     [b cons_start:start end:end];
     [GEventDispatcher add_listener:b];

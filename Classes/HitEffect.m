@@ -6,7 +6,7 @@
 @synthesize tmode;
 @synthesize nograv;
 
-+(HitEffect*)init_from:(PlayerEffectParams*)base time:(int)time {
++(HitEffect*)cons_from:(PlayerEffectParams*)base time:(int)time {
     HitEffect *e = [[HitEffect alloc] init];
     [PlayerEffectParams copy_params_from:base to:e];
     e.time_left = time;
@@ -15,8 +15,8 @@
     return e;
 }
 
-+(HitEffect*)init_from:(PlayerEffectParams*)base time:(int)time nograv:(BOOL)nograv {
-    HitEffect* h = [HitEffect init_from:base time:time];
++(HitEffect*)cons_from:(PlayerEffectParams*)base time:(int)time nograv:(BOOL)nograv {
+    HitEffect* h = [HitEffect cons_from:base time:time];
     h.nograv = nograv;
     return h;
 }

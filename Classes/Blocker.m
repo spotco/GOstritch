@@ -4,7 +4,7 @@
 
 +(Blocker*)cons_x:(float)x y:(float)y width:(float)width height:(float)height {
     Blocker* n = [Blocker node];
-    [n init_x:x y:y width:width height:height];
+    [n cons_x:x y:y width:width height:height];
     
     return n;
 }
@@ -23,7 +23,7 @@
     }
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]] && player.current_island == NULL) {
-        [player add_effect:[BlockerEffect init_from:[player get_default_params]]];
+        [player add_effect:[BlockerEffect cons_from:[player get_default_params]]];
         player.vy = ABS(player.vy)*-1;
         active = NO;
     }

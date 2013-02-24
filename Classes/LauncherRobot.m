@@ -38,7 +38,7 @@
     [self setPosition:ccp(x,y)];
     body = [CCSprite spriteWithTexture:[Resource get_tex:TEX_ENEMY_LAUNCHER] 
                                   rect:[FileCache get_cgrect_from_plist:TEX_ENEMY_LAUNCHER idname:@"launcher"]];
-    dir = [Vec3D init_x:tdir.x y:tdir.y z:0];
+    dir = [Vec3D cons_x:tdir.x y:tdir.y z:0];
     
     float tara = [self get_tar_angle_deg_self:position_ tar:ccp(position_.x+dir.x,position_.y+dir.y)];
     if (ABS(tara) > 90) {
@@ -101,7 +101,7 @@
         [LauncherRobot explosion:g at:noz];
         [g add_particle:[CannonFireParticle init_x:noz.x y:noz.y]];
         
-        Vec3D *rv = [Vec3D init_x:dir.x y:dir.y z:0];
+        Vec3D *rv = [Vec3D cons_x:dir.x y:dir.y z:0];
         [rv scale:ROCKETSPEED];
         LauncherRocket *r = [LauncherRocket cons_at:noz vel:ccp(rv.x,rv.y)];
         [rv dealloc];
@@ -115,7 +115,7 @@
         [self set_anim:ANIM_DEAD];
         int ptcnt = arc4random_uniform(4)+4;
         for(float i = 0; i < ptcnt; i++) {
-            [g add_particle:[BrokenMachineParticle init_x:position_.x y:position_.y vx:float_random(-5, 5) vy:float_random(-3, 10)]];
+            [g add_particle:[BrokenMachineParticle cons_x:position_.x y:position_.y vx:float_random(-5, 5) vy:float_random(-3, 10)]];
         }
         player.vy = 8;
         [AudioManager playsfx:SFX_BOP];
@@ -126,7 +126,7 @@
             [self set_anim:ANIM_DEAD];
             int ptcnt = arc4random_uniform(4)+4;
             for(float i = 0; i < ptcnt; i++) {
-                [g add_particle:[BrokenMachineParticle init_x:position_.x y:position_.y vx:float_random(-5, 5) vy:float_random(-3, 10)]];
+                [g add_particle:[BrokenMachineParticle cons_x:position_.x y:position_.y vx:float_random(-5, 5) vy:float_random(-3, 10)]];
             }
             [AudioManager playsfx:SFX_ROCKBREAK];
             
@@ -150,7 +150,7 @@
 
 -(CGPoint)get_nozzle {
     CGPoint pos = position_;
-    Vec3D *v = [Vec3D init_x:dir.x y:dir.y z:0];
+    Vec3D *v = [Vec3D cons_x:dir.x y:dir.y z:0];
     [v scale:110];
     pos = [v transform_pt:pos];
     [v dealloc];

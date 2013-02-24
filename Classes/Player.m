@@ -54,7 +54,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
 	player_img.anchorPoint = ccp(0,0);
 	player_img.position = ccp(IMG_OFFSET_X,IMG_OFFSET_Y);
 	
-    new_player.up_vec = [Vec3D init_x:0 y:1 z:0];
+    new_player.up_vec = [Vec3D cons_x:0 y:1 z:0];
 	[new_player addChild:player_img];
 	
     [new_player init_anim];
@@ -139,7 +139,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
 }
 
 -(void)mov_center_rotation {
-    Vec3D *dv = [Vec3D init_x:vx y:vy z:0];
+    Vec3D *dv = [Vec3D cons_x:vx y:vy z:0];
     [dv normalize];
     
     float rot = -[Common rad_to_deg:[dv get_angle_in_rad]];
@@ -236,7 +236,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
     
     if (particlectr >= 5) {
         particlectr = 0;
-        Vec3D *dv = [Vec3D init_x:vx y:vy z:0];
+        Vec3D *dv = [Vec3D cons_x:vx y:vy z:0];
         Vec3D *normal = [[Vec3D Z_VEC] crossWith:dv];
         [normal normalize];
         [dv normalize];
@@ -289,7 +289,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
     position_ = start_pt;
     current_island = NULL;
     [up_vec dealloc];
-    up_vec = [Vec3D init_x:0 y:1 z:0];
+    up_vec = [Vec3D cons_x:0 y:1 z:0];
     vx = 0;
     vy = 0;
     rotation_ = 0;
@@ -368,7 +368,7 @@ HitRect cached_rect;
         return cached_rect;
     }
     
-    Vec3D *v = [Vec3D init_x:up_vec.x y:up_vec.y z:0];
+    Vec3D *v = [Vec3D cons_x:up_vec.x y:up_vec.y z:0];
     Vec3D *h = [v crossWith:[Vec3D Z_VEC]];
     float x = self.position.x;
     float y = self.position.y;

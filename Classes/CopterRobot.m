@@ -101,8 +101,8 @@ static const int DEFAULT_HP = 4;
             
         } else if (!player.dead) {
             cur_mode = CopterMode_Killed_Player;
-            [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
-            [DazedParticle init_effect:g tar:player time:40];
+            [player add_effect:[HitEffect cons_from:[player get_default_params] time:40]];
+            [DazedParticle cons_effect:g tar:player time:40];
             [AudioManager playsfx:SFX_HIT];
             
         }
@@ -309,7 +309,7 @@ static const int DEFAULT_HP = 4;
     if (ct <= 0) {
         cur_mode = CopterMode_ToRemove;
         for(float i = 0; i < 10; i++) {
-            [g add_particle:[BrokenMachineParticle init_x:position_.x y:position_.y vx:float_random(-5, 10) vy:float_random(-10, 10)]];
+            [g add_particle:[BrokenMachineParticle cons_x:position_.x y:position_.y vx:float_random(-5, 10) vy:float_random(-10, 10)]];
         }
         [GEventDispatcher push_event:[[GEvent init_type:GEventType_BOSS1_DEFEATED] add_pt:g.player.position]];
     }
@@ -331,7 +331,7 @@ static const int DEFAULT_HP = 4;
             CGPoint noz = [self get_nozzle];
             [LauncherRobot explosion:g at:noz];
             
-            Vec3D *rv = [Vec3D init_x:-1 y:0 z:0];
+            Vec3D *rv = [Vec3D cons_x:-1 y:0 z:0];
             [rv normalize];
             [rv scale:TRACKINGFIRE_ROCKETSPEED];
             LauncherRocket *r = [[RelativePositionLauncherRocket cons_at:noz player:g.player.position vel:ccp(rv.x,rv.y)] set_remlimit:1300];
@@ -363,7 +363,7 @@ static const int DEFAULT_HP = 4;
             CGPoint noz = [self get_nozzle];
             [LauncherRobot explosion:g at:noz];
             
-            Vec3D *rv = [Vec3D init_x:1 y:0 z:0];
+            Vec3D *rv = [Vec3D cons_x:1 y:0 z:0];
             [rv normalize];
             [rv scale:RAPIDFIRE_ROCKETSPEED];
             LauncherRocket *r = [[RelativePositionLauncherRocket cons_at:noz player:g.player.position vel:ccp(rv.x,rv.y)] set_remlimit:1300];
@@ -392,7 +392,7 @@ static const int DEFAULT_HP = 4;
         CGPoint noz = [self get_nozzle];
         [LauncherRobot explosion:g at:noz];
         
-        Vec3D *rv = [Vec3D init_x:-1 y:-1 z:0];
+        Vec3D *rv = [Vec3D cons_x:-1 y:-1 z:0];
         [rv normalize];
         [rv scale:2.5];
         LauncherRocket *r = [LauncherRocket cons_at:noz vel:ccp(rv.x,rv.y)];
@@ -499,7 +499,7 @@ static const int DEFAULT_HP = 4;
 }
 
 -(CGPoint)get_nozzle {
-    Vec3D *dirvec = [Vec3D init_x:1 y:0 z:0];
+    Vec3D *dirvec = [Vec3D cons_x:1 y:0 z:0];
     [dirvec scale:100];
     if (scaleX_ < 0) {
         dirvec.y += 40;
@@ -519,7 +519,7 @@ static const int DEFAULT_HP = 4;
 
 -(void)apply_recoil {
     CGPoint noz = [self get_nozzle];
-    Vec3D *recoil_dir = [Vec3D init_x:noz.x-position_.x y:noz.y-position_.y z:0];
+    Vec3D *recoil_dir = [Vec3D cons_x:noz.x-position_.x y:noz.y-position_.y z:0];
     [recoil_dir normalize];
     [recoil_dir scale:-RECOIL_DIST];
     recoil_tar = ccp(recoil_dir.x,recoil_dir.y);

@@ -7,12 +7,12 @@
 static Vec3D* z_vec = NULL;
 +(Vec3D*)Z_VEC {
     if (z_vec == NULL) {
-        z_vec = [Vec3D init_x:0 y:0 z:1];
+        z_vec = [Vec3D cons_x:0 y:0 z:1];
     }
     return z_vec;
 }
 
-+(Vec3D*) init_x:(float)x y:(float)y z:(float)z {
++(Vec3D*) cons_x:(float)x y:(float)y z:(float)z {
     Vec3D *v = [Vec3D alloc];
     v.x = x;
     v.y = y;
@@ -26,11 +26,11 @@ static Vec3D* z_vec = NULL;
 
 
 -(Vec3D*) add:(Vec3D*)v {
-    return [Vec3D init_x:(x + v.x) y:(y+v.y) z:(z+v.z)];
+    return [Vec3D cons_x:(x + v.x) y:(y+v.y) z:(z+v.z)];
 }
 
 -(Vec3D*) sub:(Vec3D*)v {
-    return [Vec3D init_x:(x - v.x) y:(y-v.y) z:(z-v.z)];
+    return [Vec3D cons_x:(x - v.x) y:(y-v.y) z:(z-v.z)];
 }
 
 -(void) scale:(float)sf {
@@ -66,7 +66,7 @@ static Vec3D* z_vec = NULL;
     y1 = -((x*a.z) - (z*a.x));
     z1 = (x*a.y) - (a.x*y);
     
-    return [Vec3D init_x:(x1) y:(y1) z:(z1)];
+    return [Vec3D cons_x:(x1) y:(y1) z:(z1)];
 }
 
 -(float) dotWith:(Vec3D*)a {
@@ -81,7 +81,7 @@ static Vec3D* z_vec = NULL;
     float mag = [self length];
     float ang = atan2f(y, x);
     ang += rad;
-    return [Vec3D init_x:mag*cos(ang) y:mag*sin(ang) z:0];
+    return [Vec3D cons_x:mag*cos(ang) y:mag*sin(ang) z:0];
 }
 
 -(float)get_angle_in_rad {

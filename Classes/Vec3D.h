@@ -7,7 +7,7 @@
 
 @property(readwrite, assign) float x,y,z;
 
-+(Vec3D*) init_x:(float)x y:(float)y z:(float)z;
++(Vec3D*) cons_x:(float)x y:(float)y z:(float)z;
 +(float) rad_angle_between_a:(Vec3D*)a and_b:(Vec3D*)b;
 -(Vec3D*) add:(Vec3D*)v;
 -(Vec3D*) sub:(Vec3D*)v;

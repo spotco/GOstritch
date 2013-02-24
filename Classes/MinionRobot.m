@@ -67,7 +67,7 @@
         
         int ptcnt = arc4random_uniform(4)+4;
         for(float i = 0; i < ptcnt; i++) {
-            [g add_particle:[BrokenMachineParticle init_x:position_.x
+            [g add_particle:[BrokenMachineParticle cons_x:position_.x
                                                         y:position_.y
                                                        vx:float_random(-5, 5)
                                                        vy:float_random(-3, 10)]];
@@ -82,7 +82,7 @@
         
         int ptcnt = arc4random_uniform(4)+4;
         for(float i = 0; i < ptcnt; i++) {
-            [g add_particle:[BrokenMachineParticle init_x:position_.x
+            [g add_particle:[BrokenMachineParticle cons_x:position_.x
                                                             y:position_.y
                                                            vx:float_random(-5, 5) 
                                                            vy:float_random(-3, 10)]];
@@ -90,8 +90,8 @@
         [AudioManager playsfx:SFX_ROCKBREAK];
         
     } else if (!player.dead && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
-        [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
-        [DazedParticle init_effect:g tar:player time:40];
+        [player add_effect:[HitEffect cons_from:[player get_default_params] time:40]];
+        [DazedParticle cons_effect:g tar:player time:40];
         [AudioManager playsfx:SFX_HIT];
 
     }
@@ -108,7 +108,7 @@
 
 -(void)jump_from_island {
     id<PhysicsObject> player = self;
-    Vec3D *up = [Vec3D init_x:0 y:1 z:0];
+    Vec3D *up = [Vec3D cons_x:0 y:1 z:0];
     [up scale:float_random(10, 11)];
     
     player.current_island = NULL;

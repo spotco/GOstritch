@@ -2,6 +2,6 @@
 
 @interface BlockerEffect : PlayerEffectParams
 
-+(BlockerEffect*)init_from:(PlayerEffectParams*)base;
++(BlockerEffect*)cons_from:(PlayerEffectParams*)base;
 
 @end

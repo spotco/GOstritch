@@ -79,7 +79,7 @@
             ct = 0;
             
         } else {
-            [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
+            [player add_effect:[HitEffect cons_from:[player get_default_params] time:40]];
             [g add_particle:[ExplosionParticle init_x:position_.x y:position_.y]];
             
             [AudioManager playsfx:SFX_EXPLOSION];

@@ -3,9 +3,9 @@
 
 @implementation CameraArea
 
-+(CameraArea*)init_x:(float)x y:(float)y wid:(float)wid hei:(float)hei zoom:(CameraZoom)czoom {
++(CameraArea*)cons_x:(float)x y:(float)y wid:(float)wid hei:(float)hei zoom:(CameraZoom)czoom {
     CameraArea* a = [CameraArea node];
-    [a init_x:x y:y width:wid height:hei];
+    [a cons_x:x y:y width:wid height:hei];
     [a set_tar:czoom];
     return a;
 }

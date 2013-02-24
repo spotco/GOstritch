@@ -5,6 +5,6 @@
     CameraZoom tar;
 }
 
-+(CameraArea*)init_x:(float)x y:(float)y wid:(float)wid hei:(float)hei zoom:(CameraZoom)czoom;
++(CameraArea*)cons_x:(float)x y:(float)y wid:(float)wid hei:(float)hei zoom:(CameraZoom)czoom;
 
 @end

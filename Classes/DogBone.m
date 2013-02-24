@@ -73,7 +73,7 @@
     
     if (follow) {
         refresh_cached_hitbox = YES;
-        Vec3D* vel = [Vec3D init_x:player.position.x-position_.x y:player.position.y-position_.y z:0];
+        Vec3D* vel = [Vec3D cons_x:player.position.x-position_.x y:player.position.y-position_.y z:0];
         [vel normalize];
         [vel scale:sqrtf(powf(player.vx, 2) + powf(player.vy, 2))*1.2];
         vx = vel.x;

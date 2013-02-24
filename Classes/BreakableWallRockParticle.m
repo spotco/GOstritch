@@ -4,7 +4,7 @@
 
 @implementation BreakableWallRockParticle
 
-+(BreakableWallRockParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
++(BreakableWallRockParticle*)cons_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
     BreakableWallRockParticle* p = [BreakableWallRockParticle spriteWithTexture:[Resource get_tex:TEX_CAVE_ROCKPARTICLE]];
     p.position = ccp(x,y);
     [p cons_vx:vx vy:vy];

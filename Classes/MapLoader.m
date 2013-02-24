@@ -88,7 +88,7 @@ static NSMutableDictionary* cached_json;
         } else if ([ground_type isEqualToString:@"cave"]) {
             currentIsland = [CaveLineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
         } else if ([ground_type isEqualToString:@"bridge"]) {
-            currentIsland = [BridgeIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
+            currentIsland = [BridgeIsland cons_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
         } else if ([ground_type isEqualToString:@"lab"]) {
             currentIsland = [LabLineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
         } else {
@@ -157,7 +157,7 @@ static NSMutableDictionary* cached_json;
             NSDictionary* dir_obj = [j_object objectForKey:@"dir"];
             float dir_x = getflt(dir_obj, @"x");;
             float dir_y = getflt(dir_obj, @"y");;
-            Vec3D* dir_vec = [Vec3D init_x:dir_x y:dir_y z:0];
+            Vec3D* dir_vec = [Vec3D cons_x:dir_x y:dir_y z:0];
             [map.game_objects addObject:[JumpPad init_x:x y:y dirvec:dir_vec]];
             
             [dir_vec dealloc];
@@ -173,7 +173,7 @@ static NSMutableDictionary* cached_json;
             float width = getflt(j_object, @"width");;
             float height = getflt(j_object, @"height");;
             
-            [map.game_objects addObject:[Blocker init_x:x y:y width:width height:height]];
+            [map.game_objects addObject:[Blocker cons_x:x y:y width:width height:height]];
             
         } else if([type isEqualToString:@"speedup"]) {
             float x = getflt(j_object, @"x");
@@ -182,7 +182,7 @@ static NSMutableDictionary* cached_json;
             NSDictionary* dir_obj = [j_object objectForKey:@"dir"];
             float dir_x = getflt(dir_obj, @"x");;
             float dir_y = getflt(dir_obj, @"y");;
-            Vec3D* dir_vec = [Vec3D init_x:dir_x y:dir_y z:0];
+            Vec3D* dir_vec = [Vec3D cons_x:dir_x y:dir_y z:0];
             [map.game_objects addObject:[SpeedUp init_x:x y:y dirvec:dir_vec]];
             
             [dir_vec dealloc];
@@ -226,7 +226,7 @@ static NSMutableDictionary* cached_json;
             float cy = getflt(dir_obj, @"y");
             float cz = getflt(dir_obj, @"z");
             struct CameraZoom n = [Common cons_normalcoord_camera_zoom_x:cx y:cy z:cz];
-            [map.game_objects addObject:[CameraArea init_x:x y:y wid:width hei:hei zoom:n]];
+            [map.game_objects addObject:[CameraArea cons_x:x y:y wid:width hei:hei zoom:n]];
             
         } else if ([type isEqualToString:@"swingvine"]) {
             float x = getflt(j_object, @"x");
@@ -247,7 +247,7 @@ static NSMutableDictionary* cached_json;
             NSDictionary* dir_obj = [j_object objectForKey:@"dir"];
             float dir_x = getflt(dir_obj, @"x");;
             float dir_y = getflt(dir_obj, @"y");;
-            Vec3D* dir_vec = [Vec3D init_x:dir_x y:dir_y z:0];
+            Vec3D* dir_vec = [Vec3D cons_x:dir_x y:dir_y z:0];
             
             [map.game_objects addObject:[LauncherRobot cons_x:x y:y dir:dir_vec]];
             [dir_vec dealloc];

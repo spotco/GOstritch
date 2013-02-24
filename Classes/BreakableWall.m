@@ -9,7 +9,7 @@
 #define CENTER_IMG_WID 36.0
 #define CENTER_IMG_HEI 128.0
 
-+(BreakableWall*)init_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2 {
++(BreakableWall*)cons_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2 {
     BreakableWall *n = [BreakableWall node];
     [n cons_x:x y:y x2:x2 y2:y2];
     return n;
@@ -27,7 +27,7 @@
         
         float len = [dir_vec length];
         for(float i = 0; i < len; i+=float_random(8, 30)) {
-            [g add_particle:[BreakableWallRockParticle init_x:position_.x + (i/len)*dir_vec.x
+            [g add_particle:[BreakableWallRockParticle cons_x:position_.x + (i/len)*dir_vec.x
                                                             y:position_.y + (i/len)*dir_vec.y
                                                            vx:float_random(-5, 5) 
                                                            vy:float_random(-5, 5)]];
@@ -38,8 +38,8 @@
         [player reset_params];
         player.current_swingvine = NULL;
         activated = YES;
-        [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
-        [DazedParticle init_effect:g tar:player time:40];
+        [player add_effect:[HitEffect cons_from:[player get_default_params] time:40]];
+        [DazedParticle cons_effect:g tar:player time:40];
         [AudioManager playsfx:SFX_HIT];
     }
 }

@@ -3,22 +3,22 @@
 
 @implementation DazedParticle
 
-+(DazedParticle*)init_x:(float)x y:(float)y theta:(float)theta time:(int)time tracking:(id<PhysicsObject>)t {
-    return [[DazedParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]] initialize_x:x y:y t:theta time:time tracking:t];
++(DazedParticle*)cons_x:(float)x y:(float)y theta:(float)theta time:(int)time tracking:(id<PhysicsObject>)t {
+    return [[DazedParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]] cons_x:x y:y t:theta time:time tracking:t];
 }
 
-+(void)init_effect:(GameEngineLayer *)g tar:(id<PhysicsObject>)tar time:(int)time {
++(void)cons_effect:(GameEngineLayer *)g tar:(id<PhysicsObject>)tar time:(int)time {
     float x = tar.position.x;
     float y = tar.position.y+60*(tar.current_island != NULL?tar.last_ndir:1);
     
-    [g add_particle:[DazedParticle init_x:x y:y theta:0 time:time tracking:tar]];
-    [g add_particle:[DazedParticle init_x:x y:y theta:M_PI/2 time:time tracking:tar]];
-    [g add_particle:[DazedParticle init_x:x y:y theta:M_PI time:time tracking:tar]];
-    [g add_particle:[DazedParticle init_x:x y:y theta:M_PI*1.5 time:time tracking:tar]];
+    [g add_particle:[DazedParticle cons_x:x y:y theta:0 time:time tracking:tar]];
+    [g add_particle:[DazedParticle cons_x:x y:y theta:M_PI/2 time:time tracking:tar]];
+    [g add_particle:[DazedParticle cons_x:x y:y theta:M_PI time:time tracking:tar]];
+    [g add_particle:[DazedParticle cons_x:x y:y theta:M_PI*1.5 time:time tracking:tar]];
     
 }
 
--(DazedParticle*)initialize_x:(float)x y:(float)y t:(float)t time:(int)time tracking:(id<PhysicsObject>)tracking {
+-(DazedParticle*)cons_x:(float)x y:(float)y t:(float)t time:(int)time tracking:(id<PhysicsObject>)tracking {
     [self setPosition:ccp(x,y)];
     [self setScale:0.6];
     [self setColor:ccc3(255, 255, 0)];

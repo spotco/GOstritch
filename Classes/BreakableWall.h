@@ -7,6 +7,6 @@
     BOOL broken;
 }
 
-+(BreakableWall*)init_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2;
++(BreakableWall*)cons_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2;
 
 @end

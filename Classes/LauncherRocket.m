@@ -67,7 +67,7 @@
     [super update:player g:g];
     [self update_position];
     
-    Vec3D *dv = [Vec3D init_x:v.x y:v.y z:0];
+    Vec3D *dv = [Vec3D cons_x:v.x y:v.y z:0];
     [dv normalize];
     [dv scale:-1];
     [dv scale:90];
@@ -108,8 +108,8 @@
             [AudioManager playsfx:SFX_ROCKBREAK];
             
         } else if (!player.dead) {
-            [player add_effect:[HitEffect init_from:[player get_default_params] time:40]];
-            [DazedParticle init_effect:g tar:player time:40];
+            [player add_effect:[HitEffect cons_from:[player get_default_params] time:40]];
+            [DazedParticle cons_effect:g tar:player time:40];
             [self remove_from:g];
             return;
         }
@@ -120,7 +120,7 @@
 
 -(void)flyoff:(CGPoint)pv norm:(int)norm {
     broken_ct = 35;
-    Vec3D *pvec = [Vec3D init_x:pv.x y:pv.y z:0];
+    Vec3D *pvec = [Vec3D cons_x:pv.x y:pv.y z:0];
     if (norm > 0) {
         [pvec normalize];
         [pvec scale:norm];

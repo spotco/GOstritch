@@ -180,7 +180,7 @@
     CGPoint player_pre = player.position;
     CGPoint player_post = ccp(player.position.x+player.vx,player.position.y+player.vy);
     line_seg player_mov = [Common cons_line_seg_a:player_pre b:player_post];
-    Vec3D *player_mov_vec = [Vec3D init_x:player_mov.b.x - player_mov.a.x y:player_mov.b.y - player_mov.a.y z:0];
+    Vec3D *player_mov_vec = [Vec3D cons_x:player_mov.b.x - player_mov.a.x y:player_mov.b.y - player_mov.a.y z:0];
     
     Island* contact_island = NULL;
     CGPoint contact_intersection;
@@ -209,8 +209,8 @@
         }
         player.current_island = contact_island;
         
-        Vec3D *a = [Vec3D init_x:player_mov.b.x - player_mov.a.x y:player_mov.b.y - player_mov.a.y z:0];
-        Vec3D *b = [Vec3D init_x:contact_segment.b.x - contact_segment.a.x y:contact_segment.b.y - contact_segment.a.y z:0];
+        Vec3D *a = [Vec3D cons_x:player_mov.b.x - player_mov.a.x y:player_mov.b.y - player_mov.a.y z:0];
+        Vec3D *b = [Vec3D cons_x:contact_segment.b.x - contact_segment.a.x y:contact_segment.b.y - contact_segment.a.y z:0];
         float theta = [Vec3D rad_angle_between_a:a and_b:b];
         if (theta < M_PI) {
             player.vx *= MAX((M_PI - theta)/(M_PI),MAX_LOSS);

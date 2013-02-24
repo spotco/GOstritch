@@ -4,7 +4,7 @@
 
 @implementation BridgeIsland
 
-+(BridgeIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land {
++(BridgeIsland*)cons_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land {
 	BridgeIsland *new_island = [BridgeIsland node];
     new_island.fill_hei = height;
     new_island.ndir = ndir;
@@ -13,7 +13,7 @@
 	new_island.anchorPoint = ccp(0,0);
 	new_island.position = ccp(new_island.startX,new_island.startY);
     new_island.can_land = can_land;
-	[new_island init_tex];
+	[new_island cons_tex];
 	return new_island;
 }
 
@@ -26,7 +26,7 @@
     self.t_max = sqrtf(powf(self.endX - self.startX, 2) + powf(self.endY - self.startY, 2));
 }
 
--(void)init_tex {
+-(void)cons_tex {
     float BEDGE_WID = 13;
     float BEDGE_HEI = 32;
     
@@ -34,7 +34,7 @@
     float BCENTER_HEI = 39*2;
     
     CGPoint p2off = ccp(self.endX-self.startX,self.endY-self.startY);
-    Vec3D *linedir = [Vec3D init_x:p2off.x y:p2off.y z:0];
+    Vec3D *linedir = [Vec3D cons_x:p2off.x y:p2off.y z:0];
     [linedir normalize];
     
     Vec3D *linenormal = [linedir crossWith:[Vec3D Z_VEC]];
@@ -83,7 +83,7 @@
     [linedir dealloc];
     [linenormal dealloc];
     
-    linedir = [Vec3D init_x:p2off.x y:p2off.y z:0];
+    linedir = [Vec3D cons_x:p2off.x y:p2off.y z:0];
     linenormal = [linedir crossWith:[Vec3D Z_VEC]];
     [linenormal normalize];
     [linenormal scale:BCENTER_HEI];

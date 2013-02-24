@@ -5,6 +5,6 @@
     CGPoint start,end;
 }
 
-+(BoneCollectUIAnimation*)init_start:(CGPoint)start end:(CGPoint)end;
++(BoneCollectUIAnimation*)cons_start:(CGPoint)start end:(CGPoint)end;
 
 @end

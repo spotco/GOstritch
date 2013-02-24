@@ -79,7 +79,7 @@
     [toremove removeAllObjects];
 }
 -(void)start_bone_collect_anim {
-    BoneCollectUIAnimation* b = [BoneCollectUIAnimation init_start:[UILayer player_approx_position:game_engine_layer] end:ccp(0,[[UIScreen mainScreen] bounds].size.width)];
+    BoneCollectUIAnimation* b = [BoneCollectUIAnimation cons_start:[UILayer player_approx_position:game_engine_layer] end:ccp(0,[[UIScreen mainScreen] bounds].size.width)];
     [self addChild:b];
     [ingame_ui_anims addObject:b];
 }

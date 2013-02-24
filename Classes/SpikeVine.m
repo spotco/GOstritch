@@ -16,7 +16,7 @@
 
 -(void)cons_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2 {
     [self setPosition:ccp(x,y)];
-    dir_vec = [Vec3D init_x:x2-x y:y2-y z:0];
+    dir_vec = [Vec3D cons_x:x2-x y:y2-y z:0];
     [self cons_img];
     [self setActive:YES];
 }
@@ -57,8 +57,8 @@
     [player reset_params];
     player.current_swingvine = NULL;
     activated = YES;
-    [player add_effect:[HitEffect init_from:[player get_default_params] time:40 nograv:YES]];
-    [DazedParticle init_effect:g tar:player time:40];
+    [player add_effect:[HitEffect cons_from:[player get_default_params] time:40 nograv:YES]];
+    [DazedParticle cons_effect:g tar:player time:40];
     [AudioManager playsfx:SFX_HIT];
 }
 
@@ -93,7 +93,7 @@
     [normal normalize];
     [normal scale:s.width/2];
     
-    Vec3D *r_dirv = [Vec3D init_x:dir_vec.x y:dir_vec.y z:0];
+    Vec3D *r_dirv = [Vec3D cons_x:dir_vec.x y:dir_vec.y z:0];
     [r_dirv normalize];
     [r_dirv scale:-s.height];
     /**        

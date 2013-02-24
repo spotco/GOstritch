@@ -41,7 +41,7 @@ static float avg_y;
     if(touch_move_counter == 3) {
         float avg = touch_dist_sum/touch_move_counter;
         if (avg > 5) {
-            Vec3D* v = [Vec3D init_x:avg_x/touch_move_counter y:avg_y/touch_move_counter z:0];
+            Vec3D* v = [Vec3D cons_x:avg_x/touch_move_counter y:avg_y/touch_move_counter z:0];
             [v normalize];
             
             if (ABS([v get_angle_in_rad]) < M_PI*(3.0/4.0)) {
