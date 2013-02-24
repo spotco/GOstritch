@@ -7,7 +7,7 @@
 @synthesize noclip;
 
 
-+(PlayerEffectParams*)init_copy:(PlayerEffectParams*)p {
++(PlayerEffectParams*)cons_copy:(PlayerEffectParams*)p {
     PlayerEffectParams *n = [[PlayerEffectParams alloc] init];
     [PlayerEffectParams copy_params_from:p to:n];
     return n;

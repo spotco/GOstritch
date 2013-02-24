@@ -13,5 +13,5 @@
 
 
 @interface FlashHitEffect : HitEffect
-+(FlashHitEffect*)init_from:(PlayerEffectParams*)base time:(int)time;
++(FlashHitEffect*)cons_from:(PlayerEffectParams*)base time:(int)time;
 @end

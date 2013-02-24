@@ -3,7 +3,7 @@
 
 @implementation CaveLineIsland
 
-+(CaveLineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land {
++(CaveLineIsland*)cons_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land {
 	CaveLineIsland *new_island = [CaveLineIsland node];
     new_island.fill_hei = height;
     new_island.ndir = ndir;
@@ -12,8 +12,8 @@
 	new_island.anchorPoint = ccp(0,0);
 	new_island.position = ccp(new_island.startX,new_island.startY);
     new_island.can_land = can_land;
-	[new_island init_tex];
-	[new_island init_top];
+	[new_island cons_tex];
+	[new_island cons_top];
 	return new_island;
 }
 

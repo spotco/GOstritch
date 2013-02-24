@@ -3,6 +3,6 @@
 
 @interface GameEndArea : GameObject
 
-+(GameEndArea*)init_x:(float)x y:(float)y;
++(GameEndArea*)cons_x:(float)x y:(float)y;
 
 @end

@@ -7,7 +7,7 @@
 
 @implementation JumpPad
 
-+(JumpPad*)init_x:(float)x y:(float)y dirvec:(Vec3D *)vec{
++(JumpPad*)cons_x:(float)x y:(float)y dirvec:(Vec3D *)vec{
     JumpPad *j = [JumpPad node];
     j.position = ccp(x,y);
     [j cons_anim];
@@ -47,7 +47,7 @@
             
             float dvx = cosf(r)*8+float_random(0, 1);
             float dvy = sinf(r)*8+float_random(0, 1);
-            [g add_particle:[JumpPadParticle init_x:position_.x 
+            [g add_particle:[JumpPadParticle cons_x:position_.x 
                                                   y:position_.y
                                                  vx:dvx
                                                  vy:dvy]];

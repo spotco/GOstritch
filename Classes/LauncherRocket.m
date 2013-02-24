@@ -10,7 +10,7 @@
 
 #define DEFAULT_SCALE 0.75
 
--(CCAction*)init_anim:(NSArray*)a speed:(float)speed {
+-(CCAction*)cons_anim:(NSArray*)a speed:(float)speed {
 	CCTexture2D *texture = [Resource get_tex:TEX_CANNONTRAIL];
 	NSMutableArray *animFrames = [NSMutableArray array];
     for (NSString* k in a) [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[FileCache get_cgrect_from_plist:TEX_CANNONTRAIL idname:k]]];
@@ -36,7 +36,7 @@
     trail = [CCSprite node];
     [trail setScale:0.75];
     [trail setPosition:ccp(70,0)];
-    [trail runAction:[self init_anim:[NSArray arrayWithObjects:@"1",@"2",@"3",@"4", nil] speed:0.1]];
+    [trail runAction:[self cons_anim:[NSArray arrayWithObjects:@"1",@"2",@"3",@"4", nil] speed:0.1]];
     [self addChild:trail z:1];
     
     return self;
@@ -72,7 +72,7 @@
     [dv scale:-1];
     [dv scale:90];
     ct++;
-    ct%PARTICLE_FREQ==0?[g add_particle:[RocketLaunchParticle init_x:position_.x+dv.x y:position_.y+dv.y vx:-v.x vy:-v.y]]:0;
+    ct%PARTICLE_FREQ==0?[g add_particle:[RocketLaunchParticle cons_x:position_.x+dv.x y:position_.y+dv.y vx:-v.x vy:-v.y]]:0;
     [dv dealloc];
     
     
@@ -132,7 +132,7 @@
 
 -(void)remove_from:(GameEngineLayer*)g {
     [AudioManager playsfx:SFX_EXPLOSION];
-    [g add_particle:[ExplosionParticle init_x:position_.x y:position_.y]];
+    [g add_particle:[ExplosionParticle cons_x:position_.x y:position_.y]];
     //[LauncherRobot explosion:g at:position_];
     [g remove_gameobject:shadow];
     [g remove_gameobject:self];
@@ -175,7 +175,7 @@
     trail = [CCSprite node];
     [trail setScale:0.75];
     [trail setPosition:ccp(70,0)];
-    [trail runAction:[self init_anim:[NSArray arrayWithObjects:@"1",@"2",@"3",@"4", nil] speed:0.1]];
+    [trail runAction:[self cons_anim:[NSArray arrayWithObjects:@"1",@"2",@"3",@"4", nil] speed:0.1]];
     [self addChild:trail z:1];
     
     active = YES;

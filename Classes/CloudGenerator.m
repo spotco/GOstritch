@@ -11,7 +11,7 @@
 @synthesize base_hei;
 @synthesize cloud_tex;
 
-+(CloudGenerator*)init_from_tex:(CCTexture2D *)tex 
++(CloudGenerator*)cons_from_tex:(CCTexture2D *)tex
                     scrollspd_x:(float)spdx
                     scrollspd_y:(float)spdy 
                      baseHeight:(float)hei {

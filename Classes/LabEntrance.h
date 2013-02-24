@@ -8,7 +8,7 @@
 }
 
 +(LabEntrance*)cons_pt:(CGPoint)pt;
--(id)init_pt:(CGPoint)pt;
+-(id)cons_pt:(CGPoint)pt;
 -(BOOL)get_do_render;
 -(void)entrance_event;
 @end

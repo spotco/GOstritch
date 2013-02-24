@@ -30,11 +30,11 @@
 @property(readwrite,assign) CGPoint tl,bl,tr,br;
 @property(readwrite,assign) BOOL force_draw_leftline,force_draw_rightline;
 
-+(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land;
++(LineIsland*)cons_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land;
 
 -(void)calc_init;
--(void)init_tex;
--(void)init_top;
+-(void)cons_tex;
+-(void)cons_top;
 
 -(CCTexture2D*)get_tex_fill;
 -(CCTexture2D*)get_tex_corner;

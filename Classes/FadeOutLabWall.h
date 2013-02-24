@@ -5,6 +5,6 @@
     int tar_opacity;
 }
 
-+(FadeOutLabWall*)init_x:(float)x y:(float)y width:(float)width height:(float)height;
++(FadeOutLabWall*)cons_x:(float)x y:(float)y width:(float)width height:(float)height;
 
 @end

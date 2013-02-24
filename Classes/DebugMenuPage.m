@@ -26,15 +26,15 @@
 }
 
 -(void)play_boss_level {
-    [GEventDispatcher push_event:[[GEvent init_type:GEventType_MENU_PLAY_TESTLEVEL_MODE] add_i1:0 i2:0]];
+    [GEventDispatcher push_event:[[GEvent cons_type:GEventType_MENU_PLAY_TESTLEVEL_MODE] add_i1:0 i2:0]];
 }
 
 -(void)play_test_level {
-    [GEventDispatcher push_event:[[GEvent init_type:GEventType_MENU_PLAY_TESTLEVEL_MODE] add_i1:1 i2:1]];
+    [GEventDispatcher push_event:[[GEvent cons_type:GEventType_MENU_PLAY_TESTLEVEL_MODE] add_i1:1 i2:1]];
 }
 
 -(void)play_swingtest_level {
-    [GEventDispatcher push_event:[[GEvent init_type:GEventType_MENU_PLAY_TESTLEVEL_MODE] add_i1:2 i2:2]];
+    [GEventDispatcher push_event:[[GEvent cons_type:GEventType_MENU_PLAY_TESTLEVEL_MODE] add_i1:2 i2:2]];
 }
 
 @end

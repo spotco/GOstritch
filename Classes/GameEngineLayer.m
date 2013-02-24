@@ -20,7 +20,7 @@
     CCScene *scene = [CCScene node];
     GameEngineLayer *glayer = [GameEngineLayer layer_from_file:map_file_name lives:lives];
 	BGLayer *bglayer = [BGLayer cons_with_gamelayer:glayer];
-    UILayer* uilayer = [UILayer init_with_gamelayer:glayer];
+    UILayer* uilayer = [UILayer cons_with_gamelayer:glayer];
     
     [scene addChild:[CCLayerColor layerWithColor:ccc4(0, 0, 0, 255)]];
     [scene addChild:bglayer];
@@ -63,9 +63,9 @@
     refresh_viewbox_cache = YES;
     CGPoint player_start_pt = [self loadMap:map_filename];
     
-    [self init_bones];
+    [self cons_bones];
     particles = [[NSMutableArray array] retain];
-    player = [Player init_at:player_start_pt];
+    player = [Player cons_at:player_start_pt];
     [self addChild:player z:[GameRenderImplementation GET_RENDER_PLAYER_ORD]];
     
     DogShadow *d = [DogShadow cons];
@@ -132,7 +132,7 @@
         [self addChild:o z:[o get_render_ord]];
     }
     
-    World1ParticleGenerator *w1 = [World1ParticleGenerator init];
+    World1ParticleGenerator *w1 = [World1ParticleGenerator cons];
     [game_objects addObject:w1];
     [self addChild:w1];
     
@@ -164,7 +164,7 @@
 
 -(void)check_falloff {
     if (![Common hitrect_touch:[self get_world_bounds] b:[player get_hit_rect]]) {
-        [GEventDispatcher push_unique_event:[GEvent init_type:GEventType_PLAYER_DIE]];
+        [GEventDispatcher push_unique_event:[GEvent cons_type:GEventType_PLAYER_DIE]];
 	}
 }
 
@@ -192,10 +192,10 @@ int test;
         [self push_added_particles];
         [self update_render];
         [GameRenderImplementation update_render_on:self];
-        [GEventDispatcher push_event:[GEvent init_type:GEventType_GAME_TICK]];
+        [GEventDispatcher push_event:[GEvent cons_type:GEventType_GAME_TICK]];
         
     } else if (current_mode == GameEngineLayerMode_UIANIM) {
-        [GEventDispatcher push_event:[GEvent init_type:GEventType_UIANIM_TICK]];
+        [GEventDispatcher push_event:[GEvent cons_type:GEventType_UIANIM_TICK]];
         
     }
     [GEventDispatcher dispatch_events];
@@ -214,7 +214,7 @@ int test;
         [self set_checkpoint_to:e.pt];
         
     } else if (e.type == GEventType_LEVELEND) {
-        [GEventDispatcher push_event:[GEvent init_type:GEventType_LOAD_LEVELEND_MENU]];
+        [GEventDispatcher push_event:[GEvent cons_type:GEventType_LOAD_LEVELEND_MENU]];
         
     } else if (e.type == GEventType_PAUSE) {
         current_mode = GameEngineLayerMode_PAUSED;
@@ -227,9 +227,9 @@ int test;
         if (lives != GAMEENGINE_INF_LIVES && lives < 1) {
             [self game_over];
         } else {
-            [GEventDispatcher push_event:[GEvent init_type:GEventType_GAME_RESET]];
+            [GEventDispatcher push_event:[GEvent cons_type:GEventType_GAME_RESET]];
             [self player_reset];
-            [player add_effect:[FlashEffect init_from:[player get_current_params] time:35]];
+            [player add_effect:[FlashEffect cons_from:[player get_current_params] time:35]];
         }
         
     }
@@ -255,7 +255,7 @@ int test;
 
 -(void)game_over {
     current_mode = GameEngineLayerMode_GAMEOVER;
-    [GEventDispatcher push_event:[GEvent init_type:GEventType_GAMEOVER]];
+    [GEventDispatcher push_event:[GEvent cons_type:GEventType_GAMEOVER]];
 }
 -(void)exit {
     if ([GameMain GET_USE_NSTIMER]) {
@@ -288,7 +288,7 @@ int test;
 
 /* bone system */
 
--(void)init_bones {
+-(void)cons_bones {
     bones = [[NSMutableDictionary alloc]init]; //bid -> status
     for (GameObject *i in game_objects) {
         if ([i class] == [DogBone class]) {
@@ -320,7 +320,7 @@ int test;
     for(NSNumber* bid in [bones allKeys]) {
         if (bid.intValue == tbid) {
             [bones setObject:[NSNumber numberWithInt:Bone_Status_HASGET] forKey:bid]; //NSLog(@"getbid:%i",tbid);
-            [GEventDispatcher push_event:[GEvent init_type:GEventType_COLLECT_BONE]];
+            [GEventDispatcher push_event:[GEvent cons_type:GEventType_COLLECT_BONE]];
             refresh_bone_cache = YES;
             return;
         }

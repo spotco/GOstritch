@@ -2,7 +2,7 @@
 
 @implementation FlashEffect
 
-+(FlashEffect*)init_from:(PlayerEffectParams*)base time:(int)time {
++(FlashEffect*)cons_from:(PlayerEffectParams*)base time:(int)time {
     FlashEffect *e = [[FlashEffect alloc] init];
     [PlayerEffectParams copy_params_from:base to:e];
     e.time_left = time;

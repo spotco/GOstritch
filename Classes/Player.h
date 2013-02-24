@@ -39,8 +39,8 @@ typedef enum {
 +(void)set_character:(NSString*)tar;
 +(NSString*)get_character;
 
-+(Player*)init_at:(CGPoint)pt;
--(void)init_anim;
++(Player*)cons_at:(CGPoint)pt;
+-(void)cons_anim;
 -(void)add_effect:(PlayerEffectParams*)effect;
 -(void)reset;
 -(void)reset_params;

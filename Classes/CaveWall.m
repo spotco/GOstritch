@@ -3,7 +3,7 @@
 
 @implementation CaveWall
 
-+(CaveWall*)init_x:(float)x y:(float)y width:(float)width height:(float)height {
++(CaveWall*)cons_x:(float)x y:(float)y width:(float)width height:(float)height {
     CaveWall* n = [CaveWall node];
     [n cons_x:x y:y width:width height:height];
     return n;
@@ -14,7 +14,7 @@
     wid = width;
     hei = height;
     
-    tex = [Common init_render_obj:[self get_tex] npts:4];
+    tex = [Common cons_render_obj:[self get_tex] npts:4];
     active = YES;
     /*10
       32*/

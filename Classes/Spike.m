@@ -4,7 +4,7 @@
 
 @implementation Spike
 
-+(Spike*)init_x:(float)posx y:(float)posy islands:(NSMutableArray*)islands {
++(Spike*)cons_x:(float)posx y:(float)posy islands:(NSMutableArray*)islands {
     Spike *s = [Spike node];
     s.position = ccp(posx,posy);
     s.active = YES;
@@ -45,7 +45,7 @@
         [DazedParticle cons_effect:g tar:player time:40];
         [AudioManager playsfx:SFX_HIT];
         
-        //[DazedParticle init_effect:g x:player.position.x y:player.position.y+60*(player.current_island != NULL?player.last_ndir:1) time:40];
+        //[DazedParticle cons_effect:g x:player.position.x y:player.position.y+60*(player.current_island != NULL?player.last_ndir:1) time:40];
     }
     
     return;

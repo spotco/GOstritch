@@ -22,7 +22,7 @@ typedef enum {
     Bone_Status_ALREADYGET //already gotten
 } Bone_Status;
 
-+(DogBone*)init_x:(float)x y:(float)y bid:(int)bid;
++(DogBone*)cons_x:(float)x y:(float)y bid:(int)bid;
 
 @property(readwrite,assign) int bid;
 

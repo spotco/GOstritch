@@ -9,6 +9,6 @@
     BOOL activated;
 }
 
-+(JumpPad*)init_x:(float)x y:(float)y dirvec:(Vec3D*)vec;
++(JumpPad*)cons_x:(float)x y:(float)y dirvec:(Vec3D*)vec;
 
 @end

@@ -5,6 +5,6 @@
     BOOL anim_toggle;
 }
 
-+(DogRocket*)init_x:(float)x y:(float)y;
++(DogRocket*)cons_x:(float)x y:(float)y;
 
 @end

@@ -7,19 +7,19 @@
 
 @implementation Water
 
-+(Water*)init_x:(float)x y:(float)y width:(float)width height:(float)height {
++(Water*)cons_x:(float)x y:(float)y width:(float)width height:(float)height {
     Water *w = [Water node];
     w.position = ccp(x,y);
-    [w init_body_ofwidth:width height:height];
+    [w cons_body_ofwidth:width height:height];
     
     return w;
 }
 
--(void)init_body_ofwidth:(float)width height:(float)height {
+-(void)cons_body_ofwidth:(float)width height:(float)height {
     
     bwidth = width;
     bheight = height;
-    body = [self init_drawbody_ofwidth:width];
+    body = [self cons_drawbody_ofwidth:width];
     offset_ct = 0;
     [self update_body_tex_offset];
     
@@ -32,7 +32,7 @@
     [fillsprite setTextureRect:CGRectMake(0, 0, bwidth, bheight)];
     [self addChild:fillsprite z:-1];
     
-    fishes = [FishGenerator init_ofwidth:bwidth basehei:bheight];
+    fishes = [FishGenerator cons_ofwidth:bwidth basehei:bheight];
     [self addChild:fishes z:-2];
 }
 
@@ -47,14 +47,14 @@
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         [player reset_params];
         activated = YES;
-        [player add_effect:[SplashEffect init_from:[player get_default_params] time:40]];
+        [player add_effect:[SplashEffect cons_from:[player get_default_params] time:40]];
         [AudioManager playsfx:SFX_SPLASH];
         
     } else if ([player get_current_params].noclip &&
                [player get_current_params].noclip < 2 &&
                [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect_ignore_noclip]]) {
         activated = YES;
-        [player add_effect_suppress_current_end_effect:[SplashEffect init_from:[player get_default_params] time:40]];
+        [player add_effect_suppress_current_end_effect:[SplashEffect cons_from:[player get_default_params] time:40]];
         
     }
     
@@ -83,8 +83,8 @@
 
 /*0 1
   2 3*/
--(GLRenderObject*)init_drawbody_ofwidth:(float)width {
-    GLRenderObject* o = [Common init_render_obj:[Resource get_tex:TEX_WATER] npts:4];
+-(GLRenderObject*)cons_drawbody_ofwidth:(float)width {
+    GLRenderObject* o = [Common cons_render_obj:[Resource get_tex:TEX_WATER] npts:4];
     
     int twid = o.texture.pixelsWide;
     int thei = o.texture.pixelsHigh;

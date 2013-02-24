@@ -9,20 +9,20 @@ static const float TIME = 30.0;
 static const float MINSCALE = 0.75;
 static const float MAXSCALE = 0.75;
 
--(CCAction*)init_anim:(NSArray*)a speed:(float)speed {
+-(CCAction*)cons_anim:(NSArray*)a speed:(float)speed {
 	CCTexture2D *texture = [Resource get_tex:TEX_CANNONFIRE_PARTICLE];
 	NSMutableArray *animFrames = [NSMutableArray array];
     for (NSString* k in a) [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[FileCache get_cgrect_from_plist:TEX_CANNONFIRE_PARTICLE idname:k]]];
     return  [CCAnimate actionWithAnimation:[CCAnimation animationWithFrames:animFrames delay:speed] restoreOriginalFrame:NO];
 }
 
-+(CannonFireParticle*)init_x:(float)x y:(float)y {
++(CannonFireParticle*)cons_x:(float)x y:(float)y {
     return [[CannonFireParticle node] cons_x:x y:y];
 }
 
 
 -(id)cons_x:(float)x y:(float)y {
-    CCAction* anim = [self init_anim:[NSArray arrayWithObjects:@"explode_1",@"explode_2",@"explode_3",@"explode_4",@"explode_5",@"", nil] speed:0.075];
+    CCAction* anim = [self cons_anim:[NSArray arrayWithObjects:@"explode_1",@"explode_2",@"explode_3",@"explode_4",@"explode_5",@"", nil] speed:0.075];
     [self runAction:anim];
     [self setPosition:ccp(x,y)];
     ct = TIME;

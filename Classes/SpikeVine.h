@@ -11,7 +11,7 @@
     BOOL activated;
 }
 
-+(SpikeVine*)init_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2;
++(SpikeVine*)cons_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2;
 
 -(CCTexture2D*)get_base_tex;
 -(CCTexture2D*)get_section_tex;

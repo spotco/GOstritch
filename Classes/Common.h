@@ -94,7 +94,7 @@ CGPoint CGPointAdd(CGPoint a,CGPoint b);
 +(void)draw_renderobj:(GLRenderObject*)obj n_vtx:(int)n_vtx;
 +(GLRenderObject*)transform_obj:(GLRenderObject*)o by:(CGPoint)position ;
 +(void)tex_map_to_tri_loc:(GLRenderObject*)o len:(int)len;
-+(GLRenderObject*)init_render_obj:(CCTexture2D*)tex npts:(int)npts;
++(GLRenderObject*)cons_render_obj:(CCTexture2D*)tex npts:(int)npts;
 
 +(CGRect)ssrect_from_dict:(NSDictionary*)dict tar:(NSString*)tar;
 +(id)make_anim_frames:(NSArray*)animFrames speed:(float)speed;

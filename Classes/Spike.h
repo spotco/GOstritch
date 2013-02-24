@@ -7,6 +7,6 @@
     BOOL activated;
 }
 
-+(Spike*)init_x:(float)posx y:(float)posy islands:(NSMutableArray*)islands;
++(Spike*)cons_x:(float)posx y:(float)posy islands:(NSMutableArray*)islands;
 
 @end

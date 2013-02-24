@@ -17,7 +17,7 @@
 @synthesize tl,bl,tr,br;
 @synthesize force_draw_leftline,force_draw_rightline;
 
-+(LineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land {
++(LineIsland*)cons_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land {
 	LineIsland *new_island = [LineIsland node];
     new_island.fill_hei = height;
     new_island.self.ndir = ndir;
@@ -26,8 +26,8 @@
 	new_island.anchorPoint = ccp(0,0);
 	new_island.position = ccp(new_island.startX,new_island.startY);
     new_island.can_land = can_land;
-	[new_island init_tex];
-	[new_island init_top];
+	[new_island cons_tex];
+	[new_island cons_top];
     
 	return new_island;
 }
@@ -138,9 +138,9 @@
     [v scale:self.ndir];
 }
 
--(void)init_tex {
+-(void)cons_tex {
     //init islandfill
-    main_fill = [Common init_render_obj:[self get_tex_fill] npts:4];
+    main_fill = [Common cons_render_obj:[self get_tex_fill] npts:4];
 	
 	CGPoint *tri_pts = main_fill.tri_pts;
     
@@ -161,7 +161,7 @@
     [self main_fill_tex_map];
     
     
-    [self init_LR_line_with_v3t1:v3t1 v3t2:v3t2];
+    [self cons_LR_line_with_v3t1:v3t1 v3t2:v3t2];
     
     [v3t2 dealloc];
     [v3t1 dealloc];
@@ -174,7 +174,7 @@
     }
 }
 
--(void) init_LR_line_with_v3t1:(Vec3D*)v3t1 v3t2:(Vec3D*)v3t2 {
+-(void) cons_LR_line_with_v3t1:(Vec3D*)v3t1 v3t2:(Vec3D*)v3t2 {
     /**
      TL TR
      BL BR
@@ -189,15 +189,15 @@
     tl = ccp(tl.x + v3t1.x, tl.y + v3t1.y);
     tr = ccp(tr.x + v3t1.x, tr.y + v3t1.y);
     
-    [self init_left_line_fill];
-    [self init_right_line_fill];
+    [self cons_left_line_fill];
+    [self cons_right_line_fill];
 }
 
--(void)init_top {
+-(void)cons_top {
     //set top green bar
     //also initially sets toppts
-    top_fill = [Common init_render_obj:[self get_tex_top] npts:4];
-    toppts_fill = [Common init_render_obj:[self get_corner_fill_color] npts:3];
+    top_fill = [Common cons_render_obj:[self get_tex_top] npts:4];
+    toppts_fill = [Common cons_render_obj:[self get_corner_fill_color] npts:3];
     toppts_fill.isalloc = 0;
     
 	CGPoint* tri_pts = top_fill.tri_pts;
@@ -238,17 +238,17 @@
     
     [v3t2 negate];
     [v3t2 normalize];
-    [self init_tl_top:tri_pts[1] bot:tri_pts[3] vec:v3t2];
+    [self cons_tl_top:tri_pts[1] bot:tri_pts[3] vec:v3t2];
     [v3t2 negate];
-    [self init_tr_top:tri_pts[2] bot:tri_pts[0] vec:v3t2];
+    [self cons_tr_top:tri_pts[2] bot:tri_pts[0] vec:v3t2];
     
-    [self init_bottom_line_fill];
+    [self cons_bottom_line_fill];
     
     [v3t1 dealloc];
     [v3t2 dealloc];
 }
 
--(GLRenderObject*)init_TRorTL_top:(CGPoint)top bot:(CGPoint)bot vec:(Vec3D*)vec {
+-(GLRenderObject*)cons_TRorTL_top:(CGPoint)top bot:(CGPoint)bot vec:(Vec3D*)vec {
     Vec3D *mvr = [Vec3D cons_x:-vec.x y:-vec.y z:0];
     [mvr scale:MVR_ROUNDED_CORNER_SCALE];
     
@@ -256,7 +256,7 @@
     bot = [mvr transform_pt:bot];
     [mvr dealloc];
     
-    GLRenderObject* o = [Common init_render_obj:[self get_tex_corner] npts:4];
+    GLRenderObject* o = [Common cons_render_obj:[self get_tex_corner] npts:4];
 	
 	CGPoint* tri_pts = o.tri_pts;
     
@@ -271,8 +271,8 @@
     return o;
 }
 
--(void)init_tl_top:(CGPoint)top bot:(CGPoint)bot vec:(Vec3D*)vec {
-    tl_top_corner = [self init_TRorTL_top:top bot:bot vec:vec];
+-(void)cons_tl_top:(CGPoint)top bot:(CGPoint)bot vec:(Vec3D*)vec {
+    tl_top_corner = [self cons_TRorTL_top:top bot:bot vec:vec];
     CGPoint* tex_pts = tl_top_corner.tex_pts;
     
     tex_pts[0] = ccp(0,0);
@@ -281,8 +281,8 @@
     tex_pts[2] = ccp(0,1);
 }
 
--(void)init_tr_top:(CGPoint)top bot:(CGPoint)bot vec:(Vec3D*)vec {
-    tr_top_corner = [self init_TRorTL_top:top bot:bot vec:vec];
+-(void)cons_tr_top:(CGPoint)top bot:(CGPoint)bot vec:(Vec3D*)vec {
+    tr_top_corner = [self cons_TRorTL_top:top bot:bot vec:vec];
     CGPoint* tex_pts = tr_top_corner.tex_pts;
     
     tex_pts[2] = ccp(0,0);
@@ -292,7 +292,7 @@
 }
 
 -(GLRenderObject*)line_from:(CGPoint)a to:(CGPoint)b scale:(float)scale {
-    GLRenderObject* n = [Common init_render_obj:[self get_tex_border] npts:4];
+    GLRenderObject* n = [Common cons_render_obj:[self get_tex_border] npts:4];
     n.isalloc = 1;
     CGPoint* tri_pts = n.tri_pts;
 	CGPoint* tex_pts = n.tex_pts;
@@ -325,11 +325,11 @@
     return n;
 }
 
--(void)init_bottom_line_fill {
+-(void)cons_bottom_line_fill {
     bottom_line_fill = [self line_from:bl to:br scale:1];
 }
 
--(void)init_corner_line_fill {
+-(void)cons_corner_line_fill {
     //if next is island, set force_draw_rightline
     if (self.next == NULL) {
         return;
@@ -342,28 +342,25 @@
     corner_line_fill = [self line_from:br to:ccp(n.bl.x-self.startX+n.self.startX,n.bl.y-self.startY+n.self.startY) scale:1];
 }
 
--(void)init_left_line_fill {    
+-(void)cons_left_line_fill {    
     left_line_fill = [self line_from:tl to:bl scale:1];
 }
 
--(void)init_right_line_fill {    
+-(void)cons_right_line_fill {    
     right_line_fill = [self line_from:tr to:br scale:-1];
 }
 
 -(void)link_finish {
     if (self.next != NULL) {
-        //if (corner_fill.isalloc == 0) {
-            [self init_corner_tex];
-            corner_fill = [Common transform_obj:corner_fill by:position_];
-        //}
-        if (toppts_fill.isalloc == 0) {
-            [self init_corner_top];
-            toppts_fill = [Common transform_obj:toppts_fill by:position_];
-        }
-        //if (corner_line_fill.isalloc == 0) {
-            [self init_corner_line_fill];
-            corner_line_fill = [Common transform_obj:corner_line_fill by:position_];
-        //}
+        
+        [self cons_corner_tex];
+        if (corner_fill != NULL) corner_fill = [Common transform_obj:corner_fill by:position_];
+        
+        [self cons_corner_top];
+        if (toppts_fill != NULL) toppts_fill = [Common transform_obj:toppts_fill by:position_];
+        
+        [self cons_corner_line_fill];
+        if (corner_line_fill != NULL) corner_line_fill = [Common transform_obj:corner_line_fill by:position_];
     }
     
     if (!has_transformed_renderpts) {
@@ -380,7 +377,7 @@
     
 }
 
--(void)init_corner_top {
+-(void)cons_corner_top {
     //called from link_finish, position greenwedge
     Vec3D *v3t2 = [Vec3D cons_x:(self.next.endX - self.next.startX) y:(self.next.endY - self.next.startY) z:0];
     Vec3D *vZ = [Vec3D Z_VEC];
@@ -420,8 +417,8 @@
     [reduce_right dealloc];
 }
 
--(void)init_corner_tex {
-    corner_fill = [Common init_render_obj:[self get_tex_fill] npts:3];
+-(void)cons_corner_tex {
+    corner_fill = [Common cons_render_obj:[self get_tex_fill] npts:3];
     
     CGPoint* tri_pts = corner_fill.tri_pts;
     

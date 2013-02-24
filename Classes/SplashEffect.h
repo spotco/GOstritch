@@ -2,6 +2,6 @@
 
 @interface SplashEffect : HitEffect
 
-+(SplashEffect*)init_from:(PlayerEffectParams*)base time:(int)time;
++(SplashEffect*)cons_from:(PlayerEffectParams*)base time:(int)time;
 
 @end

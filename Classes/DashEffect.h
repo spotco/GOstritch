@@ -7,6 +7,6 @@
 
 @property(readwrite,assign) float vx,vy;
 
-+(DashEffect*)init_from:(PlayerEffectParams*)base vx:(float)vx vy:(float)vy;
++(DashEffect*)cons_from:(PlayerEffectParams*)base vx:(float)vx vy:(float)vy;
 
 @end

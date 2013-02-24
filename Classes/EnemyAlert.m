@@ -15,7 +15,7 @@
 -(void)update:(Player *)player g:(GameEngineLayer *)g {
     if (!activated && [Common hitrect_touch:[player get_hit_rect] b:[self get_hit_rect]]) {
         activated = YES;
-        [GEventDispatcher push_event:[GEvent init_type:GEventType_SHOW_ENEMYAPPROACH_WARNING]];
+        [GEventDispatcher push_event:[GEvent cons_type:GEventType_SHOW_ENEMYAPPROACH_WARNING]];
     }
 }
 

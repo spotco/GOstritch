@@ -6,10 +6,10 @@
 
 @synthesize bid;
 
-+(DogBone*)init_x:(float)posx y:(float)posy bid:(int)bid {
++(DogBone*)cons_x:(float)posx y:(float)posy bid:(int)bid {
     DogBone *new_coin = [DogBone node];
     new_coin.active = YES;
-    [new_coin init:ccp(posx,posy)];
+    [new_coin cons:ccp(posx,posy)];
     new_coin.bid = bid;
     
     CCTexture2D *texture = [Resource get_aa_tex:TEX_GOLDEN_BONE];
@@ -19,7 +19,7 @@
     return new_coin;
 }
 
--(void)init:(CGPoint)start {
+-(void)cons:(CGPoint)start {
     [self setPosition:start];
     initial_pos = start;
     follow = NO;

@@ -2,7 +2,7 @@
 
 @implementation LabWall
 
-+(LabWall*)init_x:(float)x y:(float)y width:(float)width height:(float)height {
++(LabWall*)cons_x:(float)x y:(float)y width:(float)width height:(float)height {
     LabWall* n = [LabWall node];
     [n cons_x:x y:y width:width height:height];
     return n;

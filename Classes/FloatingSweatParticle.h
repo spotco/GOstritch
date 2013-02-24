@@ -2,6 +2,6 @@
 
 @interface FloatingSweatParticle : StreamParticle
 
-+(FloatingSweatParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy;
++(FloatingSweatParticle*)cons_x:(float)x y:(float)y vx:(float)vx vy:(float)vy;
 
 @end

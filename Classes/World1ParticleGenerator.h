@@ -5,6 +5,6 @@
 
 @interface World1ParticleGenerator : GameObject
 
-+(World1ParticleGenerator*)init;
++(World1ParticleGenerator*)cons;
 
 @end

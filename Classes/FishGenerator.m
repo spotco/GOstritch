@@ -63,14 +63,14 @@
 
 @implementation FishGenerator
 
-+(FishGenerator*)init_ofwidth:(float)wid basehei:(float)hei {
++(FishGenerator*)cons_ofwidth:(float)wid basehei:(float)hei {
     FishGenerator *n = [FishGenerator node];
     n.anchorPoint = ccp(0,0);
-    [n init_given_width:wid basehei:hei];
+    [n cons_given_width:wid basehei:hei];
     return n;
 }
 
--(void)init_given_width:(float)wid basehei:(float)hei {
+-(void)cons_given_width:(float)wid basehei:(float)hei {
     bwidth = wid;
     bheight = hei;
     

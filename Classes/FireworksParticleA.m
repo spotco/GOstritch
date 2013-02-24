@@ -4,11 +4,11 @@
 @interface SubFireworksParticleA : Particle {
     int ct;
 }
-+(SubFireworksParticleA*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy;
++(SubFireworksParticleA*)cons_x:(float)x y:(float)y vx:(float)vx vy:(float)vy;
 @end
 
 @implementation SubFireworksParticleA
-+(SubFireworksParticleA*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
++(SubFireworksParticleA*)cons_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
     SubFireworksParticleA* p = [SubFireworksParticleA spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
     p.position = ccp(x,y);
     [p cons_vx:vx vy:vy];
@@ -34,7 +34,7 @@
 
 @implementation FireworksParticleA
 
-+(FireworksParticleA*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy ct:(int)ct {
++(FireworksParticleA*)cons_x:(float)x y:(float)y vx:(float)vx vy:(float)vy ct:(int)ct {
     FireworksParticleA* p = [FireworksParticleA spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
     p.position = ccp(x,y);
     [p cons_vx:vx vy:vy ct:ct];
@@ -53,7 +53,7 @@
     ct--;
     if (ct == 0) {
         for (float i = 0; i < M_PI * 2; i+= (M_PI*2)/14) {
-            [g add_particle:[SubFireworksParticleA init_x:position_.x y:position_.y vx:cosf(i)*8+float_random(0, 1) vy:sinf(i)*8+float_random(0, 1)]];
+            [g add_particle:[SubFireworksParticleA cons_x:position_.x y:position_.y vx:cosf(i)*8+float_random(0, 1) vy:sinf(i)*8+float_random(0, 1)]];
         }
     }
 }

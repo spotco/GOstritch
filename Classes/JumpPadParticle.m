@@ -2,7 +2,7 @@
 #import "GameRenderImplementation.h"
 
 @implementation JumpPadParticle
-+(JumpPadParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
++(JumpPadParticle*)cons_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
     JumpPadParticle *p = [JumpPadParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
     [p cons_vx:vx vy:vy];
     p.position = ccp(x,y);
@@ -22,15 +22,15 @@
 @end
 
 @implementation RocketLaunchParticle
-+(RocketLaunchParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
++(RocketLaunchParticle*)cons_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
     RocketLaunchParticle *p = [RocketLaunchParticle spriteWithTexture:[Resource get_tex:TEX_SMOKE_PARTICLE]];
     [p cons_vx:vx vy:vy];
     p.position = ccp(x,y);
     return p;
 }
 
-+(RocketLaunchParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy scale:(float)scale {
-    RocketLaunchParticle *p = [RocketLaunchParticle init_x:x y:y vx:vx vy:vy];
++(RocketLaunchParticle*)cons_x:(float)x y:(float)y vx:(float)vx vy:(float)vy scale:(float)scale {
+    RocketLaunchParticle *p = [RocketLaunchParticle cons_x:x y:y vx:vx vy:vy];
     [p setScale:scale];
     return p;
 }
@@ -62,15 +62,15 @@
 
 @implementation RocketExplodeParticle
 
-+(RocketExplodeParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
++(RocketExplodeParticle*)cons_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
     RocketExplodeParticle *p = [RocketExplodeParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
     [p cons_vx:vx vy:vy];
     p.position = ccp(x,y);
     return p;
 }
 
-+(RocketExplodeParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy scale:(float)scale {
-    RocketExplodeParticle *p = [RocketExplodeParticle init_x:x y:y vx:vx vy:vy];
++(RocketExplodeParticle*)cons_x:(float)x y:(float)y vx:(float)vx vy:(float)vy scale:(float)scale {
+    RocketExplodeParticle *p = [RocketExplodeParticle cons_x:x y:y vx:vx vy:vy];
     [p setScale:scale];
     return p;
 }

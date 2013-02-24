@@ -3,7 +3,7 @@
 
 @implementation WaveParticle
 
-+(WaveParticle*)init_x:(float)x y:(float)y vx:(float)vx vtheta:(float)vtheta {
++(WaveParticle*)cons_x:(float)x y:(float)y vx:(float)vx vtheta:(float)vtheta {
     WaveParticle *p = [WaveParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
     [p setPosition:ccp(x,y)];
     [p cons:vx vtheta:vtheta];

@@ -3,7 +3,7 @@
 
 @implementation ElectricWall
 
-+(ElectricWall*)init_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2 {
++(ElectricWall*)cons_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2 {
     ElectricWall *n = [ElectricWall node];
     [n cons_x:x y:y x2:x2 y2:y2];
     return n;
@@ -27,7 +27,7 @@
 -(void)hit:(Player *)player g:(GameEngineLayer *)g {
     [player reset_params];
     activated = YES;
-    [player add_effect:[FlashHitEffect init_from:[player get_default_params] time:40]];
+    [player add_effect:[FlashHitEffect cons_from:[player get_default_params] time:40]];
     [AudioManager playsfx:SFX_ELECTRIC];
 }
 

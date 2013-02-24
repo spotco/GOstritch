@@ -2,7 +2,7 @@
 
 @implementation DogCapeEffect
 
-+(DogCapeEffect*)init_from:(PlayerEffectParams*)base {
++(DogCapeEffect*)cons_from:(PlayerEffectParams*)base {
     DogCapeEffect *n = [[DogCapeEffect alloc] init];
     [PlayerEffectParams copy_params_from:base to:n];
     n.time_left = 300;

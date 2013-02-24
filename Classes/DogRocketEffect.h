@@ -2,6 +2,6 @@
 
 @interface DogRocketEffect : PlayerEffectParams
 
-+(DogRocketEffect*)init_from:(PlayerEffectParams*)base;
++(DogRocketEffect*)cons_from:(PlayerEffectParams*)base;
 
 @end

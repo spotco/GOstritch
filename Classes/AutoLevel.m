@@ -119,7 +119,7 @@ static NSArray* bossloadertest;
         
     } else if (e.type == GEventType_BOSS1_DEFEATED) {
         cur_mode = AutoLevelMode_Normal;
-        [GEventDispatcher push_event:[[GEvent init_type:GEventType_CHECKPOINT] add_pt:e.pt]];
+        [GEventDispatcher push_event:[[GEvent cons_type:GEventType_CHECKPOINT] add_pt:e.pt]];
         [self remove_all_ahead_but_current:e.pt];
         [tglayer stopAction:tglayer.follow_action];
         tglayer.follow_action = [CCFollow actionWithTarget:tglayer.player];
@@ -153,7 +153,7 @@ static NSArray* bossloadertest;
 }
 
 -(void)load_into_queue:(NSString*)key { //load map into queue
-    MapSection *m = [MapSection init_from_name:key];
+    MapSection *m = [MapSection cons_from_name:key];
     if (!has_pos_initial) {
         cur_x = m.map.connect_pts_x1;
         cur_y = m.map.connect_pts_y1;

@@ -9,7 +9,7 @@
     NSMutableArray *fishes;
 }
 
-+(FishGenerator*)init_ofwidth:(float)wid basehei:(float)hei;
++(FishGenerator*)cons_ofwidth:(float)wid basehei:(float)hei;
 -(void)update;
 
 @end

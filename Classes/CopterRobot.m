@@ -46,7 +46,7 @@ static const int DEFAULT_HP = 4;
 }
 
 -(CopterRobot*)cons_at:(CGPoint)p {
-    [self init_anims];
+    [self cons_anims];
     hp = DEFAULT_HP;
     active = YES;
     player_pos = p;
@@ -66,7 +66,7 @@ static const int DEFAULT_HP = 4;
     player_pos = player.position;
     if (cur_mode != CopterMode_ToRemove) {
         [self set_bounds_and_ground:g];
-        [GEventDispatcher push_event:[[GEvent init_type:GEventType_BOSS1_TICK] add_i1:hp i2:DEFAULT_HP]];
+        [GEventDispatcher push_event:[[GEvent cons_type:GEventType_BOSS1_TICK] add_i1:hp i2:DEFAULT_HP]];
     }
     
     if (hp <= DEFAULT_HP/2 && !setbroke) {
@@ -294,13 +294,13 @@ static const int DEFAULT_HP = 4;
     actual_pos = ccp(rel_pos.x+player_pos.x,actual_pos.y);
     
     if (ct%15==0&&ct>20) {
-        [g add_particle:[RelativePositionExplosionParticle init_x:position_.x+float_random(-60, 60)
+        [g add_particle:[RelativePositionExplosionParticle cons_x:position_.x+float_random(-60, 60)
                                                                 y:position_.y+float_random(-60, 60)
                                                            player:g.player.position]];
         [AudioManager playsfx:SFX_EXPLOSION];
     }
     
-    ct%5==0?[g add_particle:[RocketLaunchParticle init_x:position_.x 
+    ct%5==0?[g add_particle:[RocketLaunchParticle cons_x:position_.x 
                                                       y:position_.y 
                                                      vx:float_random(-7, 7) 
                                                      vy:float_random(-7, 7)]]:0;
@@ -311,7 +311,7 @@ static const int DEFAULT_HP = 4;
         for(float i = 0; i < 10; i++) {
             [g add_particle:[BrokenMachineParticle cons_x:position_.x y:position_.y vx:float_random(-5, 10) vy:float_random(-10, 10)]];
         }
-        [GEventDispatcher push_event:[[GEvent init_type:GEventType_BOSS1_DEFEATED] add_pt:g.player.position]];
+        [GEventDispatcher push_event:[[GEvent cons_type:GEventType_BOSS1_DEFEATED] add_pt:g.player.position]];
     }
 }
 
@@ -474,7 +474,7 @@ static const int DEFAULT_HP = 4;
     rel_pos.y += flyoffdir.y;
     [self apply_rel_pos];
     ct++;
-    ct%6==0?[g add_particle:[RocketLaunchParticle init_x:position_.x 
+    ct%6==0?[g add_particle:[RocketLaunchParticle cons_x:position_.x
                                                        y:position_.y 
                                                       vx:-flyoffdir.x + float_random(-4, 4)
                                                       vy:-flyoffdir.y + float_random(-4, 4)
@@ -580,19 +580,19 @@ static const int DEFAULT_HP = 4;
     vibration.y = VIBRATION_AMPLITUDE*sinf(vibration_theta);
 }
 
--(void)init_anims {
+-(void)cons_anims {
     body = [CCSprite spriteWithTexture:[Resource get_aa_tex:TEX_ENEMY_COPTER] 
                                   rect:[FileCache get_cgrect_from_plist:TEX_ENEMY_COPTER idname:BODY]];
     
     [self addChild:body];
     
     aux_prop = [CCSprite node];
-    [aux_prop runAction:[self init_anim:[NSArray arrayWithObjects:@"aux_prop_0",@"aux_prop_1",@"aux_prop_2",nil] speed:0.05]];
+    [aux_prop runAction:[self cons_anim:[NSArray arrayWithObjects:@"aux_prop_0",@"aux_prop_1",@"aux_prop_2",nil] speed:0.05]];
     [aux_prop setPosition:ccp(-86,-10)];
     [self addChild:aux_prop];
     
     main_prop = [CCSprite node];
-    [main_prop runAction:[self init_anim:[NSArray arrayWithObjects:@"main_prop_0",@"main_prop_1",@"main_prop_2",@"main_prop_3",@"main_prop_4",nil] speed:0.05]];
+    [main_prop runAction:[self cons_anim:[NSArray arrayWithObjects:@"main_prop_0",@"main_prop_1",@"main_prop_2",@"main_prop_3",@"main_prop_4",nil] speed:0.05]];
     [main_prop setPosition:ccp(-5,85)];
     [self addChild:main_prop];
     
@@ -623,7 +623,7 @@ static const int DEFAULT_HP = 4;
     return [GameRenderImplementation GET_RENDER_BTWN_PLAYER_ISLAND];
 }
 
--(CCAction*)init_anim:(NSArray*)a speed:(float)speed {
+-(CCAction*)cons_anim:(NSArray*)a speed:(float)speed {
 	CCTexture2D *texture = [Resource get_tex:TEX_ENEMY_COPTER];
 	NSMutableArray *animFrames = [NSMutableArray array];
     for (NSString* k in a) [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[FileCache get_cgrect_from_plist:TEX_ENEMY_COPTER idname:k]]];

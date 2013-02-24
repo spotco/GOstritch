@@ -3,7 +3,7 @@
 
 @implementation SplashEffect
 
-+(SplashEffect*)init_from:(PlayerEffectParams*)base time:(int)time {
++(SplashEffect*)cons_from:(PlayerEffectParams*)base time:(int)time {
     SplashEffect *e = [[SplashEffect alloc] init];
     [PlayerEffectParams copy_params_from:base to:e];
     e.time_left = time;

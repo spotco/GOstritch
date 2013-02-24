@@ -2,7 +2,7 @@
 
 @implementation FadeOutLabWall
 
-+(FadeOutLabWall*)init_x:(float)x y:(float)y width:(float)width height:(float)height {
++(FadeOutLabWall*)cons_x:(float)x y:(float)y width:(float)width height:(float)height {
     FadeOutLabWall* n = [FadeOutLabWall node];
     [n cons_x:x y:y width:width height:height];
     [GEventDispatcher add_listener:n];

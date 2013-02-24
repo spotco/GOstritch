@@ -2,7 +2,7 @@
 
 @implementation DogRocket
 
-+(DogRocket*)init_x:(float)x y:(float)y {
++(DogRocket*)cons_x:(float)x y:(float)y {
     DogRocket *new_rocket = [DogRocket node];
     new_rocket.active = YES;
     new_rocket.position = ccp(x,y);
@@ -37,7 +37,7 @@
     
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
-        PlayerEffectParams *e = [DogRocketEffect init_from:[player get_default_params]];
+        PlayerEffectParams *e = [DogRocketEffect cons_from:[player get_default_params]];
         player.vx += ABS(player.vy);
         player.vy = 0;
         [player add_effect:e];

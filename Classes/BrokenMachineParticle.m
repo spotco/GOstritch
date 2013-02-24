@@ -3,7 +3,7 @@
 
 @implementation BrokenMachineParticle
 
-+(BrokenMachineParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
++(BrokenMachineParticle*)cons_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
     BrokenMachineParticle* p = [BrokenMachineParticle spriteWithTexture:[Resource get_tex:TEX_ROBOT_PARTICLE]];
     p.position = ccp(x,y);
     [p cons_vx:vx vy:vy];

@@ -6,6 +6,6 @@
     int ct;
 }
 
-+(WaveParticle*)init_x:(float)x y:(float)y vx:(float)vx vtheta:(float)vtheta;
++(WaveParticle*)cons_x:(float)x y:(float)y vx:(float)vx vtheta:(float)vtheta;
 
 @end

@@ -28,15 +28,15 @@
 }
 
 -(void)play {
-    [GEventDispatcher push_event:[GEvent init_type:GEventType_MENU_PLAY_AUTOLEVEL_MODE]];
+    [GEventDispatcher push_event:[GEvent cons_type:GEventType_MENU_PLAY_AUTOLEVEL_MODE]];
 }
 
 -(void)stats {
-    [GEventDispatcher push_event:[[GEvent init_type:GEventType_MENU_GOTO_PAGE] add_i1:MENU_STATS_PAGE_ID i2:0]];
+    [GEventDispatcher push_event:[[GEvent cons_type:GEventType_MENU_GOTO_PAGE] add_i1:MENU_STATS_PAGE_ID i2:0]];
 }
 
 -(void)settings {
-    [GEventDispatcher push_event:[[GEvent init_type:GEventType_MENU_GOTO_PAGE] add_i1:MENU_SETTINGS_PAGE_ID i2:0]];
+    [GEventDispatcher push_event:[[GEvent cons_type:GEventType_MENU_GOTO_PAGE] add_i1:MENU_SETTINGS_PAGE_ID i2:0]];
 }
 
 @end

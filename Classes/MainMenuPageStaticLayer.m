@@ -75,7 +75,7 @@
         cur_disp_char = [[Player get_character] retain];
         [animp stopAction:cur_char_anim];
         [cur_char_anim dealloc];
-        cur_char_anim = [self init_run_anim:[Player get_character]];
+        cur_char_anim = [self cons_run_anim:[Player get_character]];
         [animp runAction:cur_char_anim];
         
         [ccbtn setScale:CHANGE_CUR_CHAR_ANIM_SIZE];
@@ -97,14 +97,14 @@
     [animp stopAction:cur_char_anim];
     [cur_char_anim release];
     
-    cur_char_anim = [self init_run_anim:[Player get_character]];
+    cur_char_anim = [self cons_run_anim:[Player get_character]];
     [animp runAction:cur_char_anim];
     [ccbtn addChild:animp];
     
     [interactive_items addObject:ccbtn];
 }
 
--(CCAction*)init_run_anim:(NSString*)tar {
+-(CCAction*)cons_run_anim:(NSString*)tar {
 	CCTexture2D *texture = [Resource get_tex:tar];
 	NSMutableArray *animFrames = [NSMutableArray array];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[FileCache get_cgrect_from_plist:tar idname:@"run_0"]]];
@@ -115,7 +115,7 @@
 }
 
 -(void)goto_dog_mode {
-    [GEventDispatcher push_event:[[GEvent init_type:GEventType_MENU_GOTO_PAGE] add_i1:MENU_DOG_MODE_PAGE_ID i2:0]];
+    [GEventDispatcher push_event:[[GEvent cons_type:GEventType_MENU_GOTO_PAGE] add_i1:MENU_DOG_MODE_PAGE_ID i2:0]];
 }
 
 -(void)lazy_cons_totalpages:(int)t {

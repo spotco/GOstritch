@@ -2,7 +2,7 @@
 
 @implementation GameEndArea
 
-+(GameEndArea*)init_x:(float)x y:(float)y {
++(GameEndArea*)cons_x:(float)x y:(float)y {
     GameEndArea *a = [GameEndArea node];
     a.position = ccp(x,y);
     
@@ -31,7 +31,7 @@
     if (active && [Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
         NSLog(@"Reached end");
         active = NO;
-        [GEventDispatcher push_event:[GEvent init_type:GEventType_LEVELEND]];
+        [GEventDispatcher push_event:[GEvent cons_type:GEventType_LEVELEND]];
     }
     
     return;

@@ -2,6 +2,6 @@
 
 @interface DogCapeEffect : PlayerEffectParams
 
-+(DogCapeEffect*)init_from:(PlayerEffectParams*)base;
++(DogCapeEffect*)cons_from:(PlayerEffectParams*)base;
 
 @end

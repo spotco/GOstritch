@@ -47,7 +47,7 @@
      */
     [linedir scale:-BEDGE_WID];
     [linenormal scale:BEDGE_HEI];
-    left = [Common init_render_obj:[Resource get_tex:TEX_BRIDGE_EDGE] npts:4];
+    left = [Common cons_render_obj:[Resource get_tex:TEX_BRIDGE_EDGE] npts:4];
     left.tri_pts[0] = ccp(linedir.x,linenormal.y);
     left.tri_pts[1] = ccp(0,linenormal.y);
     left.tri_pts[2] = ccp(linedir.x,0);
@@ -60,7 +60,7 @@
     
     [linedir normalize];
     [linedir scale:-BEDGE_WID];
-    right = [Common init_render_obj:[Resource get_tex:TEX_BRIDGE_EDGE] npts:4];
+    right = [Common cons_render_obj:[Resource get_tex:TEX_BRIDGE_EDGE] npts:4];
     right.tri_pts[1] = ccp(p2off.x+linedir.x,p2off.y+linenormal.y);
     right.tri_pts[0] = ccp(p2off.x,p2off.y+linenormal.y);
     right.tri_pts[3] = ccp(p2off.x+linedir.x,p2off.y);
@@ -88,7 +88,7 @@
     [linenormal normalize];
     [linenormal scale:BCENTER_HEI];
     
-    center = [Common init_render_obj:[Resource get_tex:TEX_BRIDGE_SECTION] npts:4];
+    center = [Common cons_render_obj:[Resource get_tex:TEX_BRIDGE_SECTION] npts:4];
     center.tri_pts[0] = ccp(linenormal.x,linenormal.y);
     center.tri_pts[1] = ccp(linedir.x+linenormal.x,linedir.y+linenormal.y);
     center.tri_pts[2] = ccp(0,0);

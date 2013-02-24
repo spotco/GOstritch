@@ -6,7 +6,7 @@
     BOOL activated;
 }
 
-+(CheckPoint*)init_x:(float)x y:(float)y;
--(void)init_img;
++(CheckPoint*)cons_x:(float)x y:(float)y;
+-(void)cons_img;
 
 @end

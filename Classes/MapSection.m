@@ -5,7 +5,7 @@
 @implementation MapSection
 @synthesize map;
 
-+(MapSection*)init_from_name:(NSString*)name {
++(MapSection*)cons_from_name:(NSString*)name {
     MapSection* m = [[MapSection alloc] init];
     [m cons:name];
     return m;

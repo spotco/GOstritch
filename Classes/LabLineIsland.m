@@ -7,7 +7,7 @@
 
 #define OVERALL_OFFSET_Y 0.1
 
-+(LabLineIsland*)init_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land {
++(LabLineIsland*)cons_pt1:(CGPoint)start pt2:(CGPoint)end height:(float)height ndir:(float)ndir can_land:(BOOL)can_land {
 	LabLineIsland *new_island = [LabLineIsland node];
     new_island.fill_hei = height;
     new_island.ndir = ndir;
@@ -16,8 +16,8 @@
 	new_island.anchorPoint = ccp(0,0);
 	new_island.position = ccp(new_island.startX,new_island.startY);
     new_island.can_land = can_land;
-	[new_island init_tex];
-	[new_island init_top];
+	[new_island cons_tex];
+	[new_island cons_top];
 	return new_island;
 }
 

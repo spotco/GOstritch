@@ -8,7 +8,7 @@
 #define CENTER_IMG_WID 56.0
 #define CENTER_IMG_HEI 128.0
 
-+(SpikeVine*)init_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2 {
++(SpikeVine*)cons_x:(float)x y:(float)y x2:(float)x2 y2:(float)y2 {
     SpikeVine *n = [SpikeVine node];
     [n cons_x:x y:y x2:x2 y2:y2];
     return n;
@@ -104,7 +104,7 @@
      gl rounds texture to nearest 2^n size, use img size constants to properly size
      **/
     
-    bottom = [Common init_render_obj:tex npts:4];
+    bottom = [Common cons_render_obj:tex npts:4];
     
     bottom.tri_pts[0] = ccp(-normal.x            ,-normal.y);
     bottom.tri_pts[1] = ccp(normal.x             ,normal.y);
@@ -116,7 +116,7 @@
     bottom.tex_pts[2] = ccp(0,s.height/bhei);
     bottom.tex_pts[3] = ccp(s.width/bwid,s.height/bhei);
     
-    top = [Common init_render_obj:tex npts:4];
+    top = [Common cons_render_obj:tex npts:4];
     top.tri_pts[0] = ccp(-normal.x + dir_vec.x - r_dirv.x              , -normal.y + dir_vec.y - r_dirv.y );
     top.tri_pts[1] = ccp(normal.x  + dir_vec.x - r_dirv.x             , normal.y + dir_vec.y - r_dirv.y);
     top.tri_pts[2] = ccp(-normal.x  + dir_vec.x   ,  -normal.y  + dir_vec.y);
@@ -135,7 +135,7 @@
     [normal normalize];
     [normal scale:bwid/2];
     
-    center = [Common init_render_obj:tex npts:4];
+    center = [Common cons_render_obj:tex npts:4];
     
     center.tri_pts[0] = ccp(-normal.x            ,-normal.y);
     center.tri_pts[1] = ccp(normal.x             ,normal.y);

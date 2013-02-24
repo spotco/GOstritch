@@ -3,7 +3,7 @@
 @implementation DogCape
 
 
-+(DogCape*)init_x:(float)x y:(float)y {
++(DogCape*)cons_x:(float)x y:(float)y {
     DogCape *new_cape = [DogCape node];
     new_cape.active = YES;
     new_cape.position = ccp(x,y);
@@ -37,7 +37,7 @@
     
     
     if ([Common hitrect_touch:[self get_hit_rect] b:[player get_hit_rect]]) {
-        PlayerEffectParams *e = [DogCapeEffect init_from:[player get_default_params]];
+        PlayerEffectParams *e = [DogCapeEffect cons_from:[player get_default_params]];
         [player add_effect:e];
         [self set_active:NO];
     }

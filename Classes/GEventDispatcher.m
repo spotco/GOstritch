@@ -70,7 +70,7 @@ static NSMutableArray* event_queue;
     @synthesize i1,i2;
     @synthesize f1,f2;
 
-+(GEvent*)init_type:(GEventType)t {
++(GEvent*)cons_type:(GEventType)t {
     GEvent *e = [[GEvent alloc] init];
     e.type = t;
     return e;

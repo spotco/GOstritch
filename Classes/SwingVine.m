@@ -12,11 +12,11 @@
     ccTexParams par = {GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
     [tex setTexParameters:&par];
     VineBody* v = [VineBody spriteWithTexture:tex];
-    [v init_len:len];
+    [v cons_len:len];
     return v;
 }
 
--(void)init_len:(float)len {
+-(void)cons_len:(float)len {
     [self setTextureRect:CGRectMake(0, 0, [self.texture contentSizeInPixels].width, len)];
 }
 @end
@@ -24,7 +24,7 @@
 
 @implementation SwingVine
 
-+(SwingVine*)init_x:(float)x y:(float)y len:(float)len{
++(SwingVine*)cons_x:(float)x y:(float)y len:(float)len{
     SwingVine *s = [SwingVine node];
     [s setPosition:ccp(x,y)];
     [s cons_len:len];

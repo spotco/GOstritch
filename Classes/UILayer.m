@@ -4,7 +4,7 @@
 
 @implementation UILayer
 
-+(UILayer*)init_with_gamelayer:(GameEngineLayer *)g {
++(UILayer*)cons_with_gamelayer:(GameEngineLayer *)g {
     UILayer* u = [UILayer node];
     [GEventDispatcher add_listener:u];
     [u set_gameengine:g];
@@ -13,10 +13,10 @@
 }
 
 -(void)cons {
-    [self init_ingame_ui];
-    [self init_pause_ui];
-    [self init_gameover_ui];
-    [self init_game_end_menu];
+    [self cons_ingame_ui];
+    [self cons_pause_ui];
+    [self cons_gameover_ui];
+    [self cons_game_end_menu];
     ingame_ui_anims = [[NSMutableArray array] retain];
     self.isTouchEnabled = YES;
 }
@@ -100,7 +100,7 @@
 
 /* UI initialzers */
 
--(void)init_ingame_ui {
+-(void)cons_ingame_ui {
     CCSprite *pauseicon = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEICON]];
     CCSprite *pauseiconzoom = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_PAUSEICON]];
     [UILayer set_zoom_pos_align:pauseicon zoomed:pauseiconzoom scale:1.4];
@@ -149,7 +149,7 @@
     ingame_ui.position = ccp(0,0);
     [self addChild:ingame_ui];
 }
--(void)init_pause_ui {
+-(void)cons_pause_ui {
     ccColor4B c = {0,0,0,200};
     CGSize s = [[UIScreen mainScreen] bounds].size;
     pause_ui= [CCLayerColor layerWithColor:c width:s.height height:s.width];
@@ -181,7 +181,7 @@
     pause_ui.visible = NO;
     [self addChild:pause_ui z:1];
 }
--(void)init_gameover_ui {
+-(void)cons_gameover_ui {
     ccColor4B c = {0,0,0,200};
     CGSize s = [[UIScreen mainScreen] bounds].size;
     gameover_ui= [CCLayerColor layerWithColor:c width:s.height height:s.width];
@@ -228,7 +228,7 @@
     [gameover_ui setVisible:NO];
     [self addChild:gameover_ui z:1];
 }
--(void)init_game_end_menu {
+-(void)cons_game_end_menu {
     //TODO -- FIXME
     ccColor4B c = {0,0,0,200};
     CGSize s = [[UIScreen mainScreen] bounds].size;
@@ -255,25 +255,25 @@
 /* button callbacks */
 
 -(void)pause {
-    [GEventDispatcher push_event:[GEvent init_type:GEventType_PAUSE]];
+    [GEventDispatcher push_event:[GEvent cons_type:GEventType_PAUSE]];
     
     ingame_ui.visible = NO;
     pause_ui.visible = YES;
     [[CCDirector sharedDirector] pause];
 }
 -(void)unpause {
-    [GEventDispatcher push_event:[GEvent init_type:GEventType_UNPAUSE]];
+    [GEventDispatcher push_event:[GEvent cons_type:GEventType_UNPAUSE]];
     
     ingame_ui.visible = YES;
     pause_ui.visible = NO;
     [[CCDirector sharedDirector] resume];
 }
 -(void)exit_to_menu {
-    [GEventDispatcher push_event:[GEvent init_type:GEventType_QUIT]];
+    [GEventDispatcher push_event:[GEvent cons_type:GEventType_QUIT]];
     [GEventDispatcher dispatch_events];
 }
 -(void)play_again {
-    [GEventDispatcher push_event:[GEvent init_type:GEventType_PLAYAGAIN_AUTOLEVEL]];
+    [GEventDispatcher push_event:[GEvent cons_type:GEventType_PLAYAGAIN_AUTOLEVEL]];
 }
 -(void)nextlevel {
     //TODO -- FIXME
@@ -334,7 +334,7 @@
 -(void)start_initial_anim {
     game_engine_layer.current_mode = GameEngineLayerMode_UIANIM;
     ingame_ui.visible = NO;
-    curanim = [GameStartAnim init_with_callback:[Common cons_callback:self sel:@selector(end_initial_anim)]];
+    curanim = [GameStartAnim cons_with_callback:[Common cons_callback:self sel:@selector(end_initial_anim)]];
     [self addChild:curanim];
 }
 -(void)end_initial_anim {

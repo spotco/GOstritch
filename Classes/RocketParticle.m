@@ -3,7 +3,7 @@
 
 @implementation RocketParticle
 
-+(RocketParticle*)init_x:(float)x y:(float)y {
++(RocketParticle*)cons_x:(float)x y:(float)y {
     RocketParticle* p = [RocketParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
     [p cons];
     p.position = ccp(x,y);

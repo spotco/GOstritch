@@ -30,7 +30,7 @@
 -(void)temp_make_dog_tex:(NSString*)tex pos:(CGPoint)pos sel:(SEL)sel {
     CCSprite *s = [CCSprite node];
     [s setContentSize:CGSizeMake(71, 66)];
-    CCAction *anim = [self init_run_anim:tex];
+    CCAction *anim = [self cons_run_anim:tex];
     [s runAction:anim];
     MainMenuPageZoomButton *t = [MainMenuPageZoomButton cons_spr:s at:pos fn:[Common cons_callback:self sel:sel]];
     [self add_interactive_item:t];
@@ -40,15 +40,15 @@
     
 }
 
--(void)dog1 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_1];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
--(void)dog2 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_2];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
--(void)dog3 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_3];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
--(void)dog4 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_4];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
--(void)dog5 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_5];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
--(void)dog6 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_6];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
--(void)dog7 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_7];[GEventDispatcher push_event:[GEvent init_type:GEventType_CHANGE_CURRENT_DOG]];}
+-(void)dog1 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_1];[GEventDispatcher push_event:[GEvent cons_type:GEventType_CHANGE_CURRENT_DOG]];}
+-(void)dog2 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_2];[GEventDispatcher push_event:[GEvent cons_type:GEventType_CHANGE_CURRENT_DOG]];}
+-(void)dog3 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_3];[GEventDispatcher push_event:[GEvent cons_type:GEventType_CHANGE_CURRENT_DOG]];}
+-(void)dog4 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_4];[GEventDispatcher push_event:[GEvent cons_type:GEventType_CHANGE_CURRENT_DOG]];}
+-(void)dog5 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_5];[GEventDispatcher push_event:[GEvent cons_type:GEventType_CHANGE_CURRENT_DOG]];}
+-(void)dog6 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_6];[GEventDispatcher push_event:[GEvent cons_type:GEventType_CHANGE_CURRENT_DOG]];}
+-(void)dog7 {[AudioManager playsfx:SFX_BARK];[Player set_character:TEX_DOG_RUN_7];[GEventDispatcher push_event:[GEvent cons_type:GEventType_CHANGE_CURRENT_DOG]];}
 
--(CCAction*)init_run_anim:(NSString*)tar {
+-(CCAction*)cons_run_anim:(NSString*)tar {
 	CCTexture2D *texture = [Resource get_tex:tar];
 	NSMutableArray *animFrames = [NSMutableArray array];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:texture rect:[FileCache get_cgrect_from_plist:tar idname:@"run_0"]]];

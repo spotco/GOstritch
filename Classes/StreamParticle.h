@@ -8,8 +8,8 @@
 
 @property(readwrite,assign) int ct;
 
-+(StreamParticle*)init_x:(float)x y:(float)y;
-+(StreamParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy;
++(StreamParticle*)cons_x:(float)x y:(float)y;
++(StreamParticle*)cons_x:(float)x y:(float)y vx:(float)vx vy:(float)vy;
 -(void)cons;
 
 @end

@@ -24,7 +24,7 @@
 @property(readwrite,assign) int time_left,cur_airjump_count,cur_dash_count;
 @property(readwrite,assign) int noclip;
 
-+(PlayerEffectParams*)init_copy:(PlayerEffectParams*)p;
++(PlayerEffectParams*)cons_copy:(PlayerEffectParams*)p;
 +(void)copy_params_from:(PlayerEffectParams*)a to:(PlayerEffectParams*)b;
 -(player_anim_mode)get_anim;
 -(void)update:(Player*)p g:(GameEngineLayer *)g;

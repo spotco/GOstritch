@@ -25,7 +25,7 @@
     CCLabelTTF *DEBUG_ctdisp,*DEBUG_autolvldisp;
 }
 
-+(UILayer*)init_with_gamelayer:(GameEngineLayer*)g;
++(UILayer*)cons_with_gamelayer:(GameEngineLayer*)g;
 
 -(void)start_initial_anim;
 

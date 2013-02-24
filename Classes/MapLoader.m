@@ -84,13 +84,13 @@ static NSMutableDictionary* cached_json;
         NSString *ground_type = (NSString *)[currentIslandDict objectForKey:@"ground"];
         
         if (ground_type == NULL || [ground_type isEqualToString:@"open"]) {
-            currentIsland = [LineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
+            currentIsland = [LineIsland cons_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
         } else if ([ground_type isEqualToString:@"cave"]) {
-            currentIsland = [CaveLineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
+            currentIsland = [CaveLineIsland cons_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
         } else if ([ground_type isEqualToString:@"bridge"]) {
             currentIsland = [BridgeIsland cons_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
         } else if ([ground_type isEqualToString:@"lab"]) {
-            currentIsland = [LabLineIsland init_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
+            currentIsland = [LabLineIsland cons_pt1:start pt2:end height:height ndir:ndir can_land:can_land];
         } else {
             NSLog(@"unrecognized ground type!!");
             continue;
@@ -109,46 +109,46 @@ static NSMutableDictionary* cached_json;
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
             int bid = ((NSString*)[j_object  objectForKey:@"bid"]).intValue;
-            [map.game_objects addObject:[DogBone init_x:x y:y bid:bid]];
+            [map.game_objects addObject:[DogBone cons_x:x y:y bid:bid]];
             
             
         } else if ([type isEqualToString:@"dogcape"]) {
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
-            [map.game_objects addObject:[DogCape init_x:x y:y]];
+            [map.game_objects addObject:[DogCape cons_x:x y:y]];
             
         } else if ([type isEqualToString:@"dogrocket"]) {
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
-            [map.game_objects addObject:[DogRocket init_x:x y:y]];
+            [map.game_objects addObject:[DogRocket cons_x:x y:y]];
             
         } else if ([type isEqualToString:@"ground_detail"]) {
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
             int type = ((NSString*)[j_object  objectForKey:@"img"]).intValue;
-            [map.game_objects addObject:[GroundDetail init_x:x y:y type:type islands:map.n_islands]];
+            [map.game_objects addObject:[GroundDetail cons_x:x y:y type:type islands:map.n_islands]];
             
         } else if ([type isEqualToString:@"checkpoint"]) {
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
-            [map.game_objects addObject:[CheckPoint init_x:x y:y]];
+            [map.game_objects addObject:[CheckPoint cons_x:x y:y]];
             
         } else if ([type isEqualToString:@"game_end"]) {
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
-            [map.game_objects addObject:[GameEndArea init_x:x y:y]];
+            [map.game_objects addObject:[GameEndArea cons_x:x y:y]];
             
         } else if ([type isEqualToString:@"spike"]) {
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
-            [map.game_objects addObject:[Spike init_x:x y:y islands:map.n_islands]];
+            [map.game_objects addObject:[Spike cons_x:x y:y islands:map.n_islands]];
             
         } else if ([type isEqualToString:@"water"]) {
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
             float width = getflt(j_object, @"width");;
             float hei = getflt(j_object, @"height");;
-            [map.game_objects addObject:[Water init_x:x y:y width:width height:hei]];
+            [map.game_objects addObject:[Water cons_x:x y:y width:width height:hei]];
             
         } else if ([type isEqualToString:@"jumppad"]) {
             float x = getflt(j_object, @"x");
@@ -158,7 +158,7 @@ static NSMutableDictionary* cached_json;
             float dir_x = getflt(dir_obj, @"x");;
             float dir_y = getflt(dir_obj, @"y");;
             Vec3D* dir_vec = [Vec3D cons_x:dir_x y:dir_y z:0];
-            [map.game_objects addObject:[JumpPad init_x:x y:y dirvec:dir_vec]];
+            [map.game_objects addObject:[JumpPad cons_x:x y:y dirvec:dir_vec]];
             
             [dir_vec dealloc];
             
@@ -183,43 +183,43 @@ static NSMutableDictionary* cached_json;
             float dir_x = getflt(dir_obj, @"x");;
             float dir_y = getflt(dir_obj, @"y");;
             Vec3D* dir_vec = [Vec3D cons_x:dir_x y:dir_y z:0];
-            [map.game_objects addObject:[SpeedUp init_x:x y:y dirvec:dir_vec]];
+            [map.game_objects addObject:[SpeedUp cons_x:x y:y dirvec:dir_vec]];
             
             [dir_vec dealloc];
             
         } else if ([type isEqualToString:@"cavewall"]) {
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
-            float width = getflt(j_object, @"width");;
-            float hei = getflt(j_object, @"height");;
-            [map.game_objects addObject:[CaveWall init_x:x y:y width:width height:hei]];
+            float width = getflt(j_object, @"width");
+            float hei = getflt(j_object, @"height");
+            [map.game_objects addObject:[CaveWall cons_x:x y:y width:width height:hei]];
             
         } else if ([type isEqualToString:@"island_fill"]) {
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
-            float width = getflt(j_object, @"width");;
-            float hei = getflt(j_object, @"height");;
-            [map.game_objects addObject:[IslandFill init_x:x y:y width:width height:hei]];
+            float width = getflt(j_object, @"width");
+            float hei = getflt(j_object, @"height");
+            [map.game_objects addObject:[IslandFill cons_x:x y:y width:width height:hei]];
             
         } else if ([type isEqualToString:@"breakable_wall"]) {
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
-            float x2 = getflt(j_object, @"x2");;
-            float y2 = getflt(j_object, @"y2");;
-            [map.game_objects addObject:[BreakableWall init_x:x y:y x2:x2 y2:y2]];
+            float x2 = getflt(j_object, @"x2");
+            float y2 = getflt(j_object, @"y2");
+            [map.game_objects addObject:[BreakableWall cons_x:x y:y x2:x2 y2:y2]];
             
         } else if ([type isEqualToString:@"spikevine"]) {
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
-            float x2 = getflt(j_object, @"x2");;
-            float y2 = getflt(j_object, @"y2");;
-            [map.game_objects addObject:[SpikeVine init_x:x y:y x2:x2 y2:y2]];
+            float x2 = getflt(j_object, @"x2");
+            float y2 = getflt(j_object, @"y2");
+            [map.game_objects addObject:[SpikeVine cons_x:x y:y x2:x2 y2:y2]];
             
         } else if ([type isEqualToString:@"camera_area"]) {
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
-            float width = getflt(j_object, @"width");;
-            float hei = getflt(j_object, @"height");;
+            float width = getflt(j_object, @"width");
+            float hei = getflt(j_object, @"height");
             
             NSDictionary* dir_obj = [j_object objectForKey:@"camera"];
             float cx = getflt(dir_obj, @"x");
@@ -234,7 +234,7 @@ static NSMutableDictionary* cached_json;
             float x2 = getflt(j_object, @"x2");;
             float y2 = getflt(j_object, @"y2");;
             float len = sqrtf(powf(x2-x, 2)+powf(y2-y, 2));
-            [map.game_objects addObject:[SwingVine init_x:x y:y len:len]];
+            [map.game_objects addObject:[SwingVine cons_x:x y:y len:len]];
             
         } else if ([type isEqualToString:@"robotminion"]) {
             float x = getflt(j_object, @"x");
@@ -245,8 +245,8 @@ static NSMutableDictionary* cached_json;
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
             NSDictionary* dir_obj = [j_object objectForKey:@"dir"];
-            float dir_x = getflt(dir_obj, @"x");;
-            float dir_y = getflt(dir_obj, @"y");;
+            float dir_x = getflt(dir_obj, @"x");
+            float dir_y = getflt(dir_obj, @"y");
             Vec3D* dir_vec = [Vec3D cons_x:dir_x y:dir_y z:0];
             
             [map.game_objects addObject:[LauncherRobot cons_x:x y:y dir:dir_vec]];
@@ -255,9 +255,9 @@ static NSMutableDictionary* cached_json;
         } else if ([type isEqualToString:@"labwall"]) {
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
-            float width = getflt(j_object, @"width");;
-            float hei = getflt(j_object, @"height");;
-            [map.game_objects addObject:[FadeOutLabWall init_x:x y:y width:width height:hei]];
+            float width = getflt(j_object, @"width");
+            float hei = getflt(j_object, @"height");
+            [map.game_objects addObject:[FadeOutLabWall cons_x:x y:y width:width height:hei]];
             
         } else if ([type isEqualToString:@"copter"]) {
             float x = getflt(j_object, @"x");
@@ -267,9 +267,9 @@ static NSMutableDictionary* cached_json;
         } else if ([type isEqualToString:@"electricwall"]) {
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
-            float x2 = getflt(j_object, @"x2");;
-            float y2 = getflt(j_object, @"y2");;
-            [map.game_objects addObject:[ElectricWall init_x:x y:y x2:x2 y2:y2]];
+            float x2 = getflt(j_object, @"x2");
+            float y2 = getflt(j_object, @"y2");
+            [map.game_objects addObject:[ElectricWall cons_x:x y:y x2:x2 y2:y2]];
             
         } else if ([type isEqualToString:@"labentrance"]) {
             float x = getflt(j_object, @"x");

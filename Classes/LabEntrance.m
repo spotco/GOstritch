@@ -6,12 +6,12 @@ static const float ENTR_HEI = 3000;
 @implementation LabEntranceFG
 
 +(LabEntranceFG*)cons_pt:(CGPoint)pt base:(LabEntrance*)base {
-    return [[LabEntranceFG node] init_pt:pt base:base];
+    return [[LabEntranceFG node] cons_pt:pt base:base];
 }
--(id)init_pt:(CGPoint)pt base:(LabEntrance*)tbase {
+-(id)cons_pt:(CGPoint)pt base:(LabEntrance*)tbase {
     [self setPosition:pt];
     base = tbase;
-    front_body = [Common init_render_obj:[Resource get_tex:TEX_LAB_ENTRANCE_FORE] npts:4];
+    front_body = [Common cons_render_obj:[Resource get_tex:TEX_LAB_ENTRANCE_FORE] npts:4];
     //23
     //01
     
@@ -44,13 +44,13 @@ static const float ENTR_HEI = 3000;
 @implementation LabEntrance
 
 +(LabEntrance*)cons_pt:(CGPoint)pt {
-    return [[LabEntrance node] init_pt:pt];
+    return [[LabEntrance node] cons_pt:pt];
 }
 
--(id)init_pt:(CGPoint)pt {
+-(id)cons_pt:(CGPoint)pt {
     active = YES;
     [self setPosition:pt];
-    back_body = [Common init_render_obj:[Resource get_tex:TEX_LAB_ENTRANCE_BACK] npts:4];
+    back_body = [Common cons_render_obj:[Resource get_tex:TEX_LAB_ENTRANCE_BACK] npts:4];
     //23
     //01 then flip horiz
     
@@ -68,7 +68,7 @@ static const float ENTR_HEI = 3000;
     back_body.tex_pts[1] = ccp(1,hei/back_body.texture.pixelsHigh);
 
     
-    ceil_edge = [Common init_render_obj:[Resource get_tex:TEX_LAB_ENTRANCE_CEIL] npts:4];
+    ceil_edge = [Common cons_render_obj:[Resource get_tex:TEX_LAB_ENTRANCE_CEIL] npts:4];
     
     float ceil_hei = 50;
     float ceil_leftoffset = -40;
@@ -85,7 +85,7 @@ static const float ENTR_HEI = 3000;
     ceil_edge.tex_pts[0] = ccp(0,1);
     ceil_edge.tex_pts[1] = ccp(1,1);
     
-    ceil_body = [Common init_render_obj:[Resource get_tex:TEX_LAB_ENTRANCE_CEIL_REPEAT] npts:4];
+    ceil_body = [Common cons_render_obj:[Resource get_tex:TEX_LAB_ENTRANCE_CEIL_REPEAT] npts:4];
     ceil_body.tri_pts[0] =  ccp(ceil_leftoffset,         ceil_hei+ceil_edge_hei);
     ceil_body.tri_pts[1]  = ccp(ceil_leftoffset+ceil_wid,ceil_hei+ceil_edge_hei);
     ceil_body.tri_pts[2] =  ccp(ceil_leftoffset,         ceil_hei+ceil_edge_hei+ENTR_HEI);
@@ -108,7 +108,7 @@ static const float ENTR_HEI = 3000;
 }
 
 -(void)entrance_event {
-    [GEventDispatcher push_event:[GEvent init_type:GEventType_ENTER_LABAREA]];
+    [GEventDispatcher push_event:[GEvent cons_type:GEventType_ENTER_LABAREA]];
 }
 
 -(void)reset {

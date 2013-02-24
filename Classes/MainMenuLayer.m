@@ -138,7 +138,7 @@
     
     y = y>0?0:y;
     y = y < -BGHEI+[Common SCREEN].height?-BGHEI+[Common SCREEN].height:y;
-    [GEventDispatcher push_event:[[[GEvent init_type:GEventType_MENU_TICK] add_pt:ccp(x,y)] add_i1:cur_page i2:[menu_pages count]]];
+    [GEventDispatcher push_event:[[[GEvent cons_type:GEventType_MENU_TICK] add_pt:ccp(x,y)] add_i1:cur_page i2:[menu_pages count]]];
 }
 
 -(void) ccTouchesBegan:(NSSet*)pTouches withEvent:(UIEvent*)pEvent {    
@@ -146,7 +146,7 @@
     last = touch;
     [GEventDispatcher push_event:
      [
-      [[GEvent init_type:GEventType_MENU_TOUCHDOWN] 
+      [[GEvent cons_type:GEventType_MENU_TOUCHDOWN] 
         add_pt:ccp(touch.x+cpos.x, [Common SCREEN].height - touch.y+cpos.y)]
         add_f1:cpos.x f2:cpos.y]
     ];
@@ -159,7 +159,7 @@
     last = touch;
     [GEventDispatcher push_event:
      [
-      [[GEvent init_type:GEventType_MENU_TOUCHMOVE] 
+      [[GEvent cons_type:GEventType_MENU_TOUCHMOVE] 
        add_pt:ccp(touch.x+cpos.x, [Common SCREEN].height - touch.y+cpos.y)]
        add_f1:cpos.x f2:cpos.y]
      ];
@@ -172,7 +172,7 @@
     [self calc_new_cur_page];
     [GEventDispatcher push_event:
      [
-      [[GEvent init_type:GEventType_MENU_TOUCHUP] 
+      [[GEvent cons_type:GEventType_MENU_TOUCHUP] 
        add_pt:ccp(touch.x+cpos.x, [Common SCREEN].height - touch.y+cpos.y)]
        add_f1:cpos.x f2:cpos.y]
      ];

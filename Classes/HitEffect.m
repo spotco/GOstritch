@@ -35,7 +35,7 @@
 
 -(void)effect_end:(Player*)p g:(GameEngineLayer*)g {
     [super effect_end:p g:g];
-    [GEventDispatcher push_unique_event:[GEvent init_type:GEventType_PLAYER_DIE]];
+    [GEventDispatcher push_unique_event:[GEvent cons_type:GEventType_PLAYER_DIE]];
 }
 
 -(void)effect_begin:(Player *)p {
@@ -49,7 +49,7 @@
 
 @implementation FlashHitEffect
 
-+(FlashHitEffect*)init_from:(PlayerEffectParams *)base time:(int)time {
++(FlashHitEffect*)cons_from:(PlayerEffectParams *)base time:(int)time {
     FlashHitEffect *e = [[FlashHitEffect alloc] init];
     [PlayerEffectParams copy_params_from:base to:e];
     e.time_left = time;

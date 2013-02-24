@@ -13,7 +13,7 @@ typedef enum {
 } MapSection_Position;
 
 @property(readwrite,assign) GameMap *map;
-+(MapSection*)init_from_name:(NSString*)name;
++(MapSection*)cons_from_name:(NSString*)name;
 -(MapSection_Position)get_position_status:(CGPoint)p;
 -(CGRange)get_range;
 -(void)offset_x:(float)x y:(float)y;

@@ -5,6 +5,6 @@
     int ct;
 }
 
-+(FlashEffect*)init_from:(PlayerEffectParams*)base time:(int)time;
++(FlashEffect*)cons_from:(PlayerEffectParams*)base time:(int)time;
 
 @end

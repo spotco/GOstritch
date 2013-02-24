@@ -15,7 +15,7 @@
     int disable_timer;
 }
 
-+(SwingVine*)init_x:(float)x y:(float)y len:(float)len;
++(SwingVine*)cons_x:(float)x y:(float)y len:(float)len;
 -(void)temp_disable;
 -(CGPoint)get_tangent_vel;
 

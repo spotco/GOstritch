@@ -5,6 +5,6 @@
     BOOL anim_toggle;
 }
 
-+(DogCape*)init_x:(float)x y:(float)y;
++(DogCape*)cons_x:(float)x y:(float)y;
 
 @end

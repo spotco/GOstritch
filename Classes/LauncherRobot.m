@@ -29,7 +29,7 @@
         r = r/5.0 * M_PI;
         float dvx = cosf(r)*10+float_random(0, 1);
         float dvy = sinf(r)*10+float_random(0, 1);
-        [g add_particle:[RocketExplodeParticle init_x:pt.x y:pt.y vx:dvx vy:dvy]];
+        [g add_particle:[RocketExplodeParticle cons_x:pt.x y:pt.y vx:dvx vy:dvy]];
     }
 }
 
@@ -99,7 +99,7 @@
         
         CGPoint noz = [self get_nozzle];
         [LauncherRobot explosion:g at:noz];
-        [g add_particle:[CannonFireParticle init_x:noz.x y:noz.y]];
+        [g add_particle:[CannonFireParticle cons_x:noz.x y:noz.y]];
         
         Vec3D *rv = [Vec3D cons_x:dir.x y:dir.y z:0];
         [rv scale:ROCKETSPEED];

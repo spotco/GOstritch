@@ -43,7 +43,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
     return CURRENT_CHARACTER;
 }
 
-+(Player*)init_at:(CGPoint)pt {
++(Player*)cons_at:(CGPoint)pt {
 	Player *new_player = [Player node];
     [new_player reset_params];
 	CCSprite *player_img = [CCSprite node];
@@ -57,7 +57,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
     new_player.up_vec = [Vec3D cons_x:0 y:1 z:0];
 	[new_player addChild:player_img];
 	
-    [new_player init_anim];
+    [new_player cons_anim];
 	
     new_player.start_pt = pt;
 	//new_player.anchorPoint = ccp(0.5,0.5);
@@ -120,7 +120,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
         
     } else if (cur_anim_mode == player_anim_mode_ROCKET) {
         [self start_anim:_ROCKET_ANIM];
-        [g add_particle:[RocketParticle init_x:position_.x-40 y:position_.y+20]];
+        [g add_particle:[RocketParticle cons_x:position_.x-40 y:position_.y+20]];
         
     } else if (cur_anim_mode == player_anim_mode_HIT) { 
         [self start_anim:_HIT_ANIM];
@@ -160,7 +160,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
             [dv scale:-2.5];
             dv.x += float_random(-3, 3);
             dv.y += float_random(-3, 3);
-            [g add_particle:[StreamParticle init_x:position_.x y:position_.y vx:dv.x vy:dv.y]];
+            [g add_particle:[StreamParticle cons_x:position_.x y:position_.y vx:dv.x vy:dv.y]];
             [dv dealloc];
         }
     }
@@ -175,7 +175,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
         } else {
             pvx = float_random(-4, -6);
         }
-        [g add_particle:[FloatingSweatParticle init_x:position_.x+6 y:position_.y+29 vx:pvx+vx vy:float_random(3, 6)+vy]];
+        [g add_particle:[FloatingSweatParticle cons_x:position_.x+6 y:position_.y+29 vx:pvx+vx vy:float_random(3, 6)+vy]];
     } else {
         particlectr++;
     }
@@ -249,7 +249,7 @@ static NSString* CURRENT_CHARACTER = TEX_DOG_RUN_1;
         [normal scale:float_random(-4, 4)];
         [dv scale:float_random(-8, -10)];
         
-        JumpPadParticle* pt = [JumpPadParticle init_x:x y:y vx:dv.x+normal.x vy:dv.y+normal.y];
+        JumpPadParticle* pt = [JumpPadParticle cons_x:x y:y vx:dv.x+normal.x vy:dv.y+normal.y];
         [g add_particle:pt];
         
         [dv dealloc];
@@ -412,7 +412,7 @@ HitRect cached_rect;
     return run;
 }
 
--(void)init_anim {
+-(void)cons_anim {
 	NSArray *run = [self get_run_animstr];
     _RUN_ANIM_SLOW = [self cons_anim_repeat_texstr:CURRENT_CHARACTER speed:0.075 frames:run];
     _RUN_ANIM_MED = [self cons_anim_repeat_texstr:CURRENT_CHARACTER speed:0.06 frames:run];

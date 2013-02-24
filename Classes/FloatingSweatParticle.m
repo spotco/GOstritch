@@ -2,7 +2,7 @@
 
 @implementation FloatingSweatParticle
 
-+(FloatingSweatParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
++(FloatingSweatParticle*)cons_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
     FloatingSweatParticle* p = [FloatingSweatParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
     p.position = ccp(x,y);
     [p cons_vx:vx vy:vy];

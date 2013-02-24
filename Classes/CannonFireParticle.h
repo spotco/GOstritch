@@ -4,6 +4,6 @@
     int ct;
 }
 
-+(CannonFireParticle*)init_x:(float)x y:(float)y;
++(CannonFireParticle*)cons_x:(float)x y:(float)y;
 
 @end

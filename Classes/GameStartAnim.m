@@ -4,15 +4,15 @@
 
 @implementation GameStartAnim
 
-+(GameStartAnim*)init_with_callback:(CallBack*)cb {
++(GameStartAnim*)cons_with_callback:(CallBack*)cb {
     GameStartAnim *n = [GameStartAnim node];
     n.anim_complete = cb;
-    [n initanim];
+    [n cons_anim];
     [GEventDispatcher add_listener:n];
     return n;
 }
 
--(void)initanim {
+-(void)cons_anim {
     readyimg = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_STARTGAME_READY]];
     goimg = [CCSprite spriteWithTexture:[Resource get_tex:TEX_UI_STARTGAME_GO]];
     

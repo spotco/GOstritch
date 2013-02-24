@@ -2,7 +2,7 @@
 
 @implementation DogRocketEffect
 
-+(DogRocketEffect*)init_from:(PlayerEffectParams*)base {
++(DogRocketEffect*)cons_from:(PlayerEffectParams*)base {
     DogRocketEffect *n = [[DogRocketEffect alloc] init];
     [PlayerEffectParams copy_params_from:base to:n];
     n.time_left = 200;

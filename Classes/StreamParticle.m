@@ -3,7 +3,7 @@
 @implementation StreamParticle
 @synthesize ct;
 
-+(StreamParticle*)init_x:(float)x y:(float)y {
++(StreamParticle*)cons_x:(float)x y:(float)y {
     StreamParticle* p = [StreamParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
     [p cons];
     p.position = ccp(x,y);
@@ -11,7 +11,7 @@
     return p;
 }
 
-+(StreamParticle*)init_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
++(StreamParticle*)cons_x:(float)x y:(float)y vx:(float)vx vy:(float)vy {
     StreamParticle* p = [StreamParticle spriteWithTexture:[Resource get_tex:TEX_GREY_PARTICLE]];
     p.position = ccp(x,y);
     [p cons_vx:vx vy:vy];

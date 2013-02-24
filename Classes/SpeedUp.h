@@ -7,6 +7,6 @@
     Vec3D* normal_vec;
 }
 
-+(SpeedUp*)init_x:(float)x y:(float)y dirvec:(Vec3D *)vec;
++(SpeedUp*)cons_x:(float)x y:(float)y dirvec:(Vec3D *)vec;
 
 @end

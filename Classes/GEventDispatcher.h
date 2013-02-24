@@ -41,7 +41,7 @@ typedef enum {
     @property(readwrite,assign) CGPoint pt;
     @property(readwrite,assign) int i1,i2;
     @property(readwrite,assign) float f1,f2;
-    +(GEvent*)init_type:(GEventType)t;
+    +(GEvent*)cons_type:(GEventType)t;
     -(GEvent*)add_key:(NSString*)k value:(id)v;
     -(GEvent*)add_pt:(CGPoint)tpt;
     -(GEvent*)add_i1:(int)ti1 i2:(int)ti2;

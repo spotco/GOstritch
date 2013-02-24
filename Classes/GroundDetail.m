@@ -4,7 +4,7 @@
 @implementation GroundDetail
 @synthesize imgtype;
 
-+(GroundDetail*)init_x:(float)posx y:(float)posy type:(int)type islands:(NSMutableArray *)islands{
++(GroundDetail*)cons_x:(float)posx y:(float)posy type:(int)type islands:(NSMutableArray *)islands{
     GroundDetail *d = [GroundDetail node];
     d.position = ccp(posx,posy);
     CCTexture2D *texture; 

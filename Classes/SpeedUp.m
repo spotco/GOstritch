@@ -3,7 +3,7 @@
 
 @implementation SpeedUp
 
-+(SpeedUp*)init_x:(float)x y:(float)y dirvec:(Vec3D *)vec{
++(SpeedUp*)cons_x:(float)x y:(float)y dirvec:(Vec3D *)vec{
     SpeedUp *s = [SpeedUp node];
     s.position = ccp(x,y);
     //s.anchorPoint = ccp(s.anchorPoint.x,0);
@@ -33,7 +33,7 @@
         player.vx += normal_vec.x*6;
         player.vy += normal_vec.y*6;
         
-        PlayerEffectParams *e = [PlayerEffectParams init_copy:player.get_default_params];
+        PlayerEffectParams *e = [PlayerEffectParams cons_copy:player.get_default_params];
         e.time_left = 100;
         e.cur_min_speed = 15;
         [player add_effect:e];
@@ -46,7 +46,7 @@
 -(void)particle_effect:(GameEngineLayer*)g {
     for(int i = 0; i < 6; i++) {
         float spd = float_random(4, 10);
-        [g add_particle:[JumpPadParticle init_x:position_.x 
+        [g add_particle:[JumpPadParticle cons_x:position_.x 
                                               y:position_.y
                                              vx:-normal_vec.x*spd+float_random(-5, 5)
                                              vy:-normal_vec.y*spd+float_random(-10, 10)]];
@@ -62,11 +62,11 @@
 }
 
 -(void)cons_anim {
-    anim = [self init_anim_ofspeed:0.2];
+    anim = [self cons_anim_ofspeed:0.2];
     [self runAction:anim];
 }
 
--(id)init_anim_ofspeed:(float)speed {
+-(id)cons_anim_ofspeed:(float)speed {
 	CCTexture2D *texture = [Resource get_aa_tex:TEX_SPEEDUP];
 	NSMutableArray *animFrames = [NSMutableArray array];
     

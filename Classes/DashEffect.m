@@ -6,7 +6,7 @@
 
 @synthesize vx,vy;
 
-+(DashEffect*)init_from:(PlayerEffectParams*)base vx:(float)vx vy:(float)vy {
++(DashEffect*)cons_from:(PlayerEffectParams*)base vx:(float)vx vy:(float)vy {
     DashEffect *n = [[DashEffect alloc] init];
     [PlayerEffectParams copy_params_from:base to:n];
     

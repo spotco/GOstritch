@@ -228,7 +228,7 @@ bool fm_a_gt_b(double a,double b,double delta) {
     }
 }
 
-+(GLRenderObject*)init_render_obj:(CCTexture2D*)tex npts:(int)npts {
++(GLRenderObject*)cons_render_obj:(CCTexture2D*)tex npts:(int)npts {
     GLRenderObject *n = [[GLRenderObject alloc] init];
     n.texture = tex;
     n.isalloc = 1;

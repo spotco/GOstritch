@@ -148,7 +148,7 @@ static float avg_y;
 +(void)player_dash:(Player*)player {
     [AudioManager playsfx:SFX_SPIN];
     [[player get_current_params] decr_dash_count];
-    [player add_effect:[DashEffect init_from:[player get_default_params] vx:swipe_dir.x vy:swipe_dir.y]];
+    [player add_effect:[DashEffect cons_from:[player get_default_params] vx:swipe_dir.x vy:swipe_dir.y]];
 }
 
 +(void)player_double_jump:(Player*)player {

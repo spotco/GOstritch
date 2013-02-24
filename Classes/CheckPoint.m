@@ -3,11 +3,11 @@
 
 @implementation CheckPoint
 
-+(CheckPoint*)init_x:(float)x y:(float)y {
++(CheckPoint*)cons_x:(float)x y:(float)y {
     CheckPoint *p = [CheckPoint node];
     p.position = ccp(x,y);
 
-    [p init_img];
+    [p cons_img];
     
     p.active = YES;
     
@@ -27,7 +27,7 @@ float texwid,texhei;
     return ccp((r.x2-r.x1)/2+r.x1,(r.y2-r.y1)/2+r.y1);
 }
 
--(void)init_img {
+-(void)cons_img {
     CCTexture2D *tex1 = [Resource get_tex:TEX_CHECKPOINT_1];
     CCTexture2D *tex2 = [Resource get_tex:TEX_CHECKPOINT_2];
     inactive_img = [CheckPoint makeimg:tex1];
@@ -53,9 +53,9 @@ float texwid,texhei;
         active_img.visible = YES;
         
         CGPoint center = [self get_center];
-        [GEventDispatcher push_event:[[GEvent init_type:GEventType_CHECKPOINT] add_pt:center]];
+        [GEventDispatcher push_event:[[GEvent cons_type:GEventType_CHECKPOINT] add_pt:center]];
         for(int i = 0; i < 5; i++) {
-            [g add_particle:[FireworksParticleA init_x:center.x y:center.y vx:float_random(-3,3) vy:float_random(9,14) ct:arc4random_uniform(20)+10]];
+            [g add_particle:[FireworksParticleA cons_x:center.x y:center.y vx:float_random(-3,3) vy:float_random(9,14) ct:arc4random_uniform(20)+10]];
         }
         [AudioManager playsfx:SFX_CHECKPOINT];
     }
