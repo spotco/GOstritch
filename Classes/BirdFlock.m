@@ -69,10 +69,10 @@
 
 @implementation BirdFlock
 
-+(BirdFlock*)init_x:(float)x y:(float)y {
++(BirdFlock*)cons_x:(float)x y:(float)y {
     BirdFlock* b = [BirdFlock node];
     b.position = ccp(x,y);
-    [b init_birds];
+    [b cons_birds];
     b.active = YES;
     return b;
 }
@@ -108,7 +108,7 @@
     }
 }
 
--(void)init_birds {
+-(void)cons_birds {
     birds = [NSMutableArray array];
     [birds retain];
     
@@ -118,8 +118,8 @@
         b.vx = float_random(-9, 9);
         b.vy = float_random(5, 15);
         
-        id _STAND_ANIM = [self init_stand_anim:float_random(0.1, 0.3)];
-        id _FLY_ANIM = [self init_fly_anim:float_random(0.1, 0.3)];
+        id _STAND_ANIM = [self cons_stand_anim:float_random(0.1, 0.3)];
+        id _FLY_ANIM = [self cons_fly_anim:float_random(0.1, 0.3)];
         
         [b set_stand:_STAND_ANIM set_fly:_FLY_ANIM];
         if (b.vx > 0) {
@@ -143,7 +143,7 @@
     }
 }
 
--(id)init_stand_anim:(float)speed {
+-(id)cons_stand_anim:(float)speed {
     CCTexture2D *tex = [Resource get_tex:TEX_BIRD_SS];
     NSMutableArray *animFrames = [NSMutableArray array];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:tex rect:[BirdFlock bird_ss_rect_tar:@"sit1"]]];
@@ -152,7 +152,7 @@
     return [[Common make_anim_frames:animFrames speed:speed] retain];
 }
 
--(id)init_fly_anim:(float)speed {
+-(id)cons_fly_anim:(float)speed {
     CCTexture2D *tex = [Resource get_tex:TEX_BIRD_SS];
     NSMutableArray *animFrames = [NSMutableArray array];
     [animFrames addObject:[CCSpriteFrame frameWithTexture:tex rect:[BirdFlock bird_ss_rect_tar:@"fly1"]]];

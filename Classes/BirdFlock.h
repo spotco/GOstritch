@@ -5,6 +5,6 @@
     BOOL activated;
 }
 
-+(BirdFlock*)init_x:(float)x y:(float)y;
++(BirdFlock*)cons_x:(float)x y:(float)y;
 
 @end

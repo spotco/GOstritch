@@ -25,7 +25,7 @@ static NSArray* bossloadertest;
 
 #define AUTOLEVEL_STARTLVL @"autolevel_start"
 
-+(void)init_levels {
++(void)cons_levels {
     levelset_classic = [[NSArray alloc] initWithObjects:
         @"classic_bridgenbwall",
         @"classic_cavewbwall",
@@ -83,7 +83,7 @@ static NSArray* bossloadertest;
     return levelset_boss1area;
 }
 
-+(AutoLevel*)init_with_glayer:(GameEngineLayer*)glayer {
++(AutoLevel*)cons_with_glayer:(GameEngineLayer*)glayer {
     AutoLevel* a = [AutoLevel node];
     [a cons:glayer];
     [GEventDispatcher add_listener:a];

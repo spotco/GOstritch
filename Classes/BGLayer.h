@@ -22,7 +22,7 @@
     float lastx,lasty, curx,cury;
 }
 
-+(BGLayer*)init_with_gamelayer:(GameEngineLayer*)g;
++(BGLayer*)cons_with_gamelayer:(GameEngineLayer*)g;
 -(void)set_gameengine:(GameEngineLayer*)ref;
 
 @end

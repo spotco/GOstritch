@@ -198,6 +198,7 @@
     //also initially sets toppts
     top_fill = [Common init_render_obj:[self get_tex_top] npts:4];
     toppts_fill = [Common init_render_obj:[self get_corner_fill_color] npts:3];
+    toppts_fill.isalloc = 0;
     
 	CGPoint* tri_pts = top_fill.tri_pts;
 	CGPoint* tex_pts = top_fill.tex_pts;

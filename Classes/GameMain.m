@@ -37,13 +37,13 @@
 
 +(void)main {
     [GEventDispatcher lazy_alloc];
-    [DataStore init];
-    [AutoLevel init_levels];
-    [AudioManager init];
+    [DataStore cons];
+    [AutoLevel cons_levels];
+    [AudioManager cons];
     [AudioManager set_play_bgm:PLAY_BGM];
     [AudioManager set_play_sfx:PLAY_SFX];
-    [Resource init_textures];
-    [BatchDraw init];
+    [Resource cons_textures];
+    [BatchDraw cons];
     
     if (RESET_STATS) [DataStore reset_all];
     [[CCDirector sharedDirector] setDisplayFPS:DISPLAY_FPS];

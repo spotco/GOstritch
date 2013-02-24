@@ -9,7 +9,7 @@
 #define STO_totalbones_INT @"totalbones"
 #define STO_maxbones_INT @"maxbones"
 
-+(void)init;
++(void)cons;
 +(BOOL)isset_key:(NSString*)key;
 +(void)reset_key:(NSString*)key;
 +(void)set_key:(NSString*)key int_value:(int)val;

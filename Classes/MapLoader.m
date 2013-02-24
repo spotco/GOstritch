@@ -165,7 +165,7 @@ static NSMutableDictionary* cached_json;
         } else if ([type isEqualToString:@"birdflock"]) {
             float x = getflt(j_object, @"x");
             float y = getflt(j_object, @"y");
-            [map.game_objects addObject:[BirdFlock init_x:x y:y]];
+            [map.game_objects addObject:[BirdFlock cons_x:x y:y]];
             
         } else if([type isEqualToString:@"blocker"]) {
             float x = getflt(j_object, @"x");

@@ -19,7 +19,7 @@
 +(CCScene *) scene_with:(NSString *)map_file_name lives:(int)lives {
     CCScene *scene = [CCScene node];
     GameEngineLayer *glayer = [GameEngineLayer layer_from_file:map_file_name lives:lives];
-	BGLayer *bglayer = [BGLayer init_with_gamelayer:glayer];
+	BGLayer *bglayer = [BGLayer cons_with_gamelayer:glayer];
     UILayer* uilayer = [UILayer init_with_gamelayer:glayer];
     
     [scene addChild:[CCLayerColor layerWithColor:ccc4(0, 0, 0, 255)]];
@@ -33,7 +33,7 @@
 +(CCScene*) scene_with_autolevel_lives:(int)lives {
     CCScene* scene = [GameEngineLayer scene_with:@"connector" lives:lives];
     GameEngineLayer* glayer = [scene.children objectAtIndex:2];
-    AutoLevel* nobj = [AutoLevel init_with_glayer:glayer];
+    AutoLevel* nobj = [AutoLevel cons_with_glayer:glayer];
     [glayer.game_objects addObject:nobj];
     [glayer addChild:nobj];
     [glayer stopAction:glayer.follow_action];

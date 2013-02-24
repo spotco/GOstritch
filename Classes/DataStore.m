@@ -4,7 +4,7 @@
 
 static NSUserDefaults* store;
 
-+(void)init {
++(void)cons {
     store = [NSUserDefaults standardUserDefaults];
 }
 

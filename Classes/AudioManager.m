@@ -21,7 +21,7 @@ static BOOL play_sfx = YES;
     play_sfx = t;
 }
 
-+(void)init {
++(void)cons {
     NSArray *bgm = [NSArray arrayWithObjects:
         BGMUSIC_GAMELOOP1,
         BGMUSIC_MENU1,

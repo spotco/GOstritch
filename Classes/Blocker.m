@@ -2,14 +2,14 @@
 
 @implementation Blocker
 
-+(Blocker*)init_x:(float)x y:(float)y width:(float)width height:(float)height {
++(Blocker*)cons_x:(float)x y:(float)y width:(float)width height:(float)height {
     Blocker* n = [Blocker node];
     [n init_x:x y:y width:width height:height];
     
     return n;
 }
 
--(void)init_x:(float)x y:(float)y width:(float)pwidth height:(float)pheight {
+-(void)cons_x:(float)x y:(float)y width:(float)pwidth height:(float)pheight {
     [self setPosition:ccp(x,y)];
     width = pwidth;
     height = pheight;

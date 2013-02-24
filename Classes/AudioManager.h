@@ -23,7 +23,7 @@
 
 @interface AudioManager : NSObject
 
-+(void)init;
++(void)cons;
 +(void)play:(NSString*)tar;
 +(void)playsfx:(NSString*)tar;
 

@@ -20,8 +20,8 @@ typedef enum {
     BOOL has_pos_initial;
 }
 
-+(AutoLevel*)init_with_glayer:(GameEngineLayer*)glayer;
-+(void)init_levels;
++(AutoLevel*)cons_with_glayer:(GameEngineLayer*)glayer;
++(void)cons_levels;
 
 +(void)SET_DEBUG_MODE:(int)t;
 -(NSString*)get_debug_msg;

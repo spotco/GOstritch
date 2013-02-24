@@ -98,7 +98,7 @@
 
 static NSMutableArray* z_bucket;
 
-+(void)init {
++(void)cons {
     if (!z_bucket) {
         z_bucket = [[NSMutableArray alloc] init];
         for(int i = 0; i < 8; i++) {

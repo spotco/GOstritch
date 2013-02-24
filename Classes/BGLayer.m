@@ -6,7 +6,7 @@
 @implementation BGLayer
 
 
-+(BGLayer*)init_with_gamelayer:(GameEngineLayer*)g {
++(BGLayer*)cons_with_gamelayer:(GameEngineLayer*)g {
     BGLayer *l = [BGLayer node];
     [GEventDispatcher add_listener:l];
     [l set_gameengine:g];
