@@ -34,16 +34,14 @@
 #import "LabExit.h"
 #import "EnemyAlert.h"
 
+@interface GameMap : NSObject
+    @property(readwrite,assign) NSMutableArray *n_islands, *game_objects;
+    @property(readwrite,assign) CGPoint player_start_pt;
+    @property(readwrite,assign) int assert_links;
+    @property(readwrite,assign) float connect_pts_x1,connect_pts_x2,connect_pts_y1,connect_pts_y2;
+@end
+
 @interface MapLoader : NSObject
-
-typedef struct GameMap {
-    NSMutableArray *n_islands, *game_objects;
-    CGPoint player_start_pt;
-    int assert_links;
-    float connect_pts_x1,connect_pts_x2,connect_pts_y1,connect_pts_y2;
-} GameMap;
-
-+(GameMap) load_map:(NSString *)map_file_name;
-+(void) precache_map:(NSString *)map_file_name;
-
+    +(GameMap*) load_map:(NSString *)map_file_name;
+    +(void) precache_map:(NSString *)map_file_name;
 @end

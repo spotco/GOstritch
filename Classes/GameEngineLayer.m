@@ -115,7 +115,7 @@
 }
 
 -(CGPoint)loadMap:(NSString*)filename {
-	GameMap map = [MapLoader load_map:filename];
+	GameMap *map = [MapLoader load_map:filename];
     
     islands = map.n_islands;
     int ct = [Island link_islands:islands];

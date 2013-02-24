@@ -1,5 +1,12 @@
 #import "MapLoader.h"
 
+@implementation GameMap
+@synthesize assert_links;
+@synthesize connect_pts_x1,connect_pts_x2,connect_pts_y1,connect_pts_y2;
+@synthesize game_objects,n_islands;
+@synthesize player_start_pt;
+@end
+
 @implementation MapLoader
 
 #define DOTMAP @"map"
@@ -30,13 +37,13 @@ static NSMutableDictionary* cached_json;
     return [cached_json objectForKey:map_file_name];
 }
 
-+(GameMap) load_map:(NSString *)map_file_name {
++(GameMap*) load_map:(NSString *)map_file_name {
     NSDictionary *j_map_data = [MapLoader get_jsondict:map_file_name];
     
     NSArray *islandArray = [j_map_data objectForKey:(@"islands")];
 	int islandsCount = [islandArray count];
 	
-    struct GameMap map;
+    GameMap *map = [[GameMap alloc] init];
     map.n_islands = [[NSMutableArray alloc] init];
     map.game_objects = [[NSMutableArray alloc] init];
     

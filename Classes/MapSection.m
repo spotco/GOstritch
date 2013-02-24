@@ -53,7 +53,7 @@
     [MapSection transform_map:map by_x:x by_y:y];
 }
 
-+(void)transform_map:(GameMap)map by_x:(float)tx by_y:(float)ty {
++(void)transform_map:(GameMap*)map by_x:(float)tx by_y:(float)ty {
     for (Island* i in map.n_islands) {
         [i setPosition:ccp(i.position.x+tx,i.position.y+ty)];
         i.startX +=tx;
